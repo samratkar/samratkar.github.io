@@ -4,3 +4,5 @@
 
 layout: home
 ---
+
+[Read my second post](/_posts/test.md)
