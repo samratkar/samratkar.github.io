@@ -1,9 +1,5 @@
 ---
-layout: post                # Specifies the layout to be used
-title: "My First Blog Post" # Title of the post
-date: 2024-10-05             # Publication date
-categories: [blog, jekyll]   # Categories for the post
-tags: [jekyll, markdown]     # Tags for the post
+layout: "post"
 ---
 # This is the first post
 
