@@ -5,4 +5,4 @@
 layout: home
 ---
 
-[Read my second post](/_posts/test.md)
+[Read my second post]({{ site.baseurl }}/_posts/test.md)
