@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Samrat Kar | Exploring Artificial Intelligence
+title: Samrat Kar | Exploring, learning & shaping Artificial Intelligence | AI Researcher | Amrita University
 logo : /assets/img/my-photo-small.jpg
 description: >- # this means to ignore newlines until "baseurl:"
   I am passionate about Artificial Intelligence, the cutting edge research in this area and its applications. I am a firm believer and contributor towards making the power of AI transform the world for the better.
