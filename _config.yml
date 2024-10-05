@@ -19,7 +19,7 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Samrat Kar | Exploring Artificial Intelligence
-logo : img/my-photo-small.jpg
+logo : /img/my-photo-small.jpg
 description: >- # this means to ignore newlines until "baseurl:"
   Being a Machine Learning Engineer, I am passionate about Artificial Intelligence and its applications. I am currently working on developing AI models for various applications. I am also interested in exploring the latest research in the field of AI.
   I believe in kindling and keeping the fire of agency alive in every individual. I am a firm believer in the power of AI to transform the world for the better.
