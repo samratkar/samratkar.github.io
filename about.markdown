@@ -3,7 +3,7 @@ layout: page
 title: About
 permalink: /about/
 ---
-![Avatar](img/my-photo-small.jpg "Samrat Kar")
+![Avatar](/img/my-photo-small.jpg "Samrat Kar")
 
 **Name** : Samrat Kar
 
