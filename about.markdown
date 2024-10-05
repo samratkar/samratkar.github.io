@@ -3,7 +3,7 @@ layout: page
 title: About
 permalink: /about/
 ---
-<img src="assets/img/my-photo-small.jpg" width="132" height="170">
+<img src="/assets/img/my-photo-small.jpg" width="132" height="170">
 
 **Name** : Samrat Kar
 
