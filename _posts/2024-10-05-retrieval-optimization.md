@@ -12,7 +12,7 @@ Retrieval Augmented Generation contains two steps -
 
 This article is about optimizing the 1st step - retrieval. 
 
-The first thing a retrieval system does is tokenization. Tokenisation is the process of representing creating a sequence of numbers representing words or parts of words. There are several ways to represent a string of words into tokens. The different tokenization techniques are - 
+The first thing a retrieval system does is tokenization. Tokenisation is the process of representing creating a sequence of numbers representing words or parts of words. There are several ways to represent a string of words into tokens. The different tokenization techniques are -
 
 1. wordpiece
 2. byte pair encoding
@@ -26,4 +26,4 @@ The first thing a retrieval system does is tokenization. Tokenisation is the pro
 
 # Quantization techniques
 
-If there are **millions** **of vectors** to search, then storing, indexing and searching can be resource intensive and slow. If a pilot assistant app is to be created that gathers all the dynamic data from the realtime streaming of the QAR, realtime weather information, realtime traffic information, and all the static corpus of data the comprises of the pilot operational manuals, standard operating procedures, etc, then we might have really huge set of vectors to search from. And adding up with the historical data, these vectors that needs to be searched for a given query would be in millions.
+If there are **millions** **of vectors** to search, then storing, indexing and searching can be resource intensive and slow. If a pilot assistant app is to be created that gathers all the dynamic data from the realtime streaming of the QAR, realtime weather information, realtime traffic information, and all the static corpus of data the comprises of the pilot operational manuals, standard operating procedures, etc, then we might have really huge set of vectors to search from. And adding up with the historical data, these vectors that needs to be searched for a given query would be in millions. information 
