@@ -32,5 +32,4 @@ categories: phd updates
 
 # 4. Optimization of retrieval of the information for the rag - In progress
 
-
-Details - [Retrieval Optimization | Samrat Kar Exploring, learning &amp; shaping Artificial Intelligence](https://samratkar.github.io/2024/10/05/retrieval-optimization.html)
+[Details notes of the optimization process. ](https://samratkar.github.io/2024/10/05/retrieval-optimization.html)
