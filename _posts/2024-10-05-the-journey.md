@@ -29,7 +29,12 @@ categories: phd updates
 
 ![arch-flight-bot](/assets/img/rag.jpg)
 
+# 4. Optimization of retrieval of the rag - In progress
 
-# 4. Optimization of retrieval of the information for the rag - In progress
+Optimization of retrieval piece of a RAG is of prime importance while building a virtual co pilot or a flight bot in the flight deck. This is especially important when we need to search for a given query a huge corpus of data. If there are millions of vectors to search, then storing, indexing and searching can be resource intensive and slow.
+
+If a pilot assistant app is to be created that gathers all the dynamic data from the realtime streaming of the QAR, realtime weather information, realtime traffic information, and all the static corpus of data the comprises of the pilot operational manuals, standard operating procedures, etc, then we might have really huge set of vectors to search from. And adding up with the historical data, these vectors that need to be searched for a given query would be in millions.
+
+To reduce this and simplify the search, quantization is done, that greatly helps the need of huge memory to do the computation. This exploration is towards understanding RAG and getting deep into how to optimize from tokenization to quantization. 
 
 [Details notes of the optimization process. ](https://samratkar.github.io/2024/10/05/retrieval-optimization.html)
