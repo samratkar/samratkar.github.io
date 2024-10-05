@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "The Journey!"
+title:  "The Journey"
 date:   2024-10-05 15:49:55 +0530
 categories: phd updates
 ---
