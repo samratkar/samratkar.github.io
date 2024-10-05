@@ -15,10 +15,22 @@ categories: phd updates
 
 ![arch-dia](/assets/img/open-sky-rt-stream.jpg)
 
+![data-st-viz](/assets/img/data-stream-viz.jpg)
+
 # 2. Ollama embedding - Done
 
 1. Installed Ollama in Linux.
 2. Downladed the phi-3 SLM from Ollama to the machine.
 3. Embedded some static data on the model file and queried the model and qualitatively evaluated the training with the emeddings.
 
-# 3. Architecture diagram - virtual copilot
+![ollama](/assets/img/ollama-phi3.jpg)
+
+# 3. Architecture diagram - building a rag flight bot - Done
+
+![arch-flight-bot](/assets/img/rag.jpg)
+
+
+# 4. Optimization of retrieval of the information for the rag - In progress
+
+
+Details - [Retrieval Optimization | Samrat Kar Exploring, learning &amp; shaping Artificial Intelligence](https://samratkar.github.io/2024/10/05/retrieval-optimization.html)
