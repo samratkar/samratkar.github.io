@@ -18,15 +18,13 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Exploring Artificial Intelligence
-email: your-email@example.com
+title: Samrat Kar | Exploring Artificial Intelligence
+logo : /img/my-photo-small.jpg
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  Being a Machine Learning Engineer, I am passionate about Artificial Intelligence and its applications. I am currently working on developing AI models for various applications. I am also interested in exploring the latest research in the field of AI.
+  I believe in kindling and keeping the fire of agency alive in every individual. I am a firm believer in the power of AI to transform the world for the better.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://samratkar.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: 
 github_username: samratkar
 
 # Build settings
