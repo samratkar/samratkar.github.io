@@ -27,6 +27,7 @@ url: "https://samratkar.github.io" # the base hostname & protocol for your site,
 github_username: samratkar
 twitter_username: _samrat_kar_
 linkedin_username: samratk
+wordpress_username: samratkar2012
 # Build settings
 theme: minima
 plugins:
