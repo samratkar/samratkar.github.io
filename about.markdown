@@ -37,4 +37,9 @@ permalink: /about/
    7. [Retrieval Optimization - Deeplearning.ai](https://learn.deeplearning.ai/courses/retrieval-optimization-from-tokenization-to-vector-quantization/lesson/1/introduction)
    8. [NLP specialization - Deeplearning.ai](https://www.deeplearning.ai/courses/natural-language-processing-specialization/)
 
-**Reach out to me at :** [https://www.linkedin.com/in/samratk/](https://www.linkedin.com/in/samratk/)
+**Reach out to me at :** 
+
+* [https://www.linkedin.com/in/samratk/](https://www.linkedin.com/in/samratk/)
+* [https://samratkar.github.io/](https://samratkar.github.io/)
+* [https://x.com/samrat_kar](https://x.com/samrat_kar)
+* [https://karconversations.wordpress.com/](https://karconversations.wordpress.com/)
