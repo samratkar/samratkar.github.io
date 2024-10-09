@@ -35,6 +35,16 @@ Optimization of retrieval piece of a RAG is of prime importance while building a
 
 If a pilot assistant app is to be created that gathers all the dynamic data from the realtime streaming of the QAR, realtime weather information, realtime traffic information, and all the static corpus of data the comprises of the pilot operational manuals, standard operating procedures, etc, then we might have really huge set of vectors to search from. And adding up with the historical data, these vectors that need to be searched for a given query would be in millions.
 
-To reduce this and simplify the search, quantization is done, that greatly helps the need of huge memory to do the computation. This exploration is towards understanding RAG and getting deep into how to optimize from tokenization to quantization. 
+To reduce this and simplify the search, quantization is done, that greatly helps the need of huge memory to do the computation. This exploration is towards understanding RAG and getting deep into how to optimize from tokenization to quantization.
 
 [Details notes of the optimization process. ](https://samratkar.github.io/2024/10/05/retrieval-optimization.html)
+
+# 5. On hands usage of the off the shelf LLMSs - In progress
+
+Focussing on doing some on-hands coding for using off the shelf LLMs to know how to use them. I am following this youtube video to do this - 
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oNA6pTNfHCY?si=pqhG18quasj02hMu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+# 6. Exploration on AI safety - In progress
