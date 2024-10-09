@@ -20,9 +20,13 @@ Paper : [https://arxiv.org/abs/2310.17688](https://arxiv.org/abs/2310.17688)
 Capable AI systems can better exploit weaknesses in **technical oversight** and **testing,** for example, by producing false but compelling outputs. 
 
 1. A. Pan, K. Bhatia, and J. Steinhardt, “The effects of reward misspecification: Mapping and mitigating misaligned models,” International Conference on Learning Representations, 2022.
+   Abstract - Reward hacking—where RL agents exploit gaps in misspecified reward functions—has been widely observed, but not yet systematically studied. To understand how reward hacking arises, we construct four RL environments with misspecified rewards. We investigate reward hacking as a function of agent capabilities: model capacity, action space resolution, observation space noise, and training time. More capable agents often exploit reward misspecifications, achieving higher proxyrewardand lowertruerewardthanless capableagents. Moreover, we find instances of phase transitions: capability thresholds at which the agent’s behavior qualitatively shifts, leading to a sharp decrease in the true reward. Such phase transitions pose challenges to monitoring the safety of ML systems. To address this, we propose an anomaly detection task for aberrant policies and offer several baseline detectors.
 2. Open problems and fundamental limitations of reinforcement learning from human feedback,” Jul. 2023. arXiv: 2307.1 5217 [cs.AI].
+   Abstract - Reinforcement learning from human feedback (RLHF) is a technique for training AI systems to align with human goals. RLHF has emerged as the central method used to finetune stateof-the-art large language models (LLMs). Despite this popularity, there has been relatively little public work systematizing its flaws. In this paper, we (1) survey open problems and fundamental limitations of RLHF and related methods; (2) overview techniques to understand, improve, and complement RLHF in practice; and (3) propose auditing and disclosure standards to improve societal oversight of RLHF systems. Our work emphasizes the limitations of RLHF and highlights the importance of a multi-layered approach to the development of safer AI systems.
 3. D. Hendrycks, N. Carlini, J. Schulman, and J. Steinhardt, “Unsolved problems in ML safety,” Sep. 2021. arXiv: 2109 . 13916 [cs.LG].
+   robustness, monitoring, aligning, systemic safety
 4. S. Zhuang and D. Hadfield-Menell, “Consequences of misaligned AI,” Adv. Neural Inf. Process. Syst., vol. 33, pp. 15 763–15 773, 2020.
+   we should view the design of reward functions as an interactive and dynamic process and identifies a theoretical scenario where some degree of interactivity is desirable.
 5. L. Gao, J. Schulman, and J. Hilton, “Scaling laws for reward model overoptimization,”in Proceedings of the 40th International Conference on Machine Learning, A. Krause, E. Brunskill, K. Cho, B. Engelhardt, S. Sabato, and J. Scarlett, Eds., ser. Proceedings of Machine Learning Research, vol. 202, PMLR, 2023, pp. 10 835–10 866.
 6. Towards understanding sycophancy in language models,”Oct. 2023. arXiv: 2310.13548 [cs.CL].
 7. D. Amodei, P. Christiano, and A. Ray, Learning from human preferences, https://open ai.com/research/learning-from-human-preferences, Accessed: 2023-9-15,n.d.
@@ -43,3 +47,13 @@ to achieve ambitious goals in the world (e.g., long-term planning and execution)
 ## Evaluating AI alignment
 
 If AI progress continues, AI systems will eventually possess highly dangerous capabilities. Before training and deploying such systems, we need methods to assess their propensity to use these capabilities. Purely behavioral evaluations may fail for advanced AI systems: like humans, they might behave differently under evaluation, faking alignment56–58.
+
+## Interpretability and transparency
+
+AI decisionmaking is opaque, with larger, more capable, models being more complex to interpret. So far, we can only test large models via trial and error. We need to learn to understand their inner workings54.
+
+## Resilience 
+
+Inevitably, some will misuse or act recklessly with AI. We need tools to detect and defend against AI-enabled threats such as large-scale influence operations, biological risks, and cyberattacks. However, as AI systems become more capable, they will eventually be able to circumvent human-made defenses. To enable more powerful AI-based defenses, we first need to learn how to make AI systems safe and aligned. 
+
+1. Unsolved problems in ML safety,” Sep. 2021. arXiv: 2109 . 13916 [cs.LG].
