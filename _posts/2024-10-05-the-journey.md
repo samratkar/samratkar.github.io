@@ -41,10 +41,12 @@ To reduce this and simplify the search, quantization is done, that greatly helps
 
 # 5. On hands usage of the off the shelf LLMSs - In progress
 
-Focussing on doing some on-hands coding for using off the shelf LLMs to know how to use them. I am following this youtube video to do this - 
+Focussing on doing some on-hands coding for using off the shelf LLMs to know how to use them. I am following these videos to do this -
 
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/oNA6pTNfHCY?si=pqhG18quasj02hMu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
+1. https://www.youtube.com/watch?v=oNA6pTNfHCY&t=3180s - open source LLMs coding and tuning
+2. https://www.youtube.com/watch?v=ou-BDb_3zLc&list=PL65wd6VFbIoC5Si5YO8VsdpmkzArUAlAz&index=6 - building RAG in azure
+3. https://www.youtube.com/watch?v=sVcwVQRHIc8&list=PL65wd6VFbIoC5Si5YO8VsdpmkzArUAlAz&index=4 - RAG in python
 
 # 6. Exploration on AI safety - In progress
+
+This page has the details on this exploration - [Managing AI Risk] (/_posts/2024-10-09-managing-ai-risk)
