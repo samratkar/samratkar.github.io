@@ -43,10 +43,10 @@ To reduce this and simplify the search, quantization is done, that greatly helps
 
 Focussing on doing some on-hands coding for using off the shelf LLMs to know how to use them. I am following these videos to do this -
 
-1. https://www.youtube.com/watch?v=oNA6pTNfHCY&t=3180s - open source LLMs coding and tuning
-2. https://www.youtube.com/watch?v=ou-BDb_3zLc&list=PL65wd6VFbIoC5Si5YO8VsdpmkzArUAlAz&index=6 - building RAG in azure
-3. https://www.youtube.com/watch?v=sVcwVQRHIc8&list=PL65wd6VFbIoC5Si5YO8VsdpmkzArUAlAz&index=4 - RAG in python
+1. [https://www.youtube.com/watch?v=oNA6pTNfHCY&amp;t=3180s](https://www.youtube.com/watch?v=oNA6pTNfHCY&t=3180s) - open source LLMs coding and tuning
+2. [https://www.youtube.com/watch?v=ou-BDb_3zLc&amp;list=PL65wd6VFbIoC5Si5YO8VsdpmkzArUAlAz&amp;index=6](https://www.youtube.com/watch?v=ou-BDb_3zLc&list=PL65wd6VFbIoC5Si5YO8VsdpmkzArUAlAz&index=6) - building RAG in azure
+3. [https://www.youtube.com/watch?v=sVcwVQRHIc8&amp;list=PL65wd6VFbIoC5Si5YO8VsdpmkzArUAlAz&amp;index=4](https://www.youtube.com/watch?v=sVcwVQRHIc8&list=PL65wd6VFbIoC5Si5YO8VsdpmkzArUAlAz&index=4) - RAG in python
 
 # 6. Exploration on AI safety - In progress
 
-This page has the details on this exploration - [Managing AI Risk] (/_posts/2024-10-09-managing-ai-risk)
+This page has the details on this exploration - [https://samratkar.github.io/journals/2024/10/09/managing-ai-risk.html](https://samratkar.github.io/journals/2024/10/09/managing-ai-risk.html)
