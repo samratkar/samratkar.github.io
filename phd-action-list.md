@@ -9,8 +9,8 @@ categories: phd
 - [X] 1-create a survey paper on flight deck assistance with generative ai
 - [X] 2-course list finalization.
 - [X] 3-create a private repo for the research work
-- [ ] 4-create a survey paper on explainable AI  `<in progress>`
-- [ ] 5-mindmap for the topics for survey `<in prog>`
+- [X] 4-[mindmap ](https://excalidraw.com/#room=105e034dff386f4b99a0,RTYch2fYRiyqwrsYZtc4TQ)for the topics for survey
+- [ ] 5-create a survey paper on explainable AI  `<in progress>`
 
 # Programming
 
@@ -34,3 +34,4 @@ categories: phd
 * [ ] 4-Reinforcement Learning from Human Feedback -[https://app.datacamp.com/learn/courses/reinforcement-learning-from-human-feedback-rlhf](https://app.datacamp.com/learn/courses/reinforcement-learning-from-human-feedback-rlhf)
 * [ ] 5-Developing AI Applications - [https://app.datacamp.com/learn/skill-tracks/developing-ai-applications](https://app.datacamp.com/learn/skill-tracks/developing-ai-applications)
 * [ ] 6-Deep Reinforcement Learning in Python - [https://app.datacamp.com/learn/courses/deep-reinforcement-learning-in-python](https://app.datacamp.com/learn/courses/deep-reinforcement-learning-in-python)
+* [ ] 5-Research Methodology
