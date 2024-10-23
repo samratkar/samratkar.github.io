@@ -6,11 +6,11 @@ categories: phd
 ---
 # Research papers
 
-* [X] create a survey paper on flight deck assistance with generative ai
-* [X] course list finalization.
-* [X] create a private repo for the research work
-* [ ] create a survey paper on explainable AI  `<in progress>`
-* [ ] mindmap for the topics for survey `<in prog>`
+- [X] 1-create a survey paper on flight deck assistance with generative ai
+- [X] 2-course list finalization.
+- [X] 3-create a private repo for the research work
+- [ ] 4-create a survey paper on explainable AI  `<in progress>`
+- [ ] 5-mindmap for the topics for survey `<in prog>`
 
 # Programming
 
