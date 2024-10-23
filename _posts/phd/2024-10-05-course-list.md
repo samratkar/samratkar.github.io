@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Course List"
+date:   2024-10-05 15:49:55 +0530
+categories: phd
+---
+
 | Sr# | Course Name                                                                                                                                                                          | Course provider | Modality | Status       | Credit | Remarks / Notes                                                                                  |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- | -------- | ------------ | ------ | ------------------------------------------------------------------------------------------------ |
 | 1   | [Azure fundamentals AZ900](https://app.datacamp.com/learn/skill-tracks/azure-fundamentals)                                                                                              | Microsoft       | Online   | Not Started  |        |                                                                                                  |
