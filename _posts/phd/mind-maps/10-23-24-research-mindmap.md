@@ -13,6 +13,6 @@ I am doing research on two topics relaed to AI safety -
 
 Both of these are of prime importance towards building safety critical AI systems. Be it private tutor for kids, or a pilot virtual assistant.
 
-The [AI safety landscape ](https://excalidraw.com/#json=GO8RWN28AbMItnrUdNz4s,HtspOk5X5Vd1YwaIZ_pymw)of all the areas under research is listed.
+The [AI safety landscape ](https://excalidraw.com/#room=105e034dff386f4b99a0,RTYch2fYRiyqwrsYZtc4TQ)of all the areas under research is listed.
 
 In that Explainable AI and AI alignment are the two topics of my research.
