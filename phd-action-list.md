@@ -1,6 +1,6 @@
 ---
-layout: post
-title:  "Action List"
+layout: page
+title:  "PhD Action List"
 date:   2024-10-23 11:34:55 +0530
 categories: phd
 ---
