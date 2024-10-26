@@ -17,7 +17,8 @@ categories: phd
 * [X] 1-deploy gpt4o in my azure open ai.
 * [X] 2-build text pdf RAG using open ai
 * [X] 3-build RAG on Boeing conversational AI
-* [ ] 4-improvise the RAG to make it scalable and measurable `<in progress>`
+* [X] 4-RAG semantic search with bm25 sparse retriever
+* [ ] 5-RAG evaluation `<in progress>`
 * [ ] 5-Add graphical RAG to the system
 
 # Books
