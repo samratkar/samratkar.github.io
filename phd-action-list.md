@@ -18,7 +18,7 @@ categories: phd
 * [X] 2-build text pdf RAG using open ai
 * [X] 3-build RAG on Boeing conversational AI
 * [X] 4-RAG semantic search with bm25 sparse retriever
-* [ ] 5-RAG evaluation `<in progress>`
+* [X] 5-RAG evaluation (string, faithfulness, precision)
 * [ ] 5-Add graphical RAG to the system
 
 # Books
