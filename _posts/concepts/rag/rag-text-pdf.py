@@ -1,5 +1,6 @@
 # loading pdf file. 
 import openai
+import os
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_openai import OpenAIEmbeddings 
 from langchain_chroma import Chroma
@@ -10,7 +11,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser 
 
 
-my_api_key = "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"
+my_api_key = os.getenv("OPENAI_API_KEY") 
 
 # Loading the external data and creating a vector space out of that. 
 
