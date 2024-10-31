@@ -20,6 +20,7 @@ categories: phd
 * [X] 4-RAG semantic search with bm25 sparse retriever
 * [X] 5-RAG evaluation (string, faithfulness, precision)
 * [ ] 5-Add graphical RAG to the system
+* [ ] 6-monitoring LLM apps - langsmith
 
 # Books
 
