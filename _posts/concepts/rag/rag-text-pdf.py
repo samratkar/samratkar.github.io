@@ -15,7 +15,7 @@ my_api_key = os.getenv("OPENAI_API_KEY")
 
 # Loading the external data and creating a vector space out of that. 
 
-pdf_loader = PyPDFLoader(file_path='data/pilot-manual-787.pdf')
+pdf_loader = PyPDFLoader(file_path='../../data/pilot-manual-787.pdf')
 documents = pdf_loader.load()
 splitter = RecursiveCharacterTextSplitter(
     separators=["\n", ".", "!", "?", ";"],
