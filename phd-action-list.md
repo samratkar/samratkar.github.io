@@ -10,7 +10,7 @@ categories: phd
 - [X] 2-course list finalization.
 - [X] 3-create a private repo for the research work
 - [X] 4-[mindmap ](https://excalidraw.com/#room=105e034dff386f4b99a0,RTYch2fYRiyqwrsYZtc4TQ)for the topics for survey
-- [ ] 5-create a survey paper on explainable AI  `<in progress>`
+- [ ] 5-create a survey paper on explainable AI  `<on hold>`
 
 # Programming
 
@@ -21,9 +21,6 @@ categories: phd
 * [X] 5-RAG evaluation (string, faithfulness, precision)
 * [X] 5-Add graphical RAG to the system
 * [ ] 6-monitoring LLM apps - langsmith
-* [ ] 7-Working with openai APIs
-* [ ] 8-Project1-building AI powered travel guide
-* [ ] 9-
 
 # Books
 
