@@ -19,8 +19,11 @@ categories: phd
 * [X] 3-build RAG on Boeing conversational AI
 * [X] 4-RAG semantic search with bm25 sparse retriever
 * [X] 5-RAG evaluation (string, faithfulness, precision)
-* [ ] 5-Add graphical RAG to the system
+* [X] 5-Add graphical RAG to the system
 * [ ] 6-monitoring LLM apps - langsmith
+* [ ] 7-Working with openai APIs
+* [ ] 8-Project1-building AI powered travel guide
+* [ ] 9-
 
 # Books
 
@@ -31,9 +34,17 @@ categories: phd
 # Courses
 
 * [ ] 1-Explainable AI - [https://campus.datacamp.com/courses/explainable-artificial-intelligence-xai-concepts](https://campus.datacamp.com/courses/explainable-artificial-intelligence-xai-conccepts) `<in progress>`
-* [ ] 2-RAG generation with langchain - [https://app.datacamp.com/learn/courses/retrieval-augmented-generation-rag-with-langchain](https://app.datacamp.com/learn/courses/retrieval-augmented-generation-rag-with-langchain) `<in progress>`
-* [ ] 3-Introduction to LLMs in Python - [https://app.datacamp.com/learn/courses/introduction-to-llms-in-python](https://app.datacamp.com/learn/courses/introduction-to-llms-in-python)
-* [ ] 4-Reinforcement Learning from Human Feedback -[https://app.datacamp.com/learn/courses/reinforcement-learning-from-human-feedback-rlhf](https://app.datacamp.com/learn/courses/reinforcement-learning-from-human-feedback-rlhf)
-* [ ] 5-Developing AI Applications - [https://app.datacamp.com/learn/skill-tracks/developing-ai-applications](https://app.datacamp.com/learn/skill-tracks/developing-ai-applications)
-* [ ] 6-Deep Reinforcement Learning in Python - [https://app.datacamp.com/learn/courses/deep-reinforcement-learning-in-python](https://app.datacamp.com/learn/courses/deep-reinforcement-learning-in-python)
-* [ ] 5-Research Methodology
+* [X] 2-RAG generation with langchain - [https://app.datacamp.com/learn/courses/retrieval-augmented-generation-rag-with-langchain](https://app.datacamp.com/learn/courses/retrieval-augmented-generation-rag-with-langchain)
+* [ ] 3-ChatGPT Prompt Engineering for Developers - [https://app.datacamp.com/learn/courses/chatgpt-prompt-engineering-for-developers](https://app.datacamp.com/learn/courses/chatgpt-prompt-engineering-for-developers) `<in progress>`
+* [ ] 4-Working with the OpenAI API - [https://app.datacamp.com/learn/courses/working-with-the-openai-api](https://app.datacamp.com/learn/courses/working-with-the-openai-api)
+* [ ] 5-AI Ethics - [https://app.datacamp.com/learn/courses/ai-ethics](https://app.datacamp.com/learn/courses/ai-ethics)
+* [ ] 6-Introduction to Data Privacy - [https://app.datacamp.com/learn/courses/introduction-to-data-privacy](https://app.datacamp.com/learn/courses/introduction-to-data-privacy)
+* [ ] 7-Working with Huggingface - [https://app.datacamp.com/learn/courses/working-with-hugging-face](https://app.datacamp.com/learn/courses/working-with-hugging-face)
+* [ ] 8-Introduction to Embeddings in Open AI - [https://app.datacamp.com/learn/courses/introduction-to-embeddings-with-the-openai-api](https://app.datacamp.com/learn/courses/introduction-to-embeddings-with-the-openai-api)
+* [ ] 9-Developing AI Systems with the OpenAI API - [https://app.datacamp.com/learn/courses/developing-ai-systems-with-the-openai-api](https://app.datacamp.com/learn/courses/developing-ai-systems-with-the-openai-api)
+* [ ] 10-Developing LLM Applications with LangChain - [https://app.datacamp.com/learn/courses/developing-llm-applications-with-langchain](https://app.datacamp.com/learn/courses/developing-llm-applications-with-langchain)
+* [ ] 11-Introduction to LLMs in Python - [https://app.datacamp.com/learn/courses/introduction-to-llms-in-python](https://app.datacamp.com/learn/courses/introduction-to-llms-in-python)
+* [ ] 12-Reinforcement Learning from Human Feedback -[https://app.datacamp.com/learn/courses/reinforcement-learning-from-human-feedback-rlhf](https://app.datacamp.com/learn/courses/reinforcement-learning-from-human-feedback-rlhf)
+* [ ] 13-Developing AI Applications - [https://app.datacamp.com/learn/skill-tracks/developing-ai-applications](https://app.datacamp.com/learn/skill-tracks/developing-ai-applications)
+* [ ] 14-Deep Reinforcement Learning in Python - [https://app.datacamp.com/learn/courses/deep-reinforcement-learning-in-python](https://app.datacamp.com/learn/courses/deep-reinforcement-learning-in-python)
+* [ ] 15-Research Methodology - Offline
