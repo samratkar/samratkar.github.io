@@ -6,11 +6,14 @@ categories: phd
 ---
 # Research papers
 
-- [X] 1-create a survey paper on flight deck assistance with generative ai
-- [X] 2-course list finalization.
-- [X] 3-create a private repo for the research work
-- [X] 4-[mindmap ](https://excalidraw.com/#room=105e034dff386f4b99a0,RTYch2fYRiyqwrsYZtc4TQ)for the topics for survey
-- [ ] 5-create a survey paper on explainable AI  `<on hold>`
+- [X] Survey 1 - Flight deck assistance with generative
+- [ ] Survey 2 - Explainable AI `<in progress>`
+
+  - [X] Theory of the concepts of XAI - course
+  - [ ] Implementaiton of XAI in Python - `<in progress>`
+- [ ] Survey 3 - AI Value alignment problem `<in progress>`
+
+  - [ ] CIRL paper deep dive `<in progress>`
 
 # Programming
 
@@ -19,8 +22,12 @@ categories: phd
 * [X] 3-build RAG on Boeing conversational AI
 * [X] 4-RAG semantic search with bm25 sparse retriever
 * [X] 5-RAG evaluation (string, faithfulness, precision)
-* [X] 5-Add graphical RAG to the system
-* [ ] 6-monitoring LLM apps - langsmith
+* [X] 6-Add graphical RAG to the system
+* [X] 7-Auto generation of cypher from natural language and vice versa
+* [X] 8-end to end chatbot implementation for a RAG system
+* [ ] 9-Explainable AI implementation of LIME, SHAP in Python `<in progress>`
+* [ ] 10-Reinforcement learning in Python.
+* [ ] 11-monitoring LLM apps - langsmith
 
 # Books
 
@@ -30,18 +37,19 @@ categories: phd
 
 # Courses
 
-* [X] 1-[RAG generation with langchain](https://app.datacamp.com/learn/courses/retrieval-augmented-generation-rag-with-langchain)
-* [ ] 2-[Developing LLM applications with Langchain](https://app.datacamp.com/learn/courses/developing-llm-applications-with-langchain) `<in progress>`
-* [ ] 3-[Explainable AI](https://campus.datacamp.com/courses/explainable-artificial-intelligence-xai-concepts](https://campus.datacamp.com/courses/explainable-artificial-intelligence-xai-conccepts)) - `<in progress>`
-* [ ] 4-[Introduction to Embeddings in Open AI](https://app.datacamp.com/learn/courses/introduction-to-embeddings-with-the-openai-api) `<in progress>`
-* [ ] 5-[ChatGPT Prompt Engineering for Developers](https://app.datacamp.com/learn/courses/chatgpt-prompt-engineering-for-developers)
-* [ ] 6-[Developing LLM Applications with LangChain](https://app.datacamp.com/learn/courses/developing-llm-applications-with-langchain)
-* [ ] 7-[Working with the OpenAI API](https://app.datacamp.com/learn/courses/working-with-the-openai-api)
-* [ ] 8-[AI Ethics](https://app.datacamp.com/learn/courses/ai-ethics)
-* [ ] 9-[Introduction to Data Privacy](https://app.datacamp.com/learn/courses/introduction-to-data-privacy)
-* [ ] 10-[Working with Huggingface](https://app.datacamp.com/learn/courses/working-with-hugging-face)
-* [ ] 11-[Developing AI Systems with the OpenAI API](https://app.datacamp.com/learn/courses/developing-ai-systems-with-the-openai-api)
-* [ ] 12-[Introduction to LLMs in Python](https://app.datacamp.com/learn/courses/introduction-to-llms-in-python)
-* [ ] 13-[Reinforcement Learning from Human Feedback](https://app.datacamp.com/learn/courses/reinforcement-learning-from-human-feedback-rlhf)
-* [ ] 14-[Deep Reinforcement Learning in Python](https://app.datacamp.com/learn/courses/deep-reinforcement-learning-in-python)
-* [ ] 15-Research Methodology - Offline
+* [X] [RAG generation with langchain](https://app.datacamp.com/learn/courses/retrieval-augmented-generation-rag-with-langchain)
+* [X] [Explainable AI](https://campus.datacamp.com/courses/explainable-artificial-intelligence-xai-concepts](https://campus.datacamp.com/courses/explainable-artificial-intelligence-xai-conccepts))
+* [ ] [Implementing explainable AI in Python](https://app.datacamp.com/learn/courses/explainable-ai-in-python) `<in progress>`
+* [ ] [Developing LLM applications with Langchain](https://app.datacamp.com/learn/courses/developing-llm-applications-with-langchain)
+* [ ] [Deep Reinforcement Learning in Python](https://app.datacamp.com/learn/courses/deep-reinforcement-learning-in-python)
+* [ ] [Reinforcement Learning from Human Feedback](https://app.datacamp.com/learn/courses/reinforcement-learning-from-human-feedback-rlhf)
+* [ ] [Introduction to Embeddings in Open AI](https://app.datacamp.com/learn/courses/introduction-to-embeddings-with-the-openai-api)
+* [ ] [ChatGPT Prompt Engineering for Developers](https://app.datacamp.com/learn/courses/chatgpt-prompt-engineering-for-developers)
+* [ ] [Developing LLM Applications with LangChain](https://app.datacamp.com/learn/courses/developing-llm-applications-with-langchain)
+* [ ] [Working with the OpenAI API](https://app.datacamp.com/learn/courses/working-with-the-openai-api)
+* [ ] [AI Ethics](https://app.datacamp.com/learn/courses/ai-ethics)
+* [ ] [Introduction to Data Privacy](https://app.datacamp.com/learn/courses/introduction-to-data-privacy)
+* [ ] [Working with Huggingface](https://app.datacamp.com/learn/courses/working-with-hugging-face)
+* [ ] [Developing AI Systems with the OpenAI API](https://app.datacamp.com/learn/courses/developing-ai-systems-with-the-openai-api)
+* [ ] [Introduction to LLMs in Python](https://app.datacamp.com/learn/courses/introduction-to-llms-in-python)
+* [ ] Research Methodology - Offline
