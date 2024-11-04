@@ -39,6 +39,7 @@ categories: phd
 
 * [X] [RAG generation with langchain](https://app.datacamp.com/learn/courses/retrieval-augmented-generation-rag-with-langchain)
 * [X] [Explainable AI](https://campus.datacamp.com/courses/explainable-artificial-intelligence-xai-concepts](https://campus.datacamp.com/courses/explainable-artificial-intelligence-xai-conccepts))
+* [ ] [Building agentic RAG with Llamaindex](https://learn.deeplearning.ai/courses/building-agentic-rag-with-llamaindex/lesson/1/introduction) `<in progress>`
 * [ ] [Implementing explainable AI in Python](https://app.datacamp.com/learn/courses/explainable-ai-in-python) `<in progress>`
 * [ ] [Developing LLM applications with Langchain](https://app.datacamp.com/learn/courses/developing-llm-applications-with-langchain)
 * [ ] [Deep Reinforcement Learning in Python](https://app.datacamp.com/learn/courses/deep-reinforcement-learning-in-python)
