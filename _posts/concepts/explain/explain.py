@@ -16,7 +16,8 @@ os.environ["LANGCHAIN_TRACING_V2"] = "true"
 os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
 
 
-pdf_loader = PyPDFLoader(file_path='../../../data/pilot-manual-787.pdf')
+# pdf_loader = PyPDFLoader(file_path='../../../data/pilot-manual-787.pdf')
+pdf_loader = PyPDFLoader(file_path='../../../data/metagpt.pdf')
 
 openai_api_key = os.environ.get('OPENAI_API_KEY')
 embeddings = OpenAIEmbeddings(api_key=openai_api_key, model='text-embedding-3-small')
