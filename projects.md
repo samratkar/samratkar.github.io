@@ -4,7 +4,6 @@ title:  "Life Projects"
 date:   2024-11-10 10:38:55 +0530
 categories: life
 ---
-
 # life projects
 
 ## 1. e-x-p-l-a-i-n
@@ -14,7 +13,7 @@ categories: life
 
 ## 2. panchatantra
 
-* [ ] day 1 - story 1 -
+* [ ] day 1 - story 1
 
 ## 3. phd
 
@@ -149,11 +148,11 @@ categories: life
 
 ## 10. life coaching with louise
 
-1. 09.26.2024 - started - general introduction
-2. 10.03.2024 - shared the materials on different styles of leadership
-3. 10.10.2024 - shared the ted video for jack of all
-4. 10.17.2024 - shared the document on non violent communication. shared about ren and how to handle.
-5. 10.24.2024 - discussed about ren and how to handle. shared the wheel of emotions.
-6. 10.31.2024 - persistent. unattached love. but continue to want. rejection is redirection.
-7. 11.07.2024 - somatic language of the body. communicated on having stopped emails after that beautiful ending letter. the realization of inward action of love and education as per adler, thereby respecting the limits, boundaries and needs of others.
-8. 11.14.2024 -
+1. [X] 09.26.2024 - started - general introduction
+2. [X] 10.03.2024 - shared the materials on different styles of leadership
+3. [X] 10.10.2024 - shared the ted video for jack of all
+4. [X] 10.17.2024 - shared the document on non violent communication. shared about ren and how to handle.
+5. [X] 10.24.2024 - discussed about ren and how to handle. shared the wheel of emotions.
+6. [X] 10.31.2024 - persistent. unattached love. but continue to want. rejection is redirection.
+7. [X] 11.07.2024 - somatic language of the body. communicated on having stopped emails after that beautiful ending letter. the realization of inward action of love and education as per adler, thereby respecting the limits, boundaries and needs of others.
+8. [ ] 11.14.2024 -
