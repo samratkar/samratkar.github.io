@@ -1,1 +1,0 @@
-pdf_loader = PyPDFLoader(file_path='../data/pilot-manual-787.pdf')
