@@ -8,12 +8,7 @@ categories: phd
 
 - [X] Survey 1 - Flight deck assistance with generative
 - [ ] Survey 2 - Explainable AI `<in progress>`
-
-  - [X] Theory of the concepts of XAI - course
-  - [ ] Implementaiton of XAI in Python - `<in progress>`
-- [ ] Survey 3 - AI Value alignment problem `<in progress>`
-
-  - [ ] CIRL paper deep dive `<in progress>`
+- [ ] Survey 3 - AI Value alignment problem including CIRL, IRL `<in progress>`
 
 # Programming
 
@@ -25,22 +20,26 @@ categories: phd
 * [X] 6-Add graphical RAG to the system
 * [X] 7-Auto generation of cypher from natural language and vice versa
 * [X] 8-end to end chatbot implementation for a RAG system
-* [ ] 9-Explainable AI implementation of LIME, SHAP in Python `<in progress>`
+* [X] 9-end to end chatbot e-x-p-l-a-i-n, ver 1 - Agentic RAG using llama index
+* [X] 10-end to end chatbot e-x-p-l-a-i-n, ver 2 - Runtime file upload and change option.
+* [ ] 11-end to end chatbot e-x-p-l-a-i-n, ver 3 - action triggering via LLM `<in progress>`
+* [ ] 9-Explainable AI implementation of LIME, SHAP in Python
 * [ ] 10-Reinforcement learning in Python.
 * [ ] 11-monitoring LLM apps - langsmith
 
 # Books
 
-* [ ] 6-Fast-ai Book -Deep learning for coders - fastai & PyTorch -  [https://course.fast.ai/Resources/book.html](https://course.fast.ai/Resources/book.html) `<in progress>`
-* [ ] 7-Generative Deep Learning - By David Fosters `<in progress>`
-* [ ] 8-Natural language processing with Transformers - By Lewis Tunstall `<in progress> `
+* [ ] Artifical Intelligence - A modern approach - Stuart Russel `<in progress>`
+* [ ] Fast-ai Book -Deep learning for coders - fastai & PyTorch -  [https://course.fast.ai/Resources/book.html](https://course.fast.ai/Resources/book.html)
+* [ ] Generative Deep Learning - By David Fosters
+* [ ] Natural language processing with Transformers - By Lewis Tunstall
 
 # Courses
 
 * [X] [RAG generation with langchain](https://app.datacamp.com/learn/courses/retrieval-augmented-generation-rag-with-langchain)
 * [X] [Explainable AI](https://campus.datacamp.com/courses/explainable-artificial-intelligence-xai-concepts](https://campus.datacamp.com/courses/explainable-artificial-intelligence-xai-conccepts))
 * [ ] [Building agentic RAG with Llamaindex](https://learn.deeplearning.ai/courses/building-agentic-rag-with-llamaindex/lesson/1/introduction) `<in progress>`
-* [ ] [Implementing explainable AI in Python](https://app.datacamp.com/learn/courses/explainable-ai-in-python) `<in progress>`
+* [ ] [Implementing explainable AI in Python](https://app.datacamp.com/learn/courses/explainable-ai-in-python)
 * [ ] [Developing LLM applications with Langchain](https://app.datacamp.com/learn/courses/developing-llm-applications-with-langchain)
 * [ ] [Deep Reinforcement Learning in Python](https://app.datacamp.com/learn/courses/deep-reinforcement-learning-in-python)
 * [ ] [Reinforcement Learning from Human Feedback](https://app.datacamp.com/learn/courses/reinforcement-learning-from-human-feedback-rlhf)
