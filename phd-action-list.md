@@ -6,9 +6,10 @@ categories: phd
 ---
 # Research papers
 
-- [X] Survey 1 - Flight deck assistance with generative
-- [ ] Survey 2 - Explainable AI `<in progress>`
-- [ ] Survey 3 - AI Value alignment problem including CIRL, IRL `<in progress>`
+- [X] Survey 1 - Flight deck assistance with generative ai
+- [ ] Survey 2 - Explainable AI `<on hold>`
+- [ ] Survey 3 - AI Value alignment problem including CIRL, IRL `<on hold>`
+- [ ] Survey 4 - Usage of neuro symbolic logic for Deep Learning autmentation `<not started>`
 
 # Programming
 
