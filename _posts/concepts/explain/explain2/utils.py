@@ -89,7 +89,7 @@ def init_chat_ui(chat_title: str, version: str):
     # Loop until a file is uploaded
     file_path = None 
     uploaded_file = None
-    uploaded_file = st.file_uploader("Upload a file", type=["pdf", "xls", "xlsx", "csv", "txt"], key="file_uploader")
+    uploaded_file = st.file_uploader("Upload a file", key="file_uploader")
     cwd = Path.cwd()
     if uploaded_file is not None:
         file_path = cwd / uploaded_file.name 
