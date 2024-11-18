@@ -23,8 +23,10 @@ llm = OpenAI(model="gpt-3.5-turbo")
 
 def render_fpln():
     """Renders and visualizes the flight plan."""
+    file_path_global = st.session_state.file_path
+    st.write(file_path_global)
     # Read the KML file
-    st.write (file_path_global)
+    file_path_global = st.write (file_path_global)
     gdf = gpd.read_file(file_path_global)
 
     # Calculate the centroid of the geometries
@@ -133,6 +135,7 @@ def init_chat_ui(chat_title: str, version: str):
         file_path = cwd / uploaded_file.name 
         with open(file_path, "wb") as f:
             f.write(uploaded_file.getbuffer())
+        st.session_state.file_path = file_path
         return file_path
     return None
   
