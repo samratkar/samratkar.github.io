@@ -26,7 +26,6 @@ def render_fpln():
     file_path_global = st.session_state.file_path
     st.write(file_path_global)
     # Read the KML file
-    file_path_global = st.write (file_path_global)
     gdf = gpd.read_file(file_path_global)
 
     # Calculate the centroid of the geometries
