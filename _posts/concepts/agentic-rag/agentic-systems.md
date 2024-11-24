@@ -34,4 +34,5 @@ Such interactive workflow yields much better results than writing in a single pa
 
 #### reflection
 
+1. it is about letting the LLM review it's working by giving appropriate prompts to validate itself. 
 
