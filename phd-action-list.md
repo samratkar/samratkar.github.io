@@ -23,7 +23,7 @@ categories: phd
 * [X] 8-end to end chatbot implementation for a RAG system
 * [X] 9-end to end chatbot e-x-p-l-a-i-n, ver 1 - Agentic RAG using llama index
 * [X] 10-end to end chatbot e-x-p-l-a-i-n, ver 2 - Runtime file upload and change option.
-* [ ] 11-end to end chatbot e-x-p-l-a-i-n, ver 3 - action triggering via LLM `<in progress>`
+* [X] 11-end to end chatbot e-x-p-l-a-i-n, ver 3 - action triggering via LLM
 * [ ] 9-Explainable AI implementation of LIME, SHAP in Python
 * [ ] 10-Reinforcement learning in Python.
 * [ ] 11-monitoring LLM apps - langsmith
@@ -39,7 +39,10 @@ categories: phd
 
 * [X] [RAG generation with langchain](https://app.datacamp.com/learn/courses/retrieval-augmented-generation-rag-with-langchain)
 * [X] [Explainable AI](https://campus.datacamp.com/courses/explainable-artificial-intelligence-xai-concepts](https://campus.datacamp.com/courses/explainable-artificial-intelligence-xai-conccepts))
+* [ ] Research Methodologies `<in progress>`
 * [ ] [Building agentic RAG with Llamaindex](https://learn.deeplearning.ai/courses/building-agentic-rag-with-llamaindex/lesson/1/introduction) `<in progress>`
+* [ ] [Reinforcement learning using gymnasium](https://app.datacamp.com/learn/courses/reinforcement-learning-with-gymnasium-in-python) `<in progress>`
+* [ ] [Safe &amp; Reliable AI using guardrails](https://learn.deeplearning.ai/courses/safe-and-reliable-ai-via-guardrails/lesson/1/introduction) `<in progress>`
 * [ ] [Implementing explainable AI in Python](https://app.datacamp.com/learn/courses/explainable-ai-in-python)
 * [ ] [Developing LLM applications with Langchain](https://app.datacamp.com/learn/courses/developing-llm-applications-with-langchain)
 * [ ] [Deep Reinforcement Learning in Python](https://app.datacamp.com/learn/courses/deep-reinforcement-learning-in-python)
@@ -53,4 +56,3 @@ categories: phd
 * [ ] [Working with Huggingface](https://app.datacamp.com/learn/courses/working-with-hugging-face)
 * [ ] [Developing AI Systems with the OpenAI API](https://app.datacamp.com/learn/courses/developing-ai-systems-with-the-openai-api)
 * [ ] [Introduction to LLMs in Python](https://app.datacamp.com/learn/courses/introduction-to-llms-in-python)
-* [ ] Research Methodology - Offline
