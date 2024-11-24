@@ -34,5 +34,16 @@ Such interactive workflow yields much better results than writing in a single pa
 
 #### reflection
 
-1. it is about letting the LLM review it's working by giving appropriate prompts to validate itself. 
+1. it is about letting the LLM review it's working by giving appropriate prompts to validate itself.
+2. Take the task of asking an LLM to write code. We can prompt it to generate the desired code directly to carry out some task X. After that, we can prompt it to reflect on its own output, perhaps as follows:
+Here’s code intended for task X: [previously generated code]
+Check the code carefully for correctness, style, and efficiency, and give constructive criticism for how to improve it.
+basically, send the previous response as a new prompt, adding prompts on evaluating the response.
+3. *tools to do evaluation and correction* : And we can go beyond self-reflection by giving the LLM tools that help evaluate its output; for example, running its code through a few unit tests to check whether it generates correct results on test cases or searching the web to double-check text output. Then it can reflect on any errors it found and come up with ideas for improvement.
+4. *multi-agents evaluation* - Further, we can implement Reflection using a multi-agent framework. I've found it convenient to create two different agents, one prompted to generate good outputs and the other prompted to give constructive criticism of the first agent's output. The resulting discussion between the two agents leads to improved responses.
 
+### tool use
+
+### planning
+
+### multi agent collaboration
