@@ -43,6 +43,7 @@ categories: phd
 * [ ] [Building agentic RAG with Llamaindex](https://learn.deeplearning.ai/courses/building-agentic-rag-with-llamaindex/lesson/1/introduction) `<in progress>`
 * [ ] [Reinforcement learning using gymnasium](https://app.datacamp.com/learn/courses/reinforcement-learning-with-gymnasium-in-python) `<in progress>`
 * [ ] [Safe &amp; Reliable AI using guardrails](https://learn.deeplearning.ai/courses/safe-and-reliable-ai-via-guardrails/lesson/1/introduction) `<in progress>`
+* [ ] [IBM Generative AI certification](https://www.coursera.org/professional-certificates/ibm-generative-ai-engineering) `<in progress>`
 * [ ] [Implementing explainable AI in Python](https://app.datacamp.com/learn/courses/explainable-ai-in-python)
 * [ ] [Developing LLM applications with Langchain](https://app.datacamp.com/learn/courses/developing-llm-applications-with-langchain)
 * [ ] [Deep Reinforcement Learning in Python](https://app.datacamp.com/learn/courses/deep-reinforcement-learning-in-python)
