@@ -1,8 +1,9 @@
 ---
 type : course 
-source : coursera-IBN-cert
+source : "coursera-IBM-cert-Generative AI"
 title : "Introduction to Artificial Intelligence (AI)"
-date : 11-26-2024
+date : "11-26-2024"
+summary : "introduction and types of AI."
 ---
 # Introduction to Artificial Intelligence (AI)
 
@@ -191,7 +192,3 @@ Earth --> LLMs --> Prompting-Tuning --> Application --> Prompting-Tuning
    2. [x] by using deep learning techniques on huge data sets
    3. [ ] by using shallow learning techniques on small data sets
    4. [ ] by following pre-defined rules and patterns
-
-## Impact and application of AI
-
-1. 

@@ -32,13 +32,14 @@ categories: phd
 
 * [ ] Artifical Intelligence - A modern approach - Stuart Russel `<in progress>`
 * [ ] Fast-ai Book -Deep learning for coders - fastai & PyTorch -  [https://course.fast.ai/Resources/book.html](https://course.fast.ai/Resources/book.html)
-* [ ] Generative Deep Learning - By David Fosters
+* [ ] Generative Deep Learning - By David Fosters `<in progress>`
 * [ ] Natural language processing with Transformers - By Lewis Tunstall
 
 # Courses
 
 * [X] [RAG generation with langchain](https://app.datacamp.com/learn/courses/retrieval-augmented-generation-rag-with-langchain)
 * [X] [Explainable AI](https://campus.datacamp.com/courses/explainable-artificial-intelligence-xai-concepts](https://campus.datacamp.com/courses/explainable-artificial-intelligence-xai-conccepts))
+* [ ] [IBM Generative AI Engineering Professional Certificate](https://www.coursera.org/professional-certificates/ibm-generative-ai-engineering)`<in progress>`
 * [ ] Research Methodologies `<in progress>`
 * [ ] [Building agentic RAG with Llamaindex](https://learn.deeplearning.ai/courses/building-agentic-rag-with-llamaindex/lesson/1/introduction) `<in progress>`
 * [ ] [Reinforcement learning using gymnasium](https://app.datacamp.com/learn/courses/reinforcement-learning-with-gymnasium-in-python) `<in progress>`
