@@ -75,7 +75,7 @@ There are three main types of machine learning -
       1. Generator - generates new data instances
       2. Discriminator - evaluates the generated data instances
       3. Can be used for image generation, style transfer, data augmentation 
-      ![](../../../../images/gan.png)
+      ![gan](../../../../images/gan.png)
    4. Transformers - NLP - generates text, translations. GPT - Generative Pre-trained Transformer
       1. encoders - input data
       2. decoders - output data
@@ -116,18 +116,122 @@ There are three main types of machine learning -
 
 ![NLP](../../../../images/ibm-genai/nlp.png)
 
-1. NLP is all about processing unstructured text data and converting it to structured data.
+NLP is all about processing and translating between structured and unstructured text data.
+**NLU - Natural language understanding** - it is all about conversion of unstructured text data to structured data.
 
 ```mermaid
 graph LR;
 unstructured_text_data --> structured_data;
 ```
 
-### NLG - natural language generation.
-
-1. it is all about conversion of structured data to unstructured text data.
+**NLG - Natural language generation.** - it is all about conversion of structured data to unstructured text data.
 
 ```mermaid
 graph LR;
 structured_text_data --> unstructured_data;
 ```
+
+#### Application of NLP
+
+1. Machine translation - While translating one language to the other we need to understand the context. That is the greatest channel in natural language processing. if you take the phrase, `the spirit is willing, but the flesh is weak` and you translate that from English to Russian, and then you translate that Russian translation back into English, you're going to go from the spirit is willing, but the flesh is weak to something a bit more like the `vodka is good, but the meat is rotten`, which is really not the intended context of that sentence whatsoever.
+2. chatbot or virtual assistant
+3. sentiment analysis
+4. spam determination
+
+#### NLP pipeline
+
+1. **Tokenization** - breaking down the text into words or sentences.
+2. **Stop words** - removing the common words like is, the, and, etc.
+3. **Stemming** - reducing the words to their root form. running, ran, runs all stem to run.
+4. **Lemmatization** - reducing the words to their root form based on the context. universe and university do not stem to universe. finds the meaning of the word from a dictionary, and based on the meaning finds the appropriate root. `lem of better is good`. `stem of better is bet`.
+5. **POS tagging** - identifying the parts of speech - finding where a token is used in a sentence. 
+6. **NER** - Named entity recognition - identifying the entities in the text. - for a given token is there an entity associated with it.
+7. Sentiment analysis - identifying the sentiment of the text.
+8. Topic modeling - identifying the topics in the text.
+9. Text summarization - summarizing the text.
+10. Text classification - classifying the text into categories.
+11. Text generation - generating text based on the input.
+12. Machine translation - translating the text from one language to another.
+13. Speech recognition - converting speech to text.
+14. Text to speech - converting text to speech.
+15. Question answering - answering the questions based on the text.
+16. Chatbot - interacting with the users.
+17. Information retrieval - retrieving the relevant information.
+18. Text similarity - identifying the similarity between the texts.
+19. Text clustering - clustering the texts based on the similarity.
+20. Text annotation - annotating the text with additional information.
+21. Text correction - correcting the text.
+22. Text augmentation - augmenting the text with additional information.
+23. Text normalization - normalizing the text.
+24. Text alignment - aligning the texts.
+25. Text extraction - extracting the information from the text.
+
+##### Main stages in NLP pipeline
+
+```mermaid
+graph LR;
+text --> tokenization;
+tokenization --> stop_words;
+stop_words --> stemming;
+stemming --> lemmatization;
+lemmatization --> pos_tagging;
+stemming --> pos_tagging;
+pos_tagging --> NER;
+```
+
+### AI, cloud computing, edge computing, IoT
+
+1. **IoT** -  IoT devices are a network of physical devices connected to the Internet that collect and share data for processing and analysis. These devices can be sensors, cameras, or other devices that generate data. They just generate or monitor data. They do not do any processing. They do not any storing of the data internally in them. They directly connect to internet and shared data for edge computing or cloud computing to do the processing and analysis. Typically IoT have minimal processor. IoT typically streams the data. Eg - Fitness tracker that
+   1. tracks heart rate,
+   2. steps,
+   3. activity level.
+![IoT](../../../../images/ibm-genai/iot.png)
+
+1. **Edge computing** -  Not all data collected by IoT devices has to go to the cloud. Sometimes edge computing is used, where the device processes and makes decisions locally before sending data to the cloud. This allows faster decision making. Edge computing refers to the practice of processing data closer to the source of generation rather than relying on centralized data centers. Eg - The fitness tracker has some power to do some tasks inside itself. Edge computing processes data near its source to improve response times and save bandwidth by reducing the need to send data to central servers.
+   1. handles data locally
+   2. counts steps
+   3. monitors and alerts heart rate
+   4. analyses some data. Edge AI - based on heart rate pattern it can ask you to exercise.
+2. **Edge AI** - Edge AI is a type of AI that lives on the device itself, rather than relying on the cloud. This allows the devices to process data and make decisions locally.
+3. **Cloud computing** - connecting the mobile to cloud.
+
+```mermaid
+graph LR;
+IoT --> Edge_computing;
+Edge_computing --> EdgeAI;
+Edge_computing --> Cloud_computing;
+EdgeAI --> Cloud_computing;
+```
+
+## Graded quiz
+
+1. Choose the statement that correctly defines deep learning - 
+   - Deep learning is a specialized subset of machine learning that creates neural network, an artificial replication of the brain's structure and functionality.
+  
+2. What type of neural network is commonly deployed for tasks such as time series analysis and natural language processing?
+   - Recurrent neural network (RNN) carry the ability to use data from previous step. RNNs are employed for time series analysis and natural language processing.
+
+3. Which of the following is the characteristic of discriminator network?
+   - The discriminator network tries to differentiate between real and fake data. it verifies the generated data.
+
+4. Choose the statement that describes how an IoT device works 
+   - IoT devices collect data and send it via internet to the cloud for analysis. They do not store any data locally.
+
+5. Which type of machine learning relies on providing an algorithm with a set of rules and constraints and letting it learn how to achieve its goals?
+   - Reinforcement learning is a type of machine learning that enables an agent to learn in an interactive environment by trial and error using feedback from its own actions and experiences.
+
+6. Which of the following categories of machine learning uses a reward function to penalize bad actions or reward good actions?
+   - Reinforcement learning is a different subset, and what this does is it uses a reward function to penalize bad actions or reward good actions.
+
+7. Which of the following statements best describes edge AI?
+   - Edge AI is a type of AI that lives on the device itself, rather than relying on the cloud. This allows the devices to process data and make decisions locally.
+  
+8. What is edge computing?
+   - Edge computing processes data near its source to improve response times and save bandwidth by reducing the need to send data to central servers.
+
+9. What is one of the primary reasons deep learning has gained popularity in recent years?
+    - Deep learning models can automatically extract features from raw data without the need for manual feature engineering.
+
+10. What is the function of activation function of neural network?
+       - Activation functions introduce non-linearity to the neural network, allowing it to learn complex patterns in the data.
+
