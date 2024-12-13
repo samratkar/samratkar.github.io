@@ -1,6 +1,6 @@
 ---
-title: AI-GK November 2024
-type : concepts
+title: AI-GK Batch November 2024
+type : batch
 ---
 
 1. function calling or tool calling is reliable from GPT4. Prior to GPT 4, it was not reliable.
