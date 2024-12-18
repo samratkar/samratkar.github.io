@@ -1,7 +1,7 @@
 ---
 type : talk
 date : 12-20-2024
-title : Innovation through Vulnerability
+title : courage over comfort
 references : dare to lead by brene brown.
 ---
 
