@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  "AI an overview by Russel"
 date:   2024-11-05 7:30:55 +0530
 categories: books

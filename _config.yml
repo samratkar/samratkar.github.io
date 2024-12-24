@@ -24,6 +24,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   I am passionate about Artificial Intelligence, the cutting edge research in this area and its applications. I am a firm believer and contributor towards making the power of AI transform the world for the better.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://samratkar.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+#url: "http://localhost:4000"
 github_username: samratkar
 twitter_username: _samrat_kar_
 linkedin_username: samratk
@@ -33,6 +34,8 @@ theme: minima
 plugins:
   - jekyll-feed
 show_dir_listing: false
+
+
 
 # Exclude from processing.
 # The following items will not be processed, by default.
