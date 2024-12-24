@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Guardrails
 date: 2024-11-22
 type: concepts

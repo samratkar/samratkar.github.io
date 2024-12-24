@@ -1,5 +1,4 @@
 ---
-layout: "post"
 title : "Retrieval Optimization"
 date : 2024-10-05
 ---
