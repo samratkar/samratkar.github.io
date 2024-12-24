@@ -32,6 +32,9 @@ wordpress_username: samratkar2012
 theme: minima
 plugins:
   - jekyll-feed
+show_dir_listing: false
+source: .
+
 
 # Exclude from processing.
 # The following items will not be processed, by default.
