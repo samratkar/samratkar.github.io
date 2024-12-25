@@ -1,8 +1,5 @@
 ---
 layout: home
-title: "Home"
+title: Home
 ---
-
-# Welcome to My Jekyll Site
-
-This is the homepage.
+# Daring Greatly to Live & Lead Wholeheartedly

@@ -1,4 +1,5 @@
 ---
+layout : mermaid
 title : "Retrieval Optimization"
 date : 2024-10-05
 ---
