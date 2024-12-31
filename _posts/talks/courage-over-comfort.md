@@ -5,15 +5,11 @@ title : courage over comfort
 references : dare to lead by brene brown.
 ---
 
-1. Thank you for the opportunity. Thank you for your time.
-2. In my decade long courtship with leadership today I would like to share with you my findings on how to build innovating teams through vulnerability.
-3. I have been inspired by the work of Brene Brown, a research professor at the University of Houston. She has spent the past two decades studying courage, vulnerability, shame, and empathy.
-4. In her book Dare to Lead, she writes about how vulnerability is the birthplace of innovation, creativity and change.
-5. She says that vulnerability is not weakness, it is our most accurate measure of courage.
-6. In my experience, I have found that the most innovative teams are those that are able to be vulnerable with each other.
-7. When we are vulnerable, we are able to share our fears, our doubts, our insecurities, and our failures.
-8. When we are able to do this, we create a safe space for others to do the same.
-9. This is how we build trust, and trust is the foundation of any successful team.
-10. When we trust each other, we are able to take risks, to experiment, to fail, and to learn.
-11. This is how we innovate, this is how we create something new, something better, something that has never been done before.
-12. So I encourage you to be vulnerable with each other, to share your fears, your doubts, your insecurities, and your failures.
+# Courage over comfort
+
+1. In my life of about a decade and a half years of experimenting with leadership, it has always helped me standing on the shoulders of giants - looking for answers in the seminal works on organizational psychology and leadership. Works of Erich Fromm, Victor Frankl, Czikzentmihalyi, Peter Drucker, Daniel Pink, Carl Jung, Alfred Adler, Brene Brown has greatly helped me to find answers, look within me, know myself better, and craft my character and leadership style. Today, I am going to talk about the work of Brene Brown, especially her book Dare to Lead.
+2. Story of Luke and Yoda
+3. In the onslaught of criticism, uncertainty, risk and emotional exposure, being able to lean in, be vulnerable and have tough conversations, not giving into violence is what is the subject of today's talk. How we can stop beheading our own self, thinking it to be our enemy?
+4. get into the mapping of armored leadership and daring leadership.
+5. very highly touch over my own history
+6. end the talk with the quote of the Roosevelt speech
