@@ -5,9 +5,9 @@ permalink: /about/
 ---
 <img src="/assets/img/my-photo-small.jpg" width="132" height="170">
 
-#### Name : Samrat Kar
+## Name : Samrat Kar
 
-#### Passions
+## Passions
 
 1. Positive Psychology
 2. Leadership Development
@@ -17,14 +17,14 @@ permalink: /about/
 6. Meditation
 7. Reaching out to people
 
-#### Core Values
+## Core Values
 
 1. Faith
 2. Courage
 3. Empathy
 4. Love
 
-#### Masters
+## Masters
 
 1. Brene Brown
 2. Alfred Adler
@@ -46,25 +46,25 @@ permalink: /about/
 18. Swami Vivekananda
 19. Sir John Woodroffe
 
-#### Education
+## Education
 
 1. BE Computer Science - VTU - 2002
 2. MTech Cloud Computing - BITS Pilani - 2024
 3. PhD Generative AI - Amrita University - In Progress
 
-#### Businesses worked for
+## Businesses worked for
 
 1. Honeywell Aerospace - 2003 - 2021
 2. Honeywell Intelligrated - 2021 - 2023
 3. Boeing Digital Aviation Services (Jeppesen) - 2023 - present
 
-#### Hobbies
+## Hobbies
 
 1. STEM Education for underprivileged children
 2. Reading of scriptures for school children
 3. Music
 
-#### Reach out to me at :
+## Reach out to me at :
 
 * [https://www.linkedin.com/in/samratk/](https://www.linkedin.com/in/samratk/)
 * [https://samratkar.github.io/](https://samratkar.github.io/)
