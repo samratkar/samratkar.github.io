@@ -5,21 +5,65 @@ permalink: /about/
 ---
 <img src="/assets/img/my-photo-small.jpg" width="132" height="170">
 
-**Name** : Samrat Kar
+#### Name : Samrat Kar
 
-**Purpose** : Learn and apply AI for betterment of humanity.
+#### Passions
 
-**Mission** :
+1. Positive Psychology
+2. Leadership Development
+3. AI and Machine Learning
+4. Scriptures and Philosophy
+5. Hatha Yoga
+6. Meditation
+7. Reaching out to people
 
-1. Generate two journals on Generative AI application in aviation - building virtual copilot for safety and ease of flying commercial aircrafts by 2025 Q1
-2. Build two applications on aligned with the research, by 2025 Q1
+#### Core Values
 
-**Current Areas of pursuits** :
+1. Faith
+2. Courage
+3. Empathy
+4. Love
 
-1. Phd Scholar at Amrita University, working in the area of Natural Language Processing and Generative AI.
-2. Teaches high school students STEM education.
+#### Masters
 
-**Reach out to me at :**
+1. Brene Brown
+2. Alfred Adler
+3. Viktor Frankl
+4. Erich Fromm
+5. Czsikszentmihalyi Mihaly
+6. Martin Seligman
+7. Daniel Goleman
+8. John Maxwell
+9. Simon Sinek
+10. Stephen Covey
+11. Jim Collins
+12. Peter Drucker
+13. Daniel Kahneman
+14. Daniel Pink
+15. Malcolm Gladwell
+16. Rabindranath Tagore
+17. Leo Tolstoy
+18. Swami Vivekananda
+19. Sir John Woodroffe
+
+#### Education
+
+1. BE Computer Science - VTU - 2002
+2. MTech Cloud Computing - BITS Pilani - 2024
+3. PhD Generative AI - Amrita University - In Progress
+
+#### Businesses worked for
+
+1. Honeywell Aerospace - 2003 - 2021
+2. Honeywell Intelligrated - 2021 - 2023
+3. Boeing Digital Aviation Services (Jeppesen) - 2023 - present
+
+#### Hobbies
+
+1. STEM Education for underprivileged children
+2. Reading of scriptures for school children
+
+#### Reach out to me at :
 
 * [https://www.linkedin.com/in/samratk/](https://www.linkedin.com/in/samratk/)
 * [https://samratkar.github.io/](https://samratkar.github.io/)
