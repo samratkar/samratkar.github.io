@@ -62,6 +62,7 @@ permalink: /about/
 
 1. STEM Education for underprivileged children
 2. Reading of scriptures for school children
+3. Music
 
 #### Reach out to me at :
 
