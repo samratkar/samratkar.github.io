@@ -67,7 +67,12 @@ permalink: /about/
 
 ## Reach out to me at :
 
-* [https://www.linkedin.com/in/samratk/](https://www.linkedin.com/in/samratk/)
-* [https://samratkar.github.io/](https://samratkar.github.io/)
-* [https://x.com/samrat_kar](https://x.com/samrat_kar)
-* [https://karconversations.wordpress.com/](https://karconversations.wordpress.com/)
+1. [https://www.linkedin.com/in/samratk/](https://www.linkedin.com/in/samratk/)
+2. [https://samratkar.github.io/](https://samratkar.github.io/)
+3. [https://x.com/samrat_kar](https://x.com/samrat_kar)
+4. [https://karconversations.wordpress.com/](https://karconversations.wordpress.com/)
+5. [https://criativ-mind.blogspot.com/](https://criativ-mind.blogspot.com/)
+
+## My Books published
+
+1. [Simoni's Story](https://www.amazon.in/Simonis-Story-Samrat-Kar-ebook/dp/B00AK3G8AS/) - Dec 2012
