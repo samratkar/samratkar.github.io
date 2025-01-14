@@ -8,7 +8,7 @@ references : dare to lead by brene brown.
 
 # Courage over comfort
 
-1. Good Morning everybody. My DAS family. Like all family get together, it is a pleasure standing in that presence of warm belonging, and sharing our heart's echos. Most of my friends and family already know, I have a deep, overwhelming, and long lasting love affair with **Computer Science** and **Psychology**. The journey started when I was a child, of about 8-10 years. My **parents did not used to stay with me**. I used to live with my elder brother and sister in a small town in Bihar known as Bhagalpur.
+1. Brothers and Sisters of DAS. My heart is filled with unfathomable joy and gratitude to be standing here and sharing with you a little story of a little lad from 1970s. 
 
 The love for Psychology started with a subject in my school known as **Moral Science - Girl Boy Attraction**. And Love for Computer Science started when I was successfully able to **program a text based cricket game** using BASIC language in my school using the age old intel 8086 black and white computers with big fat screens and floppy drives.
 
