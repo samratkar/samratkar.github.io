@@ -1,0 +1,595 @@
+<svg id="mermaid-1594971302343" width="100%" xmlns="http://www.w3.org/2000/svg" height="100%" style="max-width:750px;" viewBox="-50 -10 750 578"><style>
+
+
+
+#mermaid-1594971302343 .label {
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family);
+  color: #333; }
+
+#mermaid-1594971302343 .label text {
+  fill: #333; }
+
+#mermaid-1594971302343 .node rect,
+#mermaid-1594971302343 .node circle,
+#mermaid-1594971302343 .node ellipse,
+#mermaid-1594971302343 .node polygon,
+#mermaid-1594971302343 .node path {
+  fill: #ECECFF;
+  stroke: #9370DB;
+  stroke-width: 1px; }
+
+#mermaid-1594971302343 .node .label {
+  text-align: center; }
+
+#mermaid-1594971302343 .node.clickable {
+  cursor: pointer; }
+
+#mermaid-1594971302343 .arrowheadPath {
+  fill: #333333; }
+
+#mermaid-1594971302343 .edgePath .path {
+  stroke: #333333;
+  stroke-width: 1.5px; }
+
+#mermaid-1594971302343 .flowchart-link {
+  stroke: #333333;
+  fill: none; }
+
+#mermaid-1594971302343 .edgeLabel {
+  background-color: #e8e8e8;
+  text-align: center; }
+#mermaid-1594971302343   .edgeLabel rect {
+    opacity: 0.5; }
+
+#mermaid-1594971302343 .cluster rect {
+  fill: #ffffde;
+  stroke: #aaaa33;
+  stroke-width: 1px; }
+
+#mermaid-1594971302343 .cluster text {
+  fill: #333; }
+
+#mermaid-1594971302343 div.mermaidTooltip {
+  position: absolute;
+  text-align: center;
+  max-width: 200px;
+  padding: 2px;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family);
+  font-size: 12px;
+  background: #ffffde;
+  border: 1px solid #aaaa33;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 100; }
+
+#mermaid-1594971302343 .actor {
+  stroke: #CCCCFF;
+  fill: #ECECFF; }
+
+#mermaid-1594971302343 text.actor &gt; tspan {
+  fill: black;
+  stroke: none; }
+
+#mermaid-1594971302343 .actor-line {
+  stroke: grey; }
+
+#mermaid-1594971302343 .messageLine0 {
+  stroke-width: 1.5;
+  stroke-dasharray: none;
+  stroke: #333; }
+
+#mermaid-1594971302343 .messageLine1 {
+  stroke-width: 1.5;
+  stroke-dasharray: 2, 2;
+  stroke: #333; }
+
+#mermaid-1594971302343 #arrowhead path {
+  fill: #333;
+  stroke: #333; }
+
+#mermaid-1594971302343 .sequenceNumber {
+  fill: white; }
+
+#mermaid-1594971302343 #sequencenumber {
+  fill: #333; }
+
+#mermaid-1594971302343 #crosshead path {
+  fill: #333;
+  stroke: #333; }
+
+#mermaid-1594971302343 .messageText {
+  fill: #333;
+  stroke: #333; }
+
+#mermaid-1594971302343 .labelBox {
+  stroke: #CCCCFF;
+  fill: #ECECFF; }
+
+#mermaid-1594971302343 .labelText,#mermaid-1594971302343  .labelText &gt; tspan {
+  fill: black;
+  stroke: none; }
+
+#mermaid-1594971302343 .loopText,#mermaid-1594971302343  .loopText &gt; tspan {
+  fill: black;
+  stroke: none; }
+
+#mermaid-1594971302343 .loopLine {
+  stroke-width: 2px;
+  stroke-dasharray: 2, 2;
+  stroke: #CCCCFF;
+  fill: #CCCCFF; }
+
+#mermaid-1594971302343 .note {
+  stroke: #aaaa33;
+  fill: #fff5ad; }
+
+#mermaid-1594971302343 .noteText,#mermaid-1594971302343  .noteText &gt; tspan {
+  fill: black;
+  stroke: none; }
+
+#mermaid-1594971302343 .activation0 {
+  fill: #f4f4f4;
+  stroke: #666; }
+
+#mermaid-1594971302343 .activation1 {
+  fill: #f4f4f4;
+  stroke: #666; }
+
+#mermaid-1594971302343 .activation2 {
+  fill: #f4f4f4;
+  stroke: #666; }
+
+
+#mermaid-1594971302343 .mermaid-main-font {
+  font-family: "trebuchet ms", verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+#mermaid-1594971302343 .section {
+  stroke: none;
+  opacity: 0.2; }
+
+#mermaid-1594971302343 .section0 {
+  fill: rgba(102, 102, 255, 0.49); }
+
+#mermaid-1594971302343 .section2 {
+  fill: #fff400; }
+
+#mermaid-1594971302343 .section1,
+#mermaid-1594971302343 .section3 {
+  fill: white;
+  opacity: 0.2; }
+
+#mermaid-1594971302343 .sectionTitle0 {
+  fill: #333; }
+
+#mermaid-1594971302343 .sectionTitle1 {
+  fill: #333; }
+
+#mermaid-1594971302343 .sectionTitle2 {
+  fill: #333; }
+
+#mermaid-1594971302343 .sectionTitle3 {
+  fill: #333; }
+
+#mermaid-1594971302343 .sectionTitle {
+  text-anchor: start;
+  font-size: 11px;
+  text-height: 14px;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+
+#mermaid-1594971302343 .grid .tick {
+  stroke: lightgrey;
+  opacity: 0.8;
+  shape-rendering: crispEdges; }
+#mermaid-1594971302343   .grid .tick text {
+    font-family: 'trebuchet ms', verdana, arial;
+    font-family: var(--mermaid-font-family); }
+
+#mermaid-1594971302343 .grid path {
+  stroke-width: 0; }
+
+
+#mermaid-1594971302343 .today {
+  fill: none;
+  stroke: red;
+  stroke-width: 2px; }
+
+
+
+#mermaid-1594971302343 .task {
+  stroke-width: 2; }
+
+#mermaid-1594971302343 .taskText {
+  text-anchor: middle;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+#mermaid-1594971302343 .taskText:not([font-size]) {
+  font-size: 11px; }
+
+#mermaid-1594971302343 .taskTextOutsideRight {
+  fill: black;
+  text-anchor: start;
+  font-size: 11px;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+#mermaid-1594971302343 .taskTextOutsideLeft {
+  fill: black;
+  text-anchor: end;
+  font-size: 11px; }
+
+
+#mermaid-1594971302343 .task.clickable {
+  cursor: pointer; }
+
+#mermaid-1594971302343 .taskText.clickable {
+  cursor: pointer;
+  fill: #003163 !important;
+  font-weight: bold; }
+
+#mermaid-1594971302343 .taskTextOutsideLeft.clickable {
+  cursor: pointer;
+  fill: #003163 !important;
+  font-weight: bold; }
+
+#mermaid-1594971302343 .taskTextOutsideRight.clickable {
+  cursor: pointer;
+  fill: #003163 !important;
+  font-weight: bold; }
+
+
+#mermaid-1594971302343 .taskText0,
+#mermaid-1594971302343 .taskText1,
+#mermaid-1594971302343 .taskText2,
+#mermaid-1594971302343 .taskText3 {
+  fill: white; }
+
+#mermaid-1594971302343 .task0,
+#mermaid-1594971302343 .task1,
+#mermaid-1594971302343 .task2,
+#mermaid-1594971302343 .task3 {
+  fill: #8a90dd;
+  stroke: #534fbc; }
+
+#mermaid-1594971302343 .taskTextOutside0,
+#mermaid-1594971302343 .taskTextOutside2 {
+  fill: black; }
+
+#mermaid-1594971302343 .taskTextOutside1,
+#mermaid-1594971302343 .taskTextOutside3 {
+  fill: black; }
+
+
+#mermaid-1594971302343 .active0,
+#mermaid-1594971302343 .active1,
+#mermaid-1594971302343 .active2,
+#mermaid-1594971302343 .active3 {
+  fill: #bfc7ff;
+  stroke: #534fbc; }
+
+#mermaid-1594971302343 .activeText0,
+#mermaid-1594971302343 .activeText1,
+#mermaid-1594971302343 .activeText2,
+#mermaid-1594971302343 .activeText3 {
+  fill: black !important; }
+
+
+#mermaid-1594971302343 .done0,
+#mermaid-1594971302343 .done1,
+#mermaid-1594971302343 .done2,
+#mermaid-1594971302343 .done3 {
+  stroke: grey;
+  fill: lightgrey;
+  stroke-width: 2; }
+
+#mermaid-1594971302343 .doneText0,
+#mermaid-1594971302343 .doneText1,
+#mermaid-1594971302343 .doneText2,
+#mermaid-1594971302343 .doneText3 {
+  fill: black !important; }
+
+
+#mermaid-1594971302343 .crit0,
+#mermaid-1594971302343 .crit1,
+#mermaid-1594971302343 .crit2,
+#mermaid-1594971302343 .crit3 {
+  stroke: #ff8888;
+  fill: red;
+  stroke-width: 2; }
+
+#mermaid-1594971302343 .activeCrit0,
+#mermaid-1594971302343 .activeCrit1,
+#mermaid-1594971302343 .activeCrit2,
+#mermaid-1594971302343 .activeCrit3 {
+  stroke: #ff8888;
+  fill: #bfc7ff;
+  stroke-width: 2; }
+
+#mermaid-1594971302343 .doneCrit0,
+#mermaid-1594971302343 .doneCrit1,
+#mermaid-1594971302343 .doneCrit2,
+#mermaid-1594971302343 .doneCrit3 {
+  stroke: #ff8888;
+  fill: lightgrey;
+  stroke-width: 2;
+  cursor: pointer;
+  shape-rendering: crispEdges; }
+
+#mermaid-1594971302343 .milestone {
+  transform: rotate(45deg) scale(0.8, 0.8); }
+
+#mermaid-1594971302343 .milestoneText {
+  font-style: italic; }
+
+#mermaid-1594971302343 .doneCritText0,
+#mermaid-1594971302343 .doneCritText1,
+#mermaid-1594971302343 .doneCritText2,
+#mermaid-1594971302343 .doneCritText3 {
+  fill: black !important; }
+
+#mermaid-1594971302343 .activeCritText0,
+#mermaid-1594971302343 .activeCritText1,
+#mermaid-1594971302343 .activeCritText2,
+#mermaid-1594971302343 .activeCritText3 {
+  fill: black !important; }
+
+#mermaid-1594971302343 .titleText {
+  text-anchor: middle;
+  font-size: 18px;
+  fill: black;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+#mermaid-1594971302343 g.classGroup text {
+  fill: #9370DB;
+  stroke: none;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family);
+  font-size: 10px; }
+#mermaid-1594971302343   g.classGroup text .title {
+    font-weight: bolder; }
+
+#mermaid-1594971302343 g.clickable {
+  cursor: pointer; }
+
+#mermaid-1594971302343 g.classGroup rect {
+  fill: #ECECFF;
+  stroke: #9370DB; }
+
+#mermaid-1594971302343 g.classGroup line {
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1594971302343 .classLabel .box {
+  stroke: none;
+  stroke-width: 0;
+  fill: #ECECFF;
+  opacity: 0.5; }
+
+#mermaid-1594971302343 .classLabel .label {
+  fill: #9370DB;
+  font-size: 10px; }
+
+#mermaid-1594971302343 .relation {
+  stroke: #9370DB;
+  stroke-width: 1;
+  fill: none; }
+
+#mermaid-1594971302343 .dashed-line {
+  stroke-dasharray: 3; }
+
+#mermaid-1594971302343 #compositionStart {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1594971302343 #compositionEnd {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1594971302343 #aggregationStart {
+  fill: #ECECFF;
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1594971302343 #aggregationEnd {
+  fill: #ECECFF;
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1594971302343 #dependencyStart {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1594971302343 #dependencyEnd {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1594971302343 #extensionStart {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1594971302343 #extensionEnd {
+  fill: #9370DB;
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1594971302343 .commit-id,
+#mermaid-1594971302343 .commit-msg,
+#mermaid-1594971302343 .branch-label {
+  fill: lightgrey;
+  color: lightgrey;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+#mermaid-1594971302343 .pieTitleText {
+  text-anchor: middle;
+  font-size: 25px;
+  fill: black;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+#mermaid-1594971302343 .slice {
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+#mermaid-1594971302343 g.stateGroup text {
+  fill: #9370DB;
+  stroke: none;
+  font-size: 10px;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+#mermaid-1594971302343 g.stateGroup text {
+  fill: #9370DB;
+  stroke: none;
+  font-size: 10px; }
+
+#mermaid-1594971302343 g.stateGroup .state-title {
+  font-weight: bolder;
+  fill: black; }
+
+#mermaid-1594971302343 g.stateGroup rect {
+  fill: #ECECFF;
+  stroke: #9370DB; }
+
+#mermaid-1594971302343 g.stateGroup line {
+  stroke: #9370DB;
+  stroke-width: 1; }
+
+#mermaid-1594971302343 .transition {
+  stroke: #9370DB;
+  stroke-width: 1;
+  fill: none; }
+
+#mermaid-1594971302343 .stateGroup .composit {
+  fill: white;
+  border-bottom: 1px; }
+
+#mermaid-1594971302343 .stateGroup .alt-composit {
+  fill: #e0e0e0;
+  border-bottom: 1px; }
+
+#mermaid-1594971302343 .state-note {
+  stroke: #aaaa33;
+  fill: #fff5ad; }
+#mermaid-1594971302343   .state-note text {
+    fill: black;
+    stroke: none;
+    font-size: 10px; }
+
+#mermaid-1594971302343 .stateLabel .box {
+  stroke: none;
+  stroke-width: 0;
+  fill: #ECECFF;
+  opacity: 0.5; }
+
+#mermaid-1594971302343 .stateLabel text {
+  fill: black;
+  font-size: 10px;
+  font-weight: bold;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-family: var(--mermaid-font-family); }
+
+#mermaid-1594971302343 .node circle.state-start {
+  fill: black;
+  stroke: black; }
+
+#mermaid-1594971302343 .node circle.state-end {
+  fill: black;
+  stroke: white;
+  stroke-width: 1.5; }
+
+#mermaid-1594971302343 #statediagram-barbEnd {
+  fill: #9370DB; }
+
+#mermaid-1594971302343 .statediagram-cluster rect {
+  fill: #ECECFF;
+  stroke: #9370DB;
+  stroke-width: 1px; }
+
+#mermaid-1594971302343 .statediagram-cluster rect.outer {
+  rx: 5px;
+  ry: 5px; }
+
+#mermaid-1594971302343 .statediagram-state .divider {
+  stroke: #9370DB; }
+
+#mermaid-1594971302343 .statediagram-state .title-state {
+  rx: 5px;
+  ry: 5px; }
+
+#mermaid-1594971302343 .statediagram-cluster.statediagram-cluster .inner {
+  fill: white; }
+
+#mermaid-1594971302343 .statediagram-cluster.statediagram-cluster-alt .inner {
+  fill: #e0e0e0; }
+
+#mermaid-1594971302343 .statediagram-cluster .inner {
+  rx: 0;
+  ry: 0; }
+
+#mermaid-1594971302343 .statediagram-state rect.basic {
+  rx: 5px;
+  ry: 5px; }
+
+#mermaid-1594971302343 .statediagram-state rect.divider {
+  stroke-dasharray: 10,10;
+  fill: #efefef; }
+
+#mermaid-1594971302343 .note-edge {
+  stroke-dasharray: 5; }
+
+#mermaid-1594971302343 .statediagram-note rect {
+  fill: #fff5ad;
+  stroke: #aaaa33;
+  stroke-width: 1px;
+  rx: 0;
+  ry: 0; }
+
+:root {
+  --mermaid-font-family: '"trebuchet ms", verdana, arial';
+  --mermaid-font-family: "Comic Sans MS", "Comic Sans", cursive; }
+
+
+#mermaid-1594971302343 .error-icon {
+  fill: #552222; }
+
+#mermaid-1594971302343 .error-text {
+  fill: #552222;
+  stroke: #552222; }
+
+#mermaid-1594971302343 .edge-thickness-normal {
+  stroke-width: 2px; }
+
+#mermaid-1594971302343 .edge-thickness-thick {
+  stroke-width: 3.5px; }
+
+#mermaid-1594971302343 .edge-pattern-solid {
+  stroke-dasharray: 0; }
+
+#mermaid-1594971302343 .edge-pattern-dashed {
+  stroke-dasharray: 3; }
+
+#mermaid-1594971302343 .edge-pattern-dotted {
+  stroke-dasharray: 2; }
+
+#mermaid-1594971302343 .marker {
+  fill: #333333; }
+
+#mermaid-1594971302343 .marker.cross {
+  stroke: #333333; }
+
+:root { --mermaid-font-family: "trebuchet ms", verdana, arial;}</style><style>#mermaid-1594971302343 {
+    color: rgb(157, 165, 180);
+    font: normal normal 400 normal 18px / 25.7143px "trebuchet ms", verdana, arial;
+  }</style><g/><g><line id="actor3" x1="75" y1="5" x2="75" y2="567" class="actor-line" stroke-width="0.5px" stroke="#999"/><rect x="0" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"/><text x="75" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle; font-size: 14px; font-weight: 400; font-family: Open-Sans, sans-serif;"><tspan x="75" dy="0">Alice</tspan></text></g><g><line id="actor4" x1="275" y1="5" x2="275" y2="567" class="actor-line" stroke-width="0.5px" stroke="#999"/><rect x="200" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"/><text x="275" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle; font-size: 14px; font-weight: 400; font-family: Open-Sans, sans-serif;"><tspan x="275" dy="0">Bob</tspan></text></g><g><line id="actor5" x1="475" y1="5" x2="475" y2="567" class="actor-line" stroke-width="0.5px" stroke="#999"/><rect x="400" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"/><text x="475" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle; font-size: 14px; font-weight: 400; font-family: Open-Sans, sans-serif;"><tspan x="475" dy="0">John</tspan></text></g><defs><marker id="arrowhead" refX="5" refY="2" markerWidth="6" markerHeight="4" orient="auto"><path d="M 0,0 V 4 L6,2 Z"/></marker></defs><defs><marker id="crosshead" markerWidth="15" markerHeight="8" orient="auto" refX="16" refY="4"><path fill="black" stroke="#000000" stroke-width="1px" d="M 9,2 V 6 L16,4 Z" style="stroke-dasharray: 0, 0;"/><path fill="none" stroke="#000000" stroke-width="1px" d="M 0,1 L 6,7 M 6,1 L 0,7" style="stroke-dasharray: 0, 0;"/></marker></defs><defs><marker id="sequencenumber" refX="15" refY="15" markerWidth="60" markerHeight="40" orient="auto"><circle cx="15" cy="15" r="6"/></marker></defs><text x="275" y="80" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-family: &quot;trebuchet ms&quot;, verdana, arial; font-size: 16px; font-weight: 400;">Hello John, how are you?</text><line x1="75" y1="113" x2="475" y2="113" class="messageLine0" stroke-width="2" stroke="none" marker-end="url(#arrowhead)" style="fill: none;"/><text x="475" y="173" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-family: &quot;trebuchet ms&quot;, verdana, arial; font-size: 16px; font-weight: 400;">Fight against hypochondria</text><path d="M 475,206 C 535,196 535,236 475,226" class="messageLine0" stroke-width="2" stroke="none" marker-end="url(#arrowhead)" style="fill: none;"/><g><line x1="368.5" y1="123" x2="581.5" y2="123" class="loopLine"/><line x1="581.5" y1="123" x2="581.5" y2="276" class="loopLine"/><line x1="368.5" y1="276" x2="581.5" y2="276" class="loopLine"/><line x1="368.5" y1="123" x2="368.5" y2="276" class="loopLine"/><polygon points="368.5,123 418.5,123 418.5,136 410.1,143 368.5,143" class="labelBox"/><text x="394" y="136" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="labelText" style="font-family: &quot;trebuchet ms&quot;, verdana, arial; font-size: 16px; font-weight: 400;">loop</text><text x="500" y="141" text-anchor="middle" class="loopText" style="font-family: &quot;trebuchet ms&quot;, verdana, arial; font-size: 16px; font-weight: 400;"><tspan x="500">[Healthcheck]</tspan></text></g><g><rect x="500" y="286" fill="#EDF2AE" stroke="#666" width="150" height="52" rx="0" ry="0" class="note"/><text x="575" y="291" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="noteText" dy="1em" style="font-family: &quot;trebuchet ms&quot;, verdana, arial; font-size: 14px; font-weight: 400;"><tspan x="575">Rational thoughts </tspan></text><text x="575" y="307" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="noteText" dy="1em" style="font-family: &quot;trebuchet ms&quot;, verdana, arial; font-size: 14px; font-weight: 400;"><tspan x="575">prevail!</tspan></text></g><text x="275" y="353" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-family: &quot;trebuchet ms&quot;, verdana, arial; font-size: 16px; font-weight: 400;">Great!</text><line x1="475" y1="386" x2="75" y2="386" class="messageLine1" stroke-width="2" stroke="none" marker-end="url(#arrowhead)" style="stroke-dasharray: 3, 3; fill: none;"/><text x="375" y="401" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-family: &quot;trebuchet ms&quot;, verdana, arial; font-size: 16px; font-weight: 400;">How about you?</text><line x1="475" y1="434" x2="275" y2="434" class="messageLine0" stroke-width="2" stroke="none" marker-end="url(#arrowhead)" style="fill: none;"/><text x="375" y="449" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-family: &quot;trebuchet ms&quot;, verdana, arial; font-size: 16px; font-weight: 400;">Jolly good!</text><line x1="275" y1="482" x2="475" y2="482" class="messageLine1" stroke-width="2" stroke="none" marker-end="url(#arrowhead)" style="stroke-dasharray: 3, 3; fill: none;"/><g><rect x="0" y="502" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"/><text x="75" y="534.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle; font-size: 14px; font-weight: 400; font-family: Open-Sans, sans-serif;"><tspan x="75" dy="0">Alice</tspan></text></g><g><rect x="200" y="502" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"/><text x="275" y="534.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle; font-size: 14px; font-weight: 400; font-family: Open-Sans, sans-serif;"><tspan x="275" dy="0">Bob</tspan></text></g><g><rect x="400" y="502" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"/><text x="475" y="534.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle; font-size: 14px; font-weight: 400; font-family: Open-Sans, sans-serif;"><tspan x="475" dy="0">John</tspan></text></g><style type="text/css">.label { color: #000000 !important; } </style></svg>

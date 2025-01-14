@@ -1,0 +1,30 @@
+<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs id="DEF">
+<linearGradient id="rhue">
+	<stop offset="0" id="ro0" stop-color="red"/>
+	<stop offset=".25" id="ro1" stop-color="blue"/>
+	<stop offset=".75" id="ro2" stop-color="yellow"/>
+	<stop offset="1" id="ro3" stop-color="green"/>
+</linearGradient>
+</defs>
+<ellipse cx="290" cy="250" rx="80" ry="80">
+	<animate attributeName="fill" dur="5s" values="#ff8; #f88; #f8f; #88f; #8ff; #8f8" repeatCount="indefinite"/>
+</ellipse>
+<g id="penta">
+		<g  id="R1" transform="translate(200 250)">
+		<ellipse cx="0" cy="0" rx="100" ry="30" opacity=".4" fill="url(#rhue)">
+			<animateTransform attributeName="transform" type="rotate" dur="7s" from="0" to="360" repeatCount="indefinite"/>
+			<animate attributeName="cx" dur="8s" values="-20; 120; -20" repeatCount="indefinite"/>
+			<animate attributeName="ry" dur="3s" values="10; 60; 10" repeatCount="indefinite"/>
+		</ellipse>
+		</g>
+		<use xlink:href="#R1" transform="rotate(30 300 250)"/>
+		<use xlink:href="#R1" transform="rotate(60 300 250)"/>
+		<use xlink:href="#R1" transform="rotate(90 300 250)"/>
+		<use xlink:href="#R1" transform="rotate(120 300 250)"/>
+</g>
+<use xlink:href="#penta" transform="rotate(72 290 250)"/>
+<use xlink:href="#penta" transform="rotate(144 290 250)"/>
+<use xlink:href="#penta" transform="rotate(216 290 250)"/>
+<use xlink:href="#penta" transform="rotate(288 290 250)"/>
+</svg>
