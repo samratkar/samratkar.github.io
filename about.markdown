@@ -17,13 +17,11 @@ permalink: /about/
 6. Meditation
 7. Reaching out to people
 
-## 5 Core Values
+## 3 Core Values
 
-1. Faith
-2. Courage
-3. Empathy
-4. Love
-5. Serve
+1. Courage
+2. Faith
+3. Love
 
 ## Masters
 
