@@ -46,5 +46,6 @@
 45. pledge
 46. lace
 47. exalted
-48.
-49.
+48. intense
+49. rage
+50. accede  
