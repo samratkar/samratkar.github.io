@@ -262,10 +262,10 @@ Output :
 
 ### Adding special context tokens
 
-vocabulary and tokenizer implemented in the previous section, SimpleTokenizerV2, to support two new tokens, <|unk|> and <|endoftext|>
+vocabulary and tokenizer implemented in the previous section, SimpleTokenizerV2, to support two new tokens, "<|unk|>" and "<|endoftext|>"
 
-<|unk|> : token if a word is encountered that is not part of the vocabulary.
-<|endoftext|> : token to indicate the end of a text sequence - a book or a document.
+"<|unk|>" : token if a word is encountered that is not part of the vocabulary.
+"<|endoftext|>" : token to indicate the end of a text sequence - a book or a document.
 
 ```python
 class SimpleTokenizerV2:
