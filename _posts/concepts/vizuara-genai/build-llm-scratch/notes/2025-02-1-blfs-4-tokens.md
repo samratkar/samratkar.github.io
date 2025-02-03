@@ -12,7 +12,9 @@ author: Samrat Kar
 
 Tokenization is the process of breaking down a text into smaller units called tokens. These tokens are the basic building blocks of language models. The tokens are then converted into embeddings, which are vectors that represent the tokens in a high-dimensional space. The embeddings capture the semantic and syntactic properties of the tokens, allowing the language model to learn the relationships between them.
 
-Text can be brokend down into the following units - 
+Tokens are fundamental building blocks of LLMs. The way we do tokenization can have a huge effect on the LLM output.
+
+Text can be broken down into the following units - 
 
 <div class=mermaid>
     graph LR;
@@ -104,22 +106,215 @@ def categorize_number(number):
 
 #### Maths tokenization
 
-1. There should be a separate block in LLMs for mathematical problems. Even graph related problems. 
+1. There should be a separate block in LLMs for mathematical problems. Even graph related problems. This is because the textual tokenization does not fit in for mathematical problems.
+2. We can go the agentic way to do functional calls to do mathematical operations using LLMs. But that is parting ways from text based tokenization or utilization of Transformer architecture in actually deriving the mathematical solutions.
 
-2. microsoft auto-agent framework
+Note below how numbers are broken randomly in between as if they are texts.
 
+![](../../../../../images/vizuara/maths-tokens.png)
 
+## Word based tokenization
 
-
-#### Stage 1.2 - Token embeddings
-
-The tokens when identified are converted into embeddings. The embeddings are vectors. The embeddings are created in such a way that the vectors are close to each other if the tokens are similar.
-
-#### Stage 1.3 - Position embeddings
-
-Position embeddings encode the positions of the tokens in the input text. This is because transformers lack built-in order awareness, as they process input tokens in parallel instead of sequentially.
-
-[Code base](https://colab.research.google.com/drive/1YT817lJ75HFrmwvDGhFHbypl2EQm6ifc?usp=sharing)
+[Code base for building a word based tokenizer](https://colab.research.google.com/drive/1YT817lJ75HFrmwvDGhFHbypl2EQm6ifc?usp=sharing)
 
 
+```python
+import re
 
+text = "Hello, world. This, is a test."
+result = re.split(r'(\s)', text)
+
+print(result)
+
+Output : ['Hello,', ' ', 'world.', ' ', 'This,', ' ', 'is', ' ', 'a', ' ', 'test.']
+
+```
+
+```python
+result = re.split(r'([,.]|\s)', text)
+
+print(result)
+
+Output : ['Hello', ',', '', ' ', 'world', '.', '', ' ', 'This', ',', '', ' ', 'is', ' ', 'a', ' ', 'test', '.', '']
+```
+
+```python
+# item.strip() removes any leading and trailing whitespace from a string.
+# The condition if item.strip() ensures that only non-empty strings remain in the list.
+
+result = [item for item in result if item.strip()]
+print(result)
+
+Output : ['Hello,', 'world.', 'This,', 'is', 'a', 'test.']
+```
+
+```python
+
+text = "Hello, world. Is this-- a test?"
+result = re.split(r'([,.:;?_!"()\']|--|\s)', text)
+result = [item.strip() for item in result if item.strip()]
+print(result)
+
+Output : ['Hello', ',', 'world', '.', 'Is', 'this', '--', 'a', 'test', '?']
+```
+
+```python
+# Strip whitespace from each item and then filter out any empty strings.
+result = [item for item in result if item.strip()]
+print(result)
+
+Output : ['Hello', ',', 'world', '.', 'Is', 'this', '--', 'a', 'test', '?']
+```
+
+### Loading the entire corpus
+
+```python
+with open("the-verdict.txt", "r", encoding="utf-8") as f:
+    raw_text = f.read()
+
+print("Total number of character:", len(raw_text))
+print(raw_text[:99])
+
+Output : 
+Total number of character: 20479
+I HAD always thought Jack Gisburn rather a cheap genius--though a good fellow enough--so it was no 
+```
+
+```python
+preprocessed = re.split(r'([,.:;?_!"()\']|--|\s)', raw_text)
+preprocessed = [item.strip() for item in preprocessed if item.strip()]
+print(preprocessed[:30])
+print(len(preprocessed))
+
+Output : 
+['I', 'HAD', 'always', 'thought', 'Jack', 'Gisburn', 'rather', 'a', 'cheap', 'genius', '--', 'though', 'a', 'good', 'fellow', 'enough', '--', 'so', 'it', 'was', 'no', 'great', 'surprise', 'to', 'me', 'to', 'hear', 'that', ',', 'in']
+4690
+```
+
+```python
+all_words = sorted(set(preprocessed))
+vocab_size = len(all_words)
+
+print(vocab_size)
+
+Output : 1130
+```
+
+```python
+vocab = {token:integer for integer,token in enumerate(all_words)}
+for i, item in enumerate(vocab.items()):
+    print(item)
+    if i >= 50:
+        break
+```
+
+### Modularizing the code
+
+```
+Step 1: Store the vocabulary as a class attribute for access in the encode and decode methods
+Step 2: Create an inverse vocabulary that maps token IDs back to the original text tokens
+Step 3: Process input text into token IDs
+Step 4: Convert token IDs back into text
+Step 5: Replace spaces before the specified punctuation
+```
+
+```python
+class SimpleTokenizerV1:
+    def __init__(self, vocab):
+        self.str_to_int = vocab
+        self.int_to_str = {i:s for s,i in vocab.items()}
+
+    def encode(self, text):
+        preprocessed = re.split(r'([,.:;?_!"()\']|--|\s)', text)
+
+        preprocessed = [
+            item.strip() for item in preprocessed if item.strip()
+        ]
+        ids = [self.str_to_int[s] for s in preprocessed]
+        return ids
+
+#Converts a list of integers (ids) into corresponding strings using the int_to_str dictionary (presumably mapping integers to strings).
+# These strings are then joined together with a space between them to form a single string.
+    def decode(self, ids):
+        text = " ".join([self.int_to_str[i] for i in ids])
+        # Replace spaces before the specified punctuations
+        text = re.sub(r'\s+([,.?!"()\'])', r'\1', text)
+        return text
+```
+
+#### using the tokenizer class
+
+```python
+tokenizer = SimpleTokenizerV1(vocab)
+
+text = """"In the dimmest corner of her boudoir"""
+ids = tokenizer.encode(text)
+print(ids)
+
+Output : [1, 55, 988, 339, 290, 722, 539, 225]
+```
+
+```python
+tokenizer.decode(ids)
+Output :
+" In the dimmest corner of her boudoir"
+```
+
+### Adding special context tokens
+
+vocabulary and tokenizer implemented in the previous section, SimpleTokenizerV2, to support two new tokens, <|unk|> and <|endoftext|>
+
+<|unk|> : token if a word is encountered that is not part of the vocabulary.
+<|endoftext|> : token to indicate the end of a text sequence - a book or a document.
+
+```python
+class SimpleTokenizerV2:
+    def __init__(self, vocab):
+        self.str_to_int = vocab
+        self.int_to_str = { i:s for s,i in vocab.items()}
+
+    def encode(self, text):
+        preprocessed = re.split(r'([,.:;?_!"()\']|--|\s)', text)
+        preprocessed = [item.strip() for item in preprocessed if item.strip()]
+        preprocessed = [
+            item if item in self.str_to_int
+            else "<|unk|>" for item in preprocessed
+        ]
+
+        ids = [self.str_to_int[s] for s in preprocessed]
+        return ids
+
+    def decode(self, ids):
+        text = " ".join([self.int_to_str[i] for i in ids])
+        # Replace spaces before the specified punctuations
+        text = re.sub(r'\s+([,.:;?!"()\'])', r'\1', text)
+        return text
+```
+
+```python
+tokenizer = SimpleTokenizerV2(vocab)
+
+text1 = "Hello, do you like tea?"
+text2 = "In the sunlit terraces of the palace."
+
+text = " <|endoftext|> ".join((text1, text2))
+
+print(text)
+
+Output : 
+Hello, do you like tea? <|endoftext|> In the sunlit terraces of the palace
+```
+
+```python
+tokenizer.encode(text)
+
+Output:
+[1131, 5, 355, 1126, 628, 975, 10, 1130, 55, 988, 956, 984, 722, 988, 1131, 7]
+```
+
+```python
+tokenizer.decode(tokenizer.encode(text))
+
+Output :
+<|unk|>, do you like tea? <|endoftext|> In the sunlit terraces of the <|unk|>.
+```
