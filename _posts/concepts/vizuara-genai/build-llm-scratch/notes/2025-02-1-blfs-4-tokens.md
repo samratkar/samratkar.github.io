@@ -1,7 +1,7 @@
 ---
 layout: mermaid
 type: concept 
-title: "The art of tokenization"
+title: "LLM from scratch : session 3,4 - The art of tokenization"
 date: 2024-02-02
 tags: introduction to LLM
 book: build llm from scratch
@@ -14,7 +14,7 @@ Tokenization is the process of breaking down a text into smaller units called to
 
 Tokens are fundamental building blocks of LLMs. The way we do tokenization can have a huge effect on the LLM output.
 
-Text can be broken down into the following units - 
+Text can be broken down into the following units -
 
 <div class=mermaid>
     graph LR;
