@@ -47,7 +47,7 @@ $y_t = softmax(Vh_t + c)$
 #### Steps to calculate the hidden state [Encoding]
 
 <div class=mermaid>
-    graph LR;
+    graph TD;
     A(Step 1. Convert input words into embeddings) --> B(Step 2. Decide hidden state size)
     B --> C(Step 3. Initialize the first hidden state of encoder h0 based on hidden size)
     C --> D(Step 4. Initialize the weight matrices and bias term randomly for encoder)
@@ -58,7 +58,7 @@ $y_t = softmax(Vh_t + c)$
 #### Steps to translate the hidden state to the output [Decoding]
 
 <div class=mermaid>
-    graph LR;
+    graph TD;
     A(Step 1. Convert Hindi words into embeddings) --> B(Step 2. Initialize the hidden size of decoder same as that of the encoder)
     B --> C(Step 3. Initialize the 1st hidden state of decoder to teh final state of the encoder s0 = h0)
     C --> D(Step 4. Initialize the weight matrices and bias term randomly for decoder)
