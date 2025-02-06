@@ -320,21 +320,24 @@ Output :
 ```
 
 # what is the need of language model
+
 - it predicts the next word that will come after the words in a given sentence. It can also predict the next sentence.
 - each word is assigned a probability. 
 - each sentence is a conditonal probability of the next sentence based on all words.
 
 # application
+
 - spell check. which word has the highest probability.
 - speech recognition - audio to transcription. 
 
 # LLMs
+
 - LLMs are trained using **self regression training**. This is also known as **Autoregressive training**. The training set is not lablelled. But the labelling is autoregressive as the training set in corpus itself is used to determine the probability of the new text generation. **Language Modelling** is at the core of such pre-training which is self recursive.
 - keeps predicting next word over and over again.
 
 ![alt text](image.png)
 
-## Language modelling 
+## Language modelling
 
 1. Language models are trained by auto-regression training to predict the next word, or next sentence per se.
 2. Language modelling is the core of the pre-training process of all LLMs.
@@ -346,24 +349,22 @@ Output :
 
 ## How to compute the two probabilities?
 
-###### Probaility of the entire sentence : $P(W) = P(w1,w2,w3...wn)$
+**Probaility of the entire sentence : $P(W) = P(w1,w2,w3...wn)$**
 
 P(The, water, of, Walden, Pond, is, so, beautiful, blue)
 
 There is a difference between the following - 
+
 1. $P(B|A)$ : Probability of B given A : Event B has happened in past. A is happening now.
 2. $P(A,B)$ : Joint probability of A and B. Or probability when both the events A and B are happening simultaneously.
- 
 
 $P(B|A) = P(A \bigcap B) / P(A)$ 
 or, $P(B|A) = P(A,B) / P(A)$
 or, $P(A,B) = P(B/A) \times P(A)$
-
-
 or, $P(A,B) = P(A) \times P(B|A)$
 ie. probability of two events A and B happening together (joint probability) is probability of A multiplied by probability of B when A has already happened.
 
-3. extending it to multiple events we can write
+3. **extending it to multiple events we can write**
 
 $P(A, B, C, D)  = P(A) \times P(B|A) \times P(C|A,B) \times P(D|A,B,C)$
 TO get the intuition, following is the chain of thought - 
