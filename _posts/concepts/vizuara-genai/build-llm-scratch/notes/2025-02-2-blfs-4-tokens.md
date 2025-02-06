@@ -319,8 +319,12 @@ Output :
 <|unk|>, do you like tea? <|endoftext|> In the sunlit terraces of the <|unk|>.
 ```
 
+<<<<<<< HEAD
 # what is the need of language model
 
+=======
+# Language Models - what is the need of language model
+>>>>>>> 774ac15ebf241b22ed6c5b7557916ceaf599675c
 - it predicts the next word that will come after the words in a given sentence. It can also predict the next sentence.
 - each word is assigned a probability. 
 - each sentence is a conditonal probability of the next sentence based on all words.
@@ -339,9 +343,13 @@ Output :
 
 ## Language modelling
 
-1. Language models are trained by auto-regression training to predict the next word, or next sentence per se.
-2. Language modelling is the core of the pre-training process of all LLMs.
-3. A model that computers either of the ones below, are known as language models.
+1. Language models are the mathematical models that can do one or more of the following -
+   - text output - generative modelling
+   - embeddings - numeric values representation of text.
+   - classification - identify targets - key entity identification.  
+3. Language models are trained by auto-regression training to predict the next word, or next sentence per se.
+4. Language modelling is the core of the pre-training process of all LLMs.
+5. A model that computers either of the ones below, are known as language models.
    1. Obective - compute the probability of a sentence or sequence of words.
         $P(W) = P(w1,w2,w3,...,wn)$
    2. Related task - computing the probability of the upcoming word.
@@ -378,4 +386,25 @@ TO get the intuition, following is the chain of thought -
 5. Generalizing the above 
 $P(w_{1:n}) = P(w1) \times P(w2|w1) \times P(w3|w_{1:2} \times \prod()$
 5. We will never see enough data for estimating all these!!
+
+# How Language model works
+## Goal 1 : Representing language numerically : Embedding
+1. <put the pic of encoder and decoder>
+2. Non transformer language model -
+   - **Bag of words** - an algorithm that represents words as large sparse vectors or arrays of numbers. it simply records the presence of the words.
+   - **Word2Vec** - its numeric representation constitutes the meaning of the words and the contexts of few neighbouring words. 
+   - **Attention**
+3. Transformer based language model - numerically represent dense vectors of numbers which captured the meaning of words in the context of a sentence or a paragraph
+   - Encoder only models - BERT, RoBERTA, DistilBERT - great encoding text to numbers
+   - Decoder only models - generative in nature. generate text - GPT, GPT-2, GPT-3, ChatGPT,
+   - Encoder-Decoder models - T5, Switch, Flan-T5
+### Bag of words
+1. inputs are tokenized.
+2. vocabulary is formed.
+3. the numerical vector representation which shows the count of number of times a word in the vocabulary appears in the input text.
+4. this ignores the semantic nature or meaning of the texts.
+
+### Vector embeddings - word2vec
+1. this captures meaning of words in vector embeddings through neural networks. 
+
 
