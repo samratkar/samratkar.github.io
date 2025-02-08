@@ -40,8 +40,8 @@ title: "Language Models"
    - **Word2Vec** - its numeric representation constitutes the meaning of the words and the contexts of few neighboring words.
 7. **Transformer** based language model - numerically represent dense vectors of numbers which captured the meaning of words in the context of a sentence or a paragraph.
 
-![Bag of Words](./2025-02-07-bagofwords.md)
+![https://samratkar.github.io/2025/02/07/bagofwords.html](./2025-02-07-bagofwords.md)
 
-![Word2Vec](./2025-02-07-word2vec.md)
+![https://samratkar.github.io/2025/02/07/word2vec.html](./2025-02-07-word2vec.md)
 
-![Transformer](./2025-02-07-transformer-arch.md)
+![https://samratkar.github.io/2025/02/07/transformer-arch.html](./2025-02-07-transformer-arch.md)
