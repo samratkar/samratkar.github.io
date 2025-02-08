@@ -19,7 +19,7 @@ Tokens are fundamental building blocks of LLMs. The way we do tokenization can h
 ## The big picture where tokenization sits in the language model
 
 There are many algorithms to tokenize. The following diagram gives a sneak peak into where the tokenization sits in the overall process of creating a language model. This is the schematic diagram of **word2vec** method to do token embedding.
-This is a fast forwad of the future processes, after tokenization.
+This is a fast forward of the future processes, after tokenization.
 
 ![](../../../../images/genai/word2vec-blocks.svg)
 
@@ -47,9 +47,11 @@ Text can be broken down into the following units -
 1. Solves all the above issues. Eg : BPE - Byte pair encoding.
 2. Used in GPT-2, GPT-4, Llama2, BERT, etc.
 
-## The schematic diagram of different methods of tokenization
+## Building up the embeddings from sub-words to document
 
-Typically the tokenization is done for sub-words using a technique like say BPE (Byte Pair Encoding). The vocabulary is then converted into embeddings. These sub-words embedding can then be averaged out to create word level embeddings or sentence level embedding. 
+Typically the tokenization is done for sub-words using a technique like say BPE (Byte Pair Encoding). The vocabulary is then converted into embeddings. These sub-words embedding can then be averaged out to create word level embeddings or sentence level embedding.
+
+Typically tokenization is done on sub-words level, and then the embeddings are rolled up to higher abstract levels based on the need.
 
 <div class=mermaid>
     graph TD;
@@ -57,9 +59,8 @@ Typically the tokenization is done for sub-words using a technique like say BPE 
     B --> C(sub-word embeddings in vocabulary);
     C --average--> D(word embeddings);
     D --average--> E(sentence embeddings);
+    E --average--> F(document embeddings);
 </div>
-
-
 
 ## Differences in tokenizations across 4o and 3.5
 
