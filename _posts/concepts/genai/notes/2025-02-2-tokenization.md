@@ -12,9 +12,16 @@ class : 4
 
 # The art of tokenization
 
-Tokenization is the process of breaking down a text into smaller units called tokens. These tokens are the basic building blocks of language models. The tokens are then converted into embeddings, which are vectors that represent the tokens in a high-dimensional space. The embeddings capture the semantic and syntactic properties of the tokens, allowing the language model to learn the relationships between them.
+Tokenization is the process of breaking down a text into smaller units called tokens. These tokens are the basic building blocks of **language models**. The tokens are then converted into embeddings, which are vectors that represent the tokens in a high-dimensional space. The embeddings capture the semantic and syntactic properties of the tokens, allowing the language model to learn the relationships between them.
 
 Tokens are fundamental building blocks of LLMs. The way we do tokenization can have a huge effect on the LLM output.
+
+## The big picture where tokenization sits in the language model
+
+There are many algorithms to tokenize. The following diagram gives a sneak peak into where the tokenization sits in the overall process of creating a language model. This is the schematic diagram of **word2vec** method to do token embedding.
+This is a fast forwad of the future processes, after tokenization.
+
+![](../../../../images/genai/word2vec-blocks.svg)
 
 Text can be broken down into the following units -
 
@@ -39,6 +46,20 @@ Text can be broken down into the following units -
 
 1. Solves all the above issues. Eg : BPE - Byte pair encoding.
 2. Used in GPT-2, GPT-4, Llama2, BERT, etc.
+
+## The schematic diagram of different methods of tokenization
+
+Typically the tokenization is done for sub-words using a technique like say BPE (Byte Pair Encoding). The vocabulary is then converted into embeddings. These sub-words embedding can then be averaged out to create word level embeddings or sentence level embedding. 
+
+<div class=mermaid>
+    graph TD;
+    A(corpus) --> B(sub-word tokenization BPE);
+    B --> C(sub-word embeddings in vocabulary);
+    C --average--> D(word embeddings);
+    D --average--> E(sentence embeddings);
+</div>
+
+
 
 ## Differences in tokenizations across 4o and 3.5
 
