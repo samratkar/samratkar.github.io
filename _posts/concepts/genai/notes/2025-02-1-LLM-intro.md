@@ -1,22 +1,16 @@
 ---
 layout: mermaid
 type: concept 
-title: "Build LLM from scratch - Part2"
+title: "Large Language Models - An introduction"
 date: 2024-02-1
-tags: introduction to LLM
-book: build llm from scratch
-author: Samrat Kar
-course: buld LLM from scratch - vizuara
-class : 3
 ---
-
-**Courtesy and Thanks** to sessions from [Vizuara.ai](https://vizuara.ai) that has helped me to understand the concepts discussed here below. 
 
 ## Next token prediction task NLP Vs LLM
 
 NLP was created to predict the next token given the previous tokens. This is the task that LLMs are trained on as well. But NLPs are designed for specific tasks like language translations. They are specific.
 
 LLM - they can perform wide range of tasks with the same model.
+
 ## Language models explained briefly - 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/LPZh9BOjkQs?si=1nv5yyXB7Qc2Esv6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
