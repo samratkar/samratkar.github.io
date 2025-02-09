@@ -1,7 +1,7 @@
 ---
 layout : mermaid
 type : notes
-title : "Probabilities"
+title : "Introduction to n-gram language models"
 ---
 
 ### How to compute the probability of the next word?
@@ -66,8 +66,13 @@ Generalizing the product term (1) by using "n" instead of "k". n being nth term,
 
 >$P(w_{1:n}) = \prod_{k=1}^n(P(w_k|w_{1:k-1})) = \prod_{k=1}^n(P(w_k|w_{k-1})) = \prod_{n=N}^1(P(w_n|w_{(n-(N-1))})) ............(3)$
 **Here we are using N-1 previous words. (From n to n-(N-1). This is known as n-gram language model.)**
-number of previous words = n = 1 => Unigram model => $P(w_i)$
-number of previous words = n = 2 => Bigram model => $P(w_i/w_{n-1})$
+number of previous words = n = 1 => Unigram model => $∏(P(w_i))$
+number of previous words = n = 2 => Bigram model => $∏(P(w_i/w_{n-1}))$
+
+Hence the probability values would give more accurate results when we use more number of previous words. An example of increasing number of previous words - 
+
+![ ](../../../../images/genai/uni-bi-tri-quadri-gram.png)
+
 
 
 
