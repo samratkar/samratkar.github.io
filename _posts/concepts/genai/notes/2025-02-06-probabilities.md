@@ -39,5 +39,13 @@ TO get the intuition, following is the chain of thought -
 4. P(blue|the water of walden pond is so beautifully) = C(the water of walden pond is so beautifully blue)/C(the water of walden pond is so beautifully)
 
 5. Generalizing the above 
-$P(w_{1:n}) = P(w1) \times P(w2|w1) \times P(w3|w_{1:2} \times \prod()$
+
+$$
+P(w_{1:n}) = P(w1) \times P(w2|w1) \times P(w3|w_{1:2}). . . P(w_n|w{1..n-1})  \\ 
+= \prod_{k=1}^n(P(w_k|w_{1:k-1}))
+$$
+
+Eg : 
+$P("The \ water \ of \ walden \ pond \ is \ so \ beautifully \  blue") = P(The) \times P(water|The) \times P(of|The \ water) \times P(walden|The \ water \ of) \times P(pond|The \ water \ of \ walden) \times P(is|The \ water \ of \ walden \ pond) \times P(so|The \ water \ of \ walden \ pond \ is) \times P(beautifully|The \ water \ of \ walden \ pond \ is \ so) \times P(blue|The \ water \ of \ walden \ pond \ is \ so \ beautifully)$ 
+
 5. We will never see enough data for estimating all these!!
