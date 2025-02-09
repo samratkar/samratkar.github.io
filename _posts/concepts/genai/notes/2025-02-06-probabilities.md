@@ -19,27 +19,27 @@ P(The, water, of, Walden, Pond, is, so, beautifully, blue) : The probability of 
 
 There is a difference between the following - 
 
-1. **Conditional Probability $P(B|A)$** : Probability of B given A : Event B has happened in past. A is happening now. This is known as Conditional Probability.
+1. **Conditional Probability $P(B/A)$** : Probability of B given A : Event B has happened in past. A is happening now. This is known as Conditional Probability.
 2. **Joint Probability $P(A,B)$** : Joint probability of A and B. Or probability when both the events A and B are happening simultaneously.
 
-$P(B|A) = P(A \bigcap B) / P(A)$ 
-or, $P(B|A) = P(A,B) / P(A)$
+$P(B/A) = P(A \bigcap B) / P(A)$ 
+or, $P(B/A) = P(A,B) / P(A)$
 or, $P(A,B) = P(B/A) \times P(A)$
->or, $P(A,B) = P(A) \times P(B|A)$
+>or, $P(A,B) = P(A) \times P(B/A)$
 
 >ie. probability of two events A and B happening together (joint probability) is probability of A multiplied by probability of B when A has already happened.
 
 3. **Extending it to multiple events we can write**
 
->$P(A, B, C, D)  = P(A) \times P(B|A) \times P(C|A,B) \times P(D|A,B,C)$
+>$P(A, B, C, D)  = P(A) \times P(B/A) \times P(C/A,B) \times P(D/A,B,C)$
 
 To get the intuition, following is the chain of thought -
 
 - first the event A happened. So, the probability is P(A) as nothing else has happened now.
-- second the event B happened. Event A has already happened in the last step. so the probability of B, we need to compute $P(B|A)$, i.e., probability of B when A has already happened.
-- now, the third event C happened. A and B has already happened. So, probability of C would be, $P(C|A,B)$, because A and B has already happened. So,  
-- now, the fourth event D happened. A, B and C has already happened by now. So, porbability of D when A, B and C has already happened is $P(D|A,B,C)$
-- Hence the probability of all the events happening together is $P(A, B, C, D)  = P(A) \times P(B|A) \times P(C|A,B) \times P(D|A,B,C)$
+- second the event B happened. Event A has already happened in the last step. so the probability of B, we need to compute $P(B/A)$, i.e., probability of B when A has already happened.
+- now, the third event C happened. A and B has already happened. So, probability of C would be, $P(C/A,B)$, because A and B has already happened. So,  
+- now, the fourth event D happened. A, B and C has already happened by now. So, porbability of D when A, B and C has already happened is $P(D/A,B,C)$
+- Hence the probability of all the events happening together is $P(A, B, C, D)  = P(A) \times P(B/A) \times P(C/A,B) \times P(D/A,B,C)$
 
 >**Generalizing the above : The objective of a language model is to find -**
 $
