@@ -58,8 +58,15 @@ $P(w_n|w_{1:n-1}) ≈ P(w_n|w_{n-1})$
 The approximation is known as *bi-gram assumption or 1st order markov assumption*. It is considering the probability of *$(n-1)^{th}$ word*, instead of probability of *n-1 words*, to determine the Probability of $n^{th}$ word.
 This is also known as **bi-gram assumption or 1st order markov model.**
 
-> **Hence Simplifying the objective function as follows -**
+**Hence Simplifying the objective function as follows -**
 $P(w_{1:n}) = \prod_{k=1}^n(P(w_k|w_{1:k-1})) ..........(1)$
-$P(w_{1:n}) = \prod_{k=1}^n(P(w_k|w_{k-1})) ............(2)$
-generalizing the product term (1) by using "n" instead of "k". n being nth term, and N being total number of terms. In this case, instead of starting from $1^{st}$ term, we are starting from the $(N-1)^{th}$ term; the sequence in which the actual probability computations do happen in the language model.
-$P(w_{1:n}) = \prod_{k=1}^n(P(w_k|w_{1:k-1})) = \prod_{n=N}^1(P(w_n|w_{(n-N+1):(n-1)})) ............(3)$
+>$P(w_{1:n}) = \prod_{k=1}^n(P(w_k|w_{k-1})) ............(2)$ 
+
+Generalizing the product term (1) by using "n" instead of "k". n being nth term, and N being total number of terms. In this case, instead of starting from $1^{st}$ term, we are starting from the $(N)^{th}$ term; the sequence in which the actual probability computations do happen in the language model.
+
+>$P(w_{1:n}) = \prod_{k=1}^n(P(w_k|w_{1:k-1})) = \prod_{k=1}^n(P(w_k|w_{k-1})) = \prod_{n=N}^1(P(w_n|w_{(n-(N-1))})) ............(3)$
+**Here we are using N-1 previous words. (From n to n-(N-1). This is known as n-gram language model.)**
+
+
+
+
