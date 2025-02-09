@@ -11,7 +11,7 @@ title: "Language Models"
       2. each word is assigned a probability. 
       3. each sentence is a conditional probability of the next sentence based on all words.
       4. Obective - compute the probability of a sentence or sequence of words. $P(W) = P(w1,w2,w3,...,wn)$
-      5. Related task - computing the probability of the upcoming word. $P(w4|w1,w2,w3)$
+      5. Related task - computing the probability of the upcoming word. $P(w4/w1,w2,w3)$
    2. **embeddings** - numeric values representation of text
    3. **classification** - identify targets - key entity identification.
 2. A recent history of Language Models:
