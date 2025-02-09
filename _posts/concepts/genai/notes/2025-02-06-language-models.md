@@ -21,7 +21,7 @@ title: "Language Models"
 
 [How to compute probabilities : https://samratkar.github.io/2025/02/06/probabilities.html]([./2025-02-06-probabilities.md](https://samratkar.github.io/2025/02/06/probabilities.html))
 
-![How to compute probabilities : vscode preview ](./2025-02-06-probabilities.md)
+![How to compute probabilities : vscode preview ](./2025-02-06-ngram-intro.md)
 
 ## Applications of language models
 
