@@ -73,6 +73,22 @@ Hence the probability values would give more accurate results when we use more n
 
 ![ ](../../../../images/genai/uni-bi-tri-quadri-gram.png)
 
+### Issues of the n-gram language models which are solved by LLMs
+
+#### Complexity keeps increasing exponentially 
+Given a language model that is built with a vocabulary of V, the number of parameters increases exponentially with the increase in number of tokens being looked back for deriving the probability.
+1. unigram - $V$ parameters to learn
+2. bigram - $V^2$ parameters to learn
+3. trigram - $V^3$ parameters to learn
+4. quadgram - $V^4$ parameters to learn
+
+This is solved by LLMs as they can support much larger contexts, since they use embeddings.
+
+#### Synonyms and unknown token issues
+Since typically the n-gram models use word based tokenization, there are frequent cases where unknown words are encountered. On contrary the large language models use tokenization in the level of sub-words. And then they are vectorized as embeddings, with synonyms and similar words are part of the same context and are nearby each other in the embedding space. That helps solve the synonym and unknown word issue.
+
+
+
 
 
 
