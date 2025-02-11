@@ -23,11 +23,12 @@ There is a difference between the following -
 2. **Joint Probability $P(A,B)$** : Joint probability of A and B. Or probability when both the events A and B are happening simultaneously.
 
 $P(B/A) = P(A \bigcap B) / P(A)$ 
-or, $P(B/A) = P(A,B) / P(A)$
+or, $P(B/A) = P(A,B) / P(A)$      ----- (1)
 or, $P(A,B) = P(B/A) \times P(A)$
->or, $P(A,B) = P(A) \times P(B/A)$
+>or, $P(A,B) = P(A) \times P(B/A)$ ---- (2)
 
->ie. probability of two events A and B happening together (joint probability) is probability of A multiplied by probability of B when A has already happened.
+>ie. following (2) probability of two events A and B happening together (joint probability) is probability of A multiplied by probability of B when A has already happened.
+>another way to look at it from (1) is that conditional probability is joint probability / porbability of the past event. (see it through the venn diagram way)
 
 3. **Extending it to multiple events we can write**
 
@@ -72,6 +73,14 @@ number of previous words = n = 2 => Bigram model => $∏(P(w_i/w_{n-1}))$
 Hence the probability values would give more accurate results when we use more number of previous words. An example of increasing number of previous words - 
 
 ![ ](../../../../images/genai/uni-bi-tri-quadri-gram.png)
+
+### Counting the probability
+
+$P(w_i|w_{i-1}) = P(w_i,w_{i-1}) / P(w_{i-1})$ --- (1)
+$P(w_i,w_{i-1}) = count(w_i,w_{i-1}) / N --- (2)
+$P(w_{i-1}) = count(w_{i-1}) / N --- (3)
+(2)/(3) = $P(w_i,w_{i-1}) / P(w_{i-1}) = count(w_i,w_{i-1}) / count(w_{i-1})$
+$\therefore probability of the next word P(w_i|w_{i-1}) = count(w_i,w_{i-1}) / count(w_{i-1})$
 
 ### Issues of the n-gram language models which are solved by LLMs
 
