@@ -35,19 +35,23 @@ Text can be broken down into the following units -
 ## Disadvantage of character based tokenization
 
 1. This will make the number of tokens very large. The big paragraphs cannot fit into context length.
-2. This way we we would be destroying the structure of language.
+2. This way we we would be destroying the structure of language. word drive similar meaning when they are grouped together. The indirect way to drive **#semantics_will_be_destroyed**.
+3. vocabulary size will be small. it will solve the OOV problem.
+4. **ballooning effect** - context window - amount of text LLM can pay attention in one time. high number of tokens will lead to reduced context window, as it will hit the upper limit of context window. measuring of context window is always with respect to number of tokens, and not number of bytes.
 
 ## Disadvantage of word based tokenization
 
-1. learn, learning, learned, learnt - all are different tokens. But they are similar in meaning. Having them as separate tokens does not help.
-2. Also, the word based tokenization will not be able to identify the tokens if there are grammatical errors, spelling errors. And that will lead to **out of vocabulary** error.
+1. learn, learning, learned, learnt - all are different tokens. But they are similar in meaning. Having them as separate tokens does not help. This leads to **large vocabulary size**. More than 1 million English words. 
+For every word in the vocabulary, the logits metrics will give a matrix with number of column same as vocab size. So, next token prediction task will become slow and it will take up more space.
+
+2. Also, the word based tokenization will not be able to identify the tokens if there are grammatical errors, spelling errors. And that will lead to **out of vocabulary (OOV)** error.
 
 ## Sub-word based tokenization
 
 1. Solves all the above issues. Eg : BPE - Byte pair encoding.
 2. Used in GPT-2, GPT-4, Llama2, BERT, etc.
 
-## Building up the embeddings from sub-words to document
+## BPE - Byte Pair Encoding - Building up the embeddings from sub-words
 
 Typically the tokenization is done for sub-words using a technique like say BPE (Byte Pair Encoding). The vocabulary is then converted into embeddings. These sub-words embedding can then be averaged out to create word level embeddings or sentence level embedding.
 
@@ -61,6 +65,9 @@ Typically tokenization is done on sub-words level, and then the embeddings are r
     D --average--> E(sentence embeddings);
     E --average--> F(document embeddings);
 </div>
+
+### value of k 
+
 
 ## Differences in tokenizations across 4o and 3.5
 
@@ -342,3 +349,11 @@ tokenizer.decode(tokenizer.encode(text))
 Output :
 <|unk|>, do you like tea? <|endoftext|> In the sunlit terraces of the <|unk|>.
 ```
+
+## Diagrammatic representation of tokenization
+
+### Encoder
+
+### Decoder
+
+ 
