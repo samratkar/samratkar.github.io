@@ -172,3 +172,4 @@ The cell state is passed through a $tanh$ activation function and then **point-w
 - [x] A weather forecasting model that continuously updates predictions based on new temperature readings
 - [ ] A character-level language model that predicts the next character based only on the previous two characters
 - [ ] A lookup table that always retrieves predefined values without changes
+
