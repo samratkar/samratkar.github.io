@@ -19,7 +19,7 @@ Building on these ideas, Perry Zurn and his colleagues have recently sought to e
 The audio summary of the paper is available below
 
 <audio controls>
-  <source src="./papers/Architectural Styles of Curiosity.mp3" type="audio/mpeg">
+  <source src="/assets/humanism/arch-styles-curiosity.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
 
