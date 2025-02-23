@@ -52,9 +52,13 @@ It is then Brahma himself appears, and proclaims that he had willed the shloka t
 
 ## Rasas, Aesthetics and Bhavas
 The Ramayana is not just a story; it is a complex tapestry of emotions, aesthetics, and spiritual teachings. The epic employs various **rasas** (aesthetic flavors) and **bhavas** (emotional states) to evoke deep feelings in the reader or listener.
+
 1️⃣ **Rasa**: The Ramayana is rich in various rasas, such as **śṛṅgāra** (love), **vīra** (heroism), **karuṇa** (compassion), and **bhayānaka** (fear). Each character and event evokes different rasas, creating a multi-layered emotional experience.
+
 2️⃣ **Bhava**: The bhavas in the Ramayana range from **śanta** (peace) to **udvega** (anxiety). For example, Sita's abduction evokes **karuṇa**, while Rama's valor evokes **vīra**.
+
 3️⃣ **Rasa and Bhava Interaction**: The interplay between rasa and bhava is crucial. For instance, the **śṛṅgāra** rasa in Rama and Sita's love story is often tinged with **karuṇa** due to their trials and tribulations.
+
 4️⃣ **Aesthetic Experience**: The Ramayana's poetic form, rich imagery, and emotional depth create a profound aesthetic experience. The reader is not just a passive observer but is drawn into the emotional landscape of the characters.
 
 The story of Ramayana as instructed by Brahma is not written in a book. Rather it is sung by Luv and Kush in the same metre as was instructed and willed by Brahma. 
