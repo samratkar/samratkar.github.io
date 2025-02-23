@@ -37,7 +37,7 @@ Text can be broken down into the following units -
 1. This will make the number of tokens very large. The big paragraphs cannot fit into context length.
 2. This way we we would be destroying the structure of language. word drive similar meaning when they are grouped together. The indirect way to drive **#semantics_will_be_destroyed**.
 3. vocabulary size will be small. it will solve the OOV problem.
-4. **ballooning effect** - context window - amount of text LLM can pay attention in one time. high number of tokens will lead to reduced context window, as it will hit the upper limit of context window. measuring of context window is always with respect to number of tokens, and not number of bytes.
+4. **ballooning effect** - *context window* - amount of text LLM can pay attention in one time. high number of tokens will lead to reduced context window, as it will hit the upper limit of context window. measuring of context window is always with respect to number of tokens, and not number of bytes.
 
 ## Disadvantage of word based tokenization
 
