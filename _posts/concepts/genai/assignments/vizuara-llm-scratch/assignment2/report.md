@@ -9,6 +9,22 @@ author : Samrat
 ## Problem statement
 One primary task of the tokenizer is to compress the compress and encode it into a smaller tokens that can represent the entire corpus in a reasonable way. This encoding of the corpus into sub-words is known as tokenization. After the subwords are found, they are converted into numerical form, and is known as token ids. The objective of this report is to analyze the ratio between the length of the corpus and the length of the vocuabulary and analyze and see the trending of the compression ratios across different tokenizers and different languages.
 
+
+## Methodology and approach used
+### Implementation of BPE from scratch
+![](../../../notes/2025-01-26-BPE.md#algorithm)
+
+
+
+### Implementation of GPT tokenizers
+A python library named `tiktoken` is imported to use the tokenizers in the GPT models - `"gpt2", "gpt-3.5-turbo", "gpt-4"`
+
+```python
+import tiktoken
+tokenizer = tiktoken.encoding_for_model("gpt2")
+token_ids = tokenizer.encode(text)
+```
+
 ## Utilities developed
 1. `get_file_text(file_path)` : get the texts in a corpus file. 
 2. `get_character_tokens(file_path)` : divide the corpus text into characters.
