@@ -43,8 +43,12 @@ One primary task of the tokenizer is to compress the compress and encode it into
 ![](/images/genai/xtra-tokens.png)
 
 1. After 200 merges GPT tokenizers do not show any improvements on compression ratio!
-2.  
+2. The compression ratio of BPE is typically lower than GPT tokenizers. 
+3. With increase in number of extra tokens the compression ratio typically does not change for a given tokenizer. 
 
+#### Code base 
+
+[Assignment code base](https://github.com/samratkar/samratkar.github.io/blob/main/_posts/concepts/genai/assignments/vizuara-llm-scratch/assignment2/Take_Home_Assignment_BPE_Compression_Ratio_Comparison_Notebook.ipynb)
 
 
 
