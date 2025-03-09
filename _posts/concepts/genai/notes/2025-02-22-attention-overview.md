@@ -22,4 +22,7 @@ The attention mechanism is implemented as follows:
    where \( W_y \) is a learnable parameter and \( [s_j; c_j] \) denotes concatenation.
    
 
-## 
+## References
+
+1. [What is the big deal about attention - vizuara substack](https://substack.com/inbox/post/158574020)
+2. 
