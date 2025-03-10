@@ -21,7 +21,7 @@ Tokens are fundamental building blocks of LLMs. The way we do tokenization can h
 There are many algorithms to tokenize. The following diagram gives a sneak peak into where the tokenization sits in the overall process of creating a language model. This is the schematic diagram of **word2vec** method to do token embedding.
 This is a fast forward of the future processes, after tokenization.
 
-![](../../../../images/genai/word2vec-blocks.svg)
+![](/images/genai/word2vec-blocks.svg)
 
 Text can be broken down into the following units -
 
@@ -73,15 +73,15 @@ Typically tokenization is done on sub-words level, and then the embeddings are r
 
 ## Tokenization in gpt2
 
-![](../../../../images/vizuara/gpt2-tokenizer.png)
+![](/images/vizuara/gpt2-tokenizer.png)
 
 ## Tokenization in gpt3.5
 
-![](../../../../images/vizuara/gpt3.5.png)
+![](/images/vizuara/gpt3.5.png)
 
 ## Tokenization in gpt4o
 
-![](../../../../images/vizuara/gpt4o.png)
+![](/images/vizuara/gpt4o.png)
 
 ## Tokenization in gpt4o - multi-lingual
 
@@ -99,15 +99,15 @@ So, the learning corpus is important to ensure that the lesser tokens are formed
 
 ## GPT4o tokenization of Hindi - 6 tokens
 
-![](../../../../images/vizuara/hindi-gpt4o-tokenizer.png)
+![](/images/vizuara/hindi-gpt4o-tokenizer.png)
 
 ## GPT3.5 tokenization of Hindi - 33 tokens
 
-![](../../../../images/vizuara/hindi-3.5-tokens.png)
+![](/images/vizuara/hindi-3.5-tokens.png)
 
 ## GPT2 tokenization of Hindi - 59 tokens
 
-![](../../../../images/vizuara/gpt2-tokens-hindi.png)
+![](/images/vizuara/gpt2-tokens-hindi.png)
 
 ## Tokenization of python code
 
@@ -129,11 +129,11 @@ def categorize_number(number):
 
 ### GPT2 tokenization of the above code - 149 tokens
 
-![](../../../../images/vizuara/gpt2-python-tokeinzation.png)
+![](/images/vizuara/gpt2-python-tokeinzation.png)
 
 ### GPT4o tokenization of the above code - 72 tokens
 
-![](../../../../images/vizuara/gpt4o-python-token.png)
+![](/images/vizuara/gpt4o-python-token.png)
 
 ## Maths tokenization
 
@@ -142,7 +142,7 @@ def categorize_number(number):
 
 Note below how numbers are broken randomly in between as if they are texts.
 
-![](../../../../images/vizuara/maths-tokens.png)
+![](/images/vizuara/maths-tokens.png)
 
 ## Word based tokenization
 

@@ -25,7 +25,7 @@ since 1950s what has happened consistently is that size of language model has in
 | GPT 3 | 175 Billion | 2020|
 | GPT 4o | 1 Trillion | 2024|
 
-![scaling law](../../../../images/vizuara/scaling.png)
+![scaling law](/images/vizuara/scaling.png)
 
 ## Emergent properties
 
@@ -37,8 +37,8 @@ We do not know where semantic property came up. There is a step where we create 
 
 But, as a part of training, and fine tuning this happens by itself.
 
-![GPT sizes](../../../../images/vizuara/gptsizes.png)
-![alt text](../../../../images/vizuara/emergent.png)
+![GPT sizes](/images/vizuara/gptsizes.png)
+![alt text](/images/vizuara/emergent.png)
 
 
 ## Andrej Karpathy - why so many parameters? Explainability
@@ -125,7 +125,7 @@ Labels are created by the models directly which is hardcoded - n-gram token at a
         C --> D(Vector DB)
 </div>
 
-![ ](../../../../images/genai/word2vec-blocks.svg)
+![ ](/images/genai/word2vec-blocks.svg)
 
 ### Stage 3 - Fine-tuning
 

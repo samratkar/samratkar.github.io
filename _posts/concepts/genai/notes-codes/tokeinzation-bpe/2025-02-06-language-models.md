@@ -15,7 +15,7 @@ title: "Language Models"
    2. **embeddings** - numeric values representation of text
    3. **classification** - identify targets - key entity identification.
 2. A recent history of Language Models:
-![ ](../../../../images/genai/llm-timeline.svg)
+![ ](/images/genai/llm-timeline.svg)
 
 3. Language Models are trained using **self regression training**. This is also known as **Autoregressive training**. The training set is not lablelled. But the labelling is autoregressive as the training set in corpus itself is used to determine the probability of the new text generation. **Language Modelling** is at the core of such pre-training which is self recursive.
 
@@ -34,7 +34,7 @@ title: "Language Models"
 2. **Decoders** - Language models that are generative in nature. They generate texts - GPT, GPT-2, GPT-3, ChatGPT.
 3. **Encoders and Decoders** - The language models that can do both - encoding and decoding. Eg - T5, Switch, Flan-T5.
 4. All the above models are models based on [transformer architecture : vscode preview](./2025-02-7-transformer-arch.md).
-![ ](../../../../images/genai/encoder-decoder.svg)
+![ ](/images/genai/encoder-decoder.svg)
 5. Following models are legacy non-transformer based language models -
    - **Bag of words** - an algorithm that represents words as large sparse vectors or arrays of numbers. it simply records the presence of the words.
    - **Word2Vec** - its numeric representation constitutes the meaning of the words and the contexts of few neighboring words.

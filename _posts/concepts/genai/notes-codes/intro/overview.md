@@ -23,7 +23,7 @@ graph LR;
    3. Layer normalization
    4. Residual connection 
 
-![](../../../images/vizuara/transformerarch.png)
+![](/images/vizuara/transformerarch.png)
 
 7. Scaling law of language models - number of parameters increase results in better performance. 
    1. GPT-3 - 175 billion parameters
@@ -34,4 +34,4 @@ graph LR;
    1. GPT-3 - open model
    2. Turing-NLG - close model
 
-![](../../../images/vizuara/openvsclosemodels.png)
+![](/images/vizuara/openvsclosemodels.png)
