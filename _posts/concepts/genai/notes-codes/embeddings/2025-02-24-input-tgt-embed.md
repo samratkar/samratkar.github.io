@@ -333,7 +333,7 @@ Targets:
         [ 3285,   326,    11,   287]])
 ```
 ### Embeddings generation of the input output pair matrices.
-#### Capturing semantic relationship between words
+#### Capturing semantic relationship between words in word2vec
 1. Just converting tokens texts into number is not enough. These numbers should not be random numbers, but utilize the underlying semantics of the words. 
 2. Using one hot encoding - based on the vocabulary size have a vector of all zeroes. And mark as 1 the position for a given word in the vocabulary.
 This does not capture the semantic relationships betweenw ords. dogs and puppy are the two words which are related but puppy appears much much later than dogs.
@@ -352,9 +352,16 @@ This does not capture the semantic relationships betweenw ords. dogs and puppy a
 ![](/images/genai/word2vec-example.png)
 6. The assumption that neighboring words will have similar semantics might not work with low data set. But when one has a huge amount of data and several documents making a huge corpus, statistically it is found that collocated words are semantically similar.
 7. So, each token id in the vocabulary is transformed into a multi dimentional matrix which is called as embedding - In this case an embed size of 750. Each dimension is not known. To know their essense is all about **Explainability of the neural network**
-![](/images/genai/word2vecmat.svg)
+![](/images/genai/word2vecmat1.svg)
 8. The 750 - embed size is a configuration parameter that is set before training the mode. Every token is expanded to this new dimension. It is random to start with. Then dot product (cost function) is set for the words that are within the envelop as low and for others as high. This is known as **contrastive technique**
 9. In this scheme the antonym of the words will be placed as neighbors. They are opposite. But they are related as being opposite. So "man" and "woman" would appear together. i.e their embed vectors are similar. Same will be the case with "king" and "queen"
 ![](/images/genai/word2vec-newex.png)
-10. The concept of neighbours and non-neighbours exists only in the case of *word2vec*. That is not used in the LLM training. In the case of LLM, directly each token id is taken and it is converted to an embedding based on the neural network output. Neighbours and non neighbours concept is totally missing in LLMs.
-11. 
+10. The concept of neighbors and non-neighbors exists only in the case of *word2vec*. That is not used in the LLM training. In the case of LLM, directly each token id is taken and it is converted to an embedding based on the neural network output. Neighbors and non neighbors concept is totally missing in LLMs.
+11. Code implementing the **word2vec**
+[code base for the word2vec implementation](https://github.com/samratkar/samratkar.github.io/blob/main/_posts/concepts/genai/notes/code/Live_Vector_embedding.ipynb)
+
+#### Capturing semantic relationships in LLMs
+1. The token embeddings are different from the word2vec embeddings. Here neighbor and non-neighbor concept is not used. The token ids are directly converted to embeddings using a neural network. These embeddings are not static, but are trained during the pre-training phase of the LLM. 
+![](/images/genai/llm-embeddings.svg)
+
+2. 

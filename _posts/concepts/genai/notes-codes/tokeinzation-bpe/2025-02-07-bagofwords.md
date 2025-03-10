@@ -9,7 +9,7 @@ title: "Bag of Words"
 Bag of words is a non-transformer based encoder. It is an algorithm that represents words as large sparse vectors or arrays of numbers. It simply records the presence of the words. It **does not capture the semantic nature** or meaning of the texts.
 
 #### Steps
-![ ](../../../../images/dl.ai/jay-llm/bagofwords.png)
+![ ](/images/dl.ai/jay-llm/bagofwords.png)
 
 1. Inputs are tokenized. Typically white space tokenization is done.
 2. From the tokenized inputs the unique tokens are accumulated to form a vocabulary.

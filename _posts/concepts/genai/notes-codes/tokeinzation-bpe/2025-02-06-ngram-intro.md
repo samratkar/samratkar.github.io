@@ -72,7 +72,7 @@ number of previous words = n = 2 => Bigram model => $∏(P(w_i/w_{n-1}))$
 
 Hence the probability values would give more accurate results when we use more number of previous words. An example of increasing number of previous words - 
 
-![ ](../../../../images/genai/uni-bi-tri-quadri-gram.png)
+![ ](/images/genai/uni-bi-tri-quadri-gram.png)
 
 ### Counting the probability
 
