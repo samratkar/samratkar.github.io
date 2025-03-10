@@ -1,7 +1,7 @@
 ---
 layout: mermaid
 type: notes
-title : "Input-Target pair creation"
+title : "llm input target embedding"
 ---
 
 ## Stages of building an LLM
