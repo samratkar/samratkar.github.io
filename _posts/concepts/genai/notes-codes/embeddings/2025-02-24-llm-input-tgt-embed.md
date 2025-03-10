@@ -358,10 +358,10 @@ This does not capture the semantic relationships betweenw ords. dogs and puppy a
 ![](/images/genai/word2vec-newex.png)
 10. The concept of neighbors and non-neighbors exists only in the case of *word2vec*. That is not used in the LLM training. In the case of LLM, directly each token id is taken and it is converted to an embedding based on the neural network output. Neighbors and non neighbors concept is totally missing in LLMs.
 11. Code implementing the **word2vec**
-[code base for the word2vec implementation](https://github.com/samratkar/samratkar.github.io/blob/main/_posts/concepts/genai/notes/code/Live_Vector_embedding.ipynb)
+[code base for the word2vec implementation](https://github.com/samratkar/samratkar.github.io/blob/main/_posts/concepts/genai/notes-codes/embeddings/2025-02-07-word2vec.md)
 
 #### Capturing semantic relationships in LLMs
 1. The token embeddings are different from the word2vec embeddings. Here neighbor and non-neighbor concept is not used. The token ids are directly converted to embeddings using a neural network. These embeddings are not static, but are trained during the pre-training phase of the LLM. 
 ![](/images/genai/llm-embeddings.svg)
 
-2. 
+2. [Code base for llm embedding](https://github.com/samratkar/samratkar.github.io/blob/main/_posts/concepts/genai/notes-codes/embeddings/llm-token-iopair-embed-pos-embed.ipynb)
