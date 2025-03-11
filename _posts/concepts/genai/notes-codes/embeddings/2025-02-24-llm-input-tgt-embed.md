@@ -400,6 +400,11 @@ tensor([[ 1.2753, -0.2010, -0.1606],
         [-2.8400, -0.7849, -1.4096],
         [ 0.9178,  1.5810,  1.3010]], grad_fn=<EmbeddingBackward0>)
 ```
+4. **Batch size** is the number of input-output pairs that are sent to the LLM at a time. The batch size is a configuration parameter that is set before training the model. The batch size is typically set to a power of 2, such as 32, 64, or 128, to take advantage of the parallel processing capabilities of modern GPUs. The batch size can also be adjusted based on the available memory and computational resources. 
+5. Gradient update is done for the entire batch size. The loss function is calculated for each input-output pair in the batch, and the gradients are averaged over the batch size before updating the model parameters. This allows the model to learn from multiple examples at once, improving the efficiency of the training process, one batch at a time.
+6. At one time, only one part of the input and output matrix is processed and the gradient is updated 
+7. Each row is processed by different tasks of prediction of one token at a time, given the input as a string of previous tokens. Number of tokens is equal to the context size. 
+8. One input - output pair, requires number of steps = context size. In this case if context size is 4, there will be 4 prediction task for each input-output pair prediction. 
 
 
 3. [Full Code base for llm embedding](https://github.com/samratkar/samratkar.github.io/blob/main/_posts/concepts/genai/notes-codes/embeddings/llm-token-iopair-embed-pos-embed.ipynb)
