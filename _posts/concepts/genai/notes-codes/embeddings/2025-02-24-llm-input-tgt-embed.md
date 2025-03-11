@@ -364,4 +364,42 @@ This does not capture the semantic relationships betweenw ords. dogs and puppy a
 1. The token embeddings are different from the word2vec embeddings. Here neighbor and non-neighbor concept is not used. The token ids are directly converted to embeddings using a neural network. These embeddings are not static, but are trained during the pre-training phase of the LLM. 
 ![](/images/genai/llm-embeddings.svg)
 
-2. [Code base for llm embedding](https://github.com/samratkar/samratkar.github.io/blob/main/_posts/concepts/genai/notes-codes/embeddings/llm-token-iopair-embed-pos-embed.ipynb)
+2. The journey from input text, to character tokens to token ids, to input - output pairs, to batch size, to token embeddings illustrated below  - 
+![](/images/genai/token2embedding.svg)  
+
+3. Code details - When we call nn.Embeddings() it basically does a lookup of the embedding matrix and retrieves the vector embeddings for the needed token ids. The code goes something like this - 
+
+```python
+input_ids = torch.tensor([2, 3, 5, 1])
+vocab_size = 6
+output_dim = 3
+
+torch.manual_seed(123)
+embedding_layer = torch.nn.Embedding(vocab_size, output_dim)
+print(embedding_layer.weight)
+
+Output >> 
+Parameter containing:
+tensor([[ 0.3374, -0.1778, -0.1690],
+        [ 0.9178,  1.5810,  1.3010],
+        [ 1.2753, -0.2010, -0.1606],
+        [-0.4015,  0.9666, -1.1481],
+        [-1.1589,  0.3255, -0.6315],
+        [-2.8400, -0.7849, -1.4096]], requires_grad=True)
+#--------------------------------------------------------------
+
+# direct lookup from token id to vector embedding
+print(embedding_layer(torch.tensor([3])))
+Output >>
+tensor([[-0.4015,  0.9666, -1.1481]], grad_fn=<EmbeddingBackward0>)
+#--------------------------------------------------------------
+
+print(embedding_layer(input_ids))
+tensor([[ 1.2753, -0.2010, -0.1606],
+        [-0.4015,  0.9666, -1.1481],
+        [-2.8400, -0.7849, -1.4096],
+        [ 0.9178,  1.5810,  1.3010]], grad_fn=<EmbeddingBackward0>)
+```
+
+
+3. [Full Code base for llm embedding](https://github.com/samratkar/samratkar.github.io/blob/main/_posts/concepts/genai/notes-codes/embeddings/llm-token-iopair-embed-pos-embed.ipynb)
