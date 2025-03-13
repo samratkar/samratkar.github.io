@@ -61,10 +61,29 @@ Inputs shape:
 
 ```
 
-#### Getting token embedding matrix
+#### Getting token embedding matrix. The step where the 2D token id matrix is converted into a 3D token embedding matrix!
 ```python
 token_embeddings = token_embedding_layer(inputs)
 print(token_embeddings.shape)
+
+Output >>
+torch.Size([8, 4, 256])
+```
+
+#### Getting position embedding matrix. 
+```python
+pos_embedding_layer = torch.nn.Embedding(context_length, output_dim)
+pos_embeddings = pos_embedding_layer(torch.arange(max_length))
+print(pos_embeddings.shape)
+
+Output >>
+torch.Size([4, 256])
+```
+
+#### Adding the token embedding and position embedding matrices to get input matrix
+```python
+input_embeddings = token_embeddings + pos_embeddings
+print(input_embeddings.shape)
 
 Output >>
 torch.Size([8, 4, 256])
