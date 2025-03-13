@@ -3,7 +3,7 @@ layout : mermaid
 title : "Position Embeddings"
 author : Samrat Kar
 ---
->**The dog chased the ball, but ==it== could not catch ==it== even after running the whole field round and round.**
+>**The dog chased the ball, but "it" could not catch "it" even after running the whole field round and round.**
 
 
 In the above sentence,  first **"it"** refers to the dog but the second **"it"** refers to the ball. The token id for **"it"** would be same, and so would be the embedding. But based on their positions, they need to be differentiated. This differentiation based on the position of the same token in a given input text is created by adding the position embedding to the token embeddings.
