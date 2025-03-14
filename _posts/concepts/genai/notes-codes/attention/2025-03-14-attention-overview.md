@@ -5,16 +5,8 @@ title : "Attention - An overview"
 ---
 ## The main idea of attention
 The evolution of NLP has been as follows - 
-1. **RNNs**: Recurrent Neural Networks (RNNs) were the first to be used for sequence-to-sequence tasks, but they struggled with long-range dependencies.
+1. **RNNs**: [Recurrent Neural Networks (RNNs)](/_posts/concepts/genai/notes-codes/lstm-rnn/2025-02-1-RNN-theo.md) were the first to be used for sequence-to-sequence tasks, but they struggled with long-range dependencies.
 ![ ](/images/genai/rnn-unrolled.svg)
-<details>
-  <summary> Click to expand for details </summary>
-
-![ ](/images/genai/rnn-block.svg)
-
-![ ](/images/genai/rnn-details.svg)
-
-</details>
 
 <details>
   <summary>Click to expand</summary>
