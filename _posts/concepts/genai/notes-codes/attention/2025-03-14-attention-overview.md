@@ -13,6 +13,12 @@ The evolution of NLP has been as follows -
 ![ ](/images/genai/rnn-block.svg)
 
 ![ ](/images/genai/rnn-details.svg)
+
+<details>
+  <summary>Click to expand</summary>
+  <img src="/images/genai/rnn-block.svg" alt="Description" width="300">
+</details>
+
 </details>
 
 2. **LSTM**: Long Short-Term Memory (LSTM) networks improved upon RNNs by introducing memory cells and gates, allowing them to capture long-range dependencies more effectively. But still the problem was that all the previous hidden states were used to generate the next hidden state, which made it difficult to focus on specific parts of the input sequence.
