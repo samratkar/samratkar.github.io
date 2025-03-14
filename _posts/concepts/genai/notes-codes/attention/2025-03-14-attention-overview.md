@@ -9,7 +9,9 @@ The evolution of NLP has been as follows -
 ![ ](/images/genai/rnn-unrolled.svg)
 <details>
   <summary> Click to expand for details </summary>
+
 ![ ](/images/genai/rnn-block.svg)
+
 ![ ](/images/genai/rnn-details.svg)
 </details>
 
