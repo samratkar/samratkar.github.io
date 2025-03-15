@@ -17,11 +17,11 @@ The evolution of NLP has been as follows -
 
 **LSTM**: [Long Short-Term Memory (LSTM)](https://samratkar.github.io/2025/02/15/LSTM-theory.html) networks improved upon RNNs by introducing memory cells and gates, allowing them to capture long-range dependencies more effectively. But still the problem was that all the previous hidden states were used to generate the next hidden state, which made it difficult to focus on specific parts of the input sequence.
 <details>
-  <summary>Click to expand</summary>
-<video width="640" height="360" controls>
-  <source src="/images/genai/lstm-visualization.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+   <summary>Click to expand</summary>
+      <video width="640" height="360" controls>
+         <source src="/images/genai/lstm-visualization.mp4" type="video/mp4">
+         Your browser does not support the video tag.
+      </video>
 </details>
 
 ### Attention Mechanism
