@@ -5,16 +5,32 @@ title : "Attention - An overview"
 ---
 ## The main idea of attention
 The evolution of NLP has been as follows - 
-1. **RNNs**: [Recurrent Neural Networks (RNNs)](https://samratkar.github.io/2025/02/01/RNN-theo.html) were the first to be used for sequence-to-sequence tasks, but they struggled with long-range dependencies.
+### RNN - Recurrent Neural Networks
+**RNNs**: [Recurrent Neural Networks (RNNs)](https://samratkar.github.io/2025/02/01/RNN-theo.html) were the first to be used for sequence-to-sequence tasks, but they struggled with long-range dependencies.
 ![ ](/images/genai/rnn-unrolled.svg)
-
 <details>
   <summary>Click to expand</summary>
   <img src="/images/genai/rnn-block.svg" alt="Description" width="300">
 </details>
 
-2. **LSTM**: Long Short-Term Memory (LSTM) networks improved upon RNNs by introducing memory cells and gates, allowing them to capture long-range dependencies more effectively. But still the problem was that all the previous hidden states were used to generate the next hidden state, which made it difficult to focus on specific parts of the input sequence.
-3. **Attention**: The attention mechanism was introduced to allow models to focus on specific parts of the input sequence when generating each output token. This was particularly useful for tasks like machine translation, where the alignment between input and output sequences is crucial.
+### LSTM - Long Short-Term Memory
+
+**LSTM**: [Long Short-Term Memory (LSTM)](https://samratkar.github.io/2025/02/15/LSTM-theory.html) networks improved upon RNNs by introducing memory cells and gates, allowing them to capture long-range dependencies more effectively. But still the problem was that all the previous hidden states were used to generate the next hidden state, which made it difficult to focus on specific parts of the input sequence.
+<details>
+  <summary>Click to expand</summary>
+<video width="640" height="360" controls>
+  <source src="/images/genai/lstm-visualization.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+</details>
+
+### Attention Mechanism
+**Attention**: The attention mechanism was introduced to allow models to focus on **specific parts of the input sequence** when generating each output token. This was particularly useful for tasks like machine translation, where the alignment between input and output sequences is crucial.
+
+**Attention** is about selectively accessing parts of input sequence with different weights, rather than using the entire input sequence equally. This allows the model to focus on relevant parts of the input when generating each output token.
+
+For example to translate the sentence "I will eat" to French "Je vais manger", the model can focus on the word "I" when generating the word "Je", rather than considering all the words in the input sequence equally. This can be represented as - 
+
 ## Bahdanau Attention
 
 [Neural machine translation by jointly learning to align and translate](https://arxiv.org/abs/1409.0473) (Bahdanau et al., 2014) is a seminal paper that introduced the concept of attention in neural networks. The paper proposed a method for aligning and translating sequences of variable lengths, which was particularly useful for machine translation tasks.
