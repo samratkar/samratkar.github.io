@@ -4,48 +4,6 @@
   "source": "https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor",
   "elements": [
     {
-      "id": "PhZGet-wyL2wlJDRfEct9",
-      "type": "text",
-      "x": 308,
-      "y": 434.3999938964844,
-      "width": 567.4555053710938,
-      "height": 180,
-      "angle": 0,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "#a5d8ff",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "groupIds": [],
-      "frameId": null,
-      "index": "aL",
-      "roundness": null,
-      "seed": 216451523,
-      "version": 793,
-      "versionNonce": 621857034,
-      "isDeleted": false,
-      "boundElements": [
-        {
-          "id": "TpqwgqqtfKn8jUa2TiMiZ",
-          "type": "arrow"
-        }
-      ],
-      "updated": 1742045259988,
-      "link": null,
-      "locked": false,
-      "text": "query . key 1 = (0.5×0.9) + (0.5×0.1) +(0.1×0.1)  = 0.51\nquery . key 3 = (0.5x0.1) + (0.5x0.9) + (0.1x0.1) = 0.51\n\nSo the dot products of query and keys are the same for both the keys.\nThis is a problem, as we are unabe to differentiate between two tokens.\n\nTo solve the problem, instead of directly dot product, each vector is \nmultiplied by two weights - query weight and key weight, which regulate\nthe attention score for each neighboring tokens.",
-      "fontSize": 16,
-      "fontFamily": 5,
-      "textAlign": "left",
-      "verticalAlign": "top",
-      "containerId": null,
-      "originalText": "query . key 1 = (0.5×0.9) + (0.5×0.1) +(0.1×0.1)  = 0.51\nquery . key 3 = (0.5x0.1) + (0.5x0.9) + (0.1x0.1) = 0.51\n\nSo the dot products of query and keys are the same for both the keys.\nThis is a problem, as we are unabe to differentiate between two tokens.\n\nTo solve the problem, instead of directly dot product, each vector is \nmultiplied by two weights - query weight and key weight, which regulate\nthe attention score for each neighboring tokens.",
-      "autoResize": true,
-      "lineHeight": 1.25
-    },
-    {
       "id": "WE-uVvccSFJjkarIVka-b",
       "type": "line",
       "x": 471.8568599937404,
@@ -751,16 +709,18 @@
       "strokeStyle": "solid",
       "roughness": 1,
       "opacity": 100,
-      "groupIds": [],
+      "groupIds": [
+        "klpShPGANtjNFKDVjdLvj"
+      ],
       "frameId": null,
-      "index": "b02",
+      "index": "aP4",
       "roundness": null,
       "seed": 1640692310,
-      "version": 321,
-      "versionNonce": 1053461078,
+      "version": 323,
+      "versionNonce": 177149883,
       "isDeleted": false,
-      "boundElements": null,
-      "updated": 1742044537178,
+      "boundElements": [],
+      "updated": 1742105853750,
       "link": null,
       "locked": false,
       "text": "Normal dot product.\nWithout allocation score\n",
@@ -788,18 +748,20 @@
       "strokeStyle": "solid",
       "roughness": 1,
       "opacity": 100,
-      "groupIds": [],
+      "groupIds": [
+        "klpShPGANtjNFKDVjdLvj"
+      ],
       "frameId": null,
-      "index": "b03",
+      "index": "aP8",
       "roundness": {
         "type": 2
       },
       "seed": 1477713098,
-      "version": 411,
-      "versionNonce": 652679114,
+      "version": 413,
+      "versionNonce": 2069599605,
       "isDeleted": false,
-      "boundElements": null,
-      "updated": 1742045259989,
+      "boundElements": [],
+      "updated": 1742105853750,
       "link": null,
       "locked": false,
       "points": [
@@ -824,6 +786,51 @@
       "elbowed": false
     },
     {
+      "id": "PhZGet-wyL2wlJDRfEct9",
+      "type": "text",
+      "x": 308,
+      "y": 434.3999938964844,
+      "width": 567.4555053710938,
+      "height": 180,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#a5d8ff",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
+      ],
+      "frameId": null,
+      "index": "aPG",
+      "roundness": null,
+      "seed": 216451523,
+      "version": 797,
+      "versionNonce": 703227995,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "id": "TpqwgqqtfKn8jUa2TiMiZ",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1742105853750,
+      "link": null,
+      "locked": false,
+      "text": "query . key 1 = (0.5×0.9) + (0.5×0.1) +(0.1×0.1)  = 0.51\nquery . key 3 = (0.5x0.1) + (0.5x0.9) + (0.1x0.1) = 0.51\n\nSo the dot products of query and keys are the same for both the keys.\nThis is a problem, as we are unabe to differentiate between two tokens.\n\nTo solve the problem, instead of directly dot product, each vector is \nmultiplied by two weights - query weight and key weight, which regulate\nthe attention score for each neighboring tokens.",
+      "fontSize": 16,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "query . key 1 = (0.5×0.9) + (0.5×0.1) +(0.1×0.1)  = 0.51\nquery . key 3 = (0.5x0.1) + (0.5x0.9) + (0.1x0.1) = 0.51\n\nSo the dot products of query and keys are the same for both the keys.\nThis is a problem, as we are unabe to differentiate between two tokens.\n\nTo solve the problem, instead of directly dot product, each vector is \nmultiplied by two weights - query weight and key weight, which regulate\nthe attention score for each neighboring tokens.",
+      "autoResize": true,
+      "lineHeight": 1.25
+    },
+    {
       "id": "2RL_JUFvMa9t6Mez-k1nH",
       "type": "rectangle",
       "x": 286.19995880126953,
@@ -840,16 +847,18 @@
       "opacity": 100,
       "groupIds": [
         "Qn4x6rjLUmlpxyhCUpohR",
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0V4",
+      "index": "aPK",
       "roundness": {
         "type": 3
       },
       "seed": 1062269795,
-      "version": 151,
-      "versionNonce": 11920138,
+      "version": 155,
+      "versionNonce": 244522709,
       "isDeleted": false,
       "boundElements": [
         {
@@ -861,7 +870,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false
     },
@@ -882,17 +891,19 @@
       "opacity": 100,
       "groupIds": [
         "Qn4x6rjLUmlpxyhCUpohR",
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0V8",
+      "index": "aPO",
       "roundness": null,
       "seed": 1934206755,
-      "version": 112,
-      "versionNonce": 2018847382,
+      "version": 116,
+      "versionNonce": 785556731,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false,
       "text": "The",
@@ -922,16 +933,18 @@
       "opacity": 100,
       "groupIds": [
         "Qn4x6rjLUmlpxyhCUpohR",
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0VG",
+      "index": "aPV",
       "roundness": {
         "type": 3
       },
       "seed": 1459401901,
-      "version": 219,
-      "versionNonce": 1121513930,
+      "version": 223,
+      "versionNonce": 1490189365,
       "isDeleted": false,
       "boundElements": [
         {
@@ -943,7 +956,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false
     },
@@ -964,17 +977,19 @@
       "opacity": 100,
       "groupIds": [
         "Qn4x6rjLUmlpxyhCUpohR",
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0VK",
+      "index": "aPZ",
       "roundness": null,
       "seed": 406558477,
-      "version": 160,
-      "versionNonce": 683632598,
+      "version": 164,
+      "versionNonce": 818564507,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false,
       "text": "next",
@@ -1004,16 +1019,18 @@
       "opacity": 100,
       "groupIds": [
         "Qn4x6rjLUmlpxyhCUpohR",
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0VO",
+      "index": "aPd",
       "roundness": {
         "type": 3
       },
       "seed": 2119873261,
-      "version": 201,
-      "versionNonce": 1395402890,
+      "version": 205,
+      "versionNonce": 1375677845,
       "isDeleted": false,
       "boundElements": [
         {
@@ -1021,7 +1038,7 @@
           "type": "text"
         }
       ],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false
     },
@@ -1042,17 +1059,19 @@
       "opacity": 100,
       "groupIds": [
         "Qn4x6rjLUmlpxyhCUpohR",
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0VV",
+      "index": "aPl",
       "roundness": null,
       "seed": 398445901,
-      "version": 161,
-      "versionNonce": 1668283670,
+      "version": 165,
+      "versionNonce": 855892539,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false,
       "text": "day",
@@ -1082,16 +1101,18 @@
       "opacity": 100,
       "groupIds": [
         "Qn4x6rjLUmlpxyhCUpohR",
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0VZ",
+      "index": "aPp",
       "roundness": {
         "type": 3
       },
       "seed": 1727177997,
-      "version": 230,
-      "versionNonce": 1231718218,
+      "version": 234,
+      "versionNonce": 1498329845,
       "isDeleted": false,
       "boundElements": [
         {
@@ -1107,7 +1128,7 @@
           "type": "arrow"
         }
       ],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false
     },
@@ -1128,17 +1149,19 @@
       "opacity": 100,
       "groupIds": [
         "Qn4x6rjLUmlpxyhCUpohR",
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0Vd",
+      "index": "aPt",
       "roundness": null,
       "seed": 685013869,
-      "version": 186,
-      "versionNonce": 1037822550,
+      "version": 190,
+      "versionNonce": 778167003,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false,
       "text": "is",
@@ -1168,16 +1191,18 @@
       "opacity": 100,
       "groupIds": [
         "Qn4x6rjLUmlpxyhCUpohR",
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0Vl",
+      "index": "aQ",
       "roundness": {
         "type": 3
       },
       "seed": 837226381,
-      "version": 194,
-      "versionNonce": 233770506,
+      "version": 198,
+      "versionNonce": 1262914645,
       "isDeleted": false,
       "boundElements": [
         {
@@ -1185,7 +1210,7 @@
           "type": "text"
         }
       ],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false
     },
@@ -1206,17 +1231,19 @@
       "opacity": 100,
       "groupIds": [
         "Qn4x6rjLUmlpxyhCUpohR",
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0Vt",
+      "index": "aQ8",
       "roundness": null,
       "seed": 517445101,
-      "version": 157,
-      "versionNonce": 1457008534,
+      "version": 161,
+      "versionNonce": 1534513019,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false,
       "text": "bright",
@@ -1246,17 +1273,19 @@
       "opacity": 100,
       "groupIds": [
         "Qn4x6rjLUmlpxyhCUpohR",
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0W",
+      "index": "aQG",
       "roundness": null,
       "seed": 486244653,
-      "version": 93,
-      "versionNonce": 1169472714,
+      "version": 97,
+      "versionNonce": 1471953333,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false,
       "text": "key 2",
@@ -1286,17 +1315,19 @@
       "opacity": 100,
       "groupIds": [
         "Qn4x6rjLUmlpxyhCUpohR",
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0W8",
+      "index": "aQV",
       "roundness": null,
       "seed": 1218303331,
-      "version": 66,
-      "versionNonce": 714722518,
+      "version": 70,
+      "versionNonce": 1015359515,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false,
       "text": "key 1",
@@ -1326,17 +1357,19 @@
       "opacity": 100,
       "groupIds": [
         "Qn4x6rjLUmlpxyhCUpohR",
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0WG",
+      "index": "aQd",
       "roundness": null,
       "seed": 1625092589,
-      "version": 110,
-      "versionNonce": 1045861258,
+      "version": 114,
+      "versionNonce": 399850261,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false,
       "text": "key 3",
@@ -1366,17 +1399,19 @@
       "opacity": 100,
       "groupIds": [
         "Qn4x6rjLUmlpxyhCUpohR",
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0WV",
+      "index": "aQl",
       "roundness": null,
       "seed": 294267693,
-      "version": 154,
-      "versionNonce": 1723187734,
+      "version": 158,
+      "versionNonce": 1736404155,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false,
       "text": "query",
@@ -1406,17 +1441,19 @@
       "opacity": 100,
       "groupIds": [
         "Qn4x6rjLUmlpxyhCUpohR",
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0Wl",
+      "index": "aR",
       "roundness": null,
       "seed": 742763853,
-      "version": 167,
-      "versionNonce": 1510969930,
+      "version": 171,
+      "versionNonce": 1678184565,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false,
       "text": "key 4",
@@ -1446,17 +1483,19 @@
       "opacity": 100,
       "groupIds": [
         "Qn4x6rjLUmlpxyhCUpohR",
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0X",
+      "index": "aRG",
       "roundness": null,
       "seed": 1170344493,
-      "version": 94,
-      "versionNonce": 1042354006,
+      "version": 98,
+      "versionNonce": 268967259,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false,
       "text": "[ 0.9, 0.1, 0.1 ]",
@@ -1486,17 +1525,19 @@
       "opacity": 100,
       "groupIds": [
         "Qn4x6rjLUmlpxyhCUpohR",
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0X8",
+      "index": "aRV",
       "roundness": null,
       "seed": 1872442179,
-      "version": 263,
-      "versionNonce": 2075834634,
+      "version": 267,
+      "versionNonce": 1779907029,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false,
       "text": "[ 0.1, 0.9, 0.1 ]",
@@ -1526,17 +1567,19 @@
       "opacity": 100,
       "groupIds": [
         "Qn4x6rjLUmlpxyhCUpohR",
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0XG",
+      "index": "aS",
       "roundness": null,
       "seed": 67970893,
-      "version": 284,
-      "versionNonce": 1026602134,
+      "version": 288,
+      "versionNonce": 1366407675,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false,
       "text": "[ 0.5, 0.5, 0.1 ]",
@@ -1565,19 +1608,21 @@
       "roughness": 1,
       "opacity": 100,
       "groupIds": [
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0XV",
+      "index": "aSV",
       "roundness": {
         "type": 2
       },
       "seed": 1220759306,
-      "version": 195,
-      "versionNonce": 1926432714,
+      "version": 199,
+      "versionNonce": 52115253,
       "isDeleted": false,
-      "boundElements": null,
-      "updated": 1742045299180,
+      "boundElements": [],
+      "updated": 1742105853750,
       "link": null,
       "locked": false,
       "points": [
@@ -1625,19 +1670,21 @@
       "roughness": 1,
       "opacity": 100,
       "groupIds": [
-        "9wrfth5WYQyrzLZCQdcO0"
+        "9wrfth5WYQyrzLZCQdcO0",
+        "vofVmq4mYX5eZoEyQQsKN",
+        "klpShPGANtjNFKDVjdLvj"
       ],
       "frameId": null,
-      "index": "b0Xl",
+      "index": "aT",
       "roundness": {
         "type": 2
       },
       "seed": 491924746,
-      "version": 217,
-      "versionNonce": 496611798,
+      "version": 221,
+      "versionNonce": 952025755,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1742045299180,
+      "updated": 1742105853750,
       "link": null,
       "locked": false,
       "points": [
