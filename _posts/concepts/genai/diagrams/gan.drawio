@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="4ZSlqq9PTy-f_bh8gYAk" name="Page-1">
-        <mxGraphModel dx="741" dy="659" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="628" dy="659" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -94,7 +94,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="63" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="60" target="62">
+                <mxCell id="63" value="" style="edgeStyle=none;html=1;flowAnimation=1;" edge="1" parent="1" source="60" target="62">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="60" value="5. Train discriminator CNN on real data" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;resizeWidth=0;" vertex="1" parent="1">
