@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="4ZSlqq9PTy-f_bh8gYAk" name="Page-1">
-        <mxGraphModel dx="710" dy="681" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1206" dy="1781" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -107,155 +107,189 @@
                 <mxCell id="62" value="6. Train discriminator CNN on fake data" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;" parent="66" vertex="1">
                     <mxGeometry x="210" y="820" width="180" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="65" value="DISCRIMINATOR CNN" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" parent="66" vertex="1">
+                <mxCell id="65" value="TRAINING A DISCRIMINATOR CNN" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" parent="66" vertex="1">
                     <mxGeometry x="490" y="10" width="160" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="105" value="Batch of 64 images" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="66">
+                <mxCell id="105" value="Batch of 64 images" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="66" vertex="1">
                     <mxGeometry x="10" y="397.5" width="160" height="45" as="geometry"/>
                 </mxCell>
-                <mxCell id="67" value="" style="group" vertex="1" connectable="0" parent="1">
+                <mxCell id="121" value="64 X 32 X 32 X 3&lt;div&gt;Training set :&amp;nbsp;&lt;/div&gt;&lt;div&gt;64 real and 64 fake images.&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="66">
+                    <mxGeometry x="490" y="800" width="170" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="67" value="" style="group" parent="1" vertex="1" connectable="0">
                     <mxGeometry x="910" y="380" width="670" height="920" as="geometry"/>
                 </mxCell>
-                <mxCell id="68" value="" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="67">
+                <mxCell id="68" value="" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="67" vertex="1">
                     <mxGeometry y="20" width="670" height="920" as="geometry"/>
                 </mxCell>
-                <mxCell id="69" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;flowAnimation=1;" edge="1" parent="67" source="70" target="72">
+                <mxCell id="69" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;flowAnimation=1;" parent="67" source="70" target="72" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="275.5" y="50" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="70" value="Start" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" vertex="1" parent="67">
+                <mxCell id="70" value="Start" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" parent="67" vertex="1">
                     <mxGeometry x="250" y="20" width="100" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="71" value="" style="edgeStyle=none;html=1;flowAnimation=1;" edge="1" parent="67" source="72" target="75">
+                <mxCell id="71" value="" style="edgeStyle=none;html=1;flowAnimation=1;" parent="67" source="72" target="75" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="72" value="1. Define a 100 dimension random noise vector from Gaussian distribution" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;strokeWidth=2;resizeWidth=0;" vertex="1" parent="67">
+                <mxCell id="72" value="1. Define a 100 dimension random noise vector from Gaussian distribution" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;strokeWidth=2;resizeWidth=0;" parent="67" vertex="1">
                     <mxGeometry x="210" y="140" width="180" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="73" value="" style="edgeStyle=none;html=1;flowAnimation=1;" edge="1" parent="67" source="75" target="78">
+                <mxCell id="73" value="" style="edgeStyle=none;html=1;flowAnimation=1;" parent="67" source="75" target="78" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="74" value="" style="edgeStyle=none;html=1;flowAnimation=1;" edge="1" parent="67">
+                <mxCell id="74" value="" style="edgeStyle=none;html=1;flowAnimation=1;" parent="67" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="215" y="280" as="sourcePoint"/>
                         <mxPoint x="135.5" y="280" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="75" value="2. Define a new Convolutional 2D Transpose for Generator" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;resizeWidth=0;" vertex="1" parent="67">
+                <mxCell id="75" value="2. Define a new Convolutional 2D Transpose for Generator" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;resizeWidth=0;" parent="67" vertex="1">
                     <mxGeometry x="210" y="260" width="180" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="76" value="" style="edgeStyle=none;html=1;flowAnimation=1;" edge="1" parent="67" source="78" target="81">
+                <mxCell id="76" value="" style="edgeStyle=none;html=1;flowAnimation=1;" parent="67" source="78" target="81" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="78" value="3. Create a 100 dimension vector for 256 x 4 x 4 images" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;resizeWidth=0;" vertex="1" parent="67">
+                <mxCell id="78" value="3. Create a 100 dimension vector for 256 x 4 x 4 images" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;resizeWidth=0;" parent="67" vertex="1">
                     <mxGeometry x="210" y="390" width="180" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="80" value="" style="edgeStyle=none;html=1;flowAnimation=1;" edge="1" parent="67" source="81" target="92">
+                <mxCell id="80" value="" style="edgeStyle=none;html=1;flowAnimation=1;" parent="67" source="81" target="92" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="81" value="4. Upscale the images of 100 dim vector using Conv 2D Transpose&amp;nbsp;" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;resizeWidth=0;" vertex="1" parent="67">
+                <mxCell id="81" value="4. Upscale the images of 100 dim vector using Conv 2D Transpose&amp;nbsp;" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;resizeWidth=0;" parent="67" vertex="1">
                     <mxGeometry x="210" y="536" width="180" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="82" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;flowAnimation=1;" edge="1" parent="67">
+                <mxCell id="82" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;flowAnimation=1;" parent="67" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="134.5" y="299" as="sourcePoint"/>
                         <mxPoint x="214" y="299" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="83" value="2.1 Instantiate the model" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;" vertex="1" parent="67">
+                <mxCell id="83" value="2.1 Instantiate the model" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;" parent="67" vertex="1">
                     <mxGeometry x="20" y="260" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="85" value="" style="group" vertex="1" connectable="0" parent="67">
+                <mxCell id="85" value="" style="group" parent="67" vertex="1" connectable="0">
                     <mxGeometry x="480" y="300" width="160" height="310" as="geometry"/>
                 </mxCell>
-                <mxCell id="86" value="" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="85">
+                <mxCell id="86" value="" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="85" vertex="1">
                     <mxGeometry y="23" width="160" height="300.3125" as="geometry"/>
                 </mxCell>
-                <mxCell id="87" value="" style="edgeStyle=none;html=1;flowAnimation=1;" edge="1" parent="85" source="88" target="89">
+                <mxCell id="87" value="" style="edgeStyle=none;html=1;flowAnimation=1;" parent="85" source="88" target="89" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="88" value="Upscale to 8 x8" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;" vertex="1" parent="85">
+                <mxCell id="88" value="Upscale to 8 x8" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;" parent="85" vertex="1">
                     <mxGeometry x="20" y="60.2815625" width="120" height="52.5934375" as="geometry"/>
                 </mxCell>
-                <mxCell id="101" value="" style="edgeStyle=none;html=1;flowAnimation=1;" edge="1" parent="85" source="89" target="100">
+                <mxCell id="101" value="" style="edgeStyle=none;html=1;flowAnimation=1;" parent="85" source="89" target="100" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="89" value="Upscale to 16 x 16" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;" vertex="1" parent="85">
+                <mxCell id="89" value="Upscale to 16 x 16" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;" parent="85" vertex="1">
                     <mxGeometry x="20" y="143.3228125" width="120" height="55.354375" as="geometry"/>
                 </mxCell>
-                <mxCell id="100" value="Upscale to 32 x 32" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;" vertex="1" parent="85">
+                <mxCell id="100" value="Upscale to 32 x 32" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;" parent="85" vertex="1">
                     <mxGeometry x="20" y="229.125" width="120" height="55.354375" as="geometry"/>
                 </mxCell>
-                <mxCell id="90" style="edgeStyle=none;html=1;flowAnimation=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="67" target="81">
+                <mxCell id="90" style="edgeStyle=none;html=1;flowAnimation=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" parent="67" target="81" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="390" y="583" as="targetPoint"/>
                         <Array as="points"/>
                         <mxPoint x="480" y="583" as="sourcePoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="91" value="" style="edgeStyle=none;html=1;flowAnimation=1;" edge="1" parent="67" source="92" target="93">
+                <mxCell id="91" value="" style="edgeStyle=none;html=1;flowAnimation=1;" parent="67" source="92" target="93" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="92" value="5. Generate latent points&lt;div&gt;64 x 100 dim vectors&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;resizeWidth=0;" vertex="1" parent="67">
+                <mxCell id="92" value="5. Generate latent points&lt;div&gt;64 x 100 dim vectors&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;resizeWidth=0;" parent="67" vertex="1">
                     <mxGeometry x="210" y="680" width="180" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="93" value="6. Generate fake samples&lt;div&gt;64 x 32 x 32 x 3&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;" vertex="1" parent="67">
+                <mxCell id="93" value="6. Generate fake samples&lt;div&gt;64 x 32 x 32 x 3&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;" parent="67" vertex="1">
                     <mxGeometry x="210" y="820" width="180" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="94" value="GENERATOR MODEL" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="67">
-                    <mxGeometry x="490" y="10" width="160" height="30" as="geometry"/>
+                <mxCell id="94" value="GENERATOR MODEL" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" parent="67" vertex="1">
+                    <mxGeometry x="490" y="25" width="160" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="98" value="There are 256 4x4 images. Each 4x4 image will capture some new feature. So, we will capture 256 features, 1 feature per image. Each image in turn will have 100 latent points." style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="67">
-                    <mxGeometry x="10" y="405" width="180" height="45" as="geometry"/>
+                <mxCell id="98" value="We start with generating 4x4 image to eventually get 32x32 image, with latent dim = 100 for each image. There are 256 4x4 images. Each 4x4 image will capture some new feature. So, we will capture 256 features, 1 feature per image. Each image in turn will have 100 latent points." style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="67" vertex="1">
+                    <mxGeometry x="10" y="377.5" width="180" height="85" as="geometry"/>
                 </mxCell>
-                <mxCell id="107" value="Takes 64 noisy vectors and generate 64 images out of it. One vector per image. Each image will have 100 latent points. So, 64 x 100 dim vector is output" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="67">
+                <mxCell id="107" value="Take batch of 64 noisy vectors and generate 64 images out of it. One vector per image. Each image will have 100 latent points. So, 64 x 100 dim vector is output" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="67" vertex="1">
                     <mxGeometry x="20" y="680" width="160" height="45" as="geometry"/>
                 </mxCell>
-                <mxCell id="108" value="Each image will have 100 latent points" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="67">
+                <mxCell id="108" value="Each image will have 100 latent points" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="67" vertex="1">
                     <mxGeometry x="20" y="148" width="160" height="45" as="geometry"/>
                 </mxCell>
-                <mxCell id="97" style="edgeStyle=none;html=1;flowAnimation=1;" edge="1" parent="1" source="95" target="72">
+                <mxCell id="97" style="edgeStyle=none;html=1;flowAnimation=1;" parent="1" source="95" target="72" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="95" value="Define latent dimension. (eg 100)" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+                <mxCell id="95" value="Define latent dimension. (eg 100)" style="whiteSpace=wrap;html=1;rounded=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="1410" y="520" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="104" style="edgeStyle=none;html=1;flowAnimation=1;exitX=1.007;exitY=0.373;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="81">
+                <mxCell id="104" style="edgeStyle=none;html=1;flowAnimation=1;exitX=1.007;exitY=0.373;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="81" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="1390" y="940" as="targetPoint"/>
                         <Array as="points"/>
                         <mxPoint x="1310" y="950" as="sourcePoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="111" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="109">
+                <mxCell id="111" value="" style="edgeStyle=none;html=1;" parent="1" source="109" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="520" y="200" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="109" value="Generator" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="109" value="Generator" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="320" y="160" width="120" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="113" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="112" target="109">
+                <mxCell id="113" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="112" target="109" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="112" value="100 dim noise" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+                <mxCell id="112" value="100 dim noise" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
                     <mxGeometry x="160" y="160" width="120" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="118" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="114" target="117">
+                <mxCell id="118" value="" style="edgeStyle=none;html=1;" parent="1" source="114" target="117" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="114" value="Fake images&lt;div&gt;32 x 32 x 3&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+                <mxCell id="114" value="Fake images&lt;div&gt;32 x 32 x 3&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
                     <mxGeometry x="480" y="160" width="120" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="120" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="117" target="119">
+                <mxCell id="120" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="117" target="119" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="117" value="Discriminator" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="117" value="Discriminator" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="640" y="160" width="120" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="119" value="0/1" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="119" value="0/1" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="810" y="160" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="126" value="" style="group" vertex="1" connectable="0" parent="1">
+                    <mxGeometry x="1015" y="-270" width="520" height="230" as="geometry"/>
+                </mxCell>
+                <mxCell id="122" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="126">
+                    <mxGeometry width="520" height="230" as="geometry"/>
+                </mxCell>
+                <mxCell id="123" value="latent deminstion = 100" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="126">
+                    <mxGeometry x="30" y="20" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="125" value="Hyper parameters" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="126">
+                    <mxGeometry x="375" y="10" width="125" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="131" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="127">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1387.31" y="100.50500000000011" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="127" value="Generator" style="shape=image;html=1;verticalLabelPosition=bottom;verticalAlign=top;imageAspect=1;aspect=fixed;image=img/clipart/Gear_128x128.png" vertex="1" parent="1">
+                    <mxGeometry x="1254" y="64.41" width="61.54" height="72.19" as="geometry"/>
+                </mxCell>
+                <mxCell id="129" style="edgeStyle=none;html=1;" edge="1" parent="1" source="128" target="127">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1270" y="100.5" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="128" value="One 100 dimensional random Noise Vector" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#1ba1e2;sketch=1;" vertex="1" parent="1">
+                    <mxGeometry x="1010" y="56" width="160" height="89" as="geometry"/>
+                </mxCell>
+                <mxCell id="132" value="One 32 x 32 x 3 Image" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#1ba1e2;sketch=1;" vertex="1" parent="1">
+                    <mxGeometry x="1390" y="60.76" width="160" height="89.24" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
