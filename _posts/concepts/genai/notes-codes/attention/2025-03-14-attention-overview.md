@@ -58,7 +58,9 @@ Attention mechanism does two things as we see here -
 In the figure below, the BLEU score is used to measure the quality of the translation. 
 **RNNsearch-50** and **RNNsearch-30** are models that include attention mechanism. Others do not have the attention mechanism. 
 ![](/images/genai/bleuscore.png) 
-4. 
+
+4. The LSTMs without Attention mechanism would start failing as the length of the input sentence keeps growing, as shown in the figure above. 
+5. 
 
 
 ### Self attention with trainable weights. 
