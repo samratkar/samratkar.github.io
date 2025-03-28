@@ -1,0 +1,58 @@
+<mxfile host="65bd71144e">
+    <diagram id="2nEmGWlg9AN7trLZjP3I" name="Page-1">
+        <mxGraphModel dx="362" dy="659" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="17" value="" style="group" parent="1" vertex="1" connectable="0">
+                    <mxGeometry y="120" width="830" height="340" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="" style="edgeStyle=none;html=1;flowAnimation=1;" parent="17" source="2" target="3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="Eliza&lt;div&gt;1966&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="17" vertex="1">
+                    <mxGeometry width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="" style="edgeStyle=none;html=1;flowAnimation=1;" parent="17" source="3" target="5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="RNN&lt;div&gt;1980s&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;" parent="17" vertex="1">
+                    <mxGeometry x="240" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="" style="edgeStyle=none;html=1;flowAnimation=1;" parent="17" source="5" target="7" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="LSTM&lt;div&gt;1997&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;" parent="17" vertex="1">
+                    <mxGeometry x="460" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="" style="edgeStyle=none;html=1;flowAnimation=1;" parent="17" source="7" target="9" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="RNN + Attention&lt;div&gt;2014&lt;/div&gt;&lt;div&gt;Bhadanav&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;" parent="17" vertex="1">
+                    <mxGeometry x="460" y="130" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="" style="edgeStyle=none;html=1;flowAnimation=1;" parent="17" source="9" target="11" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="Attention + Transformer&lt;div&gt;2017&lt;/div&gt;&lt;div&gt;Attention is what you need&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;" parent="17" vertex="1">
+                    <mxGeometry x="220" y="130" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="Attention + GPT 2&lt;div&gt;2018&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;" parent="17" vertex="1">
+                    <mxGeometry y="130" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="RNN decoupled from Attention" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" parent="17" vertex="1">
+                    <mxGeometry x="280" y="64" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="Only decoder.&lt;div&gt;Encoder removed.&lt;/div&gt;&lt;div&gt;BERT has encoder and decoder.&lt;/div&gt;" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" parent="17" vertex="1">
+                    <mxGeometry y="54" width="230" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="Attention : Selectively accessing parts of input tokens" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" parent="17" vertex="1">
+                    <mxGeometry x="520" y="70" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="1. Next token prediction models are always decoder only models because they are built on attention mechanism which does not have any encoder block. All the GPT models are decoder only model.&amp;nbsp;&lt;div&gt;2. BERT which can do next token prediction as well as sentiment analysis, classification are decoder and encoder based models. It is a great model for summarization. BERT is bi-directional model. It is not based on causal attention, which masks the context vectors of the forthcoming words.&amp;nbsp;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="17" vertex="1">
+                    <mxGeometry x="20" y="210" width="810" height="130" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
