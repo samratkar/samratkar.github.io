@@ -4,7 +4,8 @@ type : concept
 title : "Attention - An overview"
 ---
 ## The main idea of attention
-The evolution of NLP has been as follows - 
+The evolution of NLP has been as follows -
+![](/images/genai/chronology.svg) 
 
 |**Date** | **Model** | **Description** |
 |---------|-----------|------------------|
@@ -41,11 +42,11 @@ The key idea behind Bahdanau attention is to compute a context vector that summa
 
 **Attention**: The attention mechanism was introduced to allow models to focus on **specific parts of the input sequence** when generating each output token. This was particularly useful for tasks like machine translation, where the alignment between input and output sequences is crucial.
 
-1. **Attention** is about selectively accessing parts of input sequence with different weights, rather than using the entire input sequence equally. This allows the model to focus on relevant parts of the input when generating each output token.
+**Attention** is about selectively accessing parts of input sequence with different weights, rather than using the entire input sequence equally. This allows the model to focus on relevant parts of the input when generating each output token.
 
 For example to translate the sentence "I will eat" to French "Je vais manger", the model can focus on the word "I" when generating the word "Je", rather than considering all the words in the input sequence equally. That is the challenge, how to select which past tokens are how much important quantitatively for predicting the next token. This is done by what is known as **attention scores** for every hidden state. 
 
-2. The relevant past tokens might or might not be 1:1 corresponding with the next token. For example, in the figure below the correspondence is as mentioned below. In the sentence formation the French word for zone is written before that of the economic. 
+1. The relevant past tokens might or might not be 1:1 corresponding with the next token. For example, in the figure below the correspondence is as mentioned below. In the sentence formation the French word for zone is written before that of the economic. 
    - French - zone economique europeenne
    - English - economic zone area
 ![](/images/genai/french.png)
@@ -54,25 +55,29 @@ Attention mechanism does two things as we see here -
    - translates the actual words.
    - identifies the right order of the words. And this order can change from that of the input sequence, based on the construct of the language. 
 
-3. The **Bhadanav Attention** mechanism coupled RNN + Attention mechanism. It was not earlier imagined to be used for text summarization as well. It was primarily for text translation. 
+2. The **Bhadanav Attention** mechanism coupled RNN + Attention mechanism. It was not earlier imagined to be used for text summarization as well. It was primarily for text translation. 
 In the figure below, the BLEU score is used to measure the quality of the translation. 
 **RNNsearch-50** and **RNNsearch-30** are models that include attention mechanism. Others do not have the attention mechanism. 
 ![](/images/genai/bleuscore.png) 
+The LSTMs without Attention mechanism would start failing as the length of the input sentence keeps growing, as shown in the figure above. 
 
-4. The LSTMs without Attention mechanism would start failing as the length of the input sentence keeps growing, as shown in the figure above. 
-5. 
+3. Bhadanav attention mechanism was typically used for text translation. So, the attention was from the source language to the target language. The attention scores were calculated between the source and target language.
+
 
 
 ### Self attention with trainable weights. 
 
 1. In the above case where the Bhadanav attention was used, the attention scores were created to be able to translate the words of one language to the other. 
-Self attention is the case where same concept is being used for text generation. 
+Self attention is the case where same concept is being used for text generation. So, source and targets are the same input text stream. This is known as **Auto-regression**. The model is trained to predict the next token in the sequence based on the previous tokens. The attention scores are calculated between the tokens in the same sequence.
+When the attention mechanism directed such that the source and target is the same sequence of words, it is known as **Self Attention**.
 
 2. In self attention we look into only one sequence of words. This is the main mechanism that is used to predict the next token. We take one token, and check how much attention score will that token have for all the other tokens in the sequence.
 For example, take the token - "next". We need to find the attention scores of "next" with all the other tokens in the sequence, both front and back.
 ![](/images/genai/query-key-atten-score.svg)
 
 The token that we are focusing currently is known as **query**. The other tokens are known as **keys**. The attention scores are calculated between the query and the keys.
+
+
 
 #### How to compute the attention scores?
 1. **Dot product** - 
