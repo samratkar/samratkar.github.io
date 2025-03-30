@@ -1,11 +1,14 @@
 <mxfile host="65bd71144e">
     <diagram id="nDIDQxm9bHd9AL-3DHXK" name="Page-1">
-        <mxGraphModel dx="1002" dy="659" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="992" dy="659" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="42" value="" style="group" vertex="1" connectable="0" parent="1">
+                <mxCell id="42" value="" style="group" parent="1" vertex="1" connectable="0">
                     <mxGeometry x="45" y="100" width="890" height="560" as="geometry"/>
+                </mxCell>
+                <mxCell id="47" value="" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;" vertex="1" parent="42">
+                    <mxGeometry x="700" y="-50" width="170" height="230" as="geometry"/>
                 </mxCell>
                 <mxCell id="34" value="" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;" parent="42" vertex="1">
                     <mxGeometry y="190" width="890" height="270" as="geometry"/>
@@ -34,6 +37,15 @@
                 <mxCell id="10" value="" style="edgeStyle=none;html=1;flowAnimation=1;" parent="42" source="7" target="9" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
+                <mxCell id="46" style="edgeStyle=none;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;flowAnimation=1;" edge="1" parent="42" target="44">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="695" y="80" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="615" y="80"/>
+                            <mxPoint x="615" y="140"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
                 <mxCell id="7" value="Token Embedding&lt;div&gt;multi dim vectors&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;" parent="42" vertex="1">
                     <mxGeometry x="725" width="120" height="60" as="geometry"/>
                 </mxCell>
@@ -49,10 +61,13 @@
                 <mxCell id="14" value="" style="edgeStyle=none;html=1;flowAnimation=1;" parent="42" source="24" target="13" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="11" value="Self Attention&lt;div&gt;Q, K, V&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;" parent="42" vertex="1">
+                <mxCell id="11" value="Input Embedding&lt;br&gt;&lt;div&gt;Q, K, V&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;" parent="42" vertex="1">
                     <mxGeometry x="735" y="230" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="16" value="" style="edgeStyle=none;html=1;flowAnimation=1;" parent="42" source="13" target="15" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="45" style="edgeStyle=none;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;flowAnimation=1;" edge="1" parent="42" source="13" target="44">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="13" value="Attention Scores" style="whiteSpace=wrap;html=1;rounded=1;" parent="42" vertex="1">
@@ -135,6 +150,12 @@
                 </mxCell>
                 <mxCell id="40" value="Logits matrix for next token prediction" style="whiteSpace=wrap;html=1;rounded=1;" parent="42" vertex="1">
                     <mxGeometry x="335" y="500" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" value="Context Vector" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="42">
+                    <mxGeometry x="395" y="110" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="49" value="Input Embedding" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="800" y="60" width="60" height="30" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
