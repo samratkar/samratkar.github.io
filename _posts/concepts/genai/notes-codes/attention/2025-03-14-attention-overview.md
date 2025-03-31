@@ -63,9 +63,11 @@ The LSTMs without Attention mechanism would start failing as the length of the i
 
 3. Bhadanav attention mechanism was typically used for text translation. So, the attention was from the source language to the target language. The attention scores were calculated between the source and target language.
 
-
+![](/images/genai/bhadanav-attention.svg)
 
 ### Self attention with trainable weights. 
+
+![](/images/genai/self-attention-overview.svg)
 
 1. In the above case where the Bhadanav attention was used, the attention scores were created to be able to translate the words of one language to the other. 
 Self attention is the case where same concept is being used for text generation. So, source and targets are the same input text stream. This is known as **Auto-regression**. The model is trained to predict the next token in the sequence based on the previous tokens. The attention scores are calculated between the tokens in the same sequence.
@@ -79,14 +81,30 @@ The token that we are focusing currently is known as **query**. The other tokens
 
 
 
-#### How to compute the attention scores?
-1. **Dot product** - 
+### How to compute the attention scores?
+#### Dot product
 By taking the dot product we can get an intuitive attention score which will demonstrate the closeness of one query with the other keys. But the problem is that if their are two keys, whose **magnitude is same but their directions are different**, the value of dot products will be same. Like for example if we have the keys as follows, the magnitude of the key "dog" is the same as that of the key "ball". In that case if we have a value say, "it", the dot products will be same for both the cases.  
 ![](/images/genai/query-key-dot-prod.svg)
 
-2. **Train a neural network**
+#### Train a neural network
 Start with a random initialized matrix for query and keys. And then give the right attention scores as inputs and train a neural network to learn the weights of the matrix. 
 Assume the embedding size is 3. And assume two weight matrices named ***Query*** and ***Key***. The weight matrices are initialized randomly.
+
+##### Query 
+The current word or token has a "question" about its context. **"What should I pay attention to?"**
+
+##### Key 
+Every token provides a "key", acting as a label or signal to answer queries from other tokens. It indicates : **"Here is what information I can provide"**
+
+##### Value
+Once a match (query - key) is found, this is the actual information provided. It says, **"Here is the meaning or content you will get if you attend to me"**
+
+### Workflow for creation of context vector
+
+![](/images/genai/self-attention.svg)
+
+### A toy example 
+
 $$
 Query \ weight = W_q = 
 \begin{bmatrix} 
@@ -141,19 +159,24 @@ Attention \ score = softmax(Query \cdot Key^T) =
 \end{bmatrix}
 $$
 
-##### Input matrices 
+### Input matrices 
 |Word|x = Input matrix|Query = $W_q \cdot x$ |Key = $W_k \cdot x$|
 |---|---|---|---|
 |the|$\begin{bmatrix} 0.9 & 0.1 & 0.1 \end{bmatrix}$ |$\begin{bmatrix} 0.9 & 0.1 & 0.1 \end{bmatrix}$|$\begin{bmatrix} 0.9 & 0.1 & 0.1 \end{bmatrix}$|
 |next|$\begin{bmatrix} 0.1 & 0.9 & 0.1 \end{bmatrix}$|$\begin{bmatrix} 0.1 & 0.9 & 0.1 \end{bmatrix}$|$\begin{bmatrix} 0.2 & 1.8 & 0.2 \end{bmatrix}$|
 |is|$\begin{bmatrix} 0.5 & 0.5 & 0.1 \end{bmatrix}$|$\begin{bmatrix} 0.5 & 0.5 & 0.1 \end{bmatrix}$|$\begin{bmatrix} 0.5 & 0.5 & 0.1 \end{bmatrix}$|
 
-##### Attention scores
+### Attention scores
 |Word|word with Max Attention score| score for the | score for next | sore for is |
 |---|---|---|---|---|
 |the|the|**0.4231**|0.2697|0.3072|
 |next|next|0.1487|**0.6466**|0.2047|
 |is|next|0.2728|**0.4543**|0.2728| 
+
+### Details of the workflow of self attention
+![](/images/genai/self-attention-det.svg)
+
+### Implementation of Self attention
 
 
 ## References
