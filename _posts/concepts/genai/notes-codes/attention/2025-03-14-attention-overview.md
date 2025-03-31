@@ -106,8 +106,220 @@ Once a match (query - key) is found, this is the actual information provided. It
 ### Details of the workflow of self attention
 ![](/images/genai/self-attention-det.svg)
 
-### Implementation of Self attention
+## Implementation of Self attention
+### Step 1 : Start with the input embedding matrix 
+Embedding dimension or input dimension : 8
+Context length : 5
+```python
+import torch
 
+inputs = torch.tensor(
+  [[0.43, 0.15, 0.89, 0.17, 0.23, 0.19, 0.38, 0.44], # The     (x^1)
+   [0.55, 0.87, 0.66, 0.51, 0.49, 0.3, 0.2, 0.1], # next  (x^2)
+   [0.57, 0.85, 0.64, 0.8, 0.1, 0.4, 0.21, 0.39], # day  (x^3)
+   [0.22, 0.58, 0.33, 0.4, 0.4, 0.4, 0.1, 0.3], # is     (x^4)
+   [0.77, 0.25, 0.10, 0.1, 0.9, 0.3, 0.3, 0.2]] # bright     (x^5)
+)
+```
+### Step 2 : Set the input and output dimensions
+```python
+d_in = inputs.shape[1]
+d_out = 4
+```
+### Step 3 : Initialize the weight matrices for query, key and value. 
+```python
+torch.manual_seed(123)
+W_query = torch.nn.Parameter(torch.rand(d_in, d_out), requires_grad=False)
+W_key = torch.nn.Parameter(torch.rand(d_in, d_out), requires_grad=False)
+W_value = torch.nn.Parameter(torch.rand(d_in, d_out), requires_grad=False)
+
+print(W_query)
+Output >> 
+Parameter containing:
+tensor([[0.2961, 0.5166, 0.2517, 0.6886],
+        [0.0740, 0.8665, 0.1366, 0.1025],
+        [0.1841, 0.7264, 0.3153, 0.6871],
+        [0.0756, 0.1966, 0.3164, 0.4017],
+        [0.1186, 0.8274, 0.3821, 0.6605],
+        [0.8536, 0.5932, 0.6367, 0.9826],
+        [0.2745, 0.6584, 0.2775, 0.8573],
+        [0.8993, 0.0390, 0.9268, 0.7388]])
+
+print(W_key)
+Output >>
+Parameter containing:
+tensor([[0.7179, 0.7058, 0.9156, 0.4340],
+        [0.0772, 0.3565, 0.1479, 0.5331],
+        [0.4066, 0.2318, 0.4545, 0.9737],
+        [0.4606, 0.5159, 0.4220, 0.5786],
+        [0.9455, 0.8057, 0.6775, 0.6087],
+        [0.6179, 0.6932, 0.4354, 0.0353],
+        [0.1908, 0.9268, 0.5299, 0.0950],
+        [0.5789, 0.9131, 0.0275, 0.1634]])
+
+print(W_value)
+Output >>
+Parameter containing:
+tensor([[0.3009, 0.5201, 0.3834, 0.4451],
+        [0.0126, 0.7341, 0.9389, 0.8056],
+        [0.1459, 0.0969, 0.7076, 0.5112],
+        [0.7050, 0.0114, 0.4702, 0.8526],
+        [0.7320, 0.5183, 0.5983, 0.4527],
+        [0.2251, 0.3111, 0.1955, 0.9153],
+        [0.7751, 0.6749, 0.1166, 0.8858],
+        [0.6568, 0.8459, 0.3033, 0.6060]])
+```
+### Step 4: Computation of Query, Key and Value matrices
+```python
+keys = inputs @ W_key
+values = inputs @ W_value
+queries = inputs @ W_query
+print("keys.shape:", keys.shape)
+Output >> 
+keys.shape: torch.Size([5, 4])
+
+print("values.shape:", values.shape)
+Output >>
+values.shape: torch.Size([5, 4])
+
+print("queries.shape:", queries.shape)
+Output >>
+queries.shape: torch.Size([5, 4])
+``` 
+### Step 5: Compute the attention scores
+```python
+attn_scores = queries @ keys.T 
+print(attn_scores)
+Output >>
+tensor([[ 8.7252, 10.8803, 11.0007,  7.7678,  9.7598],
+        [ 9.7351, 12.0370, 12.2923,  8.7149, 10.9628],
+        [10.4691, 12.9987, 13.1878,  9.3438, 11.8256],
+        [ 7.7531,  9.6199,  9.7608,  6.9217,  8.7864],
+        [ 8.8185, 10.9612, 11.1314,  7.8699,  9.8633]])
+```
+### Step 6: Compute the attention weights
+#### Why divide by sqrt(d_k)?
+##### Reason 1: For stability in learning
+
+The softmax function is sensitive to the magnitudes of its inputs. When the inputs are large, the differences between the exponential values of each input become much more pronounced. This causes the softmax output to become "peaky," where the highest value receives almost all the probability mass, and the rest receive very little.
+
+In attention mechanisms, particularly in transformers, if the dot products between query and key vectors become too large (like multiplying by 8 in this example), the attention scores can become very large. This results in a very sharp softmax distribution, making the model overly confident in one particular "key." Such sharp distributions can make learning unstable
+
+##### Reason 2 : To make the variance of the dot product stable
+
+The dot product of  Q and K increases the variance because multiplying two random numbers increases the variance.
+The increase in variance grows with the dimension.
+Dividing by sqrt (dimension) keeps the variance close to 1
+
+```python
+attn_weights_final = torch.softmax(attn_scores / d_k**0.5, dim=-1)
+print(attn_weights_final)
+row_sums = attn_weights_final.sum(dim=1)
+print("\nSum of Each Row:")
+print(row_sums)
+Output >> 
+tensor([[0.1069, 0.3140, 0.3335, 0.0662, 0.1793],
+        [0.0980, 0.3099, 0.3521, 0.0589, 0.1811],
+        [0.0911, 0.3227, 0.3547, 0.0519, 0.1795],
+        [0.1162, 0.2954, 0.3170, 0.0767, 0.1947],
+        [0.1063, 0.3103, 0.3379, 0.0662, 0.1793]])
+
+Sum of Each Row:
+tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000])
+```
+### Step 7: Compute the context vector
+```python
+context_vec = attn_weights_final @ values
+print(context_vec)
+Output >>
+tensor([[1.3246, 1.5236, 1.8652, 2.3285],
+        [1.3301, 1.5304, 1.8753, 2.3433],
+        [1.3325, 1.5353, 1.8866, 2.3537],
+        [1.3211, 1.5153, 1.8390, 2.3002],
+        [1.3253, 1.5242, 1.8657, 2.3304]])
+```
+## Modular implementation of self attention 
+### Version 1
+```python
+import torch.nn as nn
+
+class SelfAttention_v1(nn.Module):
+
+    def __init__(self, d_in, d_out):
+        super().__init__()
+        self.W_query = nn.Parameter(torch.rand(d_in, d_out))
+        self.W_key   = nn.Parameter(torch.rand(d_in, d_out))
+        self.W_value = nn.Parameter(torch.rand(d_in, d_out))
+
+    def forward(self, x):
+        keys = x @ self.W_key
+        queries = x @ self.W_query
+        values = x @ self.W_value
+
+        attn_scores = queries @ keys.T # omega
+        attn_weights = torch.softmax(
+            attn_scores / keys.shape[-1]**0.5, dim=-1
+        )
+
+        context_vec = attn_weights @ values
+        return context_vec
+
+# Invoking the class
+torch.manual_seed(123)
+sa_v1 = SelfAttention_v1(d_in, d_out)
+# Context matrix
+print(sa_v1(inputs))
+Output >>
+tensor([[1.3246, 1.5236, 1.8652, 2.3285],
+        [1.3301, 1.5304, 1.8753, 2.3433],
+        [1.3325, 1.5353, 1.8866, 2.3537],
+        [1.3211, 1.5153, 1.8390, 2.3002],
+        [1.3253, 1.5242, 1.8657, 2.3304]], grad_fn=<MmBackward0>)
+```
+### Version 2
+
+```python
+class SelfAttention_v2(nn.Module):
+
+    def __init__(self, d_in, d_out, qkv_bias=False):
+        super().__init__()
+        self.W_query = nn.Linear(d_in, d_out, bias=qkv_bias)
+        self.W_key   = nn.Linear(d_in, d_out, bias=qkv_bias)
+        self.W_value = nn.Linear(d_in, d_out, bias=qkv_bias)
+
+    def forward(self, x):
+        keys = self.W_key(x)
+        queries = self.W_query(x)
+        values = self.W_value(x)
+
+        attn_scores = queries @ keys.T
+        attn_weights = torch.softmax(attn_scores / keys.shape[-1]**0.5, dim=-1)
+
+        context_vec = attn_weights @ values
+        return context_vec
+
+torch.manual_seed(789)
+
+inputs = torch.tensor(
+  [[0.43, 0.15, 0.89, 0.17, 0.23, 0.19, 0.38, 0.44], # The     (x^1)
+   [0.55, 0.87, 0.66, 0.51, 0.49, 0.3, 0.2, 0.1], # next  (x^2)
+   [0.57, 0.85, 0.64, 0.8, 0.1, 0.4, 0.21, 0.39], # day  (x^3)
+   [0.22, 0.58, 0.33, 0.4, 0.4, 0.4, 0.1, 0.3], # is     (x^4)
+   [0.77, 0.25, 0.10, 0.1, 0.9, 0.3, 0.3, 0.2]] # bright     (x^5)
+)
+
+d_in = 8
+d_out = 4
+
+sa_v2 = SelfAttention_v2(d_in, d_out)
+print(sa_v2(inputs))
+Output >>
+tensor([[ 0.0174,  0.0553, -0.1093,  0.1026],
+        [ 0.0175,  0.0556, -0.1089,  0.1024],
+        [ 0.0175,  0.0559, -0.1087,  0.1022],
+        [ 0.0179,  0.0544, -0.1091,  0.1028],
+        [ 0.0172,  0.0543, -0.1105,  0.1032]], grad_fn=<MmBackward0>)
+```
 
 ## References
 
