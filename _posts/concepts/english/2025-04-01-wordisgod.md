@@ -19,7 +19,7 @@ Starting both the words with the genre of agitation, resentment, and anger. But 
 
 It was beautiful. Another reason I liked these two words is the sheer beauty that they encompass beneath their surface semantic meaning. Very much like Kali. She might appear fierce and repulsive for the initiated. But for a devotee is the deepest well of life giving nectar of love and beauty - both physical and ethereal. 
 
-### 002 : 04-02-2025 : soliloque, monologue & "ring true"
+### 002 : 04-02-2025 : soliloque, monologue, deference, "ring true"
 
 **Soliloquy** - **A speech to oneself**. A soliloquy is a speech in which a character speaks to himself or herself, revealing his or her thoughts without addressing a listener. It is a dramatic device often used in plays, particularly in **Shakespearean** works.
 
@@ -33,3 +33,7 @@ Similar soliloquies are often used in literature, theater and films to provide i
 
 **Example of Soliloque** - Hamlet's famous "To be or not to be" speech is a classic example of a soliloquy, where he contemplates life and death while alone on stage.
 **Example of Monologue** - In contrast, a monologue might be a character speaking to another character or an audience, such as a stand-up comedian performing a routine or a character delivering a speech in a play. or for that matter, Mark Antony's speech "Friends, Romans and Countrymen" in Shakespeare's Julius Caesar is a famous example of a monologue, where he addresses the crowd after Caesar's assassination.
+
+Soon, Hiddink's bet seemed to be paying off. The Korean social habit that had been slowing their play - **deference and self-criticim** - surfaced less frequently in the field.
+
+**Deference** - **Respectful submission or yielding to the judgment, opinion, or will of another**. It is a way of showing respect and consideration for someone else's authority or expertise. In the context of the book, it refers to the Korean players' tendency to show respect and submission to their seniors.
