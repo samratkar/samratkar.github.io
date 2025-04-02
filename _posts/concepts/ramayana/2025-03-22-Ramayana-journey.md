@@ -16,7 +16,8 @@ author: Samrat Kar
 
 # The Mindmap of the journey covered so far
 ## As of 03-22-2025
-![](/images/ramayana/the-plot.svg)
+![](/images/ramayana/ramplot.excalidraw.svg)
+
 # Weekly notes 
 ## 02-08-2025 - The beginning  in grief
 The Ramayana is an ancient Indian epic that narrates the life of Prince Rama, his wife Sita, and his loyal companion Hanuman. It is attributed to the sage Valmiki and is written in Sanskrit. The story is divided into seven Kandas (books) and consists of about 24,000 verses.
