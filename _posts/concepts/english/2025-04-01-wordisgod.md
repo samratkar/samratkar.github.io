@@ -8,7 +8,7 @@ author : Samrat Kar
 
 ## 001 : 04-01-2025 : Rile & Rankle
 
-## Book : Tribal - Intro : The riddle of Hiddink
+### Book : Tribal - Intro : The riddle of Hiddink
 The football coach from Netherlands riled the South Korean players and rankled the fans, who were used to deep respect for age and experience. 
 
 **Rile** - **Short term irritation**, anger and agitation. Like her continuous interruption riled me up. It might be like say, my emails rile you up. 
