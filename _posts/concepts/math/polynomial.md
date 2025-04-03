@@ -24,5 +24,6 @@ A polynomial is like a cycle with gears. It can transform on peddle to a linear 
 
 Polynomials are like machines that does this magic. And the magic is coded as a function of the independent variable. The output is the dependent variable. 
 
+![](/images/math/poly.excalidraw.svg)
 
 
