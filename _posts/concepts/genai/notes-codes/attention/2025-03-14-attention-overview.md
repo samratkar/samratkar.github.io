@@ -121,12 +121,25 @@ inputs = torch.tensor(
    [0.77, 0.25, 0.10, 0.1, 0.9, 0.3, 0.3, 0.2]] # bright     (x^5)
 )
 ```
+#### Illustration of the code 
+![](/images/genai/iembed.svg)
 ### Step 2 : Set the input and output dimensions
 ```python
 d_in = inputs.shape[1]
 d_out = 4
+print(x_2)
+print(d_in)
+print(d_out)
+Output >>
+tensor([0.5500, 0.8700, 0.6600, 0.5100, 0.4900, 0.3000, 0.2000, 0.1000])
+8
+4
 ```
+#### Illustration of the code
+![](/images/genai/iodim.svg)
 ### Step 3 : Initialize the weight matrices for query, key and value. 
+###### Wq, Wk, Wv are just trainable weight matrices. They have no relationships with the input embeddings of the text sequence.
+
 ```python
 torch.manual_seed(123)
 W_query = torch.nn.Parameter(torch.rand(d_in, d_out), requires_grad=False)
@@ -136,6 +149,8 @@ W_value = torch.nn.Parameter(torch.rand(d_in, d_out), requires_grad=False)
 print(W_query)
 Output >> 
 Parameter containing:
+### Wq is as follows. 
+### It is just a trainable weight matrix. It has no relationship with the input embeddings of the text sequence.
 tensor([[0.2961, 0.5166, 0.2517, 0.6886],
         [0.0740, 0.8665, 0.1366, 0.1025],
         [0.1841, 0.7264, 0.3153, 0.6871],
@@ -169,6 +184,8 @@ tensor([[0.3009, 0.5201, 0.3834, 0.4451],
         [0.7751, 0.6749, 0.1166, 0.8858],
         [0.6568, 0.8459, 0.3033, 0.6060]])
 ```
+#### Illustration of the code
+![](/images/genai/wqwkwv.svg)
 ### Step 4: Computation of Query, Key and Value matrices
 ```python
 keys = inputs @ W_key
@@ -186,6 +203,12 @@ print("queries.shape:", queries.shape)
 Output >>
 queries.shape: torch.Size([5, 4])
 ``` 
+#### Illustration of the code
+![](/images/genai/qkv.svg)
+
+###### Each element of Q, K, V is a linear combination of the input embedding, done by scaling up using the weight matrices 
+![](/images/genai/matmul.svg)
+
 ### Step 5: Compute the attention scores
 ```python
 attn_scores = queries @ keys.T 
