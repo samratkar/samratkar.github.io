@@ -15,8 +15,11 @@ author: Samrat Kar
 |5| 3-22-2025 | **Milestones 7, 8, 9** | Arrival at Mithila. Shabala & Vishvamitra | Vishvaitra, Rama, and Lakshmana reached Mithila. Shatananda the son of Gautama and Ahalya tells the story of Vishvamitra to Rama and Lakshmana. |
 |6| 4-5-2025 | **The grand wedding** | The Swayamvara | Rama wins the Swayamvara of Sita by breaking the bow of Shiva. |
 
+# Wordcloud of the Ramayana
+![](/images/ramayana/words.excalidraw.svg)
+
 # The Mindmap of the journey covered so far
-## As of 03-22-2025
+## As of 04-05-2025
 ![](/images/ramayana/ramplot.excalidraw.svg)
 
 # Weekly notes 
