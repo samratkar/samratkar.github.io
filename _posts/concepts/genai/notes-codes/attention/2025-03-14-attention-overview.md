@@ -99,8 +99,11 @@ Every token provides a "key", acting as a label or signal to answer queries from
 ##### Value
 Once a match (query - key) is found, this is the actual information provided. It says, **"Here is the meaning or content you will get if you attend to me"**
 
-### Workflow for creation of context vector
+### Self Attention : Workflow for creation of context vector
+#### The big picture : End to end Workflow of Self Attention 
+![](/images/genai/self-attention-big-pic.svg)
 
+#### Details of single head self attention
 ![](/images/genai/self-attention.svg)
 
 ### Details of the workflow of self attention
@@ -203,11 +206,21 @@ print("queries.shape:", queries.shape)
 Output >>
 queries.shape: torch.Size([5, 4])
 ``` 
+**Note the dimensions of the keys, values and queries.** We have moved from din to dout.
 #### Illustration of the code
 ![](/images/genai/qkv.svg)
 
+#### finding the Q, K, V matrices for "next" token
+**Note :** - The entire Wq is multiplied by the input vector to determine the Q for the input vector for "next".
+```python
+query_2 = x_2 @ W_query
+key_2 = x_2 @ W_key
+value_2 = x_2 @ W_value
+print(query_2)
+```
 ###### Each element of Q, K, V is a linear combination of the input embedding, done by scaling up using the weight matrices 
 ![](/images/genai/matmul.svg)
+
 
 ### Step 5: Compute the attention scores
 ```python
@@ -220,6 +233,22 @@ tensor([[ 8.7252, 10.8803, 11.0007,  7.7678,  9.7598],
         [ 7.7531,  9.6199,  9.7608,  6.9217,  8.7864],
         [ 8.8185, 10.9612, 11.1314,  7.8699,  9.8633]])
 ```
+#### computing the attention scores for next token with next token w22
+```python
+keys_2 = keys[1] 
+attn_score_22 = query_2.dot(keys_2)
+print(attn_score_22)
+Output >>
+tensor(12.0370)
+```
+#### Generalizing this to get the attention scores for all keys for token "next"
+```python
+attn_scores_2 = query_2 @ keys.T # All attention scores for given query
+print(attn_scores_2)
+Output >>
+tensor([ 9.7351, 12.0370, 12.2923,  8.7149, 10.9628])
+```
+
 ### Step 6: Compute the attention weights
 #### Why divide by sqrt(d_k)?
 ##### Reason 1: For stability in learning
@@ -228,13 +257,64 @@ The softmax function is sensitive to the magnitudes of its inputs. When the inpu
 
 In attention mechanisms, particularly in transformers, if the dot products between query and key vectors become too large (like multiplying by 8 in this example), the attention scores can become very large. This results in a very sharp softmax distribution, making the model overly confident in one particular "key." Such sharp distributions can make learning unstable
 
+###### Illustration on how softmax() increases the magnitude of the result for higher values
+```python
+import torch
+
+# Define the tensor
+tensor = torch.tensor([0.1, -0.2, 0.3, -0.2, 0.5])
+
+# Apply softmax without scaling
+softmax_result = torch.softmax(tensor, dim=-1)
+print("Softmax without scaling:", softmax_result)
+
+# Multiply the tensor by 8 and then apply softmax
+scaled_tensor = tensor * 8
+softmax_scaled_result = torch.softmax(scaled_tensor, dim=-1)
+print("Softmax after scaling (tensor * 8):", softmax_scaled_result)
+
+Output >>
+Softmax without scaling: tensor([0.1925, 0.1426, 0.2351, 0.1426, 0.2872])
+Softmax after scaling (tensor * 8): tensor([0.0326, 0.0030, 0.1615, 0.0030, 0.8000])
+```
+**0.8000 is higher than other values in the order of 100x.**
+
 ##### Reason 2 : To make the variance of the dot product stable
 
 The dot product of  Q and K increases the variance because multiplying two random numbers increases the variance.
 The increase in variance grows with the dimension.
 Dividing by sqrt (dimension) keeps the variance close to 1
 
+###### Illustration on how the variance increases with the dimension of the vector
+Imagine you’re rolling dice. Consider two cases:
+###### Case 1: Rolling one standard die (1–6):
+
+1. **The average (mean)** : 3.5
+2. **The variance** : 2.9 (calculated as the average of the squared differences from the mean). The variance is relatively small.
+
+###### Case 2: Rolling and summing 100 dice:
+
+1. **The average (mean)** : $100 \times 3.5 = 350$ 
+2. **The variance** : $100 \times 2.9 = 290$. The variance significantly grows.
+
+Now, outcomes fluctuate widely (e.g., you might get sums like 320, 350, or 380). The distribution spreads out drastically. Outcomes become unpredictable.
+
+###### Dot Product without normalization:
+
+Think of dimensions as "dice." Increasing the number of dimensions is like rolling more dice and summing results.
+Each dimension (dice) contributes some variance. As dimensions grow, variance accumulates.
+
+**Result: Dot products (before softmax) become either extremely large or small, making attention weights unstable and erratic.**
+
+###### Dot Product with normalization (dividing by $\sqrt{d}$):
+
+This effectively scales down the variance, ensuring the summed results remain stable.
+It’s like taking the average roll per dice rather than summing them up, stabilizing your expected outcomes.
+**Result: Attention weights become more stable, predictable, and informative, enabling the model to learn effectively.**
+
+
 ```python
+# dim = -1 implies the operation is done column-wise.
 attn_weights_final = torch.softmax(attn_scores / d_k**0.5, dim=-1)
 print(attn_weights_final)
 row_sums = attn_weights_final.sum(dim=1)
@@ -268,18 +348,25 @@ import torch.nn as nn
 
 class SelfAttention_v1(nn.Module):
 
+#### Step 1 : Initialize the weight matrices for query, key and value.
     def __init__(self, d_in, d_out):
         super().__init__()
         self.W_query = nn.Parameter(torch.rand(d_in, d_out))
         self.W_key   = nn.Parameter(torch.rand(d_in, d_out))
         self.W_value = nn.Parameter(torch.rand(d_in, d_out))
 
+#### Step 2 : Compute the Query, Key and Value matrices
+        self.d_in = d_in
+        self.d_out = d_out
     def forward(self, x):
         keys = x @ self.W_key
         queries = x @ self.W_query
         values = x @ self.W_value
 
+#### Step 3 : Compute the attention scores
         attn_scores = queries @ keys.T # omega
+
+#### Step 4 : Compute the attention weights (normalization and then softmax)
         attn_weights = torch.softmax(
             attn_scores / keys.shape[-1]**0.5, dim=-1
         )
@@ -287,10 +374,14 @@ class SelfAttention_v1(nn.Module):
         context_vec = attn_weights @ values
         return context_vec
 
-# Invoking the class
+```
+
+#### Example usage of computing the context matrix for any input embedding matrix
+```python
+# Initializing the self attention with the input dimension (embedding) and the output dimension (context)
 torch.manual_seed(123)
 sa_v1 = SelfAttention_v1(d_in, d_out)
-# Context matrix
+# Directly computing the Context matrix in one line, from any input embedding matrix
 print(sa_v1(inputs))
 Output >>
 tensor([[1.3246, 1.5236, 1.8652, 2.3285],
@@ -299,7 +390,10 @@ tensor([[1.3246, 1.5236, 1.8652, 2.3285],
         [1.3211, 1.5153, 1.8390, 2.3002],
         [1.3253, 1.5242, 1.8657, 2.3304]], grad_fn=<MmBackward0>)
 ```
-### Version 2
+### Version 2 : Using nn.Linear to initialize the weight matrices for query, key and value. This makes the training stabler.
+
+1. The random seeds are chosen by the linear neural network
+2. Also Q, K, V are just nn.Linear(din, dout, bias=false). This computes the output layer of the nn in a way it does the sum of products anyways. So, matrix multiplication is not done explicitly but nn.Linear() is used to determine Q, K, V matrices.
 
 ```python
 class SelfAttention_v2(nn.Module):
