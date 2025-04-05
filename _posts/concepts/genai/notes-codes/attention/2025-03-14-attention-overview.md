@@ -393,7 +393,10 @@ tensor([[1.3246, 1.5236, 1.8652, 2.3285],
 ### Version 2 : Using nn.Linear to initialize the weight matrices for query, key and value. This makes the training stabler.
 
 1. The random seeds are chosen by the linear neural network
-2. Also Q, K, V are just nn.Linear(din, dout, bias=false). This computes the output layer of the nn in a way it does the sum of products anyways. So, matrix multiplication is not done explicitly but nn.Linear() is used to determine Q, K, V matrices.
+2. Also Q, K, V are just nn.Linear(din, dout, bias=false). This computes the output layer of the nn in a way it does the sum of products anyways. So, matrix multiplication is not done explicitly but **$nn.Linear()$** is used to determine Q, K, V matrices.
+3. Here ***linear neural network*** means that output is a linear combination of the input. The output is a weighted sum of the inputs. The weights are the parameters of the linear layer, and they are learned during training. The bias term is also a parameter that is learned during training. The output is computed as follows:
+    **$output = (W \cdot input + b)$** where W is the weight matrix and b is the bias vector.
+4. Here the **non-linear** layer of the neural network is not used. That is implemente by passing the output of the linear layer into the **activation function**.
 
 ```python
 class SelfAttention_v2(nn.Module):
@@ -437,6 +440,21 @@ tensor([[ 0.0174,  0.0553, -0.1093,  0.1026],
         [ 0.0179,  0.0544, -0.1091,  0.1028],
         [ 0.0172,  0.0543, -0.1105,  0.1032]], grad_fn=<MmBackward0>)
 ```
+### Step 8 : Causal Attention
+#### The attention weights computed above in the self attention method are for all tokens.
+But the attentions weights for future queries are not required, when computing the attention scores for the current query as per the auto-regressive self attention. 
+![](/images/genai/causal-attention.svg)
+
+To do this following steps are taken - 
+<div class="mermaid">
+graph TD;
+    A(Input) --> B(Compute Attention Scores)
+    B --> C(Compute Attention Weights)
+    C --> D(Mask Future Tokens)
+    D --> E(Compute Context Vector)
+    E --> F(Output)
+</div>
+
 
 ## References
 

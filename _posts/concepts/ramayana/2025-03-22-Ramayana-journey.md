@@ -13,6 +13,7 @@ author: Samrat Kar
 |3| 3-01-2025 | **Milestone 4** | The fruits of grit | Subahu killed and Marich thrown away. Descent of Ganges 
 |4| 3-08-2025 | **Milestone 5, 6** | The Amrit Manthan | At Vishala, Datyas and Adityas churn the ocean with Vasuki to get Amrita - the nectar of immortality |
 |5| 3-22-2025 | **Milestones 7, 8, 9** | Arrival at Mithila. Shabala & Vishvamitra | Vishvaitra, Rama, and Lakshmana reached Mithila. Shatananda the son of Gautama and Ahalya tells the story of Vishvamitra to Rama and Lakshmana. |
+|6| 4-5-2025 | **The grand wedding** | The Swayamvara | Rama wins the Swayamvara of Sita by breaking the bow of Shiva. |
 
 # The Mindmap of the journey covered so far
 ## As of 03-22-2025
@@ -94,3 +95,25 @@ So, the point is not which destination is nobler. The point here is that the jou
 
 ### 3. The students 
 ![](/images/ramayana/class-3-22-25.png)
+
+## 04-05-2025 - The grand wedding
+### 1. The Swayamvara
+The Swayamvara is a traditional practice in ancient India where a princess chooses her husband from among a group of suitors. In the case of Sita, the daughter of King Janaka, the Swayamvara was a grand event attended by many kings and princes. The challenge was to string the mighty bow of Lord Shiva, which only Rama was able to accomplish. This act not only demonstrated Rama's strength but also his worthiness as Sita's husband.
+The wedding was atteneded by the greatest sages like Vashishtha, Vamadeva, Katyayana, Markendya.
+
+### 2. The ikshvaku dynasty
+The Ikshvaku dynasty is one of the oldest and most revered dynasties in Hindu mythology. It is said to have been founded by Ikshvaku, the son of Manu, the progenitor of mankind. The dynasty is known for its righteous kings, including Lord Rama, who is considered the seventh avatar of Vishnu. The Ikshvaku dynasty is often associated with the principles of dharma (righteousness) and justice.
+![](/images/ramayana/ikshvaku-leaneage.svg)
+![](/images/ramayana/ikshvaku-leaneage.png)
+
+### 3. Shiva's bow
+The folklore goes that Daksha, son of Brahma, undertook a great sacrifice but did not invite Shiva. Shiva was angry and came and threatened to cut off heads of all Gods who were in the sacrifice. Later the Gods placated him and he left his bow there with Daksha. From then all the kings had the bow in their court but none could lift it. 
+![](/images/ramayana/rama-in-mithila.png)
+
+### 4. The students
+![](/images/ramayana/4-5-23-students.png)
+
+
+
+
+
