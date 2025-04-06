@@ -4,7 +4,7 @@ title : "Word is God"
 author : Samrat Kar
 ---
 ## Wordmap
-![](/images/wordisgod/wordisgod.excalidraw.svg)
+![](/assets/wordisgod/excalidraws/wordisgod.excalidraw.svg)
 
 ## Book : Tribal - Intro : The riddle of Hiddink
 
