@@ -3,6 +3,11 @@ layout : mermaid
 type : concept
 title : "Attention - An overview"
 ---
+{% capture my_markdown %}
+{% include test.md %}
+{% endcapture %}
+{{ my_markdown | markdownify }}
+
 ## The main idea of attention
 The evolution of NLP has been as follows -
 ![](/images/genai/chronology.svg) 
@@ -37,7 +42,7 @@ The evolution of NLP has been as follows -
 
 ### Attention Mechanism
 #### Bhadanau Attention 
-![](/assets/genai/attention/sub-notes/bhadanau-attention.md)
+[Bhadanav attention](/assets/genai/attention/sub-notes/bhadanau-attention.md)
 
 ### Self attention with trainable weights
 ![](/assets/genai/attention/sub-notes/self-attention.md)
