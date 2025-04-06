@@ -33,9 +33,9 @@ Once a match (query - key) is found, this is the actual information provided. It
 
 ### Self Attention : Workflow for creation of context vector
 #### The big picture : End to end Workflow of Self Attention 
-
 ![](/images/genai/self-attention-big-pic.svg)
 
+#### Details of the Multi-head attention 
 ![](/images/genai/multi-head-attention.svg)
 
 #### Details of single head self attention
