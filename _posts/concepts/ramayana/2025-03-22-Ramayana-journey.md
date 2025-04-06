@@ -16,11 +16,11 @@ author: Samrat Kar
 |6| 4-5-2025 | **The grand wedding** | The Swayamvara | Rama wins the Swayamvara of Sita by breaking the bow of Shiva. |
 
 # Wordcloud of the Ramayana
-![](/images/ramayana/words.excalidraw.svg)
+![](/assets/ramayana/excalidraws/words.excalidraw.svg)
 
 # The Mindmap of the journey covered so far
 ## As of 04-05-2025
-![](/images/ramayana/ramplot.excalidraw.svg)
+![](/assets/ramayana/excalidraws/ramplot.excalidraw.svg)
 
 # Weekly notes 
 ## 02-08-2025 - The beginning  in grief
