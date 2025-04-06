@@ -42,7 +42,7 @@ The evolution of NLP has been as follows -
 
 ### Attention Mechanism
 #### Bhadanau Attention 
-[Bhadanav attention](/assets/genai/attention/sub-notes/bhadanau-attention.md)
+[Bhadanav attention](sub-notes/bhadanau-attention.md)
 
 ### Self attention with trainable weights
 ![](/assets/genai/attention/sub-notes/self-attention.md)
