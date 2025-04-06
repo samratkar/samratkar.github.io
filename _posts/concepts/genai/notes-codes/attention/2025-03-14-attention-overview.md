@@ -444,18 +444,34 @@ tensor([[ 0.0174,  0.0553, -0.1093,  0.1026],
 #### The attention weights computed above in the self attention method are for all tokens.
 But the attentions weights for future queries are not required, when computing the attention scores for the current query as per the auto-regressive self attention. 
 ![](/images/genai/causal-attention.svg)
+![](/images/genai/infity-mask.png)
 
-To do this following steps are taken - 
+#### Minus Infinity Mask 
 <div class="mermaid">
 graph TD;
-    A(Input) --> B(Compute Attention Scores)
-    B --> C(Compute Attention Weights)
-    C --> D(Mask Future Tokens)
-    D --> E(Compute Context Vector)
-    E --> F(Output)
+    A(Attention scores) --> B(Negative Infinity Masking)
+    B --> C(Causal Attention score)
+    C --multiply--> D(Value matrix)
+    D --> E(Context Vector)
 </div>
 
+## Uni-direction attention with Dropout
+There are some neurons which do no to any work in a neural network. **Dropout** is added to avoid this lazy neuron problem. This basically randomly offs some neurons in the network. This is done to avoid overfitting. The dropout rate is typically set between 0.1 and 0.5, meaning that 10% to 50% of the neurons are randomly turned off during training.
+This forces the network to learn more robust features and prevents it from relying too heavily on any single neuron.
+In a particular iteration the grayed cells are the neurons that are turned off. In some other iteration other neurons will be randomly turned off.
+![](/images/genai/dropout.png)
 
+## Multi-head attention
+In the single head causal self attention explained above we have only one attention head. This means that the model is only able to focus on one perspective of the input sequence at a time. This can be limiting, especially for complex tasks where multiple parts of the input sequence may be relevant at the same time.
+
+For example, consider this sentence : **The artist painted the portrait of a woman with a brush**
+
+
+## Layer normalization
+
+
+## All the illustrations and mindmaps referenced in this article : 
+![](/images/genai/excalidraws/attention/attention.excalidraw.png)
 ## References
 
 1. [What is the big deal about attention - vizuara substack](https://substack.com/inbox/post/158574020)
