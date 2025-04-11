@@ -13,6 +13,7 @@ from pathlib import Path
 import geopandas as gpd
 import folium
 from llama_index.core.tools import FunctionTool
+from llama_index.agent.openai import OpenAIAgent
 
 graph_tool = None 
 summary_tool = None
