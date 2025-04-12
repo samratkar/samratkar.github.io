@@ -1,6 +1,0 @@
-```
-1. list all the models - llama model list 
-2. select a model to download - llama model download --source meta --model-id  MODEL_ID
-3. custom url - https://llama3-2-lightweight.llamameta.net/*?Policy=eyJTdGF0ZW1lbnQiOlt7InVuaXF1ZV9oYXNoIjoiYXRvY2N5aTVybXJsN291ZXhiMGc4d3ZrIiwiUmVzb3VyY2UiOiJodHRwczpcL1wvbGxhbWEzLTItbGlnaHR3ZWlnaHQubGxhbWFtZXRhLm5ldFwvKiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTczMTMwMTEzMH19fV19&Signature=tyiIQPxC2Iiv4KiSr-g9wU--l3CvkUYxBUxngnjoMPnJfRbkBYwvkoq2PNi874St0hA8CrER4uEXr5Ms6r-lDh2gpem%7EqDggJaE8DzWRIumuD4F07561BHsS90fUWp4BeyInQlOrrNFAdWidh9hp5rdkXIfmy3mLUqw2nbWybzbD28XgHotHlhTs6K48lLZJl25i6lxbWlKCCpzLCKop7Ou-ZOZHU-IBTWopsoolctVVHkkNSPCkQiAH7456gyHnut7YzoHGhrFRlMAKb%7E4EtNYYefILfGgcGX0D%7EbCfRhYPtQKxSCGzcFB63vsAlEyM%7E7frbhwj6FJ9iYicjsEj6Q__&Key-Pair-Id=K15QRJLYKIFSLZ&Download-Request-ID=593669869758855 
-
-```

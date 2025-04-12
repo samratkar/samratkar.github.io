@@ -1,0 +1,12 @@
+# requirements file
+# note which revision of python, for example 3.9.6
+# in this file, insert all the pip install needs, include revision
+
+
+llama-index-core
+llama-index-utils-workflow
+llama-index-llms-openai
+llama-parse
+llama-index-embeddings-openai
+llama-index-readers-whisper
+gradio
