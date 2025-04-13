@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>KONT to KLAX</name>
+    <description>ONTARIO INTL to LOS ANGELES INTL</description>
+    <Style id="redPoly">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Placemark>
+      <name>KONT to KLAX</name>
+      <description>ONTARIO INTL to LOS ANGELES INTL</description>
+      <styleUrl>#redPoly</styleUrl>
+      <LineString>
+        <extrude>1</extrude>
+        <tesselate>1</tesselate>
+        <altitudeMode>absolute</altitudeMode>
+        <coordinates>-117.601200,34.056000,287.7312
+-118.408000,33.942500,38.1
+</coordinates>
+      </LineString>
+    </Placemark>
+  </Document>
+</kml>
