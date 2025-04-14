@@ -88,8 +88,8 @@
                   
 
                   // parsing and collecting nodes and edges from the python
-                  nodes = new vis.DataSet([{"color": "#FFA07A", "id": "StopEvent", "label": "StopEvent", "shape": "ellipse"}, {"color": "#ADD8E6", "id": "_done", "label": "_done", "shape": "box"}, {"color": "#ADD8E6", "id": "my_step", "label": "my_step", "shape": "box"}, {"color": "#E27AFF", "id": "StartEvent", "label": "StartEvent", "shape": "ellipse"}]);
-                  edges = new vis.DataSet([{"arrows": "to", "from": "StopEvent", "to": "_done"}, {"arrows": "to", "from": "my_step", "to": "StopEvent"}, {"arrows": "to", "from": "StartEvent", "to": "my_step"}]);
+                  nodes = new vis.DataSet([{"color": "#FFA07A", "id": "StopEvent", "label": "StopEvent", "shape": "ellipse"}, {"color": "#ADD8E6", "id": "_done", "label": "_done", "shape": "box"}, {"color": "#ADD8E6", "id": "step_one", "label": "step_one", "shape": "box"}, {"color": "#E27AFF", "id": "StartEvent", "label": "StartEvent", "shape": "ellipse"}, {"color": "#ADD8E6", "id": "step_three", "label": "step_three", "shape": "box"}, {"color": "#90EE90", "id": "SecondEvent", "label": "SecondEvent", "shape": "ellipse"}, {"color": "#ADD8E6", "id": "step_two", "label": "step_two", "shape": "box"}, {"color": "#90EE90", "id": "FirstEvent", "label": "FirstEvent", "shape": "ellipse"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "StopEvent", "to": "_done"}, {"arrows": "to", "from": "step_one", "to": "FirstEvent"}, {"arrows": "to", "from": "StartEvent", "to": "step_one"}, {"arrows": "to", "from": "step_three", "to": "StopEvent"}, {"arrows": "to", "from": "SecondEvent", "to": "step_three"}, {"arrows": "to", "from": "step_two", "to": "SecondEvent"}, {"arrows": "to", "from": "FirstEvent", "to": "step_two"}]);
 
                   nodeColors = {};
                   allNodes = nodes.get({ returnType: "Object" });
