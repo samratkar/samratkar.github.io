@@ -1,0 +1,100 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient Descent vs Adam Comparison -->
+  <defs>
+    <!-- Gradient for the loss function surface -->
+    <radialGradient id="lossGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#1a237e" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#3949ab" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#7986cb" stop-opacity="0.4"/>
+    </radialGradient>
+    
+    <!-- Arrow marker definition -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#000"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f5f5f5"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">Gradient Descent vs. ADAM Optimization</text>
+  
+  <!-- First visualization: Basic Gradient Descent -->
+  <g transform="translate(200, 180)">
+    <!-- Loss surface contour -->
+    <ellipse cx="0" cy="0" rx="150" ry="100" fill="url(#lossGradient)" stroke="#000" stroke-width="1"/>
+    
+    <!-- Gradient descent path -->
+    <path d="M 120,-50 L 100,-40 L 80,-30 L 60,-20 L 40,-10 L 20,0 L 0,0" fill="none" stroke="#ff5722" stroke-width="3" stroke-dasharray="5,3"/>
+    
+    <!-- Points along the path -->
+    <circle cx="120" cy="-50" r="6" fill="#ff5722"/>
+    <circle cx="100" cy="-40" r="6" fill="#ff5722"/>
+    <circle cx="80" cy="-30" r="6" fill="#ff5722"/>
+    <circle cx="60" cy="-20" r="6" fill="#ff5722"/>
+    <circle cx="40" cy="-10" r="6" fill="#ff5722"/>
+    <circle cx="20" cy="0" r="6" fill="#ff5722"/>
+    <circle cx="0" cy="0" r="6" fill="#ff5722"/>
+    
+    <!-- Minimum point -->
+    <circle cx="0" cy="0" r="8" fill="#1a237e" stroke="white" stroke-width="2"/>
+    
+    <!-- Label -->
+    <text x="0" y="130" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">Standard Gradient Descent</text>
+    <text x="0" y="150" font-family="Arial" font-size="12" text-anchor="middle">Consistent step sizes, may oscillate</text>
+  </g>
+  
+  <!-- Second visualization: ADAM -->
+  <g transform="translate(600, 180)">
+    <!-- Loss surface contour -->
+    <ellipse cx="0" cy="0" rx="150" ry="100" fill="url(#lossGradient)" stroke="#000" stroke-width="1"/>
+    
+    <!-- ADAM path -->
+    <path d="M 120,-50 L 90,-30 L 60,-15 L 30,-5 L 0,0" fill="none" stroke="#4caf50" stroke-width="3" stroke-dasharray="5,3"/>
+    
+    <!-- Points along the path -->
+    <circle cx="120" cy="-50" r="6" fill="#4caf50"/>
+    <circle cx="90" cy="-30" r="6" fill="#4caf50"/>
+    <circle cx="60" cy="-15" r="6" fill="#4caf50"/>
+    <circle cx="30" cy="-5" r="6" fill="#4caf50"/>
+    <circle cx="0" cy="0" r="6" fill="#4caf50"/>
+    
+    <!-- Minimum point -->
+    <circle cx="0" cy="0" r="8" fill="#1a237e" stroke="white" stroke-width="2"/>
+    
+    <!-- Label -->
+    <text x="0" y="130" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">ADAM Optimization</text>
+    <text x="0" y="150" font-family="Arial" font-size="12" text-anchor="middle">Adaptive step sizes, faster convergence</text>
+  </g>
+  
+  <!-- ADAM Components Diagram -->
+  <g transform="translate(400, 400)">
+    <!-- Title -->
+    <text x="0" y="-40" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">ADAM Components</text>
+    
+    <!-- Component boxes -->
+    <rect x="-250" y="0" width="150" height="60" rx="10" ry="10" fill="#bbdefb" stroke="#1976d2" stroke-width="2"/>
+    <text x="-175" y="22" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold">First Moment</text>
+    <text x="-175" y="42" font-family="Arial" font-size="12" text-anchor="middle">(Momentum)</text>
+    
+    <rect x="-50" y="0" width="150" height="60" rx="10" ry="10" fill="#c8e6c9" stroke="#388e3c" stroke-width="2"/>
+    <text x="25" y="22" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold">Second Moment</text>
+    <text x="25" y="42" font-family="Arial" font-size="12" text-anchor="middle">(Adaptive Learning Rate)</text>
+    
+    <rect x="150" y="0" width="150" height="60" rx="10" ry="10" fill="#e1bee7" stroke="#7b1fa2" stroke-width="2"/>
+    <text x="225" y="22" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold">Bias Correction</text>
+    <text x="225" y="42" font-family="Arial" font-size="12" text-anchor="middle">(Fix initialization bias)</text>
+    
+    <!-- Combining arrow -->
+    <line x1="-100" y1="30" x2="-50" y2="30" stroke="#000" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <line x1="100" y1="30" x2="150" y2="30" stroke="#000" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <!-- Final result -->
+    <rect x="0" y="100" width="150" height="60" rx="10" ry="10" fill="#ffecb3" stroke="#ff9800" stroke-width="2"/>
+    <text x="75" y="130" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold">Parameter Update</text>
+    <line x1="225" y1="60" x2="225" y2="80" stroke="#000" stroke-width="2"/>
+    <line x1="225" y1="80" x2="75" y2="80" stroke="#000" stroke-width="2"/>
+    <line x1="75" y1="80" x2="75" y2="100" stroke="#000" stroke-width="2" marker-end="url(#arrowhead)"/>
+  </g>
+</svg>

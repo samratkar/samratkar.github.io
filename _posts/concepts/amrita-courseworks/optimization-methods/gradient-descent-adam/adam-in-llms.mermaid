@@ -1,0 +1,33 @@
+flowchart TB
+    subgraph Adam["ADAM Optimizer Process"]
+        direction TB
+        A[Calculate Gradients] --> B[Update First Moment]
+        A --> C[Update Second Moment]
+        B --> D[Bias Correction]
+        C --> D
+        D --> E[Parameter Update]
+    end
+    
+    subgraph LLM["LLM Training Pipeline"]
+        direction TB
+        F[Input Tokens] --> G[Forward Pass]
+        G --> H[Loss Calculation]
+        H --> I[Backpropagation]
+        I --> Adam
+        Adam --> J[Updated Model]
+        J --> K[Evaluation]
+        K --> L{Converged?}
+        L -->|No| F
+        L -->|Yes| M[Final Model]
+    end
+    
+    subgraph Enhancements["LLM-Specific Enhancements"]
+        direction TB
+        N[Learning Rate Scheduling]
+        O[Weight Decay]
+        P[Gradient Clipping]
+        Q[Mixed Precision]
+        R[Gradient Accumulation]
+    end
+    
+    Enhancements -.- Adam
