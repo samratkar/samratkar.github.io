@@ -12,32 +12,50 @@ from llama_index.utils.workflow import draw_all_possible_flows
 from llama_index.core.workflow import Event
 """--------------------------------------------------------------------------------"""
 # defining the events
+class MyStartEvent(StartEvent):
+    output: str
+    output = "Reporting from Start Event"
+    print ("This is inside the Start Event")
 class FirstEvent(Event):
-    first_output: str
+    output: str
+    output = "Reporting from First Event"
+    print ("This is inside the First Event")
 
 class SecondEvent(Event):
-    second_output: str
+    output: str
+    output = "Reporting from Second Event"
+    print ("This is inside the Second Event")
+
+class MyStopEvent(StopEvent):
+    output: str
+    output = "Reporting from Stop Event"
+    print ("This is inside the Stop Event")
+
+class LoopEvent(Event):
+    output: str
+    output = "Reporting from Loop Event"
+    print ("This is inside the Loop Event")
 
 # defining the workflows
 class MyWorkflow(Workflow):
     # declare a function as a step
     @step
-    async def step_one(self, ev: StartEvent) -> FirstEvent:
+    async def step_one(self, ev: MyStartEvent) -> FirstEvent:
         # do something here
-        #print (ev.first_input)
-        #print (ev.first_output)
-        return FirstEvent(first_output="First step complete!")
+        print (f"This is step 1. Output from StartEvent = input to  FirstEvent: {ev.output}")
+        return FirstEvent()
     
     @step
     async def step_two(self, ev: FirstEvent) -> SecondEvent:
         # do something here
-        # print (ev.first_input)
-        return SecondEvent(second_output="Second step complete!")
+        print (f"This is step 2. Output from FirstEvent = input to  SecondEvent: {ev.output}")
+        return SecondEvent()
 
     @step
-    async def step_three(self, ev: SecondEvent) -> StopEvent:
+    async def step_three(self, ev: SecondEvent) -> MyStopEvent:
         # do something here
-        return StopEvent(third_output="Third step complete!")
+        print (f"This is step 3. Output from SecondEvent = input to  ThirdEvent: {ev.output}")
+        return StopEvent()
 
 
 async def main():
