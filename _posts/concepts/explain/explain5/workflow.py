@@ -40,22 +40,26 @@ class LoopEvent(Event):
 class MyWorkflow(Workflow):
     # declare a function as a step
     @step
-    async def step_one(self, ev: MyStartEvent) -> FirstEvent:
-        # do something here
-        print (f"This is step 1. Output from StartEvent = input to  FirstEvent: {ev.output}")
-        return FirstEvent()
+    async def step_one(self, ev: MyStartEvent | LoopEvent) -> FirstEvent | LoopEvent:
+        if random.randint(0, 1) == 0:
+            print ("Bad things happened in step 1. Looping now")
+            return LoopEvent(output="Looping back to step 1")
+        else:
+            print ("Good things happened in step 1. Continuing now")
+            print (f"This is step 1. Output from StartEvent = input to  FirstEvent: {ev.output}")
+            return FirstEvent(output = "step 1 completed")
     
     @step
     async def step_two(self, ev: FirstEvent) -> SecondEvent:
         # do something here
         print (f"This is step 2. Output from FirstEvent = input to  SecondEvent: {ev.output}")
-        return SecondEvent()
+        return SecondEvent(output="step 2 completed")
 
     @step
     async def step_three(self, ev: SecondEvent) -> MyStopEvent:
         # do something here
         print (f"This is step 3. Output from SecondEvent = input to  ThirdEvent: {ev.output}")
-        return StopEvent()
+        return StopEvent(output="step 3 completed. wnorkflow completed")
 
 
 async def main():
