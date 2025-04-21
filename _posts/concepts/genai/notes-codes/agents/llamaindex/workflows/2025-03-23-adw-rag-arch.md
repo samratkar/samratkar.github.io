@@ -25,4 +25,6 @@ Workflows are building blocks of agentic systems in llamaindex. They are event b
 3. branches
 ![](/images/genai/workflows.png)
 
+# Mindmap of the entire concept
+![](/assets/)
 
