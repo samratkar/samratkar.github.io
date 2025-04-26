@@ -411,7 +411,7 @@ def combined_loss(model_output, target, perceptual_extractor, alpha=1.0, beta=0.
     return total_loss
 ```
 
-## 5. Optimization Strategies for Your Model
+## 5. Optimization Strategies for the Model
 
 ### 5.1 Architecture Optimizations
 
