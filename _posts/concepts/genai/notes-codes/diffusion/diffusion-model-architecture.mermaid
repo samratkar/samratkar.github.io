@@ -1,0 +1,62 @@
+flowchart TD
+    subgraph "Training Process"
+        direction TB
+        A[Input Image x₀] --> B[Forward Diffusion Process]
+        B -->|"Add Noise (t steps)"| C[Noisy Image xₜ]
+        C --> D[U-Net Model]
+        T[Timestep t] --> D
+        D --> E[Predicted Noise ε_θ]
+        N[Actual Noise ε] --> F
+        E --> F[Loss Calculation]
+        F -->|Backpropagation| D
+    end
+
+    subgraph "U-Net Architecture"
+        direction TB
+        D1[Input: xₜ + t] --> D2[Initial Convolution]
+        D2 --> E1[Encoder Path]
+        
+        subgraph "Encoder Path"
+            direction TB
+            E1 --> E2[DownBlock2D\n128 channels]
+            E2 --> E3[DownBlock2D\n128 channels]
+            E3 --> E4[DownBlock2D\n256 channels]
+            E4 --> E5[DownBlock2D\n256 channels]
+            E5 --> E6[AttnDownBlock2D\n512 channels]
+            E6 --> E7[DownBlock2D\n512 channels]
+        end
+        
+        E7 --> M1[Middle Block\nAttention + ResNet]
+        
+        M1 --> U1[Decoder Path]
+        
+        subgraph "Decoder Path"
+            direction TB
+            U1 --> U2[UpBlock2D\n512 channels]
+            U2 --> U3[AttnUpBlock2D\n512 channels]
+            U3 --> U4[UpBlock2D\n256 channels]
+            U4 --> U5[UpBlock2D\n256 channels]
+            U5 --> U6[UpBlock2D\n128 channels]
+            U6 --> U7[UpBlock2D\n128 channels]
+        end
+        
+        U7 --> O1[Output Convolution]
+        O1 --> O2[Noise Prediction]
+        
+        %% Skip connections
+        E2 -.->|Skip Connection| U6
+        E3 -.->|Skip Connection| U5
+        E4 -.->|Skip Connection| U4
+        E5 -.->|Skip Connection| U3
+        E6 -.->|Skip Connection| U2
+    end
+    
+    subgraph "Generation Process"
+        direction TB
+        G1[Random Noise xT] --> G2[Reverse Diffusion Process]
+        G2 -->|"Denoise Step by Step"| G3[Generated Image x₀]
+        G4[U-Net Model θ] --> G2
+    end
+    
+    %% Connect the processes
+    D -.-> G4
