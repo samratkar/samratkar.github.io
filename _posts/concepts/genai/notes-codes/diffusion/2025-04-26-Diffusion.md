@@ -535,6 +535,9 @@ By implementing these recommendations systematically, the model can be further o
 ![](/assets/genai/diffusion/diffusion_process_grid3.png)
 ![](/assets/genai/diffusion/diffusion_steps_visualization3.png)
 
+## Architecture of diffusion model 
+![](/assets/genai/diffusion/diffusion-model-architecture.mermaid)
+
 ## Code base: 
 [Code base for the implementation of the diffusion model to generate Devangari Scripts](https://colab.research.google.com/github/samratkar/samratkar.github.io/blob/main/_posts/concepts/genai/notes-codes/diffusion/code/Diffusion_Sanskrit_Gen_img.ipynb)
 
