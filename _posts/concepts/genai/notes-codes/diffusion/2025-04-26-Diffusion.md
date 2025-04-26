@@ -541,6 +541,330 @@ By implementing these recommendations systematically, the model can be further o
 ## Code base: 
 [Code base for the implementation of the diffusion model to generate Devangari Scripts](https://colab.research.google.com/github/samratkar/samratkar.github.io/blob/main/_posts/concepts/genai/notes-codes/diffusion/code/Diffusion_Sanskrit_Gen_img.ipynb)
 
+## Training configuration
+```python
+class TrainingConfig:
+    image_size = 32  # assumes images are square
+    train_batch_size = 32
+    eval_batch_size = 32
+    num_epochs = epochs
+    gradient_accumulation_steps = 1
+    learning_rate = 1e-4
+    lr_warmup_steps = 500
+    save_image_epochs = 1
+    save_model_epochs = 30
+    mixed_precision = "fp16"  # `no` for float32, `fp16` for automatic mixed precision
+    output_dir = output_folder  # the model name
+    overwrite_output_dir = True  # overwrite the old model when re-running the notebook
+    seed = 0
+    dataset_name="data128"
+
+config = TrainingConfig()
+```
+
+## Training the model 
+
+```python
+def train_loop(config, model, noise_scheduler, optimizer, train_dataloader, lr_scheduler):
+    accelerator = Accelerator(
+        mixed_precision=config.mixed_precision,
+        gradient_accumulation_steps=config.gradient_accumulation_steps,
+        log_with="tensorboard",
+        project_dir=os.path.join(config.output_dir, "logs")
+    )
+
+    if accelerator.is_main_process:
+        if config.output_dir is not None:
+            os.makedirs(config.output_dir, exist_ok=True)
+        accelerator.init_trackers("train_example")
+
+    model, optimizer, train_dataloader, lr_scheduler = accelerator.prepare(
+        model, optimizer, train_dataloader, lr_scheduler
+    )
+
+    global_step = 0
+
+    for epoch in range(config.num_epochs):
+        progress_bar = tqdm(total=len(train_dataloader), disable=not accelerator.is_local_main_process)
+        progress_bar.set_description(f"Epoch {epoch}")
+
+        for step, batch in enumerate(train_dataloader):
+            clean_images = batch
+            noise = torch.randn(clean_images.shape).to(clean_images.device)
+            bs = clean_images.shape[0]
+            timesteps = torch.randint(0, noise_scheduler.num_train_timesteps, (bs,), device=clean_images.device).long()
+            noisy_images = noise_scheduler.add_noise(clean_images, noise, timesteps)
+
+            with accelerator.accumulate(model):
+                noise_pred = model(noisy_images, timesteps, return_dict=False)[0]
+                loss = F.mse_loss(noise_pred, noise)
+                accelerator.backward(loss)
+                accelerator.clip_grad_norm_(model.parameters(), 1.0)
+                optimizer.step()
+                lr_scheduler.step()
+                optimizer.zero_grad()
+
+            progress_bar.update(1)
+            logs = {"loss": loss.detach().item(), "lr": lr_scheduler.get_last_lr()[0], "step": global_step}
+            progress_bar.set_postfix(**logs)
+            accelerator.log(logs, step=global_step)
+            global_step += 1
+
+        if accelerator.is_main_process:
+            if (epoch + 1) % config.save_image_epochs == 0 or epoch == config.num_epochs - 1:
+                pipeline = DDPMPipeline(unet=accelerator.unwrap_model(model), scheduler=inference_scheduler)
+                evaluate(config, epoch, pipeline)
+
+            if (epoch + 1) % config.save_model_epochs == 0 or epoch == config.num_epochs - 1:
+                pipeline = DDPMPipeline(unet=accelerator.unwrap_model(model), scheduler=inference_scheduler)
+                save_dir = os.path.join(config.output_dir, f"epoch{epoch}")
+                pipeline.save_pretrained(save_dir)
+```
+
+## Define the  U-Net architecture
+
+```python
+# Define model
+model = UNet2DModel(
+    sample_size=config.image_size,  # the target image resolution
+    in_channels=1,  # the number of input channels
+    out_channels=1,  # the number of output channels
+    layers_per_block=1,  # how many ResNet layers to use per UNet block
+    block_out_channels=(128, 128, 256, 256, 512, 512),  # the number of output channels for each UNet block
+    down_block_types=(
+        "DownBlock2D",
+        "DownBlock2D",
+        "DownBlock2D",
+        "DownBlock2D",
+        "AttnDownBlock2D",
+        "DownBlock2D",
+    ),
+    up_block_types=(
+        "UpBlock2D",
+        "AttnUpBlock2D",
+        "UpBlock2D",
+        "UpBlock2D",
+        "UpBlock2D",
+        "UpBlock2D",
+    ),
+)
+```
+## Define optimizer and schduler 
+
+```python
+noise_scheduler = DDPMScheduler(num_train_timesteps=1000)
+# noise_scheduler = DDIMScheduler(num_train_timesteps=1000)
+inference_scheduler = DPMSolverMultistepScheduler()
+optimizer = AdamW(model.parameters(), lr=config.learning_rate)
+lr_scheduler = get_cosine_schedule_with_warmup(
+    optimizer=optimizer,
+    num_warmup_steps=config.lr_warmup_steps,
+    num_training_steps=(len(train_dataloader) * config.num_epochs),
+)
+```
+
+## Run the training on the model and generate the images 
+
+```python
+from accelerate import notebook_launcher
+
+args = (config, model, noise_scheduler, optimizer, train_dataloader, lr_scheduler)
+notebook_launcher(train_loop, args, num_processes=1)
+
+model_path = output_folder + "/epoch" + output_folder_prefix  # Path to the specific epoch model directory# Path to the model directory
+pipeline = DDPMPipeline.from_pretrained(model_path).to("cuda")
+pipeline.scheduler = DPMSolverMultistepScheduler()
+
+# Sample from the model and save the images in a grid
+images = pipeline(
+    batch_size=16,
+    generator=torch.Generator(device='cuda').manual_seed(config.seed), # Generator can be on GPU here
+    num_inference_steps=50
+).images
+
+# Make a grid out of the inverted images
+image_grid = make_grid(images, rows=4, cols=4)
+
+# Save the images
+test_dir = os.path.join(config.output_dir, "samples")
+os.makedirs(test_dir, exist_ok=True)
+image_grid.save(f"{test_dir}/samples.png")
+```
+
+## Visualize the images 
+```python
+from diffusers import DPMSolverMultistepScheduler, DDPMPipeline
+from PIL import Image, ImageDraw, ImageFont
+import torch
+
+def make_labeled_grid(images, prompt, steps, font_path=None, font_size=20, margin=10):
+    assert len(images) == len(steps), "The number of images must match the number of steps"
+
+    w, h = images[0].size
+    font = ImageFont.truetype(font_path, font_size) if font_path else ImageFont.load_default()
+
+    # Calculate the height of the grid including the margin for text
+    total_height = h + margin + font_size
+    total_width = w * len(images)
+    grid_height = total_height + margin + font_size  # Add extra margin for the prompt
+    grid = Image.new('RGB', size=(total_width, grid_height), color=(255, 255, 255))
+    # Draw the text prompt at the top
+    draw = ImageDraw.Draw(grid)
+    prompt_text = f"Prompt: \"{prompt}\""
+    prompt_width, prompt_height = draw.textbbox((0, 0), prompt_text, font=font)[2:4]
+    prompt_x = (total_width - prompt_width) / 2
+    prompt_y = margin / 2
+    draw.text((prompt_x, prompt_y), prompt_text, fill="black", font=font)
+
+    for i, (image, step) in enumerate(zip(images, steps)):
+        # Calculate position to paste the image
+        x = i * w
+        y = margin + font_size
+
+        # Paste the image
+        grid.paste(image, box=(x, y))
+
+        # Draw the step text
+        step_text = f"Steps: {step}"
+        text_width, text_height = draw.textbbox((0, 0), step_text, font=font)[2:4]
+        text_x = x + (w - text_width) / 2
+        text_y = y + h + margin / 2 - 8
+        draw.text((text_x, text_y), step_text, fill="black", font=font)
+    return grid
+
+# Initialize the model pipeline using your local model
+model_path = output_folder + "/epoch" + output_folder_prefix  # Path to your trained model
+pipeline = DDPMPipeline.from_pretrained(model_path).to("cuda")
+pipeline.scheduler = DPMSolverMultistepScheduler()
+
+# Define the number of steps to visualize
+num_inference_steps_list = [1, 2, 3, 5, 10, 20, 50]
+
+images = []
+
+# Generate images for each value in num_inference_steps_list
+for num_steps in num_inference_steps_list:
+    generated_images = pipeline(
+        batch_size=1,
+        generator=torch.Generator(device='cuda').manual_seed(0),
+        num_inference_steps=num_steps
+    ).images
+    images.append(generated_images[0])  # Append the generated image
+
+# Create the labeled grid with a descriptive prompt since this is an unconditional model
+prompt = "Unconditional Diffusion Model Output"
+image_grid = make_labeled_grid(images, prompt, num_inference_steps_list)
+
+# Show the grid
+from IPython.display import display
+display(image_grid)
+
+# Save the image grid
+image_grid.save("diffusion_steps_visualization3.png")
+```
+## Create an animated visualization of the diffusion process
+
+```python
+from diffusers import DPMSolverMultistepScheduler, DDPMPipeline
+from PIL import Image, ImageDraw, ImageFont
+import torch
+import numpy as np
+import os
+import imageio.v2 as imageio
+from tqdm import tqdm
+
+# Initialize the model pipeline using your local model
+model_path = output_folder + "/epoch" + output_folder_prefix  # Path to your trained model
+pipeline = DDPMPipeline.from_pretrained(model_path).to("cuda")
+pipeline.scheduler = DPMSolverMultistepScheduler()
+
+# Create output directory for frames
+os.makedirs("animation_frames", exist_ok=True)
+
+# Set parameters
+num_inference_steps = 50
+seed = 42
+
+# Use the model's forward process to generate images at each step
+print("Generating denoising frames...")
+
+# Start with pure noise (t=1000)
+generator = torch.Generator(device="cuda").manual_seed(seed)
+
+# Store all frames
+frames = []
+
+# The correct way to visualize the denoising process is to use the pipeline with
+# increasing numbers of denoising steps
+for step in tqdm(range(0, num_inference_steps + 1, 2)):  # Skip some steps for faster generation
+    if step == 0:
+        # For the initial noise, just use the pipeline with 1 step
+        # This will effectively show the noise
+        current_step = 1
+    else:
+        current_step = step
+
+    # Generate the image with the current number of denoising steps
+    image = pipeline(
+        batch_size=1,
+        generator=torch.Generator(device="cuda").manual_seed(seed),
+        num_inference_steps=current_step
+    ).images[0]
+
+    # Save the frame
+    image.save(os.path.join("animation_frames", f"frame_{step:03d}.png"))
+    frames.append(image)
+
+# Create GIF from frames
+print("Creating GIF animation...")
+# Ensure all frames have the same size (shouldn't be necessary but just in case)
+frames_resized = [frame.resize((256, 256)) for frame in frames]
+
+# Save as GIF
+output_gif = "diffusion_process3.gif"
+frames_resized[0].save(
+    output_gif,
+    save_all=True,
+    append_images=frames_resized[1:],
+    optimize=False,
+    duration=150,  # milliseconds per frame - slower to see the changes
+    loop=0  # 0 means loop indefinitely
+)
+
+print(f"Animation saved to {output_gif}")
+
+# Create a grid showing selected frames
+def create_process_grid(frames, num_to_show=8):
+    # Select frames evenly throughout the process
+    if len(frames) <= num_to_show:
+        selected_frames = frames
+    else:
+        indices = np.linspace(0, len(frames)-1, num_to_show, dtype=int)
+        selected_frames = [frames[i] for i in indices]
+
+    # Resize frames
+    width, height = 256, 256
+    selected_frames = [frame.resize((width, height)) for frame in selected_frames]
+
+    # Create grid image
+    cols = min(4, num_to_show)
+    rows = (num_to_show + cols - 1) // cols
+
+    grid = Image.new('RGB', (width * cols, height * rows))
+
+    for i, frame in enumerate(selected_frames):
+        row = i // cols
+        col = i % cols
+        grid.paste(frame, (col * width, row * height))
+
+    return grid
+
+# Create and save the grid
+grid = create_process_grid(frames)
+grid.save("diffusion_process_grid3.png")
+print("Process grid saved to diffusion_process_grid3.png")
+```
+
 ## References
 
 1. Ho, J., Jain, A., & Abbeel, P. (2020). Denoising diffusion probabilistic models. Advances in Neural Information Processing Systems.
