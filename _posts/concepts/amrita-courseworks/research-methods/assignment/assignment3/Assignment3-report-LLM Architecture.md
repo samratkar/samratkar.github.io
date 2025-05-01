@@ -1,6 +1,7 @@
-# **Advancements in Architectures, Optimization Techniques, and Tokenization/Embeddings for Large Language Models**
+# Advancements in Architectures, Optimization Techniques, and Tokenization/Embeddings for Large Language Models
+###### Samrat Kar | BL.SC.R4CSE24007 
 
-## **1\. Introduction**
+## Introduction
 
 Large Language Models (LLMs) represent a significant leap in artificial intelligence, demonstrating an unprecedented ability to process, generate, and understand human language.1 These sophisticated models, including prominent examples such as GPT-3, BERT, and T5, are built upon deep learning techniques and are trained on massive datasets of textual information.1 Their success spans a wide range of Natural Language Processing (NLP) tasks, including text generation, machine translation, question answering, summarization, and sentiment analysis, showcasing their capacity to capture intricate patterns and contextual understanding within language.1
 
@@ -8,9 +9,94 @@ The foundation for this remarkable progress lies in the Transformer architecture
 
 The field of LLMs is in a state of continuous evolution, with ongoing research focused on enhancing their architecture, optimizing training methodologies, and refining the way they process and represent language through tokenization and embeddings.1 These efforts aim to overcome existing limitations and further improve the capabilities and efficiency of LLMs, addressing challenges such as computational complexity, memory constraints, and ethical considerations surrounding model biases.1 This report provides a comprehensive survey of recent advancements in these critical areas, exploring the innovations that are shaping the future of Large Language Models.
 
-## **2\. Advancements in Transformer Architecture for LLMs**
+## Key Concepts Central to the Research
 
-### **2.1 Core Components of the Original Transformer Architecture**
+1. **Transformer Architecture Enhancements**: Innovations aimed at improving the efficiency, scalability, and performance of transformer models.
+
+2. **Optimization Techniques in Deep Learning**: Methods such as quantization, pruning, and knowledge distillation that enhance model efficiency and reduce computational resources.
+
+3. **Tokenization Strategies**: Approaches to segmenting text into tokens, impacting model understanding and performance.
+
+4. **Embedding Methods**: Techniques for representing tokens in continuous vector spaces, capturing semantic and syntactic information.
+
+5. **Training and Fine-tuning Strategies**: Procedures for pretraining and adapting models to specific tasks, including methods like Reinforcement Learning from Human Feedback (RLHF).
+
+## Concept Map
+
+<div class="mermaid">
+graph LR
+    A[Transformer Architecture Enhancements] --> B(Reformer)
+    A --> C(Linformer)
+    A --> D(Performer)
+    A --> E(BigBird)
+    A --> F(Hyena)
+
+    A --> G[Optimization Techniques]
+    G --> H(Quantization)
+    G --> I(Pruning)
+    G --> J(Knowledge Distillation)
+    G --> K(Neural Architecture Search)
+
+    A --> L[Tokenization Strategies]
+    L --> M(Byte Pair Encoding)
+    L --> N(Unigram Language Model)
+    L --> O(WordPiece)
+
+    A --> P[Embedding Methods]
+    P --> Q(Positional Embeddings)
+    P --> R(Word Importance Embedding)
+
+    A --> S[Training & Fine-tuning Strategies]
+    S --> T(Pretraining Objectives)
+    S --> U(Fine-tuning Methods)
+    S --> V(RLHF)
+</div>
+
+## Relevant Keywords and Search Terms
+
+- Transformer architecture improvements
+- Efficient transformers
+- Transformer optimization techniques
+- Quantization in deep learning
+- Knowledge distillation in NLP
+- Tokenization methods in LLMs
+- Byte Pair Encoding vs. Unigram LM
+- Embedding techniques in transformers
+- Positional embeddings
+- Word importance embedding
+- Training strategies for LLMs
+- Fine-tuning large language models
+- RLHF in NLP
+- Sparse attention mechanisms
+- Memory-efficient transformers
+
+## Search Strategy Across Academic Databases
+
+To ensure a comprehensive literature survey, the following databases were utilized:
+
+1. **arXiv**: For the latest preprints on transformer architectures and optimization techniques.
+
+2. **IEEE Xplore**: To access peer-reviewed articles on deep learning and transformer models.
+
+3. **ACM Digital Library**: For conference proceedings related to NLP and machine learning.
+
+4. **ScienceDirect**: To find journal articles on embedding methods and tokenization strategies.
+
+5. **SpringerLink**: For comprehensive reviews and surveys on transformer models.
+
+6. **Google Scholar**: To identify highly cited papers and track recent advancements.
+
+**Search Strategy**:
+
+- Utilized Boolean operators to combine keywords (e.g., "transformer AND optimization").
+
+- Applied filters for publication years (2017-2025) to focus on recent developments.
+
+- Reviewed abstracts to assess relevance before full-text analysis.
+
+## Advancements in Transformer Architecture for LLMs
+
+### Core Components of the Original Transformer Architecture
 
 The Transformer architecture, which underpins most modern LLMs, is built around several key components that enable its powerful language processing capabilities.1
 
@@ -22,11 +108,11 @@ The Transformer architecture further employs **multi-head attention**, which enh
 
 Finally, since Transformers process all tokens in parallel, they lack an inherent understanding of the order of words in a sequence.4 To address this, the Transformer architecture incorporates **positional encoding**.4 This technique adds a unique vector to the embedding of each token, representing its position in the sequence.4 By providing the model with information about the order of tokens, positional encoding ensures that the Transformer can understand the flow and structure of language, which is vital for interpreting meaning.4
 
-### **2.2 Key Innovations and Modifications in Transformer Architectures Tailored for LLMs**
+### Key Innovations and Modifications in Transformer Architectures Tailored for LLMs
 
 While the original Transformer architecture laid a robust foundation, the development of increasingly powerful LLMs has necessitated several key innovations and modifications to address the unique challenges of processing and generating natural language at scale.
 
-#### **2.2.1 Handling Long Context**
+#### Handling Long Context
 
 One of the primary limitations of the standard Transformer architecture when applied to LLMs is the computational cost associated with the self-attention mechanism, which scales quadratically with the length of the input sequence.9 This quadratic complexity poses significant challenges when dealing with long documents or conversations, as the computational resources required become prohibitive.9 Many early LLMs were thus constrained to processing relatively short text snippets.8
 
@@ -34,17 +120,17 @@ To overcome this limitation, researchers have developed various **sparse attenti
 
 Furthermore, there has been extensive research into **context window extension techniques** and **memory mechanisms** that enable LLMs to handle and generate extremely long sequences more effectively.6 These advancements explore various strategies to optimize the efficiency of the attention mechanism and to augment the Transformer architecture with external memory components that can store and retrieve information over extended contexts.9 Comprehensive surveys in this area provide a detailed overview of the progress in enhancing the long-context capabilities of Transformer-based LLMs across the entire model lifecycle, from pre-training to inference.6
 
-#### **2.2.2 Efficiency Improvements**
+#### Efficiency Improvements
 
 Beyond handling long context, enhancing the overall **computational efficiency** of Transformer architectures for LLMs is a critical area of research.1 The quadratic complexity of the attention mechanism remains a bottleneck, and various techniques have been explored to mitigate this.1 Subquadratic-time architectures, such as those employing linear attention or gated convolution models, have been developed to address the computational inefficiencies of Transformers on long sequences.14
 
 Advancements in the attention mechanism itself have also contributed to efficiency gains. **Multi-query attention (MQA)** and **grouped-query attention (GQA)** are two such innovations that can lead to increased processing speed and reduced computational load, particularly during the inference phase.3 These techniques reduce redundancy in the attention computation, making the model faster and more memory-efficient.26
 
-#### **2.2.3 Multi-Modal Capabilities**
+#### Multi-Modal Capabilities
 
 The evolution of Transformer models extends beyond processing just natural language to handling **content across different modalities**.1 This allows LLMs to be applied to a broader range of tasks, including those involving computer vision, speech processing, and other data types.7 For instance, the introduction of the Vision Transformer (ViT) demonstrated the adaptability of the Transformer architecture to image-based applications.2
 
-#### **2.2.4 Specific Architectural Variants**
+#### Specific Architectural Variants
 
 While the core principles of the Transformer remain influential, several specific architectural variants have emerged as prominent choices for building LLMs. **Decoder-only transformer architectures**, exemplified by models like GPT-3 and GPT-4, have become particularly prevalent for language generation tasks.29 Additionally, the foundational contributions of models like **BERT** (Bidirectional Encoder Representations from Transformers), which utilizes a bidirectional encoder for understanding tasks, and **GPT** (Generative Pre-trained Transformer), which employs an autoregressive decoder for language generation, have significantly shaped the field.1
 
@@ -57,11 +143,11 @@ While the core principles of the Transformer remain influential, several specifi
 | Multi-Query Attention (MQA) / Grouped-Query Attention (GQA) | Attention mechanisms that share key and value projections across multiple query heads. | 3 | Increases processing speed, reduces computational load, especially during inference. |
 | Multi-Modal Capabilities | Adaptations of the Transformer architecture to process and understand content across different data types beyond text. | 1 | Extends the applicability of LLMs to tasks involving images, audio, and other modalities. |
 
-## **3\. Optimization Techniques for Training LLMs**
+## Optimization Techniques for Training LLMs
 
 Training Large Language Models, which often contain billions or even trillions of parameters and are trained on massive datasets, demands significant computational resources and time.27 To make this process more feasible and efficient, a variety of optimization techniques have been developed and are continuously being refined.
 
-### **3.1 Efficient Fine-tuning (Parameter-Efficient Fine-Tuning \- PEFT)**
+### Efficient Fine-tuning (Parameter-Efficient Fine-Tuning \- PEFT)
 
 **Parameter-Efficient Fine-Tuning (PEFT)** represents a suite of techniques designed to adapt pre-trained LLMs to specific downstream tasks in a cost-effective manner.35 The core idea behind PEFT is to minimize the number of trainable parameters and the computational overhead during the fine-tuning process, while still achieving performance comparable to or even better than full fine-tuning.36 This is particularly crucial when working with LLMs on hardware with limited computational capabilities.38
 
@@ -69,7 +155,7 @@ One of the most popular PEFT methods is **Low-Rank Adaptation (LoRA)**.35 LoRA w
 
 Other notable PEFT techniques include **adapter tuning**, which involves inserting small, task-specific neural networks (adapters) between the layers of the pre-trained model and only training these adapters.36 **Prompt tuning** is another approach where the input prompts are optimized to guide the pre-trained model to perform the desired task effectively, often by learning soft prompts which are sequences of embedding vectors.36 **Prefix tuning** focuses on optimizing continuous prompts specifically for generation tasks.27
 
-### **3.2 Model Compression**
+### Model Compression
 
 **Model compression** techniques aim to reduce the size and computational complexity of LLMs, making them more suitable for deployment and inference, especially in resource-constrained environments.27 These methods enhance the speed, efficiency, and overall performance of LLMs while trying to maintain the quality of the original, uncompressed model.51
 
@@ -79,7 +165,7 @@ Other notable PEFT techniques include **adapter tuning**, which involves inserti
 
 **Knowledge distillation** is a technique used for both fine-tuning and compressing models.27 The goal is to transfer the knowledge from a larger, more complex "teacher" model to a smaller, more efficient "student" model.51 This is typically done by training the student model to mimic the outputs of the teacher model on a given dataset.51
 
-### **3.3 Distributed Training**
+### Distributed Training
 
 Given the massive scale of LLMs, **distributed training** across multiple computing devices, such as GPUs or specialized AI accelerators, has become essential to make the training process feasible and accelerate it.34 Distributed training involves dividing the training workload across multiple machines or processors that work in parallel and coordinate their efforts to train a single model.34
 
@@ -87,11 +173,11 @@ One common approach is **data parallelism**, where the training dataset is split
 
 Another strategy is **model parallelism**, which is employed when the model itself is too large to fit into the memory of a single device.26 In this case, different parts of the model are placed on different devices, and the computation is distributed across them.26 **Pipeline parallelism** is a form of model parallelism where the model is broken down into a sequence of stages, and each stage is processed on a different device, allowing for more efficient utilization of computational resources.26
 
-### **3.4 Memory Optimization**
+### Memory Optimization
 
 Optimizing memory usage during the training of LLMs is crucial due to the limited memory capacity of individual devices. Techniques like **gradient accumulation** allow for training with a larger effective batch size than would otherwise fit in memory.26 This is achieved by accumulating gradients over several forward and backward passes before performing a weight update.26 Additionally, **key-value caching** in LLMs, which stores the key and value tensors from previous layers to speed up the generation process, can consume a significant amount of memory that grows with the sequence length.14 Research is ongoing to develop more memory-efficient methods for managing this cache.14
 
-### **3.5 Optimized Optimizers**
+### Optimized Optimizers
 
 The choice of optimizer plays a significant role in the efficiency and effectiveness of training LLMs. Traditional optimizers like Stochastic Gradient Descent (SGD) are commonly used, but **adaptive optimizers** such as AdamW and LAMB are often preferred for training LLMs as they automatically adjust the learning rate for each parameter, helping the model learn faster and more effectively.58 Furthermore, the development of **8-bit optimizers** aims to reduce the memory footprint and accelerate data sharing during distributed training by lowering the precision of model parameters and calculations.26
 
@@ -108,11 +194,11 @@ The choice of optimizer plays a significant role in the efficiency and effective
 | Adaptive Optimizers (AdamW, LAMB) | Optimized Optimizers | Automatically adjust learning rates for each parameter. | 58 | Improves learning speed and effectiveness. |
 | 8-bit Optimizers | Optimized Optimizers | Lowers precision of optimizer states to reduce memory. | 26 | Reduces memory footprint during training. |
 
-## **4\. Tokenization and Embedding Methods in LLMs**
+## Tokenization and Embedding Methods in LLMs
 
 The way in which text data is processed and represented is fundamental to the performance of Large Language Models. **Tokenization** is the initial crucial step that involves breaking down raw text into smaller units called tokens.35 These tokens serve as the basic building blocks that the model can understand and process.70 The consistency of the tokenization process is vital for pre-trained models to function correctly.66 Following tokenization, **embeddings** are used to convert these tokens into dense vector representations that capture their semantic meaning and relationships.62
 
-### **4.1 Different Tokenization Methods**
+### Different Tokenization Methods
 
 Various tokenization methods exist, each with its own advantages and trade-offs.64
 
@@ -128,7 +214,19 @@ Various tokenization methods exist, each with its own advantages and trade-offs.
 
 **Hybrid tokenization** involves combining different tokenization methods to leverage their respective strengths and optimize for efficiency and flexibility.63 For example, the GPT-3 tokenizer uses a hybrid approach of BPE and character-level tokenization.63
 
-### **4.2 Evolution of Embedding Techniques**
+
+**Table 3: Comparison of Tokenization and Embedding Methods in LLMs**
+
+|Method | Type | Description | Key Impacts on LLMs
+|-------|------|-------------|------------------|
+Byte-Pair Encoding (BPE) | Tokenization | Iteratively merges frequent pairs of bytes. | Balances vocabulary size and handling of rare words.
+WordPiece | Tokenization | Similar to BPE but uses a scoring mechanism for merging.| Tends to prefer longer subword units.
+SentencePiece | Tokenization | Language-independent, trains from raw sentences, supports BPE and unigram. | Handles whitespace as a symbol, allows lossless detokenization.
+Contextual Embeddings | Embedding | Vector representation of a word varies based on its context. | Captures nuanced meaning of words in different contexts.
+T-FREE | Embedding | Tokenizer-free, embeds words using sparse activation patterns over character triplets.| Memory-efficient, potentially better for multilingual data.
+
+
+### Evolution of Embedding Techniques
 
 The way in which tokens are converted into numerical vectors (embeddings) has also evolved significantly, impacting the ability of LLMs to understand language.70
 
@@ -138,11 +236,11 @@ The way in which tokens are converted into numerical vectors (embeddings) has al
 
 Recent research has also explored **tokenizer-free embedding approaches**.72 These methods aim to bypass the traditional tokenization step by directly embedding words or sub-character units using techniques like sparse representations based on character triplets.72 Such approaches can offer potential advantages in terms of efficiency, handling of multilingual data, and capturing morphological similarities.72
 
-### **4.3 Impact of Tokenization and Embedding Choices**
+### Impact of Tokenization and Embedding Choices
 
 The choice of tokenization and embedding methods has a profound impact on the performance and efficiency of LLMs.64 The tokenization strategy determines the model's vocabulary size and its ability to handle rare words and different languages.64 Embeddings, by providing numerical representations of tokens, enable the model to understand the semantic meaning and relationships within the text.62 The evolution from static word embeddings to contextual embeddings and the exploration of tokenizer-free methods highlight the ongoing efforts to improve the way LLMs process and understand the complexities of human language.72
 
-**Table 3: Comparison of Tokenization and Embedding Methods in LLMs**
+**Table 4: Comparison of Tokenization and Embedding Methods in LLMs**
 
 | Method | Type | Description | Key Impacts on LLMs |
 | :---- | :---- | :---- | :---- |
@@ -152,7 +250,7 @@ The choice of tokenization and embedding methods has a profound impact on the pe
 | Contextual Embeddings | Embedding | Vector representation of a word varies based on its context. | Captures nuanced meaning of words in different contexts. |
 | T-FREE | Embedding | Tokenizer-free, embeds words using sparse activation patterns over character triplets. | Memory-efficient, potentially better for multilingual data. |
 
-## **5\. Conclusion and Future Directions**
+## Conclusion and Future Directions
 
 This report has surveyed the significant advancements in the core components that drive the capabilities of Large Language Models. The evolution of the Transformer architecture continues to be a central focus, with innovations aimed at enhancing the ability of LLMs to process and generate long sequences efficiently. Techniques such as sparse attention and context window extension are crucial steps towards enabling LLMs to tackle more complex, real-world tasks that require understanding and reasoning over extended information.
 
@@ -171,23 +269,23 @@ Looking ahead, the field is likely to see continued innovation in all these area
 3. Transformer (deep learning architecture) \- Wikipedia, accessed on April 20, 2025, [https://en.wikipedia.org/wiki/Transformer\_(deep\_learning\_architecture)](https://en.wikipedia.org/wiki/Transformer_\(deep_learning_architecture\))  
 4. Demystifying Transformer Architecture in Large Language Models \- TrueFoundry, accessed on April 20, 2025, [https://www.truefoundry.com/blog/transformer-architecture](https://www.truefoundry.com/blog/transformer-architecture)  
 5. How Transformers Work: A Detailed Exploration of Transformer Architecture \- DataCamp, accessed on April 20, 2025, [https://www.datacamp.com/tutorial/how-transformers-work](https://www.datacamp.com/tutorial/how-transformers-work)  
-6. Advancing Transformer Architecture in Long-Context Large Language Models: A Comprehensive Survey \- arXiv, accessed on April 20, 2025, [https://arxiv.org/html/2311.12351v2](https://arxiv.org/html/2311.12351v2)  
+6. Advancing Transformer Architecture in Long-Context Large Language Models: A Comprehensive Survey arXiv, accessed on April 20, 2025, [https://arxiv.org/html/2311.12351v2](https://arxiv.org/html/2311.12351v2)  
 7. Transformers and large language models in healthcare: A review \- PMC \- PubMed Central, accessed on April 20, 2025, [https://pmc.ncbi.nlm.nih.gov/articles/PMC11638972/](https://pmc.ncbi.nlm.nih.gov/articles/PMC11638972/)  
-8. Paper page \- Advancing Transformer Architecture in Long-Context ..., accessed on April 20, 2025, [https://huggingface.co/papers/2311.12351](https://huggingface.co/papers/2311.12351)  
+8. Paper page Advancing Transformer Architecture in Long-Context ..., accessed on April 20, 2025, [https://huggingface.co/papers/2311.12351](https://huggingface.co/papers/2311.12351)  
 9. arxiv.org, accessed on April 20, 2025, [http://arxiv.org/pdf/2311.12351](http://arxiv.org/pdf/2311.12351)  
-10. Multi-Head Attention and Transformer Architecture \- Pathway, accessed on April 20, 2025, [https://pathway.com/bootcamps/rag-and-llms/coursework/module-2-word-vectors-simplified/bonus-overview-of-the-transformer-architecture/multi-head-attention-and-transformer-architecture/](https://pathway.com/bootcamps/rag-and-llms/coursework/module-2-word-vectors-simplified/bonus-overview-of-the-transformer-architecture/multi-head-attention-and-transformer-architecture/)  
-11. What is Multi-head Attention and how does it improve model performance over single Attention head? \- AIML.com, accessed on April 20, 2025, [https://aiml.com/what-is-multi-head-attention-and-how-does-it-improve-model-performance-over-single-attention-head/](https://aiml.com/what-is-multi-head-attention-and-how-does-it-improve-model-performance-over-single-attention-head/)  
-12. \[1909.00188\] Improving Multi-Head Attention with Capsule Networks \- arXiv, accessed on April 20, 2025, [https://arxiv.org/abs/1909.00188](https://arxiv.org/abs/1909.00188)  
+10. Multi-Head Attention and Transformer Architecture Pathway, accessed on April 20, 2025, [https://pathway.com/bootcamps/rag-and-llms/coursework/module-2-word-vectors-simplified/bonus-overview-of-the-transformer-architecture/multi-head-attention-and-transformer-architecture/](https://pathway.com/bootcamps/rag-and-llms/coursework/module-2-word-vectors-simplified/bonus-overview-of-the-transformer-architecture/multi-head-attention-and-transformer-architecture/)  
+11. What is Multi-head Attention and how does it improve model performance over single Attention head?  AIML.com, accessed on April 20, 2025, [https://aiml.com/what-is-multi-head-attention-and-how-does-it-improve-model-performance-over-single-attention-head/](https://aiml.com/what-is-multi-head-attention-and-how-does-it-improve-model-performance-over-single-attention-head/)  
+12. 1909.00188 Improving Multi-Head Attention with Capsule Networks \- arXiv, accessed on April 20, 2025, [https://arxiv.org/abs/1909.00188](https://arxiv.org/abs/1909.00188)  
 13. Advancing Transformer Architecture in Long-Context Large Language Models: A Comprehensive Survey | PDF \- Scribd, accessed on April 20, 2025, [https://www.scribd.com/document/782625300/3](https://www.scribd.com/document/782625300/3)  
 14. Advanced Transformer Architectures \- About deep2Read \- GitHub Pages, accessed on April 20, 2025, [https://qdata.github.io/deep2Read/fmefficient/L26/](https://qdata.github.io/deep2Read/fmefficient/L26/)  
 15. MoA: Mixture of Sparse Attention for Automatic Large Language ..., accessed on April 20, 2025, [https://openreview.net/forum?id=konDsSUSqg](https://openreview.net/forum?id=konDsSUSqg)  
 16. Natively Sparse Attention (NSA) for Efficient Long-Context LLMs \- Ajith's AI Pulse, accessed on April 20, 2025, [https://ajithp.com/2025/02/21/natively-sparse-attention-nsa-the-future-of-efficient-long-context-modeling-in-large-language-models/](https://ajithp.com/2025/02/21/natively-sparse-attention-nsa-the-future-of-efficient-long-context-modeling-in-large-language-models/)  
 17. arxiv.org, accessed on April 20, 2025, [https://arxiv.org/abs/2410.13276](https://arxiv.org/abs/2410.13276)  
-18. \[2311.12351\] Advancing Transformer Architecture in Long-Context Large Language Models: A Comprehensive Survey \- arXiv, accessed on April 20, 2025, [https://arxiv.org/abs/2311.12351](https://arxiv.org/abs/2311.12351)  
+18. 2311.12351 Advancing Transformer Architecture in Long-Context Large Language Models: A Comprehensive Survey \- arXiv, accessed on April 20, 2025, [https://arxiv.org/abs/2311.12351](https://arxiv.org/abs/2311.12351)  
 19. Advancing Transformer Architecture in Long-Context Large Language Models: A Comprehensive Survey \- Scholars.io, accessed on April 20, 2025, [https://app.scholars.io/research/10381/advancing-transformer-architecture-in-long-context-large-language-models-a-comprehensive-survey](https://app.scholars.io/research/10381/advancing-transformer-architecture-in-long-context-large-language-models-a-comprehensive-survey)  
 20. Strivin0311/long-llms-learning: A repository sharing the literatures about long-context large language models, including the methodologies and the evaluation benchmarks \- GitHub, accessed on April 20, 2025, [https://github.com/Strivin0311/long-llms-learning](https://github.com/Strivin0311/long-llms-learning)  
 21. Advancing Transformer Architecture in Long-Context Large Language Models: A Comprehensive Survey \- Semantic Scholar, accessed on April 20, 2025, [https://www.semanticscholar.org/paper/Advancing-Transformer-Architecture-in-Long-Context-Huang-Xu/4ea5ca620122e6a9a2b000444d36491cebf49c7c](https://www.semanticscholar.org/paper/Advancing-Transformer-Architecture-in-Long-Context-Huang-Xu/4ea5ca620122e6a9a2b000444d36491cebf49c7c)  
-22. \[2501.06098\] ELFATT: Efficient Linear Fast Attention for Vision Transformers \- arXiv, accessed on April 20, 2025, [https://arxiv.org/abs/2501.06098](https://arxiv.org/abs/2501.06098)  
+22. 2501.06098 ELFATT: Efficient Linear Fast Attention for Vision Transformers \- arXiv, accessed on April 20, 2025, [https://arxiv.org/abs/2501.06098](https://arxiv.org/abs/2501.06098)  
 23. arxiv.org, accessed on April 20, 2025, [https://arxiv.org/abs/2412.02919](https://arxiv.org/abs/2412.02919)  
 24. arxiv.org, accessed on April 20, 2025, [https://arxiv.org/abs/2412.02344](https://arxiv.org/abs/2412.02344)  
 25. arxiv.org, accessed on April 20, 2025, [https://arxiv.org/abs/2405.05219](https://arxiv.org/abs/2405.05219)  
@@ -202,18 +300,18 @@ Looking ahead, the field is likely to see continued innovation in all these area
 34. Distributed Training of Large Language Models \- IEEE Computer Society, accessed on April 20, 2025, [https://www.computer.org/csdl/proceedings-article/icpads/2023/307100a840/1VECXZMDcc0](https://www.computer.org/csdl/proceedings-article/icpads/2023/307100a840/1VECXZMDcc0)  
 35. Training Large Language Models (LLMs): Techniques and Best Practices \- Nitor Infotech, accessed on April 20, 2025, [https://www.nitorinfotech.com/blog/training-large-language-models-llms-techniques-and-best-practices/](https://www.nitorinfotech.com/blog/training-large-language-models-llms-techniques-and-best-practices/)  
 36. Parameter-Efficient Fine-Tuning for Foundation Models \- arXiv, accessed on April 20, 2025, [https://arxiv.org/html/2501.13787v1](https://arxiv.org/html/2501.13787v1)  
-37. \[2501.13787\] Parameter-Efficient Fine-Tuning for Foundation Models \- arXiv, accessed on April 20, 2025, [https://arxiv.org/abs/2501.13787](https://arxiv.org/abs/2501.13787)  
+37. 2501.13787 Parameter-Efficient Fine-Tuning for Foundation Models \- arXiv, accessed on April 20, 2025, [https://arxiv.org/abs/2501.13787](https://arxiv.org/abs/2501.13787)  
 38. arxiv.org, accessed on April 20, 2025, [https://arxiv.org/abs/2403.14608](https://arxiv.org/abs/2403.14608)  
 39. Train Small, Infer Large: Memory-Efficient LoRA Training for Large Language Models \- arXiv, accessed on April 20, 2025, [https://arxiv.org/abs/2502.13533](https://arxiv.org/abs/2502.13533)  
 40. Train Small, Infer Large: Memory-Efficient LoRA Training for Large ..., accessed on April 20, 2025, [https://openreview.net/forum?id=s7DkcgpRxL](https://openreview.net/forum?id=s7DkcgpRxL)  
-41. \\scalerel\* Train Small, Infer Large: Memory-Efficient LoRA Training for Large Language Models \- arXiv, accessed on April 20, 2025, [https://arxiv.org/html/2502.13533v1](https://arxiv.org/html/2502.13533v1)  
-42. \[Literature Review\] Train Small, Infer Large: Memory-Efficient LoRA Training for Large Language Models \- Moonlight, accessed on April 20, 2025, [https://www.themoonlight.io/review/train-small-infer-large-memory-efficient-lora-training-for-large-language-models](https://www.themoonlight.io/review/train-small-infer-large-memory-efficient-lora-training-for-large-language-models)  
+41. scalerel Train Small, Infer Large: Memory-Efficient LoRA Training for Large Language Models \- arXiv, accessed on April 20, 2025, [https://arxiv.org/html/2502.13533v1](https://arxiv.org/html/2502.13533v1)  
+42. Literature Review Train Small, Infer Large: Memory-Efficient LoRA Training for Large Language Models \- Moonlight, accessed on April 20, 2025, [https://www.themoonlight.io/review/train-small-infer-large-memory-efficient-lora-training-for-large-language-models](https://www.themoonlight.io/review/train-small-infer-large-memory-efficient-lora-training-for-large-language-models)  
 43. Paper page \- Train Small, Infer Large: Memory-Efficient LoRA Training for Large Language Models \- Hugging Face, accessed on April 20, 2025, [https://huggingface.co/papers/2502.13533](https://huggingface.co/papers/2502.13533)  
 44. Memory-efficient Training of LLMs with Larger Mini-batches \- arXiv, accessed on April 20, 2025, [https://arxiv.org/html/2407.19580v1](https://arxiv.org/html/2407.19580v1)  
-45. \[2106.09685\] LoRA: Low-Rank Adaptation of Large Language Models \- arXiv, accessed on April 20, 2025, [https://arxiv.org/abs/2106.09685](https://arxiv.org/abs/2106.09685)  
+45. 2106.09685 LoRA: Low-Rank Adaptation of Large Language Models \- arXiv, accessed on April 20, 2025, [https://arxiv.org/abs/2106.09685](https://arxiv.org/abs/2106.09685)  
 46. GaLore: Memory-Efficient LLM Training by Gradient Low-Rank Projection : r/LocalLLaMA \- Reddit, accessed on April 20, 2025, [https://www.reddit.com/r/LocalLLaMA/comments/1b8owei/galore\_memoryefficient\_llm\_training\_by\_gradient/](https://www.reddit.com/r/LocalLLaMA/comments/1b8owei/galore_memoryefficient_llm_training_by_gradient/)  
 47. TRAIN SMALL, INFER LARGE: MEMORY-EFFICIENT LORA, accessed on April 20, 2025, [https://openreview.net/pdf/f3645a8d3db7ea3d0264384dea8c23dd492ef70a.pdf](https://openreview.net/pdf/f3645a8d3db7ea3d0264384dea8c23dd492ef70a.pdf)  
-48. \[D\] What is the motivation for parameter-efficient fine tuning if there's no significant reduction in runtime or GPU memory usage? : r/MachineLearning \- Reddit, accessed on April 20, 2025, [https://www.reddit.com/r/MachineLearning/comments/186ck5k/d\_what\_is\_the\_motivation\_for\_parameterefficient/](https://www.reddit.com/r/MachineLearning/comments/186ck5k/d_what_is_the_motivation_for_parameterefficient/)  
+48. What is the motivation for parameter-efficient fine tuning if there's no significant reduction in runtime or GPU memory usage? : r/MachineLearning \- Reddit, accessed on April 20, 2025, [https://www.reddit.com/r/MachineLearning/comments/186ck5k/d\_what\_is\_the\_motivation\_for\_parameterefficient/](https://www.reddit.com/r/MachineLearning/comments/186ck5k/d_what_is_the_motivation_for_parameterefficient/)  
 49. A Guide to Quantization in LLMs | Symbl.ai, accessed on April 20, 2025, [https://symbl.ai/developers/blog/a-guide-to-quantization-in-llms/](https://symbl.ai/developers/blog/a-guide-to-quantization-in-llms/)  
 50. 5 Tips for Optimizing Language Models \- KDnuggets, accessed on April 20, 2025, [https://www.kdnuggets.com/5-tips-for-optimizing-language-models](https://www.kdnuggets.com/5-tips-for-optimizing-language-models)  
 51. Inference Optimizations for Large Language Models: Effects, Challenges, and Practical Considerations \- arXiv, accessed on April 20, 2025, [https://arxiv.org/html/2408.03130v1](https://arxiv.org/html/2408.03130v1)  
@@ -226,7 +324,7 @@ Looking ahead, the field is likely to see continued innovation in all these area
 58. Innovations in Training Techniques for Large Language Models \- IEEE Computer Society, accessed on April 20, 2025, [https://www.computer.org/publications/tech-news/trends/training-techniques-large-language-models/](https://www.computer.org/publications/tech-news/trends/training-techniques-large-language-models/)  
 59. DeepMind looks at distributed training of large AI models \- The Register, accessed on April 20, 2025, [https://www.theregister.com/2025/02/11/deepmind\_distributed\_model\_training\_research/](https://www.theregister.com/2025/02/11/deepmind_distributed_model_training_research/)  
 60. Distributed training of large language models on AWS Trainium ..., accessed on April 20, 2025, [https://www.amazon.science/publications/distributed-training-of-large-language-models-on-aws-trainium](https://www.amazon.science/publications/distributed-training-of-large-language-models-on-aws-trainium)  
-61. LLM Distributed Training \[R\] : r/MachineLearning \- Reddit, accessed on April 20, 2025, [https://www.reddit.com/r/MachineLearning/comments/1i0vrg3/llm\_distributed\_training\_r/](https://www.reddit.com/r/MachineLearning/comments/1i0vrg3/llm_distributed_training_r/)  
+61. LLM Distributed Training R: r/MachineLearning \- Reddit, accessed on April 20, 2025, [https://www.reddit.com/r/MachineLearning/comments/1i0vrg3/llm\_distributed\_training\_r/](https://www.reddit.com/r/MachineLearning/comments/1i0vrg3/llm_distributed_training_r/)  
 62. Tokenization vs Embedding \- How are they Different? \- Airbyte, accessed on April 20, 2025, [https://airbyte.com/data-engineering-resources/tokenization-vs-embeddings](https://airbyte.com/data-engineering-resources/tokenization-vs-embeddings)  
 63. Exploring Foundations of Large Language Models (LLMs): Tokenization and Embeddings, accessed on April 20, 2025, [https://dzone.com/articles/llms-tokenization-and-embeddings](https://dzone.com/articles/llms-tokenization-and-embeddings)  
 64. Demystifying Tokens and Embeddings in Large Language Models, accessed on April 20, 2025, [https://arbs.io/2024-01-14-demystifying-tokens-and-embeddings-in-llm](https://arbs.io/2024-01-14-demystifying-tokens-and-embeddings-in-llm)  
@@ -250,7 +348,7 @@ Looking ahead, the field is likely to see continued innovation in all these area
 82. Contextual Embeddings NLP Insights | Restackio, accessed on April 20, 2025, [https://www.restack.io/p/embeddings-answer-contextual-embeddings-nlp-cat-ai](https://www.restack.io/p/embeddings-answer-contextual-embeddings-nlp-cat-ai)  
 83. Introducing Contextual Retrieval \\ Anthropic, accessed on April 20, 2025, [https://www.anthropic.com/news/contextual-retrieval](https://www.anthropic.com/news/contextual-retrieval)  
 84. Latest Developments in Vector Embeddings for AI Applications \- CelerData, accessed on April 20, 2025, [https://celerdata.com/glossary/vector-embeddings-for-ai-applications](https://celerdata.com/glossary/vector-embeddings-for-ai-applications)  
-85. \[2406.19223\] T-FREE: Subword Tokenizer-Free Generative LLMs via Sparse Representations for Memory-Efficient Embeddings \- arXiv, accessed on April 20, 2025, [https://arxiv.org/abs/2406.19223](https://arxiv.org/abs/2406.19223)  
+85. 2406.19223 T-FREE: Subword Tokenizer-Free Generative LLMs via Sparse Representations for Memory-Efficient Embeddings \- arXiv, accessed on April 20, 2025, [https://arxiv.org/abs/2406.19223](https://arxiv.org/abs/2406.19223)  
 86. T-FREE: Tokenizer-Free Generative LLMs via Sparse Representations for Memory-Efficient Embeddings | AI Research Paper Details \- AIModels.fyi, accessed on April 20, 2025, [https://www.aimodels.fyi/papers/arxiv/t-free-subword-tokenizer-free-generative-llms](https://www.aimodels.fyi/papers/arxiv/t-free-subword-tokenizer-free-generative-llms)  
 87. T-FREE: Subword Tokenizer-Free Generative LLMs via Sparse Representations for Memory-Efficient Embeddings \- Synthical, accessed on April 20, 2025, [https://synthical.com/abs/2406.19223?is\_dark=true\&utm\_source=dark\_medium](https://synthical.com/abs/2406.19223?is_dark=true&utm_source=dark_medium)  
 88. Tokenizer-Free Generative LLMs via Sparse Representations for Memory-Efficient Embeddings | PromptLayer, accessed on April 20, 2025, [https://www.promptlayer.com/research-papers/t-free-tokenizer-free-generative-llms-via-sparse-representations-for-memory-efficient-embeddings](https://www.promptlayer.com/research-papers/t-free-tokenizer-free-generative-llms-via-sparse-representations-for-memory-efficient-embeddings)  
@@ -259,4 +357,4 @@ Looking ahead, the field is likely to see continued innovation in all these area
 91. T-FREE: Tokenizer-Free Generative LLMs via Sparse Representations for Memory-Efficient Embeddings \- ResearchGate, accessed on April 20, 2025, [https://www.researchgate.net/publication/381770835\_T-FREE\_Tokenizer-Free\_Generative\_LLMs\_via\_Sparse\_Representations\_for\_Memory-Efficient\_Embeddings](https://www.researchgate.net/publication/381770835_T-FREE_Tokenizer-Free_Generative_LLMs_via_Sparse_Representations_for_Memory-Efficient_Embeddings)  
 92. Paper page \- T-FREE: Tokenizer-Free Generative LLMs via Sparse Representations for Memory-Efficient Embeddings \- Hugging Face, accessed on April 20, 2025, [https://huggingface.co/papers/2406.19223](https://huggingface.co/papers/2406.19223)  
 93. Egalitarian Language Representation in Language Models: It All Begins with Tokenizers \- arXiv, accessed on April 20, 2025, [https://arxiv.org/pdf/2409.11501](https://arxiv.org/pdf/2409.11501)  
-94. \[2205.11490\] Local Byte Fusion for Neural Machine Translation \- arXiv, accessed on April 20, 2025, [https://arxiv.org/abs/2205.11490](https://arxiv.org/abs/2205.11490)
+94. 2205.11490 Local Byte Fusion for Neural Machine Translation \- arXiv, accessed on April 20, 2025, [https://arxiv.org/abs/2205.11490](https://arxiv.org/abs/2205.11490)
