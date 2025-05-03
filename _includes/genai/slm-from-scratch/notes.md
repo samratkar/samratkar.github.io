@@ -125,7 +125,7 @@ def get_batch(split):
 
 ### Step 4 : Assembling the model architecture
 
-#### step 4.1 : Embedding layer
+***Embedding layer***
 Every word has a meaning. It is the semantic notion of every word which is very important for the language model to capture. So, before passing to the transformer block, we need to convert the token ids to word embeddings to capture the meaning of the words. 
 
 **Token embedding matrix** : Number of rows : vocabulary size (embedding dimension), column : context size 
@@ -268,13 +268,16 @@ class GPT(nn.Module):
         tok_emb = self.transformer.wte(idx)
         pos_emb = self.transformer.wpe(pos)
         x = self.transformer.drop(tok_emb + pos_emb)
+        # multiple trasformer blocks
         for block in self.transformer.h:
             x = block(x)
+        # layer normalization 
         x = self.transformer.ln_f(x)
 
         if targets is not None:
             ## neural network input = number of embeddings, and output as vocab size.
             logits = self.lm_head(x)
+            ## computing the negative log likelihood loss.
             loss = F.cross_entropy(logits.view(-1, logits.size(-1)), targets.view(-1), ignore_index=-1)
             return logits, loss
         else:
@@ -298,4 +301,149 @@ class GPT(nn.Module):
             idx_next = torch.multinomial(probs, num_samples=1)
             idx = torch.cat((idx, idx_next), dim=1)
         return idx
+```
+
+#### Parameter initialization 
+![](/assets/genai/slmfromscratch/trainerparams.png)
+
+#### Configuration 
+```python
+config = GPTConfig(
+    vocab_size=50257, # use the tokenizer's vocab size
+    block_size=128, # or whatever context size you're training with
+    n_layer=6, # number of transformer blocks
+    n_head=6, # number of multi-attention heads. each head compute different attention scores.
+    n_embd=384, # embedding dimension. number of neurons in each layer.
+    dropout=0.1, 
+    bias=True
+)
+
+model = GPT(config)
+```
+
+### Step5 : Defining the loss function - Cross entropy loss
+
+![](/assets/genai/slmfromscratch/loss.png)
+![](/assets/genai/slmfromscratch/target.png)
+
+```python 
+## i have to run the model for a prescribed number of iterations. For 100 iterations, i will take 10 batches of data. 
+def estimate_loss(model):
+    out = {}
+    model.eval()
+    with torch.inference_mode():
+        for split in ['train', 'val']:
+            losses = torch.zeros(eval_iters)
+            for k in range(eval_iters):
+                X, Y = get_batch(split)
+                with ctx:
+                    logits, loss = model(X, Y)
+                losses[k] = loss.item()
+            out[split] = losses.mean()
+    model.train()
+    return out
+```
+
+### Step 6 : 
+![](/assets/genai/slmfromscratch/step6.png)
+
+```python 
+# Training Config
+import torch
+from contextlib import nullcontext
+## Hyper parameters
+learning_rate = 1e-4 #more stable training, earlier 1e-4
+max_iters = 20000 #increase from 25000
+warmup_steps = 1000 #smoother initial train, earlier 100
+min_lr = 5e-4 #lower rate, earlier 5e-4
+eval_iters = 500 # increased from 100
+batch_size = 32 # changed from 16, better gradient estimate
+block_size = 128 #changed from 64, capture longer range dependencies
+
+gradient_accumulation_steps = 32 # reduced from 50
+
+device =  "cuda" if torch.cuda.is_available() else "cpu"
+device_type = 'cuda' if 'cuda' in device else 'cpu' # for later use in torch.autocast
+# note: float16 data type will automatically use a GradScaler
+
+# How to use autocast https://wandb.ai/wandb_fc/tips/reports/How-To-Use-Autocast-in-PyTorch--VmlldzoyMTk4NTky
+#dtype = 'bfloat16' if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else 'float16' # 'float32', 'bfloat16', or 'float16', the latter will auto implement a GradScaler
+dtype = 'bfloat16' if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else 'float16' # 'float32', 'bfloat16', or 'float16', the latter will auto implement a GradScaler
+ptdtype = {'float32': torch.float32, 'bfloat16': torch.bfloat16, 'float16': torch.float16}[dtype]
+## note: float16 data type will automatically use a GradScaler
+ctx = nullcontext() if device_type == 'cpu' else torch.amp.autocast(device_type=device_type, dtype=ptdtype)
+
+torch.set_default_device(device)
+torch.manual_seed(42)
+```
+### Step 7 : Training the model
+### Gradient accumulation
+![](/assets/genai/slmfromscratch/gradient%20accumulation.png)
+
+Paremeter updates are done after every 32 batches. 
+
+![](/assets/genai/slmfromscratch/learning%20rate.png)
+
+
+```python
+from torch.optim.lr_scheduler import LinearLR,SequentialLR, CosineAnnealingLR
+
+##PUT IN WEIGHT DECAY, CHANGED BETA2 to 0.95
+optimizer =  torch.optim.AdamW(model.parameters(), lr=learning_rate, betas=(0.9, 0.95), weight_decay=0.1, eps=1e-9) #weight decay for regularization
+
+scheduler_warmup = LinearLR(optimizer, total_iters = warmup_steps) #Implement linear warmup
+scheduler_decay = CosineAnnealingLR(optimizer,T_max = max_iters - warmup_steps, eta_min = min_lr) #Implement lr decay
+scheduler = SequentialLR(optimizer, schedulers=[scheduler_warmup, scheduler_decay], milestones=[warmup_steps]) #Switching from warmup to decay
+
+# https://stackoverflow.com/questions/72534859/is-gradscaler-necessary-with-mixed-precision-training-with-pytorch
+scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+```
+
+### Step 8 : Pre Training loop
+1. for each interation, choose x and y. go through the data set choose random indices from data sets, and find input output pairs. Get the batch
+2. Pass the entire batch to the model to get the logits.
+3. calculate the loss using cross entropy loss, using logits and targets  y. 
+4. back progpagation - compute the gradients.
+5. Accumulate the gradients till we reach gradient_accumulation_steps. (32 in this case)
+6. Update the parameters using the optimizer ADAMW.
+7. Update learning rate using the scheduler. Every time parameters are updated.
+8. Evaluate and save best model. Evaluation iterations used is 500. 
+
+```python 
+best_val_loss = float('inf')
+best_model_params_path = "best_model_params.pt"
+train_loss_list, validation_loss_list = [], []
+
+# Ensure model is on the correct device
+model = model.to(device)
+
+# In your training loop
+for epoch in tqdm(range(max_iters)):
+    if epoch % eval_iters == 0 and epoch != 0:
+        # Ensure estimate_loss uses the correct device
+        losses = estimate_loss(model)
+        print(f"Epoch {epoch}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
+        print(f"The current learning rate: {optimizer.param_groups[0]['lr']:.5f}")
+        train_loss_list += [losses['train']]
+        validation_loss_list += [losses['val']]
+
+        if losses['val'] < best_val_loss:
+            best_val_loss = losses['val']
+            torch.save(model.state_dict(), best_model_params_path)
+
+    # Ensure X and y are on the correct device
+    X, y = get_batch("train")
+    X, y = X.to(device), y.to(device)
+    # accumulate gradients
+    with ctx:
+        logits, loss = model(X, y)
+        loss = loss / gradient_accumulation_steps
+        scaler.scale(loss).backward()
+    # paraemeters are updatd only when gradient_accumulation_steps is reached.
+    if ((epoch + 1) % gradient_accumulation_steps == 0) or (epoch + 1 == max_iters):
+        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=0.5)
+        scaler.step(optimizer)
+        scaler.update()
+        optimizer.zero_grad(set_to_none=True)
+    scheduler.step()
 ```
