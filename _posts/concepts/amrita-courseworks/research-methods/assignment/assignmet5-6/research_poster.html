@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM Architecture and Explainability</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f7ff;
+      color: #333;
+      font-size: 14px;
+    }
+    .poster {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      background-color: white;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto auto auto;
+      grid-gap: 15px;
+      padding: 20px;
+    }
+    .header {
+      grid-column: 1 / 4;
+      text-align: center;
+      background-color: #001f3f;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 0;
+    }
+    .section {
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      margin-top: 0;
+    }
+    .full-width {
+      grid-column: 1 / 4;
+    }
+    .chart-container {
+      width: 100%;
+      height: 250px;
+      margin: 10px 0;
+    }
+    h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+    h2 {
+      margin-top: 0;
+      color: #001f3f;
+      border-bottom: 2px solid #001f3f;
+      padding-bottom: 8px;
+      font-size: 22px;
+    }
+    h3 {
+      color: #001f3f;
+      margin: 10px 0 5px 0;
+      font-size: 18px;
+    }
+    .author {
+      font-style: italic;
+      margin: 8px 0;
+    }
+    ul {
+      padding-left: 18px;
+      margin: 8px 0;
+    }
+    li {
+      margin-bottom: 6px;
+    }
+    .timeline {
+      display: flex;
+      position: relative;
+      margin: 15px 0;
+      height: 80px;
+    }
+    .timeline:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background-color: #001f3f;
+    }
+    .timeline-point {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      text-align: center;
+    }
+    .timeline-dot {
+      width: 16px;
+      height: 16px;
+      background-color: #001f3f;
+      border-radius: 50%;
+      margin: 0 auto;
+      margin-bottom: 8px;
+    }
+    .timeline-label {
+      font-size: 11px;
+      font-weight: bold;
+      transform: translateY(25px);
+    }
+    .highlight-box {
+      background-color: #f0f7ff;
+      padding: 12px;
+      border-left: 5px solid #001f3f;
+      margin: 15px 0;
+    }
+    .quote {
+      font-style: italic;
+      padding: 12px;
+      background-color: #f9f9f9;
+      border-left: 3px solid #001f3f;
+      margin: 8px 0;
+      font-size: 13px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 13px;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .footer {
+      grid-column: 1 / 4;
+      text-align: center;
+      font-size: 12px;
+      color: #777;
+      padding-top: 15px;
+      border-top: 1px solid #ddd;
+    }
+    p {
+      margin: 8px 0;
+    }
+    .compact-list li {
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="poster">
+    <div class="header">
+      <h1>Large Language Models: Architectural Evolution and Explainability</h1>
+      <p class="author">Samrat Kar - Dept of Computer Science, Amrita Visvavidyapeetham, Bangalore, India</p>
+    </div>
+
+    <div class="section">
+      <h2>Introduction</h2>
+      <p>Large Language Models (LLMs) have transformed AI capabilities, but their opaque, black-box nature poses significant challenges for trust, accountability, and safety in critical domains.</p>
+      
+      <div class="highlight-box">
+        <strong>Research Focus:</strong> Exploring explainability mechanisms within LLM-based systems to improve transparency and understanding of AI-generated outputs.
+      </div>
+      
+      <h3>Approach</h3>
+      <ul class="compact-list">
+        <li>Systematic literature review</li>
+        <li>Historical analysis of LLM architecture evolution</li>
+        <li>Exploration of explainable AI (XAI) techniques</li>
+        <li>Assessment of emerging trends and challenges</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>LLM Evolution Timeline</h2>
+      <div class="timeline">
+        <div class="timeline-point">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">Rule-based<br>(ELIZA, 1966)</div>
+        </div>
+        <div class="timeline-point">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">Statistical<br>(n-gram)</div>
+        </div>
+        <div class="timeline-point">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">Neural<br>(RNN, LSTM)</div>
+        </div>
+        <div class="timeline-point">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">Transformer<br>(2017)</div>
+        </div>
+        <div class="timeline-point">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">Foundation<br>Models</div>
+        </div>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg">
+          <!-- Flipped Model Growth Chart (Y-axis as X and X-axis as Y) -->
+          <text x="300" y="15" text-anchor="middle" font-weight="bold">Growth in Model Size (Parameters)</text>
+          
+          <!-- Axes -->
+          <line x1="100" y1="40" x2="100" y2="220" stroke="#333" stroke-width="2"/>
+          <line x1="100" y1="220" x2="550" y2="220" stroke="#333" stroke-width="2"/>
+          
+          <!-- X-axis labels (formerly Y-axis) -->
+          <text x="95" y="220" text-anchor="end">0</text>
+          <text x="95" y="190" text-anchor="end">1B</text>
+          <text x="95" y="160" text-anchor="end">10B</text>
+          <text x="95" y="130" text-anchor="end">100B</text>
+          <text x="95" y="100" text-anchor="end">1T</text>
+          <text x="95" y="70" text-anchor="end">10T</text>
+          <text x="95" y="40" text-anchor="end">100T</text>
+          
+          <!-- Y-axis labels (formerly X-axis) -->
+          <text x="150" y="235" text-anchor="middle">2018</text>
+          <text x="250" y="235" text-anchor="middle">2020</text>
+          <text x="350" y="235" text-anchor="middle">2022</text>
+          <text x="450" y="235" text-anchor="middle">2024</text>
+          <text x="550" y="235" text-anchor="middle">2025</text>
+          
+          <!-- Model data points -->
+          <circle cx="150" cy="215" r="5" fill="#001f3f"/>
+          <text x="150" y="200" text-anchor="middle" font-size="10">BERT (0.3B)</text>
+          
+          <circle cx="200" cy="190" r="5" fill="#001f3f"/>
+          <text x="200" y="205" text-anchor="middle" font-size="10">GPT-2 (1.5B)</text>
+          
+          <circle cx="250" cy="160" r="5" fill="#001f3f"/>
+          <text x="250" y="145" text-anchor="middle" font-size="10">T5 (11B)</text>
+          
+          <circle cx="300" cy="130" r="5" fill="#001f3f"/>
+          <text x="300" y="145" text-anchor="middle" font-size="10">GPT-3 (175B)</text>
+          
+          <circle cx="350" cy="110" r="5" fill="#001f3f"/>
+          <text x="350" y="95" text-anchor="middle" font-size="10">PaLM (540B)</text>
+          
+          <circle cx="400" cy="130" r="5" fill="#001f3f"/>
+          <text x="400" y="145" text-anchor="middle" font-size="10">LLaMA (65B)</text>
+          
+          <circle cx="450" cy="100" r="5" fill="#001f3f"/>
+          <text x="450" y="85" text-anchor="middle" font-size="10">GPT-4 (~1T)</text>
+          
+          <circle cx="500" cy="70" r="6" fill="#001f3f"/>
+          <text x="500" y="55" text-anchor="middle" font-size="10">Claude (~10T)</text>
+          
+          <!-- Trend line -->
+          <path d="M150,215 Q325,150 500,70" stroke="#001f3f" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Key Architectural Innovations</h2>
+      
+      <h3>Attention Mechanism</h3>
+      <p>Introduced in "Attention Is All You Need" (Vaswani et al., 2017), enabling models to focus on different parts of input sequences.</p>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg">
+          <text x="300" y="20" text-anchor="middle" font-weight="bold">Impact of Architecture Innovations</text>
+          
+          <!-- Performance bars -->
+          <rect x="100" y="80" width="50" height="120" fill="#001f3f" opacity="0.3"/>
+          <rect x="200" y="110" width="50" height="90" fill="#001f3f" opacity="0.5"/>
+          <rect x="300" y="70" width="50" height="130" fill="#001f3f" opacity="0.7"/>
+          <rect x="400" y="50" width="50" height="150" fill="#001f3f" opacity="0.9"/>
+          
+          <!-- X-axis labels -->
+          <text x="125" y="215" text-anchor="middle">Self-Attention</text>
+          <text x="225" y="215" text-anchor="middle">Sparse Attention</text>
+          <text x="325" y="215" text-anchor="middle">Mixture of Experts</text>
+          <text x="425" y="215" text-anchor="middle">Infini-Attention</text>
+          
+          <!-- Performance labels -->
+          <text x="125" y="70" text-anchor="middle" font-size="12">75%</text>
+          <text x="225" y="100" text-anchor="middle" font-size="12">82%</text>
+          <text x="325" y="60" text-anchor="middle" font-size="12">88%</text>
+          <text x="425" y="40" text-anchor="middle" font-size="12">95%</text>
+          
+          <!-- Base line -->
+          <line x1="50" y1="200" x2="500" y2="200" stroke="#333" stroke-width="2"/>
+        </svg>
+      </div>
+      
+      <h3>Efficient Transformers</h3>
+      <ul class="compact-list">
+        <li><strong>Sparse Attention:</strong> Enables longer context handling</li>
+        <li><strong>Mixture of Experts (MoE):</strong> Conditional compute for scaling</li>
+        <li><strong>Switch Transformers:</strong> Scale to trillion parameters with efficient sparsity</li>
+        <li><strong>Infini-Attention:</strong> Handling unlimited context length</li>
+      </ul>
+    </div>
+
+    <div class="section full-width">
+      <h2>Multimodal Integration</h2>
+      <p>Modern LLMs are evolving beyond text to process multiple modalities including images, audio, and video.</p>
+      
+      <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+        <div style="width: 45%; min-width: 300px;">
+          <h3>Multimodal Model Capabilities</h3>
+          <div class="chart-container" style="height: 220px;">
+            <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+              <!-- Radar chart for model capabilities with fixed heading position -->
+              <text x="200" y="30" text-anchor="middle" font-weight="bold">Multimodal Model Capabilities</text>
+              
+              <!-- Radar background -->
+              <polygon points="200,60 300,130 200,200 100,130" fill="none" stroke="#ccc" stroke-width="1"/>
+              <polygon points="200,85 275,130 200,175 125,130" fill="none" stroke="#ccc" stroke-width="1"/>
+              <polygon points="200,110 250,130 200,150 150,130" fill="none" stroke="#ccc" stroke-width="1"/>
+              <polygon points="200,130 200,130 200,130 200,130" fill="none" stroke="#ccc" stroke-width="1"/>
+              
+              <!-- Axis lines -->
+              <line x1="200" y1="40" x2="200" y2="210" stroke="#ccc" stroke-width="1"/>
+              <line x1="75" y1="130" x2="325" y2="130" stroke="#ccc" stroke-width="1"/>
+              
+              <!-- Axis labels -->
+              <text x="200" y="215" text-anchor="middle">Text</text>
+              <text x="65" y="130" text-anchor="end">Audio</text>
+              <text x="200" y="50" text-anchor="middle">Image</text>
+              <text x="335" y="130" text-anchor="start">Video</text>
+              
+              <!-- Data for FLAMINGO -->
+              <polygon points="200,70 290,130 200,180 110,130" fill="#001f3f" fill-opacity="0.3" stroke="#001f3f" stroke-width="2"/>
+              <text x="200" y="130" text-anchor="middle" font-weight="bold">FLAMINGO</text>
+              
+              <!-- Data for GPT-4V -->
+              <polygon points="200,60 260,130 200,170 140,130" fill="#0074D9" fill-opacity="0.3" stroke="#0074D9" stroke-width="2"/>
+              <text x="250" y="95" text-anchor="middle">GPT-4V</text>
+              
+              <!-- Data for LLAVA -->
+              <polygon points="200,65 250,130 200,190 150,130" fill="#7FDBFF" fill-opacity="0.3" stroke="#7FDBFF" stroke-width="2"/>
+              <text x="150" y="95" text-anchor="middle">LLAVA</text>
+            </svg>
+          </div>
+        </div>
+        
+        <div style="width: 45%; min-width: 300px;">
+          <h3>Multimodal Architectures</h3>
+          <table>
+            <tr>
+              <th>Model</th>
+              <th>Modalities</th>
+              <th>Architecture</th>
+            </tr>
+            <tr>
+              <td>FLAMINGO</td>
+              <td>Text + Image</td>
+              <td>Perceiver Resampler</td>
+            </tr>
+            <tr>
+              <td>KOSMOS</td>
+              <td>Text + Image</td>
+              <td>Cross-modal Attention</td>
+            </tr>
+            <tr>
+              <td>LLAVA</td>
+              <td>Text + Image</td>
+              <td>Vision Encoder + LLM</td>
+            </tr>
+            <tr>
+              <td>Video-LLaMA</td>
+              <td>Text + Video + Audio</td>
+              <td>Multi-stream Encoder</td>
+            </tr>
+            <tr>
+              <td>MMGPT</td>
+              <td>Text + Image + Audio</td>
+              <td>Unified Transformer</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Explainable AI (XAI)</h2>
+      <p>XAI refers to techniques that make the decision-making processes of AI systems transparent and interpretable to humans.</p>
+      
+      <div class="highlight-box">
+        <strong>Why XAI for LLMs?</strong>
+        <ul class="compact-list">
+          <li>Enhance transparency and trust</li>
+          <li>Detect and address bias</li>
+          <li>Improve accountability</li>
+          <li>Strengthen security and robustness</li>
+          <li>Support ethical AI development</li>
+        </ul>
+      </div>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+          <text x="200" y="20" text-anchor="middle" font-weight="bold">XAI Techniques Effectiveness</text>
+          
+          <!-- Pie chart on XAI techniques with improved text positioning -->
+          <circle cx="200" cy="120" r="90" fill="none" stroke="#333" stroke-width="2"/>
+          
+          <!-- Slices -->
+          <path d="M200,120 L200,30 A90,90 0 0,1 262,72 z" fill="#001f3f" stroke="#fff" stroke-width="1"/>
+          <text x="225" y="60" fill="white" font-size="11">Attention</text>
+          <text x="225" y="72" fill="white" font-size="11">Visualization</text>
+          <text x="225" y="84" fill="white" font-size="11">25%</text>
+          
+          <path d="M200,120 L262,72 A90,90 0 0,1 260,175 z" fill="#0074D9" stroke="#fff" stroke-width="1"/>
+          <text x="270" y="125" fill="white" font-size="11">Feature</text>
+          <text x="270" y="137" fill="white" font-size="11">Attribution</text>
+          <text x="270" y="149" fill="white" font-size="11">30%</text>
+          
+          <path d="M200,120 L260,175 A90,90 0 0,1 140,175 z" fill="#7FDBFF" stroke="#fff" stroke-width="1"/>
+          <text x="200" y="180" fill="black" font-size="11">Counterfactual</text>
+          <text x="200" y="192" fill="black" font-size="11">Explanations 20%</text>
+          
+          <path d="M200,120 L140,175 A90,90 0 0,1 127,72 z" fill="#39CCCC" stroke="#fff" stroke-width="1"/>
+          <text x="135" y="140" fill="black" font-size="11">Model</text>
+          <text x="135" y="152" fill="black" font-size="11">Introspection</text>
+          <text x="135" y="164" fill="black" font-size="11">15%</text>
+          
+          <path d="M200,120 L127,72 A90,90 0 0,1 200,30 z" fill="#B10DC9" stroke="#fff" stroke-width="1"/>
+          <text x="163" y="60" fill="white" font-size="11">Natural</text>
+          <text x="163" y="72" fill="white" font-size="11">Language</text>
+          <text x="163" y="84" fill="white" font-size="11">Explanations 10%</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Challenges in XAI for LLMs</h2>
+      
+      <div class="chart-container">
+        <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+          <text x="200" y="25" text-anchor="middle" font-weight="bold">XAI Challenges by Severity</text>
+          
+          <!-- Horizontal bar chart -->
+          <line x1="100" y1="50" x2="100" y2="200" stroke="#333" stroke-width="2"/>
+          <line x1="100" y1="200" x2="350" y2="200" stroke="#333" stroke-width="2"/>
+          
+          <!-- Bars -->
+          <rect x="100" y="60" width="220" height="20" fill="#001f3f"/>
+          <rect x="100" y="100" width="190" height="20" fill="#001f3f" opacity="0.8"/>
+          <rect x="100" y="140" width="160" height="20" fill="#001f3f" opacity="0.6"/>
+          <rect x="100" y="180" width="130" height="20" fill="#001f3f" opacity="0.4"/>
+          
+          <!-- Labels -->
+          <text x="95" y="75" text-anchor="end" font-size="11">Scale & Complexity</text>
+          <text x="325" y="75" text-anchor="middle" font-size="11">High (90%)</text>
+          
+          <text x="95" y="115" text-anchor="end" font-size="11">Context Sensitivity</text>
+          <text x="295" y="115" text-anchor="middle" font-size="11">Medium-High (80%)</text>
+          
+          <text x="95" y="155" text-anchor="end" font-size="11">Dynamic Nature</text>
+          <text x="265" y="155" text-anchor="middle" font-size="11">Medium (65%)</text>
+          
+          <text x="95" y="195" text-anchor="end" font-size="11">Interpretation Gap</text>
+          <text x="235" y="195" text-anchor="middle" font-size="11">Medium-Low (55%)</text>
+        </svg>
+      </div>
+      
+      <div class="quote">
+        "Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead." - Cynthia Rudin (2019)
+      </div>
+      
+      <p>Despite these challenges, XAI techniques continue to advance, with ongoing research focused on balancing model complexity with interpretability.</p>
+    </div>
+
+    <div class="section">
+      <h2>XAI Applications</h2>
+      
+      <table>
+        <tr>
+          <th>Domain</th>
+          <th>XAI Requirement</th>
+          <th>Benefit</th>
+        </tr>
+        <tr>
+          <td>Healthcare</td>
+          <td>Treatment recommendations</td>
+          <td>Improved doctor-patient trust</td>
+        </tr>
+        <tr>
+          <td>Finance</td>
+          <td>Loan decision justification</td>
+          <td>Regulatory compliance</td>
+        </tr>
+        <tr>
+          <td>Education</td>
+          <td>Feedback transparency</td>
+          <td>Improved learning outcomes</td>
+        </tr>
+        <tr>
+          <td>Legal</td>
+          <td>Evidence assessment</td>
+          <td>Fair judicial process</td>
+        </tr>
+      </table>
+      
+      <h3>XAI Implementation</h3>
+      <ul class="compact-list">
+        <li><strong>Feature Importance:</strong> SHAP, LIME</li>
+        <li><strong>Visual Explanation:</strong> Attention maps</li>
+        <li><strong>Counterfactual:</strong> "What if" scenarios</li>
+        <li><strong>Mechanistic:</strong> Circuit analysis</li>
+      </ul>
+    </div>
+
+    <div class="section full-width">
+      <h2>Conclusion</h2>
+      
+      <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+        <div style="width: 45%; min-width: 300px;">
+          <h3>Key Findings</h3>
+          <ul class="compact-list">
+            <li>LLM architectures have evolved from simple rule-based systems to complex transformer-based models with billions or trillions of parameters</li>
+            <li>Transformer architecture with self-attention was the most significant breakthrough, enabling unprecedented scale and performance</li>
+            <li>Multimodal integration represents the next frontier, combining text with images, audio, and video</li>
+            <li>XAI is essential for responsible AI deployment, particularly in high-stakes domains</li>
+            <li>Explainability should be a core design principle, not an afterthought</li>
+          </ul>
+        </div>
+        
+        <div style="width: 45%; min-width: 300px;">
+          <h3>Future Research Directions</h3>
+          <div class="chart-container" style="height: 200px;">
+            <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+              <text x="200" y="25" text-anchor="middle" font-weight="bold">Research Opportunity Areas</text>
+              
+              <!-- Heat map -->
+              <rect x="50" y="40" width="150" height="65" fill="#001f3f" opacity="0.9"/>
+              <text x="125" y="75" text-anchor="middle" fill="white">Mechanistic</text>
+              <text x="125" y="90" text-anchor="middle" fill="white">Interpretability</text>
+              
+              <rect x="200" y="40" width="150" height="65" fill="#001f3f" opacity="0.7"/>
+              <text x="275" y="75" text-anchor="middle" fill="white">Efficient</text>
+              <text x="275" y="90" text-anchor="middle" fill="white">Multi-modal XAI</text>
+              
+              <rect x="50" y="105" width="150" height="65" fill="#001f3f" opacity="0.5"/>
+              <text x="125" y="140" text-anchor="middle">Regulatory</text>
+              <text x="125" y="155" text-anchor="middle">Frameworks</text>
+              
+              <rect x="200" y="105" width="150" height="65" fill="#001f3f" opacity="0.3"/>
+              <text x="275" y="140" text-anchor="middle">User-centric</text>
+              <text x="275" y="155" text-anchor="middle">Explanations</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+      
+      <div class="highlight-box">
+        <p>While architectural advances in LLMs have unlocked extraordinary possibilities, the application of Explainable AI ensures these powerful tools are used safely, ethically, and equitably. By bridging the gap between complexity and comprehension, XAI empowers both creators and users of LLMs to navigate the challenges of this rapidly evolving landscape with confidence and clarity.</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Contact: BL.SC.R4CSE24007@bl.students.amrita.edu | References: See full paper for complete citations</p>
+    </div>
+  </div>
+</body>
+</html>

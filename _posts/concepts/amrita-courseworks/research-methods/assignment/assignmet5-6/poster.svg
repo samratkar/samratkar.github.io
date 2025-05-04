@@ -1,0 +1,155 @@
+<svg viewBox="0 0 1000 1400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background and border -->
+  <rect width="1000" height="1400" fill="#f0f6ff" />
+  <rect x="10" y="10" width="980" height="1380" fill="white" stroke="#2c3e50" stroke-width="2" />
+  
+  <!-- Header section -->
+  <rect x="20" y="20" width="960" height="140" fill="#3498db" rx="10" />
+  <text x="500" y="80" font-family="Arial" font-size="42" fill="white" text-anchor="middle" font-weight="bold">Large Language Models</text>
+  <text x="500" y="130" font-family="Arial" font-size="32" fill="white" text-anchor="middle">Architectural Improvements and Explainability</text>
+  
+  <!-- Author info -->
+  <text x="500" y="180" font-family="Arial" font-size="20" text-anchor="middle">Samrat Kar - Dept. of Computer Science, Amrita Visvavidyapeetham, Bangalore, India</text>
+  
+  <!-- Main content sections -->
+  <!-- Evolutionary Timeline -->
+  <rect x="30" y="210" width="450" height="380" fill="#ecf0f1" rx="5" />
+  <text x="255" y="240" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle">Evolutionary Timeline of LLMs</text>
+  
+  <!-- Timeline visualization -->
+  <line x1="80" y1="280" x2="80" y2="540" stroke="#2c3e50" stroke-width="4" />
+  <circle cx="80" cy="300" r="10" fill="#e74c3c" />
+  <text x="100" y="305" font-family="Arial" font-size="16">Rule-based Systems (ELIZA)</text>
+  
+  <circle cx="80" cy="350" r="10" fill="#e74c3c" />
+  <text x="100" y="355" font-family="Arial" font-size="16">Statistical Models (n-gram)</text>
+  
+  <circle cx="80" cy="400" r="10" fill="#e74c3c" />
+  <text x="100" y="405" font-family="Arial" font-size="16">Neural Networks (RNN, LSTM)</text>
+  
+  <circle cx="80" cy="450" r="10" fill="#e74c3c" />
+  <text x="100" y="455" font-family="Arial" font-size="16">Attention Mechanism (2014)</text>
+  
+  <circle cx="80" cy="500" r="10" fill="#e74c3c" />
+  <text x="100" y="505" font-family="Arial" font-size="16">Transformer Architecture (2017)</text>
+  
+  <line x1="80" y1="520" x2="80" y2="540" stroke="#2c3e50" stroke-width="4" stroke-dasharray="5,5" />
+  <polygon points="80,550 70,530 90,530" fill="#2c3e50" />
+  
+  <!-- Key Innovations box -->
+  <rect x="520" y="210" width="450" height="380" fill="#ecf0f1" rx="5" />
+  <text x="745" y="240" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle">Key Architectural Innovations</text>
+  
+  <!-- Innovation content -->
+  <rect x="540" y="265" width="410" height="70" fill="#d6eaf8" rx="5" />
+  <text x="550" y="290" font-family="Arial" font-size="16" font-weight="bold">Self-Attention Mechanism</text>
+  <text x="550" y="315" font-family="Arial" font-size="12">Allows models to weigh importance of words in context</text>
+  
+  <rect x="540" y="345" width="410" height="70" fill="#d6eaf8" rx="5" />
+  <text x="550" y="370" font-family="Arial" font-size="16" font-weight="bold">Efficient Transformers</text>
+  <text x="550" y="395" font-family="Arial" font-size="12">Sparse and linearized attention for longer contexts</text>
+  
+  <rect x="540" y="425" width="410" height="70" fill="#d6eaf8" rx="5" />
+  <text x="550" y="450" font-family="Arial" font-size="16" font-weight="bold">Parameter-Efficient Methods</text>
+  <text x="550" y="475" font-family="Arial" font-size="12">MoE and Switch Transformers for efficient scaling</text>
+  
+  <rect x="540" y="505" width="410" height="70" fill="#d6eaf8" rx="5" />
+  <text x="550" y="530" font-family="Arial" font-size="16" font-weight="bold">Multimodal Integration</text>
+  <text x="550" y="555" font-family="Arial" font-size="12">Models for text, images, and audio (Flamingo, KOSMOS)</text>
+  
+  <!-- Research Methodology -->
+  <rect x="30" y="610" width="940" height="200" fill="#ecf0f1" rx="5" />
+  <text x="500" y="640" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle">Research Methodology</text>
+  
+  <!-- Methodology content in columns -->
+  <rect x="50" y="660" width="280" height="130" fill="#d6eaf8" rx="5" />
+  <text x="190" y="680" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">Research Design</text>
+  <text x="60" y="705" font-family="Arial" font-size="14">• Systematic Literature Review (SLR)</text>
+  <text x="60" y="730" font-family="Arial" font-size="14">• Historical Evolution Analysis</text>
+  <text x="60" y="755" font-family="Arial" font-size="14">• Architectural Innovation Tracking</text>
+  <text x="60" y="780" font-family="Arial" font-size="14">• Emerging Trends Analysis</text>
+  
+  <rect x="360" y="660" width="280" height="130" fill="#d6eaf8" rx="5" />
+  <text x="500" y="680" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">Data Collection</text>
+  <text x="370" y="705" font-family="Arial" font-size="14">• Academic Databases Search</text>
+  <text x="370" y="730" font-family="Arial" font-size="14">• Citation Tracking</text>
+  <text x="370" y="755" font-family="Arial" font-size="14">• Open Access Repositories</text>
+  <text x="370" y="780" font-family="Arial" font-size="14">• Industry Reports and Blogs</text>
+  
+  <rect x="670" y="660" width="280" height="130" fill="#d6eaf8" rx="5" />
+  <text x="810" y="680" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">Analysis Methods</text>
+  <text x="680" y="705" font-family="Arial" font-size="14">• Thematic Analysis</text>
+  <text x="680" y="730" font-family="Arial" font-size="14">• Citation Network Analysis</text>
+  <text x="680" y="755" font-family="Arial" font-size="14">• Comparative Model Evaluation</text>
+  <text x="680" y="780" font-family="Arial" font-size="14">• Trend Identification</text>
+  
+  <!-- Explainable AI section -->
+  <rect x="30" y="830" width="940" height="300" fill="#ecf0f1" rx="5" />
+  <text x="500" y="860" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle">Explainable AI (XAI) for LLMs</text>
+  
+  <!-- Left column: Risks -->
+  <text x="250" y="890" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">Key Risks of LLMs</text>
+  <rect x="50" y="905" width="400" height="205" fill="#d6eaf8" rx="5" />
+  
+  <circle cx="70" cy="930" r="5" fill="#e74c3c" />
+  <text x="85" y="935" font-family="Arial" font-size="14">Bias and Fairness Concerns</text>
+  
+  <circle cx="70" cy="960" r="5" fill="#e74c3c" />
+  <text x="85" y="965" font-family="Arial" font-size="14">Misinformation and Disinformation</text>
+  
+  <circle cx="70" cy="990" r="5" fill="#e74c3c" />
+  <text x="85" y="995" font-family="Arial" font-size="14">Lack of Accountability</text>
+  
+  <circle cx="70" cy="1020" r="5" fill="#e74c3c" />
+  <text x="85" y="1025" font-family="Arial" font-size="14">Ethical and Legal Concerns</text>
+  
+  <circle cx="70" cy="1050" r="5" fill="#e74c3c" />
+  <text x="85" y="1055" font-family="Arial" font-size="14">Security Vulnerabilities</text>
+  
+  <circle cx="70" cy="1080" r="5" fill="#e74c3c" />
+  <text x="85" y="1085" font-family="Arial" font-size="14">Environmental and Economic Costs</text>
+  
+  <!-- Right column: XAI Solutions -->
+  <text x="750" y="890" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">XAI Mitigation Strategies</text>
+  <rect x="550" y="905" width="400" height="205" fill="#d6eaf8" rx="5" />
+  
+  <circle cx="570" cy="930" r="5" fill="#27ae60" />
+  <text x="585" y="935" font-family="Arial" font-size="14">Attention Visualization</text>
+  
+  <circle cx="570" cy="960" r="5" fill="#27ae60" />
+  <text x="585" y="965" font-family="Arial" font-size="14">Feature Attribution (SHAP, LIME)</text>
+  
+  <circle cx="570" cy="990" r="5" fill="#27ae60" />
+  <text x="585" y="995" font-family="Arial" font-size="14">Counterfactual Explanations</text>
+  
+  <circle cx="570" cy="1020" r="5" fill="#27ae60" />
+  <text x="585" y="1025" font-family="Arial" font-size="14">Model Introspection Tools</text>
+  
+  <circle cx="570" cy="1050" r="5" fill="#27ae60" />
+  <text x="585" y="1055" font-family="Arial" font-size="14">Adversarial Analysis</text>
+  
+  <circle cx="570" cy="1080" r="5" fill="#27ae60" />
+  <text x="585" y="1085" font-family="Arial" font-size="14">Prompt Analysis Tools</text>
+  
+  <!-- Challenges and Conclusion -->
+  <rect x="30" y="1150" width="940" height="230" fill="#ecf0f1" rx="5" />
+  <text x="500" y="1180" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle">Challenges and Conclusion</text>
+  
+  <!-- Challenges box -->
+  <rect x="50" y="1200" width="400" height="150" fill="#d6eaf8" rx="5" />
+  <text x="250" y="1225" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">Challenges in XAI for LLMs</text>
+  
+  <text x="70" y="1255" font-family="Arial" font-size="14">• Scale and Complexity: Billions of parameters</text>
+  <text x="70" y="1280" font-family="Arial" font-size="14">• Context Sensitivity: Dynamic interpretation</text>
+  <text x="70" y="1305" font-family="Arial" font-size="14">• Evolving Models: Continuous fine-tuning</text>
+  <text x="70" y="1330" font-family="Arial" font-size="14">• Human Interpretation Gap: Technical to meaningful</text>
+  
+  <!-- Conclusion box -->
+  <rect x="550" y="1200" width="400" height="150" fill="#d6eaf8" rx="5" />
+  <text x="750" y="1225" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">Key Takeaways</text>
+  
+  <text x="570" y="1255" font-family="Arial" font-size="14">• XAI is essential for responsible LLM deployment</text>
+  <text x="570" y="1280" font-family="Arial" font-size="14">• Explainability should be a design principle, not an afterthought</text>
+  <text x="570" y="1305" font-family="Arial" font-size="14">• Integration across the entire model lifecycle is critical</text>
+  <text x="570" y="1330" font-family="Arial" font-size="14">• XAI bridges complexity and comprehension for safer AI</text>
+</svg>
