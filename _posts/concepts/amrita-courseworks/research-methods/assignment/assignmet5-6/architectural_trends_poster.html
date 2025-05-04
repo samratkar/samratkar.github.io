@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolution of Large Language Model Architectures</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        .poster {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto 1fr auto;
+            grid-template-areas: 
+                "header"
+                "introduction"
+                "content"
+                "footer";
+        }
+        .header {
+            grid-area: header;
+            background: linear-gradient(135deg, #4A00E0, #8E2DE2);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.8em;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .header h2 {
+            font-size: 1.4em;
+            font-weight: 300;
+            margin: 10px 0 0;
+        }
+        .introduction {
+            grid-area: introduction;
+            padding: 20px 30px;
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #eaeaea;
+        }
+        .content {
+            grid-area: content;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 25px;
+            padding: 25px;
+        }
+        .section {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 20px;
+        }
+        .section h3 {
+            color: #4A00E0;
+            border-bottom: 2px solid #8E2DE2;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        .footer {
+            grid-area: footer;
+            background-color: #f9f9f9;
+            padding: 15px 30px;
+            text-align: center;
+            border-top: 1px solid #eaeaea;
+        }
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            margin: 20px 0;
+        }
+        .timeline {
+            display: flex;
+            position: relative;
+            margin: 40px 0;
+            padding-top: 40px;
+        }
+        .timeline:before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #8E2DE2;
+            z-index: 1;
+        }
+        .timeline-item {
+            flex: 1;
+            position: relative;
+            text-align: center;
+            padding-top: 30px;
+        }
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #8E2DE2;
+            z-index: 2;
+        }
+        .timeline-date {
+            font-weight: bold;
+            color: #4A00E0;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .timeline-content {
+            font-size: 0.9em;
+            padding: 5px;
+            margin-top: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eaeaea;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-box {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #8E2DE2;
+            margin: 5px 0;
+        }
+        .stat-label {
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .tech-adoption {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .tech-item {
+            text-align: center;
+            width: 20%;
+        }
+        .tech-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8E2DE2, #4A00E0);
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .tech-label {
+            font-size: 0.9em;
+        }
+        .challenges-opportunities {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 20px;
+            margin: 20px 0;
+        }
+        .challenges-box, .opportunities-box {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 15px;
+        }
+        .challenges-box h4, .opportunities-box h4 {
+            color: #4A00E0;
+            margin-top: 0;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 10px;
+        }
+        .challenges-box {
+            border-left: 4px solid #e74c3c;
+        }
+        .opportunities-box {
+            border-left: 4px solid #2ecc71;
+        }
+        ul.feature-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        ul.feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #eaeaea;
+            display: flex;
+            align-items: center;
+        }
+        ul.feature-list li:before {
+            content: '•';
+            color: #8E2DE2;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .model-comparison {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 15px;
+            margin: 20px 0;
+        }
+        .model-card {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .model-name {
+            color: #4A00E0;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .model-architecture {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .model-features {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 15px;
+        }
+        .model-features li {
+            font-size: 0.9em;
+            padding: 5px 0;
+            border-bottom: 1px dotted #eaeaea;
+        }
+        .model-features li:last-child {
+            border-bottom: none;
+        }
+        .architecture-diagram {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            margin: 20px 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .parameter-comparison {
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .parameter-bar {
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #8E2DE2, #4A00E0);
+        }
+        .parameter-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+        .diagram-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .transformer-diagram {
+            width: 80%;
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <div class="header">
+            <h1>Evolution of Large Language Model Architectures</h1>
+            <h2>Research Developments, Technical Innovations, and Future Directions</h2>
+            <h5>Samrat Kar - BL.SC.R4CSE24007@bl.students.amrita.edu - Amrita Vishwa Vidyapeetham</h5>
+        </div>
+        
+        <div class="introduction">
+            <p>Large Language Models (LLMs) have revolutionized artificial intelligence, enabling systems to understand, generate, and interact with human language at unprecedented levels. This poster explores the architectural evolution of LLMs, from early neural networks to state-of-the-art transformer-based architectures, highlighting key innovations, scaling trends, efficiency improvements, and future research directions that are shaping this rapidly evolving field.</p>
+        </div>
+        
+        <div class="content">
+            <div class="section full-width">
+                <h3>Architectural Evolution Timeline (2013-2025)</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2013-2015</div>
+                        <div class="timeline-content">Word2Vec & GloVe embeddings, Recurrent Neural Networks (RNNs)</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2016-2017</div>
+                        <div class="timeline-content">LSTM & GRU networks, Sequence-to-sequence models</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2017-2019</div>
+                        <div class="timeline-content">Transformer architecture, BERT & GPT-1/2</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2020-2022</div>
+                        <div class="timeline-content">GPT-3, Scaling laws, Mixture of Experts (MoE)</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023-2025</div>
+                        <div class="timeline-content">Multimodal LLMs, Sparse architectures, RLHF & RLAIF</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Transformer Architecture & Innovations</h3>
+                <div class="diagram-container">
+                    <svg class="transformer-diagram" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Transformer Architecture Diagram -->
+                        <rect x="100" y="10" width="300" height="50" rx="5" fill="#4A00E0" opacity="0.2" stroke="#4A00E0" />
+                        <text x="250" y="40" text-anchor="middle" fill="#4A00E0" font-weight="bold">Output Embedding</text>
+                        
+                        <rect x="100" y="70" width="300" height="160" rx="5" fill="#8E2DE2" opacity="0.1" stroke="#8E2DE2" />
+                        <text x="250" y="90" text-anchor="middle" fill="#8E2DE2" font-weight="bold">Nx Decoder Layers</text>
+                        
+                        <!-- Attention Mechanism -->
+                        <rect x="120" y="100" width="260" height="40" rx="5" fill="#8E2DE2" opacity="0.2" stroke="#8E2DE2" />
+                        <text x="250" y="125" text-anchor="middle" fill="#4A00E0">Multi-Head Self-Attention</text>
+                        
+                        <!-- Feed Forward Network -->
+                        <rect x="120" y="150" width="260" height="40" rx="5" fill="#8E2DE2" opacity="0.2" stroke="#8E2DE2" />
+                        <text x="250" y="175" text-anchor="middle" fill="#4A00E0">Position-wise Feed-Forward</text>
+                        
+                        <!-- Layer Normalization -->
+                        <rect x="120" y="200" width="110" height="20" rx="5" fill="#8E2DE2" opacity="0.3" stroke="#8E2DE2" />
+                        <text x="175" y="215" text-anchor="middle" fill="#4A00E0" font-size="12">Layer Norm</text>
+                        
+                        <rect x="250" y="200" width="130" height="20" rx="5" fill="#8E2DE2" opacity="0.3" stroke="#8E2DE2" />
+                        <text x="315" y="215" text-anchor="middle" fill="#4A00E0" font-size="12">Residual Connections</text>
+                        
+                        <rect x="100" y="240" width="300" height="50" rx="5" fill="#4A00E0" opacity="0.2" stroke="#4A00E0" />
+                        <text x="250" y="270" text-anchor="middle" fill="#4A00E0" font-weight="bold">Input Embedding + Positional Encoding</text>
+                        
+                        <!-- Arrows -->
+                        <path d="M 250 60 L 250 70" stroke="#4A00E0" stroke-width="2" />
+                        <path d="M 250 230 L 250 240" stroke="#4A00E0" stroke-width="2" />
+                    </svg>
+                </div>
+                <ul class="feature-list">
+                    <li><strong>Self-Attention Mechanism:</strong> Allows models to weigh the importance of different words in a sequence, regardless of their distance</li>
+                    <li><strong>Parallelization:</strong> Unlike RNNs, transformers process all tokens simultaneously, enabling massive parallelization</li>
+                    <li><strong>Positional Encoding:</strong> Injects sequence order information as tokens are processed in parallel</li>
+                    <li><strong>Multi-Head Attention:</strong> Allows the model to attend to information from different representation subspaces</li>
+                    <li><strong>Residual Connections & Layer Normalization:</strong> Stabilize training for deep networks</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h3>Scaling Trends & Efficiency Research</h3>
+                <div class="stat-grid">
+                    <div class="stat-box">
+                        <div class="stat-number">10,000x</div>
+                        <div class="stat-label">Parameter growth from BERT-base to leading models (2018-2024)</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">5-10%</div>
+                        <div class="stat-label">Performance improvement with each doubling of model size</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">80%</div>
+                        <div class="stat-label">Compute efficiency gains from architectural innovations</div>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Research Direction</th>
+                            <th>Key Innovations</th>
+                            <th>Performance Impact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Parameter Efficiency</td>
+                            <td>Low-rank adaptations, QLoRA, Parameter-efficient fine-tuning</td>
+                            <td>95% of full fine-tuning performance with <1% of parameters</td>
+                        </tr>
+                        <tr>
+                            <td>Sparse Architectures</td>
+                            <td>Mixture of Experts (MoE), Switch Transformers</td>
+                            <td>5x parameter scaling with minimal compute increase</td>
+                        </tr>
+                        <tr>
+                            <td>Quantization</td>
+                            <td>4-bit, 8-bit inference, GPTQ, AWQ</td>
+                            <td>75% memory reduction with <2% performance degradation</td>
+                        </tr>
+                        <tr>
+                            <td>Attention Optimization</td>
+                            <td>Flash Attention, Multi-query attention, KV caching</td>
+                            <td>Up to 7x inference speedup</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h3>Model Size & Capabilities Evolution</h3>
+                <div class="model-comparison">
+                    <div class="model-card">
+                        <div class="model-name">BERT (2018)</div>
+                        <div class="model-architecture">Bidirectional Encoder</div>
+                        <div class="parameter-comparison">
+                            <div class="parameter-bar" style="width: 1%;"></div>
+                        </div>
+                        <div class="parameter-label">
+                            <span>110M parameters</span>
+                        </div>
+                        <ul class="model-features">
+                            <li>Masked language modeling</li>
+                            <li>Bidirectional context</li>
+                            <li>Next sentence prediction</li>
+                        </ul>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-name">GPT-3 (2020)</div>
+                        <div class="model-architecture">Autoregressive Decoder</div>
+                        <div class="parameter-comparison">
+                            <div class="parameter-bar" style="width: 20%;"></div>
+                        </div>
+                        <div class="parameter-label">
+                            <span>175B parameters</span>
+                        </div>
+                        <ul class="model-features">
+                            <li>Few-shot learning</li>
+                            <li>Task generalization</li>
+                            <li>175B parameters</li>
+                        </ul>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-name">Modern LLMs (2023-2025)</div>
+                        <div class="model-architecture">Hybrid & Sparse Architectures</div>
+                        <div class="parameter-comparison">
+                            <div class="parameter-bar" style="width: 50%;"></div>
+                        </div>
+                        <div class="parameter-label">
+                            <span>100B-1T parameters</span>
+                        </div>
+                        <ul class="model-features">
+                            <li>Multimodal capabilities</li>
+                            <li>Tool use & reasoning</li>
+                            <li>Efficient sparse activation</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tech-adoption">
+                    <div class="tech-item">
+                        <div class="tech-circle">96%</div>
+                        <div class="tech-label">Self-Attention</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-circle">80%</div>
+                        <div class="tech-label">RLHF</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-circle">65%</div>
+                        <div class="tech-label">MoE Models</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-circle">45%</div>
+                        <div class="tech-label">Multimodal</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>System Architecture & Inference Optimization</h3>
+                <div class="challenges-opportunities">
+                    <div class="challenges-box">
+                        <h4>Architectural Challenges</h4>
+                        <ul>
+                            <li>Memory bandwidth limitations</li>
+                            <li>Auto-regressive generation bottlenecks</li>
+                            <li>KV cache management at scale</li>
+                            <li>Multi-device coordination</li>
+                            <li>Context length scaling</li>
+                        </ul>
+                    </div>
+                    <div class="opportunities-box">
+                        <h4>Optimization Techniques</h4>
+                        <ul>
+                            <li>Tensor parallelism</li>
+                            <li>Pipeline parallelism</li>
+                            <li>Continuous batching</li>
+                            <li>Speculative decoding</li>
+                            <li>Hardware-specific optimizations</li>
+                        </ul>
+                    </div>
+                </div>
+                <p>Modern LLM deployments require sophisticated system architectures to handle massive parameter counts, long contexts, and high throughput requirements. Research has focused on distributing computation across multiple accelerators, optimizing memory access patterns, and developing specialized kernels for key operations like attention and matrix multiplication. The software stack for LLMs has evolved from simple framework implementations to complex distributed systems with specialized components for serving, monitoring, and scaling.</p>
+            </div>
+            
+            <div class="section full-width">
+                <h3>Future Research Directions & Emerging Architectures</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Research Direction</th>
+                            <th>Description</th>
+                            <th>Potential Impact</th>
+                            <th>Development Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Retrieval-Augmented Generation (RAG)</td>
+                            <td>Hybrid architectures combining parametric knowledge with explicit retrieval systems</td>
+                            <td>Reduced hallucination, improved factuality, dynamic knowledge updates</td>
+                            <td>Early commercial deployment</td>
+                        </tr>
+                        <tr>
+                            <td>Modular Neural Networks</td>
+                            <td>Specialized components for reasoning, planning, memory, and tool use</td>
+                            <td>Improved reasoning, systematic generalization, compositional learning</td>
+                            <td>Active research</td>
+                        </tr>
+                        <tr>
+                            <td>State Space Models</td>
+                            <td>Linear state space models like Mamba as alternatives to attention</td>
+                            <td>Linear scaling with sequence length, improved efficiency for long contexts</td>
+                            <td>Early research</td>
+                        </tr>
+                        <tr>
+                            <td>Multimodal Pretraining</td>
+                            <td>Joint architectures for processing text, images, audio, and video</td>
+                            <td>Cross-modal reasoning, improved grounding, new application domains</td>
+                            <td>Rapid commercialization</td>
+                        </tr>
+                        <tr>
+                            <td>Neural Algorithmic Reasoning</td>
+                            <td>Architectures explicitly designed to learn and execute algorithms</td>
+                            <td>Improved systematic generalization, mathematical reasoning, and planning</td>
+                            <td>Early research</td>
+                        </tr>
+                        <tr>
+                            <td>Neuromorphic LLMs</td>
+                            <td>Brain-inspired architectures with spiking neural networks</td>
+                            <td>Extreme energy efficiency, continuous learning capabilities</td>
+                            <td>Theoretical exploration</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>©2025 | The architecture of large language models continues to evolve rapidly, with innovations at every level from algorithms to systems design. Future research will likely focus on improving efficiency, reasoning capabilities, and robustness while making models more accessible and deployable across diverse computing environments.</p>
+        </div>
+    </div>
+</body>
+</html>
