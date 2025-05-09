@@ -1,3 +1,4 @@
+<img src="/assets/bookworm/rolf-dead.png">
 Rolf was lying in a bed downstairs, which he had retreated to in his last weeks. He lay on his stomach and right cheek, his head tilted slightly upwards. My dad held his food. I leaned in near his midsection. My mom was at the head of the bed, stroking his tin hair. 
 
 Rolf's face was full and flushed. The sunken eyes and gaunt cheeks caused by colon cancer were gone; the tightened, sagging skin around his mouth smoothed. His lips curled upwards at the corners.
