@@ -14,11 +14,11 @@ I sensed a light radiating from Rolf's face. It pulsated in concentric circles, 
 
 ...And then the stories tapered off and we fell into a silence. A church bell rang, stirring a spiral of blackbirds out of the trees, rising into sky heavy with dark gray clouds. We shook hands and hugged and then walked quietly out of Rolf and Kim's home. 
 
-In the grief that followed, I would regularly jolt awake before dawn, gasping. My body ran hot. I ached physically. I dreamed dreams unlike anything I had experienced before. In one, I was walking up a dark, winding dirt road to an illuminated Victorian that resembled our childhood home in Penryn. Rolf burst around a corner in yellow shorts, running in his high school miler strides. He stopped, smiled, waved and moved his lips, uttering words he knew I could no longer hear. I experienced the hallucinations that Joan Didion describes in the Year of Magical Thinking. I saw the outline of Rolf's face in the shifting boundaries of neighboring clouds. On on walk on the Berkeley campus, I saw his chem-exhausted eyes in the spiraling bark of redwood tree. I heard his voice in rustline of leaves, his sigh in the wind. On two occasions I was so convinced I had seen him that I followed strangers whose shoulders, foreheads, freckles and jawlines looked like his. 
+In the grief that followed, I would regularly jolt awake before dawn, gasping. My body ran hot. I ached physically. I dreamed dreams unlike anything I had experienced before. In one, I was walking up a dark, winding dirt road to an illuminated Victorian that resembled our childhood home in Penryn. Rolf burst around a corner in yellow shorts, running in his high school miler strides. He stopped, smiled, waved and moved his lips, uttering words he knew I could no longer hear. I experienced the hallucinations that Joan Didion describes in the Year of Magical Thinking. **I saw the outline of Rolf's face in the shifting boundaries of neighboring clouds. On on walk on the Berkeley campus, I saw his chem-exhausted eyes in the spiraling bark of redwood tree. I heard his voice in rustline of leaves, his sigh in the wind. On two occasions I was so convinced I had seen him that I followed strangers whose shoulders, foreheads, freckles and jawlines looked like his.**
 
 **Our minds are relational:** 
-1. we see life patterns through our shared experiences with others, 
-2. Sense life's significant themes in the sounds of others' voices, 
-3. And feel embraced in things larger than the self through others' touch. 
-4. I saw the wonders of the world through Rolf's eyes
+1. we **see** life **patterns** through our **shared experiences** with others, 
+2. **Sense** life's significant **themes** in the sounds of **others' voices**, 
+3. And feel **embraced** in things larger than the self through others' **touch**. 
+
 
