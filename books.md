@@ -13,7 +13,7 @@ permalink: /books/
 #### 2. Awe by Dacher Keltner
 1. Date started : 2024-05-08
 2. Date completed : 2024-05-15
-3. Book review : [Awe by Dacher Keltner](https://samratkar.github.io/2024/05/15/awe.html)
+3. Book review : [Awe by Dacher Keltner](https://samratkar.github.io/2025/05/09/Awe.html)
  
 #### My Books published
 
