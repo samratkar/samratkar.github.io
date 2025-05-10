@@ -1,4 +1,5 @@
-<img src="/assets/bookworm/rolf-dead.png">
+
+<img src="/assets/bookworm/rolf-dead.png" style="width: 100%; height: auto;">
 
 Rolf was lying in a bed downstairs, which he had retreated to in his last weeks. He lay on his stomach and right cheek, his head tilted slightly upwards. My dad held his food. I leaned in near his midsection. My mom was at the head of the bed, stroking his tin hair. 
 
