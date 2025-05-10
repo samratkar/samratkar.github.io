@@ -868,7 +868,13 @@ grid = create_process_grid(frames)
 grid.save("diffusion_process_grid3.png")
 print("Process grid saved to diffusion_process_grid3.png")
 ```
+## Transfusion 
+[Transfusion paper](https://arxiv.org/pdf/2408.11039) 
 
+## CLIP : Image embeddings
+[CLIP image embeddings](https://openai.com/index/clip/)
+[Vizuara - multi modal embeddings](https://vizuara.substack.com/p/multimodal-embeddings-are-so-counter)
+[unsloth-ai](https://github.com/unslothai/unsloth)
 ## References
 
 1. Ho, J., Jain, A., & Abbeel, P. (2020). Denoising diffusion probabilistic models. Advances in Neural Information Processing Systems.
