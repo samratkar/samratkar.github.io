@@ -65,7 +65,9 @@ execution_time_minutes = (end_time - start_time) / 60
 print(f"Training completed in {execution_time_minutes:.2f} minutes.")
 >>> Training completed in 13.78 minutes.
 ```
-## Model configuration
+
+## Baseline results 
+### Model configuration
 1. learning rate = 1e-4
 2. max iters = 10000
 3. warmup steps = 2000 
@@ -81,9 +83,49 @@ print(f"Training completed in {execution_time_minutes:.2f} minutes.")
 13. dropout=0.01 
 14. bias=True
 
-## Training & validation loss
-### Epoch : 500
+### Model files 
+![Trained model files - weights and biases](/assets/genai/attention/jc-slm/model)
 
+### Training vs Validation Loss
+### Epoch : 10,000 
+![](/assets/genai/attention/jc-slm/10kep.png)
+
+### Inference output 
+
+**Input text** : "Friends, Romans, countrymen"
+**Output text** : 
+
+Friend, Romans, countrymen tyrant.
+Sh
+Shall slaves,
+Then leave their made.
+Shall I noounds,
+Most noble Caesar,
+eries.
+Stir not resolved,
+I can o’ersway him, weep for I please him come to pieces! Here:
+
+CASSIUS.
+I know not think it is but a noble Roman,
+That himKnow I these fires, why all this._]
+
+Why obscurely prey: theirFly, why, this conspirators.
+You shall sober form of heralds to astonish us.
+
+CASSIUS.
+You are dull, Casca; and those sparks of life
+That should be in a Roman you do want,
+Or else you use not. You look pale and gaze,
+And put on fear and cast yourself in wonder,
+To see the strange impatience of the Heavens:
+But if you would consider the true cause
+Why all these fires,
+
+
+## Training & validation loss analysis for changing epochs
+### Epoch : 100 
+
+### Epoch : 500
 ![](/assets/genai/lfs-assignment3/training-validation-loss.png)
 
 ### Epoch : 4000 
@@ -94,3 +136,10 @@ print(f"Training completed in {execution_time_minutes:.2f} minutes.")
 
 ### Epoch : 20,000
 ![](/assets/genai/attention/jc-slm/20kep.png)
+
+## Training & validation loss analysis for changing learning rates 
+### Epoch : 10,000, learning rate = 1e-4
+![](/assets/genai/attention/jc-slm/10kep.png)
+
+### Epoch : 10,000, learning rate = 1e-3
+
