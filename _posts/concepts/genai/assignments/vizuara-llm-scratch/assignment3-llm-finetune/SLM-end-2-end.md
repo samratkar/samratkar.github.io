@@ -142,4 +142,9 @@ Why all these fires,
 ![](/assets/genai/attention/jc-slm/10kep.png)
 
 ### Epoch : 10,000, learning rate = 1e-3
+![](/assets/genai/attention/jc-slm/lr-1e-3.png)
+
+### Epoch : 10,000, learning rate = 1e-2
+![](/assets/genai/attention/jc-slm/lr-1e-2.png)
+
 
