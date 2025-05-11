@@ -84,7 +84,7 @@ print(f"Training completed in {execution_time_minutes:.2f} minutes.")
 14. bias=True
 
 ### Model files 
-![Trained model files - weights and biases](/assets/genai/attention/jc-slm/model)
+![Trained model files - weights and biases](/assets/genai/slmfromscrat)
 
 ### Training vs Validation Loss
 ### Epoch : 10,000 
