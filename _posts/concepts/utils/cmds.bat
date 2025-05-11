@@ -26,5 +26,9 @@ conda list
 :: remove the environment
 conda remove -n agentic_2_base --all 
 
+:: inkscape 
+inkscape input.svg --export-type=png
+
+
 
 
