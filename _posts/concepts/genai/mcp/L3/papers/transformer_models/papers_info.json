@@ -1,0 +1,62 @@
+{
+  "1210.6111v1": {
+    "title": "Model Validation in Ontology Based Transformations",
+    "authors": [
+      "Jes\u00fas M. Almendros-Jim\u00e9nez",
+      "Luis Iribarne"
+    ],
+    "summary": "Model Driven Engineering (MDE) is an emerging approach of software\nengineering. MDE emphasizes the construction of models from which the\nimplementation should be derived by applying model transformations. The\nOntology Definition Meta-model (ODM) has been proposed as a profile for UML\nmodels of the Web Ontology Language (OWL). In this context, transformations of\nUML models can be mapped into ODM/OWL transformations. On the other hand, model\nvalidation is a crucial task in model transformation. Meta-modeling permits to\ngive a syntactic structure to source and target models. However, semantic\nrequirements have to be imposed on source and target models. A given\ntransformation will be sound when source and target models fulfill the\nsyntactic and semantic requirements. In this paper, we present an approach for\nmodel validation in ODM based transformations. Adopting a logic programming\nbased transformational approach we will show how it is possible to transform\nand validate models. Properties to be validated range from structural and\nsemantic requirements of models (pre and post conditions) to properties of the\ntransformation (invariants). The approach has been applied to a well-known\nexample of model transformation: the Entity-Relationship (ER) to Relational\nModel (RM) transformation.",
+    "pdf_url": "http://arxiv.org/pdf/1210.6111v1",
+    "published": "2012-10-23"
+  },
+  "1310.2279v1": {
+    "title": "A Mathematical Model, Implementation and Study of a Swarm System",
+    "authors": [
+      "Blesson Varghese",
+      "Gerard McKee"
+    ],
+    "summary": "The work reported in this paper is motivated towards the development of a\nmathematical model for swarm systems based on macroscopic primitives. A pattern\nformation and transformation model is proposed. The pattern transformation\nmodel comprises two general methods for pattern transformation, namely a\nmacroscopic transformation and mathematical transformation method. The problem\nof transformation is formally expressed and four special cases of\ntransformation are considered. Simulations to confirm the feasibility of the\nproposed models and transformation methods are presented. Comparison between\nthe two transformation methods is also reported.",
+    "pdf_url": "http://arxiv.org/pdf/1310.2279v1",
+    "published": "2013-10-08"
+  },
+  "2204.07780v1": {
+    "title": "Towards Lightweight Transformer via Group-wise Transformation for Vision-and-Language Tasks",
+    "authors": [
+      "Gen Luo",
+      "Yiyi Zhou",
+      "Xiaoshuai Sun",
+      "Yan Wang",
+      "Liujuan Cao",
+      "Yongjian Wu",
+      "Feiyue Huang",
+      "Rongrong Ji"
+    ],
+    "summary": "Despite the exciting performance, Transformer is criticized for its excessive\nparameters and computation cost. However, compressing Transformer remains as an\nopen problem due to its internal complexity of the layer designs, i.e.,\nMulti-Head Attention (MHA) and Feed-Forward Network (FFN). To address this\nissue, we introduce Group-wise Transformation towards a universal yet\nlightweight Transformer for vision-and-language tasks, termed as\nLW-Transformer. LW-Transformer applies Group-wise Transformation to reduce both\nthe parameters and computations of Transformer, while also preserving its two\nmain properties, i.e., the efficient attention modeling on diverse subspaces of\nMHA, and the expanding-scaling feature transformation of FFN. We apply\nLW-Transformer to a set of Transformer-based networks, and quantitatively\nmeasure them on three vision-and-language tasks and six benchmark datasets.\nExperimental results show that while saving a large number of parameters and\ncomputations, LW-Transformer achieves very competitive performance against the\noriginal Transformer networks for vision-and-language tasks. To examine the\ngeneralization ability, we also apply our optimization strategy to a recently\nproposed image Transformer called Swin-Transformer for image classification,\nwhere the effectiveness can be also confirmed",
+    "pdf_url": "http://arxiv.org/pdf/2204.07780v1",
+    "published": "2022-04-16"
+  },
+  "2504.16361v1": {
+    "title": "Comparing Different Transformer Model Structures for Stock Prediction",
+    "authors": [
+      "Qizhao Chen"
+    ],
+    "summary": "This paper compares different Transformer model architectures for stock index\nprediction. While many studies have shown that Transformers perform well in\nstock price forecasting, few have explored how different structural designs\nimpact performance. Most existing works treat the Transformer as a black box,\noverlooking how specific architectural choices may affect predictive accuracy.\nHowever, understanding these differences is critical for developing more\neffective forecasting models. This study aims to identify which Transformer\nvariant is most suitable for stock forecasting. This study evaluates five\nTransformer structures: (1) encoder-only Transformer, (2) decoder-only\nTransformer, (3) Vanilla Transformer (encoder + decoder), (4) Vanilla\nTransformer without embedding layers, and (5) Vanilla Transformer with\nProbSparse attention. Results show that Transformer-based models generally\noutperform traditional approaches. Transformer with decoder only structure\noutperforms all other models in all scenarios. Transformer with ProbSparse\nattention has the worst performance in almost all cases.",
+    "pdf_url": "http://arxiv.org/pdf/2504.16361v1",
+    "published": "2025-04-23"
+  },
+  "2207.04285v1": {
+    "title": "A Closer Look into Transformer-Based Code Intelligence Through Code Transformation: Challenges and Opportunities",
+    "authors": [
+      "Yaoxian Li",
+      "Shiyi Qi",
+      "Cuiyun Gao",
+      "Yun Peng",
+      "David Lo",
+      "Zenglin Xu",
+      "Michael R. Lyu"
+    ],
+    "summary": "Transformer-based models have demonstrated state-of-the-art performance in\nmany intelligent coding tasks such as code comment generation and code\ncompletion. Previous studies show that deep learning models are sensitive to\nthe input variations, but few studies have systematically studied the\nrobustness of Transformer under perturbed input code. In this work, we\nempirically study the effect of semantic-preserving code transformation on the\nperformance of Transformer. Specifically, 24 and 27 code transformation\nstrategies are implemented for two popular programming languages, Java and\nPython, respectively. For facilitating analysis, the strategies are grouped\ninto five categories: block transformation, insertion/deletion transformation,\ngrammatical statement transformation, grammatical token transformation, and\nidentifier transformation. Experiments on three popular code intelligence\ntasks, including code completion, code summarization and code search,\ndemonstrate insertion/deletion transformation and identifier transformation\nshow the greatest impact on the performance of Transformer. Our results also\nsuggest that Transformer based on abstract syntax trees (ASTs) shows more\nrobust performance than the model based on only code sequence under most code\ntransformations. Besides, the design of positional encoding can impact the\nrobustness of Transformer under code transformation. Based on our findings, we\ndistill some insights about the challenges and opportunities for\nTransformer-based code intelligence.",
+    "pdf_url": "http://arxiv.org/pdf/2207.04285v1",
+    "published": "2022-07-09"
+  }
+}
