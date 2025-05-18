@@ -29,6 +29,16 @@ conda remove -n agentic_2_base --all
 :: inkscape 
 inkscape input.svg --export-type=png
 
+:: convert ipynb file to markdown
+jupyter nbconvert --to markdown pydantic.ipynb --template C:\github\samratkar.github.io\_templates\jekyll.tpl 
 
 
+:: - postgress backup
+cd "C:\Program Files\PostgreSQL\16\bin"
+pg_dump -U postgres -d journal -F c -f backup.dump
+password - admin
+mv -Force backup.dump C:\github\life-journal\jrnls\postgres\
+restore - pg_restore -U your_username -d your_database -F c backup.dmp
 
+:: jekyll serve
+bundle exec jekyll serve 
