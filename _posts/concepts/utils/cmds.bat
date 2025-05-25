@@ -42,3 +42,30 @@ restore - pg_restore -U your_username -d your_database -F c backup.dmp
 
 :: jekyll serve
 bundle exec jekyll serve 
+
+:: uv initialization into a folder. first create the folder and then open a terminal in that folder and do and uv init
+:: this creates python file, requirement files and all in toml. readme and main.py file. 
+uv init
+
+:: creation of .venv folder 
+:: all environments are created here. 
+:: the latest python is taken up and the env is created using that automatically. 
+uv  venv 
+
+:: activate the environment 
+uv .venv\Scripts\activate 
+
+:: adding new libraries to the toml file requirement section 
+uv add "<library_name>"
+
+:: to run the uv app
+uv run 
+
+:: to run an mcp server
+:: by running uv run mcp dev you invoke the mcp inspector!
+uv run mcp dev server/weather.py 
+
+:: to use the mcp server from claude desktop app uv run mcp install 
+uv run mcp install server/weather.py 
+
+

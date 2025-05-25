@@ -1,0 +1,56 @@
+{
+  "gr-qc/0612006v1": {
+    "title": "The Xi-transform for conformally flat space-time",
+    "authors": [
+      "George Sparling"
+    ],
+    "summary": "The Xi-transform is a new spinor transform arising naturally in Einstein's\ngeneral relativity. Here the example of conformally flat space-time is\ndiscussed in detail. In particular it is shown that for this case, the\ntransform coincides with two other naturally defined transforms: one a\ntwo-variable transform on the Lie group SU(2, C), the other a transform on the\nspace of null split octaves. The key properties of the transform are developed.",
+    "pdf_url": "http://arxiv.org/pdf/gr-qc/0612006v1",
+    "published": "2006-12-01"
+  },
+  "1310.1984v2": {
+    "title": "Multiple basic hypergeometric transformation formulas arising from the balanced duality transformation",
+    "authors": [
+      "Yasushi Kajihara"
+    ],
+    "summary": "Some multiple hypergeometric transformation formulas arising from the\nbalanced du- ality transformation formula are discussed through the symmetry.\nDerivations of some transformation formulas with different dimensions are given\nby taking certain limits of the balanced duality transformation. By combining\nsome of them, some transformation formulas for $A_n$ basic hypergeometric\nseries is given. They include some generalizations of Watson, Sears and ${}_8\nW_7$ transformations.",
+    "pdf_url": "http://arxiv.org/pdf/1310.1984v2",
+    "published": "2013-10-08"
+  },
+  "1605.08683v1": {
+    "title": "The Fourier and Hilbert transforms under the Bargmann transform",
+    "authors": [
+      "Xing-Tang Dong",
+      "Kehe Zhu"
+    ],
+    "summary": "There is a canonical unitary transformation from $L^2(\\R)$ onto the Fock\nspace $F^2$, called the Bargmann transform. We study the action of the Bargmann\ntransform on several classical integral operators on $L^2(\\R)$, including the\nfractional Fourier transform, the fractional Hilbert transform, and the wavelet\ntransform.",
+    "pdf_url": "http://arxiv.org/pdf/1605.08683v1",
+    "published": "2016-05-27"
+  },
+  "1403.2188v1": {
+    "title": "Identities for the Ln-transform, the L2n-transform and the P2n transform and their applications",
+    "authors": [
+      "Nese Dernek",
+      "Fatih Aylikci"
+    ],
+    "summary": "In the present paper, the authors introduce several new integral transforms\nincluding the Ln-transform, the L2n-transform and P2n-transform generalizations\nof the classical Laplace transform and the classical Stieltjes transform as\nrespectively. It is shown that the second iterate of the L2n-transform is\nessentially the P2n-transform. Using this relationship, a few new\nParseval-Goldstein type identities are obtained. The theorem and the lemmas\nthat are proven in this article are new useful relations for evaluating\ninfinite integrals of special functions. Some related illustrative examples are\nalso given.",
+    "pdf_url": "http://arxiv.org/pdf/1403.2188v1",
+    "published": "2014-03-10"
+  },
+  "2204.07780v1": {
+    "title": "Towards Lightweight Transformer via Group-wise Transformation for Vision-and-Language Tasks",
+    "authors": [
+      "Gen Luo",
+      "Yiyi Zhou",
+      "Xiaoshuai Sun",
+      "Yan Wang",
+      "Liujuan Cao",
+      "Yongjian Wu",
+      "Feiyue Huang",
+      "Rongrong Ji"
+    ],
+    "summary": "Despite the exciting performance, Transformer is criticized for its excessive\nparameters and computation cost. However, compressing Transformer remains as an\nopen problem due to its internal complexity of the layer designs, i.e.,\nMulti-Head Attention (MHA) and Feed-Forward Network (FFN). To address this\nissue, we introduce Group-wise Transformation towards a universal yet\nlightweight Transformer for vision-and-language tasks, termed as\nLW-Transformer. LW-Transformer applies Group-wise Transformation to reduce both\nthe parameters and computations of Transformer, while also preserving its two\nmain properties, i.e., the efficient attention modeling on diverse subspaces of\nMHA, and the expanding-scaling feature transformation of FFN. We apply\nLW-Transformer to a set of Transformer-based networks, and quantitatively\nmeasure them on three vision-and-language tasks and six benchmark datasets.\nExperimental results show that while saving a large number of parameters and\ncomputations, LW-Transformer achieves very competitive performance against the\noriginal Transformer networks for vision-and-language tasks. To examine the\ngeneralization ability, we also apply our optimization strategy to a recently\nproposed image Transformer called Swin-Transformer for image classification,\nwhere the effectiveness can be also confirmed",
+    "pdf_url": "http://arxiv.org/pdf/2204.07780v1",
+    "published": "2022-04-16"
+  }
+}
