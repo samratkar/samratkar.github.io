@@ -11,3 +11,5 @@ bs4
 arxiv
 pymupdf
 wikipedia
+langchain_huggingface
+sentence-transformers

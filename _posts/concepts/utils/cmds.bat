@@ -52,8 +52,8 @@ uv init
 :: the latest python is taken up and the env is created using that automatically. 
 uv  venv 
 
-:: activate the environment 
-uv .venv\Scripts\activate 
+:: activate the environment. don't run the uv command again. 
+.venv\Scripts\activate 
 
 :: adding new libraries to the toml file requirement section 
 uv add "<library_name>"
