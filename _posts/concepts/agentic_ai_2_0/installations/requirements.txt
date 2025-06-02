@@ -18,3 +18,4 @@ pymupdf
 wikipedia
 pinecone
 numpy==1.26.4
+faiss-cpu
