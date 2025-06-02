@@ -1,3 +1,8 @@
+langchain-community
+faiss-cpu
+langchain_google_genai
+pypdf
+langchain_huggingface
 pydantic
 python-dotenv
 langchain
@@ -11,5 +16,5 @@ bs4
 arxiv
 pymupdf
 wikipedia
-langchain_huggingface
-sentence-transformers
+pinecone
+numpy==1.26.4
