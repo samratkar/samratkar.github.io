@@ -21,3 +21,4 @@ numpy==1.26.4
 faiss-cpu
 wikipedia
 youtube_search
+langgraph
