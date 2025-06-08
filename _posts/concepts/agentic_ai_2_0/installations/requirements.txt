@@ -22,3 +22,5 @@ faiss-cpu
 wikipedia
 youtube_search
 langgraph
+chromadb
+langchain-chroma>=0.1.2
