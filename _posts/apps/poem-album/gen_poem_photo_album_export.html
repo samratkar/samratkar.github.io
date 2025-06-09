@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enamor June 2025</title>
+    <style>
+        .gallery {
+            column-count: 4;
+            column-gap: 20px;
+            padding: 20px;
+        }
+        .gallery img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            break-inside: avoid;
+            display: block;
+        }
+          .poem-container {
+            width: 100%;
+            margin-bottom: 30px;
+            break-inside: avoid;
+            display: block;
+            margin: 0 auto;
+        }
+          .poem {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            text-align: center;
+            max-width: 400px;
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .poem::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            z-index: -1;
+        }
+        
+        .poem h2 {
+            margin: 0 0 20px 0;
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+          .poem p {
+            margin: 15px 0;
+            line-height: 1.6;
+            font-size: 16px;
+            font-style: italic;
+        }
+        
+        /* Export button styles */
+        .export-container {
+            text-align: center;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .export-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+        
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .export-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Loading indicator */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Responsive columns */
+        @media (max-width: 1200px) {
+            .gallery { column-count: 3; }
+        }
+        @media (max-width: 900px) {
+            .gallery { column-count: 2; }
+        }
+        @media (max-width: 600px) {
+            .gallery { column-count: 1; }
+        }    </style>
+    <!-- html2canvas library for exporting to PNG -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>    <h1>Enamor June 2025</h1>
+    <input type="file" id="folderInput" webkitdirectory multiple accept="image/*">
+    
+    <!-- Export button container -->
+    <div class="export-container" id="exportContainer">
+        <button class="export-btn" id="exportBtn" onclick="exportToPNG()">
+            Export as PNG
+        </button>
+    </div>
+    
+    <div id="gallery" class="gallery"></div>
+    
+    <canvas id="hiddenCanvas" style="display:none;"></canvas>      <script>
+        let poemsData = [];
+        
+        // Export gallery to PNG function with better dimension handling
+        async function exportToPNG() {
+            const exportBtn = document.getElementById('exportBtn');
+            const gallery = document.getElementById('gallery');
+            
+            if (!gallery.children.length) {
+                alert('Please load some images first!');
+                return;
+            }
+            
+            // Disable button and show loading state
+            exportBtn.disabled = true;
+            exportBtn.innerHTML = '<span class="loading"></span>Exporting...';
+            
+            try {
+                // Wait for all images to load completely
+                await waitForImagesToLoad();
+                
+                // Force browser to calculate proper layout
+                const rect = gallery.getBoundingClientRect();
+                
+                // Calculate total content height by checking all elements
+                let maxBottom = 0;
+                Array.from(gallery.children).forEach(child => {
+                    const childRect = child.getBoundingClientRect();
+                    const relativeBottom = childRect.bottom - rect.top;
+                    maxBottom = Math.max(maxBottom, relativeBottom);
+                });
+                
+                const exportHeight = Math.max(gallery.scrollHeight, maxBottom + 20);
+                const exportWidth = Math.max(gallery.scrollWidth, rect.width);
+                
+                console.log('Export dimensions:', { 
+                    scrollHeight: gallery.scrollHeight, 
+                    calculatedHeight: maxBottom, 
+                    exportHeight, 
+                    exportWidth 
+                });
+                  // Capture the gallery as canvas with proper dimensions
+                const canvas = await html2canvas(gallery, {
+                    backgroundColor: '#ffffff',
+                    scale: 1.5, // Good balance of quality and performance
+                    useCORS: false, // Not needed with data URLs
+                    allowTaint: false, // Not needed with data URLs
+                    height: exportHeight,
+                    width: exportWidth,
+                    scrollX: 0,
+                    scrollY: 0,
+                    logging: true, // Enable logging for debugging
+                    removeContainer: false,
+                    foreignObjectRendering: false // Better compatibility
+                });
+                
+                // Convert to blob and download
+                canvas.toBlob(function(blob) {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `enamor-photo-album-${new Date().toISOString().split('T')[0]}.png`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    
+                    // Reset button
+                    exportBtn.disabled = false;
+                    exportBtn.innerHTML = 'Export as PNG';
+                }, 'image/png', 0.95);
+                
+            } catch (error) {
+                console.error('Export failed:', error);
+                alert('Export failed. Please try again.');
+                exportBtn.disabled = false;
+                exportBtn.innerHTML = 'Export as PNG';
+            }
+        }
+        
+        // Wait for all images to load completely with progress tracking
+        function waitForImagesToLoad() {
+            return new Promise((resolve) => {
+                const images = document.querySelectorAll('#gallery img');
+                if (images.length === 0) {
+                    resolve();
+                    return;
+                }
+                
+                let loadedCount = 0;
+                const totalImages = images.length;
+                
+                console.log(`Waiting for ${totalImages} images to load...`);
+                
+                function imageLoaded(img, index) {
+                    loadedCount++;
+                    console.log(`Image ${index + 1}/${totalImages} loaded (${img.src.substring(0, 50)}...)`);
+                    
+                    if (loadedCount === totalImages) {
+                        console.log('All images loaded! Starting export...');
+                        // Additional delay to ensure all rendering is complete
+                        setTimeout(resolve, 1000);
+                    }
+                }
+                
+                images.forEach((img, index) => {
+                    if (img.complete && img.naturalHeight !== 0) {
+                        imageLoaded(img, index);
+                    } else {
+                        img.addEventListener('load', () => imageLoaded(img, index));
+                        img.addEventListener('error', () => {
+                            console.warn(`Image ${index + 1} failed to load, continuing...`);
+                            imageLoaded(img, index);
+                        });
+                    }
+                });
+            });
+        }
+          // Function to parse poems.md file and extract individual poems
+        function parsePoemsFile(markdownContent) {
+            console.log('Starting to parse poems.md...');
+            
+            // Split by "---" which appears on its own line between poems
+            const rawSections = markdownContent.split(/\n---\n|\r\n---\r\n|\r\n---\n|\n---\r\n/);
+            console.log(`Found ${rawSections.length} raw sections after splitting by ---`);
+            
+            const poems = [];
+            
+            rawSections.forEach((section, index) => {
+                section = section.trim();
+                console.log(`Processing section ${index + 1}:`, section.substring(0, 100) + '...');
+                
+                if (!section || section.length < 10) {
+                    console.log(`Skipping section ${index + 1} - too short or empty`);
+                    return;
+                }
+                
+                // Look for poem title (starts with ##)
+                const lines = section.split(/\r?\n/);
+                let titleLine = '';
+                let contentLines = [];
+                let foundTitle = false;
+                
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    
+                    if (line.startsWith('## ') && !foundTitle) {
+                        titleLine = line.replace('## ', '').trim();
+                        foundTitle = true;
+                        console.log(`Found poem title: "${titleLine}"`);
+                    } else if (foundTitle && line && !line.startsWith('#') && !line.startsWith('*Generated by')) {
+                        // Only add non-empty lines that aren't headers or footer text
+                        contentLines.push(line);
+                    }
+                }
+                
+                if (titleLine && contentLines.length > 0) {
+                    const poemContent = contentLines.join('\n').trim();
+                    poems.push({
+                        title: titleLine,
+                        content: poemContent
+                    });
+                    console.log(`Successfully parsed poem: "${titleLine}" with ${contentLines.length} lines`);
+                } else {
+                    console.log(`Skipping section ${index + 1} - no valid title or content found`);
+                }
+            });
+            
+            console.log(`PARSING COMPLETE: Successfully extracted ${poems.length} individual poems`);
+            return poems;
+        }
+        
+        // Function to create HTML for a poem
+        function createPoemHtml(title, content) {
+            const stanzas = content.split(/\n\s*\n/).filter(stanza => stanza.trim());
+            const stanzaHtml = stanzas.map(stanza => {
+                const lines = stanza.trim().split('\n').map(line => line.trim()).filter(line => line);
+                return `<p>${lines.join('<br>')}</p>`;
+            }).join('');
+            
+            return `<div class="poem">
+                        <h2>${title}</h2>
+                        ${stanzaHtml}
+                    </div>`;
+        }
+          // Load poems from poems.md file
+        fetch('./poems.md')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(markdownContent => {
+                console.log('Successfully loaded poems.md file');
+                console.log('File content length:', markdownContent.length);
+                console.log('First 200 characters:', markdownContent.substring(0, 200));
+                
+                poemsData = parsePoemsFile(markdownContent);
+                console.log(`✅ SUCCESS: Loaded ${poemsData.length} individual poems from poems.md`);
+                
+                // Log each poem title for verification
+                poemsData.forEach((poem, index) => {
+                    console.log(`Poem ${index + 1}: "${poem.title}"`);
+                });
+            })
+            .catch((error) => {
+                console.error('❌ ERROR loading poems.md:', error);
+                poemsData = [{
+                    title: 'Poem not found',
+                    content: 'Please add poems.md to this folder.'
+                }];
+                console.log('Using fallback poem data');
+            });        document.getElementById('folderInput').addEventListener('change', function(e) {
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = '';
+            const images = [];
+            
+            // Process uploaded image files and convert to data URLs
+            const filePromises = [];
+            for (let file of e.target.files) {
+                if (file.type.startsWith('image/')) {
+                    const promise = new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const img = document.createElement('img');
+                            img.src = e.target.result; // Use data URL instead of blob URL
+                            img.alt = file.name;
+                            img.title = file.name;
+                            img.crossOrigin = 'anonymous'; // Important for canvas export
+                            resolve(img);
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                    filePromises.push(promise);
+                }
+            }
+            
+            // Wait for all images to be converted to data URLs
+            Promise.all(filePromises).then(loadedImages => {
+                images.push(...loadedImages);
+                
+                console.log(`📷 Processing ${images.length} images`);
+                console.log(`📝 Available poems: ${poemsData.length}`);
+                
+                if (images.length === 0) {
+                    console.log('No images selected');
+                    return;
+                }
+                
+                if (poemsData.length === 0) {
+                    console.log('No poems available - poems may not have loaded yet');
+                    return;
+                }
+                
+                // Determine how many poems to use (3-5 poems for variety)
+                const numPoems = Math.min(Math.max(3, Math.floor(images.length / 3)), poemsData.length);
+                console.log(`🎯 Will use ${numPoems} poems for the gallery`);
+                
+                // Select random poems
+                const shuffledPoems = [...poemsData].sort(() => Math.random() - 0.5);
+                const selectedPoems = shuffledPoems.slice(0, numPoems);
+                
+                console.log('🎲 Selected poems:');
+                selectedPoems.forEach((poem, index) => {
+                    console.log(`  ${index + 1}. "${poem.title}"`);
+                });
+                
+                // Create poem containers
+                const poemContainers = [];
+                selectedPoems.forEach((poem, index) => {
+                    const poemContainer = document.createElement('div');
+                    poemContainer.className = 'poem-container';
+                    poemContainer.innerHTML = createPoemHtml(poem.title, poem.content);
+                    poemContainers.push(poemContainer);
+                    console.log(`✨ Created poem card ${index + 1}: "${poem.title}"`);
+                });
+                
+                // Calculate even distribution positions for poems
+                const totalElements = images.length + poemContainers.length;
+                const spacing = Math.floor(totalElements / poemContainers.length);
+                
+                console.log(`📐 Distributing ${poemContainers.length} poems evenly among ${totalElements} total elements`);
+                console.log(`📏 Spacing between poems: approximately every ${spacing} elements`);
+                
+                // Create final ordered array with even distribution
+                const orderedElements = [];
+                let imageIndex = 0;
+                let poemIndex = 0;
+                
+                for (let i = 0; i < totalElements; i++) {
+                    // Determine if this position should have a poem
+                    const shouldPlacePoem = poemIndex < poemContainers.length && 
+                                           (i === Math.floor((poemIndex + 1) * spacing - 1) || 
+                                            (i === totalElements - poemContainers.length + poemIndex && imageIndex >= images.length));
+                    
+                    if (shouldPlacePoem) {
+                        orderedElements.push(poemContainers[poemIndex]);
+                        console.log(`📝 Placed poem "${selectedPoems[poemIndex].title}" at position ${i + 1}`);
+                        poemIndex++;
+                    } else if (imageIndex < images.length) {
+                        orderedElements.push(images[imageIndex]);
+                        imageIndex++;
+                    }
+                }
+                
+                // Append all elements to gallery in the calculated order
+                orderedElements.forEach((element, index) => {
+                    gallery.appendChild(element);
+                });
+                
+                console.log(`🎨 Gallery complete: ${images.length} images + ${poemContainers.length} evenly distributed poem cards`);
+                
+                // Hide the file input button once images are loaded
+                if (images.length > 0) {
+                    document.getElementById('folderInput').style.display = 'none';
+                    // Show the export button
+                    document.getElementById('exportContainer').style.display = 'block';
+                }
+            });
+        });
+
+        function drawPoemOnCanvas(ctx, x, y, w, h, html) {
+            // Draw background
+            const gradient = ctx.createLinearGradient(x, y, x + w, y + h);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            ctx.fillStyle = gradient;
+            ctx.roundRect(x, y, w, h, 15);
+            ctx.fill();
+            ctx.fillStyle = 'rgba(255,255,255,0.1)';
+            ctx.fill();
+            // Draw text (simple extraction)
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.font = 'bold 22px Arial';
+            ctx.fillText('Moments Captured', x + w/2, y + 40);
+            ctx.font = 'italic 15px Arial';
+            const lines = [
+                'In frames of light and shadow cast,',
+                'These memories are meant to last.',
+                'Each image tells a story true,',
+                "Of moments shared 'tween me and you.",
+                '',
+                'Through lens and time we capture here',
+                'The laughter, joy, and those we hold dear.',
+                "A gallery of life's sweet art,",
+                'Each picture etched upon the heart.',
+                '',
+                'So browse these treasures, one by one,',
+                'Each photograph a setting sun',
+                'That froze a moment, pure and bright,',
+                'Forever held in pixel light.'
+            ];
+            let textY = y + 70;
+            lines.forEach(line => {
+                if (line === '') textY += 10;
+                else {
+                    ctx.fillText(line, x + w/2, textY);
+                    textY += 20;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
