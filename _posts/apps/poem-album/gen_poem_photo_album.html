@@ -127,7 +127,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>    <h1>Enamor June 2025</h1>
-    <input type="file" id="folderInput" webkitdirectory multiple accept="image/*">
+    
+    <!-- Step 1: Load poems file -->
+    <div id="poemsInputContainer" style="text-align: center; margin: 20px 0; padding: 20px; background: #f5f5f5; border-radius: 10px;">
+        <h3>Step 1: Load Poems</h3>
+        <p>Select the poems.md file to load all poems:</p>
+        <input type="file" id="poemsInput" accept=".md,.txt" style="margin: 10px;">
+        <div id="poemsStatus" style="margin-top: 10px; font-weight: bold;"></div>
+    </div>
+    
+    <!-- Step 2: Load images -->
+    <div id="imagesInputContainer" style="text-align: center; margin: 20px 0; padding: 20px; background: #f0f8ff; border-radius: 10px; display: none;">
+        <h3>Step 2: Load Images</h3>
+        <p>Select a folder containing your images:</p>
+        <input type="file" id="folderInput" webkitdirectory multiple accept="image/*">
+    </div>
     
     <!-- Export button container -->
     <div class="export-container" id="exportContainer">
@@ -322,36 +336,57 @@
                         <h2>${title}</h2>
                         ${stanzaHtml}
                     </div>`;
-        }
-          // Load poems from poems.md file
-        fetch('./poems.md')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+        }        // Load poems from user-selected file
+        document.getElementById('poemsInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const statusDiv = document.getElementById('poemsStatus');
+            
+            if (!file) {
+                statusDiv.textContent = '';
+                return;
+            }
+            
+            statusDiv.textContent = 'Loading poems...';
+            statusDiv.style.color = 'blue';
+            
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    const markdownContent = event.target.result;
+                    console.log('Successfully loaded poems file');
+                    console.log('File content length:', markdownContent.length);
+                    console.log('First 200 characters:', markdownContent.substring(0, 200));
+                    
+                    poemsData = parsePoemsFile(markdownContent);
+                    console.log(`✅ SUCCESS: Loaded ${poemsData.length} individual poems from file`);
+                    
+                    statusDiv.textContent = `✅ Loaded ${poemsData.length} poems successfully!`;
+                    statusDiv.style.color = 'green';
+                    
+                    // Show the images input section
+                    document.getElementById('imagesInputContainer').style.display = 'block';
+                    
+                    // Log each poem title for verification
+                    poemsData.forEach((poem, index) => {
+                        console.log(`Poem ${index + 1}: "${poem.title}"`);
+                    });
+                } catch (error) {
+                    console.error('❌ ERROR parsing poems file:', error);
+                    statusDiv.textContent = '❌ Error loading poems file. Please check the file format.';
+                    statusDiv.style.color = 'red';
                 }
-                return response.text();
-            })
-            .then(markdownContent => {
-                console.log('Successfully loaded poems.md file');
-                console.log('File content length:', markdownContent.length);
-                console.log('First 200 characters:', markdownContent.substring(0, 200));
-                
-                poemsData = parsePoemsFile(markdownContent);
-                console.log(`✅ SUCCESS: Loaded ${poemsData.length} individual poems from poems.md`);
-                
-                // Log each poem title for verification
-                poemsData.forEach((poem, index) => {
-                    console.log(`Poem ${index + 1}: "${poem.title}"`);
-                });
-            })
-            .catch((error) => {
-                console.error('❌ ERROR loading poems.md:', error);
-                poemsData = [{
-                    title: 'Poem not found',
-                    content: 'Please add poems.md to this folder.'
-                }];
-                console.log('Using fallback poem data');
-            });        document.getElementById('folderInput').addEventListener('change', function(e) {
+            };
+            
+            reader.onerror = function() {
+                statusDiv.textContent = '❌ Error reading the file.';
+                statusDiv.style.color = 'red';
+            };
+            
+            reader.readAsText(file);
+        });
+
+        // Initialize with empty poems data - user must load poems first
+        poemsData = [];document.getElementById('folderInput').addEventListener('change', function(e) {
             const gallery = document.getElementById('gallery');
             gallery.innerHTML = '';
             const images = [];
@@ -392,10 +427,9 @@
                     console.log('No poems available - poems may not have loaded yet');
                     return;
                 }
-                
-                // Determine how many poems to use (3-5 poems for variety)
-                const numPoems = Math.min(Math.max(3, Math.floor(images.length / 3)), poemsData.length);
-                console.log(`🎯 Will use ${numPoems} poems for the gallery`);
+                  // Use all available poems from poems.md file
+                const numPoems = poemsData.length;
+                console.log(`🎯 Will use all ${numPoems} poems from poems.md for the gallery`);
                 
                 // Select random poems
                 const shuffledPoems = [...poemsData].sort(() => Math.random() - 0.5);
@@ -447,15 +481,40 @@
                 // Append all elements to gallery in the calculated order
                 orderedElements.forEach((element, index) => {
                     gallery.appendChild(element);
-                });
+                });                console.log(`🎨 Gallery complete: ${images.length} images + ${poemContainers.length} evenly distributed poem cards`);
                 
-                console.log(`🎨 Gallery complete: ${images.length} images + ${poemContainers.length} evenly distributed poem cards`);
-                
-                // Hide the file input button once images are loaded
+                // Hide UI elements but keep export button - show gallery in full screen
                 if (images.length > 0) {
-                    document.getElementById('folderInput').style.display = 'none';
-                    // Show the export button
+                    // Hide step 1 and step 2 containers
+                    document.getElementById('poemsInputContainer').style.display = 'none';
+                    document.getElementById('imagesInputContainer').style.display = 'none';
+                    
+                    // Hide the title
+                    document.querySelector('h1').style.display = 'none';
+                    
+                    // Show the export button (keep it visible)
                     document.getElementById('exportContainer').style.display = 'block';
+                    
+                    // Make gallery take full screen with minimal top margin for export button
+                    const gallery = document.getElementById('gallery');
+                    gallery.style.margin = '60px 0 0 0'; // Top margin for export button
+                    gallery.style.padding = '10px';
+                    
+                    // Remove body margins/padding for full screen effect
+                    document.body.style.margin = '0';
+                    document.body.style.padding = '0';
+                    
+                    // Position export button at top of screen
+                    const exportContainer = document.getElementById('exportContainer');
+                    exportContainer.style.position = 'fixed';
+                    exportContainer.style.top = '10px';
+                    exportContainer.style.left = '50%';
+                    exportContainer.style.transform = 'translateX(-50%)';
+                    exportContainer.style.zIndex = '1000';
+                    exportContainer.style.backgroundColor = 'rgba(255,255,255,0.9)';
+                    exportContainer.style.padding = '10px';
+                    exportContainer.style.borderRadius = '25px';
+                    exportContainer.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
                 }
             });
         });
