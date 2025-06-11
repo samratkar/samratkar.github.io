@@ -135,12 +135,20 @@
         <input type="file" id="poemsInput" accept=".md,.txt" style="margin: 10px;">
         <div id="poemsStatus" style="margin-top: 10px; font-weight: bold;"></div>
     </div>
-    
-    <!-- Step 2: Load images -->
+      <!-- Step 2: Load images -->
     <div id="imagesInputContainer" style="text-align: center; margin: 20px 0; padding: 20px; background: #f0f8ff; border-radius: 10px; display: none;">
         <h3>Step 2: Load Images</h3>
         <p>Select a folder containing your images:</p>
         <input type="file" id="folderInput" webkitdirectory multiple accept="image/*">
+    </div>
+    
+    <!-- Step 3: Enter album title -->
+    <div id="titleInputContainer" style="text-align: center; margin: 20px 0; padding: 20px; background: #f0fff0; border-radius: 10px; display: none;">
+        <h3>Step 3: Enter Album Title</h3>
+        <p>Enter a title for your photo album:</p>
+        <input type="text" id="albumTitle" placeholder="Enter album title..." style="padding: 10px; margin: 10px; border-radius: 5px; border: 1px solid #ccc; width: 300px; font-size: 16px;">
+        <br>
+        <button id="createAlbumBtn" style="padding: 10px 20px; margin: 10px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">Create Album</button>
     </div>
     
     <!-- Export button container -->
@@ -151,6 +159,11 @@
     </div>
     
     <div id="gallery" class="gallery"></div>
+    
+    <!-- Album title display (hidden initially) -->
+    <div id="albumTitleDisplay" style="display: none; text-align: center; padding: 20px; margin-bottom: 20px;">
+        <h1 style="font-size: 36px; font-weight: bold; margin: 0; color: #333;"></h1>
+    </div>
     
     <canvas id="hiddenCanvas" style="display:none;"></canvas>      <script>
         let poemsData = [];
@@ -383,15 +396,13 @@
             };
             
             reader.readAsText(file);
-        });
+        });        // Initialize with empty poems data - user must load poems first
+        poemsData = [];
+        let loadedImages = [];
+        let albumTitle = '';
 
-        // Initialize with empty poems data - user must load poems first
-        poemsData = [];document.getElementById('folderInput').addEventListener('change', function(e) {
-            const gallery = document.getElementById('gallery');
-            gallery.innerHTML = '';
-            const images = [];
-            
-            // Process uploaded image files and convert to data URLs
+        // Handle Step 2: Images folder selection
+        document.getElementById('folderInput').addEventListener('change', function(e) {
             const filePromises = [];
             for (let file of e.target.files) {
                 if (file.type.startsWith('image/')) {
@@ -399,10 +410,10 @@
                         const reader = new FileReader();
                         reader.onload = function(e) {
                             const img = document.createElement('img');
-                            img.src = e.target.result; // Use data URL instead of blob URL
+                            img.src = e.target.result;
                             img.alt = file.name;
                             img.title = file.name;
-                            img.crossOrigin = 'anonymous'; // Important for canvas export
+                            img.crossOrigin = 'anonymous';
                             resolve(img);
                         };
                         reader.readAsDataURL(file);
@@ -411,113 +422,157 @@
                 }
             }
             
-            // Wait for all images to be converted to data URLs
-            Promise.all(filePromises).then(loadedImages => {
-                images.push(...loadedImages);
+            Promise.all(filePromises).then(images => {
+                loadedImages = images;
+                console.log(`📷 Loaded ${loadedImages.length} images`);
                 
-                console.log(`📷 Processing ${images.length} images`);
-                console.log(`📝 Available poems: ${poemsData.length}`);
-                
-                if (images.length === 0) {
-                    console.log('No images selected');
-                    return;
-                }
-                
-                if (poemsData.length === 0) {
-                    console.log('No poems available - poems may not have loaded yet');
-                    return;
-                }
-                  // Use all available poems from poems.md file
-                const numPoems = poemsData.length;
-                console.log(`🎯 Will use all ${numPoems} poems from poems.md for the gallery`);
-                
-                // Select random poems
-                const shuffledPoems = [...poemsData].sort(() => Math.random() - 0.5);
-                const selectedPoems = shuffledPoems.slice(0, numPoems);
-                
-                console.log('🎲 Selected poems:');
-                selectedPoems.forEach((poem, index) => {
-                    console.log(`  ${index + 1}. "${poem.title}"`);
-                });
-                
-                // Create poem containers
-                const poemContainers = [];
-                selectedPoems.forEach((poem, index) => {
-                    const poemContainer = document.createElement('div');
-                    poemContainer.className = 'poem-container';
-                    poemContainer.innerHTML = createPoemHtml(poem.title, poem.content);
-                    poemContainers.push(poemContainer);
-                    console.log(`✨ Created poem card ${index + 1}: "${poem.title}"`);
-                });
-                
-                // Calculate even distribution positions for poems
-                const totalElements = images.length + poemContainers.length;
-                const spacing = Math.floor(totalElements / poemContainers.length);
-                
-                console.log(`📐 Distributing ${poemContainers.length} poems evenly among ${totalElements} total elements`);
-                console.log(`📏 Spacing between poems: approximately every ${spacing} elements`);
-                
-                // Create final ordered array with even distribution
-                const orderedElements = [];
-                let imageIndex = 0;
-                let poemIndex = 0;
-                
-                for (let i = 0; i < totalElements; i++) {
-                    // Determine if this position should have a poem
-                    const shouldPlacePoem = poemIndex < poemContainers.length && 
-                                           (i === Math.floor((poemIndex + 1) * spacing - 1) || 
-                                            (i === totalElements - poemContainers.length + poemIndex && imageIndex >= images.length));
-                    
-                    if (shouldPlacePoem) {
-                        orderedElements.push(poemContainers[poemIndex]);
-                        console.log(`📝 Placed poem "${selectedPoems[poemIndex].title}" at position ${i + 1}`);
-                        poemIndex++;
-                    } else if (imageIndex < images.length) {
-                        orderedElements.push(images[imageIndex]);
-                        imageIndex++;
-                    }
-                }
-                
-                // Append all elements to gallery in the calculated order
-                orderedElements.forEach((element, index) => {
-                    gallery.appendChild(element);
-                });                console.log(`🎨 Gallery complete: ${images.length} images + ${poemContainers.length} evenly distributed poem cards`);
-                
-                // Hide UI elements but keep export button - show gallery in full screen
-                if (images.length > 0) {
-                    // Hide step 1 and step 2 containers
-                    document.getElementById('poemsInputContainer').style.display = 'none';
-                    document.getElementById('imagesInputContainer').style.display = 'none';
-                    
-                    // Hide the title
-                    document.querySelector('h1').style.display = 'none';
-                    
-                    // Show the export button (keep it visible)
-                    document.getElementById('exportContainer').style.display = 'block';
-                    
-                    // Make gallery take full screen with minimal top margin for export button
-                    const gallery = document.getElementById('gallery');
-                    gallery.style.margin = '60px 0 0 0'; // Top margin for export button
-                    gallery.style.padding = '10px';
-                    
-                    // Remove body margins/padding for full screen effect
-                    document.body.style.margin = '0';
-                    document.body.style.padding = '0';
-                    
-                    // Position export button at top of screen
-                    const exportContainer = document.getElementById('exportContainer');
-                    exportContainer.style.position = 'fixed';
-                    exportContainer.style.top = '10px';
-                    exportContainer.style.left = '50%';
-                    exportContainer.style.transform = 'translateX(-50%)';
-                    exportContainer.style.zIndex = '1000';
-                    exportContainer.style.backgroundColor = 'rgba(255,255,255,0.9)';
-                    exportContainer.style.padding = '10px';
-                    exportContainer.style.borderRadius = '25px';
-                    exportContainer.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+                if (loadedImages.length > 0) {
+                    // Show step 3: title input
+                    document.getElementById('titleInputContainer').style.display = 'block';
                 }
             });
         });
+
+        // Handle Step 3: Create album with title
+        document.getElementById('createAlbumBtn').addEventListener('click', function() {
+            const titleInput = document.getElementById('albumTitle');
+            albumTitle = titleInput.value.trim();
+            
+            if (!albumTitle) {
+                alert('Please enter a title for your album');
+                return;
+            }
+            
+            if (loadedImages.length === 0) {
+                alert('Please load images first');
+                return;
+            }
+            
+            if (poemsData.length === 0) {
+                alert('Please load poems first');
+                return;
+            }
+              createPhotoAlbum();
+        });
+
+        function createPhotoAlbum() {
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = '';
+            
+            console.log(`📷 Processing ${loadedImages.length} images`);
+            console.log(`📝 Available poems: ${poemsData.length}`);
+            console.log(`📖 Album title: "${albumTitle}"`);
+            
+            // Use all available poems from poems.md file
+            const numPoems = poemsData.length;
+            console.log(`🎯 Will use all ${numPoems} poems from poems.md for the gallery`);
+            
+            // Select random poems
+            const shuffledPoems = [...poemsData].sort(() => Math.random() - 0.5);
+            const selectedPoems = shuffledPoems.slice(0, numPoems);
+            
+            console.log('🎲 Selected poems:');
+            selectedPoems.forEach((poem, index) => {
+                console.log(`  ${index + 1}. "${poem.title}"`);
+            });
+            
+            // Create poem containers
+            const poemContainers = [];
+            selectedPoems.forEach((poem, index) => {
+                const poemContainer = document.createElement('div');
+                poemContainer.className = 'poem-container';
+                poemContainer.innerHTML = createPoemHtml(poem.title, poem.content);
+                poemContainers.push(poemContainer);
+                console.log(`✨ Created poem card ${index + 1}: "${poem.title}"`);
+            });
+            
+            // Calculate even distribution positions for poems
+            const totalElements = loadedImages.length + poemContainers.length;
+            const spacing = Math.floor(totalElements / poemContainers.length);
+            
+            console.log(`📐 Distributing ${poemContainers.length} poems evenly among ${totalElements} total elements`);
+            console.log(`📏 Spacing between poems: approximately every ${spacing} elements`);
+            
+            // Create final ordered array with even distribution
+            const orderedElements = [];
+            let imageIndex = 0;
+            let poemIndex = 0;
+            
+            for (let i = 0; i < totalElements; i++) {
+                // Determine if this position should have a poem
+                const shouldPlacePoem = poemIndex < poemContainers.length && 
+                                       (i === Math.floor((poemIndex + 1) * spacing - 1) || 
+                                        (i === totalElements - poemContainers.length + poemIndex && imageIndex >= loadedImages.length));
+                
+                if (shouldPlacePoem) {
+                    orderedElements.push(poemContainers[poemIndex]);
+                    console.log(`📝 Placed poem "${selectedPoems[poemIndex].title}" at position ${i + 1}`);
+                    poemIndex++;
+                } else if (imageIndex < loadedImages.length) {
+                    orderedElements.push(loadedImages[imageIndex]);
+                    imageIndex++;
+                }
+            }
+            
+            // Append all elements to gallery in the calculated order
+            orderedElements.forEach((element, index) => {
+                gallery.appendChild(element);
+            });
+            
+            console.log(`🎨 Gallery complete: ${loadedImages.length} images + ${poemContainers.length} evenly distributed poem cards`);
+            
+            // Hide UI elements and show the album with title
+            if (loadedImages.length > 0) {
+                // Hide all step containers
+                document.getElementById('poemsInputContainer').style.display = 'none';
+                document.getElementById('imagesInputContainer').style.display = 'none';
+                document.getElementById('titleInputContainer').style.display = 'none';
+                
+                // Hide the main title
+                document.querySelector('h1').style.display = 'none';
+                  // Show and set the album title
+                const albumTitleDisplay = document.getElementById('albumTitleDisplay');
+                albumTitleDisplay.querySelector('h1').textContent = albumTitle;
+                albumTitleDisplay.style.display = 'block';
+                albumTitleDisplay.style.position = 'static'; // Changed from fixed to static for export
+                albumTitleDisplay.style.textAlign = 'center';
+                albumTitleDisplay.style.margin = '20px 0';
+                albumTitleDisplay.style.padding = '20px';
+                
+                // Add beautiful line under title
+                const titleElement = albumTitleDisplay.querySelector('h1');
+                titleElement.style.borderBottom = '3px solid #667eea';
+                titleElement.style.paddingBottom = '15px';
+                titleElement.style.marginBottom = '0';
+                
+                // Show the export button
+                document.getElementById('exportContainer').style.display = 'block';
+                
+                // Make gallery take full screen with minimal top margin
+                const gallery = document.getElementById('gallery');
+                gallery.style.margin = '20px 0 0 0'; // Reduced margin since title is now in document flow
+                gallery.style.padding = '10px';
+                
+                // Insert title at the beginning of gallery for export
+                gallery.insertBefore(albumTitleDisplay, gallery.firstChild);
+                
+                // Remove body margins/padding for full screen effect
+                document.body.style.margin = '0';
+                document.body.style.padding = '0';
+                
+                // Position export button at top right corner to avoid overlap
+                const exportContainer = document.getElementById('exportContainer');
+                exportContainer.style.position = 'fixed';
+                exportContainer.style.top = '20px';
+                exportContainer.style.right = '20px'; // Changed from center to right
+                exportContainer.style.left = 'auto';
+                exportContainer.style.transform = 'none'; // Removed center transform
+                exportContainer.style.zIndex = '1000';
+                exportContainer.style.backgroundColor = 'rgba(255,255,255,0.95)';
+                exportContainer.style.padding = '10px';
+                exportContainer.style.borderRadius = '25px';
+                exportContainer.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';}
+        }
 
         function drawPoemOnCanvas(ctx, x, y, w, h, html) {
             // Draw background
