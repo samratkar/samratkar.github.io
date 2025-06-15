@@ -51,6 +51,8 @@ description : "An overview of the Stanford CS229 course on Machine Learning, cov
     
 22. **Practical Tips and Course recaps** - [https://www.youtube.com/watch?v=OftHZYlrK-E&list=PLoROMvodv4rNH7qL6-efu_q2_bPuy0adh&index=22](https://www.youtube.com/watch?v=OftHZYlrK-E&list=PLoROMvodv4rNH7qL6-efu_q2_bPuy0adh&index=22)
     
-23. **Course recap and wrap up** - [https://www.youtube.com/watch?v=_-uzSvC5m60&list=PLoROMvodv4rNH7qL6-efu_q2_bPuy0adh&index=23](https://www.youtube.com/watch?v=_-uzSvC5m60&list=PLoROMvodv4rNH7qL6-efu_q2_bPuy0adh&index=23) 
+23. **Course recap and wrap up** - [https://www.youtube.com/watch?v=_-uzSvC5m60&list=PLoROMvodv4rNH7qL6-efu_q2_bPuy0adh&index=23](https://www.youtube.com/watch?v=_-uzSvC5m60&list=PLoROMvodv4rNH7qL6-efu_q2_bPuy0adh&index=23)
+
+
 
 
