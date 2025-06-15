@@ -1,0 +1,176 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4F46E5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0D9488;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#DC2626;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EA580C;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#f8fafc"/>
+  
+  <!-- Title -->
+  <text x="600" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1e293b">LLM System Architecture</text>
+  
+  <!-- Internet/Users -->
+  <circle cx="100" cy="100" r="30" fill="#60a5fa" filter="url(#shadow)"/>
+  <text x="100" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Users</text>
+  
+  <!-- Load Balancer Layer -->
+  <rect x="250" y="70" width="120" height="60" rx="8" fill="url(#grad1)" filter="url(#shadow)"/>
+  <text x="310" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Load Balancer</text>
+  <text x="310" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">(HAProxy/NGINX)</text>
+  
+  <!-- API Gateway -->
+  <rect x="450" y="70" width="120" height="60" rx="8" fill="url(#grad2)" filter="url(#shadow)"/>
+  <text x="510" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">API Gateway</text>
+  <text x="510" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">(Kong/AWS ALB)</text>
+  
+  <!-- FedProxy -->
+  <rect x="650" y="70" width="120" height="60" rx="8" fill="url(#grad3)" filter="url(#shadow)"/>
+  <text x="710" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">FedProxy</text>
+  <text x="710" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">(Federation)</text>
+  
+  <!-- Internal Server Cluster -->
+  <rect x="200" y="200" width="800" height="500" rx="10" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2" filter="url(#shadow)"/>
+  <text x="220" y="225" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#334155">Internal Server Cluster</text>
+  
+  <!-- WebSocket Handler -->
+  <rect x="230" y="250" width="140" height="60" rx="6" fill="#8b5cf6" filter="url(#shadow)"/>
+  <text x="300" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">WebSocket</text>
+  <text x="300" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Handler</text>
+  
+  <!-- Streaming Service -->
+  <rect x="400" y="250" width="140" height="60" rx="6" fill="#06b6d4" filter="url(#shadow)"/>
+  <text x="470" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Streaming</text>
+  <text x="470" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Service</text>
+  
+  <!-- Request Router -->
+  <rect x="570" y="250" width="140" height="60" rx="6" fill="#f59e0b" filter="url(#shadow)"/>
+  <text x="640" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Request</text>
+  <text x="640" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Router</text>
+  
+  <!-- Guardrails -->
+  <rect x="230" y="350" width="120" height="50" rx="6" fill="#ef4444" filter="url(#shadow)"/>
+  <text x="290" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Guardrails</text>
+  <text x="290" y="388" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">(Safety)</text>
+  
+  <!-- Auxiliary SLMs -->
+  <rect x="370" y="350" width="120" height="50" rx="6" fill="#10b981" filter="url(#shadow)"/>
+  <text x="430" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Auxiliary</text>
+  <text x="430" y="388" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">(SLMs)</text>
+  
+  <!-- Core LLM (CLLM) -->
+  <rect x="510" y="330" width="160" height="90" rx="8" fill="url(#grad1)" filter="url(#shadow)"/>
+  <text x="590" y="365" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Core LLM</text>
+  <text x="590" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white">(CLLM)</text>
+  <text x="590" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">GPU Cluster</text>
+  
+  <!-- Vector DB -->
+  <rect x="230" y="430" width="120" height="50" rx="6" fill="#7c3aed" filter="url(#shadow)"/>
+  <text x="290" y="455" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Vector DB</text>
+  <text x="290" y="468" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">(Embeddings)</text>
+  
+  <!-- Cache Layer -->
+  <rect x="370" y="430" width="120" height="50" rx="6" fill="#f97316" filter="url(#shadow)"/>
+  <text x="430" y="455" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Cache Layer</text>
+  <text x="430" y="468" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">(Redis)</text>
+  
+  <!-- Model Registry -->
+  <rect x="510" y="450" width="120" height="50" rx="6" fill="#6366f1" filter="url(#shadow)"/>
+  <text x="570" y="475" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Model</text>
+  <text x="570" y="488" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Registry</text>
+  
+  <!-- Monitoring -->
+  <rect x="650" y="450" width="120" height="50" rx="6" fill="#14b8a6" filter="url(#shadow)"/>
+  <text x="710" y="475" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Monitoring</text>
+  <text x="710" y="488" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">(Metrics)</text>
+  
+  <!-- Context Store -->
+  <rect x="230" y="510" width="120" height="50" rx="6" fill="#be123c" filter="url(#shadow)"/>
+  <text x="290" y="535" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Context</text>
+  <text x="290" y="548" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Store</text>
+  
+  <!-- Session Manager -->
+  <rect x="370" y="510" width="120" height="50" rx="6" fill="#0891b2" filter="url(#shadow)"/>
+  <text x="430" y="535" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Session</text>
+  <text x="430" y="548" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Manager</text>
+  
+  <!-- Queue System -->
+  <rect x="510" y="530" width="120" height="50" rx="6" fill="#c2410c" filter="url(#shadow)"/>
+  <text x="570" y="555" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Queue</text>
+  <text x="570" y="568" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">(RabbitMQ)</text>
+  
+  <!-- Log Aggregator -->
+  <rect x="650" y="530" width="120" height="50" rx="6" fill="#059669" filter="url(#shadow)"/>
+  <text x="710" y="555" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">Log</text>
+  <text x="710" y="568" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Aggregator</text>
+  
+  <!-- Database -->
+  <rect x="800" y="400" width="160" height="80" rx="8" fill="#374151" filter="url(#shadow)"/>
+  <text x="880" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Database</text>
+  <text x="880" y="445" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">PostgreSQL</text>
+  <text x="880" y="460" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">User Data</text>
+  
+  <!-- GPU Cluster -->
+  <rect x="800" y="300" width="160" height="80" rx="8" fill="#7c2d12" filter="url(#shadow)"/>
+  <text x="880" y="330" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">GPU Cluster</text>
+  <text x="880" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">NVIDIA A100/H100</text>
+  <text x="880" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Model Inference</text>
+  
+  <!-- Connection Lines -->
+  <!-- User to Load Balancer -->
+  <line x1="130" y1="100" x2="250" y2="100" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Load Balancer to API Gateway -->
+  <line x1="370" y1="100" x2="450" y2="100" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- API Gateway to FedProxy -->
+  <line x1="570" y1="100" x2="650" y2="100" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- FedProxy to Internal Servers -->
+  <line x1="710" y1="130" x2="710" y2="200" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="710" y1="200" x2="640" y2="200" stroke="#64748b" stroke-width="2"/>
+  <line x1="640" y1="200" x2="640" y2="250" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Internal connections -->
+  <line x1="300" y1="310" x2="300" y2="350" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="470" y1="310" x2="470" y2="350" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="590" y1="330" x2="590" y2="310" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="590" y1="310" x2="640" y2="310" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  
+  <!-- To external resources -->
+  <line x1="670" y1="375" x2="800" y2="340" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="710" y1="450" x2="800" y2="440" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+  
+  <!-- Legend -->
+  <rect x="30" y="600" width="280" height="180" rx="8" fill="white" stroke="#e2e8f0" stroke-width="1" filter="url(#shadow)"/>
+  <text x="40" y="620" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1e293b">System Flow:</text>
+  <text x="40" y="640" font-family="Arial, sans-serif" font-size="11" fill="#475569">1. Users connect via Load Balancer</text>
+  <text x="40" y="655" font-family="Arial, sans-serif" font-size="11" fill="#475569">2. API Gateway handles auth & routing</text>
+  <text x="40" y="670" font-family="Arial, sans-serif" font-size="11" fill="#475569">3. FedProxy manages federation</text>
+  <text x="40" y="685" font-family="Arial, sans-serif" font-size="11" fill="#475569">4. WebSocket enables real-time comm</text>
+  <text x="40" y="700" font-family="Arial, sans-serif" font-size="11" fill="#475569">5. Guardrails ensure safety</text>
+  <text x="40" y="715" font-family="Arial, sans-serif" font-size="11" fill="#475569">6. Core LLM processes requests</text>
+  <text x="40" y="730" font-family="Arial, sans-serif" font-size="11" fill="#475569">7. Vector DB provides context</text>
+  <text x="40" y="745" font-family="Arial, sans-serif" font-size="11" fill="#475569">8. Streaming delivers responses</text>
+  <text x="40" y="760" font-family="Arial, sans-serif" font-size="11" fill="#475569">9. Monitoring tracks performance</text>
+</svg>
