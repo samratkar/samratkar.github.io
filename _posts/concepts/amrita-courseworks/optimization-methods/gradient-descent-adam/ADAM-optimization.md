@@ -1,5 +1,9 @@
 ## A Survey of Mathematical Optimization Methods for Large Language Model Training
 
+##### Samrat Kar (BL.SC.R4CSE24007) | Amrita Vishwa Vidyapeetham
+
+---
+
 ### Abstract
 
 The unprecedented scale and capabilities of modern Large Language Models (LLMs) are underpinned by sophisticated mathematical optimization techniques. Training these models, which can have hundreds of billions or even trillions of parameters, presents a formidable challenge in navigating a high-dimensional, non-convex loss landscape. This paper provides a comprehensive survey of the pivotal optimization algorithms that have enabled the LLM revolution. We begin with the foundational principles of Stochastic Gradient Descent (SGD) and its variants before delving into the adaptive methods, particularly Adam and its successor, AdamW, which have become the de-facto standards for LLM training. We analyze the theoretical underpinnings of these methods, their practical advantages, and the specific reasons for their widespread adoption. Furthermore, we explore the cutting edge of optimization research, documenting emerging techniques designed to enhance training efficiency, reduce memory footprints, and improve model generalization. These new frontiers include 8-bit optimizers, approximations of second-order methods, and sharpness-aware minimization, all of which are poised to define the next generation of LLM training paradigms.
@@ -474,25 +478,12 @@ The future of optimization for LLMs likely involves combinations of these approa
 The most promising direction may be adaptive, composable optimization frameworks that can automatically select and configure the most appropriate techniques based on the specific characteristics of the model and training data. This would reduce the need for extensive hyperparameter tuning and make advanced optimization accessible to a wider range of researchers and practitioners.
 As these methods mature, we can expect significant reductions in the computational resources required to train state-of-the-art LLMs, potentially democratizing access to these powerful models and enabling new applications that were previously infeasible due to resource constraints.
 
-## 11. Conclusion
 
-ADAM has become the de facto standard optimizer for training Large Language Models due to its robust performance, adaptive learning rates, and relatively low hyperparameter sensitivity. While newer techniques continue to emerge, ADAM's combination of momentum and per-parameter adaptive learning rates has proven particularly effective for navigating the complex loss landscapes of modern LLMs.
-
-The success of ADAM in LLM training demonstrates how critical optimization algorithm choice is for pushing the boundaries of what's possible in deep learning. As models continue to grow in size and complexity, further innovations in optimization will likely play a key role in enabling the next generation of language models.
-
-The journey of optimization for LLMs is a story of continuous refinement and adaptation. We have moved from the simple, noisy updates of SGD to the robust, adaptive, and well-regularized updates of AdamW, which currently reigns as the dominant algorithm for training state-of-the-art models.
-
-However, the field is far from static. The future of LLM optimization lies in tackling the tripartite challenges of **memory efficiency**, **computational speed**, and **generalization**. Innovations like 8-bit optimizers are making training more accessible, advanced methods like Shampoo are re-introducing the power of curvature information in a tractable way, and novel procedures like SAM are redefining the optimization objective itself to prioritize generalization. The co-evolution of these optimization algorithms with model architectures and hardware will continue to be the primary engine driving progress in the remarkable field of generative AI.
-
-Of course. Let's transition from the survey-level overview to a more focused and detailed technical exposition on 8-bit optimizers. This section is structured as a deeper follow-up, suitable for a technical appendix or a specialized chapter in our ongoing research documentation.
-
-***
-
-## 11. **Technical Deep Dive 4.1.1: Mathematical and Implementational Details of 8-bit Optimizers**
+## 10. **Technical Deep Dive 4.1.1: Mathematical and Implementational Details of 8-bit Optimizers**
 
 The high-level motivation for 8-bit optimizers is memory savings. To fully appreciate the ingenuity of these methods, we must analyze the mathematical challenges involved in reducing the precision of optimizer states and the specific techniques developed to overcome them.
 
-### 11.1 The Memory Imperative: A Quantitative Look
+### 10.1 The Memory Imperative: A Quantitative Look
 
 A standard AdamW optimizer maintains two state vectors for each model parameter $\theta$:
 1.  The first moment (momentum) vector, $m_t$.
@@ -511,7 +502,7 @@ This means the optimizer states alone consume **8 bytes for every 4-byte paramet
 
 This memory burden is a primary constraint on the maximum model size and batch size that can be used on a given hardware setup.
 
-### 11.2 The Challenge: The Perils of Naive Quantization
+### 10.2 The Challenge: The Perils of Naive Quantization
 
 The simplest approach would be to cast the 32-bit float values of $m_t$ and $v_t$ directly to 8-bit integers (INT8). An INT8 value can represent integers from -128 to 127. This naive approach fails catastrophically for two main reasons:
 
@@ -519,11 +510,11 @@ The simplest approach would be to cast the 32-bit float values of $m_t$ and $v_t
 
 2.  **Destructive Precision Loss:** The distribution of values within optimizer state tensors is highly non-uniform. It's typically a bell-shaped curve centered near zero, with long tails. A linear quantization scheme would allocate its 256 levels evenly across the entire range. This means the vast majority of values, which are concentrated in a small region near the mean, would be mapped to only a few integer levels. This "rounding off" of subtle but important differences in momentum and variance would destabilize training.
 
-### 11.3 The Solution: Block-wise Dynamic Quantization
+### 10.3 The Solution: Block-wise Dynamic Quantization
 
 The work by Dettmers et al. (2022) introduced a robust method that successfully overcomes these challenges. It is built on two core mathematical principles: **Block-wise Quantization** and **Dynamic (Quantile) Quantization**.
 
-##### 1. Block-wise Quantization
+#### 10.3.1. Block-wise Quantization
 
 Instead of quantizing the entire tensor (e.g., the millions of values in the momentum state for a single layer) with a single scaling factor, the tensor is first partitioned into smaller, independent blocks or chunks. A typical block size might be 2048 elements.
 
@@ -544,7 +535,7 @@ Let $X$ be a tensor of optimizer states (e.g., $m_t$ or $v_t$) that we want to q
 
 By storing one FP32 constant ($c_b$) for every 2048 INT8 values, the memory overhead is minimal, but the fidelity of the restored values is dramatically improved.
 
-##### 2. Dynamic (Quantile) Quantization
+#### 10.3.2. Dynamic (Quantile) Quantization
 
 While block-wise processing solves the dynamic range problem, linear scaling still does not optimally handle the non-uniform distribution of values. To address this, a non-linear, dynamic quantization scheme is used. **Quantile quantization** is a powerful method for this.
 
@@ -560,7 +551,7 @@ Instead of mapping the range $[-c_b, c_b]$ linearly to [-127, 127], we build a "
 
 This ensures that our 256 available "precision levels" are spent wisely, capturing the structure of the dense part of the distribution with high fidelity.
 
-#### The Full 8-bit AdamW Algorithm in Practice
+#### 10.3.3 The Full 8-bit AdamW Algorithm in Practice
 
 Here is a step-by-step breakdown of how these concepts are integrated into the training loop for a single parameter update.
 
@@ -599,9 +590,8 @@ Excellent question. The connection between a low-level mathematical technique li
 
 Here is a detailed breakdown of how 8-bit optimizers are helpful in the aviation domain, framed for industry stakeholders like aerospace engineers, safety officers, and operations managers.
 
----
 
-### **Executive Summary: The Bridge from Optimization Theory to Aviation Practice**
+### 11 **Executive Summary: The Bridge from Optimization Theory to Aviation Practice**
 
 In aviation, the adoption of new technology is governed by strict requirements for **safety, reliability, certification, and operational efficiency**. Advanced AI and Large Language Models (LLMs) offer transformative potential, from predictive maintenance to intelligent pilot assistance. However, these models are notoriously large and resource-intensive.
 
@@ -609,7 +599,7 @@ In aviation, the adoption of new technology is governed by strict requirements f
 
 **The 8-bit optimizer solution:** By drastically reducing the memory footprint of the AI development process (by up to 75%), 8-bit optimizers act as a catalyst. They do not change *what* the AI model does, but they fundamentally change *how* it is built and deployed. This makes advanced AI more accessible, affordable, and adaptable for aviation-specific needs, directly impacting safety, cost, and operational readiness.
 
-### **Specific Applications and Benefits in the Aviation Domain**
+### 12 **Specific Applications and Benefits in the Aviation Domain**
 
 Let's explore concrete use cases where the benefits of 8-bit optimizers become tangible.
 
@@ -654,10 +644,19 @@ Airlines and MRO (Maintenance, Repair, and Overhaul) centers operate on tight ma
 
 In conclusion, 8-bit optimizers are a foundational technology. They are the "lightweight composite material" of the AI software world—they don't change the laws of physics, but by making the components lighter and more efficient, they enable the construction of far more advanced and capable systems that can operate effectively within the demanding constraints of the aviation industry.
 
-# Gradient Descent Optimization: From Basics to ADAM in LLMs
-Optimization algorithms are at the heart of training neural networks. These algorithms aim to minimize a loss function by adjusting the weights and biases of the model. The choice of optimization algorithm affects convergence speed, final model accuracy, and overall training stability.
+## 13. Conclusion
 
-### 6. References
+ADAM has become the de facto standard optimizer for training Large Language Models due to its robust performance, adaptive learning rates, and relatively low hyperparameter sensitivity. While newer techniques continue to emerge, ADAM's combination of momentum and per-parameter adaptive learning rates has proven particularly effective for navigating the complex loss landscapes of modern LLMs.
+
+The success of ADAM in LLM training demonstrates how critical optimization algorithm choice is for pushing the boundaries of what's possible in deep learning. As models continue to grow in size and complexity, further innovations in optimization will likely play a key role in enabling the next generation of language models.
+
+The journey of optimization for LLMs is a story of continuous refinement and adaptation. We have moved from the simple, noisy updates of SGD to the robust, adaptive, and well-regularized updates of AdamW, which currently reigns as the dominant algorithm for training state-of-the-art models.
+
+However, the field is far from static. The future of LLM optimization lies in tackling the tripartite challenges of **memory efficiency**, **computational speed**, and **generalization**. Innovations like 8-bit optimizers are making training more accessible, advanced methods like Shampoo are re-introducing the power of curvature information in a tractable way, and novel procedures like SAM are redefining the optimization objective itself to prioritize generalization. The co-evolution of these optimization algorithms with model architectures and hardware will continue to be the primary engine driving progress in the remarkable field of generative AI.
+
+Of course. Let's transition from the survey-level overview to a more focused and detailed technical exposition on 8-bit optimizers. This section is structured as a deeper follow-up, suitable for a technical appendix or a specialized chapter in our ongoing research documentation.
+
+### 14. References
 
 -   Anil, R., Gupta, V., Koren, T., & Singer, Y. (2020). *Second Order Optimization for Deep Learning*.
 -   Brown, T. B., Mann, B., Ryder, N., et al. (2020). *Language Models are Few-Shot Learners*. In Advances in Neural Information Processing Systems (NeurIPS).
