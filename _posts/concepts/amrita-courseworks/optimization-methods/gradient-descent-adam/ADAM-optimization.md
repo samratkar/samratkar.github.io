@@ -13,11 +13,11 @@ The choice of optimization algorithm is not merely a detail but a critical compo
 
 This survey aims to provide a clear and detailed overview of the mathematical optimization methods that form the bedrock of LLM training. We will trace the evolution of these methods, from the classic SGD to the current industry-standard AdamW, explaining the mathematical intuition and practical significance of each step. Finally, we will cast our gaze toward the future, outlining active research areas that promise to make LLM training more accurate, efficient, and accessible.
 
-## 1. Introduction to Gradient Descent
+## 2. Introduction to Gradient Descent
 
 Gradient descent is a first-order iterative optimization algorithm used to find the minimum of a function. In machine learning, we use gradient descent to minimize a loss function by iteratively moving in the direction of steepest descent as defined by the negative of the gradient.
 
-### 1.1 The Basic Concept
+### 2.1 The Basic Concept
 
 At its core, gradient descent works by:
 1. Starting at an initial point
@@ -34,7 +34,7 @@ Where:
 - $\eta$ is the learning rate (step size)
 - $\nabla_\theta J(\theta_t)$ is the gradient of the objective function J with respect to parameters θ
 
-### 1.2 Types of Gradient Descent
+### 2.2 Types of Gradient Descent
 
 There are three main variants of gradient descent:
 
@@ -50,7 +50,7 @@ There are three main variants of gradient descent:
 - Pros: Balances computational efficiency with update stability
 - Cons: Requires tuning of batch size
 
-### 1.3 Challenges with Basic Gradient Descent
+### 2.3 Challenges with Basic Gradient Descent
 
 Despite its simplicity, gradient descent faces several challenges:
 
@@ -62,11 +62,11 @@ Despite its simplicity, gradient descent faces several challenges:
 
 These challenges led to the development of more sophisticated optimization algorithms, including ADAM.
 
-## 2. Advanced Gradient Descent Techniques
+## 3. Advanced Gradient Descent Techniques
 
 Before diving into ADAM, let's explore some key improvements to the basic gradient descent algorithm.
 
-### 2.1 Momentum
+### 3.1 Momentum
 
 Momentum adds a fraction of the previous update vector to the current update:
 
@@ -82,7 +82,7 @@ Where:
 - Helps overcome local minima and plateaus
 - Reduces oscillations in ravines
 
-### 2.2 RMSprop
+### 3.2 RMSprop
 
 RMSprop (Root Mean Square Propagation) adapts the learning rate for each parameter based on the historical gradient:
 
@@ -99,11 +99,11 @@ Where:
 - Handles different scales of gradients effectively
 - Mitigates the effects of vanishing/exploding gradients
 
-### 2. Foundational Methods: From SGD to Momentum
+## 4. Foundational Methods: From SGD to Momentum
 
 The core of training deep neural networks is to find the set of parameters $\theta$ that minimizes a loss function $L(\theta)$, typically averaged over a large dataset. The primary tool for this is gradient descent.
 
-#### 2.1. Stochastic Gradient Descent (SGD)
+### 4.1. Stochastic Gradient Descent (SGD)
 
 Given the massive size of modern datasets, computing the true gradient over the entire dataset for each parameter update is infeasible. Stochastic Gradient Descent (SGD) addresses this by approximating the gradient using a small, random subset of the data called a mini-batch. The parameter update rule is:
 
@@ -116,7 +116,7 @@ where:
 
 While simple and computationally light, vanilla SGD suffers from high variance in its updates, leading to noisy convergence paths. It can struggle in regions with steep ravines, where it tends to oscillate across the ravine instead of moving along its bottom, slowing down progress.
 
-#### 2.2. SGD with Momentum
+### 4.2. SGD with Momentum
 
 To mitigate the issues of SGD, the Momentum method was introduced (Polyak, 1964). It adds a fraction $\beta$ of the previous update vector to the current one, acting as a velocity term that accumulates over steps.
 
@@ -125,16 +125,16 @@ $\theta_{t+1} = \theta_t - v_{t+1}$
 
 The momentum term $v_t$ helps to dampen oscillations in directions of high curvature and accelerate convergence in consistent directions. For LLMs, while not the primary choice, the concept of momentum is a critical building block for more advanced optimizers.
 
-### 3. The Era of Adaptive Methods: Adam and AdamW
+## 5. The Era of Adaptive Methods: Adam and AdamW
 
 A key limitation of SGD and its momentum variant is the use of a single, global learning rate $\eta$ for all parameters. In a model as complex as an LLM, some parameters (e.g., those associated with rare tokens) may require larger updates, while others need finer adjustments. This observation led to the development of adaptive learning rate methods.
 
-#### 3.1. Precursors: AdaGrad and RMSProp
+### 5.1. Precursors: AdaGrad and RMSProp
 
 - **AdaGrad (Adaptive Gradient):** (Duchi et al., 2011) adapts the learning rate for each parameter by dividing it by the square root of the sum of all past squared gradients. This works well for sparse data but has a major flaw: the accumulated sum grows indefinitely, causing the learning rate to shrink to near zero, prematurely halting training.
 - **RMSProp (Root Mean Square Propagation):** (Hinton, unpublished) fixes AdaGrad's issue by using an exponentially decaying moving average of squared gradients, preventing the denominator from growing monotonically.
 
-#### 3.2. Adam: Adaptive Moment Estimation
+### 5.2. Adam: Adaptive Moment Estimation
 
 Adam (Kingma & Ba, 2015) is arguably the most significant optimization algorithm in the deep learning era. It elegantly combines the ideas of **Momentum** (first-order moment estimation) and **RMSProp** (second-order moment estimation).
 
@@ -161,7 +161,7 @@ Here, $\beta_1$ and $\beta_2$ are decay rates (typically ~0.9 and ~0.999), and $
 
 ADAM (Adaptive Moment Estimation) combines the benefits of both momentum and RMSprop, making it one of the most popular optimization algorithms in deep learning.
 
-### 3.1 The Algorithm
+### 5.3 The ADAM Algorithm
 
 ADAM maintains two moving averages:
 1. First moment (mean) of gradients - similar to momentum
@@ -189,7 +189,7 @@ Where:
 
 ![](./adam-in-llms.mermaid)
 
-### 3.2 Key Benefits of ADAM
+### 5.4 Key Benefits of ADAM
 
 1. **Adaptive Learning Rates**: Different parameters have different effective learning rates
 2. **Momentum**: Captures the concept of momentum for faster convergence
@@ -198,7 +198,7 @@ Where:
 5. **Minimal Hyperparameter Tuning**: Often works well with default values
 
 
-#### 3.3. AdamW: Decoupled Weight Decay
+### 5.5 AdamW: Decoupled Weight Decay
 
 LLMs are massively over-parameterized and thus highly prone to overfitting. A standard regularization technique is L2 regularization (also known as weight decay), which adds a penalty term $\frac{\lambda}{2}||\theta||^2$ to the loss function. When applied to Adam, the gradient of this term, $\lambda\theta$, gets incorporated into the adaptive learning rate mechanism.
 
@@ -214,7 +214,7 @@ Loshchilov & Hutter (2019) observed that this coupling is suboptimal. In Adam, t
 
 This seemingly small change ensures that weight decay acts as intended—shrinking all weights towards zero at a rate proportional to their magnitude, independent of their gradient history. This improved regularization has proven critical for achieving state-of-the-art results in LLM training, making **AdamW the current de-facto standard optimizer.**
 
-### 3.3 ADAM Variants
+### 5.6 ADAM Variants
 
 Several variants of ADAM have been proposed to address specific challenges:
 
@@ -224,11 +224,11 @@ Several variants of ADAM have been proposed to address specific challenges:
 
 **AdaBelief**: Incorporates "belief" in the gradient update to improve stability and generalization.
 
-## 4. ADAM in Large Language Models (LLMs)
+## 6. ADAM in Large Language Models (LLMs)
 
 Large Language Models like GPT, BERT, and Claude present unique optimization challenges due to their massive parameter space and complex loss landscapes.
 
-### 4.1 Why ADAM is Preferred for LLMs
+### 6.1 Why ADAM is Preferred for LLMs
 
 1. **Parameter Scale**: LLMs contain billions of parameters that benefit from adaptive learning rates
 2. **Training Stability**: ADAM's bias correction and momentum properties help maintain stable updates
@@ -236,7 +236,7 @@ Large Language Models like GPT, BERT, and Claude present unique optimization cha
 4. **Different Learning Dynamics**: Different layers in LLMs often need different effective learning rates
 5. **Sparse Gradients**: Many parameters in LLMs receive sparse gradient updates, which ADAM handles well
 
-### 4.2 Implementation Considerations in LLMs
+### 6.2 Implementation Considerations in LLMs
 
 When applying ADAM to LLMs, several practical considerations come into play:
 
@@ -253,7 +253,7 @@ When applying ADAM to LLMs, several practical considerations come into play:
 
 **Gradient Clipping**: To prevent exploding gradients, the norm of gradients is often clipped to a maximum value.
 
-### 4.3 Hyperparameter Selection for LLMs
+### 6.3 Hyperparameter Selection for LLMs
 
 Typical hyperparameters for ADAM when training LLMs:
 - $\beta_1$: 0.9 (first moment decay rate)
@@ -262,7 +262,7 @@ Typical hyperparameters for ADAM when training LLMs:
 - Learning rate: 1e-4 to 5e-5 (model-specific)
 - Weight decay: 0.01 to 0.1 (model-specific)
 
-### 4.4 ADAM's Impact on LLM Training
+### 6.4 ADAM's Impact on LLM Training
 
 The adoption of ADAM has been crucial for enabling:
 1. Training larger models without excessive hyperparameter tuning
@@ -271,9 +271,9 @@ The adoption of ADAM has been crucial for enabling:
 4. More stable training across different architectural choices
 5. Effective fine-tuning of pre-trained models
 
-## 5. Case Studies and Practical Examples
+## 7. Case Studies and Practical Examples
 
-### 5.1 Training GPT Models with ADAM
+### 7.1 Training GPT Models with ADAM
 
 OpenAI's GPT models rely heavily on ADAM optimization. For GPT-3, researchers used:
 - ADAM optimizer with β₁=0.9, β₂=0.95, ε=1e-8
@@ -282,7 +282,7 @@ OpenAI's GPT models rely heavily on ADAM optimization. For GPT-3, researchers us
 - Gradient clipping at 1.0
 - Weight decay of 0.1
 
-### 5.2 BERT Training Approach
+### 7.2 BERT Training Approach
 
 Google's BERT used:
 - ADAM optimizer with β₁=0.9, β₂=0.999, ε=1e-8
@@ -290,7 +290,7 @@ Google's BERT used:
 - Warmup over first 10,000 steps
 - L2 weight decay of 0.01
 
-### 5.3 LLaMA Training
+### 7.3 LLaMA Training
 
 Meta's LLaMA models used:
 - AdamW optimizer
@@ -298,7 +298,7 @@ Meta's LLaMA models used:
 - Weight decay of 0.1
 - Batch size of 4M tokens
 
-## 6. Limitations and Challenges
+## 8. Limitations and Challenges
 
 Despite its popularity, ADAM has some limitations when applied to LLMs:
 
@@ -308,7 +308,7 @@ Despite its popularity, ADAM has some limitations when applied to LLMs:
 4. **Computational Overhead**: Slightly more computation per step than simpler optimizers
 5. **Distributed Training Complexity**: Requires careful implementation in distributed settings
 
-## 7. Future Directions
+## 9. Future Directions
 While ADAM has become the standard optimizer for training LLMs, active research continues to push the boundaries of what's possible in optimization. As models grow larger and training becomes more resource-intensive, several promising research directions may shape the next generation of optimization algorithms. This expanded section explores these future directions in greater detail.
 
 Research continues on improving optimization for LLMs:
@@ -319,11 +319,11 @@ Research continues on improving optimization for LLMs:
 4. **Sparsity-Aware Optimizers**: Better handling of the sparse nature of updates in large models
 5. **Scale-Invariant Optimizers**: Automatically adapting to different parameter scales
 
-### 4. New Frontiers and Research Directions
+### 10. New Frontiers and Research Directions
 
 While AdamW is a robust workhorse, the scale of future models demands further innovation. Research is now focused on several key areas to improve efficiency and accuracy.
 
-#### 4.1. Memory-Efficient Optimizers: 8-bit Adam
+#### 10.1. Memory-Efficient Optimizers: 8-bit Adam
 
 A significant bottleneck in training large models is the memory footprint of the optimizer states. For every model parameter stored in 32-bit floating-point (FP32), a standard Adam optimizer requires two additional parameters for its states ($m_t$ and $v_t$), also in FP32. For a 175B parameter model, the optimizer states alone can consume over 1.4 Terabytes of GPU memory.
 
@@ -334,7 +334,7 @@ A significant bottleneck in training large models is the memory footprint of the
 
 These techniques can reduce the optimizer's memory footprint by a factor of 4x with negligible impact on model performance, making it possible to train larger models on existing hardware or fine-tune models on consumer-grade GPUs.
 
-#### 4.2. Approximating Second-Order Information: Shampoo
+#### 10.2. Approximating Second-Order Information: Shampoo
 
 First-order methods like Adam only use the gradient (slope). Second-order methods, which use the Hessian matrix (curvature of the loss landscape), can converge much faster in theory. However, for a model with $N$ parameters, computing and inverting the Hessian is an $O(N^3)$ operation, which is utterly infeasible for LLMs where $N$ is in the billions.
 
@@ -342,7 +342,7 @@ First-order methods like Adam only use the gradient (slope). Second-order method
 
 For a weight matrix $W \in \mathbb{R}^{m \times n}$, Shampoo maintains separate preconditioners for the input and output dimensions. This drastically reduces the complexity from inverting an $(mn \times mn)$ matrix to inverting two smaller matrices ($m \times m$ and $n \times n$). Recent work has shown that Shampoo can outperform AdamW in terms of final model quality and convergence speed on large-scale models, although it can have higher computational overhead per step.
 
-#### 4.3. Improving Generalization: Sharpness-Aware Minimization (SAM)
+#### 10.3. Improving Generalization: Sharpness-Aware Minimization (SAM)
 
 It has been observed that the flatness of the loss minimum found by an optimizer correlates strongly with a model's generalization ability. Models that converge to sharp, narrow minima are often brittle and perform poorly on out-of-distribution data.
 
@@ -360,12 +360,12 @@ This is a minimax problem. SAM solves it with a two-step update:
 
 By doing so, SAM forces the optimizer to find a parameter configuration where not only the loss is low, but the loss also remains low in a surrounding neighborhood. The primary drawback of SAM is that it requires two forward-backward passes per update (one to find $\epsilon$, one to compute the final gradient), doubling the computational cost. Research is ongoing to develop more efficient variants of SAM.
 
-### 7.2 Second-Order Methods
+### 10.4 Second-Order Methods
 
-#### 7.2.1 Limitations of First-Order Methods
+#### 10.4.1 Limitations of First-Order Methods
 ADAM and other popular optimizers are first-order methods, using only gradient information. They don't account for the curvature of the loss landscape, which can lead to slower convergence in highly curved regions.
 
-#### 7.2.2 Advanced Approaches
+#### 10.4.2 Advanced Approaches
 K-FAC (Kronecker-Factored Approximate Curvature)
 K-FAC approximates the Fisher information matrix using Kronecker products, making second-order optimization practical for large neural networks. Research has shown that K-FAC can significantly accelerate training while maintaining or improving final model quality.
 Shampoo Optimizer
@@ -373,12 +373,12 @@ Shampoo approximates a full-matrix adaptive algorithm with computational efficie
 Quasi-Newton Methods
 Limited-memory BFGS (L-BFGS) and other quasi-Newton methods approximate second-order information without explicitly computing the Hessian matrix. Recent research is making these methods more practical for large-scale deep learning.
 
-### 7.3 Neural Optimizers
-#### 7.3.1 Learning to Optimize
+### 10.5 Neural Optimizers
+#### 10.5.1 Learning to Optimize
 
 Rather than hand-designing optimization algorithms, neural optimizers use machine learning to discover optimal update rules. This meta-learning approach could potentially discover optimization strategies that outperform human-designed algorithms.
 
-#### 7.3.2 Promising Directions
+#### 10.5.2 Promising Directions
 Learned Update Rules
 Systems like "Learned Optimizer" use RNNs to learn update rules from data. These learned optimizers can adapt to specific problem domains and loss landscapes, potentially outperforming general-purpose optimizers like ADAM.
 Meta-Learning for Optimization
@@ -386,11 +386,11 @@ Meta-learning approaches train on collections of similar tasks to learn optimiza
 Self-Tuning Optimizers
 Recent research explores optimizers that can automatically adapt their hyperparameters during training, reducing the need for extensive hyperparameter tuning experiments.
 
-### 7.4 Sparsity-Aware Optimizers
-#### 7.4.1 The Sparsity Challenge
+### 10.6 Sparsity-Aware Optimizers
+#### 10.6.1 The Sparsity Challenge
 LLM training often involves sparse gradients, where only a small subset of parameters receive meaningful updates in each step. Standard optimizers don't fully exploit this sparsity pattern.
 
-#### 7.4.2 Advanced Approaches
+#### 10.6.2 Advanced Approaches
 
 ##### Sparse-to-Dense Training
 
@@ -402,11 +402,11 @@ Methods like "Top-K" training only update the parameters with the largest gradie
 Dynamic Sparse Training
 Instead of using a fixed architecture, dynamic sparse training methods adaptively determine which parameters to update during training, focusing computational resources on the most important parameters at each stage.
 
-### 7.5 Scale-Invariant Optimizers
-#### 7.5.1 The Scale Challenge
+### 10.7 Scale-Invariant Optimizers
+#### 10.7.1 The Scale Challenge
 Different layers in LLMs may operate at vastly different scales, making it difficult to find a single learning rate that works well for all parameters. While ADAM partially addresses this through adaptive learning rates, further improvements are possible.
 
-#### 7.5.2 Advanced Approaches
+#### 10.7.2 Advanced Approaches
 Layer-wise Adaptive Rate Scaling (LARS)
 LARS adjusts learning rates based on the ratio of parameter norm to gradient norm, enabling stable training with much larger batch sizes. This approach has shown promise for extremely large models.
 LAMB (Layer-wise Adaptive Moments optimizer for Batch training)
@@ -414,11 +414,11 @@ LAMB combines the benefits of LARS with ADAM, providing layer-wise adaptation al
 Normalized Direction-Preserving Adam (ND-Adam)
 ND-Adam normalizes gradients to preserve their direction while adapting their magnitude, addressing scale variation issues across layers more effectively than standard ADAM.
 
-### 7.6 Federated and Distributed Optimization
-#### 7.6.1 The Distribution Challenge
+### 10.8 Federated and Distributed Optimization
+#### 10.8.1 The Distribution Challenge
 Training very large LLMs requires distributed computing across many devices. However, standard optimization algorithms were not designed with massive parallelism in mind.
 
-#### 7.6.2 Advanced Approaches
+#### 10.8.2 Advanced Approaches
 Federated Averaging
 This approach trains local models on decentralized data and periodically averages parameters. Recent research is making federated learning more efficient and robust, potentially enabling collaborative training of LLMs across organizations without sharing raw data.
 Decentralized Optimization
@@ -426,12 +426,12 @@ Rather than using a parameter server architecture, decentralized optimization me
 Compressed Communication
 Methods like PowerSGD and QSGD reduce communication overhead by compressing gradients before sharing them between workers. This is particularly important for large LLMs where communication can become the primary bottleneck.
 
-### 7.7 Hybrid and Composite Optimizers
+### 10.9 Hybrid and Composite Optimizers
 
-#### 7.7.1 No One-Size-Fits-All Solution
+#### 10.9.1 No One-Size-Fits-All Solution
 Different phases of training (early vs. late) and different parts of the model (embeddings vs. attention layers) may benefit from different optimization strategies.
 
-#### 7.7.2 Advanced Approaches
+#### 10.9.2 Advanced Approaches
 Phase-Dependent Optimization
 Using different optimizers or hyperparameters at different phases of training. For example, using higher learning rates with ADAM early in training, then switching to SGD with momentum for better generalization in later stages.
 Layer-Specific Optimizers
@@ -439,42 +439,42 @@ Applying different optimization algorithms to different components of the model.
 Composite Optimization
 Rather than choosing a single algorithm, composite optimizers combine multiple update rules, selecting the most appropriate one for each parameter based on its recent update history.
 
-#### 7.8 Energy-Efficient Optimization
-##### 7.8.1 The Energy Challenge
+#### 10.10 Energy-Efficient Optimization
+##### 10.10.1 The Energy Challenge
 Training large LLMs consumes enormous amounts of energy. There's growing interest in optimization methods that reduce energy consumption without sacrificing model quality.
-##### 7.8.2 Advanced Approaches
+##### 10.10.2 Advanced Approaches
 Mixed Precision with Dynamic Loss Scaling
 Training models using lower precision (FP16 or bfloat16) dramatically reduces memory and computation requirements. Advanced loss scaling techniques maintain numerical stability while benefiting from the efficiency of lower precision.
 Efficient Attention Optimizers
 Specialized optimizers for attention mechanisms that exploit the unique structure of self-attention to reduce computational overhead during training.
 Early Stopping with Uncertainty Estimation
 Advanced techniques for determining the optimal point to stop training based on uncertainty estimates, avoiding wasted computation once improvements become marginal.
-### 7.9 Hardware-Aware Optimization
-#### 7.9.1 The Hardware Gap
+### 10.11 Hardware-Aware Optimization
+#### 10.11.1 The Hardware Gap
 Standard optimization algorithms don't account for the specific capabilities and limitations of modern AI accelerators like GPUs, TPUs, and specialized ASIC chips.
-#### 7.9.2 Advanced Approaches
+#### 10.11.2 Advanced Approaches
 Hardware-Aware Training (HAT)
 Optimization methods that adapt to the specific characteristics of the underlying hardware, such as memory hierarchy, compute units, and communication bandwidth.
 Training-Aware Chip Design
 Co-designing optimization algorithms alongside specialized hardware. For example, chips with dedicated circuits for efficiently computing ADAM updates.
 Optimizer-in-Memory Architectures
 Novel computing architectures that perform optimizer updates directly in memory, reducing data movement and dramatically improving energy efficiency.
-### 7.10 Curriculum and Progressive Optimization
-#### 7.10.1 The Learning Efficiency Challenge
+### 10.12 Curriculum and Progressive Optimization
+#### 10.12.1 The Learning Efficiency Challenge
 Training LLMs by randomly sampling from the entire dataset may not be the most efficient approach. There's growing interest in methods that optimize the order and difficulty of training examples.
-#### 7.10.2 Advanced Approaches
+#### 10.12.2 Advanced Approaches
 Difficulty-Based Curriculum Learning
 Progressively increasing the difficulty of training examples based on the model's current capabilities. This can lead to faster convergence and better final performance.
 Importance Sampling
 Dynamically adjusting the sampling probability of different examples based on their current difficulty for the model. Examples that produce larger gradients may be sampled more frequently.
 Progressive Growing of LLMs
 Starting with a smaller model and progressively growing it during training, similar to techniques used in image generation models like GANs. This approach can stabilize early training and reduce overall computational requirements.
-### 7.11 Conclusion: Towards More Efficient LLM Training
+### 10.13 Conclusion: Towards More Efficient LLM Training
 The future of optimization for LLMs likely involves combinations of these approaches, tailored to specific model architectures, hardware configurations, and training objectives. As models continue to grow in size and complexity, innovations in optimization will be crucial for making training more efficient, accessible, and environmentally sustainable.
 The most promising direction may be adaptive, composable optimization frameworks that can automatically select and configure the most appropriate techniques based on the specific characteristics of the model and training data. This would reduce the need for extensive hyperparameter tuning and make advanced optimization accessible to a wider range of researchers and practitioners.
 As these methods mature, we can expect significant reductions in the computational resources required to train state-of-the-art LLMs, potentially democratizing access to these powerful models and enabling new applications that were previously infeasible due to resource constraints.
 
-## 8. Conclusion
+## 11. Conclusion
 
 ADAM has become the de facto standard optimizer for training Large Language Models due to its robust performance, adaptive learning rates, and relatively low hyperparameter sensitivity. While newer techniques continue to emerge, ADAM's combination of momentum and per-parameter adaptive learning rates has proven particularly effective for navigating the complex loss landscapes of modern LLMs.
 
@@ -488,11 +488,11 @@ Of course. Let's transition from the survey-level overview to a more focused and
 
 ***
 
-### **Technical Deep Dive 4.1.1: Mathematical and Implementational Details of 8-bit Optimizers**
+## 11. **Technical Deep Dive 4.1.1: Mathematical and Implementational Details of 8-bit Optimizers**
 
 The high-level motivation for 8-bit optimizers is memory savings. To fully appreciate the ingenuity of these methods, we must analyze the mathematical challenges involved in reducing the precision of optimizer states and the specific techniques developed to overcome them.
 
-#### The Memory Imperative: A Quantitative Look
+### 11.1 The Memory Imperative: A Quantitative Look
 
 A standard AdamW optimizer maintains two state vectors for each model parameter $\theta$:
 1.  The first moment (momentum) vector, $m_t$.
@@ -511,7 +511,7 @@ This means the optimizer states alone consume **8 bytes for every 4-byte paramet
 
 This memory burden is a primary constraint on the maximum model size and batch size that can be used on a given hardware setup.
 
-#### The Challenge: The Perils of Naive Quantization
+### 11.2 The Challenge: The Perils of Naive Quantization
 
 The simplest approach would be to cast the 32-bit float values of $m_t$ and $v_t$ directly to 8-bit integers (INT8). An INT8 value can represent integers from -128 to 127. This naive approach fails catastrophically for two main reasons:
 
@@ -519,7 +519,7 @@ The simplest approach would be to cast the 32-bit float values of $m_t$ and $v_t
 
 2.  **Destructive Precision Loss:** The distribution of values within optimizer state tensors is highly non-uniform. It's typically a bell-shaped curve centered near zero, with long tails. A linear quantization scheme would allocate its 256 levels evenly across the entire range. This means the vast majority of values, which are concentrated in a small region near the mean, would be mapped to only a few integer levels. This "rounding off" of subtle but important differences in momentum and variance would destabilize training.
 
-#### The Solution: Block-wise Dynamic Quantization
+### 11.3 The Solution: Block-wise Dynamic Quantization
 
 The work by Dettmers et al. (2022) introduced a robust method that successfully overcomes these challenges. It is built on two core mathematical principles: **Block-wise Quantization** and **Dynamic (Quantile) Quantization**.
 
