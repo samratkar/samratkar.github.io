@@ -7,7 +7,7 @@ author : Samrat
 date: 2025-06-27
 --- 
 
-<video width="320" height="240" controls>
+<video width="500" height="240" controls>
   <source src="/assets/poems/videos/blessing-returns.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
