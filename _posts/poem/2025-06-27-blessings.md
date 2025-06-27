@@ -1,0 +1,65 @@
+---
+layout : mermaid
+type : poem
+title: "When the Blessing Returns"
+description: "A poem about perseverance, legacy, and the return of blessings."
+author : Samrat
+date: 2025-06-27
+--- 
+
+<video width="320" height="240" controls>
+  <source src="/assets/poems/videos/blessing-returns.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+## When the blessing returns
+
+**When the blessing returns**
+When the stream seems dry,
+The farmer toils but does not sigh.
+He sees around the land, river and lakes,
+From there he draws in water.
+Skillfully tending burrows and channels,
+He knows the secret of the soil.
+He knows the mystery of the rain.
+He runs, chases, and catches the clouds.
+But does not wait for the sky to open,
+He looks out for the hidden springs.
+And the remote wells,
+He knows the art of patience.
+Persevering and persisting, gritfully, 
+He toils and works, day and night,
+He is marred with sweat, dust and blood.
+But he discovers, he builds, he creates, he learns.
+Bringing life to the land barren,
+Pulling in water from unknown lands!
+
+**The transformation**
+The stream transformed into a gushing river.
+The land, once dry, now fertile and green,
+The blessing returned.
+Maybe the farmer is no more.
+But his legacy lives. 
+The land is alive, the river flows,
+The blessing returns, again and again.
+
+**The legacy**
+What was important was not the love was not lost,
+No love was wasted.
+The drying stream did rejuvenate,
+Only that the wait was vast,
+But it was all worth it.
+For it is the privilege of being human,
+To wait, to toil, to learn,
+And leave behind a legacy,
+A legacy of love, of life, of hope.
+When the blessing returns. 
+
+---
+Samrat Kar
+Friday, 12:22pm, 6-27-25
+Bangalore, India
+
+---
+
+
