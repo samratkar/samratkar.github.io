@@ -6,13 +6,13 @@ description: "Flight from Bangalore to Dubai"
 author : Samrat Kar
 date: 2025-06-28
 ---
-## Day 1 - 6-28-2025 - Saturday - Bangalore to Madrid
+## Day 1 - 6-28-2025 - Saturday - Bangalore to Madrid  
 
 ![](/assets/travels/spain25/day1-sat-6-28-25-blr-mad.png)
 
 ---
 
-## The best ride
+## The best ride  
 
 Mercedes E Class, and Mohd Siddique! 
 Few life lessons I learnt from Mr. Siddique - 
@@ -27,7 +27,7 @@ Few life lessons I learnt from Mr. Siddique -
 
 ---
 
-## The wish tree 
+## The wish tree  
 
 Glass blowers doing an incredible job!
 The wish tree made of glass
