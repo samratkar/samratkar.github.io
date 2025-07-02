@@ -13,12 +13,10 @@ tags: [spain, travels, 2025]
 
 ---
 
-<iframe width="560" height="315" 
-        src="/assets/travels/spain25/day4-video.mp4" 
-        frameborder="0" 
-        allowfullscreen>
-</iframe>
-
+<video width="640" height="360" controls>
+  <source src="/assets/travels/spain25/day4-video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ---
 
