@@ -20,8 +20,18 @@ tags: [spain, travels, 2025]
 
 ---
 
+---
 
-## It was jus the second day, but it like lifetime of friendship
+<video width="640" height="360" controls>
+  <source src="/assets/travels/spain25/day4-video.mp4" type="video2/mp4">
+  Your browser does not support the video tag.
+</video>
+
+---
+
+
+
+## It was just the second day, but it like lifetime of friendship
 
 The team at Spain have been so warm and welcoming. It feels like we have been friends for a lifetime.   
 Today was which took the delight of food and friendship to a new level.  
