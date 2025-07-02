@@ -23,7 +23,7 @@ tags: [spain, travels, 2025]
 ---
 
 <video width="640" height="360" controls>
-  <source src="/assets/travels/spain25/day4-video.mp4" type="video2/mp4">
+  <source src="/assets/travels/spain25/day4-video2.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
