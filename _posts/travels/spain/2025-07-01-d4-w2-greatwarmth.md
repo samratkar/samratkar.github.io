@@ -14,10 +14,11 @@ tags: [spain, travels, 2025]
 ---
 
 <iframe width="560" height="315" 
-        src="C:\github\samratkar.github.io\assets\travels\spain25\day4-video.mp4" 
+        src="/assets/travels/spain25/day4-video.mp4" 
         frameborder="0" 
         allowfullscreen>
 </iframe>
+
 
 ---
 
