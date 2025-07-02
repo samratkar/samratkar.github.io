@@ -19,6 +19,7 @@ tags: [spain, travels, 2025]
         allowfullscreen>
 </iframe>
 
+---
 
 
 ## It was jus the second day, but it like lifetime of friendship
