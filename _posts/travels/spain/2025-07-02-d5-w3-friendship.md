@@ -74,7 +74,7 @@ Beautifying and giving meaning to the moral.
 When you discover their music   
 resonating with yours,  
 And your own ideals, your own masters,   
-Your own struggles, you own brokenness,  
+Your own struggles, your own brokenness,  
 Sharing space with theirs!  
 When you and they do not exist in separation,  
 Rather we all blend into purple one,   
