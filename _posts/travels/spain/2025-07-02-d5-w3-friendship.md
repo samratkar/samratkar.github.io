@@ -1,3 +1,11 @@
+---
+layout : mermaid
+title : "Day 5 - The Friendship"
+date : 2025-07-03
+tags : [spain, travels, friendship, poetry]
+author : Samrat Kar
+---
+
 
 ## Day 5 : The Friendship : 7-02-2025 : Wednesday
 
