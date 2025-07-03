@@ -9,7 +9,7 @@ tags: [spain, travels, 2025]
 
 ---
 
-![](/assets/travels/spain25/day4-mon-7-1-25-warmhospitality.png)
+![](/assets/travels/spain25/day4-tue-7-1-25-warmhospitality.png)
 
 ---
 
