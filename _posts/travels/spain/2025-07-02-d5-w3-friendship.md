@@ -11,7 +11,7 @@ author : Samrat Kar
 
 ---
 
-![](/assets/travels/spain25/day6-thur-7-3-25-twinkle.png)
+![](/assets/travels/spain25/day5-wed-7-2-25-friendship.png)
 
 ---
 
