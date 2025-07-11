@@ -3,6 +3,10 @@ layout : mermaid
 type : concept
 title : "GAN - Generative Adversarial Networks"
 ---
+
+## Explain the architecture of a standard Generative Adversarial Network (GAN). 
+Describe the roles of the generator and discriminator, including the input and output of each network. Use a diagram to illustrate the interaction between the two components.
+
 ## Introduction
 Generative Adversarial Networks (GANs) are a class of machine learning frameworks designed for unsupervised learning. They consist of two neural networks, the **generator** and the **discriminator**, which are trained simultaneously through **adversarial processes**. The generator creates fake data, while the discriminator evaluates the authenticity of the data, leading to improved performance in generating realistic samples.
 [GAN generated images](https://thispersondoesnotexist.com/)
@@ -78,7 +82,20 @@ This single value function $V(D,G)$ is the objective function for the GAN, which
 - The first term $\mathbb{E}_{x \sim p_{data}(x)}[\log D(x)]$ represents the discriminator's ability to correctly classify real data samples as real.
 - The second term $\mathbb{E}_{z \sim p_{z}(z)}[\log(1 - D(G(z)))]$ represents the discriminator's ability to correctly classify generated (fake) data samples as fake. 
 
+### Overall GAN design
+
+![](/images/genai/gan-sys.svg)
+### Discriminator 
+![](/images/genai/gan-flowchart.svg)
+
+### Generator
+![](/images/genai/generator.svg)
+
+## What are the typical loss functions used in GANs for both the generator and discriminator? 
+Write down the mathematical formulation and explain how these loss functions guide the training process.
+
 #### Discriminator Loss function ($L_D$)
+
 $\mathbb{E}_{x \sim p_{data}(x)}[\log D(x)]$ : Reward for correctly identifying real data
 E_z~p_z(z)[log(1 - D(G(z)))]: Reward for correctly identifying fake data
 Higher V(D,G) = Better discriminator performance
@@ -111,13 +128,6 @@ To address the vanishing gradient problem, the generator loss is often modified 
 
 **$$L_G = \mathbb{E}_{z \sim p_{z}(z)}[\log D(G(z))]$$**
 
-### Overall GAN design
-![](/images/genai/gan-sys.svg)
-### Discriminator 
-![](/images/genai/gan-flowchart.svg)
-
-### Generator
-![](/images/genai/generator.svg)
 
 ### Training the Discriminator 
 Randomly initialize the weights of both the generator and discriminator networks.
@@ -495,6 +505,7 @@ train(g_model, d_model, gan_model, dataset, latent_dim)
 ```
 
 ---
+## Describe the training procedure of a GAN. Why is GAN training considered unstable? Discuss the techniques that are used to stabilize GAN training.
 
 ## The Training Procedure of a Generative Adversarial Network (GAN)
 
@@ -580,6 +591,8 @@ By combining several of these techniques, researchers and practitioners can achi
 
 
 ---
+
+## What are the most commonly used metrics for evaluating the performance of GANs? Compare Inception Score (IS), Frechet Inception Distance (FID), and Precision/Recall for generative models. 
 
 ## Evaluating the Performance of Generative Adversarial Networks (GANs) 
 Evaluating the performance of Generative Adversarial Networks (GANs) is challenging because there isn't a single, universally agreed-upon metric that perfectly captures both the **fidelity (quality)** and **diversity** of generated samples, which are the two key aspects of a good generative model.
@@ -710,6 +723,10 @@ Define a threshold $\delta$.
 
 In practice, **FID is currently the most widely adopted and preferred single metric** for evaluating GANs, especially for image synthesis tasks, because it balances the assessment of both fidelity and diversity by comparing the statistical properties of real and generated features. However, for a comprehensive understanding of a GAN's performance and to diagnose specific issues like mode collapse, using **Precision and Recall in conjunction with FID** provides a more complete picture. IS is still sometimes used for quick checks or in domains where Inception features are particularly relevant, but its limitations are well-acknowledged.
 
+---
+
+## Why is FID generally considered more reliable than IS for measuring GAN output quality? What are the limitations of both?
+
 ### FID is considered more reliable that Inception Score (IS) because:
 
 Frechet Inception Distance (FID) is generally considered more reliable than Inception Score (IS) for measuring GAN output quality due to a fundamental difference in what they compare and how they handle the two critical aspects of generative models: **fidelity (quality)** and **diversity**.
@@ -761,6 +778,9 @@ Despite their widespread use, both IS and FID have important limitations:
 In conclusion, FID's strength lies in its **direct comparison of feature distributions between real and generated data**, making it a more comprehensive and reliable indicator of overall GAN performance (both quality and diversity) than IS. However, both metrics are ultimately constrained by the choice of the feature extractor (Inception v3) and have their own methodological limitations that researchers continue to explore and address with newer metrics like KID, PPL, and adapted Precision/Recall.
 
 ---
+
+## Describe a scenario where two GANs have similar FID scores but very different visual results. What might cause this discrepancy?
+
 ## Similar FID Scores, Different Visual Results
 It's indeed possible for two GANs to yield similar FID scores while producing visually distinct results. This discrepancy highlights the limitations of quantitative metrics like FID, which aim to capture complex visual phenomena using statistical approximations.
 
@@ -810,6 +830,8 @@ This discrepancy arises primarily from how FID approximates distribution similar
 In essence, FID provides a statistical summary of the distance between two distributions. While it's a good proxy, it doesn't perfectly reflect all nuances of human visual perception. A GAN that is extremely good at generating a subset of the data (high quality, low diversity) can sometimes achieve a similar FID to a GAN that is moderately good across the entire data distribution (good diversity, slightly lower average quality), depending on how the errors in mean and covariance balance out in the FID formula. This scenario underscores the importance of **human visual inspection** alongside quantitative metrics when evaluating GAN performance.
 
 ---
+
+## Design a metric or method to evaluate the diversity and realism of GAN-generated images in an unlabelled dataset. Justify your approach.
 
 ## An approach to evaluate the diversity and realism of GAN generated images
 
@@ -918,6 +940,10 @@ A good GAN would have **low ANND-RG** and **low PAS**.
 
 This proposed method provides a strong foundation for evaluating unlabelled GAN outputs by focusing on interpretable measures of coverage and fidelity in a perceptually relevant feature space.
 
+---
+
+## Illustrate the architecture of the DCGAN generator. Explain how random noise input is transformed into a synthetic image.What activation functions are typically used in DCGANs, and why?
+
 ## Deep Convolutional GANs (DCGANs)
 Deep Convolutional GANs (DCGANs) are a specific type of Generative Adversarial Network (GAN) that utilizes deep convolutional neural networks (CNNs) in both the generator and discriminator components. They were introduced to improve the stability and quality of GAN training, particularly for image generation tasks.
 
@@ -962,6 +988,10 @@ Deep Convolutional GANs (DCGANs) are a specific type of Generative Adversarial N
 
 ### Summary
 DCGANs represent a significant advancement in the field of generative models, particularly for image synthesis. By leveraging deep convolutional networks, they achieve high-quality image generation while addressing many of the stability issues that plagued earlier GAN architectures. Their design principles have influenced a wide range of subsequent GAN variants and applications, making them a foundational model in the generative AI landscape.
+
+---
+
+## Compare and contrast the architecture of a vanilla GAN with that of a DCGAN (Deep Convolutional GAN). What improvements does DCGAN offer, and why are convolutional layers preferred in image-based GAN tasks?
 
 ## Comparison of GANs with DCGANs
 
@@ -1036,7 +1066,7 @@ Excellent question — and a core concept in generative deep learning. Let’s c
 
 ---
 
-Great follow-up — because while **DCGANs** offer big improvements over vanilla GANs, they’re still notoriously tricky to train. Let’s unpack the most common challenges you’d face when training a DCGAN:
+## What are some common challenges faced during the training of DCGANs (e.g., mode collapse, vanishing gradients)?
 
 ---
 
@@ -1151,6 +1181,8 @@ I’ll explain both parts clearly:
 
 ---
 
+## Explain how techniques like batch normalization and LeakyReLU help improve the stability of DCGAN training. What is the significance of removing pooling layers and using strided convolutions instead?
+
 ## 📊 How **Batch Normalization** and **LeakyReLU** Improve DCGAN Stability
 
 ### ✅ **Batch Normalization (BatchNorm)**
@@ -1242,16 +1274,19 @@ DCGAN made the generator and discriminator **fully convolutional** with no hand-
 
 These carefully chosen architectural changes in DCGAN — **BatchNorm, LeakyReLU, and replacing pooling with strided convolutions** — collectively made training much more stable, expressive, and capable of producing realistic, high-quality images compared to earlier GANs.
 
-Would you like a quick sketch diagram or code snippet of a typical DCGAN architecture using these components? I’d be happy to add that too. 🚀
+---
 
-Great — this is a deep and rich comparison of **four powerful GAN variants**:
+## Compare the architecture, training methods,loss functions and formulas and performance of  Conditional GAN, CycleGAN and StyleGAN and Pix2Pix.
+
+## In what scenarios would you prefer one over the other? Support your answer with examples and describe how its architecture differs from a standard GAN. Highlight its use case and any novel components it introduces.
+
+**four powerful GAN variants**:
 
 * **Conditional GAN (cGAN)**
 * **CycleGAN**
 * **Pix2Pix**
 * **StyleGAN**
 
-Let’s compare them across the key axes you mentioned:
 
 ---
 
@@ -1367,7 +1402,7 @@ Let’s compare them across the key axes you mentioned:
 
 ---
 
-## 🎯 TL;DR: Which GAN for What?
+## 🎯 Which GAN for What?
 
 | Scenario                                    | Best Model | Why?                                                  |
 | ------------------------------------------- | ---------- | ----------------------------------------------------- |
@@ -1375,18 +1410,6 @@ Let’s compare them across the key axes you mentioned:
 | Have paired input-output image data         | Pix2Pix    | Supervised training = high-fidelity image translation |
 | Only have unpaired domain data              | CycleGAN   | Works without paired data (e.g., Monet ↔ photo)       |
 | Need photorealistic, high-resolution images | StyleGAN   | Industry-leading image generation and style mixing    |
-
----
-
-Would you like a comparative chart with visual examples or diagrams next? I can create one to visually show the architectural differences.
-
-Excellent — let’s address this properly and practically.
-I’ll go through **Conditional GAN, Pix2Pix, CycleGAN, and StyleGAN** one by one in a structured way:
-
-* **When you'd use it**
-* **How its architecture differs from a vanilla GAN**
-* **Key novel components**
-* **Example use case**
 
 ---
 
@@ -1493,7 +1516,7 @@ When you need **photorealistic, high-resolution, high-diversity image generation
 
 ---
 
-## 🎯 TL;DR
+## 🎯 Summary
 
 * **Use cGAN when you need conditional control over outputs.**
 * **Use Pix2Pix for supervised image translation with paired datasets.**
@@ -1501,6 +1524,8 @@ When you need **photorealistic, high-resolution, high-diversity image generation
 * **Use StyleGAN for ultra-realistic, controllable high-res image generation.**
 
 ---
+
+## Explain various StyleGAN techniques
 
 ## Various Style GAN techniques
 
