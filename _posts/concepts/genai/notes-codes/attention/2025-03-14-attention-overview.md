@@ -108,8 +108,6 @@ This computes a weighted sum of the values based on the similarity between the q
 ## Compare the encoder-based models (like BERT) with decoder-only models (like GPT). 
 **What are their respective strengths and weaknesses?**
 
-Excellent question — it gets to the core of how different transformer architectures are tailored for different kinds of NLP tasks. Let’s compare **encoder-based models (like BERT)** and **decoder-only models (like GPT)** in terms of their architecture, strengths, weaknesses, and typical use cases.
-
 ---
 
 ## 📊 Encoder-based Models (e.g., **BERT**)
@@ -209,7 +207,7 @@ Excellent question — it gets to the core of how different transformer architec
 
 ---
 
-## 📖 Final Thought:
+## 📖 Summary on usage:
 
 * Use **BERT-like models** for tasks where understanding of the entire input context is crucial (classification, QA, embeddings).
 * Use **GPT-like models** for tasks requiring fluent, contextually-aware text generation or where framing the problem as text prediction makes sense.
@@ -247,8 +245,6 @@ graph TD
 •	Few-shot learning
 •	In-context learning
 How are they enabled by LLMs like GPT-3/4?
-
-Excellent — this is a foundational topic in how modern LLMs like GPT-3/4 achieve remarkable generalization without traditional fine-tuning. Let’s carefully unpack these concepts and see how models like GPT enable them.
 
 ---
 
@@ -350,7 +346,7 @@ Now, with in-context learning:
 
 ---
 
-## ✅ Final Thought:
+## ✅ Conclusion:
 
 This capability — in-context learning — is arguably the **most disruptive innovation introduced by large autoregressive LLMs**. It transformed them from static, narrow models into highly flexible generalists.
 
@@ -358,7 +354,7 @@ This capability — in-context learning — is arguably the **most disruptive in
 
 ```mermaid
 
-graph TB
+graph LR
   subgraph "Zero-shot Learning"
     A1([Instruction]) --> A2([Task Input])
     A2 --> A3([Model Response])
@@ -384,8 +380,6 @@ graph TB
 ```
 
 ## You are given a chatbot powered by an LLM. What techniques can improve the relevance, safety, and factual accuracy of its responses?
-
-Excellent question — this gets to the heart of deploying responsible, useful, and reliable AI systems. Let’s carefully break down proven techniques that can improve **relevance**, **safety**, and **factual accuracy** of chatbot/LLM responses:
 
 ---
 
