@@ -768,9 +768,6 @@ flowchart TD
 
 Synthetic data bootstrapping — when paired with rigorous filtering and fairness auditing — offers a scalable, efficient, and ethically sound way to enhance LLM training pipelines.
 
-Would you like me to prototype a sample synthetic data augmentation script (say using GPT-2 or T5) or a fairness bias test framework as well? I’d be happy to.
-
-
 
 ## The main idea of attention
 The evolution of NLP has been as follows -
