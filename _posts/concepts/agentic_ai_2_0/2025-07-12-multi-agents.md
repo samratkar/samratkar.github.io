@@ -4,6 +4,7 @@ layout : mermaid
 author : Samrat Kar
 date : 2025-07-12
 ---
+### Topics
 
 - [x] What is an LLM based system?
 - [x] How is an LLM based system different from a traditional software system?
@@ -23,3 +24,7 @@ date : 2025-07-12
   - [ ] build and deploy RAG app with pinecone serverless 
   - [ ] build a web RAG chatbot using langchain 
   - [ ] open source RAG with Nomic's new embedding model 
+
+### Working code 
+
+1. [RAG | Langgraph workflow | Decide to choose RAG or simple LLM](https://github.com/samratkar/samratkar.github.io/blob/main/_posts/concepts/agentic_ai_2_0/3-Langraph/langgraph_intro.ipynb)
