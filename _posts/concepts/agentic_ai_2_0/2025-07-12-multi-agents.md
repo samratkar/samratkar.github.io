@@ -27,4 +27,4 @@ date : 2025-07-12
 
 ### Working code 
 
-1. [RAG | Langgraph workflow | Decide to choose RAG or simple LLM](https://github.com/samratkar/samratkar.github.io/blob/main/_posts/concepts/agentic_ai_2_0/3-Langraph/langgraph_intro.ipynb)
+1. [RAG -> Langgraph workflow -> Decide to choose RAG or simple LLM](https://github.com/samratkar/samratkar.github.io/blob/main/_posts/concepts/agentic_ai_2_0/3-Langraph/langgraph_intro.ipynb)
