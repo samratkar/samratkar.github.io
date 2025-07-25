@@ -7,6 +7,8 @@ date : 2025-07-12
 
 ### Prompt Template 
 
+@research 
+
 A prompt template in LangChain is a structured way to create and manage prompts for language models. It allows you to define reusable prompt formats with placeholders that can be dynamically filled with different values.
 
 ```python
