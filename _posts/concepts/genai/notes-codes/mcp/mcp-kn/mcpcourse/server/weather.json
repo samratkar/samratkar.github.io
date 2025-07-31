@@ -1,0 +1,13 @@
+"mcpServers": {
+    "weather": {
+                "command": "c:\\users\\samra\\.local\\bin\\uv.EXE",
+                "args": [
+                    "run",
+                    "--with",
+                    "mcp[cli]",
+                    "mcp",
+                    "run",
+                    "C:\\github\\samratkar.github.io\\_posts\\concepts\\genai\\notes-codes\\mcp\\mcp-kn\\mcpcourse\\server\\weather.py"
+                ]
+            }
+    }
