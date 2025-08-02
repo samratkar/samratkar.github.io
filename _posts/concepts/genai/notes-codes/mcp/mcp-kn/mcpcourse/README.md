@@ -7,5 +7,6 @@ steps of installations -
 **install in cluade desktop the mcp server**
 4. `uv run mcp install weather.py` 
 5. for the claude desktop to work, the mcp inspector has to be connected first! 
+6. `uv add mcp-use`
 
 

@@ -51,7 +51,7 @@ async def get_alerts(state: str) -> str:
         return "No active alerts for this state."
 
     alerts = [format_alert(feature) for feature in data["features"]]
-    return "\n---\n".join(alerts)
+    return "\n---Message from MCP server---\n".join(alerts)
 
 @mcp.resource("config://app")
 def get_config() -> str:
