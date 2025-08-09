@@ -343,9 +343,9 @@ react_graph = workflow.compile()
 display(Image(react_graph.get_graph().draw_mermaid_png()))
 
 
-# query = "what is the weather of AZ?"
+query = "what is the weather of AZ?"
 # query = "what is the GDP of USA?"
-query = "Who is the president of USA today?"
+# query = "Who is the president of USA today?"
 # query = "Who is the president of India?"
 # query = "What is the stock price of Apple?"
 # query = "What is the stock price of Tesla?"
