@@ -119,36 +119,45 @@ def divide(a: int, b: int) -> float:
 
 @tool
 def get_alerts(state: str) -> str:
-    """
-    Get weather alerts for a US state from a local MCP weather server.
+    """Get weather alerts for a US state from MCP server."""
     
-    Args:
-        state (str): Two-letter US state code (e.g., 'AZ', 'CA', 'NY')
-    
-    Returns:
-        str: Weather alerts information for the state
-    """
-    async def get_weather_alerts():
-        from mcp_use import MCPClient
-        
-        # Use the same config file as your working client
-        config_file = "mcpserver.json"
-        client = MCPClient.from_config_file(config_file)
-        # Wrap everything in an agent
-        agent = MCPAgent(llm=llm, client=client, max_steps=30)
+    def run_mcp_safely():
+        async def get_weather_alerts():
+            try:
+                from mcp_use import MCPClient
+                
+                config_file = "mcpserver.json"
+                client = MCPClient.from_config_file(config_file)
+                agent = MCPAgent(llm=llm, client=client, max_steps=30)
 
+                message = f"Get weather alerts for the state {state.upper()}"
+                result = await agent.run(message)
+                return str(result)
+            except Exception as e:
+                return f"Error: {str(e)}"
+            finally:
+                try:
+                    if client and client.sessions:
+                        await client.close_all_sessions()
+                except:
+                    pass
+        
+        # Create isolated event loop
+        import asyncio
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
         try:
-            # Use agent.run() with a natural language message
-            message = f"Get weather alerts for the state {state.upper()}"
-            result = await agent.run(message)
-            return str(result)
+            return loop.run_until_complete(get_weather_alerts())
         finally:
-            # Clean up the client connection
-            if client and client.sessions:
-                await client.close_all_sessions()
+            loop.close()
     
-    # Run the async function
-    return asyncio.run(get_weather_alerts())
+    try:
+        import concurrent.futures
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            future = executor.submit(run_mcp_safely)
+            return future.result(timeout=30)
+    except Exception as e:
+        return f"Error getting weather alerts: {str(e)}"
 
 @tool
 def get_stock_price(ticker:str)->str:
@@ -302,7 +311,8 @@ workflow.add_conditional_edges(
 )
 workflow.add_edge("tools", "llm_decision_step")
 react_graph = workflow.compile()
-
+# Add this after creating react_graph
+display(Image(react_graph.get_graph().draw_mermaid_png()))
 
 # In[263]:
 
@@ -325,12 +335,12 @@ react_graph = workflow.compile()
 # In[265]:
 
 
-# messages = [HumanMessage(content="what is the weather of AZ?")]
-# messages = react_graph.invoke({"messages": messages})
-# for m in messages['messages']:
-#     m.pretty_print()    
-
-messages = [HumanMessage(content="what is GDP of USA?")]
+messages = [HumanMessage(content="what is the weather of AZ?")]
 messages = react_graph.invoke({"messages": messages})
 for m in messages['messages']:
-    m.pretty_print()
+    m.pretty_print()    
+
+# messages = [HumanMessage(content="what is GDP of USA?")]
+# messages = react_graph.invoke({"messages": messages})
+# for m in messages['messages']:
+#     m.pretty_print()
