@@ -1,3 +1,15 @@
+
+import os
+os.environ['ANONYMIZED_TELEMETRY'] = 'False'
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
+import warnings
+warnings.filterwarnings("ignore", message=".*resume_download.*")
+warnings.filterwarnings("ignore", message=".*capture.*takes.*positional.*")
+warnings.filterwarnings("ignore", message=".*telemetry.*")
+warnings.filterwarnings("ignore", category=FutureWarning)
+
 import operator
 from typing import List
 from pydantic import BaseModel , Field
