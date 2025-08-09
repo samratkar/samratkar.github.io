@@ -194,7 +194,7 @@ def get_stock_price(ticker:str)->str:
 # RAG Function
 @tool
 def rag_tool(question: str) -> str:
-    """Custom tool for serving RAG Call. Call this for questions about USA/GDP/America."""
+    """Custom tool for serving RAG Call. Call this ONLY for questions about GDP, economy, or financial statistics of USA. Do not call this function for questions about USA for any other topic."""
     
     print("-> RAG Call ->")
     
@@ -282,10 +282,10 @@ Please provide a complete answer to: {original_question}"""
     
 Please call the appropriate tool to get the information needed to answer this question.
 Available tools:
-- rag_tool: For questions about USA/GDP/America
+- rag_tool: ONLY For questions about GDP or financial or economic statistics of USA. Don't call this for any other topic about USA.
 - get_alerts: For weather alerts
 - get_stock_price: For stock prices
-- search: For general web search
+- search: For general web search. 
 - multiply, add, divide: For arithmetic
 - llm_tool: For general questions not covered by other tools
 """
@@ -329,7 +329,7 @@ display(Image(react_graph.get_graph().draw_mermaid_png()))
 
 # query = "what is the weather of AZ?"
 # query = "what is the GDP of USA?"
-query = "Who is the president of USA?"
+query = "Who is the president of USA today?"
 # query = "Who is the president of India?"
 # query = "What is the stock price of Apple?"
 # query = "What is the stock price of Tesla?"
