@@ -23,7 +23,6 @@ from langchain_core.messages import HumanMessage, AIMessage
 from langgraph.graph import StateGraph,END
 from IPython.display import Image, display
 from langchain_community.document_loaders import TextLoader, DirectoryLoader
-from langchain_community.vectorstores import Chroma
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.output_parsers import PydanticOutputParser
 from typing import TypedDict, Annotated, Sequence
@@ -223,7 +222,13 @@ def llm_tool(question: str) -> str:
     response = llm.invoke(complete_query)
     return response.content
 
-search=DuckDuckGoSearchRun()
+search = DuckDuckGoSearchRun(
+    backend="text",
+    region="us-en",  # Force US English region
+    safesearch="moderate",
+    time="y",  # Recent results
+    max_results=5
+)
 
 tools=[multiply, add, divide, search, get_alerts,get_stock_price, rag_tool, llm_tool]
 llm_with_tools=llm.bind_tools(tools)
@@ -279,13 +284,24 @@ Please provide a complete answer to: {original_question}"""
     
     # Normal flow - decide which tool to call
     tool_prompt = f"""You are a helpful assistant. Answer this question: {question}
-    
-Please call the appropriate tool to get the information needed to answer this question.
-Available tools:
+
+IMPORTANT TOOL SELECTION RULES:
+- For "Who is the president" questions → USE SEARCH TOOL (DuckDuckGo) to get current information
+- For "current events", "today", "latest news" → USE SEARCH TOOL
+- For USA GDP, economic statistics, financial data → USE rag_tool
+- For weather alerts → USE get_alerts
+- For stock prices → USE get_stock_price
+- For math calculations → USE multiply/add/divide
+- For general knowledge → USE llm_tool
+
+Question: {question}
+Based on the question above, call the SEARCH tool to get current information / current affairs, the news that is latest.
+
+Available tools: 
 - rag_tool: ONLY For questions about GDP or financial or economic statistics of USA. Don't call this for any other topic about USA.
 - get_alerts: For weather alerts
 - get_stock_price: For stock prices
-- search: For general web search. 
+- search: For general web search. For current events, politics, news etc which is new and latest. Output the result in English only. Not in any other language.
 - multiply, add, divide: For arithmetic
 - llm_tool: For general questions not covered by other tools
 """
