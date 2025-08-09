@@ -44,9 +44,34 @@ from mcp.client.stdio import stdio_client, StdioServerParameters
 from langchain_core.messages import SystemMessage
 from langgraph.prebuilt import tools_condition
 
+from langchain_community.vectorstores import Chroma
+from langchain_community.document_loaders import TextLoader, DirectoryLoader
+
 
 llm=ChatOpenAI(model='gpt-3.5-turbo')
 from langchain.tools import tool
+
+# configuring the embedding model
+from langchain_huggingface import HuggingFaceEmbeddings
+embeddings = HuggingFaceEmbeddings(
+    model_name="BAAI/bge-small-en"
+)
+
+# In[261]:
+loader=DirectoryLoader("../data2",glob="./*.txt",loader_cls=TextLoader)
+docs=loader.load()
+text_splitter=RecursiveCharacterTextSplitter(
+    chunk_size=200,
+    chunk_overlap=50
+)
+new_docs=text_splitter.split_documents(documents=docs)
+db=Chroma.from_documents(new_docs,embeddings)
+retriever=db.as_retriever(search_kwargs={"k": 3})
+
+
+def format_docs(docs):
+    """Format retrieved documents into a single string"""
+    return "\n\n".join(doc.page_content for doc in docs)
 
 @tool
 def multiply(a: int, b: int) -> int:
@@ -144,53 +169,146 @@ def get_stock_price(ticker:str)->str:
         return f"The last closing price of {ticker.upper()} was ${price:.2f}."
     except Exception as e:
         return f"An error occurred while fetching stock data: {str(e)}"
+    
+# RAG Function
+@tool
+def rag_tool(question: str) -> str:
+    """Custom tool for serving RAG Call. Call this for questions about USA/GDP/America."""
+    
+    print("-> RAG Call ->")
+    
+    prompt = PromptTemplate(
+        template="""You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. Use three sentences maximum and keep the answer concise.\nQuestion: {question} \nContext: {context} \nAnswer:""",
+        input_variables=['context', 'question']
+    )
+    
+    rag_chain = (
+        {"context": retriever | format_docs, "question": RunnablePassthrough()}
+        | prompt
+        | llm
+        | StrOutputParser()
+    )
+    result = rag_chain.invoke(question)
+    return result
+
+@tool
+def llm_tool(question: str) -> str:
+    """Custom tool for calling the LLM for general questions not covered by other tools."""
+    
+    print("-> LLM Call ->")
+    
+    # Normal LLM call
+    complete_query = "Answer the following question with your knowledge of the real world. Following is the user question: " + question
+    response = llm.invoke(complete_query)
+    return response.content
 
 search=DuckDuckGoSearchRun()
 
-tools=[multiply, add, divide, search, get_alerts,get_stock_price]
+tools=[multiply, add, divide, search, get_alerts,get_stock_price, rag_tool, llm_tool]
 llm_with_tools=llm.bind_tools(tools)
 
 
-# In[261]:
-
-
 SYSTEM_PROMPT = SystemMessage(
-    content="You are a helpful assistant tasked with using search, the yahoo finance tool and performing arithmetic on a set of inputs."
+    content="You are a helpful assistant tasked with using search and performing arithmetic on a set of inputs"
 )
-def function_1(state:MessagesState):
+def function_1(state: MessagesState):
+    """calls appropriate tools based on query. works as supervisor"""
     
-    user_question=state["messages"]
+    question = state["messages"][-1].content
+    print(f"function_1 is called with question: {question}")
+    print(f"Total messages in state: {len(state['messages'])}")
     
-    input_question = [SYSTEM_PROMPT]+user_question
+    # Check if we already have a tool result - prevent recursion
+    if len(state["messages"]) >= 3:  # User question + LLM tool call + Tool result
+        print("Tool result already received, generating final response")
+        
+        # Get the original question
+        original_question = state["messages"][0].content
+        
+        # Get the tool result (last message)
+        tool_result = state["messages"][-1].content
+        
+        # Generate final response without calling more tools
+        final_prompt = f"""Based on this information: {tool_result}
+        
+Please provide a complete answer to the original question: {original_question}
+Do not call any more tools. Just provide a direct answer."""
+        
+        final_response = llm.invoke([HumanMessage(content=final_prompt)])
+        return {"messages": [final_response]}
     
-    response = llm_with_tools.invoke(input_question)
+    # Check if this is a tool result message (from ToolNode)
+    last_message = state["messages"][-1]
+    if (hasattr(last_message, 'type') and 
+        last_message.type == 'tool' and 
+        hasattr(last_message, 'content')):
+        print("Tool result detected, providing final answer")
+        
+        # Get original question
+        original_question = state["messages"][0].content
+        tool_result = last_message.content
+        
+        # Generate final response
+        final_prompt = f"""Based on this tool result: {tool_result}
+        
+Please provide a complete answer to: {original_question}"""
+        
+        final_response = llm.invoke([HumanMessage(content=final_prompt)])
+        return {"messages": [final_response]}
     
-    return {
-        "messages":[response]
-    }
+    # Normal flow - decide which tool to call
+    tool_prompt = f"""You are a helpful assistant. Answer this question: {question}
+    
+Please call the appropriate tool to get the information needed to answer this question.
+Available tools:
+- rag_tool: For questions about USA/GDP/America
+- get_alerts: For weather alerts
+- get_stock_price: For stock prices
+- search: For general web search
+- multiply, add, divide: For arithmetic
+- llm_tool: For general questions not covered by other tools
+"""
+    
+    # Use LLM with tools to decide which tool to call
+    response = llm_with_tools.invoke([HumanMessage(content=tool_prompt)])
+    
+    return {"messages": [response]}
 
+def custom_tools_condition(state: MessagesState):
+    """Custom condition that properly handles tool flow"""
+    
+    # Get the last message
+    last_message = state["messages"][-1]
+    
+    print(f"custom_tools_condition called, last message type: {type(last_message)}")
+    
+    # If last message has tool calls, go to tools
+    if hasattr(last_message, 'tool_calls') and last_message.tool_calls:
+        print("Going to tools")
+        return "tools"
+    
+    # If no tool calls and we have content, we're done
+    print("Ending workflow")
+    return END
 
-# In[262]:
-
-
+# Keep the same workflow structure
 workflow = StateGraph(MessagesState)
 workflow.add_node("llm_decision_step", function_1)
 workflow.add_node("tools", ToolNode(tools))
 workflow.add_edge(START, "llm_decision_step")
 workflow.add_conditional_edges(
     "llm_decision_step",
-    tools_condition,
+    custom_tools_condition,
 )
 workflow.add_edge("tools", "llm_decision_step")
-react_graph2 = workflow.compile()
-display(Image(react_graph2.get_graph(xray=True).draw_mermaid_png()))
+react_graph = workflow.compile()
 
 
 # In[263]:
 
 
 # messages = [HumanMessage(content="add 1000 in the current stock price of Apple.")]
-# messages = react_graph2.invoke({"messages": messages})
+# messages = react_graph.invoke({"messages": messages})
 # for m in messages['messages']:
 #     m.pretty_print()
 
@@ -199,7 +317,7 @@ display(Image(react_graph2.get_graph(xray=True).draw_mermaid_png()))
 
 
 # messages = [HumanMessage(content="can you give me 2 times of current stock price of Apple with the latest news of the Apple.")]
-# messages = react_graph2.invoke({"messages": messages})
+# messages = react_graph.invoke({"messages": messages})
 # for m in messages['messages']:
 #     m.pretty_print()
 
@@ -207,9 +325,12 @@ display(Image(react_graph2.get_graph(xray=True).draw_mermaid_png()))
 # In[265]:
 
 
-messages = [HumanMessage(content="what is the weather of AZ?")]
-messages = react_graph2.invoke({"messages": messages})
+# messages = [HumanMessage(content="what is the weather of AZ?")]
+# messages = react_graph.invoke({"messages": messages})
+# for m in messages['messages']:
+#     m.pretty_print()    
+
+messages = [HumanMessage(content="what is GDP of USA?")]
+messages = react_graph.invoke({"messages": messages})
 for m in messages['messages']:
     m.pretty_print()
-
-
