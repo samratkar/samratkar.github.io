@@ -199,7 +199,7 @@ def rag_tool(question: str) -> str:
     print("-> RAG Call ->")
     
     prompt = PromptTemplate(
-        template="""You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. Use three sentences maximum and keep the answer concise.\nQuestion: {question} \nContext: {context} \nAnswer:""",
+        template="""You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. If you don't know the answer, search the web using appropriate tools and use that information to answer the question from internet. Use three sentences maximum and keep the answer concise.\nQuestion: {question} \nContext: {context} \nAnswer:""",
         input_variables=['context', 'question']
     )
     
@@ -219,7 +219,7 @@ def llm_tool(question: str) -> str:
     print("-> LLM Call ->")
     
     # Normal LLM call
-    complete_query = "Answer the following question with your knowledge of the real world. Following is the user question: " + question
+    complete_query = "Answer the following question with your knowledge of the real world. Following is the user question: if you dont have the answer use search tool to get the answer from internet " + question
     response = llm.invoke(complete_query)
     return response.content
 
@@ -230,7 +230,7 @@ llm_with_tools=llm.bind_tools(tools)
 
 
 SYSTEM_PROMPT = SystemMessage(
-    content="You are a helpful assistant tasked with using search and performing arithmetic on a set of inputs"
+    content="You are a helpful assistant tasked with using search and performing arithmetic on a set of inputs."
 )
 def function_1(state: MessagesState):
     """calls appropriate tools based on query. works as supervisor"""
@@ -274,7 +274,7 @@ Do not call any more tools. Just provide a direct answer."""
         
 Please provide a complete answer to: {original_question}"""
         
-        final_response = llm.invoke([HumanMessage(content=final_prompt)])
+        final_response = llm_with_tools.invoke([HumanMessage(content=final_prompt)])
         return {"messages": [final_response]}
     
     # Normal flow - decide which tool to call
@@ -326,33 +326,21 @@ react_graph = workflow.compile()
 # Add this after creating react_graph
 display(Image(react_graph.get_graph().draw_mermaid_png()))
 
-# In[263]:
 
+# query = "what is the weather of AZ?"
+# query = "what is the GDP of USA?"
+query = "Who is the president of USA?"
+# query = "Who is the president of India?"
+# query = "What is the stock price of Apple?"
+# query = "What is the stock price of Tesla?"
+# query = "What is the stock price of NIFTY?"
+# query = "What is the stock price of NIFTY.BO?"
+# query = "What is the 2 multiplied by the latest stock price of Apple?"
+# query = "What is the 2 multiplied by the latest stock price of Tesla?"
+# query = "What is the 2 multiplied by the age of Narendra Modi?"
+# query = "Search from internet about the latest news of Apple."
 
-# messages = [HumanMessage(content="add 1000 in the current stock price of Apple.")]
-# messages = react_graph.invoke({"messages": messages})
-# for m in messages['messages']:
-#     m.pretty_print()
-
-
-# In[264]:
-
-
-# messages = [HumanMessage(content="can you give me 2 times of current stock price of Apple with the latest news of the Apple.")]
-# messages = react_graph.invoke({"messages": messages})
-# for m in messages['messages']:
-#     m.pretty_print()
-
-
-# In[265]:
-
-
-messages = [HumanMessage(content="what is the weather of AZ?")]
+messages = [HumanMessage(content=query)]
 messages = react_graph.invoke({"messages": messages})
 for m in messages['messages']:
-    m.pretty_print()    
-
-# messages = [HumanMessage(content="what is GDP of USA?")]
-# messages = react_graph.invoke({"messages": messages})
-# for m in messages['messages']:
-#     m.pretty_print()
+    m.pretty_print()
