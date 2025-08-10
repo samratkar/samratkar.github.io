@@ -11,12 +11,29 @@ author : Samrat Kar
 1. [MMR-Maximal Marginal Relevance](https://medium.com/@adergunov/maximal-marginal-relevance-144c23b42be5)
 
 ### Code 
+1. [LLM Evolutionary Tree](https://github.com/Mooler0410/LLMsPracticalGuide)
+2. [VLLM](https://github.com/vllm-project/vllm)
 
 ### Papers 
 1. [BERTopic: Neural topic modeling with a class-based TF-IDF procedure](https://arxiv.org/abs/2203.05794)
+2. [General text embedding with multi stage contrastive learning](https://arxiv.org/abs/2308.03281)
+3. [Dimenstionality reduction by UMAP](https://arxiv.org/abs/1802.03426)
 
 ### Datasets
 1. [Customer support Tobi Bueck](https://huggingface.co/datasets/Tobi-Bueck/customer-support-tickets/tree/main)
+2. [Arxiv NLP dataset](https://huggingface.co/datasets/MaartenGr/arxiv_nlp)
+3. [Huggingface MTEB leadersboard for embeddings](https://huggingface.co/spaces/mteb/leaderboard)
 
 ### tools 
 1. [exa.ai](https://exa.ai/)
+
+### Blogs
+1. [Biology of LLMs](https://transformer-circuits.pub/2025/attribution-graphs/biology.html)
+2. [DBSCAN Vs HDBSCAN](https://blog.dailydoseofds.com/p/hdbscan-vs-dbscan)
+3. [Visualizing DBSCAN Vs K-Means](https://www.kaggle.com/code/ahmedmohameddawoud/dbscan-vs-k-means-visualizing-the-difference)
+4. [Visualizing K-Means Clustering](https://www.naftaliharris.com/blog/visualizing-k-means-clustering/)
+7. [Understanding UMAP](https://pair-code.github.io/understanding-umap/)
+8. [People AI Research](https://pair.withgoogle.com/)
+9. [GPT-OSS](https://openai.com/index/introducing-gpt-oss/)
+10. [LLM Evolutionary Tree](https://arxiv.org/abs/2307.09793)
+11. 
