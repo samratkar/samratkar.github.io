@@ -230,7 +230,8 @@ search = DuckDuckGoSearchRun(
     max_results=5
 )
 
-tools=[multiply, add, divide, search, get_alerts,get_stock_price, rag_tool, llm_tool]
+# tools=[multiply, add, divide, search, get_alerts,get_stock_price, rag_tool, llm_tool]
+tools=[get_alerts]
 llm_with_tools=llm.bind_tools(tools)
 
 
@@ -293,13 +294,15 @@ IMPORTANT TOOL SELECTION RULES:
 - For stock prices → USE get_stock_price
 - For math calculations → USE multiply/add/divide
 - For general knowledge → USE llm_tool
+- In a forward pass, if one tool call is successful, DO NOT call any other tool. 
+- if weather information is asked in query, ONLY call get_alerts tool.
 
 Question: {question}
 Based on the question above, call the SEARCH tool to get current information / current affairs, the news that is latest.
 
 Available tools: 
 - rag_tool: ONLY For questions about GDP or financial or economic statistics of USA. Don't call this for any other topic about USA.
-- get_alerts: For weather alerts
+- get_alerts: For weather alerts ONLY. CALL THIS ONLY WHEN WEATHER IS ASKED IN QUERY. DO NOT CALL ANY OTHER TOOL for weather information.
 - get_stock_price: For stock prices
 - search: For general web search. For current events, politics, news etc which is new and latest. Output the result in English only. Not in any other language.
 - multiply, add, divide: For arithmetic
@@ -343,7 +346,7 @@ react_graph = workflow.compile()
 display(Image(react_graph.get_graph().draw_mermaid_png()))
 
 
-query = "what is the weather of AZ?"
+query = "what is the weather of AZ today?"
 # query = "what is the GDP of USA?"
 # query = "Who is the president of USA today?"
 # query = "Who is the president of India?"
