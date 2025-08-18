@@ -18,6 +18,11 @@ author : Samrat Kar
 1. [BERTopic: Neural topic modeling with a class-based TF-IDF procedure](https://arxiv.org/abs/2203.05794)
 2. [General text embedding with multi stage contrastive learning](https://arxiv.org/abs/2308.03281)
 3. [Dimenstionality reduction by UMAP](https://arxiv.org/abs/1802.03426)
+4. [llm sychophancy](https://arxiv.org/abs/2505.13995)
+5. [many shot prompting - gpt3 paper](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://arxiv.org/pdf/2005.14165)
+6. [reasoning chaing of thoughts](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://arxiv.org/pdf/2201.11903)
+7. [Thinking is an illusion apple](https://machinelearning.apple.com/research/illusion-of-thinking)
+8. [self consistency](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://arxiv.org/pdf/2203.11171)
 
 ### Datasets
 1. [Customer support Tobi Bueck](https://huggingface.co/datasets/Tobi-Bueck/customer-support-tickets/tree/main)
@@ -36,4 +41,5 @@ author : Samrat Kar
 8. [People AI Research](https://pair.withgoogle.com/)
 9. [GPT-OSS](https://openai.com/index/introducing-gpt-oss/)
 10. [LLM Evolutionary Tree](https://arxiv.org/abs/2307.09793)
-11. 
+11. [sychophancy](https://openai.com/index/sycophancy-in-gpt-4o/)
+12. 
