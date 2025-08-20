@@ -230,8 +230,8 @@ search = DuckDuckGoSearchRun(
     max_results=5
 )
 
-# tools=[multiply, add, divide, search, get_alerts,get_stock_price, rag_tool, llm_tool]
-tools=[get_alerts]
+tools=[multiply, add, divide, search, get_alerts,get_stock_price, rag_tool, llm_tool]
+# tools=[get_alerts]
 llm_with_tools=llm.bind_tools(tools)
 
 
@@ -346,7 +346,7 @@ react_graph = workflow.compile()
 display(Image(react_graph.get_graph().draw_mermaid_png()))
 
 
-query = "what is the weather of AZ today?"
+# query = "what is the weather of AZ today?"
 # query = "what is the GDP of USA?"
 # query = "Who is the president of USA today?"
 # query = "Who is the president of India?"
@@ -359,7 +359,15 @@ query = "what is the weather of AZ today?"
 # query = "What is the 2 multiplied by the age of Narendra Modi?"
 # query = "Search from internet about the latest news of Apple."
 
-messages = [HumanMessage(content=query)]
-messages = react_graph.invoke({"messages": messages})
-for m in messages['messages']:
-    m.pretty_print()
+# messages = [HumanMessage(content=query)]
+# messages = react_graph.invoke({"messages": messages})
+# for m in messages['messages']:
+#     m.pretty_print()
+
+while(True):
+    query = input("Enter your query: ")
+    if (query == "exit") or (query == "quit"): break
+    messages = [HumanMessage(content=query)]
+    messages = react_graph.invoke({"messages": messages})
+    for m in messages['messages']:
+        m.pretty_print()
