@@ -309,5 +309,31 @@ Available tools:
 
 ```
 
-### Entire code file 
+### Entire code base 
 
+[https://github.com/samratkar/samratkar.github.io/blob/main/_posts/concepts/agentic_ai_2_0/3-Langraph/practice/workflows/tools_recursive_workflow_mcp.py](https://github.com/samratkar/samratkar.github.io/blob/main/_posts/concepts/agentic_ai_2_0/3-Langraph/practice/workflows/tools_recursive_workflow_mcp.py)
+
+### Steps for execution 
+
+The above code runs an MCP client as a tool call. So, if you would like to use that feature, you need to first run the MCP server, and then run the above code. Following are the steps to execute - 
+
+Note that this is purely optional. If you would like to run the above code without MCP, then you need not to run the MCP server code. 
+
+1. Run the mcp server : Got to the folder where the weather.py resides and run the command - `uv run mcp dev weather.py`
+2. Ensure MCP inspector is able to connect to the weather mcp server and retrieve weather information 
+3. Run the multi agent workflow code : Go to the folder where the tools_agent_no_router_loop_mcp.py resides and run the command - `python tools_agent_no_router_loop_mcp.py`
+
+#### Output - 
+
+##### MCP Server invocation 
+![](/assets/aistudygroup/resources/imgs/mcpserver%20startup.png)
+
+##### MCP server working and retrieving weather information 
+![](/assets/aistudygroup/resources/imgs/MCPInspector.png)
+
+##### Execution of the agentic workflow app 
+
+![](/assets/aistudygroup/resources/imgs/agenticworflow1.png)
+![](/assets/aistudygroup/resources/imgs/agenticworflow2.png)
+![](/assets/aistudygroup/resources/imgs/agenticworflow3.png)
+![](/assets/aistudygroup/resources/imgs/agenticworflow4.png)
