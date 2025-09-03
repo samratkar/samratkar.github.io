@@ -337,3 +337,73 @@ Note that this is purely optional. If you would like to run the above code witho
 ![](/assets/aistudygroup/resources/imgs/agenticworflow2.png)
 ![](/assets/aistudygroup/resources/imgs/agenticworflow3.png)
 ![](/assets/aistudygroup/resources/imgs/agenticworflow4.png)
+
+## Dynamically selecting tools 
+The above workflow demonstrates a design time hardcoding of all the tools, and in the run time, all those tools will be visited based on the query provided, by the function_1 which acts as the interface function with the user. 
+
+However, you can also choose a subset of tools that are defined, for a given context, in run time. This helps to reduce latency and memory footprint. 
+
+Details - [Dynamic Tool Selection](https://langchain-ai.github.io/langgraph/how-tos/tool-calling/?h=dynamically%20select%20tools#use-in-an-agent)
+
+```python 
+from dataclasses import dataclass
+from typing import Literal
+
+from langchain.chat_models import init_chat_model
+from langchain_core.tools import tool
+
+from langgraph.prebuilt import create_react_agent
+from langgraph.prebuilt.chat_agent_executor import AgentState
+from langgraph.runtime import Runtime
+
+
+@dataclass
+class CustomContext:
+    tools: list[Literal["weather", "compass"]]
+
+
+@tool
+def weather() -> str:
+    """Returns the current weather conditions."""
+    return "It's nice and sunny."
+
+
+@tool
+def compass() -> str:
+    """Returns the direction the user is facing."""
+    return "North"
+
+model = init_chat_model("anthropic:claude-sonnet-4-20250514")
+
+def configure_model(state: AgentState, runtime: Runtime[CustomContext]):
+    """Configure the model with tools based on runtime context."""
+    selected_tools = [
+        tool
+        for tool in [weather, compass]
+        if tool.name in runtime.context.tools
+    ]
+    return model.bind_tools(selected_tools)
+
+
+agent = create_react_agent(
+    # Dynamically configure the model with tools based on runtime context
+    configure_model,
+    # Initialize with all tools available
+    tools=[weather, compass]
+)
+
+output = agent.invoke(
+    {
+        "messages": [
+            {
+                "role": "user",
+                "content": "Who are you and what tools do you have access to?",
+            }
+        ]
+    },
+    context=CustomContext(tools=["weather"]),  # Only enable the weather tool
+)
+
+print(output["messages"][-1].text())
+
+```
