@@ -24,9 +24,12 @@ graph TD
 
 ### Retrievers 
 
-#### Two types of searches
+#### Two types of searches (Hybrid Search)
 1. Keyword search - looks in the documents containing **exact words** found in the prompts.
 2. Semantic search - looks for the documents with **similar meaning** to the prompt.
+3. Metadata filtering - narrow down the search results based on metadata attributes (e.g., date, author, category).
+
+![](/assets/genai/rag/search-tech.png)
 
 3. Sparse vector search (traditional search) 
    - TF-IDF
@@ -35,5 +38,7 @@ graph TD
    - Embeddings + vector DB (FAISS, Pinecone, Weaviate, etc.)
 5. Hybrid search (combination of both)
    - Combines the strengths of sparse and dense vector searches for improved retrieval performance.
-6. 
+  
+#### TF-IDF (Term Frequency-Inverse Document Frequency) search 
+
 
