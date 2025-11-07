@@ -69,70 +69,70 @@ Each “rule” comes from **Shams of Tabriz’s teachings**, blending **Sufi my
 
 These rules emphasize that God is not found in rigid rituals or doctrines, but within the **heart and spirit** of every being.
 
-1. **God is not in a mosque, church, or temple — He is within you and everyone around you.**
-2. **The path to God passes through the heart, not through reason or logic.**
-3. **You can study God endlessly, but unless you feel Him inside, it’s only theory.**
-4. **Every person you meet is a mirror showing you something of God.**
-5. **God is present in both joy and sorrow — embrace both equally.**
-6. **The universe is one — every atom vibrates with the divine.**
-7. **Whatever happens in your life, good or bad, comes from God’s love.**
-8. **Do not seek heaven or fear hell — seek only love, and you find God.**
+1. God is not in a mosque, church, or temple — He is within you and everyone around you.
+2. The path to God passes through the heart, not through reason or logic.
+3. You can study God endlessly, but unless you feel Him inside, it’s only theory.
+4. Every person you meet is a mirror showing you something of God.
+5. God is present in both joy and sorrow — embrace both equally.
+6. The universe is one — every atom vibrates with the divine.
+7. Whatever happens in your life, good or bad, comes from God’s love.
+8. Do not seek heaven or fear hell — seek only love, and you find God.
 
 
 #### 💞 **B. Rules about Love**
 
 Love is the **central force of existence**, the path that transforms the soul. Shams teaches that **divine love** and **human love** are reflections of the same truth.
 
-9. **Love is the essence of life — without it, we are empty.**
-10. **The way to the truth is through the heart, not the intellect.**
-11. **True love transforms you — it burns away the ego and reveals the soul.**
-12. **You can learn love only by loving.**
-13. **When you love truly, there is no ‘you’ or ‘I’; only love remains.**
-14. **Love does not ask for perfection — it embraces flaws as divine design.**
-15. **Love is a journey — it may hurt, but that pain is the medicine.**
-16. **When you lose yourself in love, you find your true self.**
+9. Love is the essence of life — without it, we are empty.
+10. The way to the truth is through the heart, not the intellect.
+11. True love transforms you — it burns away the ego and reveals the soul.
+12. You can learn love only by loving.
+13. When you love truly, there is no ‘you’ or ‘I’; only love remains.
+14. Love does not ask for perfection — it embraces flaws as divine design.
+15. Love is a journey — it may hurt, but that pain is the medicine.
+16. When you lose yourself in love, you find your true self.
 
 
 #### 🔥 **C. Rules about Suffering, Change, and Inner Growth**
 
 Pain and loss are sacred tools for awakening. Every trial has meaning.
 
-17. **Loneliness and suffering are necessary teachers — they polish the heart.**
-18. **The wound is where the light enters you.**
-19. **Don’t resist change — it’s how God works through you.**
-20. **Each person you encounter is sent to teach you something.**
-21. **Don’t try to control life; trust its flow — God knows better than you.**
-22. **The universe is constantly being reborn — so must you be.**
-23. **Do not fear separation or death; they are part of divine order.**
-24. **When life seems chaotic, the hidden order of God is still perfect.**
+17. Loneliness and suffering are necessary teachers — they polish the heart.
+18. The wound is where the light enters you.
+19. Don’t resist change — it’s how God works through you.
+20. Each person you encounter is sent to teach you something.
+21. Don’t try to control life; trust its flow — God knows better than you.
+22. The universe is constantly being reborn — so must you be.
+23. Do not fear separation or death; they are part of divine order.
+24. When life seems chaotic, the hidden order of God is still perfect.
 
 
 #### 🕊️ **D. Rules about Ego and Humility**
 
 The ego blinds us to truth. To reach divine love, one must dissolve the self.
 
-25. **The path of love is the annihilation of the ego.**
-26. **Don’t confuse power with strength — humility is the truest strength.**
-27. **The greater your ego, the further you are from God.**
-28. **Do not judge others — judgment comes from the ego, not love.**
-29. **When you see faults in others, you are really seeing your own.**
-30. **Let go of pride, for it blocks divine light.**
-31. **A heart that is empty of ego is full of love.**
-32. **Serving others purifies the soul.**
+25. The path of love is the annihilation of the ego.
+26. Don’t confuse power with strength — humility is the truest strength.
+27. The greater your ego, the further you are from God.
+28. Do not judge others — judgment comes from the ego, not love.
+29. When you see faults in others, you are really seeing your own.
+30. Let go of pride, for it blocks divine light.
+31. A heart that is empty of ego is full of love.
+32. Serving others purifies the soul.
 
 
 #### 🌸 **E. Rules about Truth and Tolerance**
 
 Truth is vast and cannot be confined to one religion, culture, or identity.
 
-33. **The path to truth is a work of the heart, not the head.**
-34. **Don’t get stuck in labels — Muslim, Christian, Jew — God is beyond all.**
-35. **All faiths speak the same truth in different languages.**
-36. **Fanaticism kills love — stay open, humble, and kind.**
-37. **The real sin is to hurt another being.**
-38. **Don’t worship forms; seek the essence behind them.**
-39. **Patience is key — what seems late is always on divine time.**
-40. **A life without love is meaningless; love is the bridge to everything.**
+33. The path to truth is a work of the heart, not the head.
+34. Don’t get stuck in labels — Muslim, Christian, Jew — God is beyond all.
+35. All faiths speak the same truth in different languages.
+36. Fanaticism kills love — stay open, humble, and kind.
+37. The real sin is to hurt another being.
+38. Don’t worship forms; seek the essence behind them.
+39. Patience is key — what seems late is always on divine time.
+40. A life without love is meaningless; love is the bridge to everything.
 
 
 #### 🌕 **Essence of All 40 Rules**
