@@ -63,7 +63,9 @@ Perfect 🌹 — here’s a **summarized version of the 40 Rules of Love** from 
 
 Each “rule” comes from **Shams of Tabriz’s teachings**, blending **Sufi mysticism** and **universal wisdom** about love, God, and self-transformation.
 
-## 🌿 **A. Rules about God and Spirituality**
+### The 40 rules of love - summary 
+
+#### 🌿 **A. Rules about God and Spirituality**
 
 These rules emphasize that God is not found in rigid rituals or doctrines, but within the **heart and spirit** of every being.
 
@@ -77,7 +79,7 @@ These rules emphasize that God is not found in rigid rituals or doctrines, but w
 8. **Do not seek heaven or fear hell — seek only love, and you find God.**
 
 
-## 💞 **B. Rules about Love**
+#### 💞 **B. Rules about Love**
 
 Love is the **central force of existence**, the path that transforms the soul. Shams teaches that **divine love** and **human love** are reflections of the same truth.
 
@@ -91,7 +93,7 @@ Love is the **central force of existence**, the path that transforms the soul. S
 16. **When you lose yourself in love, you find your true self.**
 
 
-## 🔥 **C. Rules about Suffering, Change, and Inner Growth**
+#### 🔥 **C. Rules about Suffering, Change, and Inner Growth**
 
 Pain and loss are sacred tools for awakening. Every trial has meaning.
 
@@ -105,7 +107,7 @@ Pain and loss are sacred tools for awakening. Every trial has meaning.
 24. **When life seems chaotic, the hidden order of God is still perfect.**
 
 
-## 🕊️ **D. Rules about Ego and Humility**
+#### 🕊️ **D. Rules about Ego and Humility**
 
 The ego blinds us to truth. To reach divine love, one must dissolve the self.
 
@@ -119,7 +121,7 @@ The ego blinds us to truth. To reach divine love, one must dissolve the self.
 32. **Serving others purifies the soul.**
 
 
-## 🌸 **E. Rules about Truth and Tolerance**
+#### 🌸 **E. Rules about Truth and Tolerance**
 
 Truth is vast and cannot be confined to one religion, culture, or identity.
 
@@ -133,12 +135,12 @@ Truth is vast and cannot be confined to one religion, culture, or identity.
 40. **A life without love is meaningless; love is the bridge to everything.**
 
 
-## 🌕 **Essence of All 40 Rules**
+#### 🌕 **Essence of All 40 Rules**
 
 > *“Whatever happens, love is always the answer — for in love we find God, in pain we find truth, and in surrender we find peace.”*
 
 
-## 🌹 **The Forty Rules of Love — Summary Chart**
+#### 🌹 **The Forty Rules of Love — Summary Chart**
 
 | **Theme**                          | **Essence of the Rule**                                                                                                                                                                                                                                                                                                                                              | **Key Message / Insight**                                                                                  |
 | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
