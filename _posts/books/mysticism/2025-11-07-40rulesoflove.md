@@ -1,6 +1,6 @@
 ---
 layout : mermaid
-title : Awe by Dacher Keltner
+title : 40 rules of Love by Elif Shafak
 author : Samrat Kar
 ---
 
