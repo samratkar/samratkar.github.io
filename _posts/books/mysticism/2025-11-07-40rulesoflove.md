@@ -157,5 +157,9 @@ Truth is vast and cannot be confined to one religion, culture, or identity.
 **Elif Shafak’s message:**
 The divine can only be known through *love*, and *love* is found through *living with an open heart* — embracing joy, pain, and the unity of all beings.
 
+### Song's of Rumi sung by Coleman Barks
+
+[Coleman Barks sings Rumi's poems translated by himself](https://1drv.ms/v/c/c96794a723ce4dd4/EYNZ8KmzZylLgdYJdG2swU0BXeA1yEMm1nAHJq0kMP7FEA?e=V5ptOB)
+
 
 
