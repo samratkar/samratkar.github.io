@@ -58,9 +58,6 @@ While each rule has unique wisdom, they collectively emphasize:
 
 The novel suggests that **every form of love — human or divine — is a step toward spiritual awakening**. It calls readers to break free from rigid structures, open their hearts, and live authentically guided by compassion and connection to the divine within.
 
-
-Perfect 🌹 — here’s a **summarized version of the 40 Rules of Love** from *Elif Shafak’s* *The Forty Rules of Love*, organized by their **spiritual theme**.
-
 Each “rule” comes from **Shams of Tabriz’s teachings**, blending **Sufi mysticism** and **universal wisdom** about love, God, and self-transformation.
 
 ### The 40 rules of love - summary 
