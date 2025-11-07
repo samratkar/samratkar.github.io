@@ -10,10 +10,15 @@ permalink: /books/
 2. Date completed : 2024-01-15
 3. Book review : [Dare to Lead by Brene Brown](https://samratkar.github.io/2024/12/15/vulnerability.html)
 
-#### 2. Awe by Dacher Keltner
+#### 2. 40 rules of love by Dacher Keltner
 1. Date started : 2024-05-08
-2. Date completed : 2024-05-15
+2. Date completed : In progress
 3. Book review : [Awe by Dacher Keltner](https://samratkar.github.io/2025/05/09/Awe.html)
+
+#### 3. 40 rules of love by Elif Shafak
+1. Date started : 2025-10-08
+2. Date completed : In progress
+3. Book review : [40 Rules of Love by Elif Shafak](https://samratkar.github.io/2024/04/21/40-Rules-of-Love.html)
  
 #### My Books published
 
