@@ -151,3 +151,85 @@ The divine can only be known through *love*, and *love* is found through *living
 
 
 
+# 40 Rules of Love
+
+---
+
+## Rule 1 : Seeing God 
+How we see God 
+is a direct reflection of 
+how we see ourselves.
+If God brings to mind
+Mostly fear and blame,
+It means there is too much
+fear and blame 
+welled inside us.
+If we see God
+As full of love and compassion
+So are we.
+
+---
+
+## Rule 2 : Know! through heart
+The path to the Truth
+Is the labour of the heart,
+Not of the head.
+Make your heart your primary guide.
+Not your mind.
+Meet, challenge, 
+And ultimately prevail
+Over your nafs with your heart,
+Knowing yourself will 
+Lead you to the knowledge of God.
+
+---
+
+## RUle 3 : Immanence of God.
+You can study God
+Through everything and everyone
+In the universe,
+Because God is not confined
+in a mosque, synagogue, or church.
+But if you are still
+In need of knowing where exactly
+His abode is,
+There is only one place
+To look for Him : 
+In the heart of a true lover.
+
+---
+
+## Rule 4 : Beyond words
+Most of the problems of the world,
+Stem from linguistic mistakes
+And simple misunderstandings.
+Don’t ever take words at face value.
+When you step into the zone of love,
+Language as we know it
+Becomes obsolete.
+That which cannot be put into words
+Can only be gasped through silence.
+
+---
+
+## Rule 5 : Truly seeing self & God
+Loneliness and solitude 
+Are two different things.
+When you are lonely,
+It is easy to delude yourself
+Into believing that 
+You are on the right path.
+Solitude is better for us,
+as it means being 
+alone without feeling lonely.
+But eventually it is best
+To find a person,
+The person who 
+Will be your mirror.
+Remember, only in 
+Another person’s heart can you
+Truly see yourself and
+The presence of God within you!
+
+---
+
