@@ -4,7 +4,7 @@ title : 40 rules of Love by Elif Shafak
 author : Samrat Kar
 ---
 
-## 1 to 17 Rules 
+## The Forty Rules of Love
 
 ![](/assets/bookworm/40rulesoflove.jpg)
 
