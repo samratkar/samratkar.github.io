@@ -271,3 +271,28 @@ But only love will
 Purify your heart.   
 
 ---
+
+## Rule 18 : The Singularity
+The whole universe is contained
+Within a single human being - you. 
+Everything that you see around,
+including the things you might not be fond of
+And even the people you despise or abhor,
+Is present within you in varying degrees. 
+Therefore do not look for Sheitan
+Outside yourself either. 
+The devil is not an extraordinary force 
+That attacks from without. 
+It is an ordinary voice within.
+If you get to know yourself fully, 
+Facing the honesty and hardness
+Both your dark and bring sides,
+You will arrive at 
+A supreme form of consciousness.
+When a person knows himself or herself,
+he or she knows God.
+
+---
+
+## Rule 19 : 
+If you 
