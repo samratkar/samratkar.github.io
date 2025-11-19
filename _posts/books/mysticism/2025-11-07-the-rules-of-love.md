@@ -273,446 +273,446 @@ Purify your heart.
 ---
 
 ## Rule 18 : The Singularity
-The whole universe is contained
-Within a single human being - you. 
-Everything that you see around,
-including the things you might not be fond of
-And even the people you despise or abhor,
-Is present within you in varying degrees. 
-Therefore do not look for Sheitan
-Outside yourself either. 
-The devil is not an extraordinary force 
-That attacks from without. 
-It is an ordinary voice within.
-If you get to know yourself fully, 
-Facing the honesty and hardness
-Both your dark and bring sides,
-You will arrive at 
-A supreme form of consciousness.
-When a person knows himself or herself,
-he or she knows God.
+The whole universe is contained  
+Within a single human being - you.   
+Everything that you see around,  
+including the things you might not be fond of  
+And even the people you despise or abhor,  
+Is present within you in varying degrees.   
+Therefore do not look for Sheitan  
+Outside yourself either.   
+The devil is not an extraordinary force   
+That attacks from without.   
+It is an ordinary voice within.  
+If you get to know yourself fully,   
+Facing the honesty and hardness  
+Both your dark and bring sides,  
+You will arrive at   
+A supreme form of consciousness.  
+When a person knows himself or herself,  
+he or she knows God.  
 
 ---
 
 ## Rule 19 : We are all one 
-If you want to change 
-the way others treat you,
-You should first change 
-the way you treat yourself.
-Unless you learn to love yourself,
-Fully and sincerely, 
-There is no way you can be loved.
-Once you achieve that stage,
-However, be thankful 
-For every thorn 
-that other might throw at you.
-It is a sign that you will soon
-be showered in roses. 
-How can you blame others
-For disrespecting you
-When you think of yourself
-As unworthy of respect?
+If you want to change   
+the way others treat you,  
+You should first change   
+the way you treat yourself.  
+Unless you learn to love yourself,  
+Fully and sincerely,   
+There is no way you can be loved.  
+Once you achieve that stage,  
+However, be thankful   
+For every thorn   
+that other might throw at you.  
+It is a sign that you will soon  
+be showered in roses.   
+How can you blame others  
+For disrespecting you  
+When you think of yourself  
+As unworthy of respect?  
 
 ---
 
 ## Rule 20 : Be the flow
-Fret not where the road will take you.
-Instead concentrate on the first step.
-That's the hardest part
-And that's what you are responsible for.
-Once you take that step 
-Let everything do what it naturally does.
-And rest will follow. 
-Do not go with the flow
-Be the flow. 
+Fret not where the road will take you.  
+Instead concentrate on the first step.  
+That's the hardest part  
+And that's what you are responsible for.  
+Once you take that step   
+Let everything do what it naturally does.  
+And rest will follow.   
+Do not go with the flow  
+Be the flow.   
 
 ---
 
 ## Rule 21 : Respecting differences
-We are all created in His image,
-And yet we were each created 
-different and unique. 
-No two people are alike.
-No two hearts beat to the same rhythm.
-If God had wanted everyone to be the same,
-He would have made it so.
-Therefore, disrespecting differences
-And imposing your thoughts on others,
-Is tantamount to disrespecting God's holy scheme.
+We are all created in His image,  
+And yet we were each created   
+different and unique.   
+No two people are alike.  
+No two hearts beat to the same rhythm.  
+If God had wanted everyone to be the same,  
+He would have made it so.  
+Therefore, disrespecting differences  
+And imposing your thoughts on others,  
+Is tantamount to disrespecting God's holy scheme.  
 
 ---
 
 ## Rule 22 : The Inner Realm
-When a true lover of God
-Goes into a tavern,
-The tavern becomes his 
-chamber of prayer,
-But when a wine bibber goes
-Into the same chamber,
-It becomes his tavern. 
+When a true lover of God  
+Goes into a tavern,  
+The tavern becomes his   
+chamber of prayer,  
+But when a wine bibber goes  
+Into the same chamber,  
+It becomes his tavern.   
 
-In everything we do,
-It is our hearts 
-that make the difference,
-Not our outer appearences.
+In everything we do,  
+It is our hearts   
+that make the difference,  
+Not our outer appearences.  
 
-Sufis do not judge
-Other people on how they look
-Or who they are.
+Sufis do not judge  
+Other people on how they look  
+Or who they are.  
 
-When a Sufi stares at someone,
-He keeps both eyes closed
-And instead opens a third eye - 
-The eye that sees the inner realm. 
+When a Sufi stares at someone,  
+He keeps both eyes closed  
+And instead opens a third eye -   
+The eye that sees the inner realm.   
 
 ---
 
 ## Rule 23 : The temporary loan
-Life is a temporary loan,
-And this world is nothing
-But a sketchy imitation of Reality.
+Life is a temporary loan,  
+And this world is nothing  
+But a sketchy imitation of Reality.  
 
-Only children would mistake
-A toy for the real thing.
+Only children would mistake  
+A toy for the real thing.  
 
-And yet human beings 
-Either become infatuated with the toy
-Or Disrespectfully break it
-And throw it aside.
+And yet human beings   
+Either become infatuated with the toy  
+Or Disrespectfully break it  
+And throw it aside.  
 
-In this life stay away from 
-all kind sof extremities,
-For they will destroy 
-your inner balance. 
+In this life stay away from   
+all kind sof extremities,  
+For they will destroy   
+your inner balance.   
 
 ---
 
 ## Rule 24 : The human divinity
-The human being has a unique place
-Among God's creations.
-Each and every one of us without exception
-Is designed to be God's delegate on Earth.
+The human being has a unique place  
+Among God's creations.  
+Each and every one of us without exception  
+Is designed to be God's delegate on Earth.  
 
-As yourself, just how often 
-do you behave like a delegate.
-If you ever do so?
-Remember, it falls upon each of us
-To discover the divine sprit 
-Inside and live by it.
+As yourself, just how often   
+do you behave like a delegate.  
+If you ever do so?  
+Remember, it falls upon each of us  
+To discover the divine spirit   
+Inside and live by it.  
 
 ---
 
 ## Rule 25 : Hell and heaven
-Hell is in the here and now.
-So, is heaven.
-Quit worrying about hell
-Or dreaming about heaven,
-As they are both
-Present inside this very moment.
+Hell is in the here and now.  
+So, is heaven.  
+Quit worrying about hell  
+Or dreaming about heaven,  
+As they are both  
+Present inside this very moment.  
 
-Every time we fall in love,
-We ascend to heaven.
-Every time we hate, 
-Envy, or fight someone,
-We tumble straight into 
-The fires of hell.
+Every time we fall in love,  
+We ascend to heaven.  
+Every time we hate,   
+Envy, or fight someone,  
+We tumble straight into   
+The fires of hell.  
 
 ---
 
 ## Rule 26 : The One Being
-The universe is one being.
-Everything and everyone
-Is interconnected 
-Through an invisible web of stories.
+The universe is one being.  
+Everything and everyone  
+Is interconnected   
+Through an invisible web of stories.  
 
-Whether we are aware of it or not, 
-We are all in a silent conversation.
-Do no harm. 
-Practice compassion. 
-And do not gossip behind anyone's back - 
-Not even a seemingly innocent remark!
-The words that come out of our mouths
-Do not vanish 
-But are perpetually stored in
-Infinite space,
-And they will come back to us
-In due time.
-One man's pain will hurt us all.
-One man's joy will make everyone simle.
+Whether we are aware of it or not,   
+We are all in a silent conversation.  
+Do no harm.   
+Practice compassion.   
+And do not gossip behind anyone's back -   
+Not even a seemingly innocent remark!  
+The words that come out of our mouths  
+Do not vanish   
+But are perpetually stored in  
+Infinite space,  
+And they will come back to us  
+In due time.  
+One man's pain will hurt us all.  
+One man's joy will make everyone smile.  
 
 ---
 
 ## Rule 27 : The echoes of snowy mountain
-This world is like 
-A snowy mountain,
-That echoes your voice.
+This world is like   
+A snowy mountain,  
+That echoes your voice.  
 
-Whatever you speak, 
-Good or evil,
-Will somehow come back to you.
+Whatever you speak,   
+Good or evil,  
+Will somehow come back to you.  
 
-Therefore, if there is someone 
-Who harbors ill thoughts about you,
-Saying similarly bad things about him
-Will only make matters worse.
-You will be locked in a vicious circle
-Of malevolent energy.
+Therefore, if there is someone   
+Who harbors ill thoughts about you,  
+Saying similarly bad things about him  
+Will only make matters worse.  
+You will be locked in a vicious circle  
+Of malevolent energy.  
 
-Instead of forty days and nights
-Say and think nice things about that person.
-Everything will be different
-At the end of the forty days,
-Because you will be different inside.
+Instead of forty days and nights  
+Say and think nice things about that person.  
+Everything will be different  
+At the end of the forty days,  
+Because you will be different inside.  
 
 ---
 
 
 ## Rule 28 : Time - The endless spiral within
-The past is an interpretation. 
-The future is an illusion.
-The world does not move through time
-As if it were a straight line,
-Proceeding from past to the future.
-Instead time moves 
-Through and within us,
-In endless spirals.
+The past is an interpretation.   
+The future is an illusion.  
+The world does not move through time  
+As if it were a straight line,  
+Proceeding from past to the future.  
+Instead time moves   
+Through and within us,  
+In endless spirals.  
 
-Eternity does not mean infinite time,
-But simply timelessness.
+Eternity does not mean infinite time,  
+But simply timelessness.  
 
-If you want to experience 
-Eternal illumination,
-Put the past and the future 
-Out of your mind
-And remain within
-The present moment.
+If you want to experience   
+Eternal illumination,  
+Put the past and the future   
+Out of your mind  
+And remain within  
+The present moment.  
 
 ---
 
 ## Rule 29 : The Destiny of 40 levels
-Destiny does not mean that
-Your life has been strictly predetermined.
-Therefore, to leave everything to fate
-And to not actively contribute
-To the music of the universe
-Is a sign of sheer ignorance.
+Destiny does not mean that  
+Your life has been strictly predetermined.  
+Therefore, to leave everything to fate  
+And to not actively contribute  
+To the music of the universe  
+Is a sign of sheer ignorance.  
 
-The music of the universe is all pervading
-And it is composed on 
-Forty different levels.
+The music of the universe is all pervading  
+And it is composed on   
+Forty different levels.  
 
-Your destiny is the level 
-Where you will play your tune.
-You might not change
-Your instrument, but 
-How well you play is entirely in your hands.
+Your destiny is the level   
+Where you will play your tune.  
+You might not change  
+Your instrument, but   
+How well you play is entirely in your hands.  
 
 ---
 
 ## Rule 30 : The Only One
-The true Sufi is such that
-Even when he is unjustly accused, attacked, 
-And condemned from all sides,
-he patiently endures,
-Uttering not a single bad word
-About any of his critics.
+The true Sufi is such that  
+Even when he is unjustly accused, attacked,   
+And condemned from all sides,  
+he patiently endures,  
+Uttering not a single bad word  
+About any of his critics.  
 
-A Sufi never apportions blame.
-how can there be opponents
-Or rivals or even "others" 
-When there is no "self" in the first place?
+A Sufi never apportions blame.  
+how can there be opponents  
+Or rivals or even "others"   
+When there is no "self" in the first place?  
 
-How can there be anyone to blame 
-When there is only One? 
+How can there be anyone to blame   
+When there is only One?   
 
 ---
 
 ## Rule 31 : Expansion and softening of heart
-If you want to strengthen your faith,
-You will need to soften inside.
-For your faith to be rock solid,
-Your heart needs to be as soft as a feather.
+If you want to strengthen your faith,  
+You will need to soften inside.  
+For your faith to be rock solid,  
+Your heart needs to be as soft as a feather.  
 
-Through an illness, accident, loss
-Or Fright, one way or another,
-We all are faced with incidents
-That teach us how to
-Become less selfish and judgmental,
-And more compassionate and generous.
+Through an illness, accident, loss  
+Or Fright, one way or another,  
+We all are faced with incidents  
+That teach us how to   
+Become less selfish and judgmental,  
+And more compassionate and generous.  
 
-Yet some of us learn the lesson
-And manage to become milder,
-While some others end up
-becoming even harsher than before.
+Yet some of us learn the lesson  
+And manage to become milder,  
+While some others end up  
+becoming even harsher than before.  
 
-The only way to get closer to Truth
-Is to expand your heart 
-So that it will encompass
-All humanity and still have 
-room for more Love.
+The only way to get closer to Truth  
+Is to expand your heart   
+So that it will encompass  
+All humanity and still have   
+room for more Love.  
 
 ---
 
 ## Rule 32 : The Fetish of the Truth
-Spiritual growth is about 
-The totality of our consciousness.
-Not about obsessing over
-particular aspects.
+Spiritual growth is about   
+The totality of our consciousness.  
+Not about obsessing over  
+particular aspects.  
 
-Nothing should stand between
-Yourself and God.
+Nothing should stand between  
+Yourself and God.  
 
-Not imams, priests, rabbis,
-Or any other custodians of 
-Moral or religious leadership.
-Not spiritual masters, 
-Not even your faith.
+Not imams, priests, rabbis,  
+Or any other custodians of   
+Moral or religious leadership.  
+Not spiritual masters,   
+Not even your faith.  
 
-Believe in your values and your rules,
-But never lord them over others.
-If you keep breaking other people's hearts,
-Whatever religious duty you perform is no good.
+Believe in your values and your rules,  
+But never lord them over others.  
+If you keep breaking other people's hearts,  
+Whatever religious duty you perform is no good.  
 
-Stay away from all sorts of idolatry,
-For they will blur your vision.
-Let God and only God be your guide.
-Learn the Truth, 
-My friend, but be careful 
-Not to make fetish out of your truths.
+Stay away from all sorts of idolatry,  
+For they will blur your vision.  
+Let God and only God be your guide.  
+Learn the Truth,   
+My friend, but be careful   
+Not to make fetish out of your truths.  
 
 ---
 
 ## Rule 33 : Consciousness of nothingness
-While everyone in this world
-Strives to get somewhere 
-And become someone,
-Only to leave it all behind after death,
-You aim for the supreme stage of nothingness.
+While everyone in this world  
+Strives to get somewhere   
+And become someone,  
+Only to leave it all behind after death,  
+You aim for the supreme stage of nothingness.  
 
-Live this life as 
-light and empty as the number zero.
-We are no different from a pot.
-It is not the decorations outside 
-But the emptiness inside
-That holds us straight.
-Just like that,
-It is not what we aspire to achieve
-But the consciousness of nothingness 
-That keeps us going. 
+Live this life as   
+light and empty as the number zero.  
+We are no different from a pot.  
+It is not the decorations outside   
+But the emptiness inside  
+That holds us straight.  
+Just like that,  
+It is not what we aspire to achieve  
+But the consciousness of nothingness   
+That keeps us going.   
 
 ---
 
 ## Rule 34 : Submission to the Divine essence
-Submission does not mean being weak or passive.
-It leads to neither fatalism nor Capitulation.
-Just the opposite. 
-True power resides in submission - 
-A power that comes from within.
+Submission does not mean being weak or passive.  
+It leads to neither fatalism nor Capitulation.  
+Just the opposite.   
+True power resides in submission -   
+A power that comes from within.  
 
-Those who submit to the divine essence of life
-Will live in unperturbed tranquillity and peace
-Even when the whole wide world
-Goes through turbulence after turbulence.
+Those who submit to the divine essence of life  
+Will live in unperturbed tranquillity and peace  
+Even when the whole wide world  
+Goes through turbulence after turbulence.  
 
 ---
 
 ## Rule 35 : Co-existence of the Opposites within
-In this world, it is not similarities 
-Or regularities that take us a step forward,
-But blunt opposites.
+In this world, it is not similarities   
+Or regularities that take us a step forward,  
+But blunt opposites.  
 
-And all the opposites in the universe,
-Are present within each and every one of us.
-Therefore, the believer needs to meet
-The unbeliever residing within.
-And the non believer should get
-To know the silent faithful in him.
+And all the opposites in the universe,  
+Are present within each and every one of us.  
+Therefore, the believer needs to meet  
+The unbeliever residing within.  
+And the non believer should get  
+To know the silent faithful in him.  
 
-Until the day one reaches the stage 
-Of Insan-i-Kamil, the perfect human being,
-Faith is a gradual process
-And one that necessitates
-Its seemingly opposite : Disbelief.
+Until the day one reaches the stage   
+Of Insan-i-Kamil, the perfect human being,  
+Faith is a gradual process  
+And one that necessitates  
+Its seemingly opposite : Disbelief.  
 
 ---
 
 ## Rule 36 : The will of God
-The world is erected
-Upon the principle of reciprocity.
+The world is erected  
+Upon the principle of reciprocity.  
 
-Neither a drop of kindness
-Nor a speck of evil will
-Remain unreciprocated. 
+Neither a drop of kindness  
+Nor a speck of evil will  
+Remain unreciprocated.   
 
-Fear not the plots,
-Deceptions, or tricks of other people.
-If somebody is setting a trap,
-Remember, so is God.
+Fear not the plots,  
+Deceptions, or tricks of other people.  
+If somebody is setting a trap,  
+Remember, so is God.  
 
-He is the biggest plotter.
-Not even a leaf stirs outside
-God's knowledge.
+He is the biggest plotter.  
+Not even a leaf stirs outside  
+God's knowledge.  
 
-Simply and fully believe in that.
-Whatsoever God does, He does beautifully.
+Simply and fully believe in that.  
+Whatsoever God does, He does beautifully.  
 
 ---
 
 ## Rule 37 : God the clockmaker
-God is a meticulous clockmaker.
-So precise is His order 
-That everything on earth happens in its own time. 
-Neither a minute late or a minute early. 
-And for everyone without exception,
-The clock works accurately.
-For each there is a time to love,
-And a time to die.
+God is a meticulous clockmaker.  
+So precise is His order   
+That everything on earth happens in its own time.   
+Neither a minute late or a minute early.   
+And for everyone without exception,  
+The clock works accurately.  
+For each there is a time to love,  
+And a time to die.  
 
 ---
 
 ## Rule 38 : Dying before death
-It is never too late to ask yourself,
-"Am I ready to change the life I am living? 
-Am I ready to change within?"
-Even if a single day in your life 
-Is the same as the day before,
-it surely is a pity. 
-At every moment and with each new breath,
-One should be renewed and renewed again.
-There is only one way to be born into a new life
-To die before death.
+It is never too late to ask yourself,  
+"Am I ready to change the life I am living?   
+Am I ready to change within?"  
+Even if a single day in your life   
+Is the same as the day before,  
+it surely is a pity.   
+At every moment and with each new breath,  
+One should be renewed and renewed again.  
+There is only one way to be born into a new life  
+To die before death.  
 
 ---
 
 ## Rule 39 : Change and Sameness
-While the parts change 
-The whole always remains the same.
-For every thief who departs this world,
-A new one is born.
-And every decent person who passes away
-is replaced by a new one.
-In this way 
-Not only does nothing remain the same
-But also nothing ever really changes.
+While the parts change   
+The whole always remains the same.  
+For every thief who departs this world,  
+A new one is born.  
+And every decent person who passes away  
+is replaced by a new one.  
+In this way   
+Not only does nothing remain the same  
+But also nothing ever really changes.  
 
 ---
 
 ## Rule 40 : 
-A life without love is of no account.
-Don't ask yourself what kind of love you should seek,
-Spiritual or material,
-Divine or mundane,
-Eastern or Western,
-Divisions only lead to more divisions.
-Love has no labels,
-No definitions. 
-It is what it is is,
-Pure and Simple. 
+A life without love is of no account.  
+Don't ask yourself what kind of love you should seek,  
+Spiritual or material,  
+Divine or mundane,  
+Eastern or Western,  
+Divisions only lead to more divisions.  
+Love has no labels,  
+No definitions.   
+It is what it is is,  
+Pure and Simple.   
 
-Love is the water of life.
-And a lover is a soul of fire!
-The universe turns differently 
-When fire loves water.
+Love is the water of life.  
+And a lover is a soul of fire!  
+The universe turns differently   
+When fire loves water.  
 
 ---
 
