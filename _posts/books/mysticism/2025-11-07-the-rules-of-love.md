@@ -670,7 +670,7 @@ And a time to die.
 
 ---
 
-## Rule 38 : Dyingbefore death
+## Rule 38 : Dying before death
 It is never too late to ask yourself,
 "Am I ready to change the life I am living? 
 Am I ready to change within?"
