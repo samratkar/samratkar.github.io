@@ -11,217 +11,217 @@ author : Samrat Kar
 ---
 
 ## Rule 1 : Seeing God 
-How we see God   
-is a direct reflection of   
-how we see ourselves.  
-If God brings to mind  
-Mostly fear and blame,  
-It means there is too much  
-fear and blame   
-welled inside us.  
-If we see God  
-As full of love and compassion  
-So are we.  
+How we see God     
+is a direct reflection of     
+how we see ourselves.    
+If God brings to mind    
+Mostly fear and blame,    
+It means there is too much    
+fear and blame     
+welled inside us.    
+If we see God    
+As full of love and compassion    
+So are we.    
 
 ---
 
 ## Rule 2 : Know! through heart
-The path to the Truth  
-Is the labour of the heart,  
-Not of the head.  
-Make your heart your primary guide.  
-Not your mind.  
-Meet, challenge,   
-And ultimately prevail  
-Over your nafs with your heart,  
-Knowing yourself will   
-Lead you to the knowledge of God.  
+The path to the Truth    
+Is the labour of the heart,    
+Not of the head.    
+Make your heart your primary guide.    
+Not your mind.    
+Meet, challenge,     
+And ultimately prevail    
+Over your nafs with your heart,    
+Knowing yourself will     
+Lead you to the knowledge of God.    
 
 ---
 
 ## Rule 3 : Immanence of God.
-You can study God  
-Through everything and everyone  
-In the universe,  
-Because God is not confined  
-in a mosque, synagogue, or church.  
-But if you are still  
-In need of knowing where exactly  
-His abode is,  
-There is only one place  
-To look for Him :   
-In the heart of a true lover.  
+You can study God    
+Through everything and everyone    
+In the universe,    
+Because God is not confined    
+in a mosque, synagogue, or church.    
+But if you are still    
+In need of knowing where exactly    
+His abode is,    
+There is only one place    
+To look for Him :     
+In the heart of a true lover.    
 
 ---
 
 ## Rule 4 : Intellect and Love 
-Intellect and love   
-Are made of different materials.  
-Intellect ties people in knots  
-And risks nothing,  
-But love dissolves all tangles  
-And risks everything.  
-Intellect is always cautious and advises,  
-"Beware too much ecstasy!"  
-Whereas love says,  
-"Oh, never mind! Take the plunge!"  
-Intellect does not easily break down,  
-Whereas love can effortlessly reduce itself to rubble.  
-But treasures are hidden among ruins.  
-A broken heart hides treasures.  
+Intellect and love     
+Are made of different materials.    
+Intellect ties people in knots    
+And risks nothing,    
+But love dissolves all tangles    
+And risks everything.    
+Intellect is always cautious and advises,    
+"Beware too much ecstasy!"    
+Whereas love says,    
+"Oh, never mind! Take the plunge!"    
+Intellect does not easily break down,    
+Whereas love can effortlessly reduce itself to rubble.    
+But treasures are hidden among ruins.    
+A broken heart hides treasures.    
 
 ---
 
 ## Rule 5 : Beyond words
-Most of the problems of the world,  
-Stem from linguistic mistakes  
-And simple misunderstandings.  
-Don’t ever take words at face value.  
-When you step into the zone of love,  
-Language as we know it  
-Becomes obsolete.  
-That which cannot be put into words  
-Can only be gasped through silence.  
+Most of the problems of the world,    
+Stem from linguistic mistakes    
+And simple misunderstandings.    
+Don’t ever take words at face value.    
+When you step into the zone of love,    
+Language as we know it    
+Becomes obsolete.    
+That which cannot be put into words    
+Can only be gasped through silence.    
 
 ---
 
 ## Rule 6 : Truly seeing self & God
-Loneliness and solitude   
-Are two different things.  
-When you are lonely,  
-It is easy to delude yourself  
-Into believing that   
-You are on the right path.  
-Solitude is better for us,  
-as it means being   
-alone without feeling lonely.  
-But eventually it is best  
-To find a person,  
-The person who   
-Will be your mirror.  
-Remember, only in   
-Another person’s heart can you  
-Truly see yourself and  
-The presence of God within you!  
+Loneliness and solitude     
+Are two different things.    
+When you are lonely,    
+It is easy to delude yourself    
+Into believing that     
+You are on the right path.    
+Solitude is better for us,    
+as it means being     
+alone without feeling lonely.    
+But eventually it is best    
+To find a person,    
+The person who     
+Will be your mirror.    
+Remember, only in     
+Another person’s heart can you    
+Truly see yourself and    
+The presence of God within you!    
 
 ---
 
 ## Rule 7 : Gratitude always 
-Whatever happens in your life,  
-No matter how troubling things might seem,  
-Do not enter the neighborhood of despair.  
-Even when all doors remain closed,  
-God will open up  
-A new path only for you.   
-Be thankful!  
-It is easy to be thankful  
-When all is well.  
-A Sufi is thankful  
-Not only for what he has been given  
-But also for all that he has been denied.  
+Whatever happens in your life,    
+No matter how troubling things might seem,    
+Do not enter the neighborhood of despair.    
+Even when all doors remain closed,   
+God will open up    
+A new path only for you.     
+Be thankful!    
+It is easy to be thankful    
+When all is well.    
+A Sufi is thankful    
+Not only for what he has been given    
+But also for all that he has been denied.    
 
 ---
 
 ## Rule 8 : Patience eternal
-Patience does not mean to passively endure.  
-It means to be farsighted enough  
-To trust the end result of a process.  
-What does patience mean?  
-It means to look at the thorn  
-And see the rose,  
-To look at the night,  
-And see the dawn.   
-Impatience means   
-To be shortsighted  
-As to not be able to see the outcome.  
-The lovers of God  
-NNever run out of patience,  
-For they know  
-That time is needed for   
-Crescent moon to become full.   
+Patience does not mean to passively endure.    
+It means to be farsighted enough    
+To trust the end result of a process.    
+What does patience mean?    
+It means to look at the thorn    
+And see the rose,    
+To look at the night,    
+And see the dawn.     
+Impatience means     
+To be shortsighted    
+As to not be able to see the outcome.    
+The lovers of God    
+NNever run out of patience,    
+For they know    
+That time is needed for     
+Crescent moon to become full.     
 
 ---
 
 ## Rule 9 : Different levels 
-Each and reader comprehends the Holy Quran  
-On a different level in tandem   
-With the depth of his understanding.  
-There are four levels of insight.  
-The first level is the outer meaning  
-And it is the one   
-That the majority of the people are content with.  
-Next is the Batins - the inner level.  
-Third, there is the inner of the inner.  
-And the fourth level  
-Is so deep   
-It cannot be put  
-Into words and   
-Is therefore bound to remain indescribable  
+Each and reader comprehends the Holy Quran    
+On a different level in tandem     
+With the depth of his understanding.    
+There are four levels of insight.    
+The first level is the outer meaning    
+And it is the one     
+That the majority of the people are content with.    
+Next is the Batins - the inner level.    
+Third, there is the inner of the inner.    
+And the fourth level    
+Is so deep     
+It cannot be put    
+Into words and     
+Is therefore bound to remain indescribable    
 
 ---
 
 ## Rule 10 : The journey within
-East, west, south or north,  
-Makes little difference.  
-No matter what your destination,  
-Just be sure to make  
-Every journey a journey within.  
-If you travel within,  
-You will travel the whole wide world  
-And Beyond.  
+East, west, south or north,    
+Makes little difference.    
+No matter what your destination,    
+Just be sure to make    
+Every journey a journey within.    
+If you travel within,    
+You will travel the whole wide world    
+And Beyond.    
 
 ---
 
 ## Rule 11 : Perfection in pain
-The midwife knows that when  
-There is no pain,  
-The way for the baby   
-Cannot be opened   
-And the mother cannot give birth.  
-Likewise for a new self to be born,   
-Hardship is necessary.  
-Just as clay needs to go through  
-Intense heat to become strong.  
-Love can only be   
-Perfected in pain.  
+The midwife knows that when    
+There is no pain,    
+The way for the baby     
+Cannot be opened     
+And the mother cannot give birth.    
+Likewise for a new self to be born,     
+Hardship is necessary.    
+Just as clay needs to go through    
+Intense heat to become strong.    
+Love can only be     
+Perfected in pain.    
 
 ---
 
 ## Rule 12 : The quest of change 
-The quest for Love changes us.  
-There is no seeker among those,  
-Who search for Love   
-who has not matured on the way.  
-The moment you start seeking for Love,  
-YOu start to change within and without.  
+The quest for Love changes us.    
+There is no seeker among those,    
+Who search for Love     
+who has not matured on the way.    
+The moment you start seeking for Love,    
+YOu start to change within and without.    
 
 ---
 
 ## Rule 13 : Fake Gurus 
-There are more fake gurus and false teachers,  
-In this world, than the number of stars   
-In the visible universe.  
-Don't confuse power-driven,  
-self-centered people   
-With true mentors.  
-A genuine spiritual master  
-Will not direct your attention  
-To himself or herself  
-And will not expect absolute obedience  
-Or utter admiration from you,  
-But instead will help you  
-To appreciate and admire your inner self.  
-True mentors are as transparent as glass.  
-They let the light of God pass through them.  
+There are more fake gurus and false teachers,    
+In this world, than the number of stars     
+In the visible universe.    
+Don't confuse power-driven,    
+self-centered people     
+With true mentors.    
+A genuine spiritual master    
+Will not direct your attention    
+To himself or herself    
+And will not expect absolute obedience    
+Or utter admiration from you,    
+But instead will help you    
+To appreciate and admire your inner self.    
+True mentors are as transparent as glass.    
+They let the light of God pass through them.    
 
 ---
 
 ## Rule 14 : Embracing change
-Try not to resist the changes  
-That come your way.  
-Instead let life live through you.  
-And do not worry  
-That your life is turning upside down.  
+Try not to resist the changes    
+That come your way.    
+Instead let life live through you.    
+And do not worry    
+That your life is turning upside down.    
 How do you know   
 That the side you are used to  
 Is better than the one to come?  
@@ -670,8 +670,49 @@ And a time to die.
 
 ---
 
-## Rule 38 : 
-Even if a single day in oyur life 
-I the same as teh day before,
-it surely is apity. 
-At every moment and 
+## Rule 38 : Dyingbefore death
+It is never too late to ask yourself,
+"Am I ready to change the life I am living? 
+Am I ready to change within?"
+Even if a single day in your life 
+Is the same as the day before,
+it surely is a pity. 
+At every moment and with each new breath,
+One should be renewed and renewed again.
+There is only one way to be born into a new life
+To die before death.
+
+---
+
+## Rule 39 : Change and Sameness
+While the parts change 
+The whole always remains the same.
+For every thief who departs this world,
+A new one is born.
+And every decent person who passes away
+is replaced by a new one.
+In this way 
+Not only does nothing remain the same
+But also nothing ever really changes.
+
+---
+
+## Rule 40 : 
+A life without love is of no account.
+Don't ask yourself what kind of love you should seek,
+Spiritual or material,
+Divine or mundane,
+Eastern or Western,
+Divisions only lead to more divisions.
+Love has no labels,
+No definitions. 
+It is what it is is,
+Pure and Simple. 
+
+Love is the water of life.
+And a lover is a soul of fire!
+The universe turns differently 
+When fire loves water.
+
+---
+
