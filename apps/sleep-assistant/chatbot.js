@@ -248,6 +248,10 @@ async function sendMessage() {
     const relevantDocs = searchRelevantDocuments(message);
     const response = generateResponse(message, relevantDocs);
     
+    // Debug logging
+    console.log('Relevant docs found:', relevantDocs.length);
+    console.log('Response sources:', response.sources);
+    
     // Hide typing indicator and show response
     hideTypingIndicator();
     addBotMessage(response.answer, response.sources);
@@ -279,6 +283,7 @@ function addUserMessage(message) {
 
 // Add bot message to chat
 function addBotMessage(message, sources = []) {
+    console.log('addBotMessage called with sources:', sources);
     const chatMessages = document.getElementById('chatMessages');
     const messageDiv = document.createElement('div');
     messageDiv.className = 'message bot';
