@@ -1,6 +1,6 @@
 ---
 layout: mermaid
-title: Introduction to Gymnasium
+title: Introduction to Reinforcement learning using Gymnasium
 description: "Gymnasium is a toolkit for developing and comparing reinforcement learning algorithms. It provides a wide variety of environments to test and train RL agents."
 tags: [gymnasium, reinforcement-learning, rl, python]
 ---
