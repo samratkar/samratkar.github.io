@@ -111,6 +111,40 @@ function searchRelevantDocuments(query, topK = 3) {
         .slice(0, topK);
 }
 
+// Extract title and authors from document text
+function extractMetadata(document) {
+    const lines = document.split('\n').filter(line => line.trim());
+    let title = '';
+    let authors = '';
+    
+    // Look for title patterns
+    for (let i = 0; i < Math.min(10, lines.length); i++) {
+        const line = lines[i].trim();
+        if (line.includes('TITLE') || line.includes('Title')) {
+            title = lines[i + 1]?.trim() || line.replace(/TITLE|Title/gi, '').trim();
+            break;
+        }
+    }
+    
+    // Extract first meaningful line as title if not found
+    if (!title) {
+        title = lines.find(line => line.length > 20 && line.length < 200) || 'Research Paper';
+        title = title.substring(0, 150);
+    }
+    
+    // Look for authors
+    for (let i = 0; i < Math.min(15, lines.length); i++) {
+        const line = lines[i].toLowerCase();
+        if (line.includes('author') && !line.includes('corresponding')) {
+            const nextLines = lines.slice(i + 1, i + 4).join(' ');
+            authors = nextLines.substring(0, 100);
+            break;
+        }
+    }
+    
+    return { title, authors };
+}
+
 // Generate response based on relevant documents
 function generateResponse(query, relevantDocs) {
     if (relevantDocs.length === 0) {
@@ -172,9 +206,20 @@ function generateResponse(query, relevantDocs) {
         answer += `I found ${relevantDocs.length} relevant sections in my knowledge base that might help answer your question.`;
     }
     
+    // Extract metadata from relevant documents
+    const sources = relevantDocs.map((doc, idx) => {
+        const metadata = extractMetadata(doc.document);
+        return {
+            number: idx + 1,
+            title: metadata.title,
+            authors: metadata.authors,
+            score: doc.score.toFixed(2)
+        };
+    });
+    
     return {
         answer: answer,
-        sources: relevantDocs.map((doc, idx) => `Source ${idx + 1}`)
+        sources: sources
     };
 }
 
@@ -240,7 +285,18 @@ function addBotMessage(message, sources = []) {
     
     let sourceHtml = '';
     if (sources && sources.length > 0) {
-        sourceHtml = `<div class="source-reference">📚 ${sources.join(', ')}</div>`;
+        sourceHtml = '<div class="source-references">';
+        sourceHtml += '<div class="source-title">📚 Sources:</div>';
+        sources.forEach(source => {
+            sourceHtml += `
+                <div class="source-item">
+                    <strong>Source ${source.number}</strong> (Relevance: ${source.score})<br>
+                    <em>${escapeHtml(source.title)}</em>
+                    ${source.authors ? `<br><small>${escapeHtml(source.authors)}</small>` : ''}
+                </div>
+            `;
+        });
+        sourceHtml += '</div>';
     }
     
     messageDiv.innerHTML = `
