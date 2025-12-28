@@ -23,6 +23,15 @@ title: Home - All Articles
   
   .gradient-header th {
     color: white !important;
+    background: transparent !important;
+  }
+  
+  .gradient-header tr {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  }
+  
+  table thead.gradient-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
   }
   
   .glass-effect {
@@ -100,8 +109,8 @@ title: Home - All Articles
   
   .stat-card {
     background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
+    border-radius: 10px;
+    padding: 0.75rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
     transition: all 0.3s ease;
   }
@@ -112,13 +121,14 @@ title: Home - All Articles
   }
   
   .stat-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
+    flex-shrink: 0;
   }
   
   /* Hide default theme header */
@@ -134,15 +144,15 @@ title: Home - All Articles
 <div class="bg-gray-50 min-h-screen">
   <!-- Header - Full Width -->
   <header class="full-width-header gradient-bg text-white shadow-lg">
-    <div class="max-w-screen-2xl mx-auto px-6 py-8">
+    <div class="max-w-screen-2xl mx-auto px-6 py-6">
       <div class="flex items-center justify-between">
         <div>
-          <h1 class="text-5xl font-bold">Samrat Kar | exploring & experimenting</h1>
-          <p class="text-blue-100 mt-3 text-lg">Article Index - All my writings and explorations</p>
+          <h1 class="text-2xl font-bold">Samrat Kar | exploring & experimenting</h1>
+          <p class="text-blue-100 mt-2 text-sm">Article Index - All my writings and explorations</p>
         </div>
         <div class="text-right">
-          <div class="text-4xl font-bold">{{ site.posts | size }}</div>
-          <div class="text-sm text-blue-100">Total Articles</div>
+          <div class="text-xl font-bold">{{ site.posts | size }}</div>
+          <div class="text-xs text-blue-100">Total Articles</div>
         </div>
       </div>
     </div>
@@ -198,64 +208,88 @@ title: Home - All Articles
       
       <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
         <div class="stat-card">
-          <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-            </svg>
+          <div class="flex items-center gap-3">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="text-lg font-bold text-gray-800">{{ total_posts }}</div>
+              <div class="text-xs text-gray-500">Total Articles</div>
+            </div>
           </div>
-          <div class="text-3xl font-bold text-gray-800">{{ total_posts }}</div>
-          <div class="text-sm text-gray-500 mt-1">Total Articles</div>
         </div>
         
         <div class="stat-card">
-          <div class="stat-icon" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-            </svg>
+          <div class="flex items-center gap-3">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="text-lg font-bold text-gray-800">{{ all_tags.size }}</div>
+              <div class="text-xs text-gray-500">Unique Tags</div>
+            </div>
           </div>
-          <div class="text-3xl font-bold text-gray-800">{{ all_tags.size }}</div>
-          <div class="text-sm text-gray-500 mt-1">Unique Tags</div>
         </div>
         
         <div class="stat-card">
-          <div class="stat-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-            </svg>
+          <div class="flex items-center gap-3">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="text-lg font-bold text-gray-800">{{ all_categories.size }}</div>
+              <div class="text-xs text-gray-500">Categories</div>
+            </div>
           </div>
-          <div class="text-3xl font-bold text-gray-800">{{ all_categories.size }}</div>
-          <div class="text-sm text-gray-500 mt-1">Categories</div>
         </div>
         
         <div class="stat-card">
-          <div class="stat-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
-            </svg>
+          <div class="flex items-center gap-3">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="text-lg font-bold text-gray-800">{{ posts_with_tags }}</div>
+              <div class="text-xs text-gray-500">Tagged Articles</div>
+            </div>
           </div>
-          <div class="text-3xl font-bold text-gray-800">{{ posts_with_tags }}</div>
-          <div class="text-sm text-gray-500 mt-1">Tagged Articles</div>
         </div>
         
         <div class="stat-card">
-          <div class="stat-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
-            </svg>
+          <div class="flex items-center gap-3">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="text-lg font-bold text-gray-800">{{ posts_with_categories }}</div>
+              <div class="text-xs text-gray-500">Categorized</div>
+            </div>
           </div>
-          <div class="text-3xl font-bold text-gray-800">{{ posts_with_categories }}</div>
-          <div class="text-sm text-gray-500 mt-1">Categorized</div>
         </div>
         
         <div class="stat-card">
-          <div class="stat-icon" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
-            </svg>
+          <div class="flex items-center gap-3">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="text-lg font-bold text-gray-800" id="filteredCountTop">{{ total_posts }}</div>
+              <div class="text-xs text-gray-500">Filtered Results</div>
+            </div>
           </div>
-          <div class="text-3xl font-bold text-gray-800" id="filteredCountTop">{{ total_posts }}</div>
-          <div class="text-sm text-gray-500 mt-1">Filtered Results</div>
         </div>
       </div>
     </div>
@@ -272,9 +306,9 @@ title: Home - All Articles
       
       <!-- Left Panel - Tags -->
       <div class="w-72 flex-shrink-0">
-        <div class="side-panel bg-white rounded-xl shadow-lg p-5 border border-gray-100">
-          <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2 pb-3 border-b border-gray-200">
-            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="side-panel bg-white rounded-xl shadow-lg p-4 border border-gray-100">
+          <h3 class="text-base font-bold text-gray-800 mb-3 flex items-center gap-2 pb-2 border-b border-gray-200">
+            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
             </svg>
             <span>Tags</span>
@@ -291,8 +325,8 @@ title: Home - All Articles
             >
           </div>
           
-          <div class="mb-4">
-            <button onclick="clearFilters()" class="w-full px-4 py-2.5 text-sm font-medium bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 rounded-lg transition shadow-sm">
+          <div class="mb-3">
+            <button onclick="clearFilters()" class="w-full px-3 py-2 text-xs font-medium bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 rounded-lg transition shadow-sm">
               <svg class="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
               </svg>
@@ -317,12 +351,13 @@ title: Home - All Articles
           <div class="overflow-x-auto">
             <table class="w-full">
               <thead class="gradient-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;">
-                <tr>
-                  <th class="px-6 py-4 text-left text-base font-semibold text-white">Title</th>
-                  <th class="px-6 py-4 text-left text-base font-semibold text-white">Summary</th>
-                  <th class="px-6 py-4 text-left text-base font-semibold whitespace-nowrap text-white">Date</th>
-                  <th class="px-6 py-4 text-left text-base font-semibold text-white">Tags</th>
-                  <th class="px-6 py-4 text-left text-base font-semibold text-white">Categories</th>
+                <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;">
+                  <th class="px-4 py-3 text-left text-xs font-semibold" style="color: white !important; background: transparent !important; width: 60px;">#</th>
+                  <th class="px-4 py-3 text-left text-xs font-semibold" style="color: white !important; background: transparent !important;">Title</th>
+                  <th class="px-4 py-3 text-left text-xs font-semibold" style="color: white !important; background: transparent !important;">Summary</th>
+                  <th class="px-4 py-3 text-left text-xs font-semibold whitespace-nowrap" style="color: white !important; background: transparent !important;">Date</th>
+                  <th class="px-4 py-3 text-left text-xs font-semibold" style="color: white !important; background: transparent !important;">Tags</th>
+                  <th class="px-4 py-3 text-left text-xs font-semibold" style="color: white !important; background: transparent !important;">Categories</th>
                 </tr>
               </thead>
               <tbody id="articlesTable" class="divide-y divide-gray-200">
@@ -330,13 +365,14 @@ title: Home - All Articles
                   <tr class="article-row" 
                       data-tags="{% if post.tags %}{% for tag in post.tags %}{{ tag }}{% unless forloop.last %}|{% endunless %}{% endfor %}{% endif %}{% if post.tag and post.tags.size > 0 %}|{% endif %}{% if post.tag %}{{ post.tag }}{% endif %}"
                       data-categories="{% if post.categories %}{% for category in post.categories %}{{ category }}{% unless forloop.last %}|{% endunless %}{% endfor %}{% endif %}">
-                    <td class="px-6 py-4">
-                      <a href="{{ post.url | relative_url }}" class="text-blue-600 hover:text-blue-800 font-medium text-base hover:underline">
+                    <td class="px-4 py-3 text-xs text-gray-600 font-medium">{{ forloop.index }}</td>
+                    <td class="px-4 py-3">
+                      <a href="{{ post.url | relative_url }}" class="text-blue-600 hover:text-blue-800 font-medium text-xs hover:underline">
                         {{ post.title | escape }}
                       </a>
                     </td>
-                    <td class="px-6 py-4">
-                      <div class="text-sm text-gray-600 line-clamp-2">
+                    <td class="px-4 py-3">
+                      <div class="text-xs text-gray-600 line-clamp-2">
                         {% if post.summary %}
                           {{ post.summary }}
                         {% elsif post.excerpt %}
@@ -346,30 +382,30 @@ title: Home - All Articles
                         {% endif %}
                       </div>
                     </td>
-                    <td class="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">
+                    <td class="px-4 py-3 text-xs text-gray-600 whitespace-nowrap">
                       {{ post.date | date: "%b %-d, %Y" }}
                     </td>
-                    <td class="px-6 py-4">
-                      <div class="flex flex-wrap gap-1.5">
+                    <td class="px-4 py-3">
+                      <div class="flex flex-wrap gap-1">
                         {% if post.tags %}
                           {% for tag in post.tags %}
-                            <span class="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition">
+                            <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition">
                               {{ tag }}
                             </span>
                           {% endfor %}
                         {% endif %}
                         {% if post.tag %}
-                          <span class="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition">
+                          <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition">
                             {{ post.tag }}
                           </span>
                         {% endif %}
                       </div>
                     </td>
-                    <td class="px-6 py-4">
-                      <div class="flex flex-wrap gap-1.5">
+                    <td class="px-4 py-3">
+                      <div class="flex flex-wrap gap-1">
                         {% if post.categories %}
                           {% for category in post.categories %}
-                            <span class="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 hover:bg-purple-200 transition">
+                            <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-purple-100 text-purple-700 hover:bg-purple-200 transition">
                               {{ category }}
                             </span>
                           {% endfor %}
@@ -386,9 +422,9 @@ title: Home - All Articles
       
       <!-- Right Panel - Categories -->
       <div class="w-72 flex-shrink-0">
-        <div class="side-panel bg-white rounded-xl shadow-lg p-5 border border-gray-100">
-          <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2 pb-3 border-b border-gray-200">
-            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="side-panel bg-white rounded-xl shadow-lg p-4 border border-gray-100">
+          <h3 class="text-base font-bold text-gray-800 mb-3 flex items-center gap-2 pb-2 border-b border-gray-200">
+            <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
             </svg>
             <span>Categories</span>
