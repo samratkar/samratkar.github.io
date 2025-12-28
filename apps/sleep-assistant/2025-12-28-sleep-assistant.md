@@ -60,7 +60,7 @@ permalink: /apps/sleep-assistant/
 <div class="app-preview">
     <h2>🤖 Your Personal Sleep Science Assistant</h2>
     <p>Ask questions about sleep disorders, sleep stages, and get answers based on scientific research</p>
-    <a href="{{ site.baseurl }}/_posts/apps/sleep_assistant/index.html" class="launch-btn" target="_blank">
+    <a href="{{ site.baseurl }}/apps/sleep-assistant/index.html" class="launch-btn" target="_blank">
         🚀 Launch Sleep Assistant
     </a>
 </div>
@@ -132,7 +132,7 @@ This chatbot demonstrates:
 
 ## 📖 Documentation
 
-Full documentation, source code, and setup instructions are available in the [GitHub repository](https://github.com/samratkar/samratkar.github.io/tree/main/_posts/apps/sleep_assistant).
+Full documentation, source code, and setup instructions are available in the [GitHub repository](https://github.com/samratkar/samratkar.github.io/tree/main/apps/sleep-assistant).
 
 ## 🚀 Quick Start
 
@@ -169,7 +169,7 @@ Planned features:
 
 ---
 
-**Ready to learn about sleep science?** [Launch the Sleep Assistant →]({{ site.baseurl }}/_posts/apps/sleep_assistant/index.html)
+**Ready to learn about sleep science?** [Launch the Sleep Assistant →]({{ site.baseurl }}/apps/sleep-assistant/index.html)
 
 <div style="text-align: center; margin-top: 40px; padding: 20px; background: #f5f7fa; border-radius: 10px;">
     <p><em>💤 Better understanding leads to better sleep</em></p>
