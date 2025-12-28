@@ -18,7 +18,11 @@ title: Home - All Articles
   }
   
   .gradient-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  }
+  
+  .gradient-header th {
+    color: white !important;
   }
   
   .glass-effect {
@@ -116,6 +120,15 @@ title: Home - All Articles
     justify-content: center;
     margin-bottom: 1rem;
   }
+  
+  /* Hide default theme header */
+  .site-header {
+    display: none !important;
+  }
+  
+  header.site-header {
+    display: none !important;
+  }
 </style>
 
 <div class="bg-gray-50 min-h-screen">
@@ -124,8 +137,8 @@ title: Home - All Articles
     <div class="max-w-screen-2xl mx-auto px-6 py-8">
       <div class="flex items-center justify-between">
         <div>
-          <h1 class="text-5xl font-bold">Article Index</h1>
-          <p class="text-blue-100 mt-2 text-lg">Exploring and experimenting with ideas</p>
+          <h1 class="text-5xl font-bold">Samrat Kar | exploring & experimenting</h1>
+          <p class="text-blue-100 mt-3 text-lg">Article Index - All my writings and explorations</p>
         </div>
         <div class="text-right">
           <div class="text-4xl font-bold">{{ site.posts | size }}</div>
@@ -269,6 +282,16 @@ title: Home - All Articles
           </h3>
           
           <div class="mb-4">
+            <input 
+              type="text" 
+              id="tagSearch" 
+              placeholder="Search tags..." 
+              class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              onkeyup="filterTagsList()"
+            >
+          </div>
+          
+          <div class="mb-4">
             <button onclick="clearFilters()" class="w-full px-4 py-2.5 text-sm font-medium bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 rounded-lg transition shadow-sm">
               <svg class="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
@@ -277,7 +300,7 @@ title: Home - All Articles
             </button>
           </div>
           
-          <div class="space-y-1">
+          <div id="tagsList" class="space-y-1">
             {% for tag in all_tags %}
               <div class="tag-item px-3 py-2.5 rounded-lg text-sm font-medium" onclick="filterByTag('{{ tag }}', this)" data-tag="{{ tag }}">
                 <span class="inline-block w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
@@ -293,13 +316,13 @@ title: Home - All Articles
         <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
           <div class="overflow-x-auto">
             <table class="w-full">
-              <thead class="gradient-header text-white">
+              <thead class="gradient-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;">
                 <tr>
-                  <th class="px-6 py-4 text-left text-base font-semibold">Title</th>
-                  <th class="px-6 py-4 text-left text-base font-semibold">Summary</th>
-                  <th class="px-6 py-4 text-left text-base font-semibold whitespace-nowrap">Date</th>
-                  <th class="px-6 py-4 text-left text-base font-semibold">Tags</th>
-                  <th class="px-6 py-4 text-left text-base font-semibold">Categories</th>
+                  <th class="px-6 py-4 text-left text-base font-semibold text-white">Title</th>
+                  <th class="px-6 py-4 text-left text-base font-semibold text-white">Summary</th>
+                  <th class="px-6 py-4 text-left text-base font-semibold whitespace-nowrap text-white">Date</th>
+                  <th class="px-6 py-4 text-left text-base font-semibold text-white">Tags</th>
+                  <th class="px-6 py-4 text-left text-base font-semibold text-white">Categories</th>
                 </tr>
               </thead>
               <tbody id="articlesTable" class="divide-y divide-gray-200">
@@ -452,5 +475,19 @@ title: Home - All Articles
     
     activeFilter = { type: null, value: null };
     updateFilteredCount();
+  }
+  
+  function filterTagsList() {
+    const searchInput = document.getElementById('tagSearch').value.toLowerCase();
+    const tagItems = document.querySelectorAll('.tag-item');
+    
+    tagItems.forEach(item => {
+      const tagText = item.textContent.toLowerCase().trim();
+      if (tagText.includes(searchInput)) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
   }
 </script>
