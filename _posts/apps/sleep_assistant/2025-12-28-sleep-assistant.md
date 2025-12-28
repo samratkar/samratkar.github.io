@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Sleep Assistant AI Chatbot"
-permalink: /apps/sleep-assistant/
+permalink: /apps/sleep-assistant-info/
 ---
 
 # 🌙 Sleep Assistant AI Chatbot
@@ -60,7 +60,7 @@ permalink: /apps/sleep-assistant/
 <div class="app-preview">
     <h2>🤖 Your Personal Sleep Science Assistant</h2>
     <p>Ask questions about sleep disorders, sleep stages, and get answers based on scientific research</p>
-    <a href="{{ site.baseurl }}/apps/sleep-assistant/index.html" class="launch-btn" target="_blank">
+    <a href="{{ site.baseurl }}/apps/sleep-assistant/" class="launch-btn" target="_blank">
         🚀 Launch Sleep Assistant
     </a>
 </div>
@@ -169,7 +169,7 @@ Planned features:
 
 ---
 
-**Ready to learn about sleep science?** [Launch the Sleep Assistant →]({{ site.baseurl }}/apps/sleep-assistant/index.html)
+**Ready to learn about sleep science?** [Launch the Sleep Assistant →]({{ site.baseurl }}/apps/sleep-assistant/)
 
 <div style="text-align: center; margin-top: 40px; padding: 20px; background: #f5f7fa; border-radius: 10px;">
     <p><em>💤 Better understanding leads to better sleep</em></p>
