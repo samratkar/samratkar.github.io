@@ -1,0 +1,149 @@
+# About Page Content
+# Edit this file to update your profile information
+
+profile:
+  name: "Samrat Kar"
+  title: "Software Engineering Manager | AI/ML Tech Leader"
+  organization: "Jeppesen Foreflight (Formerly Boeing) | Flight Efficiency Solutions"
+  photo: "/assets/img/my-photo-small.png"
+  badges:
+    - "23+ Years Experience"
+    - "AI & Cloud Expert"
+    - "Aviation Technology"
+    - "1 US Patent on Avionics"
+
+about:
+  paragraphs:
+    - "Tech leader with 23 years of experience, specializing in developing cloud-native AI-based applications and on-board avionics systems for OEMs and airlines. Currently building agentic and multi-agent systems for AI-enabled services based on aviation data at Boeing/Jeppesen."
+    - "I'm passionate about leveraging cutting-edge AI/ML technologies to solve complex aviation challenges, with a proven track record of delivering 1-2% fuel savings per flight through predictive deep learning models."
+
+experience:
+  - title: "Software Engineering Manager"
+    company: "Boeing Digital Aviation (Jeppesen Foreflight)"
+    department: "Flight Efficiency Solutions"
+    duration: "May 2023 - Present"
+    achievements:
+      - "Building **agentic and multi-agent systems** for AI-enabled services based on aviation data, leveraging Azure OpenAI and advanced LLM orchestration frameworks"
+      - "Designed and led development of **Flight Deck Advisor** - A prescriptive deep learning ensemble model that predicts the most optimum cost index, enabling **1-2% fuel savings per flight** across commercial and military aircraft"
+      - "This solution is **fleet agnostic** and has been deployed for multiple aircraft types, demonstrating significant operational cost reduction"
+      - "Built and led high-performing teams for **real-time wind and route uplink** capabilities to Flight Deck for both commercial and business jets, ensuring optimal flight planning"
+      - "Spearheaded **cloud migration initiative** - Successfully migrated three critical flight operations products (Wind Updates, Route Sync, and Flight Deck Advisor) from on-premise infrastructure to **Azure cloud**"
+      - "Implemented **DataMesh integration** on Databricks, establishing an automated ETL pipeline to ingest, process, and visualize aircraft Quick Access Recorder (QAR) flight data at scale"
+      - "Recognized as **AS9100 / CMMI-5 expert**, ensuring highest standards of quality and process maturity in aerospace software development"
+
+  - title: "Software Engineering Manager"
+    company: "Honeywell Intelligrated"
+    department: "Warehouse Execution Systems - Multi-site Microservice Cloud Platform"
+    duration: "October 2021 - May 2023"
+    achievements:
+      - "Reorganized global software engineering teams across multiple sites, achieving **25% increase in development velocity** and **20% improvement in quality performance**, with consistently >85% stakeholder satisfaction"
+      - "Established Honeywell's **offshore capability in Bangalore**, successfully building and scaling a ~100-member strong engineering team by leveraging India's highly educated and digitally literate workforce"
+      - "Architected and mapped organization-wide **Agile structure** incorporating a sustained release train for scaled agile SDLC, driving **20% improvement in schedule compliance** across quarters and multiple customer releases"
+      - "Designed and deployed comprehensive **end-to-end CI/CD automation framework** running over **6,000+ regression tests** using Selenium/Cucumber/Java stack, resulting in **20% reduction in post-release defects** YoY and **50% performance improvement** at scale"
+      - "Led complete **end-to-end design and test strategy** for microservice-based applications, improving scoping, planning, and predictability of program execution. Reduced testing EAC by **15%** and uncovered major scalability risks upfront"
+      - "Incorporated **design for resiliency** patterns ensuring **99.99% availability** metrics for multi-site, multi-user web applications on private cloud infrastructure"
+      - "Optimized engineering practices by leading improvements in automation, infrastructure, processes, and team organization, reducing sprint-on-sprint volatility by **20%** and improving schedule and cost performance by **25%**"
+      - "Built robust **onshore customer-facing capability** in Mason, Ohio, with competent team and automation framework for customer demos with software-hardware integration"
+      - "Supervised and built high-performing test team of **30+ senior software engineers**, delivering multi-user web applications for major customers including **Target, The Home Depot, Big Lots, Hamilton, Nike**"
+      - "Invented and patented **engine relight visualization methods and systems** for aircraft avionics (Patent # US 11,385,072)"
+
+  - title: "Senior Software Engineering Supervisor"
+    company: "Honeywell Intelligrated"
+    department: "Warehouse Process Automation"
+    duration: "October 2019 - September 2021"
+    achievements:
+      - "Delivered **end-to-end warehouse process automation solution** capable of fulfilling **5,000 orders per hour** with system reliability of **99.99%** for goods-to-person solution"
+      - "Led major infrastructure **upgrade from manual Docker Compose deployments to Kubernetes orchestrated multi-node clusters** with high availability configurations, enabling **40% improvement** in system availability"
+      - "Designed and deployed comprehensive **VPT workflow simulation** using JMeter stack to perform endurance testing for 2+ weeks continuously, establishing performance baselines for customer deployments with **50% improvement** in endurance metrics"
+      - "Modernized VPT simulation to **scriptless test environment** using Doppelio, reducing VPT readiness lead time by **70%**"
+      - "Configured and tuned **Kubernetes cluster topologies**, component instances, and resource allocations to accommodate 5,000+ orders fulfillment per hour through reduced latency and increased scalability"
+      - "Implemented **real-time monitoring** of endurance test metrics using InfluxDB time-series database with Grafana dashboards for continuous performance insights"
+      - "Supervised globally distributed team of **10+ senior software engineers** developing microservice-based web applications"
+
+  - title: "Senior Software Engineering Supervisor"
+    company: "Honeywell Aerospace"
+    department: "Flight Management Systems - Avionics"
+    duration: "September 2014 - September 2019"
+    achievements:
+      - "Led major **architectural transformation** of fuel performance computing module from monolithic architecture to **microservice REST API** based on cloud, enabling brand new preflight planning solution for pilots"
+      - "Built industry's first Flight Management System for **Boeing 747-8** from scratch using object-oriented principles with MVC pattern, creating the industry's first FMS with SPL architecture and reducing development efforts by **40%**"
+      - "Developed comprehensive **end-to-end simulation system** to run flight management on Windows laptop by building platform abstraction layer on Windows kernel, reducing testing efforts by **70%**"
+      - "Successfully **transitioned from Waterfall to Agile** project management methodologies, reducing cycle time by **50%** for projects requiring 75+ days of development effort for **Gulfstream, Airbus, Boeing, and Embraer**"
+      - "Delivered critical avionics features for major OEMs ensuring DO-178B compliance and certification standards"
+
+  - title: "Technology Specialist"
+    company: "Honeywell Aerospace"
+    department: "Flight Management Systems - Core Platform"
+    duration: "September 2011 - September 2014"
+    achievements:
+      - "Designed and implemented **common framework and platform layer** for flight management systems, creating scalable and reusable architecture across multiple product lines built upon core assets"
+      - "Built **rule-based state machine transition framework** for flight phase transitions and Required Navigation Performance (RNP) transitions for FMS"
+      - "Developed **native logging system** for embedded software enabling comprehensive debugging and diagnostics capabilities"
+      - "Implemented **Noise Abatement feature** for Embraer aircraft on native flight management system, ensuring compliance with environmental regulations"
+      - "Developed **RTA (Required Time of Arrival)** feature for Boeing commercial jets, enhancing precision approach capabilities"
+      - "Implemented **onboard-to-offboard application communication** via onboard computer from cockpit to cloud, enabling real-time data exchange for microservice-based flight crew services"
+      - "Designed and implemented **COM-based distributed simulation tool** for monitoring messages in avionics bus, improving system integration testing"
+
+  - title: "Early Career Progression"
+    company: "Honeywell Aerospace"
+    department: "Flight Management Systems & Avionics"
+    duration: "July 2003 - August 2011"
+    summary: "Progressive career advancement through technical excellence and leadership:"
+    achievements:
+      - "**Tech Lead (January 2006 - May 2011):** Led technical teams in developing critical FMS features and establishing software development best practices"
+      - "**Senior Software Engineer (July 2004 - December 2005):** Contributed to major avionics system development with focus on performance optimization"
+      - "**Software Engineer (July 2003 - June 2004):** Started career developing embedded avionics software with focus on DO-178B certified systems"
+
+education:
+  - degree: "PhD in Generative AI"
+    institution: "Amrita University"
+    status: "In Progress"
+    color: "purple"
+  - degree: "MTech in Cloud Computing"
+    institution: "BITS Pilani"
+    status: "2024"
+    color: "blue"
+  - degree: "BE in Computer Science"
+    institution: "VTU"
+    status: "2002"
+    color: "green"
+
+publications:
+  - type: "book"
+    icon: "📚"
+    title: "Simoni's Story"
+    date: "December 2012"
+    link: "https://www.amazon.in/Simonis-Story-Samrat-Kar-ebook/dp/B00AK3G8AS/"
+  - type: "patent"
+    icon: "🔬"
+    title: "Engine relight visualization methods and systems for aircraft avionics systems"
+    number: "US 11,385,072"
+    link: "https://patents.justia.com/patent/11385072"
+
+social_links:
+  - name: "LinkedIn"
+    url: "https://www.linkedin.com/in/samratk/"
+    icon: "linkedin"
+  - name: "Twitter / X"
+    url: "https://x.com/samrat_kar"
+    icon: "twitter"
+  - name: "Blog"
+    url: "https://karconversations.wordpress.com/"
+    icon: "blog"
+
+skills:
+  - category: "AI & ML"
+    items: ["Agentic RAG", "Multi-Agents", "Azure OpenAI", "Deep Learning"]
+  - category: "Programming"
+    items: ["Python", "Java", "C/C++", "JavaScript"]
+  - category: "DevOps & Cloud"
+    items: ["Kubernetes", "Docker", "Azure", "Databricks"]
+  - category: "Architecture"
+    items: ["Microservices", "Cloud Native", "Big Data"]
+
+certifications:
+  - "Scrum & SAFe Certified"
+  - "Google Certified Project Management"
+  - "AI-Machine Learning (IIIT Bangalore)"
+  - "Executive MBA Certificate (IIM Bangalore)"
+  - "Positive Psychology"
