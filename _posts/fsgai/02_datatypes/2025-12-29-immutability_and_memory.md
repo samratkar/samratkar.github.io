@@ -2,6 +2,7 @@
 category: full stack llm app 
 subcategory: mutability
 tag : immutability
+layout : mermaid
 ---
 
 # Python Immutability and Memory Management
