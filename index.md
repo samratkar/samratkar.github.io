@@ -97,6 +97,43 @@ title: Home - All Articles
     align-items: flex-start;
   }
   
+  /* Adjust panel widths for better table visibility */
+  .w-72.flex-shrink-0 {
+    width: 15rem !important;
+  }
+  
+  /* Table container with vertical scroll */
+  .flex-1.min-w-0 > div {
+    max-height: calc(100vh - 12rem);
+    overflow-y: auto;
+  }
+  
+  .flex-1.min-w-0 > div::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .flex-1.min-w-0 > div::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  .flex-1.min-w-0 > div::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 10px;
+  }
+  
+  .flex-1.min-w-0 > div::-webkit-scrollbar-thumb:hover {
+    background: #5568d3;
+  }
+  
+  /* Table column widths */
+  table th:nth-child(1) { width: 50px; }
+  table th:nth-child(2) { width: 25%; }
+  table th:nth-child(3) { width: 30%; }
+  table th:nth-child(4) { width: 100px; }
+  table th:nth-child(5) { width: 15%; }
+  table th:nth-child(6) { width: 15%; }
+  
   .full-width-header {
     width: 100vw;
     position: relative;
@@ -328,7 +365,7 @@ title: Home - All Articles
     <div class="flex gap-6">
       
       <!-- Left Panel - Tags -->
-      <div class="w-72 flex-shrink-0">
+      <div class="w-72 flex-shrink-0" style="width: 15rem;">
         <div class="side-panel bg-white rounded-xl shadow-lg p-4 border border-gray-100">
           <h3 class="text-base font-bold text-gray-800 mb-3 flex items-center gap-2 pb-2 border-b border-gray-200">
             <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -410,24 +447,33 @@ title: Home - All Articles
                     </td>
                     <td class="px-4 py-3">
                       <div class="flex flex-wrap gap-1">
+                        {% assign displayed_tags = "" | split: "" %}
                         {% if post.tags %}
                           {% for tag in post.tags %}
-                            <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition">
-                              {{ tag }}
-                            </span>
+                            {% unless displayed_tags contains tag %}
+                              <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition">
+                                {{ tag }}
+                              </span>
+                              {% assign displayed_tags = displayed_tags | push: tag %}
+                            {% endunless %}
                           {% endfor %}
                         {% endif %}
                         {% if post.tag %}
                           {% if post.tag.first %}
                             {% for tag in post.tag %}
-                              <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition">
-                                {{ tag }}
-                              </span>
+                              {% unless displayed_tags contains tag %}
+                                <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition">
+                                  {{ tag }}
+                                </span>
+                                {% assign displayed_tags = displayed_tags | push: tag %}
+                              {% endunless %}
                             {% endfor %}
                           {% else %}
-                            <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition">
-                              {{ post.tag }}
-                            </span>
+                            {% unless displayed_tags contains post.tag %}
+                              <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition">
+                                {{ post.tag }}
+                              </span>
+                            {% endunless %}
                           {% endif %}
                         {% endif %}
                       </div>
@@ -452,7 +498,7 @@ title: Home - All Articles
       </div>
       
       <!-- Right Panel - Categories -->
-      <div class="w-72 flex-shrink-0">
+      <div class="w-72 flex-shrink-0" style="width: 15rem;">
         <div class="side-panel bg-white rounded-xl shadow-lg p-4 border border-gray-100">
           <h3 class="text-base font-bold text-gray-800 mb-3 flex items-center gap-2 pb-2 border-b border-gray-200">
             <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">

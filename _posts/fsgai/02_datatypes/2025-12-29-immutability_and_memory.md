@@ -1,7 +1,7 @@
 ---
-category: full stack gen ai application 
+category: full stack llm app 
 subcategory: mutability and memory
-tag : [python, immutability, memory management, data types]
+tag : immutability
 ---
 
 # Python Immutability and Memory Management
