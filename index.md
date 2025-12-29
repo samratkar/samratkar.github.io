@@ -211,18 +211,63 @@ title: Home - All Articles
   header.site-header {
     display: none !important;
   }
+  
+  .nav-menu {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .nav-link {
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .nav-link:hover {
+    background: white;
+    color: #667eea;
+    border-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+  }
+  
+  @media (max-width: 768px) {
+    .nav-menu {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    
+    .nav-link {
+      font-size: 0.8rem;
+      padding: 0.5rem 1rem;
+    }
+  }
 </style>
 
 <div class="bg-gray-50 min-h-screen">
   <!-- Header - Full Width -->
   <header class="full-width-header gradient-bg text-white shadow-lg">
     <div class="max-w-screen-2xl mx-auto px-6 py-6">
-      <div class="flex items-center justify-between">
-        <div>
+      <div class="flex items-center justify-between flex-wrap gap-6">
+        <div class="flex-1">
           <h1 class="text-2xl font-bold">Samrat Kar | exploring & experimenting</h1>
           <p class="text-blue-100 mt-2 text-sm">Article Index - All my writings and explorations</p>
         </div>
-        <div class="text-right">
+        <nav class="nav-menu">
+          <a href="/" class="nav-link">🏠 Home</a>
+          <a href="/about/" class="nav-link">👤 About</a>
+          <a href="/books/" class="nav-link">📚 Books</a>
+        </nav>
+        <div class="text-right flex-shrink-0">
           <div class="text-xl font-bold">{{ site.posts | size }}</div>
           <div class="text-xs text-blue-100">Total Articles</div>
         </div>
