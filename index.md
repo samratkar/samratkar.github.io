@@ -89,23 +89,6 @@ title: Home - All Articles
     display: none;
   }
   
-  /* Force three column layout */
-  .flex.gap-6 {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: flex-start !important;
-  }
-  
-  .flex-1.min-w-0 {
-    flex: 1 1 0% !important;
-    min-width: 0 !important;
-  }
-  
-  .w-72.flex-shrink-0 {
-    width: 18rem !important;
-    flex-shrink: 0 !important;
-  }
-  
   .full-width-header {
     width: 100vw;
     position: relative;
