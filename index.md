@@ -89,6 +89,14 @@ title: Home - All Articles
     display: none;
   }
   
+  /* Ensure three-column layout stays horizontal */
+  .flex.gap-6 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+  }
+  
   .full-width-header {
     width: 100vw;
     position: relative;
@@ -163,25 +171,40 @@ title: Home - All Articles
   {% assign all_categories = "" | split: "" %}
   {% for post in site.posts %}
     <!-- Collect from both 'tags' and 'tag' fields -->
-    {% for tag in post.tags %}
-      {% assign tag_str = tag | append: "" %}
-      {% unless all_tags contains tag_str %}
-        {% assign all_tags = all_tags | push: tag_str %}
-      {% endunless %}
-    {% endfor %}
+    {% if post.tags %}
+      {% for tag in post.tags %}
+        {% assign tag_str = tag | strip %}
+        {% unless all_tags contains tag_str %}
+          {% assign all_tags = all_tags | push: tag_str %}
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
     {% if post.tag %}
-      {% assign tag_value = post.tag | append: "" %}
-      {% unless all_tags contains tag_value %}
-        {% assign all_tags = all_tags | push: tag_value %}
-      {% endunless %}
+      {% if post.tag.first %}
+        <!-- If post.tag is an array, iterate through it -->
+        {% for tag in post.tag %}
+          {% assign tag_str = tag | strip %}
+          {% unless all_tags contains tag_str %}
+            {% assign all_tags = all_tags | push: tag_str %}
+          {% endunless %}
+        {% endfor %}
+      {% else %}
+        <!-- If post.tag is a single string -->
+        {% assign tag_value = post.tag | strip %}
+        {% unless all_tags contains tag_value %}
+          {% assign all_tags = all_tags | push: tag_value %}
+        {% endunless %}
+      {% endif %}
     {% endif %}
     <!-- Collect categories -->
-    {% for category in post.categories %}
-      {% assign cat_str = category | append: "" %}
-      {% unless all_categories contains cat_str %}
-        {% assign all_categories = all_categories | push: cat_str %}
-      {% endunless %}
-    {% endfor %}
+    {% if post.categories %}
+      {% for category in post.categories %}
+        {% assign cat_str = category | strip %}
+        {% unless all_categories contains cat_str %}
+          {% assign all_categories = all_categories | push: cat_str %}
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
   {% endfor %}
   {% assign all_tags = all_tags | sort %}
   {% assign all_categories = all_categories | sort %}
@@ -363,7 +386,7 @@ title: Home - All Articles
               <tbody id="articlesTable" class="divide-y divide-gray-200">
                 {% for post in sorted_posts %}
                   <tr class="article-row" 
-                      data-tags="{% if post.tags %}{% for tag in post.tags %}{{ tag }}{% unless forloop.last %}|{% endunless %}{% endfor %}{% endif %}{% if post.tag and post.tags.size > 0 %}|{% endif %}{% if post.tag %}{{ post.tag }}{% endif %}"
+                      data-tags="{% if post.tags %}{% for tag in post.tags %}{{ tag }}{% unless forloop.last %}|{% endunless %}{% endfor %}{% endif %}{% if post.tag %}{% if post.tag.first %}{% for tag in post.tag %}{{ tag }}{% unless forloop.last %}|{% endunless %}{% endfor %}{% else %}{{ post.tag }}{% endif %}{% endif %}"
                       data-categories="{% if post.categories %}{% for category in post.categories %}{{ category }}{% unless forloop.last %}|{% endunless %}{% endfor %}{% endif %}">
                     <td class="px-4 py-3 text-xs text-gray-600 font-medium">{{ forloop.index }}</td>
                     <td class="px-4 py-3">
@@ -395,9 +418,17 @@ title: Home - All Articles
                           {% endfor %}
                         {% endif %}
                         {% if post.tag %}
-                          <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition">
-                            {{ post.tag }}
-                          </span>
+                          {% if post.tag.first %}
+                            {% for tag in post.tag %}
+                              <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition">
+                                {{ tag }}
+                              </span>
+                            {% endfor %}
+                          {% else %}
+                            <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition">
+                              {{ post.tag }}
+                            </span>
+                          {% endif %}
                         {% endif %}
                       </div>
                     </td>
