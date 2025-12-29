@@ -24,12 +24,27 @@ permalink: /books/
     padding: 1.5rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
-    margin-bottom: 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
   
   .book-card:hover {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     transform: translateY(-2px);
+  }
+  
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  .published-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 1.5rem;
   }
   
   .header-image {
@@ -156,28 +171,35 @@ permalink: /books/
   
   <h2 class="section-title">📚 Books I'm Reading</h2>
   
-  {% for book in site.data.books.reading_list %}
-  <div class="book-card">
-    <h3 class="book-title">{{ forloop.index }}. {{ book.title }} by {{ book.author }}</h3>
-    <div class="book-info">
-      <p><strong>Date Started:</strong> {{ book.date_started }}</p>
-      <p><strong>Date Completed:</strong> {{ book.date_completed }}</p>
-      <p><strong>Book Review:</strong> <a href="{{ book.review_url }}" class="book-link">{{ book.title }} by {{ book.author }}</a></p>
+  <div class="books-grid">
+    {% for book in site.data.books.reading_list %}
+    <div class="book-card">
+      <h3 class="book-title">{{ forloop.index }}. {{ book.title }}</h3>
+      <div class="book-info" style="flex-grow: 1;">
+        <p style="margin-bottom: 0.5rem;"><strong>Author:</strong> {{ book.author }}</p>
+        <p style="margin-bottom: 0.5rem;"><strong>Started:</strong> {{ book.date_started }}</p>
+        <p style="margin-bottom: 0.5rem;"><strong>Status:</strong> {{ book.date_completed }}</p>
+        {% if book.review_url != 'TBD' %}
+        <p style="margin-top: 1rem;"><a href="{{ book.review_url }}" class="book-link">📖 Read Review</a></p>
+        {% endif %}
+      </div>
     </div>
+    {% endfor %}
   </div>
-  {% endfor %}
   
   <h2 class="section-title">✍️ My Published Books</h2>
   
-  {% for book in site.data.books.published_books %}
-  <div class="published-book">
-    <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem;">{{ book.title }}</h3>
-    <p style="margin: 0;">Published: {{ book.publication_date }} | <a href="{{ book.url }}" target="_blank">View on Amazon</a></p>
-    {% if book.description %}
-    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.95;">{{ book.description }}</p>
-    {% endif %}
+  <div class="published-grid">
+    {% for book in site.data.books.published_books %}
+    <div class="published-book">
+      <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem;">{{ book.title }}</h3>
+      <p style="margin: 0;">Published: {{ book.publication_date }} | <a href="{{ book.url }}" target="_blank">View on Amazon</a></p>
+      {% if book.description %}
+      <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.95;">{{ book.description }}</p>
+      {% endif %}
+    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
   
 </div>
 </div>
