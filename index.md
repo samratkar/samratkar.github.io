@@ -77,35 +77,6 @@ title: Home - All Articles
     font-weight: 600;
   }
   
-  .category-parent {
-    cursor: pointer;
-    user-select: none;
-  }
-  
-  .category-parent .expand-icon {
-    transition: transform 0.2s ease;
-    display: inline-block;
-  }
-  
-  .category-parent.expanded .expand-icon {
-    transform: rotate(90deg);
-  }
-  
-  .subcategory-list {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
-  
-  .subcategory-list.expanded {
-    max-height: 1000px;
-  }
-  
-  .subcategory-item {
-    margin-left: 1.25rem;
-    font-size: 0.813rem;
-  }
-  
   .article-row {
     transition: background-color 0.2s ease;
   }
@@ -461,73 +432,12 @@ title: Home - All Articles
           </h3>
           
           <div class="space-y-1">
-            <!-- AI Trends -->
-            <div>
-              <div class="category-parent category-item px-3 py-2.5 rounded-lg text-sm font-medium" onclick="toggleCategoryExpand(this, 'ai-trends')">
-                <span class="expand-icon">▶</span>
-                <span class="inline-block w-2 h-2 bg-purple-400 rounded-full mx-2"></span>
-                AI Trends
+            {% for category in all_categories %}
+              <div class="category-item px-3 py-2.5 rounded-lg text-sm font-medium" onclick="filterByCategory('{{ category }}', this)" data-category="{{ category }}">
+                <span class="inline-block w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                {{ category }}
               </div>
-              <div class="subcategory-list" data-parent="ai-trends">
-                {% for category in all_categories %}
-                  {% if category contains "ai-trend" or category contains "ai_trend" %}
-                    <div class="subcategory-item category-item px-3 py-2 rounded-lg" onclick="filterByCategory('{{ category }}', this)" data-category="{{ category }}">
-                      <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                      {{ category }}
-                    </div>
-                  {% endif %}
-                {% endfor %}
-              </div>
-            </div>
-            
-            <!-- Apps -->
-            <div>
-              <div class="category-parent category-item px-3 py-2.5 rounded-lg text-sm font-medium" onclick="toggleCategoryExpand(this, 'apps')">
-                <span class="expand-icon">▶</span>
-                <span class="inline-block w-2 h-2 bg-purple-400 rounded-full mx-2"></span>
-                Apps
-              </div>
-              <div class="subcategory-list" data-parent="apps">
-                {% for category in all_categories %}
-                  {% if category contains "app" %}
-                    <div class="subcategory-item category-item px-3 py-2 rounded-lg" onclick="filterByCategory('{{ category }}', this)" data-category="{{ category }}">
-                      <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                      {{ category }}
-                    </div>
-                  {% endif %}
-                {% endfor %}
-              </div>
-            </div>
-            
-            <!-- Books -->
-            <div>
-              <div class="category-parent category-item px-3 py-2.5 rounded-lg text-sm font-medium" onclick="toggleCategoryExpand(this, 'books')">
-                <span class="expand-icon">▶</span>
-                <span class="inline-block w-2 h-2 bg-purple-400 rounded-full mx-2"></span>
-                Books
-              </div>
-              <div class="subcategory-list" data-parent="books">
-                {% for category in all_categories %}
-                  {% if category contains "book" or category contains "ai" and category contains "mysticism" or category contains "psych" or category contains "writing" %}
-                    <div class="subcategory-item category-item px-3 py-2 rounded-lg" onclick="filterByCategory('{{ category }}', this)" data-category="{{ category }}">
-                      <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                      {{ category }}
-                    </div>
-                  {% endif %}
-                {% endfor %}
-              </div>
-            </div>
-            
-            <!-- Concepts -->
-            <div>
-              <div class="category-parent category-item px-3 py-2.5 rounded-lg text-sm font-medium" onclick="toggleCategoryExpand(this, 'concepts')">
-                <span class="expand-icon">▶</span>
-                <span class="inline-block w-2 h-2 bg-purple-400 rounded-full mx-2"></span>
-                Concepts
-              </div>
-              <div class="subcategory-list" data-parent="concepts">
-                {% for category in all_categories %}
-                  {% if category contains "genai" or category contains "agentic" or category contains "langraph" or category contains "pytorch" or category contains "fastai" or category contains "rag" or category contains "llm" or category contains "prompt" or category contains "reinforcement" or category contains "unsupervised" or category contains "android" or category contains "aws" or category contains "blockchain" or category contains "math" or category contains "physics" or category contains "english" or category contains "markdown" or category contains "music" or category contains "emotion" or category contains "humanism" or category contains "positive-psychology" or category contains "purposeful" or category contains "nptel" or category contains "coursework" or category contains "flight-dispatch" or category contains "weather" or category contains "windsurf" %}
+            {% endfor %}
                     <div class="subcategory-item category-item px-3 py-2 rounded-lg" onclick="filterByCategory('{{ category }}', this)" data-category="{{ category }}">
                       <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
                       {{ category }}
@@ -642,22 +552,6 @@ title: Home - All Articles
 <script>
   let activeFilter = { type: null, value: null };
   
-  function toggleCategoryExpand(element, parentId) {
-    const parent = element;
-    const subcategoryList = document.querySelector(`.subcategory-list[data-parent="${parentId}"]`);
-    
-    if (parent.classList.contains('expanded')) {
-      parent.classList.remove('expanded');
-      subcategoryList.classList.remove('expanded');
-    } else {
-      parent.classList.add('expanded');
-      subcategoryList.classList.add('expanded');
-    }
-    
-    // Stop event propagation to prevent filtering when expanding/collapsing
-    event.stopPropagation();
-  }
-  
   function updateFilteredCount() {
     const visibleRows = document.querySelectorAll('.article-row:not(.hidden-row)').length;
     document.getElementById('filteredCountTop').textContent = visibleRows;
@@ -712,12 +606,10 @@ title: Home - All Articles
   function clearFilters() {
     const tagItems = document.querySelectorAll('.tag-item');
     const categoryItems = document.querySelectorAll('.category-item');
-    const categoryParents = document.querySelectorAll('.category-parent');
     const rows = document.querySelectorAll('.article-row');
     
     tagItems.forEach(item => item.classList.remove('active'));
     categoryItems.forEach(item => item.classList.remove('active'));
-    categoryParents.forEach(parent => parent.classList.remove('active'));
     rows.forEach(row => row.classList.remove('hidden-row'));
     
     activeFilter = { type: null, value: null };
