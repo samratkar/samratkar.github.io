@@ -1,3 +1,9 @@
+---
+category: full stack gen ai application 
+subcategory: mutability and memory
+tag : [python, immutability, memory management, data types]
+---
+
 # Python Immutability and Memory Management
 
 ## The Immutability Paradox
