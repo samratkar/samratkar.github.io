@@ -1,6 +1,6 @@
 ---
 category: full stack llm app 
-subcategory: mutability and memory
+subcategory: mutability
 tag : immutability
 ---
 

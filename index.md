@@ -77,6 +77,33 @@ title: Home - All Articles
     font-weight: 600;
   }
   
+  .subcategory-item {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: 1rem;
+    font-size: 0.85rem;
+  }
+  
+  .subcategory-item:hover {
+    background-color: #d1fae5;
+    transform: translateX(4px);
+  }
+  
+  .subcategory-item.active {
+    background-color: #10b981;
+    color: white;
+    font-weight: 600;
+  }
+  
+  .category-header {
+    cursor: pointer;
+    font-weight: 600;
+  }
+  
+  .category-section {
+    margin-bottom: 0.75rem;
+  }
+  
   .article-row {
     transition: background-color 0.2s ease;
   }
@@ -203,9 +230,12 @@ title: Home - All Articles
     </div>
   </header>
 
-  <!-- Collect all tags and categories from all posts FIRST -->
+  <!-- Collect all tags, categories, and subcategories from all posts FIRST -->
   {% assign all_tags = "" | split: "" %}
   {% assign all_categories = "" | split: "" %}
+  {% assign all_subcategories = "" | split: "" %}
+  {% comment %} Create a map of category to subcategories {% endcomment %}
+  {% assign category_subcategories = "" %}
   {% for post in site.posts %}
     <!-- Collect from both 'tags' and 'tag' fields -->
     {% if post.tags %}
@@ -242,9 +272,38 @@ title: Home - All Articles
         {% endunless %}
       {% endfor %}
     {% endif %}
+    {% if post.category %}
+      {% assign cat_value = post.category | strip %}
+      {% unless all_categories contains cat_value %}
+        {% assign all_categories = all_categories | push: cat_value %}
+      {% endunless %}
+      {% comment %} Build category-subcategory mapping {% endcomment %}
+      {% if post.subcategory %}
+        {% assign mapping_key = cat_value | append: ":::" | append: post.subcategory %}
+        {% unless category_subcategories contains mapping_key %}
+          {% assign category_subcategories = category_subcategories | append: mapping_key | append: "|||" %}
+        {% endunless %}
+      {% endif %}
+    {% endif %}
+    <!-- Collect subcategories -->
+    {% if post.subcategories %}
+      {% for subcategory in post.subcategories %}
+        {% assign subcat_str = subcategory | strip %}
+        {% unless all_subcategories contains subcat_str %}
+          {% assign all_subcategories = all_subcategories | push: subcat_str %}
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
+    {% if post.subcategory %}
+      {% assign subcat_value = post.subcategory | strip %}
+      {% unless all_subcategories contains subcat_value %}
+        {% assign all_subcategories = all_subcategories | push: subcat_value %}
+      {% endunless %}
+    {% endif %}
   {% endfor %}
   {% assign all_tags = all_tags | sort %}
   {% assign all_categories = all_categories | sort %}
+  {% assign all_subcategories = all_subcategories | sort %}
 
   <!-- Statistics Section -->
   <div class="full-width-container bg-white border-b border-gray-200 shadow-sm">
@@ -424,7 +483,8 @@ title: Home - All Articles
                 {% for post in sorted_posts %}
                   <tr class="article-row" 
                       data-tags="{% if post.tags %}{% for tag in post.tags %}{{ tag }}{% unless forloop.last %}|{% endunless %}{% endfor %}{% endif %}{% if post.tag %}{% if post.tag.first %}{% for tag in post.tag %}{{ tag }}{% unless forloop.last %}|{% endunless %}{% endfor %}{% else %}{{ post.tag }}{% endif %}{% endif %}"
-                      data-categories="{% if post.categories %}{% for category in post.categories %}{{ category }}{% unless forloop.last %}|{% endunless %}{% endfor %}{% endif %}">
+                      data-categories="{% for category in post.categories %}{{ category }}{% unless forloop.last %}|{% endunless %}{% endfor %}"
+                      data-subcategories="{% if post.subcategory %}{{ post.subcategory }}{% endif %}{% if post.subcategories %}{% for subcategory in post.subcategories %}{{ subcategory }}{% unless forloop.last %}|{% endunless %}{% endfor %}{% endif %}">
                     <td class="px-4 py-3 text-xs text-gray-600 font-medium">{{ forloop.index }}</td>
                     <td class="px-4 py-3">
                       <a href="{{ post.url | relative_url }}" class="text-blue-600 hover:text-blue-800 font-medium text-xs hover:underline">
@@ -480,13 +540,11 @@ title: Home - All Articles
                     </td>
                     <td class="px-4 py-3">
                       <div class="flex flex-wrap gap-1">
-                        {% if post.categories %}
-                          {% for category in post.categories %}
-                            <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-purple-100 text-purple-700 hover:bg-purple-200 transition">
-                              {{ category }}
-                            </span>
-                          {% endfor %}
-                        {% endif %}
+                        {% for category in post.categories %}
+                          <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-purple-100 text-purple-700 hover:bg-purple-200 transition">
+                            {{ category }}
+                          </span>
+                        {% endfor %}
                       </div>
                     </td>
                   </tr>
@@ -497,7 +555,7 @@ title: Home - All Articles
         </div>
       </div>
       
-      <!-- Right Panel - Categories -->
+      <!-- Right Panel - Categories & Sub-Categories -->
       <div class="w-72 flex-shrink-0" style="width: 15rem;">
         <div class="side-panel bg-white rounded-xl shadow-lg p-4 border border-gray-100">
           <h3 class="text-base font-bold text-gray-800 mb-3 flex items-center gap-2 pb-2 border-b border-gray-200">
@@ -510,9 +568,29 @@ title: Home - All Articles
           
           <div class="space-y-1">
             {% for category in all_categories %}
-              <div class="category-item px-3 py-2.5 rounded-lg text-sm font-medium" onclick="filterByCategory('{{ category }}', this)" data-category="{{ category }}">
-                <span class="inline-block w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-                {{ category }}
+              <div class="category-section">
+                <div class="category-item category-header px-3 py-2.5 rounded-lg text-sm" onclick="filterByCategory('{{ category }}', this)" data-category="{{ category }}">
+                  <span class="inline-block w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                  {{ category }}
+                </div>
+                {% comment %} Find and display subcategories for this category {% endcomment %}
+                {% assign category_key = category | append: ":::" %}
+                {% if category_subcategories contains category_key %}
+                  <div class="ml-4 mt-1 space-y-1">
+                    {% assign mappings = category_subcategories | split: "|||" %}
+                    {% for mapping in mappings %}
+                      {% if mapping contains category_key %}
+                        {% assign parts = mapping | split: ":::" %}
+                        {% if parts[0] == category %}
+                          <a href="javascript:void(0)" class="subcategory-item block px-3 py-1.5 rounded-lg text-sm hover:no-underline" onclick="filterBySubcategory('{{ parts[1] }}', this); return false;" data-subcategory="{{ parts[1] }}">
+                            <span class="inline-block w-1.5 h-1.5 bg-green-400 rounded-full mr-2"></span>
+                            <span class="text-gray-700">{{ parts[1] }}</span>
+                          </a>
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                {% endif %}
               </div>
             {% endfor %}
           </div>
@@ -534,9 +612,11 @@ title: Home - All Articles
   function filterByTag(tag, element) {
     const tagItems = document.querySelectorAll('.tag-item');
     const categoryItems = document.querySelectorAll('.category-item');
+    const subcategoryItems = document.querySelectorAll('.subcategory-item');
     
     tagItems.forEach(item => item.classList.remove('active'));
     categoryItems.forEach(item => item.classList.remove('active'));
+    subcategoryItems.forEach(item => item.classList.remove('active'));
     
     element.classList.add('active');
     activeFilter = { type: 'tag', value: tag };
@@ -557,17 +637,44 @@ title: Home - All Articles
   function filterByCategory(category, element) {
     const tagItems = document.querySelectorAll('.tag-item');
     const categoryItems = document.querySelectorAll('.category-item');
+    const subcategoryItems = document.querySelectorAll('.subcategory-item');
     
     tagItems.forEach(item => item.classList.remove('active'));
     categoryItems.forEach(item => item.classList.remove('active'));
+    subcategoryItems.forEach(item => item.classList.remove('active'));
     
     element.classList.add('active');
     activeFilter = { type: 'category', value: category };
     
     const rows = document.querySelectorAll('.article-row');
     rows.forEach(row => {
-      const categories = row.dataset.categories ? row.dataset.categories.split('|') : [];
+      const categories = row.dataset.categories ? row.dataset.categories.split('|').filter(c => c.trim()) : [];
       if (categories.includes(category)) {
+        row.classList.remove('hidden-row');
+      } else {
+        row.classList.add('hidden-row');
+      }
+    });
+    
+    updateFilteredCount();
+  }
+  
+  function filterBySubcategory(subcategory, element) {
+    const tagItems = document.querySelectorAll('.tag-item');
+    const categoryItems = document.querySelectorAll('.category-item');
+    const subcategoryItems = document.querySelectorAll('.subcategory-item');
+    
+    tagItems.forEach(item => item.classList.remove('active'));
+    categoryItems.forEach(item => item.classList.remove('active'));
+    subcategoryItems.forEach(item => item.classList.remove('active'));
+    
+    element.classList.add('active');
+    activeFilter = { type: 'subcategory', value: subcategory };
+    
+    const rows = document.querySelectorAll('.article-row');
+    rows.forEach(row => {
+      const subcategories = row.dataset.subcategories ? row.dataset.subcategories.split('|').filter(s => s.trim()) : [];
+      if (subcategories.includes(subcategory)) {
         row.classList.remove('hidden-row');
       } else {
         row.classList.add('hidden-row');
@@ -580,10 +687,12 @@ title: Home - All Articles
   function clearFilters() {
     const tagItems = document.querySelectorAll('.tag-item');
     const categoryItems = document.querySelectorAll('.category-item');
+    const subcategoryItems = document.querySelectorAll('.subcategory-item');
     const rows = document.querySelectorAll('.article-row');
     
     tagItems.forEach(item => item.classList.remove('active'));
     categoryItems.forEach(item => item.classList.remove('active'));
+    subcategoryItems.forEach(item => item.classList.remove('active'));
     rows.forEach(row => row.classList.remove('hidden-row'));
     
     activeFilter = { type: null, value: null };
