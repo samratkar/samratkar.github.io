@@ -1,0 +1,63 @@
+# Books Page Content
+# Edit this file to update your reading list and published books
+
+header:
+  title: "📚 My Reading Journey"
+  subtitle: "Books that inspire, challenge, and transform"
+  image: "/assets/bookworm/header.png"
+
+reading_list:
+  - title: "Dare to Lead"
+    author: "Brené Brown"
+    date_started: "November 1, 2024"
+    date_completed: "January 15, 2024"
+    status: "completed"
+    review_url: "https://samratkar.github.io/2024/12/15/vulnerability.html"
+    
+  - title: "Awe"
+    author: "Dacher Keltner"
+    date_started: "May 8, 2024"
+    date_completed: "In Progress"
+    status: "in_progress"
+    review_url: "https://samratkar.github.io/2025/05/09/Awe.html"
+    
+  - title: "40 Rules of Love"
+    author: "Elif Shafak"
+    date_started: "October 8, 2025"
+    date_completed: "November 17, 2025"
+    status: "completed"
+    review_url: "https://samratkar.github.io/2025/11/07/40rulesoflove.html"
+
+  - title: "Strong Ground"
+    author: "Brené Brown"
+    date_started: "December 25, 2025"
+    date_completed: "In Progress"
+    status: "in_progress"
+    review_url: TBD 
+
+  - title: "The English Teacher"
+    author: "R K Narayan"
+    date_started: "December 15, 2025"
+    date_completed: "In Progress"
+    status: "in_progress"
+    review_url: TBD 
+
+  - title: "Useful Delusions"
+    author: "Shankar Vedantam"
+    date_started: "November 7, 2025"
+    date_completed: "In Progress"
+    status: "in_progress"
+    review_url: TBD 
+
+  - title: "Norwegian Wood"
+    author: "Haruki Murakami"
+    date_started: "October 17, 2025"
+    date_completed: "In Progress"
+    status: "in_progress"
+    review_url: TBD 
+
+published_books:
+  - title: "Simoni's Story"
+    publication_date: "December 2012"
+    url: "https://www.amazon.in/Simonis-Story-Samrat-Kar-ebook/dp/B00AK3G8AS/"
+    description: "A captivating novel exploring life, relationships, and personal growth"
