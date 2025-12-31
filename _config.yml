@@ -20,6 +20,7 @@
 markdown: kramdown
 kramdown:
   math_engine: mathjax
+  hard_wrap: true
 title: Samrat Kar | exploring & experimenting  
 logo : /assets/img/my-photo-small.jpg
 description: >- # this means to ignore newlines until "baseurl:"
