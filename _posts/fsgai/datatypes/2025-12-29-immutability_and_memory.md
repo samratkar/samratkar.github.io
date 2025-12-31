@@ -215,16 +215,4 @@ old_id = id(my_list)
 my_list.append(4)
 print(id(my_list) == old_id)  # True
 ```
->Where the mind is without fear
-And the head is held high
-Where knowledge is free
-Where the world has not been broken up into fragments
-By the narrow domestic walls
-Where words come out from the depth of truth
-Where tireless striving stretches its arms towards perfection
-Where the clear stream of reason has not lost its way
-Into the dreary desert sand of dead habit
-Where the mind is led forward by thee
-Into ever-widening thought and action
-That is where the mind can find freedom.
--- Rabindranath Tagore
+
