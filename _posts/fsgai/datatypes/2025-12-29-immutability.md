@@ -1,7 +1,7 @@
 ---
 category: full stack llm app 
 subcategory: mutability
-tag : immutability
+tag : mutability
 layout : mermaid
 ---
 
