@@ -213,9 +213,9 @@ Failure here often underlies failure in all other tasks.
   
 ## 9. The 3 life tasks: love, work, friendship
 
-<dev class="mermaid">
+<div class="mermaid">
 flowchart TD
-    SELF("SELF<br/>Meaning · Identity · Self-Acceptance<br/>“**I am worthy to belong and to contribute**.”")
+    SELF("SELF<br/>Meaning · Identity · Self-Acceptance<br/>"**I am worthy to belong and to contribute**."")
 
     WORK("WORK<br/>Contribution · Usefulness<br/>**How do I give?**")
     FRIENDSHIP("FRIENDSHIP<br/>Community · Equality<br/>**Do I belong?**")
@@ -225,7 +225,7 @@ flowchart TD
     SELF --> FRIENDSHIP
     SELF --> LOVE
 
-</dev>
+</div>
 
 
 In Alfred Adler’s Individual Psychology, **life tasks** are the fundamental arenas in which every human must learn to live, cooperate, and find meaning. Mental health, in Adler’s view, is not an inner state but the ability to meet these tasks with courage, equality, and social interest.
@@ -474,7 +474,7 @@ Life’s lies are beliefs that protect us
 from fear by keeping us from life.**
 
 ## High level flow of thoughts in the book 
-<dev class="mermaid">
+<div class="mermaid">
 graph TD
     A["Past does not determine present. Purpose, meaning, narrative does.<br/>(**Teleology over Causality**)"]
     B["All problems are interpersonal<br/>(**Relationships over Isolation**)"]
@@ -489,7 +489,7 @@ graph TD
     D --> E
     E --> F
     F --> G
-</dev>
+</div>
 
 ## Conclusion: The Enduring Insight of Alfred Adler’s Philosophy
 
