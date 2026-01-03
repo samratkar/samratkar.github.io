@@ -327,7 +327,7 @@ Defined by the
 
 ## 10. Life's lies 
 
-<dev class="mermaid">
+<div class="mermaid">
 flowchart TB
     A["LIFE'S TASKS<br/>**Work · Friendship · Love**"]
 
@@ -362,7 +362,7 @@ flowchart TB
 
     H --> I
     I --> A
-</dev>
+</div>
 
 In Alfred Adler’s Individual Psychology, **“life’s lies”** are false convictions a person adopts to avoid life’s tasks while protecting self-esteem. They are not conscious deceptions, but **deep assumptions** that make avoidance feel justified and safe.
 
