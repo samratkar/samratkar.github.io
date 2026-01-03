@@ -3,7 +3,7 @@ layout: mermaid
 category: books
 subcategory: "the courage to be disliked" 
 title: "The courage to be disliked - A book review"
-date: 2025-01-03
+date: 2026-01-03
 tags: [adler, courage, contribution, lifestyle]
 book: The courage to be disliked
 author: Ichiro Kishimi, Fumitake Koga
