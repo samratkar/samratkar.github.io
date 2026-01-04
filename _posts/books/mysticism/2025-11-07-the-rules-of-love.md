@@ -1,7 +1,13 @@
 ---
-layout : mermaid
-title : 40 rules of Love by Elif Shafak
-author : Samrat Kar
+layout: mermaid
+category: books
+subcategory: "forty rules of love" 
+title: "The forty rules of love - A book review"
+date: 2025-11-07
+tags: [rumi, love, spirituality, "shams of tabriz"]
+book: The forty rules of love
+author: Elif Shafak
+summary: The forty rules of love explores the transformative power of love through the intertwined stories of Rumi and a modern-day housewife. It delves into themes of spirituality, connection, and the profound impact of love on personal growth and understanding. The book invites readers to embrace love in its many forms and challenges conventional perceptions, offering a rich tapestry of wisdom and insight.
 ---
 
 ## The Forty Rules of Love

@@ -4,7 +4,7 @@ category: books
 subcategory: "the courage to be disliked" 
 title: "The courage to be disliked - A book review"
 date: 2026-01-03
-tags: [adler, courage, contribution, lifestyle]
+tags: [adler, courage, contribution, lifestyle, humanism]
 book: The courage to be disliked
 author: Ichiro Kishimi, Fumitake Koga
 summary: The courage to be disliked presents a transformative philosophy rooted in Alfred Adler’s Individual Psychology. It challenges readers to rethink their relationship with the past, others, and themselves. By embracing teleology, detaching from approval, and engaging courageously with life’s tasks, individuals can find authentic freedom and happiness. At its core, the book is a call to live sincerely—accepting the possibility of being disliked as the price of true freedom. It teaches that happiness is not a reward for success or approval, but a choice made through courageous living, contribution, and authentic relationships.
@@ -329,10 +329,10 @@ Defined by the
 
 <div class="mermaid">
 flowchart TB
-    A["LIFE'S TASKS<br/>**Work · Friendship · Love**"]
+    A["LIFE'S TASKS<br/>Work · Friendship · Love"]
 
-    B["FEAR OF FAILURE<br/>**Rejection · Inferiority · Loss**"]
-    C["LIFE'S LIES<br/>(**False Convictions**)"]
+    B["FEAR OF FAILURE<br/>Rejection · Inferiority · Loss"]
+    C["LIFE'S LIES<br/>(False Convictions)"]
 
     D1["Lies about SELF<br/>“I am incapable / broken / special”"]
     D2["Lies about OTHERS<br/>“People are unsafe / judgmental”"]
@@ -476,13 +476,13 @@ from fear by keeping us from life.**
 ## High level flow of thoughts in the book 
 <div class="mermaid">
 graph TD
-    A["Past does not determine present. Purpose, meaning, narrative does.<br/>(**Teleology over Causality**)"]
-    B["All problems are interpersonal<br/>(**Relationships over Isolation**)"]
-    C["Detach from need for approval<br/>(**Freedom through Authenticity**)"]
-    D["Separation of tasks<br/>(**Emotional Boundaries**)"]
-    E["Equality and contribution<br/>(**Cooperation over Competition**)"]
-    F["Community feeling over self-centeredness<br/>(**Belonging through Contribution**)"]
-    G["Happiness is a choice, not a destination<br/>(**Courage to Live Now**)"]
+    A["Past does not determine present. Purpose, meaning, narrative does.<br/>(Teleology over Causality)"]
+    B["All problems are interpersonal<br/>(Relationships over Isolation)"]
+    C["Detach from need for approval<br/>(Freedom through Authenticity)"]
+    D["Separation of tasks<br/>(Emotional Boundaries)"]
+    E["Equality and contribution<br/>(Cooperation over Competition)"]
+    F["Community feeling over self-centeredness<br/>(Belonging through Contribution)"]
+    G["Happiness is a choice, not a destination<br/>(Courage to Live Now)"]
     A --> B
     B --> C
     C --> D
@@ -535,6 +535,49 @@ In an age preoccupied with trauma, labels, and diagnoses, Adler’s philosophy r
 ### Related Philosophical Context
 8. **Friedrich Nietzsche** – especially the idea of *will to power* (which Adler reframed socially).
 9. **Viktor Frankl** – meaning-centered psychology influenced by Adlerian thought.
+
+## The Poem 
+
+The past is a tale the mind still repeats,
+A shadow that follows but bows to **new feats**.
+What happened has weight, yet **no sovereign claim**,
+For **meaning**, not memory, authors the frame.
+
+All suffering rises **where mirrors are placed**,
+Where selves are compared, ranked, measured, and chased.
+No ache lives alone, no wound stands apart,
+Each **pain is a distance** from heart to heart.
+
+Freedom arrives without trumpet or cheer,
+It enters when praise is no longer held dear.
+To walk unapproved, yet **inwardly sound**,
+Is to stand on a truth not borrowed from ground.
+
+Let tasks fall away to the hands they belong,
+Where blame grows exhausted and peace grows strong.
+One life bears its choosing, another its view,
+What others make of it is never for you.
+
+Comparison bends every mirror to lie,
+One climbs only when another must die.
+But worth is not taller when others are small,
+No crown can be raised from a needless fall.
+
+Happiness waits not at triumph’s bright gate,
+Nor bows to success or the favor of fate.
+It grows in contribution, humble and still,
+In offering presence, not bending one’s will.
+
+Joy is not stolen, demanded, or won,
+It blooms when the courage to live has begun.
+Chosen in daylight, in failure, in fear,
+It asks no permission to quietly appear
+
+The bravest of lives is gentle and true,
+Not loud in its claims nor eager for view.
+Rooted in self, yet turned toward the whole,
+A life lived in courage becomes a shared soul.
+
 
 
 
