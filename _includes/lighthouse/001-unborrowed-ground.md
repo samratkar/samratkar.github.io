@@ -1,13 +1,3 @@
----
-title: The Unborrowed Ground
-layout: mermaid 
-category: lighthouse
-subcategory: "the unborrowed ground"
-tags: [adler, lighthouse, courage, contribution, lifestyle, humanism]
----
-
-# The Un-borrowed Ground
-
 ![](/assets/adler/theunborrowedground.png)
 
 ### The Past Is Not a Prison
