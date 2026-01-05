@@ -6,7 +6,7 @@ subcategory: "the unborrowed ground"
 tags: [adler, lighthouse, courage, contribution, lifestyle, humanism]
 ---
 
-## The Un-borrowed Ground. 
+# The Un-borrowed Ground
 
 ![](/assets/adler/theunborrowedground.png)
 
