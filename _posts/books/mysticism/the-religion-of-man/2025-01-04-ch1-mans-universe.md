@@ -2,7 +2,7 @@
 layout: mermaid
 tag : ["books", "the religion of man", "humanism"]
 category : "books"
-subcategory : "the religion of man - chapter 1"
+subcategory : "the religion of man"
 title: "the religion of man"
 date: 2026-01-04
 summary : 
