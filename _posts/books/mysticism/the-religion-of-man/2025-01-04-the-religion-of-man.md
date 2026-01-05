@@ -10,13 +10,13 @@ author: Rabindranath Tagore
 summary: The religion of man explores the universal spiritual values that transcend religious boundaries. Tagore emphasizes the divine presence within every human being and advocates for a humanism that recognizes the sacredness of life. The book invites readers to see beyond dogma and rituals, encouraging a direct, personal experience of the divine through love, compassion, and creativity.
 ---
 
-## The Religion of Man
+## The Religion of Man - A book review
 
 ![](/assets/tagore/Rabindranath_Tagore.jpg.webp)
 
 ## 1. Religion as a Living Human Experience
 
-Tagore begins by redefining religion. He distances it from **organized belief systems**, scriptures taken literally, and mechanical rituals. For him, religion is not something one *belongs to* but something one *realizes*.
+Tagore begins by redefining religion. He distances it from **organized belief systems**, scriptures taken literally, and mechanical rituals. For him, religion is not something one *belongs to* but something one *realizes*, only in one's relationship with his fellow human beings. He goes even further and argues that even science, like arts, finds it true meaning and purpose only in the eyes and mind of humans. So, is religion. He names his God as the "Man God". The God that is realized outside the self of a normal individual "man", in his effort to reach out to a collective human spirit that transcends individual egos.
 
 * Religion is an **inner awakening**, not an external command.
 * It grows organically out of human consciousness, much like art or love.
@@ -130,34 +130,21 @@ It means:
 
 This religion has **no fixed creed**, no chosen people, and no final authority—except the ongoing moral awakening of humanity itself.
 
-## Essence in a Single Sentence
-
 Tagore’s *The Religion of Man* proclaims that **to be fully human—to love, create, act justly, and live in harmony—is the truest form of worship**.
 
 ## 10. Comparison of Tagore's philosophy with Vedanta 
+Below is a **conceptual comparison** between **“Man’s Universe”** (the first chapter of **The Religion of Man**) by **Rabindranath Tagore** and the **Upanishadic idea of Brahman** 
 
-![Image](https://upload.wikimedia.org/wikipedia/commons/1/13/Chandogya_Upanishad_verses_1.1.1-1.1.9%2C_Samaveda%2C_Sanskrit%2C_Devanagari_script%2C_1849_CE_manuscript.jpg)
-
-![Image](https://www.poojn.in/wp-content/uploads/2025/05/Brahman-Symbolism-in-Art-and-Iconography-A-Complete-Guide.jpeg.jpg)
-
-![Image](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Rabindranath_Tagore.jpg/960px-Rabindranath_Tagore.jpg)
-
-Below is a **conceptual comparison** between **“Man’s Universe”** (the first chapter of **The Religion of Man**) by **Rabindranath Tagore** and the **Upanishadic idea of Brahman** (as articulated in texts like the **Chandogya Upanishad** and **Brihadaranyaka Upanishad**).
-
----
 
 ## 1. Point of Departure: Human Experience vs Metaphysical Absolute
-
 ### Man’s Universe (Tagore)
-
-Tagore begins with **human consciousness**. The universe is not treated as a metaphysical given but as something **experienced, valued, and interpreted** by humans. Meaning arises where the human mind encounters reality.
+Tagore begins with **human consciousness**. The universe is not treated as a metaphysical given but as something **experienced, valued, and interpreted** by humans. Meaning arises where the human mind encounters reality. And that experience is inherently relational. Man discovers and realizes it only in love and belonging to others.
 
 * The universe of religion is a **human universe**
 * Truth, beauty, and value are relational
 * The infinite is sensed *within* finite human experience
 
 ### Brahman (Upanishads)
-
 The Upanishads begin with **Brahman**, the ultimate, self-existent reality.
 
 * Brahman is **sat–cit–ānanda** (being–consciousness–bliss)
@@ -166,14 +153,14 @@ The Upanishads begin with **Brahman**, the ultimate, self-existent reality.
 
 **Contrast:**
 Tagore starts from *experience* and moves toward the infinite; the Upanishads start from the *infinite* and guide the seeker inward.
+For Upanishad, the existence of humans is contingent on Brahman; for Tagore, the universe is meaningful only through human realization. Brahman is an absolute as per Upanishad, which does not need existence of humans. In contrast, Tagore's God is relational and needs humans to realize its meaning.
 
----
 
 ## 2. Nature of the Ultimate Reality
 
-### Man’s Universe
+### Man’s Universe (Tagore's take)
 
-* The ultimate is **relational and personal**
+* The ultimate is **relational and personal**. (Not absolute impersonal)
 * God is encountered in love, creativity, ethics, and beauty
 * The divine is meaningful only insofar as it is **realized in human life**
 
@@ -195,21 +182,25 @@ Tagore humanizes the infinite; the Upanishads de-personalize it to transcend lim
 * Humans are finite but capable of realizing the infinite through **relationship**
 * The infinite is not outside the world but **expressed through it**
 * Separation from the infinite causes suffering
+* Tagore refers to a subliminal mind that is in touch with the infinite, and is not just an aggregation of finite minds. But it is a complex inter-relationship that maintains a perfect coordination of functions, thereby resulting in a creative unity.
+* Tagore links this creative unity to not only to God, but also to evolution, nature, art, science and culture.
 
 ### Upanishads
 
 * The finite self (*jīva*) is bound by *avidyā* (ignorance)
 * Liberation (*mokṣa*) occurs by realizing **Ātman = Brahman**
 * The world is ultimately **non-dual**
+* What is truth is the "Sakshi" - The observer - The Brahman - who witnesses the creation, and in that witness, the world appears as maya - an illusion.
 
 **Similarity:**
 Both see human suffering as rooted in **false separation** from the infinite.
 
----
+>Tagore says, by loving another human being, one reaches the infinite. Upanishads say, by realizing the self as non-different from Brahman, one attains liberation.
+
 
 ## 4. Path to Realization
 
-### Man’s Universe
+### Man’s Universe (Tagore's take)
 
 * Ethical action, love, beauty, creativity
 * Participation in the world, not withdrawal
@@ -281,195 +272,7 @@ Tagore can be seen as **reinterpreting Brahman in humanistic terms** for a moder
 
 **Tagore translates the Upanishadic Brahman into the language of lived humanity**—where the infinite is not escaped into, but **fulfilled through human relationship, beauty, and moral responsibility**.
 
-## Adler Vs Tagore 
 
-Below is a **deep philosophical comparison** between **“Man’s Universe”** (from **The Religion of Man** by **Rabindranath Tagore**) and **Alfred Adler’s concept of *Lifestyle*** from **Alfred Adler**’s Individual Psychology.
 
-This comparison is especially meaningful because **both thinkers reject determinism** and place **human meaning-making at the center of life**—though they arrive there from different traditions.
-
-## 1. Starting Point: Meaning vs Metaphysics
-
-### Tagore – Man’s Universe
-
-Tagore begins with the idea that the universe becomes *real and meaningful* only when it is **related to human consciousness**. The universe of religion is not the physical cosmos but the **humanly experienced universe**—shaped by value, beauty, love, and ethics. Meaning is not discovered like a fact; it is **realized through participation**.
-
-### Adler – Lifestyle
-
-Adler begins not with the universe but with the **individual’s interpretation of life**. *Lifestyle* is the unconscious pattern of meanings a person forms in early childhood about:
-
-* Who am I?
-* What is the world like?
-* How do I belong?
-
-Life is not governed by causes from the past but by the **meanings we assign to experience**.
-
-**Common ground:**
-Reality is not decisive by itself; **interpretation is**.
-
-## 2. Rejection of Determinism
-
-### Tagore
-
-Tagore rejects:
-
-* Mechanical science as a complete explanation of life
-* Fatalistic religion
-* Historical or biological determinism
-
-Humans are not passive products of nature—they are **co-creators of meaning**.
-
-### Adler
-
-Adler explicitly rejects:
-
-* Freudian biological determinism
-* Trauma-based destiny
-* Fixed personality types
-
-Lifestyle is **chosen**, not imposed—even if unconsciously.
-
-**Shared insight:**
-
-> The past does not determine the present; meaning does.
-
-## 3. The Role of the Self
-
-### Tagore
-
-The self is finite but reaches fulfillment by aligning with the **universal human spirit**. Ego isolation leads to suffering; transcendence occurs through love and service.
-
-The self finds truth by **going beyond itself**, not by dominating others.
-
-### Adler
-
-The self begins with feelings of **inferiority**, but health lies not in superiority, rather in **social interest (Gemeinschaftsgefühl)**—a sense of belonging and contribution.
-
-The self matures by moving **from self-centered goals to communal goals**.
-
-**Parallel:**
-Both see suffering as rooted in **ego-centered orientation**.
-
-## 4. Purpose Over Cause
-
-### Tagore
-
-Human life is guided by **values**, not blind causality. The soul moves toward harmony, beauty, and unity with others.
-
-Life is **teleological**—drawn forward by ideals.
-
-### Adler
-
-Adler famously argued that humans are **goal-oriented**, not cause-driven. Lifestyle is oriented toward a *fictional final goal*—a vision of what “success” or “belonging” means.
-
-We move toward imagined meanings, not away from past wounds.
-
-**Strong convergence:**
-Both replace *why did this happen?* with *what am I moving toward?*
-
-## 5. Freedom and Responsibility
-
-### Tagore
-
-Freedom is not arbitrary choice but **moral participation** in the universal. True freedom deepens responsibility.
-
-A religion that removes freedom destroys the human spirit.
-
-### Adler
-
-Freedom lies in recognizing one’s lifestyle and **choosing differently**. Psychological health involves accepting responsibility for one’s meanings.
-
-Excuses—biology, parents, fate—are forms of avoidance.
-
-**Shared ethic:**
-Freedom and responsibility are inseparable.
-
-## 6. World Engagement vs Withdrawal
-
-### Tagore
-
-Spirituality requires **engagement with the world**—through art, love, justice, and compassion. Withdrawal is a failure of realization.
-
-God is found **in humanity**, not beyond it.
-
-### Adler
-
-Mental health is achieved through **participation in life tasks**:
-
-* Work
-* Friendship
-* Love
-
-Withdrawal (avoidance, superiority, victimhood) is a sign of unhealthy lifestyle.
-
-**Agreement:**
-Life must be lived *with* others, not escaped from.
-
-
-## 7. Language Difference, Vision Unity
-
-| Tagore                    | Adler                           |
-| ------------------------- | ------------------------------- |
-| Spiritual-poetic language | Psychological-clinical language |
-| Universal spirit          | Social interest                 |
-| God realized in humanity  | Meaning realized in belonging   |
-| Harmony with infinite     | Contribution to community       |
-
-They speak **different vocabularies**, but point to the **same human truth**.
-
-
-## Final Synthesis (This Is the Key Insight)
-
-**Tagore describes the universe becoming meaningful through human values.
-Adler describes the individual becoming meaningful through chosen purpose.**
-
-Both assert:
-
-> Humans are not shaped by what happened to them,
-> but by how they *decide to live* in relation to others.
-
-
-### One-line distillation
-
-**Tagore gives the cosmic version of Adler; Adler gives the psychological version of Tagore.**
-
-If you’d like, I can next:
-
-* Compare this with **The Courage to Be Disliked** directly
-* Write a **short meditative reflection** blending Tagore + Adler
-* Map these ideas to **modern existentialism (Frankl, Sartre)**
-
-## The Poem 
-
-## The Stance
-
-The world is mute till meaning wakes,
-A hush that waits for paths we take;
-Not forged by cause, nor bound by blame,
-Life blooms the hour we choose its name.
-
-No past commands the breath of now,
-It only shows a learned “how”;
-The heart decides, in quiet art,
-Which way to turn, which role to start.
-
-When self stands small, it aches alone,
-A fragile throne of brittle stone;
-When stretched in care, in shared design,
-The soul grows wide, the stars align.
-
-Not found above, nor lost below,
-The sacred moves where choices go;
-In work, in love, in hands that give,
-The infinite learns how to live.
-
-To walk with all, not rise in rank,
-To serve the field, not guard the bank;
-This stance, once chosen, makes us whole—
-A healed world circling one soul.
-
-So meaning sings where courage stood,
-Where fear was met by brotherhood;
-The human way, the cosmic art—
-One life, one choice, one open heart.
 
 
