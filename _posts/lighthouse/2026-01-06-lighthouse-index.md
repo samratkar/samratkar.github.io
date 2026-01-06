@@ -2,7 +2,8 @@
 date: 2026-01-06 
 layout: default
 title: Lighthouse - Wisdom & Reflection
-topic: lighthouse
+category: lighthouse
+subcategory: index
 tag: [lighthouse]
 ---
 
