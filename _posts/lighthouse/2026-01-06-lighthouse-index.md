@@ -3,7 +3,7 @@ date: 2026-01-06
 layout: default
 title: Lighthouse - Wisdom & Reflection
 category: lighthouse
-subcategory: index
+subcategory: lighthouse-index
 tag: [lighthouse]
 ---
 
@@ -217,6 +217,24 @@ tag: [lighthouse]
     </div>
   </header>
 
+{% assign lighthouse_posts = site.posts | where_exp: "post", "post.tags contains 'lighthouse'" %}
+  {% assign all_tags = "" | split: "" %}
+  {% assign all_topics = "" | split: "" %}
+  {% for post in lighthouse_posts %}
+    {% for tag in post.tags %}
+      {% unless tag == "lighthouse" %}
+        {% unless all_tags contains tag %}
+          {% assign all_tags = all_tags | push: tag %}
+        {% endunless %}
+      {% endunless %}
+    {% endfor %}
+    {% if post.topic %}
+      {% unless all_topics contains post.topic %}
+        {% assign all_topics = all_topics | push: post.topic %}
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
+
   <!-- Statistics Section -->
   <div class="full-width-container bg-white border-b border-gray-200 shadow-sm">
     <div class="max-w-screen-2xl mx-auto px-6 py-6">
@@ -229,7 +247,7 @@ tag: [lighthouse]
               </svg>
             </div>
             <div>
-              <div class="text-2xl font-bold text-gray-800">2</div>
+              <div class="text-2xl font-bold text-gray-800">{{ lighthouse_posts | size }}</div>
               <div class="text-sm text-gray-500">Total Articles</div>
             </div>
           </div>
@@ -243,7 +261,7 @@ tag: [lighthouse]
               </svg>
             </div>
             <div>
-              <div class="text-2xl font-bold text-gray-800" id="tagCount">6</div>
+              <div class="text-2xl font-bold text-gray-800" id="tagCount">{{ all_tags | size }}</div>
               <div class="text-sm text-gray-500">Tags</div>
             </div>
           </div>
@@ -257,7 +275,7 @@ tag: [lighthouse]
               </svg>
             </div>
             <div>
-              <div class="text-2xl font-bold text-gray-800" id="topicCount">2</div>
+              <div class="text-2xl font-bold text-gray-800" id="topicCount">{{ all_topics | size }}</div>
               <div class="text-sm text-gray-500">Topics</div>
             </div>
           </div>
@@ -272,7 +290,7 @@ tag: [lighthouse]
               </svg>
             </div>
             <div>
-              <div class="text-2xl font-bold text-gray-800" id="filteredCount">2</div>
+              <div class="text-2xl font-bold text-gray-800" id="filteredCount">{{ lighthouse_posts | size }}</div>
               <div class="text-sm text-gray-500">Filtered Results</div>
             </div>
           </div>
@@ -318,30 +336,13 @@ tag: [lighthouse]
             </div>
             
             <div id="tagsList" class="space-y-1">
-              <div class="tag-item px-3 py-2.5 rounded-lg text-sm font-medium" onclick="filterByTag('freedom', this)" data-tag="freedom">
+              {% assign sorted_tags = all_tags | sort_natural %}
+              {% for tag in sorted_tags %}
+              <div class="tag-item px-3 py-2.5 rounded-lg text-sm font-medium" onclick="filterByTag('{{ tag }}', this)" data-tag="{{ tag }}">
                 <span class="inline-block w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-                Freedom
+                {{ tag | capitalize }}
               </div>
-              <div class="tag-item px-3 py-2.5 rounded-lg text-sm font-medium" onclick="filterByTag('courage', this)" data-tag="courage">
-                <span class="inline-block w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-                Courage
-              </div>
-              <div class="tag-item px-3 py-2.5 rounded-lg text-sm font-medium" onclick="filterByTag('meaning', this)" data-tag="meaning">
-                <span class="inline-block w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-                Meaning
-              </div>
-              <div class="tag-item px-3 py-2.5 rounded-lg text-sm font-medium" onclick="filterByTag('authenticity', this)" data-tag="authenticity">
-                <span class="inline-block w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-                Authenticity
-              </div>
-              <div class="tag-item px-3 py-2.5 rounded-lg text-sm font-medium" onclick="filterByTag('philosophy', this)" data-tag="philosophy">
-                <span class="inline-block w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-                Philosophy
-              </div>
-              <div class="tag-item px-3 py-2.5 rounded-lg text-sm font-medium" onclick="filterByTag('psychology', this)" data-tag="psychology">
-                <span class="inline-block w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-                Psychology
-              </div>
+              {% endfor %}
             </div>
           </div>
         </div>
@@ -360,54 +361,42 @@ tag: [lighthouse]
                   </tr>
                 </thead>
                 <tbody id="articlesTable" class="divide-y divide-gray-200">
+                  {% for post in lighthouse_posts %}
+                  {% assign tag_string = post.tags | join: "|" %}
+                  {% assign subtopic_string = "" %}
+                  {% if post.subtopics %}
+                    {% assign subtopic_string = post.subtopics | join: "|" %}
+                  {% endif %}
                   <tr class="article-row" 
-                      data-tags="freedom|courage|authenticity|psychology"
-                      data-topic="Adlerian Psychology"
-                      data-subtopics="The Past|Suffering|Courage to Be Disliked|Separation of Tasks|Comparison|Contribution|Happiness|Way of Being">
-                    <td class="px-4 py-3 text-sm text-gray-600 font-medium">1</td>
+                      data-tags="{{ tag_string }}"
+                      {% if post.topic %}data-topic="{{ post.topic }}"{% endif %}
+                      {% if subtopic_string != "" %}data-subtopics="{{ subtopic_string }}"{% endif %}>
+                    <td class="px-4 py-3 text-sm text-gray-600 font-medium">{{ forloop.index }}</td>
                     <td class="px-4 py-3">
-                      <a href="#unborrowed-ground" class="text-purple-600 hover:text-purple-800 font-medium text-sm hover:underline">
-                        The Unborrowed Ground
+                      <a href="{{ post.url }}" target="_blank" class="text-purple-600 hover:text-purple-800 font-medium text-sm hover:underline">
+                        {{ post.title }}
                       </a>
                     </td>
                     <td class="px-4 py-3">
                       <div class="text-sm text-gray-600 line-clamp-2">
-                        Exploring Adlerian psychology through poetry — the past is not a prison, suffering is relational, and freedom comes from the courage to be disliked. Discover the power of contribution over recognition.
+                        {% if post.summary %}
+                          {{ post.summary }}
+                        {% elsif post.excerpt %}
+                          {{ post.excerpt | strip_html | truncatewords: 30 }}
+                        {% else %}
+                          {{ post.content | strip_html | truncatewords: 30 }}
+                        {% endif %}
                       </div>
                     </td>
                     <td class="px-4 py-3">
                       <div class="flex flex-wrap gap-1">
-                        <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700">freedom</span>
-                        <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700">courage</span>
-                        <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700">authenticity</span>
-                        <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700">psychology</span>
+                        {% for tag in post.tags %}
+                          <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700">{{ tag }}</span>
+                        {% endfor %}
                       </div>
                     </td>
                   </tr>
-                  <tr class="article-row" 
-                      data-tags="meaning|freedom|philosophy|courage"
-                      data-topic="Tagore's Philosophy"
-                      data-subtopics="Awakening of Meaning|Freedom from Past|Relational Vastness|Divine Immanence|Comradeship|Embrace of Life|Divine in Humanity|Universe Made Human">
-                    <td class="px-4 py-3 text-sm text-gray-600 font-medium">2</td>
-                    <td class="px-4 py-3">
-                      <a href="#the-stance" class="text-purple-600 hover:text-purple-800 font-medium text-sm hover:underline">
-                        The Stance
-                      </a>
-                    </td>
-                    <td class="px-4 py-3">
-                      <div class="text-sm text-gray-600 line-clamp-2">
-                        "The truth of the Universe is human truth." Journey through Tagore's philosophy — the awakening of meaning, freedom from the tyranny of the past, and the divine woven into humanity. Faith that sings before dawn.
-                      </div>
-                    </td>
-                    <td class="px-4 py-3">
-                      <div class="flex flex-wrap gap-1">
-                        <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700">meaning</span>
-                        <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700">freedom</span>
-                        <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700">philosophy</span>
-                        <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700">courage</span>
-                      </div>
-                    </td>
-                  </tr>
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
@@ -425,126 +414,39 @@ tag: [lighthouse]
             </h3>
             
             <div class="space-y-1">
+              {% for topic in all_topics %}
+                {% assign topic_id = topic | slugify %}
+                {% assign topic_posts = lighthouse_posts | where: "topic", topic %}
+                {% if topic_posts.size > 0 %}
               <div class="topic-section">
-                <div class="topic-item topic-header px-3 py-2.5 rounded-lg text-sm flex items-center justify-between" onclick="toggleTopic('adlerian', this)" data-topic="Adlerian Psychology">
+                <div class="topic-item topic-header px-3 py-2.5 rounded-lg text-sm flex items-center justify-between" onclick="toggleTopic('{{ topic_id }}', this)" data-topic="{{ topic }}">
                   <div>
                     <span class="inline-block w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-                    <span>Adlerian Psychology</span>
+                    <span>{{ topic }}</span>
                   </div>
                   <svg class="w-4 h-4 transform transition-transform topic-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                   </svg>
                 </div>
-                <div id="adlerian-subtopics" class="subtopics-container">
-                  <div class="subtopic-item px-3 py-2 rounded-lg text-xs" onclick="filterBySubtopic('The Past', this)" data-subtopic="The Past">
+                <div id="{{ topic_id }}-subtopics" class="subtopics-container">
+                  {% for post in topic_posts %}
+                    {% if post.subtopics %}
+                      {% for subtopic in post.subtopics %}
+                  <div class="subtopic-item px-3 py-2 rounded-lg text-xs" onclick="filterBySubtopic('{{ subtopic }}', this)" data-subtopic="{{ subtopic }}">
                     <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                    1. The Past Is Not a Prison
+                    {{ subtopic }}
                   </div>
-                  <div class="subtopic-item px-3 py-2 rounded-lg text-xs" onclick="filterBySubtopic('Suffering', this)" data-subtopic="Suffering">
-                    <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                    2. All Suffering Is Relational
-                  </div>
-                  <div class="subtopic-item px-3 py-2 rounded-lg text-xs" onclick="filterBySubtopic('Courage to Be Disliked', this)" data-subtopic="Courage to Be Disliked">
-                    <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                    3. The Courage to Be Disliked
-                  </div>
-                  <div class="subtopic-item px-3 py-2 rounded-lg text-xs" onclick="filterBySubtopic('Separation of Tasks', this)" data-subtopic="Separation of Tasks">
-                    <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                    4. The Separation of Tasks
-                  </div>
-                  <div class="subtopic-item px-3 py-2 rounded-lg text-xs" onclick="filterBySubtopic('Comparison', this)" data-subtopic="Comparison">
-                    <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                    5. Beyond Comparison
-                  </div>
-                  <div class="subtopic-item px-3 py-2 rounded-lg text-xs" onclick="filterBySubtopic('Contribution', this)" data-subtopic="Contribution">
-                    <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                    6. Contribution Over Recognition
-                  </div>
-                  <div class="subtopic-item px-3 py-2 rounded-lg text-xs" onclick="filterBySubtopic('Happiness', this)" data-subtopic="Happiness">
-                    <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                    7. Happiness Is a Choice
-                  </div>
-                  <div class="subtopic-item px-3 py-2 rounded-lg text-xs" onclick="filterBySubtopic('Way of Being', this)" data-subtopic="Way of Being">
-                    <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                    8. Courage as a Way of Being
-                  </div>
+                      {% endfor %}
+                    {% endif %}
+                  {% endfor %}
                 </div>
               </div>
-              
-              <div class="topic-section">
-                <div class="topic-item topic-header px-3 py-2.5 rounded-lg text-sm flex items-center justify-between" onclick="toggleTopic('tagore', this)" data-topic="Tagore's Philosophy">
-                  <div>
-                    <span class="inline-block w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-                    <span>Tagore's Philosophy</span>
-                  </div>
-                  <svg class="w-4 h-4 transform transition-transform topic-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                  </svg>
-                </div>
-                <div id="tagore-subtopics" class="subtopics-container">
-                  <div class="subtopic-item px-3 py-2 rounded-lg text-xs" onclick="filterBySubtopic('Awakening of Meaning', this)" data-subtopic="Awakening of Meaning">
-                    <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                    1. The Awakening of Meaning
-                  </div>
-                  <div class="subtopic-item px-3 py-2 rounded-lg text-xs" onclick="filterBySubtopic('Freedom from Past', this)" data-subtopic="Freedom from Past">
-                    <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                    2. Freedom from Tyranny of Past
-                  </div>
-                  <div class="subtopic-item px-3 py-2 rounded-lg text-xs" onclick="filterBySubtopic('Relational Vastness', this)" data-subtopic="Relational Vastness">
-                    <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                    3. The Relational Vastness & Awe
-                  </div>
-                  <div class="subtopic-item px-3 py-2 rounded-lg text-xs" onclick="filterBySubtopic('Divine Immanence', this)" data-subtopic="Divine Immanence">
-                    <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                    4. Immanence of the Divine
-                  </div>
-                  <div class="subtopic-item px-3 py-2 rounded-lg text-xs" onclick="filterBySubtopic('Comradeship', this)" data-subtopic="Comradeship">
-                    <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                    5. Comradeship of All Beings
-                  </div>
-                  <div class="subtopic-item px-3 py-2 rounded-lg text-xs" onclick="filterBySubtopic('Embrace of Life', this)" data-subtopic="Embrace of Life">
-                    <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                    6. Courageous Embrace of Life
-                  </div>
-                  <div class="subtopic-item px-3 py-2 rounded-lg text-xs" onclick="filterBySubtopic('Divine in Humanity', this)" data-subtopic="Divine in Humanity">
-                    <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                    7. The Divine Woven into Humanity
-                  </div>
-                  <div class="subtopic-item px-3 py-2 rounded-lg text-xs" onclick="filterBySubtopic('Universe Made Human', this)" data-subtopic="Universe Made Human">
-                    <span class="inline-block w-1.5 h-1.5 bg-purple-300 rounded-full mr-2"></span>
-                    8. The Universe Made Human
-                  </div>
-                </div>
-              </div>
+                {% endif %}
+              {% endfor %}
             </div>
           </div>
         </div>
         
-      </div>
-    </div>
-  </div>
-  
-  <!-- Full Articles Section -->
-  <div class="full-width-container bg-gradient-to-b from-white to-purple-50 py-12 mt-12">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold text-gray-800 mb-4" style="font-family: 'Crimson Text', serif;">Full Articles</h2>
-        <div class="w-32 h-1 bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 mx-auto rounded-full"></div>
-        <p class="mt-4 text-gray-600 text-lg">Dive deep into each reflection below</p>
-      </div>
-      
-      <div id="unborrowed-ground" class="bg-white rounded-2xl shadow-xl p-8 mb-8 border-l-8 border-purple-500 hover:shadow-2xl transition-shadow">
-        <h2 class="text-4xl font-bold text-purple-900 mb-6" style="font-family: 'Crimson Text', serif;">The Unborrowed Ground</h2>
-        <div class="prose prose-lg max-w-none">
-          {% include lighthouse/001-unborrowed-ground.md %}
-        </div>
-      </div>
-      
-      <div id="the-stance" class="bg-white rounded-2xl shadow-xl p-8 mb-8 border-l-8 border-purple-400 hover:shadow-2xl transition-shadow">
-        <h2 class="text-4xl font-bold text-purple-900 mb-6" style="font-family: 'Crimson Text', serif;">The Stance</h2>
-        <div class="prose prose-lg max-w-none">
-          {% include lighthouse/002-the-stance.md %}
-        </div>
       </div>
     </div>
   </div>
