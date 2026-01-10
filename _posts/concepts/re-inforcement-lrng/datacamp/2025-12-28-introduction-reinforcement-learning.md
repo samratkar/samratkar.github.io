@@ -9,6 +9,19 @@ tags: [gymnasium, reinforcement-learning, rl, python]
 ![](../../../../images/rl-fwk.png)
 
 ```python
+
+import gymnasium as gym
+
+# Create an environment
+env = gym.make('CartPole-v1')
+
+# Initialize the environment
+state = env.reset()
+
+# Example of taking an action
+action = env.action_space.sample()
+next_state, reward, done, info = env.step(action)
+
 env = create_environment()
 state = env.get_initial_state()
 for i in range (n_iterations):
