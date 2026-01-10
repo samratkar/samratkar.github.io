@@ -3,14 +3,19 @@ layout: mermaid
 tag : ["books", "the religion of man", "humanism"]
 category : "books"
 subcategory : "the religion of man"
-title: "the religion of man"
+title: "ch1 - the religion of man"
 date: 2026-01-04
 summary : 
 ---
 
 ## The Man's Universe
 
-I started reading the book, "the religion of man" by Rabindranath Tagore today. It is a collection of his lectures delivered at the University of London in 1930. The book delves into Tagore's philosophical reflections on humanity, spirituality, and the interconnectedness of all beings. The first chapter is named as "Man's Universe".
+"the religion of man" by Rabindranath Tagore today. It is a collection of his lectures delivered at the University of London in 1930. The book delves into Tagore's philosophical reflections on humanity, spirituality, and the interconnectedness of all beings. The first chapter is named as "Man's Universe".
+
+The 1st chapter - "Man's Universe" - explores the evolution, religion, science - the entire universe - from the perspective of human experience and meaning. This is a novel approach to seeing the truth. Unlike the popular notion of truth being impersonal and objective, Tagore emphasizes the **relational** and **experiential** nature of truth.
+
+## The key points 
+1. **Aggregation vs Inter-relation** : Tagore says the biological evolution is not just an aggregation but a complex **inter-relationship** - maintaining a perfect .
 
 ## The Poem 
 
