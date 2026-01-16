@@ -1,6 +1,6 @@
 ---
 layout: mermaid
-tag : ["books", "the religion of man", "humanism"]
+tag : ["books", "the religion of man", "humanism", "tagore"]
 category : "books"
 subcategory : "the religion of man"
 title: "ch1 - the religion of man"
@@ -14,8 +14,22 @@ summary :
 
 The 1st chapter - "Man's Universe" - explores the evolution, religion, science - the entire universe - from the perspective of human experience and meaning. This is a novel approach to seeing the truth. Unlike the popular notion of truth being impersonal and objective, Tagore emphasizes the **relational** and **experiential** nature of truth.
 
-## The key points 
-1. **Aggregation vs Inter-relation** : Tagore says the biological evolution is not just an aggregation but a complex **inter-relationship** - maintaining a perfect .
+### The key points 
+#### Creative Principle of Unity 
+Aggregation vs Inter-relation - Tagore says the biological evolution is not just an aggregation but a manifestation of a marvellous quality of complex **inner inter-relationship** - maintaining a perfect coordination of functions. This is the **creative principle of unity**.
+This creative unity has ever been that of @inner-inter-relationships. This creative unity is manifested in the inward expressions of man. This manifestation are in two forms - 
+1. @Gross : This is the realm of being @mortal. It comprises of his own body and mind, in his physical system within him. This is observed by the outward senses by Man.
+2. @Subtle : This is the realm of @immortality. This is outside his physical system, which is manifested by his innner-inter-relationships with his fellow men, and nature. Man misses himself when isolated. He finds his own **@larger_and_truer** self in his wide human relationships. This is superfluous to his physical existence. This is what sets him apart from animals. Through this Man has turned the course of volution from an indefinite march of physical aggrandizement to a freedom of a more subtle perfection. This has made possible his progress to become unlimited. 
+   - In this ideal of unity he realizes the @eternal in his life. 
+   - He also realizes his @boundless love.
+   - 
+
+#### The energizing truth 
+The unity becomes not a mere subjective idea, but an energizing truth. 
+
+#### Evolution is a continuous process finding its meaning in Man
+The process of evolution, which after ages has reached man, must be realized in its unity with him; though in him it assumes a new value and proceeds to a different path. It is a continuous process that finds its meaning in Man. 
+
 
 ## The Poem 
 
