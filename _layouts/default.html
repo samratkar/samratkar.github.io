@@ -79,6 +79,13 @@
       margin: 1.5rem auto;
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    
+    img.small:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     }
     
     img.medium {
@@ -89,6 +96,13 @@
       margin: 1.5rem auto;
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    
+    img.medium:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     }
     
     img.original {
@@ -97,6 +111,13 @@
       height: auto;
       display: block;
       margin: 1.5rem auto;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    
+    img.original:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     }
     
     /* Side-by-side images */
@@ -136,21 +157,49 @@
       gap: 2rem;
       align-items: flex-start;
       margin: 2rem 0;
+      flex-wrap: nowrap;
     }
     
     .text-column {
-      flex: 1;
+      flex: 1 1 50%;
       min-width: 250px;
     }
     
+    .text-column ol,
+    .text-column ul {
+      padding-left: 1.5rem;
+      margin: 1rem 0;
+    }
+    
+    .text-column ol {
+      list-style-type: decimal;
+    }
+    
+    .text-column ul {
+      list-style-type: disc;
+    }
+    
+    .text-column li {
+      margin-bottom: 0.5rem;
+    }
+    
     .image-column {
-      flex: 1;
+      flex: 1 1 50%;
       min-width: 250px;
     }
     
     .image-column img {
-      margin: 0 !important;
+      width: auto !important;
       display: block !important;
+      margin: 0 auto !important;
+    }
+    
+    /* Responsive for text-image layout */
+    @media (max-width: 768px) {
+      .text-image-row {
+        flex-direction: column;
+        flex-wrap: wrap;
+      }
     }
     
     /* Responsive images on smaller screens */

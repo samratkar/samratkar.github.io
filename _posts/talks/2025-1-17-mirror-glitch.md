@@ -9,69 +9,70 @@ date: 2026-01-17
 
 ## The Mirror Glitch 
 
-![](/assets/talks/mirror-glitch/IMG_20260117_140216.jpg){:.medium}
+![](/assets/talks/mirror-glitch/IMG_20260117_131157.jpg)
 
-Today I had been to IIIT-Bangalore to attend a seminar known as "Mirror Glitch".
-The seminar was about seeing our identity in the digital world, 
-And the ramifications of that, and how we get lost in the maze,
-And start identifying ourselves with things that are not really us!
-And how to reclaim our authentic self amidst the digital noise.
-It was known as the Mirror Glitch - 
-The glitch in the mirror that reminds us all is not as it seems from outside.
-There is perhaps some broken part of us that is innate and that becomes 
-The portal of reclaiming our true self.
-
+Today I had been to IIIT-Bangalore to attend a seminar known as **"Mirror Glitch"**. 
+The seminar was about seeing our identity in the digital world, and the ramifications of that. How we get lost in the maze, and start identifying ourselves with things that are not really us! And how to reclaim our authentic self amidst the digital noise. It was known as the @Mirror_Glitch!
+The glitch in the mirror that reminds us all is not as it seems from outside. There is perhaps some broken part of us that is innate and that becomes the portal of reclaiming our true self.
 The honorable registrar Mr. Sridhar started his beautiful speech to give the context of the seminar. 
 He gave the context with this thought provoking poem of Dale Wimbrow Sr.
 
 ### The Man in the Glass 
 
 <div class="text-image-row">
-<div class="text-column">
+<div class="text-column" markdown="1">
 
 By Peter Dale Wimbrow Sr.  
 
-When you get what you want in your struggle for self  
-And the world makes you king for a day  
-Just go to the mirror and look at yourself  
-And see what that man has to say.  
+When you get what you want in your struggle for self<br>
+And the world makes you king for a day<br>
+Just go to the mirror and look at yourself<br>
+And see what that man has to say.
 
-For it isn’t your father, or mother, or wife  
-Whose judgment upon you must pass  
-The fellow whose verdict counts most in your life  
-Is the one staring back from the glass.  
+For it isn't your father, or mother, or wife<br>
+Whose judgment upon you must pass<br>
+The fellow whose verdict counts most in your life<br>
+Is the one staring back from the glass.
 
-He’s the fellow to please – never mind all the rest  
-For he’s with you, clear to the end  
-And you’ve passed your most difficult, dangerous test  
-If the man in the glass is your friend.  
+He's the fellow to please – never mind all the rest<br>
+For he's with you, clear to the end<br>
+And you've passed your most difficult, dangerous test<br>
+If the man in the glass is your friend.
 
-You may fool the whole world down the pathway of years  
-And get pats on the back as you pass  
-But your final reward will be heartache and tears  
-If you’ve cheated the man in the glass.  
+You may fool the whole world down the pathway of years<br>
+And get pats on the back as you pass<br>
+But your final reward will be heartache and tears<br>
+If you've cheated the man in the glass.
 
 </div>
 <div class="image-column">
 
-![](/assets/talks/mirror-glitch/IMG_20260117_102042.jpg){:.medium}
+<img src="/assets/talks/mirror-glitch/IMG_20260117_102042.jpg" class="medium" alt="The Man in the Glass">
 
 </div>
 </div>
 
 ### The Speakers
 
-![](/assets/talks/mirror-glitch/IMG_20260117_131157.jpg)
+<div class="text-image-row">
+<div class="image-column">
+<img src="/assets/talks/mirror-glitch/IMG_20260117_140216.jpg" class="small" alt="Speakers at Mirror Glitch">
+</div>
+<div class="text-column" markdown="1">
 
-All the speakers were exceptional! 
+All the speakers were exceptional!
+
 1. @Prakash_Belawadi - Renowned Filmmaker, Playwright, Actor and Aesthetics Scholar. [Wikipedia](https://en.wikipedia.org/wiki/Prakash_Belawadi)
-2. @Madhumita_Bhaskar - Vocalist, artist, founder - Shrota House. [Shrota House](https://shrotahouse.com/
+2. @Madhumita_Bhaskar - Vocalist, artist, founder - Shrota House. [Shrota House](https://shrotahouse.com/)
 3. @Nisha_Khanna - Psychologist and Relationship Expert. [Bye Tense](https://www.drnishakhanna.com/)
 4. @Manan_Pahwa - Digital Experience Designer and Researcher. [substack - blog](https://thebehaviouraldetective.substack.com/)
 5. @Anup_Gupta - Founder - Mathongo. [Twitter-handle](https://x.com/anuprocks?lang=en)
 
+</div>
+</div>
+
 ### Prakash Belawadi
-![](/assets/talks/mirror-glitch/IMG_20260117_150004.jpg){:.medium}
+![](/assets/talks/mirror-glitch/IMG_20260117_150004.jpg){:.small}
 The most enlightening talk was from @Prakash_Belawadi. 
 
 He brought into discussion of aesthetics, @natya_shashtra, and how being human is defined by the nuances of aesthetics of '@rasa', '@dwani' and '@auchitya'. he was talking about the prejudices that get loaded in these AI systems, that bring in '@cold_shoulder' to different nuances of being a human. He was talking about the universal human experience, and how as computer scientists we need to reclaim our humanity while building these systems. The idea was how to reclaim the human experience through aesthetics, creativity and expression, and integrate with the AI and the digital world. 
@@ -110,17 +111,40 @@ In his book - "Essays on Gita", @Sri_Aurobindo brings forth this idea of @sacrif
 The talk by @Madhumita_Bhaskar was also totally in another level as well! She was talking of @frame and @freedom. @frame was not a cage or a boundary. But it was the netted support for the wild creative vine to grow, thrive and flourish. It was amazing the way she put the whole talk. And her slides were mind blowingly simmple and beautiful. She was talking about how @Purpose, @consistency, @hardwork create that frame, and then that works as a light house that keeps us and supports us when things become stormy. I asked her how we can know what is our purpose. She said it is by consistent practice of who we are and doing that again and again. It is about identifying what I feel the best while expressing myself, and consistently doing that and improvising on that, something in long term, slowly slowly becomes clearer and we see our purpose emerge! That was beautifully articulated. 
 I reflected that it is in writing I find myself, and perhaps that idea of practicing @compassion, creating @beauty, solving @problems, and being a better @software_engineer is defined as a purpose for me, as I continue to learn, continue to experiment and continue to explore being who I am at @work, in @love, in @life. I am reminded of @Alfred_Adler and his ideas on @life-tasks. 
 
-## Dr. Nisha Khanna
-![](/assets/talks/mirror-glitch/IMG_20260117_112201.jpg)
+### Dr. Nisha Khanna
+<div class="image-row">
+<img src="/assets/talks/mirror-glitch/IMG_20260117_112201.jpg" class="medium" alt>
+<img src="/assets/talks/mirror-glitch/IMG_20260117_110352.jpg" class="medium" alt>
+<img src="/assets/talks/mirror-glitch/IMG_20260117_111222.jpg" class="medium" alt>
+<img src="/assets/talks/mirror-glitch/IMG_20260117_111833.jpg" class="medium" alt>
+<img src="/assets/talks/mirror-glitch/IMG_20260117_112600.jpg" class="medium" alt>
+<img src="/assets/talks/mirror-glitch/IMG_20260117_112844.jpg" class="medium" alt>
+</div>
+
 
 @Dr.Neha_Khanna who is a famous celebrity psychologist from Delhi. She spoke about identity, self discrepancy, cognitive dissonance and how to reclaim our true self in the soup of social media. Her talk was pretty detailed and showed several scientific frameworks and studies. 
 
-## Manan Pahwa
-![](/assets/talks/mirror-glitch/IMG_20260117_120313.jpg)
+### Manan Pahwa
+<div class="image-row">
+<img src="/assets/talks/mirror-glitch/IMG_20260117_120313.jpg" class="medium" alt>
+<img src="/assets/talks/mirror-glitch/IMG_20260117_114509.jpg" class="medium" alt>
+<img src="/assets/talks/mirror-glitch/IMG_20260117_120358.jpg" class="medium" alt>
+<img src="/assets/talks/mirror-glitch/IMG_20260117_120313.jpg" class="medium" alt>
+</div>
 @Mannan_Pahwa spoke on design in the digital world. how he works to create that vibe, that environment that enables people to better navigate through the digital maze. He shared several enlightening ideas on standing up and using the technology towards blossoming rather than dooming. 
 He was speaking about the idea of @blossom_scrolling instead of @doom_scrolling. @blossom_Scrolling is how we move from one concept to another, that triggers a higher order thinking in us, creating new nerve connections, and seeing the world differently. I shared with him my experience with the research paper @Barath wrote as @MetaPrompt. I shared with them, that when I had attended the @google_fest, i saw a google engineer sharing the sql pipe functionality that was transforming the non-liner sql block of queries into a linear flow using "|>" symbol. It was blossom scrolling across multiple spaces and times! And how beautifully and exquisitely @Bharath had captured that essence in the research paper.
 
+### Anup Gupta
+![](/assets/talks/mirror-glitch/IMG_20260117_123959.jpg)
+
+Anup Gupta in his very authentic and simplistic style shared the central theme as playing by one's own strengths. It is about being authentic to oneself. He shared his life journey, and how he did not get deterred by the mishaps during his JEE exam day, and as his uncle had said, if Tendulkar goes out, will Indian team stop playing? He had lots of passion in cricket, and so he was able to pull up all his spirits and play his best for the exam. 
+He asked some thought provoking questions to the audience, and made us think and jolt  us from the inertia of our habitual thinking patterns of - An imaginary destination, that is not reached yet. Rather he was stressing on living life point to point, whole and complete and giving each moment its full due. He explained an example where in his company he does not chase a large big target, rather he has daily realistic targets that his team works towards and rejoiced at it. 
+He was also mentioning about **delayed gratification**. How he would give himself a target to complete some topics in studies. And if he would have completed it, then he would go for a movie. And how that movie would become extra pleasurable as he was earning it as a reward of his hard work! I was able to relate to this to the work of @Chikzentmihalyi on @flow_state. How when we are in flow, we are able to derive immense pleasure from the work itself. And that becomes a reward in itself. And more importantly the ability to see intermediate results of the hard work, which fuels us to go further.
+
+### The goodies
 Overall the day was just awesome! Food was great and they gave high tea as well. Also they gifted on water bottle, pen and a notebook. It was a great experience. 
-![](/assets/talks/mirror-glitch/IMG_20260118_104551.jpg)
-![](/assets/talks/mirror-glitch/IMG_20260118_104212.jpg)
+<div class="image-row">
+<img src="/assets/talks/mirror-glitch/IMG_20260118_104551.jpg" class="medium" alt>    
+<img src="/assets/talks/mirror-glitch/IMG_20260118_104212.jpg" class="medium" alt>
+</div>
 
