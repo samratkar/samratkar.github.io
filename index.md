@@ -71,14 +71,16 @@ title: Home - All Articles
     border-radius: 10px;
   }
   
-  .tag-item, .category-item {
-    cursor: pointer;
+  .tag-item, .category-item, div.tag-item, div.category-item {
+    cursor: pointer !important;
     transition: all 0.2s ease;
+    user-select: none;
   }
   
   .tag-item:hover, .category-item:hover {
     background-color: #f3e8ff;
     transform: translateX(4px);
+    cursor: pointer !important;
   }
   
   .tag-item.active, .category-item.active {
@@ -87,16 +89,18 @@ title: Home - All Articles
     font-weight: 600;
   }
   
-  .subcategory-item {
-    cursor: pointer;
+  .subcategory-item, div.subcategory-item {
+    cursor: pointer !important;
     transition: all 0.2s ease;
     margin-left: 1rem;
     font-size: 0.85rem;
+    user-select: none;
   }
   
   .subcategory-item:hover {
     background-color: #f3e8ff;
     transform: translateX(4px);
+    cursor: pointer !important;
   }
   
   .subcategory-item.active {
@@ -900,10 +904,38 @@ title: Home - All Articles
     console.log('Event listeners set up complete');
   }
   
+  // Force cursor pointer on clickable items
+  function forceCursorStyles() {
+    document.querySelectorAll('.tag-item').forEach(item => {
+      item.style.cursor = 'pointer';
+    });
+    document.querySelectorAll('.category-item').forEach(item => {
+      item.style.cursor = 'pointer';
+    });
+    document.querySelectorAll('.subcategory-item').forEach(item => {
+      item.style.cursor = 'pointer';
+    });
+  }
+  
   // Try multiple times to ensure event listeners are attached
-  document.addEventListener('DOMContentLoaded', setupEventListeners);
-  window.addEventListener('load', setupEventListeners);
-  setTimeout(setupEventListeners, 100);
-  setTimeout(setupEventListeners, 500);
-  setTimeout(setupEventListeners, 1000);
+  document.addEventListener('DOMContentLoaded', function() {
+    setupEventListeners();
+    forceCursorStyles();
+  });
+  window.addEventListener('load', function() {
+    setupEventListeners();
+    forceCursorStyles();
+  });
+  setTimeout(function() {
+    setupEventListeners();
+    forceCursorStyles();
+  }, 100);
+  setTimeout(function() {
+    setupEventListeners();
+    forceCursorStyles();
+  }, 500);
+  setTimeout(function() {
+    setupEventListeners();
+    forceCursorStyles();
+  }, 1000);
 </script>
