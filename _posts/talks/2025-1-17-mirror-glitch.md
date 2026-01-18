@@ -50,6 +50,8 @@ And get pats on the back as you pass
 But your final reward will be heartache and tears
 If you’ve cheated the man in the glass.
 
+### The Speakers
+
 ![](/assets/talks/mirror-glitch/IMG_20260117_131157.jpg)
 
 All the speakers were exceptional! 
@@ -59,6 +61,7 @@ All the speakers were exceptional!
 4. @Manan_Pahwa - Digital Experience Designer and Researcher. [substack - blog](https://thebehaviouraldetective.substack.com/)
 5. @Anup_Gupta - Founder - Mathongo. [Twitter-handle](https://x.com/anuprocks?lang=en)
 
+### Prakash Belawadi
 The most enlightening talk was from @Prakash_Belawadi. 
 
 He brought into discussion of aesthetics, @natya_shashtra, and how being human is defined by the nuances of aesthetics of '@rasa', '@dwani' and '@auchitya'. he was talking about the prejudices that get loaded in these AI systems, that bring in '@cold_shoulder' to different nuances of being a human. He was talking about the universal human experience, and how as computer scientists we need to reclaim our humanity while building these systems. The idea was how to reclaim the human experience through aesthetics, creativity and expression, and integrate with the AI and the digital world. 
@@ -81,46 +84,30 @@ He also hinted on @Karma_yoga / @Purushartha - it is what we do that defines our
 He ended his talk challenging the audience to practice larger @sacrifice and to @Be_a_Hero! 
 In his book - "Essays on Gita", @Sri_Aurobindo brings forth this idea of @sacrifice as the highest form of @love and the essence of @Gita. 
 
+@Prakash_Belwadi was mentioning that @success typically is when you do better than your surroundings. Then he asked, why something has to be better than others. Why cannot it be a better version of our previous self. And when that happens, we are not competing but collaborating. (Something Adler always reiterated in his writings). 
 
+### Madhumita Bhaskar
 ![](/assets/talks/mirror-glitch/IMG_20260117_141655.jpg)
+
 
 The talk by @Madhumita_Bhaskar was also totally in another level as well! She was talking of @frame and @freedom. @frame was not a cage or a boundary. But it was the netted support for the wild creative vine to grow, thrive and flourish. It was amazing the way she put the whole talk. And her slides were mind blowingly simmple and beautiful. She was talking about how @Purpose, @consistency, @hardwork create that frame, and then that works as a light house that keeps us and supports us when things become stormy. I asked her how we can know what is our purpose. She said it is by consistent practice of who we are and doing that again and again. It is about identifying what I feel the best while expressing myself, and consistently doing that and improvising on that, something in long term, slowly slowly becomes clearer and we see our purpose emerge! That was beautifully articulated. 
 I reflected that it is in writing I find myself, and perhaps that idea of practicing @compassion, creating @beauty, solving @problems, and being a better @software_engineer is defined as a purpose for me, as I continue to learn, continue to experiment and continue to explore being who I am at @work, in @love, in @life. I am reminded of @Alfred_Adler and his ideas on @life-tasks. 
 
-@Prakash_Belwadi was mentioning that @success typically is when you do better than your surroundings. Then he asked, why something has to be better than others. Why cannot it be a better version of our previous self. And when that happens, we are not competing but collaborating. (Something Adler always reiterated in his writings). 
+#### Frame & Art with Hindustani Classical Music
+![](/assets/talks/mirror-glitch/IMG_20260117_143139.jpg)
+![](/assets/talks/mirror-glitch/IMG_20260117_144556.jpg)
 
-![](/assets/images/mirror-glitch/IMG_20260117_112201.jpg)
+## Dr. Nisha Khanna
+![](/assets/talks/mirror-glitch/IMG_20260117_112201.jpg)
 
-Then we had @Dr.Neha_Khanna who is a famous celebrity psychologist from Delhi. She spoke about identity, self discrepancy, cognitive dissonance and how to reclaim our true self in the soup of social media. Her talk was pretty detailed and showed several scientific frameworks and studies. 
+@Dr.Neha_Khanna who is a famous celebrity psychologist from Delhi. She spoke about identity, self discrepancy, cognitive dissonance and how to reclaim our true self in the soup of social media. Her talk was pretty detailed and showed several scientific frameworks and studies. 
 
-![](/assets/images/mirror-glitch/IMG_20260117_120313.jpg)
+## Manan Pahwa
+![](/assets/talks/mirror-glitch/IMG_20260117_120313.jpg)
+@Mannan_Pahwa spoke on design in the digital world. how he works to create that vibe, that environment that enables people to better navigate through the digital maze. He shared several enlightening ideas on standing up and using the technology towards blossoming rather than dooming. 
+He was speaking about the idea of @blossom_scrolling instead of @doom_scrolling. @blossom_Scrolling is how we move from one concept to another, that triggers a higher order thinking in us, creating new nerve connections, and seeing the world differently. I shared with him my experience with the research paper @Barath wrote as @MetaPrompt. I shared with them, that when I had attended the @google_fest, i saw a google engineer sharing the sql pipe functionality that was transforming the non-liner sql block of queries into a linear flow using "|>" symbol. It was blossom scrolling across multiple spaces and times! And how beautifully and exquisitely @Bharath had captured that essence in the research paper.
 
-Then @Mannan_Pahwa spoke on design in the digital world. how he works to create that vibe, that environment that enables people to better navigate through the digital maze. He shared several enlightening ideas on standing up and using the technology towards blossoming rather than dooming. 
-He was speaking about the idea of @blossom_scrolling instead of @doom_scrolling. @blossom_Scrolling is how we move from one concept to another, that triggers a higher order thinking in us, creating new nerve connections, and seeing the world differently. I shared with him my experience with the research paper I wrote with Barath known as @MetaPrompt. I shared with them, that when I had attended the @google_fest, i saw a google engineer sharing the sql pipe functionality that was transforming the non-liner sql block of queries into a linear flow using "|>" symbol. It was blossom scrolling across multiple spaces and times! That was beautiful na? All clapped on that analogy!
-
-Overall the day was just awesome! Food was great and they gave high tea as well. Also they gifted on water bottle. It was a great experience. @Tushki and @Gayatri had come along for the seminar. Gayatri also loved it very much. She calls me @Sheldon 😀. There was another woman whom we made friends with. Her name is @Akanksha. She was very friendly and we had good discussion. She was enjoying our conversation with @Gayatri, when we were making fun of each other..
-
-Hope you had a great day today! How are you? I hope you loved the book! Yea, this is the book about this @creative_unity, @universal_humanism and @Divine_Man (Tagore's "Man" is the "Mankind"). It is a great way to introduce you the book on the day it was handed over to you. Love you! 
-
-The whole day I was thinking about @you and @enamor! Amidst all the talk about Purpose, meaning, aesthetics and how this @beautiful and @divine @love of @internal @inter-relationship creates such beautiful expressions of @being_human ! How beautiful was the composition of @intimate_temple_of_clothes! right!?
-
->God Bless you @!
-In morn and eve,
-In sun and shade,
-In rain and breeze,
-In joy and grief!
-
->God Bless you @!
-In mind and heart,
-In thought and deed,
-In wake and sleep,
-In word and silence,
-
->God Bless you @!
-
-@LOVE_YOU_AS_ALWAYS  @LYAA 
-
-![](/assets/images/lyaa/prayer-temple-clothes.png)
-
-
+Overall the day was just awesome! Food was great and they gave high tea as well. Also they gifted on water bottle, pen and a notebook. It was a great experience. 
+![](/assets/talks/mirror-glitch/IMG_20260118_104551.jpg)
+![](/assets/talks/mirror-glitch/IMG_20260118_104212.jpg)
 
