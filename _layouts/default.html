@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page.title | default: site.title }}</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   
   <style>
     body {
@@ -15,6 +15,59 @@
     }
     h1, h2, h3, h4, h5, h6 {
       color: #E6E6FA;
+    }
+    
+    /* Global stat-card embossed glass effect */
+    .stat-card {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.85) 0%, rgba(243, 232, 255, 0.6) 100%) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      border-radius: 12px !important;
+      padding: 0.75rem 1rem !important;
+      box-shadow: 
+        6px 6px 12px rgba(155, 135, 245, 0.12),
+        -3px -3px 8px rgba(255, 255, 255, 0.7),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.8),
+        inset -1px -1px 2px rgba(155, 135, 245, 0.08) !important;
+      border: none !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-4px) scale(1.02) !important;
+      box-shadow: 
+        8px 8px 16px rgba(155, 135, 245, 0.18),
+        -4px -4px 10px rgba(255, 255, 255, 0.8),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.9),
+        inset -1px -1px 2px rgba(155, 135, 245, 0.1) !important;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(243, 232, 255, 0.75) 100%) !important;
+    }
+    
+    .stat-card .flex {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 0.75rem !important;
+    }
+    
+    .stat-icon {
+      width: 36px !important;
+      height: 36px !important;
+      min-width: 36px !important;
+      border-radius: 8px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-shrink: 0 !important;
+    }
+    
+    /* Global gradient header */
+    .gradient-bg {
+      background: linear-gradient(135deg, #9b87f5 0%, #c4b5fd 100%) !important;
+    }
+    
+    .full-width-header {
+      background: linear-gradient(135deg, #9b87f5 0%, #c4b5fd 100%) !important;
     }
   </style>
 </head>

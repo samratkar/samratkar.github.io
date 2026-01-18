@@ -15,13 +15,20 @@
     }
     
     .gradient-bg {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #e9d5ff 0%, #ddd6fe 50%, #c4b5fd 100%);
     }
     
     .glass-effect {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(196, 181, 253, 0.4);
+      box-shadow: 0 4px 16px rgba(91, 33, 182, 0.1);
+    }
+    
+    /* Style for @mentions - lavender theme color */
+    .at-mention {
+      color: #5b21b6;
+      font-weight: 500;
     }
     
     .article-content {
@@ -35,7 +42,7 @@
     .article-content h4,
     .article-content h5,
     .article-content h6 {
-      color: #1f2937;
+      color: #5b21b6;
       font-weight: 700;
       margin-top: 2rem;
       margin-bottom: 1rem;
@@ -43,7 +50,7 @@
     }
     
     .article-content h1 { font-size: 2.25rem; }
-    .article-content h2 { font-size: 1.875rem; border-bottom: 2px solid #e5e7eb; padding-bottom: 0.5rem; }
+    .article-content h2 { font-size: 1.875rem; border-bottom: 2px solid #c4b5fd; padding-bottom: 0.5rem; }
     .article-content h3 { font-size: 1.5rem; }
     .article-content h4 { font-size: 1.25rem; }
     
@@ -90,20 +97,23 @@
     }
     
     .article-content blockquote {
-      border-left: 4px solid #667eea;
+      border-left: 4px solid #a78bfa;
       padding-left: 1.5rem;
       margin: 1.5rem 0;
       color: #6b7280;
       font-style: italic;
+      background: rgba(233, 213, 255, 0.3);
+      padding: 1rem 1.5rem;
+      border-radius: 0 0.5rem 0.5rem 0;
     }
     
     .article-content a {
-      color: #667eea;
+      color: #7c3aed;
       text-decoration: underline;
     }
     
     .article-content a:hover {
-      color: #764ba2;
+      color: #5b21b6;
     }
     
     .article-content table {
@@ -129,14 +139,14 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      color: #667eea;
+      color: #5b21b6;
       text-decoration: none;
       font-weight: 500;
       transition: all 0.2s;
     }
     
     .back-link:hover {
-      color: #764ba2;
+      color: #7c3aed;
       transform: translateX(-4px);
     }
     
@@ -159,8 +169,8 @@
     }
     
     .tag-badge {
-      background: #dbeafe;
-      color: #1e40af;
+      background: #ede9fe;
+      color: #5b21b6;
       padding: 0.25rem 0.75rem;
       border-radius: 9999px;
       font-size: 0.75rem;
@@ -168,8 +178,8 @@
     }
     
     .category-badge {
-      background: #e9d5ff;
-      color: #6b21a8;
+      background: #ddd6fe;
+      color: #5b21b6;
       padding: 0.25rem 0.75rem;
       border-radius: 9999px;
       font-size: 0.75rem;
@@ -177,13 +187,13 @@
     }
   </style>
 </head>
-<body class="bg-gray-50 min-h-screen">
+<body style="background: linear-gradient(135deg, #e9d5ff 0%, #ddd6fe 50%, #c4b5fd 100%); min-height: 100vh;">
   <!-- Header -->
-  <header class="gradient-bg text-white shadow-lg">
+  <header class="gradient-bg shadow-lg">
     <div class="max-w-7xl mx-auto px-6 py-6">
       <div class="flex items-center justify-between">
         <div>
-          <a href="/" class="back-link text-white hover:text-blue-100">
+          <a href="/" class="back-link text-purple-900 hover:text-purple-700">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
             </svg>
@@ -191,8 +201,8 @@
           </a>
         </div>
         <div class="text-right">
-          <h1 class="text-xl font-bold">Samrat Kar</h1>
-          <p class="text-sm text-blue-100">exploring & experimenting</p>
+          <h1 class="text-xl font-bold text-purple-900">Samrat Kar</h1>
+          <p class="text-sm text-purple-700">exploring & experimenting</p>
         </div>
       </div>
     </div>
@@ -203,7 +213,7 @@
     <article class="bg-white rounded-xl shadow-lg p-8 glass-effect">
       <!-- Article Header -->
       <div class="mb-6">
-        <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ page.title }}</h1>
+        <h1 class="text-4xl font-bold text-purple-900 mb-4">{{ page.title }}</h1>
         
         <!-- Metadata -->
         <div class="metadata">
@@ -257,8 +267,8 @@
   </main>
 
   <!-- Footer -->
-  <footer class="bg-white border-t border-gray-200 mt-12">
-    <div class="max-w-7xl mx-auto px-6 py-6 text-center text-gray-600 text-sm">
+  <footer class="bg-white/50 backdrop-blur-sm border-t border-purple-200 mt-12">
+    <div class="max-w-7xl mx-auto px-6 py-6 text-center text-purple-700 text-sm">
       <p>&copy; {{ 'now' | date: "%Y" }} Samrat Kar. All rights reserved.</p>
     </div>
   </footer>
@@ -288,5 +298,34 @@
   <script type="text/javascript" async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  
+  <script>
+    // Style words starting with @ in blue
+    function styleAtMentions() {
+      const walker = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+      );
+      
+      const textNodes = [];
+      while (walker.nextNode()) {
+        if (walker.currentNode.nodeValue.match(/@[a-zA-Z_][a-zA-Z0-9_]*/)) {
+          textNodes.push(walker.currentNode);
+        }
+      }
+      
+      textNodes.forEach(node => {
+        const text = node.nodeValue;
+        const span = document.createElement('span');
+        span.innerHTML = text.replace(/@[a-zA-Z_][a-zA-Z0-9_]*/g, '<span class="at-mention">$&</span>');
+        node.parentNode.replaceChild(span, node);
+      });
+    }
+    
+    // Run on page load
+    document.addEventListener('DOMContentLoaded', styleAtMentions);
+  </script>
 </body>
 </html>

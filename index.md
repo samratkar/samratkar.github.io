@@ -4,7 +4,7 @@ title: Home - All Articles
 ---
 
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
 <style>
   body {
@@ -14,11 +14,20 @@ title: Home - All Articles
   }
   
   .gradient-bg {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #9b87f5 0%, #c4b5fd 100%) !important;
+  }
+  
+  .gradient-bg h1,
+  .gradient-bg p {
+    color: white !important;
+  }
+  
+  .gradient-bg p.subtitle {
+    color: rgba(233, 213, 255, 1) !important;
   }
   
   .gradient-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    background: linear-gradient(135deg, #9b87f5 0%, #c4b5fd 100%) !important;
   }
   
   .gradient-header th {
@@ -27,17 +36,18 @@ title: Home - All Articles
   }
   
   .gradient-header tr {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    background: linear-gradient(135deg, #9b87f5 0%, #c4b5fd 100%) !important;
   }
   
   table thead.gradient-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    background: linear-gradient(135deg, #9b87f5 0%, #c4b5fd 100%) !important;
   }
   
   .glass-effect {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(196, 181, 253, 0.4);
+    box-shadow: 0 4px 16px rgba(91, 33, 182, 0.1);
   }
   
   .side-panel {
@@ -57,7 +67,7 @@ title: Home - All Articles
   }
   
   .side-panel::-webkit-scrollbar-thumb {
-    background: #667eea;
+    background: #9b87f5;
     border-radius: 10px;
   }
   
@@ -67,12 +77,12 @@ title: Home - All Articles
   }
   
   .tag-item:hover, .category-item:hover {
-    background-color: #e0e7ff;
+    background-color: #f3e8ff;
     transform: translateX(4px);
   }
   
   .tag-item.active, .category-item.active {
-    background-color: #667eea;
+    background-color: #9b87f5;
     color: white;
     font-weight: 600;
   }
@@ -85,14 +95,20 @@ title: Home - All Articles
   }
   
   .subcategory-item:hover {
-    background-color: #d1fae5;
+    background-color: #f3e8ff;
     transform: translateX(4px);
   }
   
   .subcategory-item.active {
-    background-color: #10b981;
+    background-color: #c4b5fd;
     color: white;
     font-weight: 600;
+  }
+  
+  /* Style for @mentions - lavender theme color */
+  .at-mention {
+    color: #5b21b6;
+    font-weight: 500;
   }
   
   .category-header {
@@ -106,10 +122,11 @@ title: Home - All Articles
   
   .article-row {
     transition: background-color 0.2s ease;
+    background: white;
   }
   
   .article-row:hover {
-    background-color: #f9fafb;
+    background-color: #faf5ff;
   }
   
   .hidden-row {
@@ -145,12 +162,12 @@ title: Home - All Articles
   }
   
   .flex-1.min-w-0 > div::-webkit-scrollbar-thumb {
-    background: #667eea;
+    background: #9b87f5;
     border-radius: 10px;
   }
   
   .flex-1.min-w-0 > div::-webkit-scrollbar-thumb:hover {
-    background: #5568d3;
+    background: #8b5cf6;
   }
   
   /* Table column widths */
@@ -180,27 +197,52 @@ title: Home - All Articles
   }
   
   .stat-card {
-    background: white;
-    border-radius: 10px;
-    padding: 0.75rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.85) 0%, rgba(243, 232, 255, 0.6) 100%) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    box-shadow: 
+      6px 6px 12px rgba(155, 135, 245, 0.12),
+      -3px -3px 8px rgba(255, 255, 255, 0.7),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.8),
+      inset -1px -1px 2px rgba(155, 135, 245, 0.08);
+    border: none;
     transition: all 0.3s ease;
   }
   
   .stat-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 
+      8px 8px 16px rgba(155, 135, 245, 0.18),
+      -4px -4px 10px rgba(255, 255, 255, 0.8),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.9),
+      inset -1px -1px 2px rgba(155, 135, 245, 0.1);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(243, 232, 255, 0.75) 100%) !important;
+  }
+  
+  .stat-card .flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
   }
   
   .stat-icon {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 0;
     flex-shrink: 0;
+  }
+  
+  .stat-icon svg {
+    width: 20px;
+    height: 20px;
   }
   
   /* Hide default theme header */
@@ -233,7 +275,7 @@ title: Home - All Articles
   
   .nav-link:hover {
     background: white;
-    color: #667eea;
+    color: #9b87f5;
     border-color: white;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
@@ -255,22 +297,18 @@ title: Home - All Articles
 
 <div class="bg-gray-50 min-h-screen">
   <!-- Header - Full Width -->
-  <header class="full-width-header gradient-bg text-white shadow-lg">
+  <header class="full-width-header shadow-lg" style="background: linear-gradient(135deg, #9b87f5 0%, #c4b5fd 100%) !important;">
     <div class="max-w-screen-2xl mx-auto px-6 py-6">
       <div class="flex items-center justify-between flex-wrap gap-6">
         <div class="flex-1">
-          <h1 class="text-2xl font-bold">Samrat Kar | exploring & experimenting</h1>
-          <p class="text-blue-100 mt-2 text-sm">Article Index - All my writings and explorations</p>
+          <h1 class="text-3xl font-bold" style="color: white !important; font-family: 'Crimson Text', serif; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">📚 Samrat Kar | exploring & experimenting 📚</h1>
+          <p class="subtitle mt-2 text-sm" style="color: #e9d5ff !important;">Article Index - All my writings and explorations</p>
         </div>
         <nav class="nav-menu">
-          <a href="/" class="nav-link">🏠 Home</a>
-          <a href="/about/" class="nav-link">👤 About</a>
-          <a href="/books/" class="nav-link">📚 Books</a>
+          <a href="/" class="nav-link" style="color: white !important;">🏠 Home</a>
+          <a href="/about/" class="nav-link" style="color: white !important;">👤 About</a>
+          <a href="/books/" class="nav-link" style="color: white !important;">📚 Books</a>
         </nav>
-        <div class="text-right flex-shrink-0">
-          <div class="text-xl font-bold">{{ site.posts | size }}</div>
-          <div class="text-xs text-blue-100">Total Articles</div>
-        </div>
       </div>
     </div>
   </header>
@@ -351,7 +389,7 @@ title: Home - All Articles
   {% assign all_subcategories = all_subcategories | sort %}
 
   <!-- Statistics Section -->
-  <div class="full-width-container bg-white border-b border-gray-200 shadow-sm">
+  <div class="full-width-container border-b border-gray-200 shadow-sm" style="background: linear-gradient(135deg, rgba(155, 135, 245, 0.1) 0%, rgba(196, 181, 253, 0.15) 100%);">
     <div class="max-w-screen-2xl mx-auto px-6 py-6">
       {% assign total_posts = site.posts | size %}
       {% assign posts_with_tags = 0 %}
@@ -370,31 +408,17 @@ title: Home - All Articles
         {% assign total_categories_count = total_categories_count | plus: post.categories.size %}
       {% endfor %}
       
-      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="stat-card">
           <div class="flex items-center gap-3">
-            <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #9b87f5 0%, #c4b5fd 100%);">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
               </svg>
             </div>
-            <div>
-              <div class="text-lg font-bold text-gray-800">{{ total_posts }}</div>
-              <div class="text-xs text-gray-500">Total Articles</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="stat-card">
-          <div class="flex items-center gap-3">
-            <div class="stat-icon" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
-              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="text-lg font-bold text-gray-800">{{ all_tags.size }}</div>
-              <div class="text-xs text-gray-500">Unique Tags</div>
+            <div class="flex items-baseline gap-2">
+              <span class="text-2xl font-bold text-gray-800">{{ total_posts }}</span>
+              <span class="text-sm text-gray-500">Articles</span>
             </div>
           </div>
         </div>
@@ -402,13 +426,13 @@ title: Home - All Articles
         <div class="stat-card">
           <div class="flex items-center gap-3">
             <div class="stat-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
-              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
               </svg>
             </div>
-            <div>
-              <div class="text-lg font-bold text-gray-800">{{ all_categories.size }}</div>
-              <div class="text-xs text-gray-500">Categories</div>
+            <div class="flex items-baseline gap-2">
+              <span class="text-2xl font-bold text-gray-800">{{ all_tags.size }}</span>
+              <span class="text-sm text-gray-500">Tags</span>
             </div>
           </div>
         </div>
@@ -416,27 +440,13 @@ title: Home - All Articles
         <div class="stat-card">
           <div class="flex items-center gap-3">
             <div class="stat-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
-              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
               </svg>
             </div>
-            <div>
-              <div class="text-lg font-bold text-gray-800">{{ posts_with_tags }}</div>
-              <div class="text-xs text-gray-500">Tagged Articles</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="stat-card">
-          <div class="flex items-center gap-3">
-            <div class="stat-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
-              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="text-lg font-bold text-gray-800">{{ posts_with_categories }}</div>
-              <div class="text-xs text-gray-500">Categorized</div>
+            <div class="flex items-baseline gap-2">
+              <span class="text-2xl font-bold text-gray-800">{{ all_categories.size }}</span>
+              <span class="text-sm text-gray-500">Categories</span>
             </div>
           </div>
         </div>
@@ -444,14 +454,14 @@ title: Home - All Articles
         <div class="stat-card">
           <div class="flex items-center gap-3">
             <div class="stat-icon" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);">
-              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
               </svg>
             </div>
-            <div>
-              <div class="text-lg font-bold text-gray-800" id="filteredCountTop">{{ total_posts }}</div>
-              <div class="text-xs text-gray-500">Filtered Results</div>
+            <div class="flex items-baseline gap-2">
+              <span class="text-2xl font-bold text-gray-800" id="filteredCountTop">{{ total_posts }}</span>
+              <span class="text-sm text-gray-500">Filtered</span>
             </div>
           </div>
         </div>
@@ -470,13 +480,13 @@ title: Home - All Articles
       
       <!-- Left Panel - Tags -->
       <div class="w-72 flex-shrink-0" style="width: 15rem;">
-        <div class="side-panel bg-white rounded-xl shadow-lg p-4 border border-gray-100">
-          <h3 class="text-base font-bold text-gray-800 mb-3 flex items-center gap-2 pb-2 border-b border-gray-200">
-            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="side-panel rounded-xl shadow-lg p-4" style="background: white; border: 1px solid rgba(196, 181, 253, 0.3);">
+          <h3 class="text-base font-bold text-purple-900 mb-3 flex items-center gap-2 pb-2 border-b border-purple-200">
+            <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
             </svg>
             <span>Tags</span>
-            <span class="ml-auto text-sm font-normal text-gray-500">({{ all_tags.size }})</span>
+            <span class="ml-auto text-sm font-normal text-purple-600">({{ all_tags.size }})</span>
           </h3>
           
           <div class="mb-4">
@@ -484,13 +494,14 @@ title: Home - All Articles
               type="text" 
               id="tagSearch" 
               placeholder="Search tags..." 
-              class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              class="w-full px-3 py-2 text-sm rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              style="background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(196, 181, 253, 0.5);"
               onkeyup="filterTagsList()"
             >
           </div>
           
           <div class="mb-3">
-            <button onclick="clearFilters()" class="w-full px-3 py-2 text-xs font-medium bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 rounded-lg transition shadow-sm">
+            <button onclick="clearFilters()" class="w-full px-3 py-2 text-xs font-medium bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 rounded-lg transition shadow-sm">>
               <svg class="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
               </svg>
@@ -501,7 +512,7 @@ title: Home - All Articles
           <div id="tagsList" class="space-y-1">
             {% for tag in all_tags %}
               <div class="tag-item px-3 py-2.5 rounded-lg text-sm font-medium" onclick="filterByTag('{{ tag }}', this)" data-tag="{{ tag }}">
-                <span class="inline-block w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                <span class="inline-block w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
                 {{ tag }}
               </div>
             {% endfor %}
@@ -511,11 +522,11 @@ title: Home - All Articles
       
       <!-- Center - Articles Table -->
       <div class="flex-1 min-w-0">
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+        <div class="rounded-xl shadow-lg overflow-hidden" style="background: white; border: 1px solid rgba(196, 181, 253, 0.5);">
           <div class="overflow-x-auto">
             <table class="w-full">
-              <thead class="gradient-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;">
-                <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;">
+              <thead class="gradient-header" style="background: linear-gradient(135deg, #9b87f5 0%, #c4b5fd 100%) !important;">
+                <tr style="background: transparent !important;">
                   <th class="px-4 py-3 text-left text-xs font-semibold" style="color: white !important; background: transparent !important; width: 60px;">#</th>
                   <th class="px-4 py-3 text-left text-xs font-semibold" style="color: white !important; background: transparent !important;">Title</th>
                   <th class="px-4 py-3 text-left text-xs font-semibold" style="color: white !important; background: transparent !important;">Summary</th>
@@ -532,7 +543,7 @@ title: Home - All Articles
                       data-subcategories="{% if post.subcategory %}{{ post.subcategory }}{% endif %}{% if post.subcategories %}{% for subcategory in post.subcategories %}{{ subcategory }}{% unless forloop.last %}|{% endunless %}{% endfor %}{% endif %}">
                     <td class="px-4 py-3 text-xs text-gray-600 font-medium">{{ forloop.index }}</td>
                     <td class="px-4 py-3">
-                      <a href="{{ post.url | relative_url }}" class="text-blue-600 hover:text-blue-800 font-medium text-xs hover:underline">
+                      <a href="{{ post.url | relative_url }}" class="text-purple-600 hover:text-purple-800 font-medium text-xs hover:underline">
                         {{ post.title | escape }}
                       </a>
                     </td>
@@ -556,7 +567,7 @@ title: Home - All Articles
                         {% if post.tags %}
                           {% for tag in post.tags %}
                             {% unless displayed_tags contains tag %}
-                              <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition">
+                              <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-purple-100 text-purple-700 hover:bg-purple-200 transition">
                                 {{ tag }}
                               </span>
                               {% assign displayed_tags = displayed_tags | push: tag %}
@@ -567,7 +578,7 @@ title: Home - All Articles
                           {% if post.tag.first %}
                             {% for tag in post.tag %}
                               {% unless displayed_tags contains tag %}
-                                <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition">
+                                <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-purple-100 text-purple-700 hover:bg-purple-200 transition">
                                   {{ tag }}
                                 </span>
                                 {% assign displayed_tags = displayed_tags | push: tag %}
@@ -575,7 +586,7 @@ title: Home - All Articles
                             {% endfor %}
                           {% else %}
                             {% unless displayed_tags contains post.tag %}
-                              <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition">
+                              <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-purple-100 text-purple-700 hover:bg-purple-200 transition">
                                 {{ post.tag }}
                               </span>
                             {% endunless %}
@@ -602,13 +613,13 @@ title: Home - All Articles
       
       <!-- Right Panel - Categories & Sub-Categories -->
       <div class="w-72 flex-shrink-0" style="width: 15rem;">
-        <div class="side-panel bg-white rounded-xl shadow-lg p-4 border border-gray-100">
-          <h3 class="text-base font-bold text-gray-800 mb-3 flex items-center gap-2 pb-2 border-b border-gray-200">
+        <div class="side-panel rounded-xl shadow-lg p-4" style="background: white; border: 1px solid rgba(196, 181, 253, 0.3);">
+          <h3 class="text-base font-bold text-purple-900 mb-3 flex items-center gap-2 pb-2 border-b border-purple-200">
             <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
             </svg>
             <span>Categories</span>
-            <span class="ml-auto text-sm font-normal text-gray-500">({{ all_categories.size }})</span>
+            <span class="ml-auto text-sm font-normal text-purple-600">({{ all_categories.size }})</span>
           </h3>
           
           <div class="space-y-1">
@@ -628,8 +639,8 @@ title: Home - All Articles
                         {% assign parts = mapping | split: ":::" %}
                         {% if parts[0] == category %}
                           <a href="javascript:void(0)" class="subcategory-item block px-3 py-1.5 rounded-lg text-sm hover:no-underline" onclick="filterBySubcategory('{{ parts[1] }}', this); return false;" data-subcategory="{{ parts[1] }}">
-                            <span class="inline-block w-1.5 h-1.5 bg-green-400 rounded-full mr-2"></span>
-                            <span class="text-gray-700">{{ parts[1] }}</span>
+                            <span class="inline-block w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>
+                            <span class="text-purple-700">{{ parts[1] }}</span>
                           </a>
                         {% endif %}
                       {% endif %}
@@ -757,4 +768,61 @@ title: Home - All Articles
       }
     });
   }
+  
+  // Style words starting with @ in blue
+  function styleAtMentions() {
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+    
+    const textNodes = [];
+    while (walker.nextNode()) {
+      if (walker.currentNode.nodeValue.match(/@[a-zA-Z_][a-zA-Z0-9_]*/)) {
+        textNodes.push(walker.currentNode);
+      }
+    }
+    
+    textNodes.forEach(node => {
+      const text = node.nodeValue;
+      const regex = /@[a-zA-Z_][a-zA-Z0-9_]*/g;
+      
+      if (regex.test(text)) {
+        const span = document.createElement('span');
+        span.innerHTML = text.replace(/@[a-zA-Z_][a-zA-Z0-9_]*/g, '<span class="at-mention">$&</span>');
+        node.parentNode.replaceChild(span, node);
+      }
+    });
+  }
+  
+  // Run on page load
+  document.addEventListener('DOMContentLoaded', styleAtMentions);
+  
+  // Re-apply stat-card styles after Tailwind loads
+  function applyStatCardStyles() {
+    document.querySelectorAll('.stat-card').forEach(card => {
+      card.style.cssText = `
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.85) 0%, rgba(243, 232, 255, 0.6) 100%) !important;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 12px;
+        padding: 0.75rem 1rem;
+        box-shadow: 6px 6px 12px rgba(155, 135, 245, 0.12), -3px -3px 8px rgba(255, 255, 255, 0.7), inset 1px 1px 2px rgba(255, 255, 255, 0.8), inset -1px -1px 2px rgba(155, 135, 245, 0.08);
+        border: none;
+        transition: all 0.3s ease;
+      `;
+    });
+    
+    // Apply header gradient
+    document.querySelectorAll('.full-width-header').forEach(header => {
+      header.style.background = 'linear-gradient(135deg, #9b87f5 0%, #c4b5fd 100%)';
+    });
+  }
+  
+  // Apply immediately and after a short delay (for Tailwind)
+  document.addEventListener('DOMContentLoaded', applyStatCardStyles);
+  setTimeout(applyStatCardStyles, 100);
+  setTimeout(applyStatCardStyles, 500);
 </script>
