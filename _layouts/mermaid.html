@@ -150,6 +150,43 @@
       transform: translateX(-4px);
     }
     
+    /* Image size controls - use classes to control size */
+    img.small {
+      max-width: 200px;
+      width: auto;
+      height: auto;
+      display: block;
+      margin: 1.5rem auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    img.medium {
+      max-width: 400px;
+      width: auto;
+      height: auto;
+      display: block;
+      margin: 1.5rem auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    img.original {
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      display: block;
+      margin: 1.5rem auto;
+    }
+    
+    /* Responsive images on smaller screens */
+    @media (max-width: 768px) {
+      img.small,
+      img.medium {
+        max-width: 100%;
+      }
+    }
+    
     .metadata {
       display: flex;
       gap: 1rem;

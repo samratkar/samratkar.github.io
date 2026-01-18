@@ -9,7 +9,7 @@ date: 2026-01-17
 
 ## The Mirror Glitch 
 
-![](/assets/talks/mirror-glitch/IMG_20260117_140216.jpg)
+![](/assets/talks/mirror-glitch/IMG_20260117_140216.jpg){:.small}
 
 Today I had been to IIIT-Bangalore to attend a seminar known as "Mirror Glitch".
 The seminar was about seeing our identity in the digital world, 
@@ -26,7 +26,7 @@ He gave the context with this thought provoking poem of Dale Wimbrow Sr.
 
 ### The Man in the Glass 
 
-![](/assets/talks/mirror-glitch/IMG_20260117_102042.jpg)
+![](/assets/talks/mirror-glitch/IMG_20260117_102042.jpg){:.small}
 
 By Peter Dale Wimbrow Sr.
 

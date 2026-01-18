@@ -115,6 +115,30 @@ title: Home - All Articles
     font-weight: 500;
   }
   
+  /* Image size controls for markdown content */
+  .post-content img,
+  article img,
+  .content img,
+  main img {
+    max-width: 600px;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 1.5rem auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Responsive images on smaller screens */
+  @media (max-width: 768px) {
+    .post-content img,
+    article img,
+    .content img,
+    main img {
+      max-width: 100%;
+    }
+  }
+  
   .category-header {
     cursor: pointer;
     font-weight: 600;
