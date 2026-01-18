@@ -9,7 +9,7 @@ date: 2026-01-17
 
 ## The Mirror Glitch 
 
-![](/assets/talks/mirror-glitch/IMG_20260117_140216.jpg){:.small}
+![](/assets/talks/mirror-glitch/IMG_20260117_140216.jpg){:.medium}
 
 Today I had been to IIIT-Bangalore to attend a seminar known as "Mirror Glitch".
 The seminar was about seeing our identity in the digital world, 
@@ -26,29 +26,38 @@ He gave the context with this thought provoking poem of Dale Wimbrow Sr.
 
 ### The Man in the Glass 
 
-![](/assets/talks/mirror-glitch/IMG_20260117_102042.jpg){:.small}
+<div class="text-image-row">
+<div class="text-column">
 
-By Peter Dale Wimbrow Sr.
+By Peter Dale Wimbrow Sr.  
 
->When you get what you want in your struggle for self
-And the world makes you king for a day
-Just go to the mirror and look at yourself
-And see what that man has to say.
+When you get what you want in your struggle for self  
+And the world makes you king for a day  
+Just go to the mirror and look at yourself  
+And see what that man has to say.  
 
->For it isn’t your father, or mother, or wife
-Whose judgment upon you must pass
-The fellow whose verdict counts most in your life
-Is the one staring back from the glass.
+For it isn’t your father, or mother, or wife  
+Whose judgment upon you must pass  
+The fellow whose verdict counts most in your life  
+Is the one staring back from the glass.  
 
->He’s the fellow to please – never mind all the rest
-For he’s with you, clear to the end
-And you’ve passed your most difficult, dangerous test
-If the man in the glass is your friend.
+He’s the fellow to please – never mind all the rest  
+For he’s with you, clear to the end  
+And you’ve passed your most difficult, dangerous test  
+If the man in the glass is your friend.  
 
->You may fool the whole world down the pathway of years
-And get pats on the back as you pass
-But your final reward will be heartache and tears
-If you’ve cheated the man in the glass.
+You may fool the whole world down the pathway of years  
+And get pats on the back as you pass  
+But your final reward will be heartache and tears  
+If you’ve cheated the man in the glass.  
+
+</div>
+<div class="image-column">
+
+![](/assets/talks/mirror-glitch/IMG_20260117_102042.jpg){:.medium}
+
+</div>
+</div>
 
 ### The Speakers
 
@@ -62,6 +71,7 @@ All the speakers were exceptional!
 5. @Anup_Gupta - Founder - Mathongo. [Twitter-handle](https://x.com/anuprocks?lang=en)
 
 ### Prakash Belawadi
+![](/assets/talks/mirror-glitch/IMG_20260117_150004.jpg){:.medium}
 The most enlightening talk was from @Prakash_Belawadi. 
 
 He brought into discussion of aesthetics, @natya_shashtra, and how being human is defined by the nuances of aesthetics of '@rasa', '@dwani' and '@auchitya'. he was talking about the prejudices that get loaded in these AI systems, that bring in '@cold_shoulder' to different nuances of being a human. He was talking about the universal human experience, and how as computer scientists we need to reclaim our humanity while building these systems. The idea was how to reclaim the human experience through aesthetics, creativity and expression, and integrate with the AI and the digital world. 
@@ -87,15 +97,18 @@ In his book - "Essays on Gita", @Sri_Aurobindo brings forth this idea of @sacrif
 @Prakash_Belwadi was mentioning that @success typically is when you do better than your surroundings. Then he asked, why something has to be better than others. Why cannot it be a better version of our previous self. And when that happens, we are not competing but collaborating. (Something Adler always reiterated in his writings). 
 
 ### Madhumita Bhaskar
-![](/assets/talks/mirror-glitch/IMG_20260117_141655.jpg)
+
+![](/assets/talks/mirror-glitch/IMG_20260117_143139.jpg)
+
+<div class="image-row">
+<img src="/assets/talks/mirror-glitch/IMG_20260117_141655.jpg" class="small" alt="">
+<img src="/assets/talks/mirror-glitch/IMG_20260117_145133.jpg" class="small" alt="">
+</div>
+
 
 
 The talk by @Madhumita_Bhaskar was also totally in another level as well! She was talking of @frame and @freedom. @frame was not a cage or a boundary. But it was the netted support for the wild creative vine to grow, thrive and flourish. It was amazing the way she put the whole talk. And her slides were mind blowingly simmple and beautiful. She was talking about how @Purpose, @consistency, @hardwork create that frame, and then that works as a light house that keeps us and supports us when things become stormy. I asked her how we can know what is our purpose. She said it is by consistent practice of who we are and doing that again and again. It is about identifying what I feel the best while expressing myself, and consistently doing that and improvising on that, something in long term, slowly slowly becomes clearer and we see our purpose emerge! That was beautifully articulated. 
 I reflected that it is in writing I find myself, and perhaps that idea of practicing @compassion, creating @beauty, solving @problems, and being a better @software_engineer is defined as a purpose for me, as I continue to learn, continue to experiment and continue to explore being who I am at @work, in @love, in @life. I am reminded of @Alfred_Adler and his ideas on @life-tasks. 
-
-#### Frame & Art with Hindustani Classical Music
-![](/assets/talks/mirror-glitch/IMG_20260117_143139.jpg)
-![](/assets/talks/mirror-glitch/IMG_20260117_144556.jpg)
 
 ## Dr. Nisha Khanna
 ![](/assets/talks/mirror-glitch/IMG_20260117_112201.jpg)
