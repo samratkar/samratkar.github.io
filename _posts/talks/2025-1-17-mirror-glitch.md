@@ -24,25 +24,25 @@ He gave the context with this thought provoking poem of Dale Wimbrow Sr.
 
 By Peter Dale Wimbrow Sr.  
 
-When you get what you want in your struggle for self<br>
+**When you get what you want in your struggle for self<br>
 And the world makes you king for a day<br>
 Just go to the mirror and look at yourself<br>
-And see what that man has to say.
+And see what that man has to say.**
 
-For it isn't your father, or mother, or wife<br>
+**For it isn't your father, or mother, or wife<br>
 Whose judgment upon you must pass<br>
 The fellow whose verdict counts most in your life<br>
-Is the one staring back from the glass.
+Is the one staring back from the glass.**
 
-He's the fellow to please – never mind all the rest<br>
+**He's the fellow to please – never mind all the rest<br>
 For he's with you, clear to the end<br>
 And you've passed your most difficult, dangerous test<br>
-If the man in the glass is your friend.
+If the man in the glass is your friend.**
 
-You may fool the whole world down the pathway of years<br>
+**You may fool the whole world down the pathway of years<br>
 And get pats on the back as you pass<br>
 But your final reward will be heartache and tears<br>
-If you've cheated the man in the glass.
+If you've cheated the man in the glass.**
 
 </div>
 <div class="image-column">
@@ -72,7 +72,7 @@ All the speakers were exceptional!
 </div>
 
 ### Prakash Belawadi
-![](/assets/talks/mirror-glitch/IMG_20260117_150004.jpg){:.small}
+![](/assets/talks/mirror-glitch/IMG_20260117_150004.jpg){:.medium}
 The most enlightening talk was from @Prakash_Belawadi. 
 
 He brought into discussion of aesthetics, @natya_shashtra, and how being human is defined by the nuances of aesthetics of '@rasa', '@dwani' and '@auchitya'. he was talking about the prejudices that get loaded in these AI systems, that bring in '@cold_shoulder' to different nuances of being a human. He was talking about the universal human experience, and how as computer scientists we need to reclaim our humanity while building these systems. The idea was how to reclaim the human experience through aesthetics, creativity and expression, and integrate with the AI and the digital world. 
@@ -102,8 +102,8 @@ In his book - "Essays on Gita", @Sri_Aurobindo brings forth this idea of @sacrif
 ![](/assets/talks/mirror-glitch/IMG_20260117_143139.jpg)
 
 <div class="image-row">
-<img src="/assets/talks/mirror-glitch/IMG_20260117_141655.jpg" class="small" alt="">
-<img src="/assets/talks/mirror-glitch/IMG_20260117_145133.jpg" class="small" alt="">
+<img src="/assets/talks/mirror-glitch/IMG_20260117_141655.jpg" class="medium" alt="">
+<img src="/assets/talks/mirror-glitch/IMG_20260117_145133.jpg" class="medium" alt="">
 </div>
 
 
@@ -112,25 +112,25 @@ The talk by @Madhumita_Bhaskar was also totally in another level as well! She wa
 I reflected that it is in writing I find myself, and perhaps that idea of practicing @compassion, creating @beauty, solving @problems, and being a better @software_engineer is defined as a purpose for me, as I continue to learn, continue to experiment and continue to explore being who I am at @work, in @love, in @life. I am reminded of @Alfred_Adler and his ideas on @life-tasks. 
 
 ### Dr. Nisha Khanna
-<div class="image-row">
-<img src="/assets/talks/mirror-glitch/IMG_20260117_112201.jpg" class="medium" alt>
-<img src="/assets/talks/mirror-glitch/IMG_20260117_110352.jpg" class="medium" alt>
-<img src="/assets/talks/mirror-glitch/IMG_20260117_111222.jpg" class="medium" alt>
-<img src="/assets/talks/mirror-glitch/IMG_20260117_111833.jpg" class="medium" alt>
-<img src="/assets/talks/mirror-glitch/IMG_20260117_112600.jpg" class="medium" alt>
-<img src="/assets/talks/mirror-glitch/IMG_20260117_112844.jpg" class="medium" alt>
-</div>
+
+![](/assets/talks/mirror-glitch/IMG_20260117_112201.jpg)
+![](/assets/talks/mirror-glitch/IMG_20260117_110352.jpg)
+![](/assets/talks/mirror-glitch/IMG_20260117_111222.jpg)
+![](/assets/talks/mirror-glitch/IMG_20260117_111833.jpg)
+![](/assets/talks/mirror-glitch/IMG_20260117_112600.jpg)
+![](/assets/talks/mirror-glitch/IMG_20260117_112844.jpg)
+
 
 
 @Dr.Neha_Khanna who is a famous celebrity psychologist from Delhi. She spoke about identity, self discrepancy, cognitive dissonance and how to reclaim our true self in the soup of social media. Her talk was pretty detailed and showed several scientific frameworks and studies. 
 
 ### Manan Pahwa
-<div class="image-row">
-<img src="/assets/talks/mirror-glitch/IMG_20260117_120313.jpg" class="medium" alt>
-<img src="/assets/talks/mirror-glitch/IMG_20260117_114509.jpg" class="medium" alt>
-<img src="/assets/talks/mirror-glitch/IMG_20260117_120358.jpg" class="medium" alt>
-<img src="/assets/talks/mirror-glitch/IMG_20260117_120313.jpg" class="medium" alt>
-</div>
+
+![](/assets/talks/mirror-glitch/IMG_20260117_120313.jpg)
+![](/assets/talks/mirror-glitch/IMG_20260117_114509.jpg)
+![](/assets/talks/mirror-glitch/IMG_20260117_120358.jpg)
+![](/assets/talks/mirror-glitch/IMG_20260117_120313.jpg)
+
 @Mannan_Pahwa spoke on design in the digital world. how he works to create that vibe, that environment that enables people to better navigate through the digital maze. He shared several enlightening ideas on standing up and using the technology towards blossoming rather than dooming. 
 He was speaking about the idea of @blossom_scrolling instead of @doom_scrolling. @blossom_Scrolling is how we move from one concept to another, that triggers a higher order thinking in us, creating new nerve connections, and seeing the world differently. I shared with him my experience with the research paper @Barath wrote as @MetaPrompt. I shared with them, that when I had attended the @google_fest, i saw a google engineer sharing the sql pipe functionality that was transforming the non-liner sql block of queries into a linear flow using "|>" symbol. It was blossom scrolling across multiple spaces and times! And how beautifully and exquisitely @Bharath had captured that essence in the research paper.
 
