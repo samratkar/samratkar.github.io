@@ -129,8 +129,15 @@ title: Home - All Articles
     background-color: #faf5ff;
   }
   
-  .hidden-row {
-    display: none;
+  .article-row.hidden-row,
+  tr.hidden-row,
+  tbody tr.hidden-row {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    line-height: 0 !important;
+    overflow: hidden !important;
   }
   
   /* Ensure three-column layout stays horizontal */
@@ -511,7 +518,7 @@ title: Home - All Articles
           
           <div id="tagsList" class="space-y-1">
             {% for tag in all_tags %}
-              <div class="tag-item px-3 py-2.5 rounded-lg text-sm font-medium" onclick="filterByTag('{{ tag }}', this)" data-tag="{{ tag }}">
+              <div class="tag-item px-3 py-2.5 rounded-lg text-sm font-medium" data-tag="{{ tag | escape }}">
                 <span class="inline-block w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
                 {{ tag }}
               </div>
@@ -625,7 +632,7 @@ title: Home - All Articles
           <div class="space-y-1">
             {% for category in all_categories %}
               <div class="category-section">
-                <div class="category-item category-header px-3 py-2.5 rounded-lg text-sm" onclick="filterByCategory('{{ category }}', this)" data-category="{{ category }}">
+                <div class="category-item category-header px-3 py-2.5 rounded-lg text-sm" data-category="{{ category | escape }}">
                   <span class="inline-block w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
                   {{ category }}
                 </div>
@@ -638,10 +645,10 @@ title: Home - All Articles
                       {% if mapping contains category_key %}
                         {% assign parts = mapping | split: ":::" %}
                         {% if parts[0] == category %}
-                          <a href="javascript:void(0)" class="subcategory-item block px-3 py-1.5 rounded-lg text-sm hover:no-underline" onclick="filterBySubcategory('{{ parts[1] }}', this); return false;" data-subcategory="{{ parts[1] }}">
+                          <div class="subcategory-item block px-3 py-1.5 rounded-lg text-sm" data-subcategory="{{ parts[1] | escape }}">
                             <span class="inline-block w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></span>
                             <span class="text-purple-700">{{ parts[1] }}</span>
-                          </a>
+                          </div>
                         {% endif %}
                       {% endif %}
                     {% endfor %}
@@ -662,10 +669,12 @@ title: Home - All Articles
   
   function updateFilteredCount() {
     const visibleRows = document.querySelectorAll('.article-row:not(.hidden-row)').length;
+    console.log('Visible rows:', visibleRows);
     document.getElementById('filteredCountTop').textContent = visibleRows;
   }
   
   function filterByTag(tag, element) {
+    console.log('Filtering by tag:', tag);
     const tagItems = document.querySelectorAll('.tag-item');
     const categoryItems = document.querySelectorAll('.category-item');
     const subcategoryItems = document.querySelectorAll('.subcategory-item');
@@ -682,8 +691,10 @@ title: Home - All Articles
       const tags = row.dataset.tags ? row.dataset.tags.split('|') : [];
       if (tags.includes(tag)) {
         row.classList.remove('hidden-row');
+        row.style.display = '';
       } else {
         row.classList.add('hidden-row');
+        row.style.display = 'none';
       }
     });
     
@@ -691,6 +702,7 @@ title: Home - All Articles
   }
   
   function filterByCategory(category, element) {
+    console.log('Filtering by category:', category);
     const tagItems = document.querySelectorAll('.tag-item');
     const categoryItems = document.querySelectorAll('.category-item');
     const subcategoryItems = document.querySelectorAll('.subcategory-item');
@@ -703,19 +715,26 @@ title: Home - All Articles
     activeFilter = { type: 'category', value: category };
     
     const rows = document.querySelectorAll('.article-row');
+    let matchCount = 0;
     rows.forEach(row => {
       const categories = row.dataset.categories ? row.dataset.categories.split('|').filter(c => c.trim()) : [];
+      console.log('Row categories:', categories, 'Looking for:', category);
       if (categories.includes(category)) {
         row.classList.remove('hidden-row');
+        row.style.display = '';
+        matchCount++;
       } else {
         row.classList.add('hidden-row');
+        row.style.display = 'none';
       }
     });
+    console.log('Matched rows:', matchCount);
     
     updateFilteredCount();
   }
   
   function filterBySubcategory(subcategory, element) {
+    console.log('Filtering by subcategory:', subcategory);
     const tagItems = document.querySelectorAll('.tag-item');
     const categoryItems = document.querySelectorAll('.category-item');
     const subcategoryItems = document.querySelectorAll('.subcategory-item');
@@ -728,14 +747,20 @@ title: Home - All Articles
     activeFilter = { type: 'subcategory', value: subcategory };
     
     const rows = document.querySelectorAll('.article-row');
+    let matchCount = 0;
     rows.forEach(row => {
       const subcategories = row.dataset.subcategories ? row.dataset.subcategories.split('|').filter(s => s.trim()) : [];
+      console.log('Row subcategories:', subcategories, 'Looking for:', subcategory);
       if (subcategories.includes(subcategory)) {
         row.classList.remove('hidden-row');
+        row.style.display = '';
+        matchCount++;
       } else {
         row.classList.add('hidden-row');
+        row.style.display = 'none';
       }
     });
+    console.log('Matched rows:', matchCount);
     
     updateFilteredCount();
   }
@@ -749,7 +774,10 @@ title: Home - All Articles
     tagItems.forEach(item => item.classList.remove('active'));
     categoryItems.forEach(item => item.classList.remove('active'));
     subcategoryItems.forEach(item => item.classList.remove('active'));
-    rows.forEach(row => row.classList.remove('hidden-row'));
+    rows.forEach(row => {
+      row.classList.remove('hidden-row');
+      row.style.display = '';
+    });
     
     activeFilter = { type: null, value: null };
     updateFilteredCount();
@@ -825,4 +853,57 @@ title: Home - All Articles
   document.addEventListener('DOMContentLoaded', applyStatCardStyles);
   setTimeout(applyStatCardStyles, 100);
   setTimeout(applyStatCardStyles, 500);
+  
+  // Add click event listeners to tags, categories, and subcategories
+  function setupEventListeners() {
+    console.log('Setting up event listeners...');
+    
+    // Tags
+    const tagItems = document.querySelectorAll('.tag-item');
+    console.log('Found tag items:', tagItems.length);
+    tagItems.forEach((item, index) => {
+      console.log('Setting up tag listener', index, 'with data:', item.dataset.tag);
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        const tag = this.dataset.tag;
+        console.log('Tag clicked:', tag, 'Element:', this);
+        filterByTag(tag, this);
+      });
+    });
+    
+    // Categories
+    const categoryItems = document.querySelectorAll('.category-item');
+    console.log('Found category items:', categoryItems.length);
+    categoryItems.forEach((item, index) => {
+      console.log('Setting up category listener', index, 'with data:', item.dataset.category);
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        const category = this.dataset.category;
+        console.log('Category clicked:', category, 'Element:', this);
+        filterByCategory(category, this);
+      });
+    });
+    
+    // Subcategories
+    const subcategoryItems = document.querySelectorAll('.subcategory-item');
+    console.log('Found subcategory items:', subcategoryItems.length);
+    subcategoryItems.forEach((item, index) => {
+      console.log('Setting up subcategory listener', index, 'with data:', item.dataset.subcategory);
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        const subcategory = this.dataset.subcategory;
+        console.log('Subcategory clicked:', subcategory, 'Element:', this);
+        filterBySubcategory(subcategory, this);
+      });
+    });
+    
+    console.log('Event listeners set up complete');
+  }
+  
+  // Try multiple times to ensure event listeners are attached
+  document.addEventListener('DOMContentLoaded', setupEventListeners);
+  window.addEventListener('load', setupEventListeners);
+  setTimeout(setupEventListeners, 100);
+  setTimeout(setupEventListeners, 500);
+  setTimeout(setupEventListeners, 1000);
 </script>
