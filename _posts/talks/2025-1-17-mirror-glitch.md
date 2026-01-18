@@ -58,12 +58,12 @@ He brought into discussion of aesthetics, @natya_shashtra, and how being human i
 He spoke to me a lot after the talk. We resonated well on our views on @aesthetics and @humanism. Just loved talking to him. I wanted to take a selfie. But then left it as is. First I did not want to take anything from that great man. Be it his face and flaunt myself that I was with him. Also, I wanted to let it go loose, as I just loved him so much, thinking, we will be good friends and meet him again. We spoke of Tagore's idea of the "Creative Unity", and the idea of the "Divine Man". And how through creativity, and aesthetic expression we reclaim our humanity. I was thinking that as I write poems and express my love. That makes me feel human, feel complete, feel alive. And I am sure, that expression makes my beloved feel loved, desired and proud for her divinity, her beauty and her grace. I told him how I so much resonated his idea of love, creativity and connection. And then, told him how similar were the thoughts of Tagore. His eyes were bright, and said, Tagore was a seminal figure in this area of @humanism and @aesthetics. He said that the swedish embassy had invited him to give a talk on Tagore and that was such a pleasure for him. 
 He also shared that it was Bamkim Chandra Chatterjee, and his writings that kindled that original thought of human love, human divinity, and culmination of life's purpose in love and service towards humanity. He spoke about the sacrifice, about the need to love, to connect and to reclaim our universal human experience.
 
-It was such a pleasure talking to him @Renu. He asked me if I teach there. I said, no I am visiting just for the seminar. He asked me from where I am. 
+It was such a pleasure talking to him. He asked me if I teach there. I said, no I am visiting just for the seminar. He asked me from where I am. 
 
 ![](/assets/images/mirror-glitch/IMG_20260117_141655.jpg)
 
 The talk by @Madhumia_Bhaskar was also totally in another level as well! She was talking of @frame and @freedom. @frame was not a cage or a boundary. But it was the netted support for the wild creative vine to grow, thrive and flourish. It was amazing the way she put the whole talk. And her slides were mind blowingly simmple and beautiful. I just loved her talk. She was talking about how @Purpose creates that frame, and then that works as a light house that keeps us and supports us when things become stormy. I asked her how we can reclaim our purpose. She said it is by consistent practice of who we are and doing that again and again. It is about identifying what I feel the best while expressing myself, and consistently doing that and improvising on that, something in long term, slowly slowly becomes clearer and we see our purpose emerge! That was beautifully articulated. 
-I reflected that it is in writing I find myself, and perhaps @loving @you @Renu and writing to you is the purpose that makes me @alive. And that @love is my frame where my mind plays wild. 
+I reflected that it is in writing I find myself, and perhaps @loving @you @ and writing to you is the purpose that makes me @alive. And that @love is my frame where my mind plays wild. 
 
 @Prakash_Belwadi was mentioning that @success typically is when you do better than your surroundings. Then he asked, why something has to be better than others. Why cannot it be a better version of our previous self. And when that happens, we are not competing but collaborating. (Something Adler always reiterated in his writings). 
 
@@ -82,19 +82,19 @@ Hope you had a great day today! How are you? I hope you loved the book! Yea, thi
 
 The whole day I was thinking about @you and @enamor! Amidst all the talk about Purpose, meaning, aesthetics and how this @beautiful and @divine @love of @internal @inter-relationship creates such beautiful expressions of @being_human ! How beautiful was the composition of @intimate_temple_of_clothes! right!?
 
->God Bless you @Renu!
+>God Bless you @!
 In morn and eve,
 In sun and shade,
 In rain and breeze,
 In joy and grief!
 
->God Bless you @Renu!
+>God Bless you @!
 In mind and heart,
 In thought and deed,
 In wake and sleep,
 In word and silence,
 
->God Bless you @Renu!
+>God Bless you @!
 
 @LOVE_YOU_AS_ALWAYS  @LYAA 
 
