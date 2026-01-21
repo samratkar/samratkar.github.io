@@ -11,7 +11,12 @@ summary: "When life is harsh and all seems lost, and the soul searches a reason 
 
 ### The Reason to Live
 
-![](/assets/lighthouse/truth-beaty-love.png){:.small}
+---
+
+![](/assets/lighthouse/truth-beaty-love.png){:.medium}
+
+---
+
 
 When in life all that we have built
 Gets washed away like castles in the sand,
