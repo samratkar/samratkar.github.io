@@ -2,7 +2,7 @@
 layout: mermaid
 tags: [creative-unity, purpose, lighthouse, love]
 title: "The Reason to Live"
-date: 2026-01-21 09:30:00
+date: 2026-01-21
 category: books
 subcategory: "the religion of man"
 author: Samrat Kar
