@@ -1,6 +1,6 @@
 ---
 layout: mermaid
-tags: [jrnl, creative-unity, sadness, purpose, poem, humanism, lighthouse, love]
+tags: [creative-unity, purpose, lighthouse, love]
 title: "The Reason to Live"
 date: 2026-01-21 09:30:00
 category: books
