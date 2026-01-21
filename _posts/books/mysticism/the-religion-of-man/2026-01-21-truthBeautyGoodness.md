@@ -1,7 +1,7 @@
 ---
 layout: mermaid
 tags: [creative-unity, purpose, lighthouse, love]
-title: "The Reason to Live"
+title: "Truth Beauty & Goodness"
 date: 2026-01-21
 category: books
 subcategory: "the religion of man"
