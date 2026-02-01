@@ -1,4 +1,5 @@
 ---
+layout: mermaid
 tags : [books, psychology, sociology, Fromm]
 title: "Introduction to 'The Sane Society'"
 category: books
