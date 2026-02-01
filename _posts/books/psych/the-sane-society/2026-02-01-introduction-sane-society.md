@@ -4,9 +4,10 @@ tags : [books, psychology, sociology, Fromm]
 title: "Introduction to 'The Sane Society'"
 category: books
 subcategory: "The Sane Society"
-summary: "Defines the human condition and how human evolution has parted away (for good) from the biological evolution of nature. And how this departure causes a dialectical tension in man to reconcile this with his drive towards creative unity. The parallels in the work of Tagore, Adler, Jung and Fromm are described here. 
+summary: "Defines the human condition and how human evolution has parted away (for good) from the biological evolution of nature. And how this departure causes a dialectical tension in man to reconcile this with his drive towards creative unity. The parallels in the work of Tagore, Adler, Jung and Fromm are described here"
 ---
 
+## The Sane Society - by Erich Fromm
 I started re-reading **Sane Society**. It is such a mystical experience to read this at this point of my life, having read @Tagore and @Adler. I am able to understand @Fromm more deeply. And it is fascinating to see how their thoughts align. Perhaps the idea of @Jung's **collective unconscious** is at play here! Here is the notes from today's reading - 
 
 ### The human condition in modern society
