@@ -1,0 +1,339 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: QAR pipeline - preprocess, training, savings
+
+Parameters:
+  AirlineBucketName:
+    Type: String
+    Description: S3 bucket for a single airline (e.g., qar-aa-data)
+  BatchId:
+    Type: String
+    Default: "2026-02-07"
+    Description: Default batch id for testing
+  PermissionsBoundaryArn:
+    Type: String
+    Default: ""
+    Description: Optional IAM permissions boundary ARN for all roles
+
+Globals:
+  Function:
+    Runtime: python3.11
+    Timeout: 30
+    MemorySize: 256
+    Architectures:
+      - x86_64
+
+Resources:
+  ParseKeyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PermissionsBoundary: !If [HasPermBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      CodeUri: ../lambdas
+      Handler: parse_key.handler
+      Policies:
+        - AWSLambdaBasicExecutionRole
+
+  UpdateManifestFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PermissionsBoundary: !If [HasPermBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      CodeUri: ../lambdas
+      Handler: update_manifest.handler
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - Statement:
+            - Effect: Allow
+              Action:
+                - s3:GetObject
+                - s3:PutObject
+              Resource:
+                - !Sub "arn:aws:s3:::${AirlineBucketName}/preprocess/*"
+            - Effect: Allow
+              Action:
+                - s3:ListBucket
+              Resource:
+                - !Sub "arn:aws:s3:::${AirlineBucketName}"
+
+  LoadManifestFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PermissionsBoundary: !If [HasPermBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      CodeUri: ../lambdas
+      Handler: load_manifest.handler
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - Statement:
+            - Effect: Allow
+              Action:
+                - s3:GetObject
+              Resource:
+                - !Sub "arn:aws:s3:::${AirlineBucketName}/preprocess/*"
+            - Effect: Allow
+              Action:
+                - s3:ListBucket
+              Resource:
+                - !Sub "arn:aws:s3:::${AirlineBucketName}"
+
+  PreprocessStateMachine:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      PermissionsBoundary: !If [HasPermBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      DefinitionUri: statemachines/preprocess.asl.json
+      DefinitionSubstitutions:
+        ParseKeyLambdaArn: !GetAtt ParseKeyFunction.Arn
+        UpdateManifestLambdaArn: !GetAtt UpdateManifestFunction.Arn
+        PreprocessJobQueue: qar-preprocess-queue
+        PreprocessJobDefinition: qar-preprocess-job:1
+      Logging:
+        Level: ALL
+        IncludeExecutionData: true
+        Destinations:
+          - CloudWatchLogsLogGroup:
+              LogGroupArn: !GetAtt PreprocessSfnLogGroup.Arn
+      Policies:
+        - LambdaInvokePolicy:
+            FunctionName: !Ref ParseKeyFunction
+        - LambdaInvokePolicy:
+            FunctionName: !Ref UpdateManifestFunction
+        - Statement:
+            - Effect: Allow
+              Action:
+                - batch:SubmitJob
+                - batch:DescribeJobs
+                - batch:TerminateJob
+              Resource: "*"
+
+  TrainingStateMachine:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      PermissionsBoundary: !If [HasPermBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      DefinitionUri: statemachines/training.asl.json
+      DefinitionSubstitutions:
+        LoadManifestLambdaArn: !GetAtt LoadManifestFunction.Arn
+        TrainJobQueue: qar-train-queue
+        TrainJobDefinition: qar-train-job:1
+      Logging:
+        Level: ALL
+        IncludeExecutionData: true
+        Destinations:
+          - CloudWatchLogsLogGroup:
+              LogGroupArn: !GetAtt TrainingSfnLogGroup.Arn
+      Policies:
+        - LambdaInvokePolicy:
+            FunctionName: !Ref LoadManifestFunction
+        - Statement:
+            - Effect: Allow
+              Action:
+                - batch:SubmitJob
+                - batch:DescribeJobs
+                - batch:TerminateJob
+              Resource: "*"
+
+  SavingsStateMachine:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      PermissionsBoundary: !If [HasPermBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      DefinitionUri: statemachines/savings.asl.json
+      DefinitionSubstitutions:
+        SavingsJobQueue: qar-savings-queue
+        SavingsJobDefinition: qar-savings-job:1
+      Logging:
+        Level: ALL
+        IncludeExecutionData: true
+        Destinations:
+          - CloudWatchLogsLogGroup:
+              LogGroupArn: !GetAtt SavingsSfnLogGroup.Arn
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - batch:SubmitJob
+                - batch:DescribeJobs
+                - batch:TerminateJob
+              Resource: "*"
+
+  PreprocessEventRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: Start preprocess workflow on new incoming CSVs
+      EventPattern:
+        source:
+          - aws.s3
+        detail-type:
+          - Object Created
+        detail:
+          bucket:
+            name:
+              - !Ref AirlineBucketName
+          object:
+            key:
+              - prefix: incoming/
+      Targets:
+        - Arn: !Ref PreprocessStateMachine
+          Id: PreprocessStateMachineTarget
+          RoleArn: !GetAtt EventBridgeInvokeSfnRole.Arn
+
+  EventBridgeInvokeSfnRole:
+    Type: AWS::IAM::Role
+    Properties:
+      PermissionsBoundary: !If [HasPermBoundary, !Ref PermissionsBoundaryArn, !Ref "AWS::NoValue"]
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: events.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: InvokeSfn
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - states:StartExecution
+                Resource:
+                  - !Ref PreprocessStateMachine
+
+  ParseKeyLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${ParseKeyFunction}"
+      RetentionInDays: 30
+
+  UpdateManifestLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${UpdateManifestFunction}"
+      RetentionInDays: 30
+
+  LoadManifestLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${LoadManifestFunction}"
+      RetentionInDays: 30
+
+  PreprocessSfnLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/states/${PreprocessStateMachine}"
+      RetentionInDays: 30
+
+  TrainingSfnLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/states/${TrainingStateMachine}"
+      RetentionInDays: 30
+
+  SavingsSfnLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/states/${SavingsStateMachine}"
+      RetentionInDays: 30
+
+  PreprocessFailuresAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: Preprocess state machine failed executions > 0
+      Namespace: AWS/States
+      MetricName: ExecutionsFailed
+      Dimensions:
+        - Name: StateMachineArn
+          Value: !Ref PreprocessStateMachine
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+
+  TrainingFailuresAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: Training state machine failed executions > 0
+      Namespace: AWS/States
+      MetricName: ExecutionsFailed
+      Dimensions:
+        - Name: StateMachineArn
+          Value: !Ref TrainingStateMachine
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+
+  SavingsFailuresAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: Savings state machine failed executions > 0
+      Namespace: AWS/States
+      MetricName: ExecutionsFailed
+      Dimensions:
+        - Name: StateMachineArn
+          Value: !Ref SavingsStateMachine
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+
+  ParseKeyErrorsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: ParseKey Lambda errors > 0
+      Namespace: AWS/Lambda
+      MetricName: Errors
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref ParseKeyFunction
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+
+  UpdateManifestErrorsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: UpdateManifest Lambda errors > 0
+      Namespace: AWS/Lambda
+      MetricName: Errors
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref UpdateManifestFunction
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+
+  LoadManifestErrorsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: LoadManifest Lambda errors > 0
+      Namespace: AWS/Lambda
+      MetricName: Errors
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref LoadManifestFunction
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+
+Outputs:
+  PreprocessStateMachineArn:
+    Value: !Ref PreprocessStateMachine
+  TrainingStateMachineArn:
+    Value: !Ref TrainingStateMachine
+  SavingsStateMachineArn:
+    Value: !Ref SavingsStateMachine
+
+Conditions:
+  HasPermBoundary: !Not [!Equals [!Ref PermissionsBoundaryArn, ""]]

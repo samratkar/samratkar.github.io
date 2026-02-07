@@ -1,0 +1,22 @@
+{
+  "Comment": "QAR savings per airline batch (manual trigger)",
+  "StartAt": "RunSavings",
+  "States": {
+    "RunSavings": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::batch:submitJob.sync",
+      "Parameters": {
+        "JobName.$": "States.Format('qar-savings-{}', $.airline)",
+        "JobQueue": "${SavingsJobQueue}",
+        "JobDefinition": "${SavingsJobDefinition}",
+        "ContainerOverrides": {
+          "Environment": [
+            { "Name": "AIRLINE", "Value.$": "$.airline" },
+            { "Name": "BATCH_ID", "Value.$": "$.batch_id" }
+          ]
+        }
+      },
+      "End": true
+    }
+  }
+}

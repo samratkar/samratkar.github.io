@@ -1,0 +1,46 @@
+{
+  "Comment": "QAR training per tail (manual trigger)",
+  "StartAt": "LoadManifest",
+  "States": {
+    "LoadManifest": {
+      "Type": "Task",
+      "Resource": "${LoadManifestLambdaArn}",
+      "Next": "TrainTails"
+    },
+    "TrainTails": {
+      "Type": "Map",
+      "ItemsPath": "$.tails",
+      "MaxConcurrency": 10,
+      "Parameters": {
+        "airline.$": "$.airline",
+        "batch_id.$": "$.batch_id",
+        "tail.$": "$$.Map.Item.Value.tail",
+        "input_s3.$": "$$.Map.Item.Value.input_s3"
+      },
+      "Iterator": {
+        "StartAt": "RunTraining",
+        "States": {
+          "RunTraining": {
+            "Type": "Task",
+            "Resource": "arn:aws:states:::batch:submitJob.sync",
+            "Parameters": {
+              "JobName.$": "States.Format('qar-train-{}', $.tail)",
+              "JobQueue": "${TrainJobQueue}",
+              "JobDefinition": "${TrainJobDefinition}",
+              "ContainerOverrides": {
+                "Environment": [
+                  { "Name": "INPUT_S3", "Value.$": "$.input_s3" },
+                  { "Name": "AIRLINE", "Value.$": "$.airline" },
+                  { "Name": "TAIL", "Value.$": "$.tail" },
+                  { "Name": "BATCH_ID", "Value.$": "$.batch_id" }
+                ]
+              }
+            },
+            "End": true
+          }
+        }
+      },
+      "End": true
+    }
+  }
+}

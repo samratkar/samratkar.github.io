@@ -1,0 +1,42 @@
+{
+  "Comment": "QAR preprocess on S3 PutObject",
+  "StartAt": "ExtractKey",
+  "States": {
+    "ExtractKey": {
+      "Type": "Pass",
+      "Parameters": {
+        "bucket.$": "$.detail.bucket.name",
+        "key.$": "$.detail.object.key"
+      },
+      "Next": "ParseKey"
+    },
+    "ParseKey": {
+      "Type": "Task",
+      "Resource": "${ParseKeyLambdaArn}",
+      "Next": "RunPreprocess"
+    },
+    "RunPreprocess": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::batch:submitJob.sync",
+      "Parameters": {
+        "JobName.$": "States.Format('qar-preprocess-{}', $.tail)",
+        "JobQueue": "${PreprocessJobQueue}",
+        "JobDefinition": "${PreprocessJobDefinition}",
+        "ContainerOverrides": {
+          "Environment": [
+            { "Name": "INPUT_S3", "Value.$": "$.s3_uri" },
+            { "Name": "AIRLINE", "Value.$": "$.airline" },
+            { "Name": "TAIL", "Value.$": "$.tail" },
+            { "Name": "BATCH_ID", "Value.$": "$.batch_id" }
+          ]
+        }
+      },
+      "Next": "UpdateManifest"
+    },
+    "UpdateManifest": {
+      "Type": "Task",
+      "Resource": "${UpdateManifestLambdaArn}",
+      "End": true
+    }
+  }
+}
