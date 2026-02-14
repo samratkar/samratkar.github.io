@@ -13,12 +13,12 @@ In the previous chapter [Introduction to Sane Society](https://samratkar.github.
 Fromm then categorizes these fundamental needs of man into 5 categories as follows - 
 
 <div class="mermaid">
-graph TD
-    A(1. Relatedness through love)
-    B(2. Transcendence through creativity)
-    C(3. Rootedness in self awareness, imagination and reason)
-    D(4. Sense of identity derived from self, not herd)
-    E(5. Frame of orientation and devotion)
+    graph TD
+        A(1. Relatedness through love)
+        B(2. Transcendence through creativity)
+        C(3. Rootedness in self awareness, imagination and reason)
+        D(4. Sense of identity derived from self, not herd)
+        E(5. Frame of orientation and devotion)
 </div>
 
 ### Need 1 : Relatedness vs. Narcissism : 
