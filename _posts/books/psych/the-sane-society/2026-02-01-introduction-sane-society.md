@@ -1,6 +1,6 @@
 ---
 layout: mermaid
-tags : [books, psychology, sociology, Fromm]
+tags : [books, psychology, "the sane society", Fromm]
 title: "Introduction to 'The Sane Society'"
 category: books
 subcategory: "The Sane Society"
