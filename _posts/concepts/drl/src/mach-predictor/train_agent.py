@@ -5,45 +5,41 @@ import torch.optim as optim
 from torch.distributions import Normal
 import numpy as np
 import os
+import json
+import argparse
 from aircraft_env import AircraftEnv
 
 # Hyperparameters
-LEARNING_RATE = 3e-4
-GAMMA = 0.99
-EPS_CLIP = 0.2
-K_EPOCHS = 4
-BATCH_SIZE = 64
-TOTAL_TIMESTEPS = 100000
-HIDDEN_SIZE = 64
+DEFAULT_CONFIG = "configs/approach_expanded_fuel_model_golden.json"
 
 class ActorCritic(nn.Module):
-    def __init__(self, state_dim, action_dim):
+    def __init__(self, state_dim, action_dim, hidden_size=64):
         super(ActorCritic, self).__init__()
         
         # Actor
         self.actor = nn.Sequential(
-            nn.Linear(state_dim, HIDDEN_SIZE),
+            nn.Linear(state_dim, hidden_size),
             nn.Tanh(),
-            nn.Linear(HIDDEN_SIZE, HIDDEN_SIZE),
+            nn.Linear(hidden_size, hidden_size),
             nn.Tanh(),
-            nn.Linear(HIDDEN_SIZE, action_dim),
+            nn.Linear(hidden_size, action_dim),
             nn.Tanh() # Actions are in [-1, 1]
         )
         self.log_std = nn.Parameter(torch.zeros(1, action_dim)) # Learnable std deviation
         
         # Critic
         self.critic = nn.Sequential(
-            nn.Linear(state_dim, HIDDEN_SIZE),
+            nn.Linear(state_dim, hidden_size),
             nn.Tanh(),
-            nn.Linear(HIDDEN_SIZE, HIDDEN_SIZE),
+            nn.Linear(hidden_size, hidden_size),
             nn.Tanh(),
-            nn.Linear(HIDDEN_SIZE, 1)
+            nn.Linear(hidden_size, 1)
         )
 
     def forward(self):
         raise NotImplementedError
 
-    def get_action_and_value(self, state, action=None):
+    def get_action_and_value(self, state, action=None, deterministic=False):
         if isinstance(state, np.ndarray):
             state = torch.FloatTensor(state)
         
@@ -56,7 +52,7 @@ class ActorCritic(nn.Module):
         dist = Normal(mean, std)
         
         if action is None:
-            action = dist.sample()
+            action = mean if deterministic else dist.sample()
         
         action_log_probs = dist.log_prob(action).sum(axis=-1)
         dist_entropy = dist.entropy().sum(axis=-1)
@@ -64,23 +60,86 @@ class ActorCritic(nn.Module):
         
         return action, action_log_probs, dist_entropy, value
 
-def train():
+def load_config(path):
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def train(config_path=None):
+    if config_path is None:
+        config_path = DEFAULT_CONFIG if os.path.exists(DEFAULT_CONFIG) else None
+    cfg = load_config(config_path) if config_path else {}
+
+    LEARNING_RATE = cfg.get("learning_rate", 2e-4)
+    GAMMA = cfg.get("gamma", 0.99)
+    EPS_CLIP = cfg.get("eps_clip", 0.2)
+    K_EPOCHS = cfg.get("k_epochs", 4)
+    BATCH_SIZE = cfg.get("batch_size", 128)
+    TOTAL_TIMESTEPS = cfg.get("total_timesteps", 250000)
+    HIDDEN_SIZE = cfg.get("hidden_size", 64)
+    PRETRAIN_STEPS = cfg.get("pretrain_steps", 2000)
+    PRETRAIN_BATCH = cfg.get("pretrain_batch", 256)
+    SHAPING_STRENGTH = cfg.get("reward_shaping_strength", 0.5)
+    CURRICULUM_STEPS = cfg.get("curriculum_steps", 80000)
+    QAR_DATA_PATH = cfg.get("qar_data_path", "data/qar_737800_cruise.csv")
+    FUEL_FLOW_SCALE = cfg.get("fuel_flow_scale", 1.0)
+    FUEL_FLOW_BIAS = cfg.get("fuel_flow_bias", 0.0)
+    FUEL_FPN_QUAD = cfg.get("fuel_fpn_quad")
+    FUEL_MODEL_PATH = cfg.get("fuel_model_path")
+    FUEL_MODEL_SCALER_PATH = cfg.get("fuel_model_scaler_path")
     # Create Environment
     # We use the synthetic data for initialization
-    data_path = "data/Tail_X1.csv"
+    data_path = QAR_DATA_PATH if os.path.exists(QAR_DATA_PATH) else "data/Tail_X1.csv"
     if not os.path.exists(data_path):
         print(f"Warning: {data_path} not found. Running with random initialization.")
-        env = AircraftEnv()
+        env = AircraftEnv(
+            reward_shaping_strength=SHAPING_STRENGTH,
+            phase_mode="cruise_only",
+            fuel_flow_scale=FUEL_FLOW_SCALE,
+            fuel_flow_bias=FUEL_FLOW_BIAS,
+            fuel_fpn_quad=FUEL_FPN_QUAD,
+            fuel_model_path=FUEL_MODEL_PATH if FUEL_MODEL_PATH and os.path.exists(FUEL_MODEL_PATH) else None,
+            fuel_model_scaler_path=FUEL_MODEL_SCALER_PATH if FUEL_MODEL_SCALER_PATH and os.path.exists(FUEL_MODEL_SCALER_PATH) else None,
+        )
     else:
-        env = AircraftEnv(data_path=data_path)
+        env = AircraftEnv(
+            data_path=data_path,
+            reward_shaping_strength=SHAPING_STRENGTH,
+            phase_mode="cruise_only",
+            fuel_flow_scale=FUEL_FLOW_SCALE,
+            fuel_flow_bias=FUEL_FLOW_BIAS,
+            fuel_fpn_quad=FUEL_FPN_QUAD,
+            fuel_model_path=FUEL_MODEL_PATH if FUEL_MODEL_PATH and os.path.exists(FUEL_MODEL_PATH) else None,
+            fuel_model_scaler_path=FUEL_MODEL_SCALER_PATH if FUEL_MODEL_SCALER_PATH and os.path.exists(FUEL_MODEL_SCALER_PATH) else None,
+        )
     
     state_dim = env.observation_space.shape[0]
     action_dim = env.action_space.shape[0]
     
-    policy = ActorCritic(state_dim, action_dim)
+    policy = ActorCritic(state_dim, action_dim, hidden_size=HIDDEN_SIZE)
     optimizer = optim.Adam(policy.parameters(), lr=LEARNING_RATE)
     
     print("Starting training...")
+
+    # 0. Oracle pretraining (behavior cloning on coarse grid search)
+    print("Pretraining actor on oracle Mach...")
+    for _ in range(PRETRAIN_STEPS):
+        states = []
+        targets = []
+        for _ in range(PRETRAIN_BATCH):
+            s, _ = env.reset()
+            # Convert oracle Mach to normalized action
+            oracle_mach = env._oracle_mach()
+            target_action = (oracle_mach - 0.78) / 0.08
+            states.append(torch.FloatTensor(s))
+            targets.append(torch.FloatTensor([target_action]))
+        states = torch.stack(states)
+        targets = torch.stack(targets)
+        pred, _, _, _ = policy.get_action_and_value(states, deterministic=True)
+        loss = ((pred - targets) ** 2).mean()
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
     
     # Simple PPO Rollout Buffer
     states = []
@@ -95,6 +154,10 @@ def train():
     state, _ = env.reset()
     
     for step in range(TOTAL_TIMESTEPS):
+        # Curriculum: start with cruise-only, then full phases
+        if global_step == CURRICULUM_STEPS:
+            env.phase_mode = "mixed"
+
         # 1. Collect Data
         with torch.no_grad():
             action, log_prob, _, value = policy.get_action_and_value(state)
@@ -147,6 +210,7 @@ def train():
             b_returns = torch.FloatTensor(returns)
             b_values = torch.stack(values).squeeze()
             b_advantages = b_returns - b_values
+            b_advantages = (b_advantages - b_advantages.mean()) / (b_advantages.std() + 1e-8)
             
             # Optimize
             for _ in range(K_EPOCHS):
@@ -178,4 +242,7 @@ def train():
     print("Training finished. Model saved to models/tail_policy.pt")
 
 if __name__ == "__main__":
-    train()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config", type=str, default=None, help="Path to config JSON")
+    args = parser.parse_args()
+    train(args.config)

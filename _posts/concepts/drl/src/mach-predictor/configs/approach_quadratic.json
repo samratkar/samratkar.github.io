@@ -1,0 +1,23 @@
+{
+  "name": "quadratic_calibration",
+  "description": "Quadratic fuel-per-NM calibration with PPO",
+  "golden": false,
+  "learning_rate": 0.0002,
+  "gamma": 0.99,
+  "eps_clip": 0.2,
+  "k_epochs": 4,
+  "batch_size": 128,
+  "total_timesteps": 250000,
+  "hidden_size": 64,
+  "pretrain_steps": 2000,
+  "pretrain_batch": 256,
+  "reward_shaping_strength": 0.5,
+  "curriculum_steps": 80000,
+  "qar_data_path": "data/qar_737800_cruise.csv",
+  "phase_mode": "cruise_only",
+  "fuel_flow_scale": 1.0,
+  "fuel_flow_bias": 0.0,
+  "fuel_fpn_quad": [0.11985757133532016, -4.002590373288333, 44.855037842114776],
+  "fuel_model_path": null,
+  "fuel_model_scaler_path": null
+}
