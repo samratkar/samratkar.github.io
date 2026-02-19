@@ -250,15 +250,6 @@
         .replace(/\b\w/g, (c) => c.toUpperCase());
     }
 
-    async function exists(url) {
-      try {
-        const res = await fetch(url, { method: 'HEAD' });
-        return res.ok;
-      } catch (err) {
-        return false;
-      }
-    }
-
     async function loadColabs() {
       const { owner, repo, basePath } = getRepoInfo();
       const colabsPath = `${basePath}/colabs`;
@@ -274,20 +265,16 @@
 
         for (const item of items) {
           if (item.type === 'dir') {
-            const url = `${colabsPath}/${item.name}/index.html`;
-            if (await exists(url)) {
-              entries.push({
-                name: item.name,
-                url,
-                type: 'folder'
-              });
-            }
+            entries.push({
+              name: item.name,
+              url: `${colabsPath}/${item.name}/`,
+              type: 'folder'
+            });
           }
           if (item.type === 'file' && item.name.endsWith('.html')) {
-            const url = `${colabsPath}/${item.name}`;
             entries.push({
               name: item.name.replace(/\.html$/, ''),
-              url,
+              url: `${colabsPath}/${item.name}`,
               type: 'file'
             });
           }
