@@ -281,7 +281,7 @@
               }
             }
           }
-          if (item.type === 'file' && item.name.endsWith('.html')) {
+          if (item.type === 'file' && item.name.endsWith('.html') && item.name !== 'index.html') {
             entries.push({
               name: item.name.replace(/\.html$/, ''),
               url: `${colabsPath}/${item.name}`,
