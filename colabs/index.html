@@ -265,11 +265,21 @@
 
         for (const item of items) {
           if (item.type === 'dir') {
-            entries.push({
-              name: item.name,
-              url: `${colabsPath}/${item.name}/`,
-              type: 'folder'
-            });
+            const childApi = `https://api.github.com/repos/${owner}/${repo}/contents/colabs/${item.name}`;
+            const childRes = await fetch(childApi);
+            if (childRes.ok) {
+              const childItems = await childRes.json();
+              const indexHtml = childItems.find((child) => child.type === 'file' && child.name === 'index.html');
+              const firstHtml = childItems.find((child) => child.type === 'file' && child.name.endsWith('.html'));
+              const target = indexHtml || firstHtml;
+              if (target) {
+                entries.push({
+                  name: item.name,
+                  url: `${colabsPath}/${item.name}/${target.name}`,
+                  type: 'folder'
+                });
+              }
+            }
           }
           if (item.type === 'file' && item.name.endsWith('.html')) {
             entries.push({
