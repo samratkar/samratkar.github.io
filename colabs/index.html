@@ -71,6 +71,24 @@
       color: #4c3f6b;
     }
 
+    .home-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--lav-500), var(--lav-300));
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 10px 20px rgba(124, 58, 237, 0.25);
+    }
+
+    .home-link:hover {
+      background: linear-gradient(135deg, var(--lav-700), var(--lav-500));
+    }
+
     .controls {
       max-width: 980px;
       margin: 18px auto 10px;
@@ -203,6 +221,7 @@
     <div class="hero-card">
       <h1>Colabs Library</h1>
       <p>Browse the exported codelab HTMLs hosted in this repository.</p>
+      <a class="home-link" href="/">Back to Home</a>
     </div>
   </section>
 
