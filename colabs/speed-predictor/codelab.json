@@ -1,0 +1,25 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2026-02-19T21:45:16+05:30",
+  "id": "my-first-codelab",
+  "duration": 0,
+  "title": "Aircraft Mach Optimization using Deep Reinforcement Learning",
+  "authors": "Samrat Kar",
+  "summary": "Build a sample app with X",
+  "source": "README.md",
+  "theme": "",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "web",
+    "beginner"
+  ],
+  "tags": [
+    "web"
+  ],
+  "url": "my-first-codelab"
+}

@@ -1,0 +1,6 @@
+gymnasium==1.0.0
+numpy
+pandas
+matplotlib
+torch
+scikit-learn

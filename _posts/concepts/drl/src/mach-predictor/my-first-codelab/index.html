@@ -1,0 +1,114 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Aircraft Mach Optimization using Deep Reinforcement Learning</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14" ga4id=""></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  codelab-ga4id=""
+                  id="my-first-codelab"
+                  title="Aircraft Mach Optimization using Deep Reinforcement Learning"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Problem Statement" duration="0">
+        <p>Aircraft fuel efficiency depends significantly on the Mach number (speed) flown relative to the aircraft&#39;s weight, altitude, and temperature. By analyzing historical QAR (Quick Access Recorder) data, we can learn a policy to recommend the optimal Mach number for specific flight conditions.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Solution Approach" duration="0">
+        <ol type="1">
+<li><strong>Data Generation</strong>: We generate synthetic QAR data simulating realistic flight physics (Fuel Flow vs. Mach/Weight/Alt).</li>
+<li><strong>Environment</strong>: A custom Gymnasium environment (<code>AircraftEnv</code>) simulates the aircraft fuel burn based on the synthetic physics model.</li>
+<li><strong>RL Agent</strong>: A PPO (Proximal Policy Optimization) agent is trained to select the Mach number that minimizes fuel flow (maximizes negative fuel burn).</li>
+<li><strong>Prediction</strong>: The trained agent can be used to predict the optimal Mach number for new flight conditions.</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Project Structure" duration="0">
+        <ul>
+<li><code>src/data_generator.py</code>: Generates synthetic flight data CSVs in <code>data/</code>.</li>
+<li><code>src/aircraft_env.py</code>: Custom Gym environment.</li>
+<li><code>src/train_agent.py</code>: Training script using PyTorch PPO.</li>
+<li><code>src/predict_mach.py</code>: Inference script to query the trained model.</li>
+<li><code>requirements.txt</code>: Python dependencies.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Setup" duration="0">
+        <ol type="1">
+<li><strong>Install Dependencies</strong>: <pre><code language="language-bash" class="language-bash">python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+</code></pre>
+</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Usage" duration="0">
+        <h2 is-upgraded>1. Generate Data</h2>
+<p>Generate synthetic data for tails (e.g., Tail_X1):</p>
+<pre><code language="language-bash" class="language-bash">python src/data_generator.py
+</code></pre>
+<p>This creates <code>data/Tail_X1.csv</code>.</p>
+<h2 is-upgraded>2. Train the Agent</h2>
+<p>Train the DRL agent on the generated data/environment:</p>
+<pre><code language="language-bash" class="language-bash">python src/train_agent.py
+</code></pre>
+<p>This will train for 100,000 timesteps and save the model to <code>models/tail_policy.pt</code>.</p>
+<h2 is-upgraded>3. Predict Optimal Mach</h2>
+<p>Use the trained model to predict the optimal Mach for specific conditions:</p>
+<pre><code language="language-bash" class="language-bash"># Usage: python src/predict_mach.py &lt;Altitude&gt; &lt;Weight&gt; &lt;TAT&gt; &lt;CAS&gt;
+python src/predict_mach.py 36000 70000 -45 280
+</code></pre>
+<p>Output:</p>
+<pre><code>Predicted Optimal Mach: 0.7802
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="How it Works" duration="0">
+        <ul>
+<li>The <strong>Environment</strong> calculates a &#34;Fuel Penalty&#34; based on how far the chosen Mach is from the theoretical optimal (approx 0.78 in our simulation) and other factors like weight and altitude.</li>
+<li>The <strong>Agent</strong> observes <code>[Altitude, Weight, TAT, CAS]</code> and outputs a continuous action mapped to Mach <code>[0.70, 0.86]</code>.</li>
+<li>Over time, the agent learns to output Mach numbers close to 0.78 (or the optimal for the condition), minimizing the fuel flow.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

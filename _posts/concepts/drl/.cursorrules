@@ -1,0 +1,4 @@
+# Project Rules
+
+## Documentation
+- **Walkthrough**: Always save a copy of the `walkthrough.md` artifact to `src/walkthrough.md` when completing a task. Update this file in the project structure rather than just the internal artifact path.
