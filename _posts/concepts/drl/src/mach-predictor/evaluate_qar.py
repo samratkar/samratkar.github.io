@@ -1,32 +1,108 @@
+import argparse
+import json
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
-from pathlib import Path
 import torch
 
 from aircraft_env import AircraftEnv, isa_atmosphere
 from train_agent import ActorCritic
 
+DEFAULT_ROOT = Path("/Users/samrat.kar/cio/airlines-data/glo/737-800/baseline")
+REQUIRED_COLS = [
+    "selectedFuelFlow1",
+    "selectedFuelFlow2",
+    "groundAirSpeed",
+    "Airspeed",
+    "altitude",
+    "grossWeight",
+    "totalAirTemperatureCelsius",
+    "mach",
+    "angleOfAttackVoted",
+    "horizontalStabilizerPosition",
+    "totalFuelWeight",
+    "trackAngleTrue",
+    "fmcMach",
+    "latitude",
+    "longitude",
+    "GMTHours",
+    "Day",
+    "Month",
+    "YEAR",
+]
+
+
+def load_qar_rows(input_csv, data_root, max_rows, sample_rows, seed):
+    if input_csv:
+        qar = pd.read_csv(input_csv)
+        if not set(REQUIRED_COLS).issubset(qar.columns):
+            missing = sorted(set(REQUIRED_COLS) - set(qar.columns))
+            raise RuntimeError(f"Input CSV missing required columns: {missing}")
+        qar = qar[REQUIRED_COLS].dropna()
+    else:
+        rows = []
+        row_count = 0
+        for f in Path(data_root).rglob("*.csv"):
+            try:
+                df = pd.read_csv(f)
+            except Exception:
+                continue
+            if not set(REQUIRED_COLS).issubset(df.columns):
+                continue
+            df = df[REQUIRED_COLS].dropna()
+            rows.append(df)
+            row_count += len(df)
+            if row_count >= max_rows:
+                break
+        if not rows:
+            raise RuntimeError("No usable QAR rows found.")
+        qar = pd.concat(rows, ignore_index=True)
+
+    qar = qar[(qar["groundAirSpeed"] > 100) & (qar["altitude"] > 30000)]
+    if len(qar) > sample_rows:
+        qar = qar.sample(sample_rows, random_state=seed)
+    return qar
+
 
 def main():
+<<<<<<< Updated upstream
     qar_path = Path("data/qar_737800_cruise.csv")
     sample_rows = 20000
+=======
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input_csv", type=str, default=None, help="Single QAR CSV input")
+    parser.add_argument("--data_root", type=str, default=str(DEFAULT_ROOT))
+    parser.add_argument("--policy_path", type=str, default="models/tail_policy.pt")
+    parser.add_argument("--fuel_model_path", type=str, default="models/fuel_model.pt")
+    parser.add_argument("--fuel_scaler_path", type=str, default="models/fuel_model_scaler.json")
+    parser.add_argument("--max_rows", type=int, default=200000)
+    parser.add_argument("--sample_rows", type=int, default=20000)
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--results_json", type=str, default=None, help="Optional JSON output")
+    args = parser.parse_args()
+>>>>>>> Stashed changes
 
     # Load policy + env (uses expanded-feature fuel model if configured in env)
     env = AircraftEnv(
-        fuel_model_path="models/fuel_model.pt",
-        fuel_model_scaler_path="models/fuel_model_scaler.json",
+        fuel_model_path=args.fuel_model_path,
+        fuel_model_scaler_path=args.fuel_scaler_path,
     )
     state_dim = env.observation_space.shape[0]
     policy = ActorCritic(state_dim, 1)
-    policy.load_state_dict(torch.load("models/tail_policy.pt"))
+    policy.load_state_dict(torch.load(args.policy_path))
     policy.eval()
 
+<<<<<<< Updated upstream
     if not qar_path.exists():
         raise RuntimeError(f"No usable QAR record found at {qar_path}. Run build_qar_dataset.py first.")
 
     qar = pd.read_csv(qar_path)
     if len(qar) > sample_rows:
         qar = qar.sample(sample_rows, random_state=42)
+=======
+    qar = load_qar_rows(args.input_csv, args.data_root, args.max_rows, args.sample_rows, args.seed)
+>>>>>>> Stashed changes
 
     # qar_737800_cruise.csv uses 'CAS' for airspeed and 'windKts' for groundSpeed-CAS
     wind = qar["windKts"].astype(float).to_numpy()
@@ -136,6 +212,22 @@ def main():
     print("baseline_fuel_per_nm", baseline_mean)
     print("policy_fuel_per_nm", policy_mean)
     print("improvement_pct", improvement)
+    if args.results_json:
+        out = {
+            "qar_rows": int(len(qar)),
+            "baseline_fuel_per_nm": baseline_mean,
+            "policy_fuel_per_nm": policy_mean,
+            "improvement_pct": improvement,
+            "policy_path": args.policy_path,
+            "fuel_model_path": args.fuel_model_path,
+            "fuel_scaler_path": args.fuel_scaler_path,
+            "input_csv": args.input_csv,
+            "data_root": args.data_root,
+        }
+        p = Path(args.results_json)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(json.dumps(out, indent=2), encoding="utf-8")
+        print("RESULTS_JSON", p)
 
 
 if __name__ == "__main__":

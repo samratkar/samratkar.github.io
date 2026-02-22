@@ -1,3 +1,13 @@
+<<<<<<< Updated upstream
+=======
+id: mach-predictor-codelab
+summary: Build a sample app with X
+categories: web, beginner
+tags: web
+status: draft
+authors: Samrat Kar
+
+>>>>>>> Stashed changes
 # Aircraft Mach Optimization using Deep Reinforcement Learning
 
 This project uses Deep Reinforcement Learning (DRL) to recommend the optimal Mach number for a Boeing 737-800 during cruise, minimizing fuel burn per nautical mile. The agent is trained with PPO on a custom Gymnasium environment whose reward signal is driven by a neural fuel model fitted to real QAR (Quick Access Recorder) data.
@@ -19,7 +29,19 @@ This project uses Deep Reinforcement Learning (DRL) to recommend the optimal Mac
 12. [State, Action, Transition Reference](#12-state-action-transition-reference)
 13. [Diagrams](#13-diagrams)
 
+<<<<<<< Updated upstream
 ---
+=======
+## Project Structure
+- `data_generator.py`: Generates synthetic flight data CSVs in `data/`.
+- `generate_synthetic_qar.py`: Builds QAR-like synthetic data from field-distribution cruise data.
+- `aircraft_env.py`: Custom Gym environment.
+- `train_fuel_model.py`: Trains the expanded-feature fuel model (supports `--input_csv` and custom output paths).
+- `train_agent.py`: Training script using PyTorch PPO.
+- `evaluate_qar.py`: QAR-aligned evaluator (supports `--input_csv`, model paths, and JSON result publishing).
+- `predict_mach.py`: Inference script to query the trained model.
+- `requirements.txt`: Python dependencies.
+>>>>>>> Stashed changes
 
 ## 1. Problem Statement
 
@@ -395,6 +417,7 @@ python train_agent.py --config configs/approach_expanded_fuel_model_golden.json
 ```bash
 python evaluate_qar.py
 ```
+<<<<<<< Updated upstream
 
 ### Single-row inference
 
@@ -618,3 +641,34 @@ Above M_crit, wave drag rises steeply. The policy learns to sit near the minimum
 - The neural fuel model and the physics fallback produce consistent reward signals — the physics model is used during random initialization only; the golden pipeline always uses `models/fuel_model.pt`.
 - All scripts are self-contained and portable; no external data paths are required if `data/qar_737800_cruise.csv` and `models/` already exist.
 - `evaluate_qar.py` reads `data/qar_737800_cruise.csv` (columns: `CAS`, `windKts`, `mach`, etc.) and reconstructs ground speed as `CAS + windKts`. Baseline fuel is evaluated via the fuel model at the recorded mach, ensuring a fair apples-to-apples comparison with the policy.
+=======
+This runs:
+1. `build_qar_dataset.py`
+2. `train_fuel_model.py`
+3. `train_agent.py --config configs/approach_expanded_fuel_model_golden.json`
+4. `evaluate_qar.py`
+
+## Synthetic QAR Pipeline (models/syn)
+Synthetic training artifacts are isolated in `models/syn/`.
+
+Run:
+```bash
+python generate_synthetic_qar.py --field_csv data/qar_737800_cruise.csv --output_csv data/qar_737800_synthetic.csv
+python train_fuel_model.py --input_csv data/qar_737800_synthetic.csv --model_path models/syn/fuel_model.pt --scaler_path models/syn/fuel_model_scaler.json --sample_rows 120000
+python train_agent.py --config configs/approach_expanded_fuel_model_syn.json
+python evaluate_qar.py --input_csv data/qar_737800_synthetic.csv --policy_path models/syn/tail_policy.pt --fuel_model_path models/syn/fuel_model.pt --fuel_scaler_path models/syn/fuel_model_scaler.json --sample_rows 20000 --results_json models/syn/results.json
+```
+
+Generated files:
+- `data/qar_737800_synthetic.csv`
+- `models/syn/fuel_model.pt`
+- `models/syn/fuel_model_scaler.json`
+- `models/syn/tail_policy.pt`
+- `models/syn/results.json`
+
+Published synthetic results (run date: February 22, 2026):
+- Eval rows: `20000`
+- Baseline fuel per NM: `12.25299747494486`
+- Policy fuel per NM: `11.94069350943155`
+- Fuel savings: `2.5487964569642076%`
+>>>>>>> Stashed changes

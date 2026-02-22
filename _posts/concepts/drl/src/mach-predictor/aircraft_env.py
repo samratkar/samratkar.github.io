@@ -1,11 +1,37 @@
-import gymnasium as gym
-from gymnasium import spaces
 import numpy as np
 import pandas as pd
 import json
 from pathlib import Path
 import torch
 import torch.nn as nn
+
+try:
+    import gymnasium as gym
+    from gymnasium import spaces
+except ImportError:
+    class _FallbackEnv:
+        metadata = {}
+
+        def reset(self, seed=None, options=None):
+            if seed is not None:
+                np.random.seed(seed)
+            return None
+
+    class _FallbackBox:
+        def __init__(self, low, high, shape, dtype=np.float32):
+            self.low = low
+            self.high = high
+            self.shape = shape
+            self.dtype = dtype
+
+    class _FallbackSpaces:
+        Box = _FallbackBox
+
+    class _FallbackGym:
+        Env = _FallbackEnv
+
+    gym = _FallbackGym()
+    spaces = _FallbackSpaces()
 
 # ISA / physics helpers (lightweight, not aircraft-specific)
 G0 = 9.80665

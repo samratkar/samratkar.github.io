@@ -1,4 +1,3 @@
-import gymnasium as gym
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -91,6 +90,10 @@ def train(config_path=None):
     FUEL_FPN_QUAD = cfg.get("fuel_fpn_quad")
     FUEL_MODEL_PATH = cfg.get("fuel_model_path")
     FUEL_MODEL_SCALER_PATH = cfg.get("fuel_model_scaler_path")
+    OUTPUT_MODEL_PATH = cfg.get("output_model_path", "models/tail_policy.pt")
+    SEED = cfg.get("seed", 42)
+    np.random.seed(SEED)
+    torch.manual_seed(SEED)
     # Create Environment
     # We use the synthetic data for initialization
     data_path = QAR_DATA_PATH if os.path.exists(QAR_DATA_PATH) else "data/Tail_X1.csv"
@@ -98,7 +101,7 @@ def train(config_path=None):
         print(f"Warning: {data_path} not found. Running with random initialization.")
         env = AircraftEnv(
             reward_shaping_strength=SHAPING_STRENGTH,
-            phase_mode="cruise_only",
+            phase_mode=cfg.get("phase_mode", "cruise_only"),
             fuel_flow_scale=FUEL_FLOW_SCALE,
             fuel_flow_bias=FUEL_FLOW_BIAS,
             fuel_fpn_quad=FUEL_FPN_QUAD,
@@ -109,7 +112,7 @@ def train(config_path=None):
         env = AircraftEnv(
             data_path=data_path,
             reward_shaping_strength=SHAPING_STRENGTH,
-            phase_mode="cruise_only",
+            phase_mode=cfg.get("phase_mode", "cruise_only"),
             fuel_flow_scale=FUEL_FLOW_SCALE,
             fuel_flow_bias=FUEL_FLOW_BIAS,
             fuel_fpn_quad=FUEL_FPN_QUAD,
@@ -247,6 +250,7 @@ def train(config_path=None):
                 print(f"Step {global_step}, Loss: {loss.item():.4f}, Elapsed: {elapsed:.1f}s ({elapsed/60:.1f} min)")
 
     # Save Model
+<<<<<<< Updated upstream
     total_elapsed = time.time() - train_start
     os.makedirs("models", exist_ok=True)
     torch.save(policy.state_dict(), "models/tail_policy.pt")
@@ -406,6 +410,11 @@ Target: fuel_per_nm normalized (y_mean=11.9788, y_std=3.3369 kg/NM)
 
     (snap_dir / "README.md").write_text(readme, encoding="utf-8")
     print(f"Snapshot saved to {snap_dir}/")
+=======
+    os.makedirs(os.path.dirname(OUTPUT_MODEL_PATH) or ".", exist_ok=True)
+    torch.save(policy.state_dict(), OUTPUT_MODEL_PATH)
+    print(f"Training finished. Model saved to {OUTPUT_MODEL_PATH}")
+>>>>>>> Stashed changes
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

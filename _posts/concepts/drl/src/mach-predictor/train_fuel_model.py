@@ -1,3 +1,4 @@
+import argparse
 import json
 from pathlib import Path
 
@@ -6,67 +7,93 @@ import pandas as pd
 import torch
 import torch.nn as nn
 
-DATA_ROOT = Path("/Users/samrat.kar/cio/airlines-data/glo/737-800/baseline")
-MAX_ROWS = 300000
-SAMPLE_ROWS = 120000
-MODEL_PATH = Path("models/fuel_model.pt")
-SCALER_PATH = Path("models/fuel_model_scaler.json")
+DEFAULT_DATA_ROOT = Path("/Users/samrat.kar/cio/airlines-data/glo/737-800/baseline")
+DEFAULT_MODEL_PATH = Path("models/fuel_model.pt")
+DEFAULT_SCALER_PATH = Path("models/fuel_model_scaler.json")
+DEFAULT_MAX_ROWS = 300000
+DEFAULT_SAMPLE_ROWS = 120000
+DEFAULT_EPOCHS = 30
+
+REQUIRED_COLS = [
+    "selectedFuelFlow1",
+    "selectedFuelFlow2",
+    "altitude",
+    "grossWeight",
+    "totalAirTemperatureCelsius",
+    "Airspeed",
+    "groundAirSpeed",
+    "mach",
+    "angleOfAttackVoted",
+    "horizontalStabilizerPosition",
+    "totalFuelWeight",
+    "trackAngleTrue",
+    "fmcMach",
+    "latitude",
+    "longitude",
+    "GMTHours",
+    "Day",
+    "Month",
+    "YEAR",
+]
 
 
-def load_qar_rows():
-    rows = []
-    row_count = 0
-    for f in DATA_ROOT.rglob("*.csv"):
-        try:
-            df = pd.read_csv(f)
-        except Exception:
-            continue
-        cols = [
-            "selectedFuelFlow1",
-            "selectedFuelFlow2",
-            "altitude",
-            "grossWeight",
-            "totalAirTemperatureCelsius",
-            "Airspeed",
-            "groundAirSpeed",
-            "mach",
-            "angleOfAttackVoted",
-            "horizontalStabilizerPosition",
-            "totalFuelWeight",
-            "trackAngleTrue",
-            "fmcMach",
-            "latitude",
-            "longitude",
-            "GMTHours",
-            "Day",
-            "Month",
-            "YEAR",
-        ]
-        if not set(cols).issubset(df.columns):
-            continue
-        df = df[cols].dropna()
-        rows.append(df)
-        row_count += len(df)
-        if row_count >= MAX_ROWS:
-            break
+def load_qar_rows(input_csv, data_root, max_rows, sample_rows, seed):
+    if input_csv:
+        qar = pd.read_csv(input_csv)
+        if not set(REQUIRED_COLS).issubset(qar.columns):
+            missing = sorted(set(REQUIRED_COLS) - set(qar.columns))
+            raise RuntimeError(f"Input CSV missing required columns: {missing}")
+        qar = qar[REQUIRED_COLS].dropna()
+    else:
+        rows = []
+        row_count = 0
+        for f in Path(data_root).rglob("*.csv"):
+            try:
+                df = pd.read_csv(f)
+            except Exception:
+                continue
+            if not set(REQUIRED_COLS).issubset(df.columns):
+                continue
+            df = df[REQUIRED_COLS].dropna()
+            rows.append(df)
+            row_count += len(df)
+            if row_count >= max_rows:
+                break
 
-    if not rows:
-        raise RuntimeError("No usable QAR rows found.")
+        if not rows:
+            raise RuntimeError("No usable QAR rows found.")
+        qar = pd.concat(rows, ignore_index=True)
 
-    qar = pd.concat(rows, ignore_index=True)
     # Cruise-ish filter to reduce variance in regimes
     qar = qar[(qar["groundAirSpeed"] > 100) & (qar["altitude"] > 30000)]
-    if len(qar) > SAMPLE_ROWS:
-        qar = qar.sample(SAMPLE_ROWS, random_state=42)
+    if len(qar) > sample_rows:
+        qar = qar.sample(sample_rows, random_state=seed)
     return qar
 
 
 def main():
+<<<<<<< Updated upstream
     if MODEL_PATH.exists() and SCALER_PATH.exists():
         print("Fuel model already exists, skipping training.")
         return
 
     qar = load_qar_rows()
+=======
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input_csv", type=str, default=None, help="Single QAR CSV input")
+    parser.add_argument("--data_root", type=str, default=str(DEFAULT_DATA_ROOT), help="QAR folder root")
+    parser.add_argument("--model_path", type=str, default=str(DEFAULT_MODEL_PATH), help="Output model path")
+    parser.add_argument(
+        "--scaler_path", type=str, default=str(DEFAULT_SCALER_PATH), help="Output scaler json path"
+    )
+    parser.add_argument("--max_rows", type=int, default=DEFAULT_MAX_ROWS)
+    parser.add_argument("--sample_rows", type=int, default=DEFAULT_SAMPLE_ROWS)
+    parser.add_argument("--epochs", type=int, default=DEFAULT_EPOCHS)
+    parser.add_argument("--seed", type=int, default=42)
+    args = parser.parse_args()
+
+    qar = load_qar_rows(args.input_csv, args.data_root, args.max_rows, args.sample_rows, args.seed)
+>>>>>>> Stashed changes
 
     # Features and target
     X = qar[
@@ -98,7 +125,7 @@ def main():
     y = fpn.reshape(-1, 1)
 
     # Train/test split
-    rng = np.random.default_rng(42)
+    rng = np.random.default_rng(args.seed)
     idx = rng.permutation(len(X))
     train_size = int(0.8 * len(X))
     train_idx = idx[:train_size]
@@ -132,7 +159,7 @@ def main():
     opt = torch.optim.Adam(model.parameters(), lr=1e-3)
     loss_fn = nn.MSELoss()
 
-    for _ in range(30):
+    for _ in range(args.epochs):
         pred = model(Xtr)
         loss = loss_fn(pred, ytr)
         opt.zero_grad()
@@ -158,9 +185,12 @@ def main():
     mae_fpn = float(np.mean(np.abs(pred_fpn - true_fpn)))
     rmse_fpn = float(np.sqrt(np.mean((pred_fpn - true_fpn) ** 2)))
 
-    MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
-    torch.save(model.state_dict(), MODEL_PATH)
-    SCALER_PATH.write_text(
+    model_path = Path(args.model_path)
+    scaler_path = Path(args.scaler_path)
+    model_path.parent.mkdir(parents=True, exist_ok=True)
+    scaler_path.parent.mkdir(parents=True, exist_ok=True)
+    torch.save(model.state_dict(), model_path)
+    scaler_path.write_text(
         json.dumps(
             {
                 "mean": x_mean.tolist(),
@@ -179,6 +209,8 @@ def main():
     print("R2", r2)
     print("MAE_FPN", mae_fpn)
     print("RMSE_FPN", rmse_fpn)
+    print("MODEL_PATH", model_path)
+    print("SCALER_PATH", scaler_path)
 
 
 if __name__ == "__main__":
