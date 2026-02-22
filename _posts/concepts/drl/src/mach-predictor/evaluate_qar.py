@@ -39,7 +39,7 @@ def load_qar_rows(input_csv, data_root, max_rows, sample_rows, seed):
         if not set(REQUIRED_COLS).issubset(qar.columns):
             missing = sorted(set(REQUIRED_COLS) - set(qar.columns))
             raise RuntimeError(f"Input CSV missing required columns: {missing}")
-        qar = qar[REQUIRED_COLS].dropna()
+        qar = qar.dropna(subset=REQUIRED_COLS)
     else:
         rows = []
         row_count = 0
@@ -50,7 +50,7 @@ def load_qar_rows(input_csv, data_root, max_rows, sample_rows, seed):
                 continue
             if not set(REQUIRED_COLS).issubset(df.columns):
                 continue
-            df = df[REQUIRED_COLS].dropna()
+            df = df.dropna(subset=REQUIRED_COLS)
             rows.append(df)
             row_count += len(df)
             if row_count >= max_rows:
@@ -66,10 +66,6 @@ def load_qar_rows(input_csv, data_root, max_rows, sample_rows, seed):
 
 
 def main():
-<<<<<<< Updated upstream
-    qar_path = Path("data/qar_737800_cruise.csv")
-    sample_rows = 20000
-=======
     parser = argparse.ArgumentParser()
     parser.add_argument("--input_csv", type=str, default=None, help="Single QAR CSV input")
     parser.add_argument("--data_root", type=str, default=str(DEFAULT_ROOT))
@@ -81,7 +77,6 @@ def main():
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--results_json", type=str, default=None, help="Optional JSON output")
     args = parser.parse_args()
->>>>>>> Stashed changes
 
     # Load policy + env (uses expanded-feature fuel model if configured in env)
     env = AircraftEnv(
@@ -93,26 +88,27 @@ def main():
     policy.load_state_dict(torch.load(args.policy_path))
     policy.eval()
 
-<<<<<<< Updated upstream
-    if not qar_path.exists():
-        raise RuntimeError(f"No usable QAR record found at {qar_path}. Run build_qar_dataset.py first.")
-
-    qar = pd.read_csv(qar_path)
-    if len(qar) > sample_rows:
-        qar = qar.sample(sample_rows, random_state=42)
-=======
     qar = load_qar_rows(args.input_csv, args.data_root, args.max_rows, args.sample_rows, args.seed)
->>>>>>> Stashed changes
 
-    # qar_737800_cruise.csv uses 'CAS' for airspeed and 'windKts' for groundSpeed-CAS
-    wind = qar["windKts"].astype(float).to_numpy()
+    # Use explicit wind/temp/CAS if present; otherwise derive from raw QAR columns.
+    if "windKts" in qar.columns:
+        wind = qar["windKts"].astype(float).to_numpy()
+    else:
+        wind = (qar["groundAirSpeed"] - qar["Airspeed"]).astype(float).to_numpy()
+
     alt = qar["altitude"].to_numpy()
-    alt_m = alt * 0.3048
-    isa_temp = np.array([isa_atmosphere(a)[0] for a in alt_m]) - 273.15
-    temp_dev = qar["tempDevC"].to_numpy()
+    if "tempDevC" in qar.columns:
+        temp_dev = qar["tempDevC"].astype(float).to_numpy()
+    else:
+        alt_m = alt * 0.3048
+        isa_temp = np.array([isa_atmosphere(a)[0] for a in alt_m]) - 273.15
+        temp_dev = qar["totalAirTemperatureCelsius"].to_numpy() - isa_temp
 
     weight = qar["grossWeight"].to_numpy()
-    cas = qar["CAS"].to_numpy()
+    if "CAS" in qar.columns:
+        cas = qar["CAS"].astype(float).to_numpy()
+    else:
+        cas = qar["Airspeed"].astype(float).to_numpy()
     gs = (cas + wind).clip(min=100.0)
 
     _turb = np.full_like(alt, 0.2, dtype=float)

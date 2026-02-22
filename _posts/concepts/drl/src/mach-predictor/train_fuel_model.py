@@ -72,13 +72,6 @@ def load_qar_rows(input_csv, data_root, max_rows, sample_rows, seed):
 
 
 def main():
-<<<<<<< Updated upstream
-    if MODEL_PATH.exists() and SCALER_PATH.exists():
-        print("Fuel model already exists, skipping training.")
-        return
-
-    qar = load_qar_rows()
-=======
     parser = argparse.ArgumentParser()
     parser.add_argument("--input_csv", type=str, default=None, help="Single QAR CSV input")
     parser.add_argument("--data_root", type=str, default=str(DEFAULT_DATA_ROOT), help="QAR folder root")
@@ -93,7 +86,6 @@ def main():
     args = parser.parse_args()
 
     qar = load_qar_rows(args.input_csv, args.data_root, args.max_rows, args.sample_rows, args.seed)
->>>>>>> Stashed changes
 
     # Features and target
     X = qar[
