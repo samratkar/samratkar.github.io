@@ -249,11 +249,98 @@ def train(config_path=None):
                 elapsed = time.time() - train_start
                 print(f"Step {global_step}, Loss: {loss.item():.4f}, Elapsed: {elapsed:.1f}s ({elapsed/60:.1f} min)")
 
-    # Save model to configured path
+    # Save model artifacts
     total_elapsed = time.time() - train_start
-    os.makedirs(os.path.dirname(OUTPUT_MODEL_PATH) or ".", exist_ok=True)
-    torch.save(policy.state_dict(), OUTPUT_MODEL_PATH)
-    print(f"Training finished. Model saved to {OUTPUT_MODEL_PATH}")
+    output_path = Path(OUTPUT_MODEL_PATH)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Store run artifacts in timestamped folder under the configured parent.
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    run_dir = output_path.parent / f"saved_{ts}"
+    run_dir.mkdir(parents=True, exist_ok=False)
+    run_model_path = run_dir / output_path.name
+    torch.save(policy.state_dict(), run_model_path)
+
+    # Keep latest policy at configured output path for compatibility.
+    shutil.copy2(run_model_path, output_path)
+
+    fuel_model_copied = None
+    fuel_scaler_copied = None
+    if FUEL_MODEL_PATH and os.path.exists(FUEL_MODEL_PATH):
+        fuel_model_copied = run_dir / Path(FUEL_MODEL_PATH).name
+        shutil.copy2(FUEL_MODEL_PATH, fuel_model_copied)
+    if FUEL_MODEL_SCALER_PATH and os.path.exists(FUEL_MODEL_SCALER_PATH):
+        fuel_scaler_copied = run_dir / Path(FUEL_MODEL_SCALER_PATH).name
+        shutil.copy2(FUEL_MODEL_SCALER_PATH, fuel_scaler_copied)
+
+    run_stats = {
+        "timestamp": ts,
+        "config_path": config_path,
+        "qar_data_path": QAR_DATA_PATH,
+        "phase_mode": cfg.get("phase_mode", "cruise_only"),
+        "timing_seconds": {
+            "pretrain": pretrain_elapsed,
+            "total": total_elapsed,
+        },
+        "hyperparameters": {
+            "learning_rate": LEARNING_RATE,
+            "gamma": GAMMA,
+            "eps_clip": EPS_CLIP,
+            "k_epochs": K_EPOCHS,
+            "batch_size": BATCH_SIZE,
+            "total_timesteps": TOTAL_TIMESTEPS,
+            "hidden_size": HIDDEN_SIZE,
+            "pretrain_steps": PRETRAIN_STEPS,
+            "pretrain_batch": PRETRAIN_BATCH,
+            "reward_shaping_strength": SHAPING_STRENGTH,
+            "curriculum_steps": CURRICULUM_STEPS,
+        },
+        "artifacts": {
+            "policy_in_run_folder": str(run_model_path).replace("\\", "/"),
+            "policy_latest": str(output_path).replace("\\", "/"),
+            "fuel_model_copied": str(fuel_model_copied).replace("\\", "/") if fuel_model_copied else None,
+            "fuel_scaler_copied": str(fuel_scaler_copied).replace("\\", "/") if fuel_scaler_copied else None,
+        },
+    }
+    (run_dir / "training_stats.json").write_text(json.dumps(run_stats, indent=2), encoding="utf-8")
+
+    readme_lines = [
+        "# Training Run Summary",
+        "",
+        f"- Timestamp: `{ts}`",
+        f"- Config: `{config_path}`",
+        f"- QAR data path: `{QAR_DATA_PATH}`",
+        f"- Phase mode: `{cfg.get('phase_mode', 'cruise_only')}`",
+        "",
+        "## Timings",
+        f"- Pretraining: `{pretrain_elapsed:.1f}s` (`{pretrain_elapsed/60:.1f} min`)",
+        f"- Total training: `{total_elapsed:.1f}s` (`{total_elapsed/60:.1f} min`)",
+        "",
+        "## Key Hyperparameters",
+        f"- learning_rate: `{LEARNING_RATE}`",
+        f"- gamma: `{GAMMA}`",
+        f"- eps_clip: `{EPS_CLIP}`",
+        f"- k_epochs: `{K_EPOCHS}`",
+        f"- batch_size: `{BATCH_SIZE}`",
+        f"- total_timesteps: `{TOTAL_TIMESTEPS}`",
+        f"- hidden_size: `{HIDDEN_SIZE}`",
+        f"- pretrain_steps: `{PRETRAIN_STEPS}`",
+        f"- pretrain_batch: `{PRETRAIN_BATCH}`",
+        f"- reward_shaping_strength: `{SHAPING_STRENGTH}`",
+        f"- curriculum_steps: `{CURRICULUM_STEPS}`",
+        "",
+        "## Artifacts",
+        f"- Policy (run folder): `{str(run_model_path).replace(chr(92), '/')}`",
+        f"- Policy (latest): `{str(output_path).replace(chr(92), '/')}`",
+        f"- Fuel model copy: `{str(fuel_model_copied).replace(chr(92), '/') if fuel_model_copied else 'not copied (path missing)'}`",
+        f"- Fuel scaler copy: `{str(fuel_scaler_copied).replace(chr(92), '/') if fuel_scaler_copied else 'not copied (path missing)'}`",
+        f"- Stats JSON: `{str((run_dir / 'training_stats.json')).replace(chr(92), '/')}`",
+    ]
+    (run_dir / "README.md").write_text("\n".join(readme_lines) + "\n", encoding="utf-8")
+
+    print(f"Training finished. Model saved to {run_model_path}")
+    print(f"Latest model copied to {output_path}")
+    print(f"Run artifacts directory: {run_dir}")
     print(f"Total training time: {total_elapsed:.1f}s ({total_elapsed/60:.1f} min)")
 
 if __name__ == "__main__":
