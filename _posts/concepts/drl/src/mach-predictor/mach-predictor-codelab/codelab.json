@@ -1,0 +1,17 @@
+{
+  "environment": "web",
+  "source": "README.md",
+  "format": "html",
+  "prefix": "../../",
+  "mainga": "UA-49880327-14",
+  "updated": "2026-02-22T10:56:20+05:30",
+  "id": "mach-predictor-codelab",
+  "duration": 0,
+  "title": "Aircraft Mach Optimization using Deep Reinforcement Learning",
+  "summary": "",
+  "theme": "",
+  "status": null,
+  "category": null,
+  "tags": null,
+  "url": "mach-predictor-codelab"
+}

@@ -1,492 +1,620 @@
-id: my-first-codelab
-summary: Build a sample app with X
-categories: web, beginner
-tags: web
-status: draft
-authors: Samrat Kar
-
 # Aircraft Mach Optimization using Deep Reinforcement Learning
 
-This application demonstrates how to use Deep Reinforcement Learning (DRL) to optimize the Mach number for aircraft tails to minimize fuel consumption.
+This project uses Deep Reinforcement Learning (DRL) to recommend the optimal Mach number for a Boeing 737-800 during cruise, minimizing fuel burn per nautical mile. The agent is trained with PPO on a custom Gymnasium environment whose reward signal is driven by a neural fuel model fitted to real QAR (Quick Access Recorder) data.
 
-## Problem Statement
-Aircraft fuel efficiency depends significantly on the Mach number (speed) flown relative to the aircraft's weight, altitude, and temperature. By analyzing historical QAR (Quick Access Recorder) data, we can learn a policy to recommend the optimal Mach number for specific flight conditions.
+---
 
-## Solution Approach
-1. **Data Generation**: Generate synthetic QAR data using a simplified aerodynamic + engine model.
-2. **Environment**: A custom Gymnasium environment (`AircraftEnv`) simulates fuel burn and cruise dynamics.
-3. **RL Agent**: A PPO (Proximal Policy Optimization) agent learns to pick Mach to minimize fuel flow.
-4. **Prediction**: The trained agent predicts Mach for new flight conditions.
+## Table of Contents
+1. [Problem Statement](#1-problem-statement)
+2. [Solution Architecture](#2-solution-architecture)
+3. [DRL Theory](#3-drl-theory)
+4. [Environment Design](#4-environment-design-aircraftenv)
+5. [Neural Fuel Model](#5-neural-fuel-model)
+6. [Training Pipeline](#6-training-pipeline)
+7. [Project Structure](#7-project-structure)
+8. [Setup](#8-setup)
+9. [Usage](#9-usage)
+10. [Latest Performance Results](#10-latest-performance-results)
+11. [Experiment History](#11-experiment-history)
+12. [State, Action, Transition Reference](#12-state-action-transition-reference)
+13. [Diagrams](#13-diagrams)
 
-## Project Structure
-- `data_generator.py`: Generates synthetic flight data CSVs in `data/`.
-- `aircraft_env.py`: Custom Gym environment.
-- `train_agent.py`: Training script using PyTorch PPO.
-- `predict_mach.py`: Inference script to query the trained model.
-- `requirements.txt`: Python dependencies.
+---
 
-## Setup
-1.  **Install Dependencies**:
-    ```bash
-    python3 -m venv .venv
-    source .venv/bin/activate
-    pip install -r requirements.txt
-    ```
+## 1. Problem Statement
 
-## Usage
+Cruise fuel efficiency depends on choosing the right Mach number given real-time flight conditions (altitude, weight, temperature, wind). Flying too fast increases wave drag; flying too slow increases induced drag. The optimal Mach trades off these effects against the headwind component to minimize **fuel per nautical mile (kg/NM)**.
 
-### 1. Generate Data
-Generate synthetic data for tails (e.g., Tail_X1):
-```bash
-python data_generator.py
+Airlines record these conditions in QAR data but typically fly a fixed FMC-programmed Mach. A learned policy that responds to actual conditions can improve on this.
+
+---
+
+## 2. Solution Architecture
+
 ```
-This creates `data/Tail_X1.csv`.
-
-### 2. Train the Agent
-Train the DRL agent on the generated data/environment:
-```bash
-python train_agent.py
-```
-This will train for 100,000 timesteps and save the model to `models/tail_policy.pt`.
-
-### 3. Predict Optimal Mach
-Use the trained model to predict the optimal Mach for specific conditions:
-```bash
-# Usage: python predict_mach.py <Altitude> <Weight> <TAT> <CAS> [TempDevC] [WindKts] [Phase] [TargetAlt] [Turb] [Regime] [AoA] [HStab] [TotalFuelWeight] [TrackAngle] [FmcMach] [Lat] [Lon] [GMTHours] [Day] [Month] [Year]
-python predict_mach.py 36000 70000 -45 280 0 10 1 35000 0.2 0 2 0 8000 180 0.78 -10 -50 12 15 6 2023
-```
-Output:
-```
-Predicted Optimal Mach: 0.7802
+QAR CSV data
+     │
+     ▼
+build_qar_dataset.py          ← filters + saves cruise rows to data/qar_737800_cruise.csv
+     │
+     ▼
+train_fuel_model.py           ← trains a neural fuel model (models/fuel_model.pt)
+     │
+     ▼
+train_agent.py                ← PPO agent using AircraftEnv + neural fuel model
+     │                           (oracle pretraining → curriculum → PPO)
+     ▼
+models/tail_policy.pt
+     │
+     ▼
+evaluate_qar.py               ← evaluates policy vs baseline on 20k QAR cruise rows
 ```
 
-## How it Works (Updated Design)
-- The environment is now a short-horizon **cruise segment** rather than a one-step bandit. Each episode runs multiple steps with weight decreasing as fuel burns.
-- Observations are **normalized** `[Altitude_ft, Weight_kg, TAT_C, CAS_kts, TempDev_C, Wind_kts, Phase, TargetAlt_ft, Turb, Regime, AoA, HStab, TotalFuelWeight, TrackAngle, FmcMach, Lat, Lon, GMTHours, Day, Month, Year]` for stable learning.
-- Actions are still normalized to `[-1, 1]` and mapped to Mach `[0.70, 0.86]`.
-- The fuel model is based on **aerodynamic drag** and **engine TSFC** instead of a simple quadratic penalty.
-- A **wind/temperature profile** evolves slowly during an episode, and **per-tail variability** slightly changes aerodynamic/engine parameters.
-- **Turbulence** varies in time (AR(1)), increasing noise in fuel burn.
-- **Mid-episode regime flips** simulate performance degradation (e.g., higher TSFC).
-- The episode includes **climb, cruise, and descent phases** with altitude targets and constraints.
+All four steps are orchestrated by `run_golden.sh`.
+Steps 1 and 2 are **skipped automatically** if their output files already exist.
 
-## Environment Logic (Implementation Details)
-1. **Atmosphere (ISA)**
-   - Temperature, pressure, and density computed from altitude using a standard ISA approximation (troposphere + isothermal stratosphere).
-2. **Airspeed**
-   - TAS derived from Mach and local speed of sound.
-   - CAS approximated from TAS and density (via EAS relationship).
-3. **Drag Model**
-   - `CD = CD0 + k * CL^2 + CD_wave * wave^2`
-   - `CL = Weight / (q * S)`
-   - `q = 0.5 * rho * V^2`
-4. **Fuel Flow**
-   - `FuelFlow = Drag * TSFC`
-   - TSFC increases with altitude and temperature deviation (simplified).
-5. **Reward**
-   - Negative **fuel burn per distance** (kg per NM) using ground speed (`CAS + wind`).
-   - Penalty for large deviations from target altitude.
-   - **Energy management penalty** discourages excessive Mach in climb/descent and low-altitude overspeed.
-6. **State Update**
-   - Weight decreases each step by fuel burned.
-   - Altitude follows climb/cruise/descent rates toward a target altitude.
-   - Temperature deviation and wind evolve via a low-variance random walk.
+---
 
-## DRL Theory and Equations
-**MDP Definition**
-- State `s = [alt, weight, TAT, CAS, tempDev, wind, phase, targetAlt, turb, regime, aoa, hstab, totalFuelWeight, trackAngle, fmcMach, lat, lon, gmtHours, day, month, year]`
-- Action `a = Mach`
-- Reward `r = -fuel_per_nm - altitude_penalty - energy_penalty`
-- Transition includes weight burn, climb/cruise dynamics, and AR(1) wind/temp.
+## 3. DRL Theory
 
-**PPO Objective and Terms**
-```text
-L_CLIP = E[min(r_t(θ) * A_t, clip(r_t(θ), 1-ε, 1+ε) * A_t)]
-r_t(θ) = π_θ(a_t|s_t) / π_θ_old(a_t|s_t)
-δ_t = r_t + γ V(s_{t+1}) - V(s_t)
-A_t = δ_t + γλ δ_{t+1} + ...
-L_V = 0.5 * (V(s_t) - R_t)^2
-L_H = -β * H(π_θ(.|s_t))
+### 3.1 Markov Decision Process (MDP)
+
+A reinforcement learning problem is formalized as an MDP defined by the tuple **(S, A, P, R, γ)**:
+
+| Symbol | Meaning | This Project |
+|---|---|---|
+| **S** | State space | 21 flight-condition variables (see §12) |
+| **A** | Action space | Continuous Mach command → [-1, 1] mapped to [0.70, 0.86] |
+| **P(s'\|s,a)** | Transition distribution | Physics update + AR(1) wind/temp stochasticity |
+| **R(s,a)** | Reward function | `-fuel_per_nm/10 - altitude_penalty - energy_penalty` |
+| **γ** | Discount factor | 0.99 |
+
+The agent's goal is to find policy **π** that maximises expected discounted return:
+
+```
+J(π) = E[ Σ_{t=0}^{T} γ^t R(s_t, a_t) ]
+```
+
+### 3.2 Why DRL (not supervised or rule-based)?
+
+- The optimal Mach is a **non-linear function** of many interacting variables (weight, ISA deviation, wind, wave-drag cliff at M_crit).
+- The problem has **temporal structure** — weight decreases as fuel burns, changing the optimal Mach during a cruise segment.
+- The state space is **continuous** — exact dynamic programming (value iteration) is infeasible.
+
+### 3.3 Bellman Equations
+
+The value function satisfies:
+
+```
+V^π(s) = E_π[ R(s,a) + γ V^π(s') ]
+Q^π(s,a) = R(s,a) + γ E[ V^π(s') ]
+```
+
+The **advantage** measures how much better action `a` is vs the average:
+
+```
+A_t = Q(s_t, a_t) - V(s_t)
+```
+
+### 3.4 PPO (Proximal Policy Optimization)
+
+PPO is an on-policy actor-critic method. It improves sample efficiency over vanilla policy gradient by reusing a mini-batch for multiple gradient steps while constraining how far the policy can move (via a clipping trick).
+
+**Probability ratio:**
+```
+r_t(θ) = π_θ(a_t | s_t) / π_θ_old(a_t | s_t)
+```
+
+**Clipped surrogate objective (actor loss):**
+```
+L_CLIP = E[ min( r_t(θ) · A_t,  clip(r_t(θ), 1-ε, 1+ε) · A_t ) ]
+```
+The clip prevents large policy updates that could destabilize training.
+
+**Generalized Advantage Estimation (GAE):**
+```
+δ_t = R_t + γ V(s_{t+1}) - V(s_t)          ← TD residual
+A_t = δ_t + (γλ) δ_{t+1} + (γλ)² δ_{t+2} + ...
+```
+GAE with λ=0.95 smoothly interpolates between 1-step TD (low variance, high bias) and full Monte Carlo (unbiased, high variance).
+
+**Critic loss:**
+```
+L_V = 0.5 · (V(s_t) - R_t)²
+```
+
+**Entropy bonus (exploration):**
+```
+L_H = -β · H( π_θ(·|s_t) )
+```
+
+**Combined loss minimized at each update:**
+```
 L = -L_CLIP + L_V + L_H
 ```
-- `π_θ`: policy network (actor)
-- `V(s)`: value function (critic)
-- `A_t`: advantage
-- `γ`: discount factor
-- `λ`: GAE smoothing factor
-- `ε`: PPO clip range
-- `β`: entropy coefficient
 
-**Aerodynamics and Propulsion**
-```text
-q = 0.5 * ρ * V^2
-CL = W / (q * S)
-CD = CD0 + k * CL^2 + CD_wave * wave^2
-D = q * S * CD
-FuelFlow = D * TSFC
-FuelPerNM = FuelFlow / GroundSpeed
-GroundSpeed = CAS + Wind
+### 3.5 Actor-Critic Network
+
+Both actor and critic are two-layer MLPs (64 hidden units, Tanh activations) sharing no weights:
+
 ```
-- `TSFC`: thrust specific fuel consumption
-- `CD0, k, CD_wave`: drag model parameters
+Actor:  s → [64, Tanh] → [64, Tanh] → μ_θ(s) ∈ [-1,1]  (+ learnable log_std)
+Critic: s → [64, Tanh] → [64, Tanh] → V(s) ∈ ℝ
+```
 
-## Testing and Performance
-**Test Setup**
-- Model: `models/tail_policy.pt`
-- Baseline: fixed Mach **0.7628** (QAR cruise mean)
-- Episodes: 30 steps each
-- Phases tested: climb and cruise only (no descent)
-- Date run: February 19, 2026
-**Note**: Tests include turbulence and regime variables in state; retrain if state changes.
+The action distribution is Gaussian: `a ~ N(μ_θ(s), σ_θ)`.
+At inference, the **deterministic mean** is used for stable Mach predictions.
 
-**Real QAR Baseline (B737-800)**
-- Source folder: `/Users/samrat.kar/cio/airlines-data/glo/737-800/baseline`
-- Fuel flow used: `selectedFuelFlow1 + selectedFuelFlow2`
-- Ground speed used: `groundAirSpeed` (rows with `groundAirSpeed > 100`)
-- Cruise filter: `altitude > 30000 ft`
-- Overall mean fuel per NM: **15.7351 kg/NM**
-- Overall mean Mach: **0.6279**, FMC Mach: **0.6585**
-- Cruise mean fuel per NM: **11.8547 kg/NM**
-- Cruise mean Mach: **0.7628**
+---
 
-## Experiments (Numbered)
+## 4. Environment Design (`AircraftEnv`)
 
-**Experiment 0: QAR-Aligned Evaluation Baseline**
-**QAR-Aligned Evaluation (Real Data Distribution)**
-- Sample size: 20,000 cruise rows (random sample)
-- Baseline fuel per NM (QAR): **11.9848 kg/NM**
-- Policy fuel per NM (expanded-feature fuel model at QAR states): **11.1363 kg/NM**
-- Improvement: **+7.08%** (policy better)
-- Notes:
-  - Wind approximated as `groundAirSpeed - Airspeed`
-  - Temp deviation approximated by `TAT - ISA_temp` (TAT used as proxy for OAT)
-  - CAS approximated by `Airspeed`
-- Turbulence fixed at 0.2, regime fixed at 0 for this evaluation
-Summary: This is the primary benchmark used for comparing methods.
+### 4.1 Observation Space (21 variables)
 
-## Experiment 1: Supervised Modeling on QAR (Mach Prediction)
-**Goal**: Predict observed Mach from QAR cruise states (regression).
+All observations are normalized by fixed mean/std before being fed to the network.
 
-**Features**
-- `altitude, grossWeight, totalAirTemperatureCelsius, Airspeed, groundAirSpeed`
-
-**Model**
-- 2‑layer MLP (64‑64), ReLU, trained with MSE loss.
-
-**Results (80k cruise rows)**
-- MAE: **0.2282**
-- RMSE: **0.2783**
-- R²: **-179.84**
-- Baseline (predict mean Mach):
-  - MAE: **0.0141**
-  - RMSE: **0.0207**
-
-**Finding**
-- Mach in cruise is nearly constant. A simple mean predictor beats the MLP. Supervised modeling on these features does not improve over a constant baseline.
-Summary: Supervised Mach regression is not useful for this dataset; constant baseline wins.
-
-## Experiment 2: Environment Calibration to QAR (Linear + Quadratic)
-**Goal**: Fit a linear calibration `fpn_QAR ≈ a * fpn_env + b` using observed Mach.
-
-**Fit (50k cruise samples)**
-- `a = 0.1681`, `b = 9.0294`
-- MAE: **1.7678 kg/NM**
-- RMSE: **3.2756 kg/NM**
-- R²: **0.0094**
-
-**Finding**
-- Linear calibration only weakly explains QAR fuel‑per‑NM variance.
-
-**Nonlinear Calibration (Quadratic)**
-- Fit: `fpn_QAR ≈ a * fpn_env^2 + b * fpn_env + c`
-- `a = 0.11986`, `b = -4.00259`, `c = 44.85504`
-- MAE: **1.6915 kg/NM**
-- RMSE: **3.1922 kg/NM**
-- R²: **0.0592**
-
-**Finding**
-- Quadratic calibration improves fit modestly over linear, but variance explained is still low.
-Summary: Calibration helps slightly, but cannot fully match QAR fuel variance.
-
-## Experiment 3: Richer Calibration (Ridge, Expanded Features)
-- Features: `[fpn_env, fpn_env^2, fpn_env^3, alt, weight, mach, temp_dev]` (standardized)
-- Ridge weights (λ=1e-2): `[-1.2266, -0.4478, 2.3290, -1.4806, 0.2639, 1.6639, -0.2878]`
-- MAE: **11.9015 kg/NM**
-- RMSE: **12.2366 kg/NM**
-- R²: **-12.81**
-
-**Finding**
-- This richer linear model overfits/underperforms and is significantly worse than quadratic calibration.
-Summary: Ridge regression on expanded features is unstable and worse than quadratic.
-
-## Experiment 4: Nonlinear Calibration (MLP)
-- Reason: richer linear model underperformed, so moved to a nonlinear regressor.
-- Model: 2‑layer MLP (64‑64), ReLU, MSE loss.
-- Features: `[fpn_env, fpn_env^2, fpn_env^3, alt, weight, mach, temp_dev]` (standardized)
-- MAE: **10.3357 kg/NM**
-- RMSE: **10.7971 kg/NM**
-- R²: **-9.75**
-
-**Finding**
-- Nonlinear MLP still underperforms quadratic calibration. The quadratic mapping remains best so far.
-Summary: Nonlinear MLP calibration did not improve fit and was discarded.
-
-## Experiment 5: Quadratic Calibration PPO (Re-runs)
-**Current Code Setting**
-- The environment and training pipeline are set to use the **expanded‑feature fuel model** (`models/fuel_model.pt`) for rewards.
-
-**Quadratic Calibration Re‑run**
-- QAR‑aligned evaluation (20k rows): **12.3739 kg/NM** policy vs **11.9270 kg/NM** baseline
-- Improvement: **-3.75%**
-Summary: Quadratic calibration + PPO improves stability but does not beat QAR baseline.
-
-## Experiment 6: Expanded Feature Strategy (New)
-**Decision**
-- Increase the feature set using additional QAR signals (AoA, HStab, fuel, track, FMC Mach, lat/lon, time).
-
-**Fuel‑Per‑NM Model (Expanded Features)**
-- Features: `altitude, grossWeight, TAT, Airspeed, groundAirSpeed, mach, AoA, HStab, totalFuelWeight, trackAngleTrue, fmcMach, lat, lon, GMTHours, Day, Month, YEAR`
-- Target: `fuel_per_nm`, trained on normalized target.
-- Metrics (120k rows):
-  - MAE (normalized): **0.3535**
-  - RMSE (normalized): **0.5626**
-  - R²: **0.6938**
-  - MAE (fuel per NM): **1.1796 kg/NM**
-  - RMSE (fuel per NM): **1.8773 kg/NM**
-
-**PPO with Expanded Feature Fuel Model**
-- QAR‑aligned evaluation (20k rows):
-  - Baseline fuel per NM: **11.9848 kg/NM**
-  - Policy fuel per NM: **11.1363 kg/NM**
-  - Improvement: **+7.08%**
-
-**Conclusion**
-- This is the first configuration where **DRL beats the QAR baseline**.
-Summary: Expanded features + fuel model + PPO deliver positive savings.
-
-## Comparative Analysis
-| Experiment | Approach | Key Metric | QAR-Aligned Improvement |
+| Variable | Unit | Range | Description |
 |---|---|---|---|
-| 0 | QAR baseline (cruise) | Fuel per NM = **11.9848** | Baseline |
-| 1 | Supervised Mach regression (MLP) | R² **-179.84** | Not competitive |
-| 2 | Calibration (linear + quadratic) | Quad R² **0.0592** | Indirect |
-| 3 | Ridge calibration (expanded) | R² **-12.81** | Worse than quad |
-| 4 | MLP calibration (expanded) | R² **-9.75** | Worse than quad |
-| 5 | Quadratic calibration + PPO | Fuel per NM **12.3739** | **-3.75%** |
-| 6 | Expanded-feature fuel model + PPO | Fuel per NM **10.5609** | **+11.88%** |
+| `altitude` | ft | 10k–41k | Current altitude |
+| `grossWeight` | kg | 55k–78k | Aircraft gross weight |
+| `TAT` | °C | -60–+20 | Total air temperature |
+| `CAS` | kts | ~200–320 | Calibrated airspeed |
+| `tempDevC` | °C | -8–+8 | ISA temperature deviation |
+| `windKts` | kts | -60–+60 | Along-track wind (+ = tailwind) |
+| `phase` | — | {0,1,2} | 0=climb, 1=cruise, 2=descent |
+| `targetAltitude` | ft | 15k–39k | Target altitude for this segment |
+| `turbulence` | — | 0–1 | Turbulence intensity (AR(1)) |
+| `regime` | — | {0,1} | 0=nominal, 1=degraded engine |
+| `angleOfAttackVoted` | ° | -2–8 | Angle of attack |
+| `horizontalStabilizerPosition` | ° | -3–3 | Horizontal stabilizer trim |
+| `totalFuelWeight` | kg | 1k–12k | Fuel remaining |
+| `trackAngleTrue` | ° | 0–360 | True track |
+| `fmcMach` | — | 0.70–0.86 | FMC-programmed Mach target |
+| `latitude` | ° | -35–5 | Latitude |
+| `longitude` | ° | -80–-30 | Longitude |
+| `GMTHours` | h | 0–24 | UTC time |
+| `Day` | — | 1–28 | Day of month |
+| `Month` | — | 1–12 | Month |
+| `YEAR` | — | ~2023 | Year |
 
-## Strategy Change: Supervised Fuel‑Per‑NM Model (Decision Trail)
-**Decision**
-- Try a learned fuel model from QAR to replace the synthetic physics + calibration.
+### 4.2 Action Space
 
-**Model**
-- Features: `altitude, grossWeight, totalAirTemperatureCelsius, Airspeed, groundAirSpeed, mach`
-- Target: `fuel_per_nm = (FF1 + FF2) / groundAirSpeed`, trained in log‑space
-- Model: 2‑layer MLP (64‑64), MSE loss
+```
+a ∈ [-1, 1]   →   Mach = 0.78 + a × 0.08   ∈ [0.70, 0.86]
+```
 
-**Fuel Model Metrics (120k rows)**
-- MAE (log space): **1.0436**
-- RMSE (log space): **1.1585**
-- R²: **-6.72**
-- MAE (fuel per NM): **7.7563 kg/NM**
-- RMSE (fuel per NM): **9.0563 kg/NM**
+### 4.3 Physics (ISA Atmosphere + Drag Model)
 
-**PPO with Learned Fuel Model (QAR‑aligned eval, 20k rows)**
-- Baseline fuel per NM: **11.9270 kg/NM**
-- Policy fuel per NM: **31.6177 kg/NM**
-- Improvement: **-165.09%** (much worse)
+**ISA atmosphere:**
+```
+T(h) = T0 + Λ·h           (troposphere, h ≤ 11 km)
+ρ(h) = p(h) / (R_air · T(h))
+```
 
-**Conclusion**
-- The learned fuel‑per‑NM model is not reliable with current features and produces unstable rewards.  
-- We revert to the **quadratic calibration + oracle** as the best DRL setup so far.
+**Airspeed conversion:**
+```
+TAS = Mach × √(γ · R_air · T)
+CAS ≈ TAS × √(ρ / ρ₀)            (EAS approximation)
+```
 
-## QAR‑Aligned PPO Retraining (Step 3)
-**Goal**: Train PPO on QAR‑sampled cruise states with:
-- Oracle pretraining (grid‑search Mach)
-- Reward shaping toward oracle
-- Calibrated fuel flow (quadratic mapping)
-- Stronger oracle (golden‑section search over Mach)
+**Aerodynamic drag:**
+```
+q   = 0.5 · ρ · TAS²
+CL  = W / (q · S_ref)
+CD  = CD0 + k·CL² + CD_wave·(max(0, M-M_crit)/0.08)²
+D   = q · S_ref · CD
+```
 
-**Evaluation on QAR cruise sample (20k rows)**
-- Baseline fuel per NM (QAR): **11.9270 kg/NM**
-- Policy fuel per NM: **12.3430 kg/NM**
-- Improvement: **-3.49%**
+Wave drag activates above the critical Mach (M_crit ≈ 0.78), creating a strong
+non-linear penalty for flying too fast.
 
-**Finding**
-- PPO improved substantially from the uncalibrated run but still does not beat the QAR baseline.
+**Fuel flow (physics fallback):**
+```
+FuelFlow [kg/hr] = D × TSFC × 3600
+TSFC = TSFC_base × (1 + 0.12·h/11000) × (1 + 0.01·(T0-T))
+```
 
-## Best Approach (Current Evidence)
-- **Expanded‑feature fuel model + PPO** is the best performing DRL setup so far, beating the QAR baseline by **+11.88%** on cruise.
-- **Quadratic calibration + PPO** is the strongest baseline DRL method before feature expansion.
+In the golden pipeline the physics model is **replaced** by the neural fuel model (§5).
 
-**What would likely make DRL win**
-- Calibrate the environment with a **richer model** (nonlinear, phase‑aware).
-- Include **more predictive features** (thrust mode, flap config, N1, ISA deviation, CG).
-- Use a **stronger oracle** (continuous optimization rather than coarse grid).
+### 4.4 Reward
 
-**Fixed Scenarios (10 total)**
-- Climb-1: alt 24000 ft, target 36000 ft, wt 76000 kg, tempDev -2 C, wind 15 kts, turb 0.3, regime 0
-- Climb-2: alt 26000 ft, target 37000 ft, wt 72000 kg, tempDev 1 C, wind -10 kts, turb 0.2, regime 0
-- Climb-3: alt 28000 ft, target 39000 ft, wt 70000 kg, tempDev 4 C, wind 25 kts, turb 0.4, regime 1
-- Climb-4: alt 22000 ft, target 35000 ft, wt 78000 kg, tempDev -5 C, wind 5 kts, turb 0.1, regime 0
-- Climb-5: alt 30000 ft, target 38000 ft, wt 68000 kg, tempDev 0 C, wind -20 kts, turb 0.5, regime 1
-- Cruise-1: alt 35000 ft, target 35000 ft, wt 70000 kg, tempDev -1 C, wind 10 kts, turb 0.2, regime 0
-- Cruise-2: alt 37000 ft, target 37000 ft, wt 66000 kg, tempDev 2 C, wind -5 kts, turb 0.3, regime 0
-- Cruise-3: alt 33000 ft, target 33000 ft, wt 74000 kg, tempDev 0 C, wind 20 kts, turb 0.2, regime 1
-- Cruise-4: alt 39000 ft, target 39000 ft, wt 62000 kg, tempDev -3 C, wind 15 kts, turb 0.4, regime 0
-- Cruise-5: alt 36000 ft, target 36000 ft, wt 68000 kg, tempDev 5 C, wind -15 kts, turb 0.6, regime 1
+```
+ground_speed = max(CAS + wind, 100)     [kts]
+fuel_per_nm  = FuelFlow / ground_speed  [kg/NM]
 
-**Fixed Scenario Results (Fuel per NM)**
-- Climb-1: policy 22.5260 vs baseline 20.7283 kg/NM, improvement -8.67%
-- Climb-2: policy 23.3083 vs baseline 18.7053 kg/NM, improvement -24.61%
-- Climb-3: policy 21.0760 vs baseline 22.8887 kg/NM, improvement 7.92%
-- Climb-4: policy 22.4873 vs baseline 18.7212 kg/NM, improvement -20.12%
-- Climb-5: policy 22.8922 vs baseline 22.5920 kg/NM, improvement -1.33%
-- Cruise-1: policy 20.5865 vs baseline 17.2469 kg/NM, improvement -19.36%
-- Cruise-2: policy 18.7050 vs baseline 17.7845 kg/NM, improvement -5.18%
-- Cruise-3: policy 20.7433 vs baseline 16.3242 kg/NM, improvement -27.07%
-- Cruise-4: policy 16.4470 vs baseline 17.0662 kg/NM, improvement 3.63%
-- Cruise-5: policy 22.7634 vs baseline 20.1655 kg/NM, improvement -12.88%
+reward = -fuel_per_nm / 10
+       - altitude_penalty               (deviation > 1000 ft from target)
+       - energy_penalty                 (overspeed in climb/descent)
+       - shaping_penalty                (optional: distance from oracle Mach)
+```
 
-**Random Scenario Summary (50 climb + 50 cruise)**
-- Climb: policy 19.3724 vs baseline 18.0631 kg/NM, improvement -7.63%, policy reward -60.309, baseline reward -56.456
-- Cruise: policy 19.6119 vs baseline 18.6997 kg/NM, improvement -5.30%, policy reward -58.836, baseline reward -56.099
+### 4.5 State Transitions
 
-## State, Action, Transition Tables
-**State Variables (S)**
-| Name | Symbol | Range | Meaning | Transition Driver |
-|---|---|---|---|---|
-| Altitude_ft | `alt` | 10k–41k | Aircraft altitude | Climb/cruise/descent rates |
-| Weight_kg | `W` | 55k–78k | Gross weight | Fuel burn per step |
-| TAT_C | `TAT` | ~-60–+20 | Total air temp | ISA + temp dev |
-| CAS_kts | `CAS` | ~200–320 | Calibrated airspeed | Mach + density |
-| TempDev_C | `ΔT` | -8–+8 | ISA temperature deviation | AR(1) process |
-| Wind_kts | `WIND` | -60–+60 | Along‑track wind | AR(1) process |
-| Phase | `φ` | {0,1,2} | 0=climb,1=cruise,2=descent | Altitude vs target |
-| TargetAlt_ft | `alt*` | 15k–39k | Target altitude | Scenario definition |
-| Turb | `τ` | 0–1 | Turbulence intensity | AR(1) process |
-| Regime | `ρ` | {0,1} | 0=nominal, 1=degraded | Random mid‑episode flip |
-| AoA | `α` | ~-2–8 | Angle of attack | Slowly varying |
-| HStab | `H` | ~-3–3 | Horizontal stabilizer pos | Slowly varying |
-| TotalFuelWeight | `FW` | 1k–12k | Fuel remaining | Decreases |
-| TrackAngle | `χ` | 0–360 | Track angle true | Slowly varying |
-| FmcMach | `M_FMC` | 0.70–0.86 | FMC target Mach | Slowly varying |
-| Latitude | `lat` | -35–5 | Latitude | Slowly varying |
-| Longitude | `lon` | -80–-30 | Longitude | Slowly varying |
-| GMTHours | `t` | 0–24 | Time of day | Increments |
-| Day | `d` | 1–28 | Day of month | Fixed per episode |
-| Month | `m` | 1–12 | Month | Fixed per episode |
-| Year | `y` | ~2023 | Year | Fixed per episode |
-
-**Action (A)**
-| Name | Symbol | Range | Meaning |
-|---|---|---|---|
-| Mach command | `a` | [-1,1] → [0.70,0.86] | Continuous Mach selection |
-
-**Transition Summary (P)**
-| Component | Update Rule (Conceptual) |
+| Component | Update |
 |---|---|
-| Altitude | climb/cruise/descent dynamics toward `alt*` |
-| Weight | `W_{t+1} = W_t - FuelFlow_t * dt` |
-| Temp dev | `ΔT_{t+1} = μ + φ(ΔT_t-μ) + ε` |
-| Wind | `WIND_{t+1} = μ + φ(WIND_t-μ) + ε` |
-| Turb | `τ_{t+1} = μ + φ(τ_t-μ) + ε` |
-| Regime | flips with small probability |
-| CAS/TAT | derived from Mach + ISA + ΔT |
+| Weight | `W_{t+1} = W_t − FuelFlow_t × Δt` |
+| Altitude | Climb/cruise/descent rate toward `targetAltitude` |
+| TempDev | AR(1): `ΔT_{t+1} = 0.95·ΔT_t + ε`, ε ~ N(0, 0.2) |
+| Wind | AR(1): `W_{t+1} = 0.90·W_t + ε`, ε ~ N(0, 2.0) |
+| Turbulence | AR(1) around mean 0.2 |
+| Regime | Flips (0↔1) with probability 0.02 per step |
+| TAT / CAS | Recomputed from Mach + ISA + ΔT each step |
 
-## How the Policy Chooses Actions
-The policy is a Gaussian actor:
-1. Input normalized state `s_t` into the actor network.
-2. Actor outputs mean `μ_θ(s_t)` and log‑std `log σ_θ`.
-3. Sample (train) or take mean (inference) to get action `a_t`.
-4. Map `a_t` to Mach in `[0.70, 0.86]`.
+### 4.6 Oracle Mach
 
-## How Next State Drives Fuel Mileage
-The next state affects fuel burn through:
-- Air density → drag → fuel flow
-- Weight → lift coefficient → induced drag
-- Temperature & turbulence → TSFC and noise
-- Wind → ground speed → fuel per NM
+The environment exposes `_oracle_mach()`, which runs a **golden-section search** (20 iterations) over Mach ∈ [0.70, 0.86] to find the Mach that minimizes `FuelFlow / GroundSpeed` for the current state. This is used in two places:
+- **Oracle pretraining**: behavior-clone the actor toward the oracle before PPO begins.
+- **Reward shaping**: penalize distance from oracle Mach during PPO (optional, `reward_shaping_strength = 0.5`).
 
-Optimizing `r_t` (negative fuel per NM + penalties) across time yields the policy that maximizes expected fuel mileage.
+---
 
-## Diagrams
-```mermaid
-flowchart LR
-    S[State s_t] -->|Policy πθ| A[Action a_t (Mach)]
-    A -->|Env dynamics| S2[Next state s_{t+1}]
-    A --> R[Reward r_t]
-    S2 -->|Value V(s_{t+1})| U[Advantage A_t]
-    R --> U
-    U -->|PPO update| S
+## 5. Neural Fuel Model
+
+### 5.1 Motivation
+
+The physics drag model is a simplified approximation. Real fuel burn depends on many factors (engine condition, actual CG, exact trim). A neural network trained on QAR records captures these effects directly.
+
+### 5.2 Architecture
+
+```
+Input (17 features) → [64, ReLU] → [64, ReLU] → FuelPerNM (scalar)
 ```
 
-```mermaid
-stateDiagram-v2
-    [*] --> Climb
-    Climb --> Cruise: alt near target
-    Cruise --> Cruise: hold altitude
-    Cruise --> Descent: scenario sets target lower
-    Descent --> Cruise: alt near target
+**Input features:**
+`altitude, grossWeight, TAT, Airspeed (CAS), groundAirSpeed, mach, AoA, HStab, totalFuelWeight, trackAngleTrue, fmcMach, latitude, longitude, GMTHours, Day, Month, YEAR`
+
+**Target:** `fuel_per_nm = (FF1 + FF2) / groundAirSpeed` (normalized)
+
+### 5.3 Training
+
+- Data: `data/qar_737800_cruise.csv` (120,000 cruise rows, altitude > 30,000 ft, ground speed > 100 kts)
+- Split: 80/20 train/test
+- Loss: MSE on normalized target
+- Optimizer: Adam (lr=1e-3), 30 epochs
+- Scaler saved to `models/fuel_model_scaler.json`
+
+### 5.4 Performance
+
+| Metric | Value |
+|---|---|
+| MAE (normalized) | 0.3535 |
+| RMSE (normalized) | 0.5626 |
+| R² | 0.6938 |
+| MAE (kg/NM) | 1.18 |
+| RMSE (kg/NM) | 1.88 |
+
+R² = 0.69 means the model explains ~69% of fuel variance across the diverse QAR fleet.
+
+---
+
+## 6. Training Pipeline
+
+### 6.1 Phase 0 — Oracle Pretraining (Behavior Cloning)
+
+Before PPO begins, the **actor is pre-trained** to imitate the oracle Mach via supervised learning:
+
+```
+for step in range(2000):
+    sample 256 random states from env.reset()
+    oracle_mach = env._oracle_mach()          ← golden-section search
+    target_action = (oracle_mach - 0.78) / 0.08
+    loss = MSE(actor(state), target_action)
+    optimizer.step()
 ```
 
-## MDP and PPO (Theory ↔ Experiment)
-**MDP Definition in This Project**
-- States `S`: `[alt, weight, TAT, CAS, tempDev, wind, phase, targetAlt]`
-- Actions `A`: continuous Mach command mapped to `[0.70, 0.86]`
-- Transitions `P(s'|s,a)`: physics update (fuel burn, climb/cruise dynamics) + stochastic wind/temp
-- Rewards `R(s,a)`: `-fuel_per_nm/10 - altitude_penalty - energy_penalty`
-- Discount `γ`: `0.99`
+This warm-starts the policy near a good solution, reducing the exploration needed during PPO.
 
-**Bellman Equations (Why They Apply)**
-```text
-V(s) = E[r(s,a) + γ V(s') | s]
-Q(s,a) = E[r(s,a) + γ V(s') | s,a]
+### 6.2 Phase 1 — Curriculum Learning
+
+Training starts in **cruise-only** mode (`phase_mode = "cruise_only"`) for the first 80,000 steps, so the agent first masters the main objective (fuel efficiency at cruise altitude). At step 80,000 the environment switches to **mixed phases** (climb + cruise + descent), teaching the agent to handle altitude transitions.
+
+### 6.3 Phase 2 — PPO Training
+
 ```
-Exact dynamic programming is infeasible because the state/action spaces are continuous, so we use function approximation (neural networks).
-
-**PPO Objective Used**
-```text
-r_t(θ) = π_θ(a_t|s_t) / π_θ_old(a_t|s_t)
-L_CLIP = E[min(r_t(θ) * A_t, clip(r_t(θ), 1-ε, 1+ε) * A_t)]
-δ_t = r_t + γ V(s_{t+1}) - V(s_t)
-A_t = δ_t + γλ δ_{t+1} + ...
-L_V = 0.5 * (V(s_t) - R_t)^2
-L_H = -β * H(π_θ(.|s_t))
-L = -L_CLIP + L_V + L_H
+Hyperparameter           Value
+──────────────────────   ─────────
+Total timesteps          250,000
+Batch size               128
+K epochs per update      4
+Learning rate            2e-4
+Discount γ               0.99
+GAE λ                    0.95
+PPO clip ε               0.2
+Entropy coefficient β    0.01
+Reward shaping strength  0.5
 ```
 
-**Mapping Theory to Experiment**
-- The actor network parameterizes `π_θ(a|s)` and outputs a Gaussian action (Mach).
-- The critic estimates `V(s)`, which drives advantage `A_t` for PPO updates.
-- Training optimizes expected discounted return `E[Σ γ^t r_t]`.
-- Evaluation compares PPO policy against a fixed Mach baseline on climb/cruise scenarios, measuring fuel per NM and average reward.
+Every 128 steps the buffer is consumed: advantages are computed with GAE, the policy is updated for K=4 epochs, the buffer is cleared, and training continues.
 
-## Notes
-- The physics is still simplified, but it is structured to be consistent and differentiable, which makes it a good DRL training target.
-- Inference uses deterministic policy mean for stable Mach predictions.
-## Config-Driven Approaches
-Each approach now has a dedicated config file under `configs/`.
+---
 
-**Golden config**
-- `configs/approach_expanded_fuel_model_golden.json`
+## 7. Project Structure
 
-**Other approaches**
-- `configs/approach_quadratic.json`
-- `configs/approach_linear_calibration.json`
-- `configs/approach_fuel_model_basic.json`
+```
+mach-predictor/
+├── run_golden.sh                    ← end-to-end pipeline script
+├── build_qar_dataset.py             ← builds data/qar_737800_cruise.csv from raw QAR
+├── train_fuel_model.py              ← trains neural fuel model from QAR
+├── train_agent.py                   ← PPO agent training
+├── evaluate_qar.py                  ← policy vs baseline evaluation on QAR data
+├── predict_mach.py                  ← single-row inference CLI
+├── aircraft_env.py                  ← custom Gymnasium environment
+├── data_generator.py                ← synthetic data generator (for prototyping)
+├── configs/
+│   ├── approach_expanded_fuel_model_golden.json   ← golden config (used by run_golden.sh)
+│   ├── approach_quadratic.json
+│   ├── approach_linear_calibration.json
+│   └── approach_fuel_model_basic.json
+├── data/
+│   ├── qar_737800_cruise.csv        ← 120k filtered cruise rows (built once)
+│   ├── Tail_01.csv … Tail_50.csv   ← synthetic per-tail data
+│   ├── Tail_X1.csv, Tail_Y2.csv    ← extra synthetic tails
+├── models/
+│   ├── fuel_model.pt                ← neural fuel model weights
+│   ├── fuel_model_scaler.json       ← feature normalization stats
+│   └── tail_policy.pt               ← trained PPO policy weights
+└── requirements.txt
+```
 
-Run training with:
+---
+
+## 8. Setup
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+---
+
+## 9. Usage
+
+### Full golden pipeline
+
+```bash
+bash run_golden.sh
+```
+
+Runs these four steps in order:
+1. **`build_qar_dataset.py`** — filters QAR CSVs into `data/qar_737800_cruise.csv`.
+   *Skipped automatically if the file already exists.*
+2. **`train_fuel_model.py`** — fits the neural fuel model.
+   *Skipped automatically if `models/fuel_model.pt` already exists.*
+3. **`train_agent.py --config configs/approach_expanded_fuel_model_golden.json`** — trains the PPO agent.
+4. **`evaluate_qar.py`** — evaluates the policy on 20,000 QAR cruise rows and prints improvement.
+
+### Train agent only (specific config)
+
 ```bash
 python train_agent.py --config configs/approach_expanded_fuel_model_golden.json
 ```
 
-**Golden pipeline script**
+### Evaluate existing model
+
 ```bash
-./run_golden.sh
+python evaluate_qar.py
 ```
-This runs:
-1. `build_qar_dataset.py`
-2. `train_fuel_model.py`
-3. `train_agent.py --config configs/approach_expanded_fuel_model_golden.json`
-4. `evaluate_qar.py`
+
+### Single-row inference
+
+```bash
+# python predict_mach.py <Alt> <Weight> <TAT> <CAS> [TempDevC] [WindKts] [Phase] \
+#   [TargetAlt] [Turb] [Regime] [AoA] [HStab] [TotalFuelWeight] [TrackAngle] \
+#   [FmcMach] [Lat] [Lon] [GMTHours] [Day] [Month] [Year]
+
+python predict_mach.py 36000 70000 -45 280 0 10 1 35000 0.2 0 2 0 8000 180 0.78 -10 -50 12 15 6 2023
+# Output: Predicted Optimal Mach: 0.7802
+```
+
+### Generate synthetic data (prototyping)
+
+```bash
+python data_generator.py
+# Creates data/Tail_01.csv … Tail_50.csv
+```
+
+---
+
+## 10. Latest Performance Results
+
+**Run date:** February 2026
+**Model:** `models/tail_policy.pt` (expanded-feature fuel model + PPO, golden config)
+**Evaluation data:** `data/qar_737800_cruise.csv`, 20,000 random cruise rows
+**Evaluation method:** Both baseline and policy evaluated via the same neural fuel model —
+- Baseline: fuel model queried at the **recorded mach** from QAR
+- Policy: fuel model queried at the **RL-recommended mach**
+
+| Metric | Value |
+|---|---|
+| QAR rows evaluated | 20,000 |
+| Baseline fuel/NM (recorded mach) | **12.01 kg/NM** |
+| Policy fuel/NM (RL-recommended mach) | **11.12 kg/NM** |
+| **Improvement** | **+7.44%** |
+
+The policy consistently recommends Mach numbers that the fuel model predicts will
+consume less fuel per nautical mile than the originally flown Mach.
+
+---
+
+## 11. Experiment History
+
+### QAR Cruise Baseline
+- Source: B737-800 fleet, cruise rows (altitude > 30,000 ft, ground speed > 100 kts)
+- Mean fuel per NM: **11.85–12.01 kg/NM** (depending on sample)
+- Mean cruise Mach: **0.7628**, FMC Mach: **0.6585**
+
+### Experiment 1 — Supervised Mach Regression
+**Goal:** Predict observed Mach from QAR states (MLP regression).
+
+- Features: `altitude, grossWeight, TAT, Airspeed, groundAirSpeed`
+- MAE: 0.2282 | RMSE: 0.2783 | R²: **-179.84**
+- Mean-Mach predictor MAE: 0.0141 (much better)
+
+**Finding:** Mach in cruise is nearly constant; supervised regression on these features cannot beat a constant baseline.
+
+### Experiment 2 — Environment Calibration (Linear + Quadratic)
+**Goal:** Fit a mapping `fpn_QAR ≈ f(fpn_env)`.
+
+- Linear: `a=0.1681, b=9.0294` → R²=0.009
+- Quadratic: `a=0.120, b=-4.003, c=44.855` → R²=0.059
+
+**Finding:** Calibration weakly explains QAR fuel variance; quadratic is better than linear.
+
+### Experiment 3 — Ridge Calibration (Expanded Features)
+- Features: `[fpn_env, fpn_env², fpn_env³, alt, weight, mach, temp_dev]`
+- MAE: 11.90 kg/NM | R²: **-12.81** — worse than quadratic.
+
+### Experiment 4 — MLP Calibration (Expanded Features)
+- Same features as Exp 3, two-layer MLP
+- MAE: 10.34 kg/NM | R²: **-9.75** — still worse than quadratic.
+
+### Experiment 5 — Quadratic Calibration + PPO
+- Policy fuel per NM: 12.37 | Baseline: 11.93 → **-3.75%** (policy worse)
+
+### Experiment 6 — Expanded-Feature Fuel Model + PPO (Golden)
+**Decision:** Replace calibration with a neural fuel model trained on full QAR feature set.
+
+- Fuel model R²: **0.69** (strong fit)
+- Policy fuel per NM: **11.12** | Baseline: **12.01** → **+7.44%** (policy better)
+
+This is the first configuration where DRL consistently beats the QAR baseline.
+
+### Comparative Summary
+
+| Experiment | Approach | Policy fuel/NM | QAR Improvement |
+|---|---|---|---|
+| Baseline | QAR recorded mach | 12.01 | — |
+| 1 | Supervised Mach regression | — | Not competitive |
+| 2 | Quadratic calibration | — | Indirect |
+| 3 | Ridge calibration (expanded) | — | Worse |
+| 4 | MLP calibration (expanded) | — | Worse |
+| 5 | Quadratic calibration + PPO | 12.37 | **-3.75%** |
+| **6** | **Expanded-feature fuel model + PPO** | **11.12** | **+7.44%** |
+
+### What would further improve the policy
+- Include thrust mode, flap config, N1 sensor readings, CG position as state features.
+- Phase-aware separate fuel models (climb vs cruise vs descent).
+- Continuous Mach optimization in the oracle rather than grid search.
+- Longer training (> 250k steps) or off-policy algorithms (SAC) for better sample efficiency.
+
+---
+
+## 12. State, Action, Transition Reference
+
+### State Variables
+
+| Name | Symbol | Range | Transition Driver |
+|---|---|---|---|
+| Altitude_ft | `alt` | 10k–41k ft | Climb/cruise/descent dynamics |
+| Weight_kg | `W` | 55k–78k kg | Fuel burn per step |
+| TAT_C | `TAT` | ~-60–+20 °C | ISA + TempDev |
+| CAS_kts | `CAS` | ~200–320 kts | Mach + air density |
+| TempDev_C | `ΔT` | -8–+8 °C | AR(1) random walk |
+| Wind_kts | `wind` | -60–+60 kts | AR(1) random walk |
+| Phase | `φ` | {0,1,2} | Altitude vs target |
+| TargetAlt_ft | `alt*` | 15k–39k ft | Fixed per scenario |
+| Turb | `τ` | 0–1 | AR(1) around 0.2 |
+| Regime | `ρ` | {0,1} | Random mid-episode flip |
+| AoA | `α` | -2–8 ° | Slow random walk |
+| HStab | `H` | -3–3 ° | Slow random walk |
+| TotalFuelWeight | `FW` | 1k–12k kg | Decreases with burn |
+| TrackAngle | `χ` | 0–360 ° | Slow random walk |
+| FmcMach | `M_FMC` | 0.70–0.86 | Slow random walk |
+| Latitude | `lat` | -35–5 ° | Fixed per episode |
+| Longitude | `lon` | -80–-30 ° | Fixed per episode |
+| GMTHours | `t` | 0–24 h | Increments by Δt |
+| Day | `d` | 1–28 | Fixed per episode |
+| Month | `m` | 1–12 | Fixed per episode |
+| Year | `y` | ~2023 | Fixed per episode |
+
+### Action
+
+| Name | Range | Mapping |
+|---|---|---|
+| Mach command | [-1, 1] | `Mach = 0.78 + a × 0.08` → [0.70, 0.86] |
+
+### Reward Components
+
+| Component | Formula | Purpose |
+|---|---|---|
+| Fuel efficiency | `-fuel_per_nm / 10` | Primary objective |
+| Altitude penalty | `-max(0, (|alt-alt*| - 1000) / 10000)` | Track target altitude |
+| Energy penalty | `-overspeed_penalty` | Avoid high Mach in climb/descent |
+| Shaping penalty | `-0.5 × ((Mach - oracle_Mach) / 0.08)²` | Guide toward oracle (optional) |
+
+---
+
+## 13. Diagrams
+
+### Training Flow
+
+```mermaid
+flowchart TD
+    A[QAR CSV data] --> B[build_qar_dataset.py]
+    B --> C[data/qar_737800_cruise.csv]
+    C --> D[train_fuel_model.py]
+    D --> E[models/fuel_model.pt]
+    C --> F[train_agent.py]
+    E --> F
+    F --> G[Oracle pretraining\nbehavior cloning]
+    G --> H[Curriculum: cruise-only\nsteps 0–80k]
+    H --> I[Full phases\nsteps 80k–250k]
+    I --> J[models/tail_policy.pt]
+    J --> K[evaluate_qar.py]
+    C --> K
+    E --> K
+    K --> L[improvement_pct: +7.44%]
+```
+
+### PPO Update Cycle
+
+```mermaid
+flowchart LR
+    S[State s_t] -->|Actor πθ| A[Action a_t\nMach]
+    A -->|AircraftEnv| S2[s_{t+1}]
+    A -->|Fuel model + reward| R[r_t]
+    S2 -->|Critic V| V[V s_{t+1}]
+    R --> ADV[Advantage A_t\nGAE]
+    V --> ADV
+    ADV -->|PPO clip + update| S
+```
+
+### Flight Phase State Machine
+
+```mermaid
+stateDiagram-v2
+    [*] --> Climb: phase=0
+    Climb --> Cruise: alt ≥ target − 300 ft
+    Cruise --> Cruise: hold altitude
+    Cruise --> Descent: target set lower
+    Descent --> Cruise: alt ≤ target + 300 ft
+```
+
+### Drag vs Mach (Why There's an Optimal Speed)
+
+```
+Fuel/NM
+   │
+   │      induced drag          wave drag
+   │        ╲                    ╱
+   │         ╲                  ╱
+   │          ╲                ╱
+   │           ╲______________╱   ← optimal Mach here
+   │
+   └────────────────────────────── Mach
+           0.70  0.74  0.78  0.82  0.86
+                        ↑
+                     M_crit
+```
+
+At low Mach, induced drag dominates (heavy aircraft at low speed needs high CL).
+Above M_crit, wave drag rises steeply. The policy learns to sit near the minimum.
+
+---
+
+## Notes
+
+- The neural fuel model and the physics fallback produce consistent reward signals — the physics model is used during random initialization only; the golden pipeline always uses `models/fuel_model.pt`.
+- All scripts are self-contained and portable; no external data paths are required if `data/qar_737800_cruise.csv` and `models/` already exist.
+- `evaluate_qar.py` reads `data/qar_737800_cruise.csv` (columns: `CAS`, `windKts`, `mach`, etc.) and reconstructs ground speed as `CAS + windKts`. Baseline fuel is evaluated via the fuel model at the recorded mach, ensuring a fair apples-to-apples comparison with the policy.

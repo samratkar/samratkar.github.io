@@ -8,8 +8,7 @@ from train_agent import ActorCritic
 
 
 def main():
-    root = Path("/Users/samrat.kar/cio/airlines-data/glo/737-800/baseline")
-    max_rows = 200000
+    qar_path = Path("data/qar_737800_cruise.csv")
     sample_rows = 20000
 
     # Load policy + env (uses expanded-feature fuel model if configured in env)
@@ -22,58 +21,23 @@ def main():
     policy.load_state_dict(torch.load("models/tail_policy.pt"))
     policy.eval()
 
-    rows = []
-    row_count = 0
-    for f in root.rglob("*.csv"):
-        try:
-            df = pd.read_csv(f)
-        except Exception:
-            continue
-        cols = [
-            "selectedFuelFlow1",
-            "selectedFuelFlow2",
-            "groundAirSpeed",
-            "Airspeed",
-            "altitude",
-            "grossWeight",
-            "totalAirTemperatureCelsius",
-            "mach",
-            "angleOfAttackVoted",
-            "horizontalStabilizerPosition",
-            "totalFuelWeight",
-            "trackAngleTrue",
-            "fmcMach",
-            "latitude",
-            "longitude",
-            "GMTHours",
-            "Day",
-            "Month",
-            "YEAR",
-        ]
-        if not set(cols).issubset(df.columns):
-            continue
-        df = df[cols].dropna()
-        rows.append(df)
-        row_count += len(df)
-        if row_count >= max_rows:
-            break
+    if not qar_path.exists():
+        raise RuntimeError(f"No usable QAR record found at {qar_path}. Run build_qar_dataset.py first.")
 
-    qar = pd.concat(rows, ignore_index=True)
-    qar = qar[(qar["groundAirSpeed"] > 100) & (qar["altitude"] > 30000)]
+    qar = pd.read_csv(qar_path)
     if len(qar) > sample_rows:
         qar = qar.sample(sample_rows, random_state=42)
 
-    ff = qar["selectedFuelFlow1"] + qar["selectedFuelFlow2"]
-    fpn_baseline = (ff / qar["groundAirSpeed"]).astype(float)
-
-    wind = (qar["groundAirSpeed"] - qar["Airspeed"]).astype(float).to_numpy()
+    # qar_737800_cruise.csv uses 'CAS' for airspeed and 'windKts' for groundSpeed-CAS
+    wind = qar["windKts"].astype(float).to_numpy()
     alt = qar["altitude"].to_numpy()
     alt_m = alt * 0.3048
     isa_temp = np.array([isa_atmosphere(a)[0] for a in alt_m]) - 273.15
-    temp_dev = qar["totalAirTemperatureCelsius"].to_numpy() - isa_temp
+    temp_dev = qar["tempDevC"].to_numpy()
 
     weight = qar["grossWeight"].to_numpy()
-    cas = qar["Airspeed"].to_numpy()
+    cas = qar["CAS"].to_numpy()
+    gs = (cas + wind).clip(min=100.0)
 
     _turb = np.full_like(alt, 0.2, dtype=float)
     regime = np.zeros_like(alt, dtype=float)
@@ -115,30 +79,53 @@ def main():
     action = action.numpy().reshape(-1)
     policy_mach = 0.78 + action * 0.08
 
-    fpn_policy = []
-    for i in range(len(policy_mach)):
-        m = float(np.clip(policy_mach[i], env.mach_min, env.mach_max))
+    tat_arr = qar["totalAirTemperatureCelsius"].to_numpy()
+    aoa_arr = qar["angleOfAttackVoted"].to_numpy()
+    hstab_arr = qar["horizontalStabilizerPosition"].to_numpy()
+    tfw_arr = qar["totalFuelWeight"].to_numpy()
+    track_arr = qar["trackAngleTrue"].to_numpy()
+    fmc_arr = qar["fmcMach"].to_numpy()
+    lat_arr = qar["latitude"].to_numpy()
+    lon_arr = qar["longitude"].to_numpy()
+    gmt_arr = qar["GMTHours"].to_numpy()
+    day_arr = qar["Day"].to_numpy()
+    month_arr = qar["Month"].to_numpy()
+    year_arr = qar["YEAR"].to_numpy()
+    mach_arr = qar["mach"].to_numpy()
+
+    def _set_env_state(i):
         env.altitude = float(alt[i])
         env.weight = float(weight[i])
-        env.tat = float(qar["totalAirTemperatureCelsius"].to_numpy()[i])
+        env.tat = float(tat_arr[i])
         env.cas = float(cas[i])
         env.wind_kts = float(wind[i])
-        env.aoa = float(qar["angleOfAttackVoted"].to_numpy()[i])
-        env.hstab = float(qar["horizontalStabilizerPosition"].to_numpy()[i])
-        env.total_fuel_weight = float(qar["totalFuelWeight"].to_numpy()[i])
-        env.track_angle = float(qar["trackAngleTrue"].to_numpy()[i])
-        env.fmc_mach = float(qar["fmcMach"].to_numpy()[i])
-        env.latitude = float(qar["latitude"].to_numpy()[i])
-        env.longitude = float(qar["longitude"].to_numpy()[i])
-        env.gmt_hours = float(qar["GMTHours"].to_numpy()[i])
-        env.day = float(qar["Day"].to_numpy()[i])
-        env.month = float(qar["Month"].to_numpy()[i])
-        env.year = float(qar["YEAR"].to_numpy()[i])
+        env.aoa = float(aoa_arr[i])
+        env.hstab = float(hstab_arr[i])
+        env.total_fuel_weight = float(tfw_arr[i])
+        env.track_angle = float(track_arr[i])
+        env.fmc_mach = float(fmc_arr[i])
+        env.latitude = float(lat_arr[i])
+        env.longitude = float(lon_arr[i])
+        env.gmt_hours = float(gmt_arr[i])
+        env.day = float(day_arr[i])
+        env.month = float(month_arr[i])
+        env.year = float(year_arr[i])
 
+    # Baseline: fuel model evaluated at actual recorded mach
+    fpn_baseline = []
+    for i in range(len(qar)):
+        _set_env_state(i)
+        ff_hr = env._fuel_flow_from_model(float(np.clip(mach_arr[i], env.mach_min, env.mach_max)))
+        fpn_baseline.append(ff_hr / float(gs[i]))
+    fpn_baseline = np.array(fpn_baseline)
+
+    # Policy: fuel model evaluated at policy-recommended mach
+    fpn_policy = []
+    for i in range(len(policy_mach)):
+        _set_env_state(i)
+        m = float(np.clip(policy_mach[i], env.mach_min, env.mach_max))
         ff_hr = env._fuel_flow_from_model(m)
-        gs = max(float(qar["groundAirSpeed"].to_numpy()[i]), 100.0)
-        fpn_policy.append(ff_hr / gs)
-
+        fpn_policy.append(ff_hr / float(gs[i]))
     fpn_policy = np.array(fpn_policy)
 
     baseline_mean = float(np.mean(fpn_baseline))

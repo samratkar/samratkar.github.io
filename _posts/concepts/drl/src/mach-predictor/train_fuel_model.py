@@ -62,6 +62,10 @@ def load_qar_rows():
 
 
 def main():
+    if MODEL_PATH.exists() and SCALER_PATH.exists():
+        print("Fuel model already exists, skipping training.")
+        return
+
     qar = load_qar_rows()
 
     # Features and target

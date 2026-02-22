@@ -10,6 +10,10 @@ SAMPLE_ROWS = 120000
 
 
 def main():
+    if OUT_PATH.exists():
+        print(f"QAR dataset already exists at {OUT_PATH}, skipping build.")
+        return
+
     rows = []
     row_count = 0
     for f in DATA_ROOT.rglob("*.csv"):
