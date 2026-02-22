@@ -343,7 +343,6 @@ title: Home - All Articles
           <a href="/" class="nav-link" style="color: white !important;">🏠 Home</a>
           <a href="/about/" class="nav-link" style="color: white !important;">👤 About</a>
           <a href="/books/" class="nav-link" style="color: white !important;">📚 Books</a>
-          <a href="/colabs/" class="nav-link" style="color: white !important;">🧪 Colabs</a>
         </nav>
       </div>
     </div>
