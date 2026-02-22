@@ -1,0 +1,29 @@
+{
+  "timestamp": "20260222_145640",
+  "config_path": "configs/approach_expanded_fuel_model_syn.json",
+  "qar_data_path": "data/qar_737800_synthetic.csv",
+  "phase_mode": "cruise_only",
+  "timing_seconds": {
+    "pretrain": 299.38546800613403,
+    "total": 608.670761346817
+  },
+  "hyperparameters": {
+    "learning_rate": 0.0002,
+    "gamma": 0.99,
+    "eps_clip": 0.2,
+    "k_epochs": 4,
+    "batch_size": 128,
+    "total_timesteps": 30000,
+    "hidden_size": 64,
+    "pretrain_steps": 300,
+    "pretrain_batch": 128,
+    "reward_shaping_strength": 1.0,
+    "curriculum_steps": 50000
+  },
+  "artifacts": {
+    "policy_in_run_folder": "models/syn/saved_20260222_145640/tail_policy.pt",
+    "policy_latest": "models/syn/tail_policy.pt",
+    "fuel_model_copied": "models/syn/saved_20260222_145640/fuel_model.pt",
+    "fuel_scaler_copied": "models/syn/saved_20260222_145640/fuel_model_scaler.json"
+  }
+}

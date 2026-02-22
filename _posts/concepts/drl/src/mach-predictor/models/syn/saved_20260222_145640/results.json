@@ -1,0 +1,11 @@
+{
+  "qar_rows": 20000,
+  "baseline_fuel_per_nm": 12.249326891505453,
+  "policy_fuel_per_nm": 12.00537574088277,
+  "improvement_pct": 1.9915473950805915,
+  "policy_path": "models/syn/tail_policy.pt",
+  "fuel_model_path": "models/syn/fuel_model.pt",
+  "fuel_scaler_path": "models/syn/fuel_model_scaler.json",
+  "input_csv": "data/qar_737800_synthetic.csv",
+  "data_root": "\\Users\\samrat.kar\\cio\\airlines-data\\glo\\737-800\\baseline"
+}
