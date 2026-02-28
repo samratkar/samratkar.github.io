@@ -3,6 +3,7 @@ tags : [english, tuition-fun]
 category : [tuitions]
 subcategory : [tuition-fun]
 title : "Tuition & Fun"
+layout : mermaid
 ---
 
 # Tuition & Fun
