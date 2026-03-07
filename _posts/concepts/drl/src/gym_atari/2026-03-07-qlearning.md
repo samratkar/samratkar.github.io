@@ -1,6 +1,9 @@
 ---
 tags : [drl, deep-queue, gymnasium]
-title : "Q-Learning Notes"
+title : "Deep Q Learning Notes"
+category: dlr 
+subcategory: Deep Q Learning
+layout : mermaid
 ---
 
 # Deep Q learning 
@@ -60,4 +63,3 @@ The lunar lander crashes. Because -
   8. No reward/gradient stabilization (e.g., clipping) can further increase unstable updates in early training.  
 
   ## Improvising the training loop - Part 2
-  
