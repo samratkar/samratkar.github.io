@@ -41,7 +41,7 @@ def calculate_loss(net, state, action, next_state, reward, done):
     return criterion(current_q, target_q)
 
 
-env = gym.make("LunarLander-v3")
+env = gym.make("LunarLander-v3", render_mode="human")
 
 for episode in range(NUM_EPISODES):
     state, _ = env.reset()
@@ -62,4 +62,6 @@ for episode in range(NUM_EPISODES):
         episode_reward += reward
 
     print(f"Episode {episode + 1}: reward={episode_reward:.2f}")
+
+env.close()
 

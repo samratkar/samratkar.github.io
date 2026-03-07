@@ -39,13 +39,25 @@ $$
 
 ![](./q_network.py)
 
-## Training the neural network
+## Training the neural network with lunar lander environment - Part 1
 
 ![](/assets/drl/lossfun.jpg)
 
 {% highlight python %}
-{% include_relative lunar_lander.py %}
+{% include_relative lunar_lander1.py %}
 {% endhighlight %}
 
-![](./lunar_lander.py)
+![](./lunar_lander1.py)
 
+The lunar lander crashes. Because - 
+  1. The agent starts with an untrained Q-network, so its Q-values are essentially random.
+  2. The policy is greedy (argmax) from the start, so it repeatedly picks whatever random action currently looks best.
+  3. There is no exploration strategy (no epsilon-greedy), so it does not try enough alternative actions to discover safer behavior.                                                                        
+  4. LunarLander needs coordinated action sequences; random/poor early choices quickly lead to bad trajectories and crashes.                                                                            
+  5. Training updates are noisy because they are done step-by-step on highly correlated samples (no replay buffer)
+  6. There is no target network, so the learning target moves every step, making Q-learning unstable.
+  7. Very short training (10 episodes) is far from enough for this task; early episodes are expected to be mostly crashes.
+  8. No reward/gradient stabilization (e.g., clipping) can further increase unstable updates in early training.  
+
+  ## Improvising the training loop - Part 2
+  
