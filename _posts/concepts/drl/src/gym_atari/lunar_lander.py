@@ -1,48 +1,65 @@
 """
-loop through all episodes 
-    loop through steps in each episode
-        at each step choose an action, 
-        calculate the loss,
-        update the network
+Simple LunarLander DQN-style training loop.
 """
 
 import gymnasium as gym
-import numpy as np
 import torch
 import torch.nn as nn
 
-import gymnasium as gym
-import numpy as np
-import torch
-import torch.nn as nn
+from q_network import QNetwork
 
-class Network(nn.Module):
-    def __init__(self, dim_in, dim_out):
-        super().__init__()
-        self.linear = nn.Linear(dim_in, dim_out)
-    def forward(self, x):
-        return self.linear(x)
+GAMMA = 0.99
+LR = 1e-4
+NUM_EPISODES = 10
 
-# instantiate the network. nn works as a policy to map states to actions. 
-# input is 8 : set of one state representation. here 8 inputs constitute one input state representation. 
-# output is number of actions. 4 in this case.
-network = Network(8, 4)
 
-env = gym.make("LunarLander-v2")
-# Run ten episodes
-for episode in range(10):
-    state, info = env.reset()
-    done = False    
-    # Run through steps until done
+model = QNetwork(8, 4)
+optimizer = torch.optim.Adam(model.parameters(), lr=LR)
+criterion = nn.MSELoss()
+
+
+def to_tensor(state):
+    return torch.tensor(state, dtype=torch.float32)
+
+
+def select_action(net, state_tensor):
+    q_values = net(state_tensor)
+    return torch.argmax(q_values).item()
+
+
+def calculate_loss(net, state, action, next_state, reward, done):
+    state_t = to_tensor(state)
+    next_state_t = to_tensor(next_state)
+
+    q_values = net(state_t)
+    current_q = q_values[action]
+
+    with torch.no_grad():
+        next_q = net(next_state_t).max()
+        target_q = reward + GAMMA * next_q * (1 - int(done))
+
+    return criterion(current_q, target_q)
+
+
+env = gym.make("LunarLander-v3")
+
+for episode in range(NUM_EPISODES):
+    state, _ = env.reset()
+    done = False
+    episode_reward = 0.0
+
     while not done:
-        action = select_action(network, state)        
-        # Take the action
-        next_state, reward, terminated, truncated, _ = (env.step(action))
-        done = terminated or truncated        
-        loss = calculate_loss(network, state, action, next_state, reward, done)
+        action = select_action(model, to_tensor(state))
+        next_state, reward, terminated, truncated, _ = env.step(action)
+        done = terminated or truncated
+
+        loss = calculate_loss(model, state, action, next_state, reward, done)
         optimizer.zero_grad()
         loss.backward()
-        optimizer.step()        
-        # Update the state
-        state = next_state 
-    print(f"Episode {episode} complete.")
+        optimizer.step()
+
+        state = next_state
+        episode_reward += reward
+
+    print(f"Episode {episode + 1}: reward={episode_reward:.2f}")
+

@@ -3,7 +3,49 @@ tags : [drl, deep-queue, gymnasium]
 title : "Q-Learning Notes"
 ---
 
-# Action value function 
-![](/assets/drl/action-value-fn.jpg)
+# Deep Q learning 
+## What is Q? 
+ 
+`Action value function` **$Q(s,a)$** associating a value (reward) to any combination of state $s_t$ and action $a_t$.
 
-$\pi(a|s) = \epsilon$-greedy policy derived from $Q(s,a)$
+![](/assets/drl/q_s_a.jpg)
+
+## Recursive definition of Q
+
+$Q(s_t,a_t)$ can be written as a recursive formula called the `Bellman equation`, expressing the **Q value** in the current state in terms of the Q values of the next states: 
+
+![](/assets/drl/bellman-deterministic-q.jpg)
+
+The **update rule** for Q learning - 
+
+![](/assets/drl/q_learning_update_rule.jpg)
+
+## Q Network
+### Mapping states to action values
+
+![](/assets/drl/q_nw.jpg)
+
+`Bellman optimality equation` (for $Q^{*}$):
+
+$$
+Q^{*}(s_t,a_t) = \mathbb{E}\!\left[ r_t + \gamma \max_{a'} Q^{*}(s_{t+1},a') \;\middle|\; s_t=s,\; a_t=a \right]
+$$
+
+### A neural network to implement the Q function
+
+{% highlight python %}
+{% include_relative q_network.py %}
+{% endhighlight %}
+
+![](./q_network.py)
+
+## Training the neural network
+
+![](/assets/drl/lossfun.jpg)
+
+{% highlight python %}
+{% include_relative lunar_lander.py %}
+{% endhighlight %}
+
+![](./lunar_lander.py)
+

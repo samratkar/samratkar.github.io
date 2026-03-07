@@ -1,6 +1,8 @@
-gymnasium==1.0.0
+gymnasium
 numpy
 pandas
 matplotlib
 torch
 scikit-learn
+swig
+gymnasium[box2d]
