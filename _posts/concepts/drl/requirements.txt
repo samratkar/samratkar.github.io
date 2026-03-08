@@ -4,6 +4,5 @@ pandas
 matplotlib
 torch
 scikit-learn
-swig
-gymnasium[box2d]
-matplotlib
+Box2D
+pygame

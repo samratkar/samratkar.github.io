@@ -1,12 +1,12 @@
 ---
 tags : [drl, deep-queue, gymnasium]
-title : "Deep Q Learning Notes"
+title : "Q Learning Notes"
 category: dlr 
-subcategory: "Deep Q Learning"
+subcategory: "Q Learning"
 layout : mermaid
 ---
 
-# Deep Q learning 
+# Q learning Notes 
 ## What is Q? 
  
 `Action value function` **$Q(s,a)$** associating a value (reward) to any combination of state $s_t$ and action $a_t$.
@@ -23,7 +23,7 @@ The **update rule** for Q learning -
 
 ![](/assets/drl/q_learning_update_rule.jpg)
 
-## Q Network
+## Q Network - QN
 ### Mapping states to action values
 
 > Q-network maps **state -> Q-values** for **all** actions, that are possible from **that state**.
@@ -172,12 +172,12 @@ That is the value used in loss (predicted Q(s,a) vs target).
 
 ![](./lunar_lander2_replay_buffer.py)
 
-## The complete DQN algorithm 
-### The Problem 
+## Double Q learning - DQN  
+## The Problem with Q learning 
 1. enough exploration was not done. 
 2. There were no targets for Q-values. 
 
-### Epsilon Greediness - more exploration
+## Epsilon Greediness - more exploration
 Epsilon greediness lets the agent occasionally choose a random action over the highest value one. **Decayed greediness** can be followed to focus more on exploration early in training and more on exploitation later.
 
 $\epsilon = end + (start - end) \cdot e^{-\frac{step}{decay}}$
@@ -294,5 +294,71 @@ update_target_network(target_network, online_network, tau)
 {% endhighlight %}
 ![](./lunar_lander3_greedy_fixedQ.py)
 
-## Double DQN - to address overestimation bias in Q-learning
-In standard DQN, the same network is used to select the action and to evaluate the action's value, which can lead to overestimation of Q-values. Double DQN addresses this by using the online network to select the action and the target network to evaluate the action's value. This helps to reduce overestimation bias and leads to more stable learning.
+## Double DQN - DDQN - to address overestimation bias in Q-learning
+
+> **PLAIN DQN - Double Queue Network** - With the target network separated out, it reduces feedback loops from rapidly moving target, but does not fully remove overestimation bias. 
+
+
+1. In DQN, there is a tendency to overestimate Q-values because the calculation of all target q_values involves taking maximum across all actions.This maximum is not taken from the **real action value function, but from our current best estimate** (from a neural network, that has not seen all the trainsitions yet), which is noisy.  
+
+2. In standard DQN, the target uses : $y = r + \gamma \max_{a'} Q_{\theta^-}(s', a')$ 
+The issue is that Q-value function is being approximated by a neural network with parameters $\theta^-$, and the max operator is applied to these noisy estimates, which can lead to overestimation of the true Q-values.
+In DQN target there are two parameter sets being used - 
+
+- $(Q_\theta)$: online network (being updated),                                                                         
+- $(Q_{\theta^-})$: target network (older/frozen copy for stability).
+
+3. In tabular Bellman equations, one often write just (Q(s,a)) (no parameters), because each state-action has its own stored value. 
+
+4. This is known as `maximization bias` or `overestimation bias` in Q-learning. This leads to slower and less stable learning. 
+
+5. For vanilla Q-learning, the update rule is - (**Value Estimation**)
+$$\left[Q_1(s,a) \leftarrow (1-\alpha)Q_1(s,a) + \alpha\left[r + \gamma \max_{a'} Q_0(s',a')\right]\right]$$  
+
+- $(Q_1)$: online/current network (being updated).
+- $(Q_0)$: target/frozen network (older copy).
+- $(\alpha)$: learning rate.
+- $(r + \gamma(\cdot))$: bootstrapped Bellman target.
+
+in NN training, this is implemented as minimizing the **loss function** : 
+$$\left[\big(Q_1(s,a)-[r+\gamma\max_{a'}Q_0(s',a')]\big)^2\right]$$
+
+- **Action selection** = choosing which next action looks best: $[a^*=\arg\max_{a'} Q_0(s',a')]$ - $max_a = argmax(Q_1(s'))$
+
+- **Value estimation** = evaluating how good that chosen action is: $[Q_0(s',a^*)]$
+- In vanilla DQN target: **$[r + \gamma \max_{a'} Q_0(s',a')]$**
+
+- this is equivalent to:
+1. $(a^* = \arg\max_{a'} Q_0(s',a'))$  (pick best action under $(Q_0)$) - **action selection**
+2. use $(Q_0(s',a^*))$ as the value - **value estimation** 
+Both these tasks are being done by the **Target NN** 
+So $(\max_{a'} Q_0(s',a') = Q_0(s',a^*))$.
+Same thing, different notation. Vanilla formula hides the separate **“select then evaluate”** steps by writing them as one max expression.
+
+> **Double DQN - DDQN** - This addresses overestimation more directly by decoupling selection and evaluation of the action in the target calculation.
+
+$[a^* = \arg\max_{a'} Q_{\theta}(s',a') \quad\text{(select with online net)}]$ 
+$[y = r + \gamma Q_{\theta^-}(s', a^*) \quad\text{(evaluate with target net)}]$  
+
+![](/assets/drl/ddqn.jpg)
+
+![](/assets/drl/ddqn1.jpg)
+
+![](/assets/drl/online-target-nn.jpg)
+
+## DDQN - Double DQN Implementation 
+{% highlight python %}
+{% include_relative lunar_lander4_ddqn.py %}
+{% endhighlight %}
+
+![](./lunar_lander4_ddqn.py)
+
+## Summary
+Online Network and Target Network:
+1. The online network is used for action selection and is updated by gradient descent.
+2. The target network is used for value evaluation and is updated by taking a weighted average between both networks.
+
+Training Double DQN:
+
+1. Use the online network to calculate actions for the Q-target calculation.
+2. Use the target network to estimate the Q-value corresponding to these actions.
