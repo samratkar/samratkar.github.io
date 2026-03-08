@@ -1,31 +1,61 @@
 """
-Simple LunarLander DQN-style training loop.
+Greedy Epsilon and fix Q-value 
 """
 
 import gymnasium as gym
 import matplotlib.pyplot as plt
 import numpy as np
+from datetime import datetime
 import torch
 import torch.nn as nn
+import random 
+import math
 
 from q_network import QNetwork
 from replay_buffer import ReplayBuffer
+
 
 GAMMA = 0.99
 LR = 1e-4
 NUM_EPISODES = 100
 batch_size = 64
 replay_buffer = ReplayBuffer(capacity=10000)
+tau = 0.001
 
 q_network = QNetwork(8, 4)
 optimizer = torch.optim.Adam(q_network.parameters(), lr=LR)
 criterion = nn.MSELoss()
+online_network = QNetwork(8, 4)
+target_network = QNetwork(8,4)
+target_network.load_state_dict(online_network.state_dict())
+
+def update_target_network(target_network, online_network, tau):
+    target_net_state_dict = target_network.state_dict()
+    online_net_state_dict = online_network.state_dict()
+    for key in online_net_state_dict:
+        target_net_state_dict[key] = (online_net_state_dict[key]*tau) + target_net_state_dict[key] * (1-tau)
+    target_network.load_state_dict(target_net_state_dict)
+    return None
+
+
+# slect action based on decayed epsilon greedy method
+def select_action(q_values, step, start, end, decay):
+    # calculate the threshold value for this step 
+    epsilon = (end + (start-end)*math.exp(-step/decay))
+    # draw a random number between 0 and 1
+    sample = random.random()
+    if sample < epsilon:
+        # Return the random action index 
+        return random.choice(range(len(q_values)))
+    #Return the action index with the highest Q value
+    return torch.argmax(q_values).item()
+
 
 
 def to_tensor(state):
     return torch.tensor(state, dtype=torch.float32)
 
-def describe_episode(episode, reward, episode_reward, step, terminated, truncated):
+def describe_episode(episode, reward, episode_reward, step, terminated, truncated, total_steps):
     if truncated:
         status = "Timeout"
     elif episode_reward >= 200:
@@ -40,12 +70,15 @@ def describe_episode(episode, reward, episode_reward, step, terminated, truncate
         status = "Crashed"
 
     print(
-        f"| Episode {episode + 1:4d} | Duration: {step:4d} steps | Reward: {episode_reward:10.2f} | {status:<12} |"
+        f"| Episode {episode + 1:4d} | Duration: {step:4d} steps | Reward: {episode_reward:10.2f} | {status:<12} | Total Steps: {total_steps:6d} |"
     )
 
 
 def plot_rewards(episode_rewards):
     episodes = list(range(1, len(episode_rewards) + 1))
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    trend_filename = f"lunar_lander3_rewards_trend_{timestamp}.png"
+    hist_filename = f"lunar_lander3_rewards_histogram_{timestamp}.png"
     x = np.asarray(episodes, dtype=np.float32)
     y = np.asarray(episode_rewards, dtype=np.float32)
 
@@ -63,7 +96,7 @@ def plot_rewards(episode_rewards):
     plt.grid(alpha=0.3)
     plt.legend()
     plt.tight_layout()
-    plt.savefig("lunar_lander_rewards_trend.png", dpi=150)
+    plt.savefig(trend_filename, dpi=150)
 
     # Histogram of achieved rewards
     plt.figure(figsize=(10, 5))
@@ -73,14 +106,15 @@ def plot_rewards(episode_rewards):
     plt.ylabel("Frequency")
     plt.grid(alpha=0.25)
     plt.tight_layout()
-    plt.savefig("lunar_lander_rewards_histogram.png", dpi=150)
+    plt.savefig(hist_filename, dpi=150)
+    print(f"Saved plots: {trend_filename}, {hist_filename}")
 
     plt.show()
 
 
 env = gym.make("LunarLander-v3", render_mode="human")
 all_episode_rewards = []
-
+total_steps = 0
 for episode in range(NUM_EPISODES):
     state, info = env.reset()
     done = False
@@ -89,10 +123,11 @@ for episode in range(NUM_EPISODES):
 
     while not done:
         step += 1
-        # invokes the q_network and passes the inputs states, and it returns q_values for all the states - 1 row for each state. 
-        q_values = q_network(state)
-        # argmax() returns the index of the highest q_value for each row. 
-        action = torch.argmax(q_values).item()
+        total_steps += 1
+        # invokes the online_network and passes the inputs states, and it returns q_values for all the states - 1 row for each state. 
+        q_values = online_network(state)
+        # select the action with epsilon greediness
+        action = select_action(q_values, total_steps, start=0.9, end=0.05, decay=1000)
         # apply the chosen action to the environment for one timestep, till done. 
         next_state, reward, terminated, truncated, _ = env.step(action)
         done = terminated or truncated
@@ -103,19 +138,22 @@ for episode in range(NUM_EPISODES):
         # sample a batch of 64 experiences from the replay buffer 
         if len(replay_buffer) >= batch_size:
             states, actions, rewards, next_states, dones = replay_buffer.sample(batch_size)
-            q_values = q_network(states).gather(1, actions).squeeze(1)
-            # obtain the next state q_values across all columns in a given row
-            next_state_q_values = q_network(next_states).amax(1)
-            target_q_values = rewards + GAMMA * next_state_q_values * (1-dones)
+            q_values = online_network(states).gather(1, actions).squeeze(1)
+            # don't update the weights of the target network during backward propagation. gradients are not tracked.
+            with torch.no_grad():
+                # obtain the next state q_values across all columns in a given row
+                next_state_q_values = target_network(next_states).amax(1)
+                target_q_values = rewards + GAMMA * next_state_q_values * (1-dones)
             loss = nn.MSELoss()(target_q_values, q_values)
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
+            update_target_network(target_network, online_network, tau=0.005)
         state = next_state
         episode_reward += reward
 
     all_episode_rewards.append(episode_reward)
-    describe_episode(episode, reward, episode_reward, step, terminated, truncated)
+    describe_episode(episode, reward, episode_reward, step, terminated, truncated, total_steps)
 
 env.close()
 plot_rewards(all_episode_rewards)

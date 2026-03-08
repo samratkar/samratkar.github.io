@@ -49,7 +49,13 @@ $$
 Q^{*}(s_t,a_t) = \mathbb{E}\!\left[ r_t + \gamma \max_{a'} Q^{*}(s_{t+1},a') \;\middle|\; s_t=s,\; a_t=a \right]
 $$
 
-### A neural network to implement the Q function
+### A neural network to implement the Q function for Lunar Lander environment
+
+```python 
+# QNetwork(state_size, action_size). for Lunar Lander action_size = 4
+# Action space - [0, 1, 2, 3] - [do nothing, fire left engine, fire main engine, fire right engine]
+# State space - 8 dimensions - [x, y, x_dot, y_dot, angle, angular_velocity, left_leg_contact, right_leg_contact]
+``` 
 
 {% highlight python %}
 {% include_relative q_network.py %}
@@ -91,13 +97,6 @@ The lunar lander crashes. Because -
 Experience Replay buffer - a memory that stores the agent's experiences at each time step, $e_t = (s_t, a_t, r_{t+1}, s_{t+1})$. During training, we sample mini-batches of experiences from the replay buffer to update the Q network. This breaks the correlation between consecutive updates and allows the agent to learn from a more diverse set of experiences.
 
 ## Improvising the training loop - Part 2 - Replay Buffering 
-
-{% highlight python %}
-{% include_relative lunar_lander2_replay_buffer.py %}
-{% endhighlight %}
-
-![](./lunar_lander2_replay_buffer.py)
-
 ### Dequeue data structure 
 
 {% highlight python %}
@@ -164,3 +163,126 @@ q_values[2] = 0.7
   ]
 ```
 That is the value used in loss (predicted Q(s,a) vs target).
+
+### Full algorithm with replay buffer
+
+{% highlight python %}
+{% include_relative lunar_lander_replay_buffer.py %}
+{% endhighlight %}
+
+![](./lunar_lander_replay_buffer.py)
+
+## The complete DQN algorithm 
+### The Problem 
+1. enough exploration was not done. 
+2. There were no targets for Q-values. 
+
+### Epsilon Greediness - more exploration
+Epsilon greediness lets the agent occasionally choose a random action over the highest value one. **Decayed greediness** can be followed to focus more on exploration early in training and more on exploitation later.
+
+$\epsilon = end + (start - end) \cdot e^{-\frac{step}{decay}}$
+
+![](/assets/drl/decayedepsilon.jpg)
+
+This is implemented in the `select_action()` function - 
+it requires 5 arguments - 
+- `q_values`: The Q-values for all actions in the current state. This determines the optimal action. 
+- `step` : the current step number 
+- `start`, `end` and `decay` - thre parameters describing the epsilon decay.
+
+
+```python
+# slect action based on decayed epsilon greedy method
+def select_action(q_values, step, start, end, decay):
+    # calculate the threshold value for this step 
+    epsilon = (end + (start-end)*math.exp(-step/decay))
+    # draw a random number between 0 and 1
+    sample = random.random()
+    if sample < epsilon:
+        # Return the random action index 
+        return random.choice(range(len(q_values)))
+    #Return the action index with the highest Q value
+    return torch.argmax(q_values).item()
+```
+
+### Fixed Q value - more stable learning
+
+The loss function is such that the target keeps changing with the network's own predictions. 
+This is because - 
+- Q-network is used in both q-value and TD Target calculation 
+- this shifts both q-value and the target value. 
+This can lead to instability. To address this, we use a **separate target network** that is a copy of the main Q-network but with frozen weights. The target network is updated periodically (e.g., every few episodes) with the weights of the main Q-network. This way, the target values are more stable during training.
+
+![](/assets/drl/lossfun.jpg)
+
+#### Target network
+
+A target neural network predicts the target Q-values, and its weights are updated less frequently than the main network. This helps to stabilize training by providing a more consistent target for the loss function.
+
+The online Q-network is updated every step, while the target network is updated every few episodes (or steps) by copying the weights from the online network.
+
+#### Implementation 
+1. **Initialize** the online and target networks with the same parameters.
+```python 
+# Initialize online and target networks with same initial parameters.
+online_network = QNetwork(8, 4)
+target_network = QNetwork(8,4)
+target_network.load_state_dict(online_network.state_dict())
+```
+2. **Run gradient descent** on the online network every step, to determine the q-values for all the states in the batch. 
+
+3. **Periodically not at every step, but once in a batch, update the target network** weights and biases with that of the **weighted average** of that of the online network. This way, the target network is updated less frequently, providing more stable targets for the loss function. 
+A small value `tau` is a hyperparameter that controls the update rate of the target network. A common choice is `tau = 0.001`, which means that the target network is updated with 0.1% of the online network's weights and 99% of its own weights at each update step.
+
+```python
+def update_target_network(target_network, online_network, tau):
+    target_net_state_dict = target_network.state_dict()
+    online_net_state_dict = online_network.state_dict()
+    for key in online_net_state_dict:
+        target_net_state_dict[key] = (online_net_state_dict[key]*tau) + target_net_state_dict[key] * (1-tau)
+    target_network.load_state_dict(target_net_state_dict)
+    return None
+```
+
+4. **Training loop** - the complete DQN algorithm with replay buffer, epsilon greedy action selection and target network update. 
+
+```python 
+# 1. get the current state from environment 
+state, info = env.reset()
+
+# 2. get the q-values for all the current states from the online network 
+q_values = online_network(state)
+
+# 3. select action using epsilon greedy method
+action = select_action(q_values, step, start, end, decay)
+
+# 4. take action in the environment, get reward and next state
+next_state, reward, done, info = env.step(action)
+
+# 5. store the experience in replay buffer
+replay_buffer.append((state, action, reward, next_state, done))
+
+# 6. sample a batch of experiences from the replay buffer after replay buffer has enough samples
+if len(replay_buffer) >= batch_size:
+    batch = replay_buffer.sample(batch_size)
+
+# 7. Identify the q_values of the current states and the actions taken in those states from the batch
+q_values = online_network(states).gather(1, actions).squeeze(1)
+
+# 8. compute the target Q-values using the target network. Don't compute gradients for the target network, as it is not being updated every step.
+with torch.no_grad():
+  # obtain the next state q_values across all columns in a given row
+  next_state_q_values = target_network(next_states).amax(1)
+  target_q_values = rewards + GAMMA * next_state_q_values * (1-dones)
+
+# 9. compute the loss between the predicted Q-values from the online network and the target Q-values
+loss = nn.MSELoss()(target_q_values, q_values)
+
+# 10. perform a gradient descent step to update the online network's weights
+optimizer.zero_grad()
+loss.backward()
+optimizer.step()
+
+# 11. periodically update the target network's weights with that of the online network using a weighted average
+update_target_network(target_network, online_network, tau)
+```
