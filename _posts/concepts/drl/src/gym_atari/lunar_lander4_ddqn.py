@@ -6,6 +6,10 @@ import gymnasium as gym
 import matplotlib.pyplot as plt
 import numpy as np
 from datetime import datetime
+import os
+import sys
+import atexit
+import csv
 import torch
 import torch.nn as nn
 import random 
@@ -28,6 +32,47 @@ criterion = nn.MSELoss()
 online_network = QNetwork(8, 4)
 target_network = QNetwork(8,4)
 target_network.load_state_dict(online_network.state_dict())
+
+
+class Tee:
+    def __init__(self, *streams):
+        self.streams = streams
+
+    def write(self, data):
+        for stream in self.streams:
+            stream.write(data)
+        return len(data)
+
+    def flush(self):
+        for stream in self.streams:
+            stream.flush()
+
+    def isatty(self):
+        return any(getattr(stream, "isatty", lambda: False)() for stream in self.streams)
+
+
+def setup_console_file_logging():
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_dir = "logs"
+    os.makedirs(log_dir, exist_ok=True)
+    log_path = os.path.join(log_dir, f"lunar_lander4_ddqn_{timestamp}.log")
+
+    original_stdout = sys.stdout
+    original_stderr = sys.stderr
+    log_file = open(log_path, "a", encoding="utf-8")
+
+    sys.stdout = Tee(original_stdout, log_file)
+    sys.stderr = Tee(original_stderr, log_file)
+
+    def _cleanup():
+        sys.stdout = original_stdout
+        sys.stderr = original_stderr
+        log_file.close()
+
+    atexit.register(_cleanup)
+    print(f"Logging console output to: {log_path}")
+    return log_path
+
 
 def update_target_network(target_network, online_network, tau):
     target_net_state_dict = target_network.state_dict()
@@ -72,6 +117,7 @@ def describe_episode(episode, reward, episode_reward, step, terminated, truncate
     print(
         f"| Episode {episode + 1:4d} | Duration: {step:4d} steps | Reward: {episode_reward:10.2f} | {status:<12} | Total Steps: {total_steps:6d} |"
     )
+    return status
 
 
 def plot_rewards(episode_rewards):
@@ -112,9 +158,18 @@ def plot_rewards(episode_rewards):
     plt.show()
 
 
+setup_console_file_logging()
 env = gym.make("LunarLander-v3", render_mode="human")
 all_episode_rewards = []
 total_steps = 0
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+os.makedirs("logs", exist_ok=True)
+csv_path = os.path.join("logs", f"lunar_lander4_ddqn_episode_summary_{timestamp}.csv")
+
+with open(csv_path, "w", newline="", encoding="utf-8") as csv_file:
+    csv_writer = csv.writer(csv_file)
+    csv_writer.writerow(["episode", "duration", "reward", "state_name", "total_steps"])
+
 for episode in range(NUM_EPISODES):
     state, info = env.reset()
     done = False
@@ -155,7 +210,11 @@ for episode in range(NUM_EPISODES):
         episode_reward += reward
 
     all_episode_rewards.append(episode_reward)
-    describe_episode(episode, reward, episode_reward, step, terminated, truncated, total_steps)
+    state_name = describe_episode(episode, reward, episode_reward, step, terminated, truncated, total_steps)
+    with open(csv_path, "a", newline="", encoding="utf-8") as csv_file:
+        csv_writer = csv.writer(csv_file)
+        csv_writer.writerow([episode + 1, step, f"{episode_reward:.2f}", state_name, total_steps])
 
 env.close()
+print(f"Saved episode CSV: {csv_path}")
 plot_rewards(all_episode_rewards)
