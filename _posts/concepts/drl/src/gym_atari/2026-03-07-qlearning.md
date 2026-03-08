@@ -170,7 +170,7 @@ That is the value used in loss (predicted Q(s,a) vs target).
 {% include_relative lunar_lander_replay_buffer.py %}
 {% endhighlight %}
 
-![](./lunar_lander_replay_buffer.py)
+![](./lunar_lander2_replay_buffer.py)
 
 ## The complete DQN algorithm 
 ### The Problem 
@@ -286,6 +286,13 @@ optimizer.step()
 # 11. periodically update the target network's weights with that of the online network using a weighted average
 update_target_network(target_network, online_network, tau)
 ```
+
+### Full implementation of the DQN algorithm with replay buffer, epsilon greedy action selection and target network update
+
+{% highlight python %}
+{% include_relative lunar_lander3_greedy_fixedQ.py %}
+{% endhighlight %}
+![](./lunar_lander3_greedy_fixedQ.py)
 
 ## Double DQN - to address overestimation bias in Q-learning
 In standard DQN, the same network is used to select the action and to evaluate the action's value, which can lead to overestimation of Q-values. Double DQN addresses this by using the online network to select the action and the target network to evaluate the action's value. This helps to reduce overestimation bias and leads to more stable learning.
