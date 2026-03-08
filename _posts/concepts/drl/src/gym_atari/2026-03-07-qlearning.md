@@ -2,7 +2,7 @@
 tags : [drl, deep-queue, gymnasium]
 title : "Deep Q Learning Notes"
 category: dlr 
-subcategory: Deep Q Learning
+subcategory: "Deep Q Learning"
 layout : mermaid
 ---
 
@@ -286,3 +286,6 @@ optimizer.step()
 # 11. periodically update the target network's weights with that of the online network using a weighted average
 update_target_network(target_network, online_network, tau)
 ```
+
+## Double DQN - to address overestimation bias in Q-learning
+In standard DQN, the same network is used to select the action and to evaluate the action's value, which can lead to overestimation of Q-values. Double DQN addresses this by using the online network to select the action and the target network to evaluate the action's value. This helps to reduce overestimation bias and leads to more stable learning.
