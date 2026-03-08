@@ -167,7 +167,7 @@ That is the value used in loss (predicted Q(s,a) vs target).
 ### Full algorithm with replay buffer
 
 {% highlight python %}
-{% include_relative lunar_lander_replay_buffer.py %}
+{% include_relative lunar_lander2_replay_buffer.py %}
 {% endhighlight %}
 
 ![](./lunar_lander2_replay_buffer.py)
