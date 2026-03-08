@@ -52,6 +52,22 @@ $$
 
 ![](./lunar_lander1.py)
 
+### Output 
+![](/assets/drl/output1.jpg)
+
+```text
+Episode 1: reward=-431.60
+Episode 2: reward=-501.77
+Episode 3: reward=-210.85
+Episode 4: reward=-408.80
+Episode 5: reward=-266.54
+Episode 6: reward=23.38
+Episode 7: reward=-368.02
+Episode 8: reward=-95.81
+Episode 9: reward=-398.78
+Episode 10: reward=-329.06
+```
+### The Problem
 The lunar lander crashes. Because - 
 1. The agent starts with an untrained Q-network, so its Q-values are essentially random.
 2. The policy is greedy (argmax) from the start, so it repeatedly picks whatever random action currently looks best.
