@@ -6,3 +6,4 @@ torch
 scikit-learn
 swig
 gymnasium[box2d]
+matplotlib

@@ -26,6 +26,21 @@ The **update rule** for Q learning -
 ## Q Network
 ### Mapping states to action values
 
+> Q-network maps **state -> Q-values** for **all** actions, that are possible from **that state**.
+The output depends on the number of actions and number of states. 
+So for 5 input states, we get 5 rows, each row has 4 actions values (one per action).
+
+1. If action space has 4 actions:
+  - input one state tensor (state_dim,) -> output (4,) : 1 dimension vector
+  - input batch of 5 states (5, state_dim) -> output(5,4) : 2 dimension matrix
+2. NN's Output index corresponds to the action ID. 
+  if the output of the network is [q0,q1,q2,q3]. That means : 
+  - q0 = Q(s, action 0)
+  - q1 = Q(s, action 1)
+  - etc.  
+3. `argmax` picks the idex of highest Q-value, and that index is the action we send to env.step(action).  
+
+
 ![](/assets/drl/q_nw.jpg)
 
 `Bellman optimality equation` (for $Q^{*}$):
@@ -47,10 +62,10 @@ $$
 ![](/assets/drl/lossfun.jpg)
 
 {% highlight python %}
-{% include_relative lunar_lander1.py %}
+{% include_relative lunar_lander1_basic.py %}
 {% endhighlight %}
 
-![](./lunar_lander1.py)
+![](./lunar_lander1_basic.py)
 
 ### Output 
 ![](/assets/drl/output1.jpg)
@@ -69,13 +84,83 @@ Episode 10: reward=-329.06
 ```
 ### The Problem
 The lunar lander crashes. Because - 
-1. The agent starts with an untrained Q-network, so its Q-values are essentially random.
-2. The policy is greedy (argmax) from the start, so it repeatedly picks whatever random action currently looks best.
-3. There is no exploration strategy (no epsilon-greedy), so it does not try enough alternative actions to discover safer behavior.                                                                        
-4. LunarLander needs coordinated action sequences; random/poor early choices quickly lead to bad trajectories and crashes.                                                                            
-5. Training updates are noisy because they are done step-by-step on highly correlated samples (no replay buffer)
-6. There is no target network, so the learning target moves every step, making Q-learning unstable.
-7. Very short training (10 episodes) is far from enough for this task; early episodes are expected to be mostly crashes.
-8. No reward/gradient stabilization (e.g., clipping) can further increase unstable updates in early training.  
+1. The learning is only from the last experience. So, consecutive updates are highly correlated.
+2. Agent is forgetful.
 
-## Improvising the training loop - Part 2
+### The Solution 
+Experience Replay buffer - a memory that stores the agent's experiences at each time step, $e_t = (s_t, a_t, r_{t+1}, s_{t+1})$. During training, we sample mini-batches of experiences from the replay buffer to update the Q network. This breaks the correlation between consecutive updates and allows the agent to learn from a more diverse set of experiences.
+
+## Improvising the training loop - Part 2 - Replay Buffering 
+
+{% highlight python %}
+{% include_relative lunar_lander2_replay_buffer.py %}
+{% endhighlight %}
+
+![](./lunar_lander2_replay_buffer.py)
+
+### Dequeue data structure 
+
+{% highlight python %}
+{% include_relative dequeue.py %}
+{% endhighlight %}
+
+![](./dequeue.py)
+
+### Replay Buffer implementation with dequeue 
+
+{% highlight python %}
+{% include_relative replay_buffer.py %}
+{% endhighlight %}
+
+![](./replay_buffer.py)
+
+### Batch-wise processing 
+
+1. The q-network gives all action scores for one state.
+  Example for 4 actions: 
+  ```python 
+  q_values = [1.2, -0.4, 0.7, 2.0]
+  ```
+
+2. Suppose in that state, agent actually took action 2.
+
+3. For training, you only need score of taken action: 
+
+```python 
+q_values[2] = 0.7
+```
+
+4. In batches, this happens for many rows at once.
+  Example:                                                                            
+  
+  ```python
+  q_values = 
+  [                   
+    [1.2, -0.4, 0.7, 2.0],   # sample 1
+    [0.1,  0.3, 1.1, 0.5],   # sample 2
+    [2.2,  1.9, 0.2, 0.0]    # sample 3
+  ]
+  
+  actions = [2, 0, 1]  
+  ```
+
+5. We want:         
+  - row1 pick col2 -> 0.7 
+  - row2 pick col0 -> 0.1
+  - row3 pick col1 -> 1.9
+
+6. `gather()` does exactly this row-wise picking: 
+```python 
+  actions_tensor = torch.tensor(actions, dtype=torch.long).unsqueeze(1)
+  chosen_q = q_values.gather(1, actions_tensor)
+  - action id = q-value index = before: shape (3,) -> [2,0,1]
+  - action id = q-value index = after: shape (3,1) -> [[2],[0],[1]]
+  - gather(dim=1, ...) needs this (batch, 1) form.
+  chosen_q =
+  [
+    [0.7],
+    [0.1],
+    [1.9]
+  ]
+```
+That is the value used in loss (predicted Q(s,a) vs target).
