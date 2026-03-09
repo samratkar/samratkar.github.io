@@ -1,3 +1,12 @@
+---
+tags : [drl, mdp, gymnasium]
+title : "DRL intro"
+category: dlr 
+subcategory: "drl_foundations"
+layout : mermaid
+---
+
+
 # Deep Reinforcement Learning
 
 ---
