@@ -362,3 +362,5 @@ Training Double DQN:
 
 1. Use the online network to calculate actions for the Q-target calculation.
 2. Use the target network to estimate the Q-value corresponding to these actions.
+
+## PER - Prioritized Experience Replay
