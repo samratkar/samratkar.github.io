@@ -1,0 +1,28 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2026-03-12T05:42:22+05:30",
+  "id": "dp-vs-q-learning-case-study",
+  "duration": 0,
+  "title": "Case Study: Dynamic Programming vs Q-Learning",
+  "authors": "Samrat Kar",
+  "summary": "dynamic programming vs q-learning case study",
+  "source": ".\\2026-03-11-dp-vs-q-learning-case-study.md",
+  "theme": "",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "ml",
+    "reinforcement-learning"
+  ],
+  "tags": [
+    "dp",
+    "drl",
+    "gymnasium",
+    "q-learning"
+  ],
+  "url": "dp-vs-q-learning-case-study"
+}

@@ -1,0 +1,527 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Case Study: Dynamic Programming vs Q-Learning</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="dp-vs-q-learning-case-study"
+                  title="Case Study: Dynamic Programming vs Q-Learning"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Common Environment" duration="0">
+        <p>Consider a <code>3 x 3</code> grid world:</p>
+<pre><code language="language-text" class="language-text">+-----+-----+-----+
+| S0  | S1  | S2  |
++-----+-----+-----+
+| S3  | S4  | S5  |
++-----+-----+-----+
+| S6  | S7  | S8  |
++-----+-----+-----+
+</code></pre>
+<p>Assumptions:</p>
+<ul>
+<li>start state: <code>S0</code></li>
+<li>goal state: <code>S8</code></li>
+<li>actions: <code>Up</code>, <code>Right</code>, <code>Down</code>, <code>Left</code></li>
+<li>reward <code>+10</code> for reaching <code>S8</code></li>
+<li>reward <code>-1</code> for every non-terminal move</li>
+<li>episode ends at <code>S8</code></li>
+</ul>
+<p>State layout:</p>
+<pre><code language="language-text" class="language-text">S0 S1 S2
+S3 S4 S5
+S6 S7 S8
+</code></pre>
+<p>Action mapping:</p>
+<pre><code language="language-python" class="language-python">UP = 0
+RIGHT = 1
+DOWN = 2
+LEFT = 3
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Case Study 1: Dynamic Programming" duration="0">
+        <h2 is-upgraded>Setting</h2>
+<p>In dynamic programming, we assume the environment model is fully known.</p>
+<p>That means for every state-action pair we know:</p>
+<ul>
+<li>the next possible state</li>
+<li>the reward</li>
+<li>the transition probability</li>
+</ul>
+<p>In a tabular Gym-style setting, that is represented by:</p>
+<pre><code language="language-python" class="language-python">env.P[s][a]
+</code></pre>
+<h2 is-upgraded>Intuition</h2>
+<p>Dynamic programming computes values by applying Bellman updates repeatedly.</p>
+<p>In this grid world:</p>
+<ul>
+<li>if moving <code>Right</code> from <code>S7</code> reaches <code>S8</code>, that action should become highly valued</li>
+<li>then states that can reach <code>S7</code> should also gain value</li>
+<li>eventually value information propagates backward through the whole grid</li>
+</ul>
+<h2 is-upgraded>Diagram</h2>
+<pre><code language="language-mermaid" class="language-mermaid">flowchart LR
+    S0[&#34;S0&#34;] --&gt; S1[&#34;S1&#34;]
+    S1 --&gt; S2[&#34;S2&#34;]
+    S2 --&gt; S5[&#34;S5&#34;]
+    S5 --&gt; S8[&#34;S8 Goal&#34;]
+
+    S0 --&gt; S3[&#34;S3&#34;]
+    S3 --&gt; S6[&#34;S6&#34;]
+    S6 --&gt; S7[&#34;S7&#34;]
+    S7 --&gt; S8
+</code></pre>
+<p>Dynamic programming uses the full model to evaluate all possible actions and transitions at every state.</p>
+<h2 is-upgraded>Example Policy Iteration Code</h2>
+<pre><code language="language-python" class="language-python">import numpy as np
+
+
+def policy_evaluation(env, policy, gamma=0.9, theta=1e-8):
+    num_states = env.observation_space.n
+    V = np.zeros(num_states)
+
+    while True:
+        delta = 0.0
+        for s in range(num_states):
+            old_v = V[s]
+            new_v = 0.0
+
+            for a, action_prob in enumerate(policy[s]):
+                if action_prob == 0:
+                    continue
+
+                for prob, next_state, reward, done in env.P[s][a]:
+                    new_v += action_prob * prob * (
+                        reward + gamma * (1 - done) * V[next_state]
+                    )
+
+            V[s] = new_v
+            delta = max(delta, abs(old_v - new_v))
+
+        if delta &lt; theta:
+            break
+
+    return V
+
+
+def compute_q_from_v(env, V, gamma=0.9):
+    num_states = env.observation_space.n
+    num_actions = env.action_space.n
+    Q = np.zeros((num_states, num_actions))
+
+    for s in range(num_states):
+        for a in range(num_actions):
+            for prob, next_state, reward, done in env.P[s][a]:
+                Q[s, a] += prob * (
+                    reward + gamma * (1 - done) * V[next_state]
+                )
+
+    return Q
+
+
+def policy_improvement(env, V, gamma=0.9):
+    Q = compute_q_from_v(env, V, gamma)
+    num_states, num_actions = Q.shape
+    policy = np.zeros((num_states, num_actions))
+
+    for s in range(num_states):
+        best_action = np.argmax(Q[s])
+        policy[s, best_action] = 1.0
+
+    return policy, Q
+
+
+def policy_iteration(env, gamma=0.9, theta=1e-8):
+    num_states = env.observation_space.n
+    num_actions = env.action_space.n
+    policy = np.ones((num_states, num_actions)) / num_actions
+
+    while True:
+        V = policy_evaluation(env, policy, gamma=gamma, theta=theta)
+        new_policy, Q = policy_improvement(env, V, gamma=gamma)
+
+        if np.array_equal(new_policy, policy):
+            break
+
+        policy = new_policy
+
+    return policy, V, Q
+</code></pre>
+<h2 is-upgraded>Example Outcome</h2>
+<p>A likely optimal policy for the grid might look like:</p>
+<pre><code language="language-text" class="language-text">+---------+---------+---------+
+| S0  -&gt;  | S1  -&gt;  | S2  v   |
++---------+---------+---------+
+| S3  -&gt;  | S4  -&gt;  | S5  v   |
++---------+---------+---------+
+| S6  -&gt;  | S7  -&gt;  | S8 Goal |
++---------+---------+---------+
+</code></pre>
+<p>This means:</p>
+<ul>
+<li>from the top row, move right until the last column</li>
+<li>then move down toward the goal</li>
+</ul>
+<h2 is-upgraded>What DP is doing</h2>
+<p>Dynamic programming is effectively asking:</p>
+<ul>
+<li>if I know the exact transition probabilities and rewards,</li>
+<li>what is the exact best value of each state,</li>
+<li>and therefore what is the exact best action at each state?</li>
+</ul>
+<p>So DP performs <strong>full expected backups</strong>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Case Study 2: Q-Learning" duration="0">
+        <h2 is-upgraded>Setting</h2>
+<p>Now assume we do <strong>not</strong> know the model.</p>
+<p>So we do not know:</p>
+<ul>
+<li><code>env.P[s][a]</code></li>
+<li>transition probabilities</li>
+<li>exact reward structure in table form</li>
+</ul>
+<p>Instead, the agent only interacts with the environment and observes:</p>
+<pre><code language="language-text" class="language-text">(state, action, reward, next_state)
+</code></pre>
+<h2 is-upgraded>Intuition</h2>
+<p>Q-learning starts with a zero Q-table and improves it from experience.</p>
+<p>At first:</p>
+<ul>
+<li>the agent explores</li>
+<li>values are mostly guesses</li>
+</ul>
+<p>Over many episodes:</p>
+<ul>
+<li>transitions leading toward the goal receive better value</li>
+<li>bad actions get lower value</li>
+<li>the Q-table gradually approximates the optimal action-value function</li>
+</ul>
+<h2 is-upgraded>Q-Learning Update</h2>
+<pre><code language="language-math" class="language-math">Q(S_t,A_t) \leftarrow Q(S_t,A_t) + \alpha \left[R_{t+1} + \gamma \max_{a&#39;} Q(S_{t+1},a&#39;) - Q(S_t,A_t)\right]
+</code></pre>
+<h2 is-upgraded>Diagram</h2>
+<pre><code language="language-mermaid" class="language-mermaid">flowchart LR
+    A[&#34;Current state s&#34;] --&gt; B[&#34;Choose action a&#34;]
+    B --&gt; C[&#34;Observe reward r and next state s&#39;&#34;]
+    C --&gt; D[&#34;Compute target: r + gamma max_a&#39; Q(s&#39;,a&#39;)&#34;]
+    D --&gt; E[&#34;Update Q(s,a)&#34;]
+</code></pre>
+<h2 is-upgraded>Q-Learning Code</h2>
+<pre><code language="language-python" class="language-python">import numpy as np
+import random
+
+
+def epsilon_greedy_action(Q, state, epsilon):
+    if random.random() &lt; epsilon:
+        return random.randrange(Q.shape[1])
+    return np.argmax(Q[state])
+
+
+def q_learning(env, num_episodes=5000, alpha=0.1, gamma=0.9, epsilon=1.0,
+               epsilon_decay=0.995, epsilon_min=0.01):
+    num_states = env.observation_space.n
+    num_actions = env.action_space.n
+    Q = np.zeros((num_states, num_actions))
+
+    for episode in range(num_episodes):
+        state, _ = env.reset()
+        done = False
+
+        while not done:
+            action = epsilon_greedy_action(Q, state, epsilon)
+            next_state, reward, terminated, truncated, _ = env.step(action)
+            done = terminated or truncated
+
+            target = reward + gamma * (1 - done) * np.max(Q[next_state])
+            Q[state, action] += alpha * (target - Q[state, action])
+
+            state = next_state
+
+        epsilon = max(epsilon_min, epsilon * epsilon_decay)
+
+    return Q
+
+
+def greedy_policy_from_q(Q):
+    num_states, num_actions = Q.shape
+    policy = np.zeros((num_states, num_actions))
+
+    for s in range(num_states):
+        best_action = np.argmax(Q[s])
+        policy[s, best_action] = 1.0
+
+    return policy
+</code></pre>
+<h2 is-upgraded>Example Learning Story</h2>
+<p>Suppose the agent is in <code>S7</code> and takes <code>Right</code>.</p>
+<p>If that reaches the goal <code>S8</code> with reward <code>+10</code>, then:</p>
+<pre><code language="language-text" class="language-text">Q(S7, Right) becomes large
+</code></pre>
+<p>Then later, if the agent is in <code>S6</code> and moving <code>Right</code> often leads to <code>S7</code>, then:</p>
+<pre><code language="language-text" class="language-text">Q(S6, Right) also increases
+</code></pre>
+<p>So just like DP, value information propagates backward, but here it happens from sampled experience instead of from the known model.</p>
+<h2 is-upgraded>Example Learned Policy</h2>
+<p>After enough episodes, the learned greedy policy may become:</p>
+<pre><code language="language-text" class="language-text">+---------+---------+---------+
+| S0  -&gt;  | S1  -&gt;  | S2  v   |
++---------+---------+---------+
+| S3  -&gt;  | S4  -&gt;  | S5  v   |
++---------+---------+---------+
+| S6  -&gt;  | S7  -&gt;  | S8 Goal |
++---------+---------+---------+
+</code></pre>
+<p>So the final policy may match the dynamic programming solution, even though the learning process is completely different.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Side-by-Side Comparison" duration="0">
+        <h2 is-upgraded>Core Difference</h2>
+<p>Dynamic Programming:</p>
+<ul>
+<li>knows the model</li>
+<li>computes exact expected updates</li>
+</ul>
+<p>Q-Learning:</p>
+<ul>
+<li>does not know the model</li>
+<li>learns from sampled experience</li>
+</ul>
+<h2 is-upgraded>Backup Comparison</h2>
+<p>Dynamic programming backup:</p>
+<pre><code language="language-math" class="language-math">Q^*(s,a) = \sum_{s&#39;,r} p(s&#39;,r \mid s,a)\left[r + \gamma \max_{a&#39;} Q^*(s&#39;,a&#39;)\right]
+</code></pre>
+<p>Q-learning backup:</p>
+<pre><code language="language-math" class="language-math">Q(s,a) \leftarrow Q(s,a) + \alpha \left[r + \gamma \max_{a&#39;} Q(s&#39;,a&#39;) - Q(s,a)\right]
+</code></pre>
+<p>Interpretation:</p>
+<ul>
+<li>DP averages over <strong>all possible next outcomes</strong></li>
+<li>Q-learning uses <strong>one observed sample</strong></li>
+</ul>
+<h2 is-upgraded>Diagram</h2>
+<pre><code language="language-mermaid" class="language-mermaid">flowchart TD
+    A[&#34;Dynamic Programming&#34;]
+    B[&#34;Known model&#34;]
+    C[&#34;Enumerate all next outcomes&#34;]
+    D[&#34;Expected Bellman backup&#34;]
+    E[&#34;Exact update&#34;]
+
+    F[&#34;Q-Learning&#34;]
+    G[&#34;Unknown model&#34;]
+    H[&#34;Observe one transition sample&#34;]
+    I[&#34;Sampled Bellman backup&#34;]
+    J[&#34;Incremental update&#34;]
+
+    A --&gt; B --&gt; C --&gt; D --&gt; E
+    F --&gt; G --&gt; H --&gt; I --&gt; J
+</code></pre>
+<h2 is-upgraded>Comparison Table</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Aspect</p>
+</td><td colspan="1" rowspan="1"><p>Dynamic Programming</p>
+</td><td colspan="1" rowspan="1"><p>Q-Learning</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Model needed?</p>
+</td><td colspan="1" rowspan="1"><p>Yes</p>
+</td><td colspan="1" rowspan="1"><p>No</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Uses <code>env.P[s][a]</code>?</p>
+</td><td colspan="1" rowspan="1"><p>Yes</p>
+</td><td colspan="1" rowspan="1"><p>No</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Update type</p>
+</td><td colspan="1" rowspan="1"><p>Expected backup</p>
+</td><td colspan="1" rowspan="1"><p>Sampled backup</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Learns from</p>
+</td><td colspan="1" rowspan="1"><p>Full model</p>
+</td><td colspan="1" rowspan="1"><p>Experience</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Requires episodes?</p>
+</td><td colspan="1" rowspan="1"><p>Not necessarily</p>
+</td><td colspan="1" rowspan="1"><p>Usually trained over episodes</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Exploration needed?</p>
+</td><td colspan="1" rowspan="1"><p>No</p>
+</td><td colspan="1" rowspan="1"><p>Yes</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Typical setting</p>
+</td><td colspan="1" rowspan="1"><p>Known tabular MDP</p>
+</td><td colspan="1" rowspan="1"><p>Unknown environment</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Converges to optimal?</p>
+</td><td colspan="1" rowspan="1"><p>Yes, under standard assumptions</p>
+</td><td colspan="1" rowspan="1"><p>Yes, under standard assumptions and sufficient exploration</p>
+</td></tr>
+</table>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Why Both Matter" duration="0">
+        <p>Dynamic programming is important because:</p>
+<ul>
+<li>it gives the clean mathematical foundation</li>
+<li>it shows what the exact Bellman solution looks like</li>
+<li>it explains policy evaluation, policy improvement, policy iteration, and value iteration</li>
+</ul>
+<p>Q-learning is important because:</p>
+<ul>
+<li>in real problems the model is often unknown</li>
+<li>we still want to learn optimal behavior</li>
+<li>Q-learning shows how Bellman optimality can be learned from data</li>
+</ul>
+<p>So the relationship is:</p>
+<pre><code language="language-text" class="language-text">Dynamic Programming:
+  exact Bellman updates with known model
+
+Q-Learning:
+  sample-based Bellman updates without known model
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Final Takeaway" duration="0">
+        <p>Both methods try to answer the same question:</p>
+<ul>
+<li>what is the best action to take in each state?</li>
+</ul>
+<p>But they solve it differently:</p>
+<ul>
+<li>Dynamic Programming solves it from the model</li>
+<li>Q-Learning solves it from experience</li>
+</ul>
+<p>So if the model is known, dynamic programming is the cleanest exact method. If the model is unknown, Q-learning is a practical model-free alternative.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Key Insights in Sutton-Style Framing" duration="0">
+        <p>The following ideas are closely aligned with the way Sutton and Barto motivate these methods.</p>
+<h2 is-upgraded>Key insights behind Dynamic Programming</h2>
+<ol type="1">
+<li><strong>Dynamic programming assumes a complete model of the environment</strong></li>
+</ol>
+<p>DP requires knowledge of:</p>
+<ul>
+<li>state transitions</li>
+<li>rewards</li>
+</ul>
+<p>This is why DP is mainly a planning method rather than a pure learning method.</p>
+<ol type="1" start="2">
+<li><strong>DP is built directly on the Bellman equations</strong></li>
+</ol>
+<p>The Bellman expectation and Bellman optimality equations provide recursive definitions of value. DP turns those recursive equations into iterative algorithms.</p>
+<ol type="1" start="3">
+<li><strong>Policy evaluation and policy improvement are the central decomposition</strong></li>
+</ol>
+<p>A major insight is that control can be broken into two alternating steps:</p>
+<ul>
+<li>evaluate the current policy</li>
+<li>improve the policy using the current values</li>
+</ul>
+<p>This leads naturally to policy iteration.</p>
+<ol type="1" start="4">
+<li><strong>Value iteration compresses evaluation and improvement together</strong></li>
+</ol>
+<p>Instead of fully evaluating a policy before improving it, value iteration performs partial evaluation and greedy improvement in the same update.</p>
+<ol type="1" start="5">
+<li><strong>DP establishes the conceptual foundation for later RL methods</strong></li>
+</ol>
+<p>Even when a model is not available, the structure of DP remains important because later methods such as TD learning and Q-learning can be understood as approximations to DP-style Bellman backups.</p>
+<h2 is-upgraded>Key insights behind Q-Learning</h2>
+<ol type="1">
+<li><strong>Q-learning learns action values directly from experience</strong></li>
+</ol>
+<p>Rather than learning a model first, Q-learning directly estimates: $$ Q^*(s,a) $$</p>
+<p>This is a major shift from planning with a model to learning from interaction.</p>
+<ol type="1" start="2">
+<li><strong>Q-learning is a sample-based version of Bellman optimality updates</strong></li>
+</ol>
+<p>Instead of averaging over all possible next outcomes, Q-learning updates from one sampled transition at a time.</p>
+<p>So it can be seen as replacing:</p>
+<ul>
+<li>full expected backup</li>
+</ul>
+<p>with:</p>
+<ul>
+<li>sampled backup</li>
+</ul>
+<ol type="1" start="3">
+<li><strong>Q-learning is off-policy</strong></li>
+</ol>
+<p>This is one of the most important conceptual insights.</p>
+<p>The agent may behave using an exploratory policy, such as epsilon-greedy, but the update target still uses: $$ \max_{a&#39;} Q(s&#39;,a&#39;) $$</p>
+<p>So it learns about the greedy policy while behaving differently during learning.</p>
+<ol type="1" start="4">
+<li><strong>The learned Q-values are enough for control</strong></li>
+</ol>
+<p>Once the Q-table is learned, there is no need to separately learn a model or a state-value function. The policy can be obtained directly by choosing: $$ \arg\max_a Q(s,a) $$</p>
+<ol type="1" start="5">
+<li><strong>Q-learning brings optimal control into the model-free setting</strong></li>
+</ol>
+<p>This is the core reason it is so influential. It keeps the optimality idea from dynamic programming, but removes the need for a known transition model.</p>
+<h2 is-upgraded>Shared insight across both methods</h2>
+<p>Both dynamic programming and Q-learning are driven by the same high-level idea:</p>
+<ul>
+<li>good decisions today depend on reward today plus good decisions tomorrow</li>
+</ul>
+<p>In Sutton-style RL, this is the unifying role of Bellman recursion.</p>
+<p>So:</p>
+<ul>
+<li>DP uses Bellman recursion with a known model</li>
+<li>Q-learning uses Bellman recursion with sampled experience</li>
+</ul>
+<h2 is-upgraded>Short summary</h2>
+<pre><code language="language-text" class="language-text">Dynamic Programming:
+  planning with a known model
+  exact Bellman backups
+  policy evaluation + policy improvement
+
+Q-Learning:
+  learning without a model
+  sampled Bellman optimality backups
+  direct estimation of optimal action values
+</code></pre>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
