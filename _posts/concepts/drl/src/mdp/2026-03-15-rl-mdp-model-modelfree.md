@@ -1,0 +1,144 @@
+---
+tags : [drl, mdp, dynamic-programming, q-learning, gymnasium]
+title : "Case Study: Dynamic Programming vs Q-Learning"
+category: dlr
+subcategory: "mdp"
+layout : mermaid
+---
+
+## State Value and Policy
+- State value `V(s)` is defined for a single state `s`.
+- It represents the **expected** total reward **from** that state to the **goal** when following a particular **policy**.
+- The value of a state depends on the entire future trajectory of states and rewards under the policy, but it is attached to the starting state only.
+
+## Episode Start and State Value
+- The state value depends on where the episode starts.
+- For a trajectory `s0 → s1 → s2 → s3 → s4`:
+  - `V(s0)` is the expected sum of rewards from `s0` onward.
+  - `V(s1)` is the expected sum of rewards from `s1` onward.
+- The episode start determines which state value is relevant.
+
+## Validity of State Values
+- For a given policy, there is a valid state value for every state in the Markov Decision Process (MDP).
+- The episode boundaries (start and end) determine which state values are used or estimated.
+
+## Definition of an Episode
+- An episode typically starts at an initial state and ends at a terminal state (goal, failure, or timeout).
+- The full sequence from start to terminal state is called a **trajectory or episode.**
+- Value functions can be defined as if **starting at any** state along the trajectory for analysis. But always ending with the goal state. 
+
+## Expected Rewards and Sampling
+
+### Definition level (theory)
+- The state value `V(s)` is the **expected return**, which is a probability-weighted sum of rewards and next-state values (Bellman equation).
+
+If we have the full MDP model (all transition probabilities and rewards), we can write something like the Bellman equation, to compute the state value $V(s)$:
+
+$$V(s) = \sum_a π(a|s) \sum_{s', r} P(s', r | s, a) [ r + γ V(s') ]$$
+
+Here the expectation is explicit: probabilities × rewards/next-values, summed.
+
+- In practice, the agent samples trajectories and averages actual returns to estimate `V(s)`, as an approximation to the expected value, as the state transition probabilities might not be known to the agent.
+- Sampling does not multiply rewards by transition probabilities explicitly because the environment's randomness and averaging over episodes implicitly do this.
+
+When we know the full MDP (transition probabilities and rewards **$P(s', r | s, a)$.**) and use the Bellman equation directly to determine the value function, that family of methods is called **dynamic programming** - policy evaluation, policy iteration, value iteration. 
+
+### Sample level (practice) 
+In many RL settings, the agent doesn’t know transition probabilities and rewards - **$P(s', r | s, a)$.** 
+
+So instead of computing the expectation analytically, it does the following - 
+
+- Interacts with the environment and gets sampled trajectories: **`s0, a0, r1`** → **`s1, a1, r2`**, …
+- For each visit to state s, it computes the actual return from that point:
+**$$G_t = r_{t+1} + γ r_{t+2} + γ² r_{t+3} + …$$** 
+- Then it averages these returns over many episodes to **approximate** V(s).
+
+So at the sample level, we don’t multiply each reward by transition probabilities because We usually don’t know those probabilities. The law of large numbers tells us that averaging many sampled returns converges to the same expectation that the probability-weighted sum would give.
+
+### Rule of the Thumb
+
+**Theory:** “V(s) is the average outcome over all possible futures, weighted by their probabilities.”
+
+**Practice:** “I’ll run the process many times from s, record the actual returns, and take the empirical average. That implicitly does the probability-weighting for me.”
+
+## Numerical Example of Sampling vs Definition
+
+### Scenario
+- State `s` with two actions `a1` and `a2`.
+- Action `a1`: reward 5 with probability 0.8, reward 0 with probability 0.2.
+- Action `a2`: reward 10 with probability 0.5, reward 0 with probability 0.5.
+
+### Definition Method
+- `V(s)` for `a1` = 0.8 * 5 + 0.2 * 0 = 4
+- `V(s)` for `a2` = 0.5 * 10 + 0.5 * 0 = 5
+
+### Sample Method
+- Sample episodes for each action and record rewards.
+- Average returns converge to expected values as samples increase.
+
+### Conclusion
+- Sampling method estimates converge to the definition method values by the law of large numbers.
+
+## RL Methods on the “Definition vs Sample” Axis
+### Model Based
+#### 1. Dynamic Programming (DP) – Definition / Model-Based
+- Assumes **full knowledge of the MDP**: transition probabilities and rewards.
+- Uses the **Bellman expectation/optimality equations** directly.
+- Computes values via **sweeps over the state space**:
+  - Policy evaluation
+  - Policy iteration
+  - Value iteration
+- Conceptually: *“I know all probabilities, so I can compute expectations analytically.”*
+### Model Free
+#### 1. Monte Carlo (MC) – Sample-Based, No Bootstrapping 
+- **Model-free**: does **not** need transition probabilities.
+- Uses **complete episodes** sampled from interaction with the environment.
+- For each state, averages **actual returns** observed after visiting that state.
+- No bootstrapping: updates use **only sampled returns**, not current value estimates.
+- Conceptually: *“I don’t know probabilities; I’ll approximate expectations by averaging many full-episode samples.”*
+
+#### 2. Temporal-Difference (TD) Methods – Sample-Based, With Bootstrapping
+Model-free like MC, but uses **bootstrapping** (updates from other estimates):
+
+#### 2.1 SARSA (On-Policy TD Control)
+- Learns **action-value function** \( Q(s, a) \).
+- Update uses the **actual next action** taken under the current policy:
+  - Target: \( r + \gamma Q(s', a') \).
+- On-policy: learns about the policy it is actually following (e.g., ε-greedy).
+
+#### 2.2 Q-learning (SARSAMAX, Off-Policy TD Control)
+- Also learns **Q(s, a)**.
+- Update uses the **max over next actions**:
+  - Target: \( r + \gamma \max_{a'} Q(s', a') \).
+- Off-policy: learns the **greedy** policy while possibly behaving ε-greedily for exploration.
+
+### The Big Picture
+- **Dynamic Programming**: definition/analytic level with a **known model**.
+- **Monte Carlo + TD (SARSA, Q-learning)**: **sample level**, learning from experience without knowing the model.
+  - MC: sample-based, no bootstrapping.
+  - TD (SARSA, Q-learning): sample-based **with** bootstrapping.
+
+<div class="mermaid">
+flowchart TB
+  A["Bellman Equations (Theory)<br/>Definition level"]
+  A --> B{"Do we know the full MDP?<br/>(transitions & rewards)"}
+
+  B -->|Yes| C["Dynamic Programming (DP)<br/>Model-based"]
+  B -->|No| D["Model-free RL<br/>Sample level"]
+
+    C --> C1[Policy Evaluation]
+    C --> C2[Policy Iteration]
+    C --> C3[Value Iteration]
+
+    D --> E["Monte Carlo (MC)"]
+    D --> F["Temporal-Difference (TD)"]
+
+    E:::mc
+    F:::td
+
+    F --> G["SARSA<br/>(on-policy TD control)"]
+    F --> H["Q-learning<br/>(off-policy TD control)"]
+
+    classDef mc fill:#e0f7fa,stroke:#00838f,stroke-width:1px;
+    classDef td fill:#fff3e0,stroke:#ef6c00,stroke-width:1px;
+</div>
