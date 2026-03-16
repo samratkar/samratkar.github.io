@@ -32,21 +32,15 @@ Consider a `3 x 3` grid world:
 +-----+-----+-----+
 ```
 
-Assumptions:
+Model details: Transition Probabilities and Rewards : $p(s', r \mid s, a)$
 - start state: `S0`
 - goal state: `S8`
-- actions: `Up`, `Right`, `Down`, `Left`
 - reward `+10` for reaching `S8`
-- reward `-1` for every non-terminal move
 - episode ends at `S8`
+- reward `-1` for every non-terminal move
 
-State layout:
-
-```text
-S0 S1 S2
-S3 S4 S5
-S6 S7 S8
-```
+Agent details: Policy : $\pi(a \mid s)$
+- actions: `Up`, `Right`, `Down`, `Left`
 
 Action mapping:
 
@@ -60,41 +54,26 @@ LEFT = 3
 
 ### What DP is solving
 
-Dynamic programming is a planning framework for solving an MDP when the full model is known.
+Dynamic programming is a planning framework for solving an MDP when the full model is known. i.e. we know the transition-reward distribution $p(s', r \mid s, a)$ for every state-action pair.
+
 It can be used to compute:
 
-- `V_pi(s)`: the value of state `s` under a specific policy `pi`
-- `Q_pi(s,a)`: the value of taking action `a` in state `s` under a specific policy `pi`
-- `V*(s)`: the optimal state value
-- `Q*(s,a)`: the optimal action value
+!!!info 
+    - $V_\pi(s)$: the value of state $s$ under a ***specific policy $\pi$***
+    - $Q_\pi(s,a)$: the value of taking action $a$ in state $s$ under a ***specific policy $\pi$***
+    - $V^*(s)$: the optimal state value - ***over all policies***
+    - $Q^*(s,a)$: the optimal action value - ***over all policies***
 
-So `Q` and `Q*` are not the same:
-
-- `Q_pi(s,a)` means the expected return if you take action `a` in state `s` and then continue following policy `pi`
-- `Q*(s,a)` means the best possible expected return if you take action `a` in state `s` and act optimally afterward
-
-In short:
-
-```text
-Q_pi: action value under a particular policy
-Q*:   optimal action value over all policies
-```
-
-This is why we should not call dynamic programming "Q* learning".
-
-- DP is the broader method class
-- `Q*` is one particular object that DP can compute
-- Q-learning is a separate model-free algorithm whose goal is to learn `Q*` from sampled experience
-
-DP is relevant here because it gives the exact Bellman target that Q-learning is trying to approximate.
-If the model is known, DP can compute `Q*` directly by repeatedly applying Bellman optimality updates over all state-action pairs.
-If the model is unknown, Q-learning uses sampled transitions to move its estimates toward that same `Q*`.
+!!!note
+    DP gives the exact Bellman target that Q-learning is trying to approximate.
+    If the model is known, DP can compute `Q*` directly by repeatedly applying Bellman optimality updates over all state-action pairs.
+    If the model is unknown, Q-learning uses sampled transitions to move its estimates toward that same `Q*`.
 
 So the connection is:
 
 ```text
 DP with known model        -> computes Q* by full expected backups
-Q-learning without model  -> learns Q* by sampled backups
+Q-learning without model   -> learns Q* by sampled backups
 ```
 
 ### Settings
@@ -102,7 +81,7 @@ Q-learning without model  -> learns Q* by sampled backups
 In dynamic programming, we assume the finite MDP is fully known:
 
 ```math
-\mathcal{M} = \left(\mathcal{S}, \mathcal{A}, p(s', r \mid s, a), \gamma\right)
+\mathcal{M} = \left(\mathcal{S}, \mathcal{A}, \pi(a \mid s), p(s', r \mid s, a), \gamma\right)
 ```
 
 In plain English, this means:
@@ -110,18 +89,12 @@ In plain English, this means:
 - the environment is modeled as an MDP $\mathcal{M}$
 - $\mathcal{S}$ is the set of all states
 - $\mathcal{A}$ is the set of all actions
+- $\pi(a \mid s)$ is the policy that maps states to actions
 - $p(s', r \mid s, a)$ is the conditional probability of getting next state $s'$ and reward $r$, given current state $s$ and action $a$
 - $\gamma \in [0,1)$ is the discount factor used to discount future rewards
 
-So in DP, the full model is known: for any current state $s$ and action $a$, we know the distribution over all possible next outcomes $(s', r)$, and we also know the fixed discount factor $\gamma$.
 
-So for every state-action pair $(s, a)$, DP assumes the model gives:
-
-- all possible next states $s'$
-- all possible rewards $r$
-- the full transition-reward distribution $p(s', r \mid s, a)$
-
-Once the MDP model $\left(\mathcal{S}, \mathcal{A}, p(s', r \mid s, a), \gamma\right)$ is known, dynamic programming uses it to compute long-term return estimates under a policy $\pi(a \mid s)$. These are the state-value function $v_\pi(s)$ and the action-value function $q_\pi(s,a)$. They are defined in terms of the same transition-reward model $p(s', r \mid s, a)$ and the same discount factor $\gamma$.
+Once the MDP model $\mathcal{M}$ is known, dynamic programming uses it to compute long-term return estimates. These are the state-value function $v_\pi(s)$ and the action-value function $q_\pi(s,a)$. 
 
 For policy evaluation, the state-value function is:
 
