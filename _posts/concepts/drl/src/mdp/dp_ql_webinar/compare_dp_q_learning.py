@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import numpy as np
 
-from dynamic_programming_case_study import policy_iteration_with_history
-from gridworld_case_study import GridWorldCaseStudyEnv, format_policy
-from q_learning_case_study import q_learning_with_history
+from _posts.concepts.drl.src.mdp.dp_ql_webinar.dynamic_programming_case_study import policy_iteration_with_history
+from _posts.concepts.drl.src.mdp.dp_ql_webinar.gridworld_case_study import GridWorldCaseStudyEnv, format_policy
+from _posts.concepts.drl.src.mdp.dp_ql_webinar.q_learning_case_study import q_learning_with_history
 
 
 def print_dp_snapshots(dp_history):

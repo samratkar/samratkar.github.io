@@ -9,10 +9,19 @@ import numpy as np
 from gridworld_case_study import GridWorldCaseStudyEnv, format_policy
 
 
-def epsilon_greedy_action(Q, state, epsilon):
-    if random.random() < epsilon:
-        return random.randrange(Q.shape[1])
-    return int(np.argmax(Q[state]))
+def epsilon_greedy_policy_from_q(Q, epsilon):
+    num_states, num_actions = Q.shape
+    policy = np.full((num_states, num_actions), epsilon / num_actions)
+
+    for s in range(num_states):
+        best_action = int(np.argmax(Q[s]))
+        policy[s, best_action] += 1.0 - epsilon
+
+    return policy
+
+
+def sample_action_from_policy(policy, state):
+    return int(np.random.choice(policy.shape[1], p=policy[state]))
 
 
 def q_learning(
@@ -37,7 +46,8 @@ def q_learning(
         done = False
 
         for _ in range(max_steps_per_episode):
-            action = epsilon_greedy_action(Q, state, epsilon)
+            policy = epsilon_greedy_policy_from_q(Q, epsilon)
+            action = sample_action_from_policy(policy, state)
             next_state, reward, terminated, truncated, _ = env.step(action)
             done = terminated or truncated
 
@@ -81,7 +91,8 @@ def q_learning_with_history(
         done = False
 
         for _ in range(max_steps_per_episode):
-            action = epsilon_greedy_action(Q, state, epsilon)
+            policy = epsilon_greedy_policy_from_q(Q, epsilon)
+            action = sample_action_from_policy(policy, state)
             next_state, reward, terminated, truncated, _ = env.step(action)
             done = terminated or truncated
 
@@ -98,7 +109,7 @@ def q_learning_with_history(
                     "episode": episode,
                     "epsilon": epsilon,
                     "Q": Q.copy(),
-                    "policy": greedy_policy_from_q(Q),
+                    "policy": policy.copy(),
                 }
             )
 
@@ -134,12 +145,12 @@ def main():
         print(snapshot["Q"])
         print("max_a Q(s, a)")
         print(snapshot["Q"].max(axis=1).reshape(3, 3))
-        print("Greedy policy")
+        print(f"Epsilon-greedy behavior policy (epsilon={snapshot['epsilon']:.3f})")
         print(format_policy(snapshot["policy"]))
 
     print("Learned action values Q")
     print(Q)
-    print("\nGreedy policy from Q-learning")
+    print("\nGreedy policy extracted from the learned Q-table")
     print(format_policy(policy))
 
 
