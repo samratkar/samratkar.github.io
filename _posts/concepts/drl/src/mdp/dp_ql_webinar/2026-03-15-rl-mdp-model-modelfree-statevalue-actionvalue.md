@@ -19,6 +19,34 @@ Agent is something that it can control. Action is controlled by the agent. It is
 
 $$Policy = \pi(a|s) $$
 
+### Visual depiction of $\pi(a|s)$ and $P(s'|s,a)$
+
+The two conditional probabilities act at different points in one RL step:
+
+- $\pi(a|s)$ belongs to the **agent**: in state $s$, how likely is each action?
+- $P(s'|s,a)$ belongs to the **environment**: after action $a$ is chosen in state $s$, how likely is each next state?
+
+![](./pi_p_depiction.mermaid)
+
+Read it left to right:
+
+- first, the agent samples or selects an action using $\pi(a|s)$
+- then, given that chosen action, the environment produces the next state according to $P(s'|s,a)$
+
+So one interaction step is:
+
+$$
+s \xrightarrow{\pi(a|s)} a \xrightarrow{P(s'|s,a)} s'
+$$
+
+If reward is included explicitly, the fuller environment model is:
+
+$$
+P(s', r \mid s, a)
+$$
+
+and $P(s'|s,a)$ is the marginal next-state distribution obtained from it.
+
 ## State Value and Action Value
 
 State value and action value are two different ways to represent the expected return in reinforcement learning.

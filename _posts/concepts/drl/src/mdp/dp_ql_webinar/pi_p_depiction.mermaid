@@ -1,0 +1,55 @@
+flowchart LR
+    S["Current state<br/>s"]
+
+    subgraph POLICY["Agent: policy distribution π(a|s)"]
+        direction TB
+        A1["Action a1<br/>policy probability π(a1|s)"]
+        A2["Chosen action a2<br/>policy probability π(a2|s)"]
+        A3["Action a3<br/>policy probability π(a3|s)"]
+    end
+
+    subgraph ENV["Environment joint distribution: P(s',r|s,a2)"]
+        direction TB
+        SP1["Outcome 1<br/>joint outcome (s1', r1)"]
+        SP2["Outcome 2<br/>joint outcome (s2', r2)"]
+        SP3["Outcome 3<br/>joint outcome (s3', r3)"]
+    end
+
+    subgraph RET["Reward and continuation"]
+        direction TB
+        R1["⧉ outcome contribution<br/>r1 + γV(s1')"]
+        R2["⧉ outcome contribution<br/>r2 + γV(s2')"]
+        R3["⧉ outcome contribution<br/>r3 + γV(s3')"]
+    end
+
+    S -->|"π(a1|s)"| A1
+    S -->|"π(a2|s)"| A2
+    S -->|"π(a3|s)"| A3
+
+    A2 -->|"P(s1',r1|s,a2)"| SP1
+    A2 -->|"P(s2',r2|s,a2)"| SP2
+    A2 -->|"P(s3',r3|s,a2)"| SP3
+
+    SP1 --> R1
+    SP2 --> R2
+    SP3 --> R3
+
+    Bellman["Bellman expectation:<br/>Vπ(s) = Σa π(a|s) Σs',r P(s',r|s,a)[r + γVπ(s')]"]
+
+    R1 --> Bellman
+    R2 --> Bellman
+    R3 --> Bellman
+
+    classDef state fill:#eef2ff,stroke:#4f46e5,stroke-width:2px,color:#111827;
+    classDef policy fill:#fff7ed,stroke:#c2410c,stroke-width:2px,color:#111827;
+    classDef chosen fill:#ffedd5,stroke:#9a3412,stroke-width:3px,color:#111827;
+    classDef env fill:#ecfeff,stroke:#0f766e,stroke-width:2px,color:#111827;
+    classDef ret fill:#f5f3ff,stroke:#7c3aed,stroke-width:2px,color:#111827;
+    classDef bell fill:#f9fafb,stroke:#374151,stroke-width:2px,color:#111827;
+
+    class S state;
+    class A1,A3 policy;
+    class A2 chosen;
+    class SP1,SP2,SP3 env;
+    class R1,R2,R3 ret;
+    class Bellman bell;

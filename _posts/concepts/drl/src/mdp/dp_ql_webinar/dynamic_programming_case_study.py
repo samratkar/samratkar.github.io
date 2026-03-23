@@ -24,7 +24,7 @@ import numpy as np
 from gridworld_case_study import GridWorldCaseStudyEnv, format_policy
 
 
-def policy_evaluation(env, policy, gamma=0.9, theta=1e-8):
+def policy_evaluation(env, policy, gamma=0.9, theta=1e-8, max_iterations=10000):
     # Precondition:
     # - `env` must expose:
     #   - `observation_space.n`
@@ -52,7 +52,7 @@ def policy_evaluation(env, policy, gamma=0.9, theta=1e-8):
     num_states = env.observation_space.n
     V = np.zeros(num_states)
 
-    while True:
+    for _ in range(max_iterations):
         delta = 0.0
         for s in range(num_states):
             # Save the previous estimate so convergence can be measured later.
@@ -80,6 +80,11 @@ def policy_evaluation(env, policy, gamma=0.9, theta=1e-8):
 
         if delta < theta:
             return V
+
+    raise RuntimeError(
+        "policy_evaluation did not converge within max_iterations="
+        f"{max_iterations}"
+    )
 
 
 def compute_q_from_v(env, V, gamma=0.9):
@@ -157,7 +162,9 @@ def policy_improvement(env, V, gamma=0.9, epsilon=0.1):
     return policy, Q
 
 
-def policy_iteration(env, gamma=0.9, theta=1e-8, epsilon=0.1):
+def policy_iteration(
+    env, gamma=0.9, theta=1e-8, epsilon=0.1, max_policy_iterations=1000
+):
     # Precondition:
     # - `env` must be a finite tabular MDP
     # - `gamma`, `theta`, and `epsilon` should be valid numeric hyperparameters
@@ -175,16 +182,26 @@ def policy_iteration(env, gamma=0.9, theta=1e-8, epsilon=0.1):
     num_actions = env.action_space.n
     policy = np.ones((num_states, num_actions)) / num_actions
 
-    while True:
+    for _ in range(max_policy_iterations):
         V = policy_evaluation(env, policy, gamma=gamma, theta=theta)
         new_policy, Q = policy_improvement(env, V, gamma=gamma, epsilon=epsilon)
-        # Stability means the greedy improvement step made no further changes.
-        if np.array_equal(new_policy, policy):
+        stable = np.array_equal(
+            new_policy.argmax(axis=1), policy.argmax(axis=1)
+        )
+        # Stability means the greedy action chosen in each state no longer changes.
+        if stable:
             return policy, V, Q
         policy = new_policy
 
+    raise RuntimeError(
+        "policy_iteration did not converge within max_policy_iterations="
+        f"{max_policy_iterations}"
+    )
 
-def policy_iteration_with_history(env, gamma=0.9, theta=1e-8, epsilon=0.1):
+
+def policy_iteration_with_history(
+    env, gamma=0.9, theta=1e-8, epsilon=0.1, max_policy_iterations=1000
+):
     # Precondition:
     # Same as `policy_iteration()`.
     #
@@ -207,9 +224,12 @@ def policy_iteration_with_history(env, gamma=0.9, theta=1e-8, epsilon=0.1):
     history = []
 
     iteration = 0
-    while True:
+    for _ in range(max_policy_iterations):
         V = policy_evaluation(env, policy, gamma=gamma, theta=theta)
         new_policy, Q = policy_improvement(env, V, gamma=gamma, epsilon=epsilon)
+        stable = np.array_equal(
+            new_policy.argmax(axis=1), policy.argmax(axis=1)
+        )
         history.append(
             {
                 # Iteration number in the outer policy-iteration loop.
@@ -218,13 +238,18 @@ def policy_iteration_with_history(env, gamma=0.9, theta=1e-8, epsilon=0.1):
                 "policy": new_policy.copy(),
                 "V": V.copy(),
                 "Q": Q.copy(),
-                "stable": np.array_equal(new_policy, policy),
+                "stable": stable,
             }
         )
-        if np.array_equal(new_policy, policy):
+        if stable:
             return new_policy, V, Q, history
         policy = new_policy
         iteration += 1
+
+    raise RuntimeError(
+        "policy_iteration_with_history did not converge within "
+        f"max_policy_iterations={max_policy_iterations}"
+    )
 
 
 def main():
