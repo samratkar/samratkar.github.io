@@ -21,7 +21,31 @@ from __future__ import annotations
 
 import numpy as np
 
-from gridworld_case_study import GridWorldCaseStudyEnv, format_policy
+from gridworld_case_study import (
+    ACTION_NAMES,
+    GridWorldCaseStudyEnv,
+    format_greedy_actions,
+    format_policy,
+)
+
+
+def format_q_tie_details(Q):
+    # Show exact full-precision rows when multiple actions share the same
+    # maximal Q-value so tie-breaking is visible instead of being hidden by
+    # rounded table output or a single-arrow policy renderer.
+    lines = []
+    for state, row in enumerate(np.asarray(Q, dtype=float)):
+        best_value = row.max()
+        tied_actions = np.flatnonzero(np.isclose(row, best_value))
+        if len(tied_actions) > 1:
+            row_values = ", ".join(f"{value:.15f}" for value in row)
+            action_names = ", ".join(
+                ACTION_NAMES[int(action)].upper() for action in tied_actions
+            )
+            lines.append(
+                f"state {state}: Q=[{row_values}] tied_best_actions=[{action_names}]"
+            )
+    return "\n".join(lines) if lines else "No tied greedy actions."
 
 
 def policy_evaluation(env, policy, gamma=0.9, theta=1e-8, max_iterations=10000):
@@ -138,12 +162,13 @@ def policy_improvement(env, V, gamma=0.9, epsilon=0.1):
     #
     # What happens:
     # 1. Convert the current state values `V` into action values `Q`.
-    # 2. For each state, choose the action with the largest Q-value.
+    # 2. For each state, find all actions tied for the largest Q-value.
     # 3. Build an epsilon-greedy policy:
     #    - distribute `epsilon` uniformly across all actions
-    #    - give the remaining `1 - epsilon` probability to the best action
+    #    - split the remaining `1 - epsilon` probability equally across all
+    #      tied best actions
     #    This produces a policy row representing action probabilities
-    #    `pi(a|s)` instead of a one-hot deterministic choice.
+    #    `pi(a|s)` without arbitrarily breaking ties among equally good actions.
     #
     # Postcondition:
     # Returns:
@@ -154,10 +179,11 @@ def policy_improvement(env, V, gamma=0.9, epsilon=0.1):
     policy = np.full((num_states, num_actions), epsilon / num_actions)
 
     for s in range(num_states):
-        # `argmax` selects the best action for this state, which gets the
-        # extra `1 - epsilon` probability mass.
-        best_action = int(np.argmax(Q[s]))
-        policy[s, best_action] += 1.0 - epsilon
+        row = np.asarray(Q[s], dtype=float)
+        best_value = row.max()
+        best_actions = np.flatnonzero(np.isclose(row, best_value))
+        greedy_share = (1.0 - epsilon) / len(best_actions)
+        policy[s, best_actions] += greedy_share
 
     return policy, Q
 
@@ -282,6 +308,10 @@ def main():
         print(snapshot["V"].reshape(3, 3))
         print("Q")
         print(snapshot["Q"])
+        print("Full-precision tied greedy Q rows")
+        print(format_q_tie_details(snapshot["Q"]))
+        print("Greedy actions from Q (ties shown)")
+        print(format_greedy_actions(snapshot["Q"]))
         print(f"Epsilon-greedy policy (epsilon={epsilon})")
         print(format_policy(snapshot["policy"]))
 
@@ -289,6 +319,10 @@ def main():
     print(V.reshape(3, 3))
     print("\nOptimal action values Q*")
     print(Q)
+    print("\nFull-precision tied greedy Q rows")
+    print(format_q_tie_details(Q))
+    print("\nGreedy actions from Q* (ties shown)")
+    print(format_greedy_actions(Q))
     print(f"\nEpsilon-greedy policy from DP (epsilon={epsilon})")
     print(format_policy(policy))
 

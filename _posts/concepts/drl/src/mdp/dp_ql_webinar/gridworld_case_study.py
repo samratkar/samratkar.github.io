@@ -298,13 +298,26 @@ class GridWorldCaseStudyEnv:
         return next_state, reward, done, False, {}
 
 
+def _format_action_grid(rows) -> str:
+    lines = []
+    cols = GridWorldConfig().cols
+    separator = "+---+---+---+"
+    lines.append(separator)
+    for idx in range(0, len(rows), cols):
+        lines.append("|" + "|".join(rows[idx : idx + cols]) + "|")
+        lines.append(separator)
+    return "\n".join(lines)
+
+
 def format_policy(policy) -> str:
     # Precondition:
     # `policy` should be indexable by state and each row should support
-    # `.argmax()` to pick the best action for that state.
+    # selecting the highest-probability action(s) for that state.
     #
     # What happens:
     # 1. Map the best action in each state to an arrow symbol.
+    # 2. If multiple actions are tied for the largest probability, display all
+    #    tied arrows in the same cell so the visualization does not hide ties.
     # 2. Replace the goal state's arrow with `G`.
     # 3. Group the states row by row into a text grid.
     #
@@ -321,13 +334,40 @@ def format_policy(policy) -> str:
         if state == GridWorldConfig().goal_state:
             rows.append(" G ")
         else:
-            rows.append(f" {arrows[int(policy[state].argmax())]} ")
+            row = np.asarray(policy[state], dtype=float)
+            best_value = row.max()
+            best_actions = np.flatnonzero(np.isclose(row, best_value))
+            cell = "".join(arrows[action] for action in best_actions)
+            rows.append(f"{cell:^3}")
 
-    lines = []
-    cols = GridWorldConfig().cols
-    separator = "+---+---+---+"
-    lines.append(separator)
-    for idx in range(0, len(rows), cols):
-        lines.append("|" + "|".join(rows[idx : idx + cols]) + "|")
-        lines.append(separator)
-    return "\n".join(lines)
+    return _format_action_grid(rows)
+
+
+def format_greedy_actions(Q) -> str:
+    # Precondition:
+    # `Q` should be a state-action value table with one row per state.
+    #
+    # What happens:
+    # 1. Find all actions tied for the maximal Q-value in each state.
+    # 2. Render every tied greedy action in the same grid cell.
+    #
+    # Postcondition:
+    # Returns a grid that exposes greedy-action ties directly from Q.
+    arrows = {
+        UP: "^",
+        RIGHT: ">",
+        DOWN: "v",
+        LEFT: "<",
+    }
+    rows = []
+    for state in range(Q.shape[0]):
+        if state == GridWorldConfig().goal_state:
+            rows.append(" G ")
+        else:
+            row = np.asarray(Q[state], dtype=float)
+            best_value = row.max()
+            best_actions = np.flatnonzero(np.isclose(row, best_value))
+            cell = "".join(arrows[action] for action in best_actions)
+            rows.append(f"{cell:^3}")
+
+    return _format_action_grid(rows)
