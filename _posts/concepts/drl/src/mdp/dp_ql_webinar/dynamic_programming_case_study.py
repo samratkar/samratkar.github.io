@@ -19,7 +19,9 @@ End-to-end story of this file:
 
 from __future__ import annotations
 
+import json
 import numpy as np
+from pathlib import Path
 
 from gridworld_case_study import (
     ACTION_NAMES,
@@ -46,6 +48,51 @@ def format_q_tie_details(Q):
                 f"state {state}: Q=[{row_values}] tied_best_actions=[{action_names}]"
             )
     return "\n".join(lines) if lines else "No tied greedy actions."
+
+
+def serialize_transition_model(env):
+    transition_model = {}
+    for state, actions in env.P.items():
+        transition_model[str(state)] = {}
+        for action, outcomes in actions.items():
+            action_name = ACTION_NAMES[int(action)].upper()
+            transition_model[str(state)][action_name] = [
+                {
+                    "probability": float(prob),
+                    "next_state": int(next_state),
+                    "reward": float(reward),
+                    "done": bool(done),
+                }
+                for prob, next_state, reward, done in outcomes
+            ]
+    return transition_model
+
+
+def export_final_policy_json(
+    env,
+    policy,
+    V,
+    Q,
+    stable,
+    epsilon,
+    output_path="dynamic_programming_policies.json",
+):
+    payload = {
+        "epsilon": epsilon,
+        "action_order": [
+            ACTION_NAMES[i].upper() for i in range(policy.shape[1])
+        ],
+        "final": {
+            "stable": bool(stable),
+            "policy_matrix": policy.tolist(),
+            "V": V.tolist(),
+            "Q": Q.tolist(),
+            "transition_model": serialize_transition_model(env),
+        },
+    }
+    path = Path(output_path)
+    path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    return path
 
 
 def policy_evaluation(env, policy, gamma=0.9, theta=1e-8, max_iterations=10000):
@@ -325,6 +372,15 @@ def main():
     print(format_greedy_actions(Q))
     print(f"\nEpsilon-greedy policy from DP (epsilon={epsilon})")
     print(format_policy(policy))
+    export_path = export_final_policy_json(
+        env=env,
+        policy=policy,
+        V=V,
+        Q=Q,
+        stable=history[-1]["stable"] if history else True,
+        epsilon=epsilon,
+    )
+    print(f"\nExported final policy JSON to {export_path.resolve()}")
 
 
 if __name__ == "__main__":
