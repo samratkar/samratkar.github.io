@@ -107,7 +107,7 @@ $$
 q_{\pi}(s,a) = \sum_{s',r} p(s', r \mid s, a)\left[r + \gamma \sum_{a'} \pi(a' \mid s') q_{\pi}(s', a')\right]
 $$
 
-$$Q^\pi(s,a) = \sum_{s',r} P(s',r|s,a)[r + \gamma V^\pi(s')]$$
+$$Q^\pi(s,a) = \sum_{s',r} P(s',r|s,a)\left[r + \gamma V^\pi(s')\right]$$
 
 ### The Big Picture
 - **Dynamic Programming**: definition/analytic level with a **known model**.
