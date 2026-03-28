@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Dynamic Programming Probability Structures</title>
+  <desc id="desc">Diagram showing agent policy probabilities pi(a|s) and environment joint transition distribution P(s', r | s, a) stored in P[state][action].</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fcfcff" />
+      <stop offset="100%" stop-color="#f5f7fb" />
+    </linearGradient>
+    <linearGradient id="policyBox" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff7ed" />
+      <stop offset="100%" stop-color="#ffedd5" />
+    </linearGradient>
+    <linearGradient id="envBox" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ecfeff" />
+      <stop offset="100%" stop-color="#ccfbf1" />
+    </linearGradient>
+    <linearGradient id="codeBox" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8fafc" />
+      <stop offset="100%" stop-color="#eef2ff" />
+    </linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#475569" />
+    </marker>
+    <style>
+      .title { font: 700 30px Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 16px Arial, sans-serif; fill: #475569; }
+      .section { font: 700 18px Arial, sans-serif; fill: #0f172a; }
+      .label { font: 600 15px Arial, sans-serif; fill: #0f172a; }
+      .body { font: 400 15px Arial, sans-serif; fill: #334155; }
+      .mono { font: 400 15px 'Courier New', monospace; fill: #111827; }
+      .small { font: 400 13px Arial, sans-serif; fill: #475569; }
+      .badge { font: 700 12px Arial, sans-serif; fill: #0f172a; letter-spacing: 0.08em; }
+      .math { font: 600 16px 'Courier New', monospace; fill: #111827; }
+      .box { stroke-width: 2; rx: 18; ry: 18; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="760" fill="url(#bg)" />
+
+  <text x="48" y="54" class="title">How Dynamic Programming Uses Two Probability Structures</text>
+  <text x="48" y="82" class="subtitle">The agent stores action probabilities in the policy. The environment stores joint outcome probabilities in P[state][action].</text>
+
+  <rect x="46" y="118" width="352" height="124" fill="#ffffff" stroke="#cbd5e1" class="box" />
+  <text x="68" y="152" class="badge">CURRENT INPUT</text>
+  <text x="68" y="184" class="section">State s = 0</text>
+  <text x="68" y="210" class="body">The same state feeds both the policy lookup and</text>
+  <text x="68" y="234" class="body">the environment transition lookup.</text>
+
+  <line x1="398" y1="180" x2="448" y2="180" stroke="#475569" stroke-width="3" marker-end="url(#arrow)" />
+
+  <rect x="448" y="100" width="390" height="320" fill="url(#policyBox)" stroke="#c2410c" class="box" />
+  <text x="474" y="138" class="badge">AGENT SIDE</text>
+  <text x="474" y="172" class="section">policy[s][a] = pi(a|s)</text>
+  <text x="474" y="200" class="body">One row per state.</text>
+  <text x="474" y="224" class="body">Each entry is an action probability.</text>
+
+  <rect x="474" y="248" width="322" height="38" rx="10" ry="10" fill="#ffffff" stroke="#fdba74" />
+  <text x="490" y="272" class="mono">policy[0] = [0.25, 0.25, 0.25, 0.25]</text>
+
+  <text x="490" y="320" class="mono">pi(Up|s=0)    = 0.25</text>
+  <text x="490" y="350" class="mono">pi(Right|s=0) = 0.25</text>
+  <text x="490" y="380" class="mono">pi(Down|s=0)  = 0.25</text>
+  <text x="490" y="410" class="mono">pi(Left|s=0)  = 0.25</text>
+
+  <rect x="930" y="100" width="218" height="560" fill="url(#envBox)" stroke="#0f766e" class="box" />
+  <text x="946" y="138" class="badge">ENVIRONMENT SIDE</text>
+  <text x="946" y="170" class="section">P[state][action]</text>
+  <text x="946" y="194" class="section">stores</text>
+  <text x="946" y="218" class="section">P(s', r | s, a)</text>
+  <text x="946" y="246" class="body">Choose one state-action pair,</text>
+  <text x="946" y="268" class="body">then read stochastic outcomes.</text>
+
+  <rect x="946" y="290" width="178" height="76" rx="10" ry="10" fill="#ffffff" stroke="#5eead4" />
+  <text x="958" y="314" class="mono">P[0][Right] = [</text>
+  <text x="958" y="336" class="mono">(prob, next_state,</text>
+  <text x="958" y="358" class="mono"> reward, done), ... ]</text>
+
+  <rect x="946" y="386" width="178" height="76" rx="14" ry="14" fill="#ffffff" stroke="#99f6e4" />
+  <text x="960" y="410" class="label">Outcome 1</text>
+  <text x="960" y="434" class="mono">(0.80, 1,</text>
+  <text x="960" y="456" class="mono"> -1.0, False)</text>
+
+  <rect x="946" y="482" width="178" height="76" rx="14" ry="14" fill="#ffffff" stroke="#99f6e4" />
+  <text x="960" y="506" class="label">Outcome 2</text>
+  <text x="960" y="530" class="mono">(0.10, 0,</text>
+  <text x="960" y="552" class="mono"> -1.0, False)</text>
+
+  <rect x="946" y="578" width="178" height="76" rx="14" ry="14" fill="#ffffff" stroke="#99f6e4" />
+  <text x="960" y="602" class="label">Outcome 3</text>
+  <text x="960" y="626" class="mono">(0.10, 3,</text>
+  <text x="960" y="648" class="mono"> -1.0, False)</text>
+
+  <text x="946" y="690" class="small">Each tuple is one support point</text>
+  <text x="946" y="710" class="small">of the joint conditional distribution</text>
+  <text x="946" y="734" class="math">P(s', r | s=0, a=Right)</text>
+
+  <rect x="448" y="430" width="390" height="230" fill="url(#codeBox)" stroke="#4f46e5" class="box" />
+  <text x="474" y="456" class="badge">BELLMAN WEIGHTING</text>
+  <text x="474" y="490" class="section">Both probabilities appear</text>
+  <text x="474" y="514" class="section">in one update</text>
+  <text x="474" y="548" class="mono">for a in actions:</text>
+  <text x="498" y="576" class="mono">action_prob = policy[s][a]</text>
+  <text x="498" y="604" class="mono">for prob, s', r, done in P[s][a]:</text>
+  <text x="514" y="632" class="mono">V[s] += action_prob * prob *</text>
+  <text x="514" y="654" class="mono">        (r + gamma * V[s'])</text>
+
+  <line x1="838" y1="174" x2="930" y2="174" stroke="#475569" stroke-width="3" marker-end="url(#arrow)" />
+  <line x1="838" y1="544" x2="930" y2="544" stroke="#475569" stroke-width="3" marker-end="url(#arrow)" />
+
+  <text x="884" y="142" text-anchor="middle" class="small">choose</text>
+  <text x="884" y="158" text-anchor="middle" class="small">action</text>
+  <text x="884" y="510" text-anchor="middle" class="small">average</text>
+  <text x="884" y="526" text-anchor="middle" class="small">outcomes</text>
+
+  <rect x="48" y="696" width="836" height="58" fill="#ffffff" stroke="#cbd5e1" class="box" />
+  <text x="72" y="722" class="section">Interpretation</text>
+  <text x="250" y="722" class="body">policy[s][a] is the agent's distribution over actions: pi(a|s).</text>
+  <text x="72" y="744" class="body">P[s][a] is the environment's list representation of the joint conditional distribution over outcomes: P(s', r | s, a).</text>
+</svg>

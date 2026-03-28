@@ -2,7 +2,7 @@
 tags : [drl, mdp, dynamic-programming, q-learning, gymnasium]
 title : "Case Study: Dynamic Programming vs Q-Learning"
 category: dlr
-subcategory: "mdp"
+subcategory: "dp-qlearning"
 layout : mermaid
 ---
 
@@ -58,16 +58,15 @@ Dynamic programming is a planning framework for solving an MDP when the full mod
 
 It can be used to compute:
 
-!!!info 
-    - $V_\pi(s)$: the value of state $s$ under a ***specific policy $\pi$***
-    - $Q_\pi(s,a)$: the value of taking action $a$ in state $s$ under a ***specific policy $\pi$***
-    - $V^*(s)$: the optimal state value - ***over all policies***
-    - $Q^*(s,a)$: the optimal action value - ***over all policies***
+>- $V_\pi(s)$: the value of state $s$ under a ***specific policy $\pi$***
+>- $Q_\pi(s,a)$: the value of taking action $a$ in state $s$ under a ***specific policy $\pi$***
+>- $V^⋆(s)$: the optimal state value - ***over all policies***
+>- $Q^⋆(s,a)$: the optimal action value - ***over all policies***
 
-!!!note
-    DP gives the exact Bellman target that Q-learning is trying to approximate.
-    If the model is known, DP can compute `Q*` directly by repeatedly applying Bellman optimality updates over all state-action pairs.
-    If the model is unknown, Q-learning uses sampled transitions to move its estimates toward that same `Q*`.
+
+>DP gives the exact Bellman target that Q-learning is trying to approximate.
+>If the model is known, DP can compute `Q*` directly by repeatedly applying Bellman optimality updates over all state-action pairs.
+>If the model is unknown, Q-learning uses sampled transitions to move its estimates toward that same `Q*`.
 
 So the connection is:
 
@@ -80,9 +79,9 @@ Q-learning without model   -> learns Q* by sampled backups
 
 In dynamic programming, we assume the finite MDP is fully known:
 
-```math
+$$
 \mathcal{M} = \left(\mathcal{S}, \mathcal{A}, \pi(a \mid s), p(s', r \mid s, a), \gamma\right)
-```
+$$
 
 In plain English, this means:
 
@@ -98,214 +97,25 @@ Once the MDP model $\mathcal{M}$ is known, dynamic programming uses it to comput
 
 For policy evaluation, the state-value function is:
 
-```math
+$$
 v_{\pi}(s) = \sum_a \pi(a \mid s)\sum_{s',r} p(s', r \mid s, a)\left[r + \gamma v_{\pi}(s')\right]
-```
+$$
 
 For action values:
 
-```math
+$$
 q_{\pi}(s,a) = \sum_{s',r} p(s', r \mid s, a)\left[r + \gamma \sum_{a'} \pi(a' \mid s') q_{\pi}(s', a')\right]
-```
+$$
 
-In many tabular Gymnasium toy-text environments, this model is exposed as:
+### Source Code 
 
-```python
-env.P[s][a]
-```
+<iframe
+src="/assets/drl/webinars/dp-qlearning/src/dynamic_programming_case_study.html"
+width="100%"
+height="900"
+style="border: 1px solid #ddd;">
+</iframe>
 
-Conceptually, the probability distribution is:
-
-```python
-p[(s, a)] = [
-    (prob_1, next_state_1, reward_1),
-    (prob_2, next_state_2, reward_2),
-    ...
-]
-```
-
-where the probabilities for a fixed $(s, a)$ sum to `1`.
-
-In a tabular Gymnasium toy-text implementation, this is usually stored as:
-
-```python
-env.P: dict[int, dict[int, list[tuple[float, int, float, bool]]]]
-```
-
-Meaning:
-
-- `env.P[s]` returns all actions available from state `s`
-- `env.P[s][a]` returns a list of transitions for action `a` in state `s`
-- each transition is `(prob, next_state, reward, done)`
-
-So the implementation form of the transition-reward probability distribution is:
-
-```python
-env.P[s][a] = [
-    (prob_1, next_state_1, reward_1, done_1),
-    (prob_2, next_state_2, reward_2, done_2),
-    ...
-]
-```
-
-Here:
-
-- `prob_i` corresponds to the probability mass from `p(s', r \mid s, a)`
-- `next_state_i` is one possible `s'`
-- `reward_i` is the reward paired with that `s'`
-- `done_i` indicates whether that transition ends the episode
-
-Example:
-
-```python
-env.P[7][1]
-# [(1.0, 8, 10.0, True)]
-```
-
-This means:
-
-- with probability `1.0`
-- the next state is `8`
-- the reward is `10.0`
-- and the transition ends the episode
-
-Note:
-- this tabular `P` structure is common in Gymnasium toy-text style environments, but it is not part of the generic Gymnasium `Env` API for all environments
-- some codebases may write `env.p[s][a]`, but the common attribute name in these environments is uppercase `env.P`
-
-### Intuition
-
-Dynamic programming computes values by applying Bellman updates repeatedly.
-
-In this grid world:
-- if moving `Right` from `S7` reaches `S8`, that action should become highly valued
-- then states that can reach `S7` should also gain value
-- eventually value information propagates backward through the whole grid
-
-### Diagram
-
-```mermaid
-flowchart LR
-    S0["S0"] --> S1["S1"]
-    S1 --> S2["S2"]
-    S2 --> S5["S5"]
-    S5 --> S8["S8 Goal"]
-
-    S0 --> S3["S3"]
-    S3 --> S6["S6"]
-    S6 --> S7["S7"]
-    S7 --> S8
-```
-
-Dynamic programming uses the full model to evaluate all possible actions and transitions at every state.
-
-### Example Policy Iteration Code
-
-```python
-import numpy as np
-
-
-def policy_evaluation(env, policy, gamma=0.9, theta=1e-8):
-    num_states = env.observation_space.n
-    V = np.zeros(num_states)
-
-    while True:
-        delta = 0.0
-        for s in range(num_states):
-            old_v = V[s]
-            new_v = 0.0
-
-            for a, action_prob in enumerate(policy[s]):
-                if action_prob == 0:
-                    continue
-
-                for prob, next_state, reward, done in env.P[s][a]:
-                    new_v += action_prob * prob * (
-                        reward + gamma * (1 - done) * V[next_state]
-                    )
-
-            V[s] = new_v
-            delta = max(delta, abs(old_v - new_v))
-
-        if delta < theta:
-            break
-
-    return V
-
-
-def compute_q_from_v(env, V, gamma=0.9):
-    num_states = env.observation_space.n
-    num_actions = env.action_space.n
-    Q = np.zeros((num_states, num_actions))
-
-    for s in range(num_states):
-        for a in range(num_actions):
-            for prob, next_state, reward, done in env.P[s][a]:
-                Q[s, a] += prob * (
-                    reward + gamma * (1 - done) * V[next_state]
-                )
-
-    return Q
-
-
-def policy_improvement(env, V, gamma=0.9):
-    Q = compute_q_from_v(env, V, gamma)
-    num_states, num_actions = Q.shape
-    policy = np.zeros((num_states, num_actions))
-
-    for s in range(num_states):
-        best_action = np.argmax(Q[s])
-        policy[s, best_action] = 1.0
-
-    return policy, Q
-
-
-def policy_iteration(env, gamma=0.9, theta=1e-8):
-    num_states = env.observation_space.n
-    num_actions = env.action_space.n
-    policy = np.ones((num_states, num_actions)) / num_actions
-
-    while True:
-        V = policy_evaluation(env, policy, gamma=gamma, theta=theta)
-        new_policy, Q = policy_improvement(env, V, gamma=gamma)
-
-        if np.array_equal(new_policy, policy):
-            break
-
-        policy = new_policy
-
-    return policy, V, Q
-```
-
-### Example Outcome
-
-A likely optimal policy for the grid might look like:
-
-```text
-+---------+---------+---------+
-| S0  ->  | S1  ->  | S2  v   |
-+---------+---------+---------+
-| S3  ->  | S4  ->  | S5  v   |
-+---------+---------+---------+
-| S6  ->  | S7  ->  | S8 Goal |
-+---------+---------+---------+
-```
-
-This means:
-- from the top row, move right until the last column
-- then move down toward the goal
-
-### What DP is doing
-
-Dynamic programming is effectively asking:
-
-- if I know the exact transition probabilities and rewards,
-- what is the exact best value of each state,
-- and therefore what is the exact best action at each state?
-
-So DP performs **full expected backups**.
-
----
 
 ## Case Study 2: Q-Learning
 
