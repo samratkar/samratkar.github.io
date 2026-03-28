@@ -109,13 +109,25 @@ $$
 
 ### Source Code 
 
+[Link to the source code](/assets/drl/webinars/dp-qlearning/src/dynamic_programming_case_study.ipynb)
+
 <iframe
 src="/assets/drl/webinars/dp-qlearning/src/dynamic_programming_case_study.html"
 width="100%"
-height="900"
+height="1000"
 style="border: 1px solid #ddd;">
 </iframe>
 
+### The gridboard game 
+
+[Link to the source code](/assets/drl/webinars/dp-qlearning/src/dynamic_programming_case_study.ipynb)
+
+<iframe
+src="/assets/drl/webinars/dp-qlearning/src/dynamic_programming_game.html"
+width="100%"
+height="1000"
+style="border: 1px solid #ddd;">
+</iframe>
 
 ## Case Study 2: Q-Learning
 
