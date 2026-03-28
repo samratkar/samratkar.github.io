@@ -120,7 +120,9 @@ style="border: 1px solid #ddd;">
 
 ### The gridboard game 
 
-[Link to the source code](/assets/drl/webinars/dp-qlearning/src/dynamic_programming_game.html)
+<a href="/assets/drl/webinars/dp-qlearning/src/dynamic_programming_game.html" target="_blank" rel="noopener noreferrer">
+    Open the game in the a new tab full screen mode
+</a> 
 
 <iframe
 src="/assets/drl/webinars/dp-qlearning/src/dynamic_programming_game.html"
