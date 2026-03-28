@@ -107,9 +107,43 @@ $$
 q_{\pi}(s,a) = \sum_{s',r} p(s', r \mid s, a)\left[r + \gamma \sum_{a'} \pi(a' \mid s') q_{\pi}(s', a')\right]
 $$
 
-### Source Code 
+$$Q^\pi(s,a) = \sum_{s',r} P(s',r|s,a)[r + \gamma V^\pi(s')]$$
 
-[Link to the source code](/assets/drl/webinars/dp-qlearning/src/dynamic_programming_case_study.ipynb)
+### The Big Picture
+- **Dynamic Programming**: definition/analytic level with a **known model**.
+- **Monte Carlo + TD (SARSA, Q-learning)**: **sample level**, learning from experience without knowing the model.
+  - MC: sample-based, no bootstrapping.
+  - TD (SARSA, Q-learning): sample-based **with** bootstrapping.
+
+<div class="mermaid">
+flowchart TB
+  A["Bellman Equations (Theory)<br/>Definition level"]
+  A --> B{"Do we know the full MDP?<br/>(transitions & rewards)"}
+
+  B -->|Yes| C["Dynamic Programming (DP)<br/>Model-based"]
+  B -->|No| D["Model-free RL<br/>Sample level"]
+
+    C --> C1[Policy Evaluation]
+    C --> C2[Policy Iteration]
+    C --> C3[Value Iteration]
+
+    D --> E["Monte Carlo (MC)"]
+    D --> F["Temporal-Difference (TD)"]
+
+    E:::mc
+    F:::td
+
+    F --> G["SARSA<br/>(on-policy TD control)"]
+    F --> H["Q-learning<br/>(off-policy TD control)"]
+
+    classDef mc fill:#e0f7fa,stroke:#00838f,stroke-width:1px;
+    classDef td fill:#fff3e0,stroke:#ef6c00,stroke-width:1px;
+</div>
+
+
+### Source Code Dynamic Programming
+
+[Link to the source code - Dynamic Programming](/assets/drl/webinars/dp-qlearning/src/dynamic_programming_case_study.ipynb)
 
 <iframe
 src="/assets/drl/webinars/dp-qlearning/src/dynamic_programming_case_study.html"
