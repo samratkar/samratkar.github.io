@@ -120,7 +120,7 @@ style="border: 1px solid #ddd;">
 
 ### The gridboard game 
 
-[Link to the source code](/assets/drl/webinars/dp-qlearning/src/dynamic_programming_case_study.ipynb)
+[Link to the source code](/assets/drl/webinars/dp-qlearning/src/dynamic_programming_game.html)
 
 <iframe
 src="/assets/drl/webinars/dp-qlearning/src/dynamic_programming_game.html"
