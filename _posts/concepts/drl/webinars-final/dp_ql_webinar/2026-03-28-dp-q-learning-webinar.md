@@ -143,7 +143,10 @@ flowchart TB
 
 ### Source Code Dynamic Programming
 
-[Link to the source code - Dynamic Programming](https://github.com/samratkar/samratkar.github.io/blob/main/assets/drl/webinars/dp-qlearning/src/dynamic_programming_case_study.ipynb)
+
+<a href="https://github.com/samratkar/samratkar.github.io/blob/main/assets/drl/webinars/dp-qlearning/src/dynamic_programming_case_study.ipynb" target="_blank" rel="noopener noreferrer">
+    Open for source code for Dynamic Programming case study
+</a> 
 
 ### The gridboard game 
 
@@ -239,54 +242,6 @@ flowchart LR
     D --> E["Update Q(s,a)"]
 ```
 
-### Q-Learning Code
-
-```python
-import numpy as np
-import random
-
-
-def epsilon_greedy_action(Q, state, epsilon):
-    if random.random() < epsilon:
-        return random.randrange(Q.shape[1])
-    return np.argmax(Q[state])
-
-
-def q_learning(env, num_episodes=5000, alpha=0.1, gamma=0.9, epsilon=1.0,
-               epsilon_decay=0.995, epsilon_min=0.01):
-    num_states = env.observation_space.n
-    num_actions = env.action_space.n
-    Q = np.zeros((num_states, num_actions))
-
-    for episode in range(num_episodes):
-        state, _ = env.reset()
-        done = False
-
-        while not done:
-            action = epsilon_greedy_action(Q, state, epsilon)
-            next_state, reward, terminated, truncated, _ = env.step(action)
-            done = terminated or truncated
-
-            target = reward + gamma * (1 - done) * np.max(Q[next_state])
-            Q[state, action] += alpha * (target - Q[state, action])
-
-            state = next_state
-
-        epsilon = max(epsilon_min, epsilon * epsilon_decay)
-
-    return Q
-
-
-def greedy_policy_from_q(Q):
-    num_states, num_actions = Q.shape
-    policy = np.zeros((num_states, num_actions))
-
-    for s in range(num_states):
-        best_action = np.argmax(Q[s])
-        policy[s, best_action] = 1.0
-
-    return policy
-```
 
 ### Example Learning Story
 
@@ -465,9 +420,13 @@ But they solve it differently:
 So if the model is known, dynamic programming is the cleanest exact method.
 If the model is unknown, Q-learning is a practical model-free alternative.
 
-### Source Code Dynamic Programming
+### Source Code Q Learning
 
-[Link to the source code - Q Learning](https://github.com/samratkar/samratkar.github.io/blob/main/assets/drl/webinars/dp-qlearning/src/q_learning_case_study.ipynb)
+
+<a href="https://github.com/samratkar/samratkar.github.io/blob/main/assets/drl/webinars/dp-qlearning/src/q_learning_case_study.ipynb" target="_blank" rel="noopener noreferrer">
+    Source code for Q-Learning case study
+</a> 
+
 
 ### The gridboard game 
 
