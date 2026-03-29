@@ -1,8 +1,7 @@
-"""Generate a standalone HTML game view from dynamic_programming_policies.json."""
+"""Generate DP HTML views that fetch policy data at runtime."""
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 
@@ -1196,22 +1195,45 @@ MODEL_TEMPLATE = """<!DOCTYPE html>
 """
 
 
+def convert_to_fetch_template(template: str, json_filename: str) -> str:
+    script_start = f"""<script>
+    async function init() {{
+      const response = await fetch("{json_filename}", {{ cache: "no-store" }});
+      if (!response.ok) {{
+        throw new Error(`HTTP ${{response.status}} while loading {json_filename}`);
+      }}
+      const policyData = await response.json();
+"""
+    script_end = f"""
+    }}
+
+    init().catch((error) => {{
+      console.error("Failed to load policy data", error);
+      document.body.innerHTML = `<pre style="padding:16px;font-family:monospace;">Failed to load {json_filename}\\n${{String(error)}}</pre>`;
+    }});
+  </script>"""
+    template = template.replace('<script>\n    const policyData = __POLICY_JSON__;\n', script_start)
+    template = template.replace("\n    resetGame();\n  </script>", "\n    resetGame();" + script_end)
+    template = template.replace("\n    initializeSelectedState();\n    render();\n  </script>", "\n    initializeSelectedState();\n    render();" + script_end)
+    return template
+
+
 def main() -> None:
     workdir = Path(__file__).resolve().parent
     json_path = workdir / "dynamic_programming_policies.json"
     game_html_path = workdir / "dynamic_programming_game.html"
     model_html_path = workdir / "dynamic_programming_model.html"
 
-    payload = json.loads(json_path.read_text(encoding="utf-8"))
-    html = HTML_TEMPLATE.replace(
-        "__POLICY_JSON__", json.dumps(payload, indent=2)
-    )
+    if not json_path.exists():
+        raise FileNotFoundError(
+            f"Missing precondition: generate {json_path.name} before rendering the dynamic programming HTML views."
+        )
+
+    html = convert_to_fetch_template(HTML_TEMPLATE, json_path.name)
     html = html.replace("{{", "{").replace("}}", "}")
     game_html_path.write_text(html, encoding="utf-8")
 
-    model_html = MODEL_TEMPLATE.replace(
-        "__POLICY_JSON__", json.dumps(payload, indent=2)
-    )
+    model_html = convert_to_fetch_template(MODEL_TEMPLATE, json_path.name)
     model_html = model_html.replace("{{", "{").replace("}}", "}")
     model_html_path.write_text(model_html, encoding="utf-8")
     print(game_html_path.resolve())

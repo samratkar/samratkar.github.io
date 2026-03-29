@@ -1,0 +1,799 @@
+{
+  "algorithm": "q_learning",
+  "alpha": 0.1,
+  "gamma": 0.9,
+  "epsilon_start": 1.0,
+  "epsilon_decay": 0.995,
+  "epsilon_min": 0.01,
+  "epsilon_final": 0.01,
+  "num_episodes": 5000,
+  "max_steps_per_episode": 50,
+  "seed": 7,
+  "action_order": [
+    "UP",
+    "RIGHT",
+    "DOWN",
+    "LEFT"
+  ],
+  "final": {
+    "policy_matrix": [
+      [
+        0.0025,
+        0.0025,
+        0.9924999999999999,
+        0.0025
+      ],
+      [
+        0.0025,
+        0.9924999999999999,
+        0.0025,
+        0.0025
+      ],
+      [
+        0.0025,
+        0.0025,
+        0.9924999999999999,
+        0.0025
+      ],
+      [
+        0.0025,
+        0.0025,
+        0.9924999999999999,
+        0.0025
+      ],
+      [
+        0.0025,
+        0.9924999999999999,
+        0.0025,
+        0.0025
+      ],
+      [
+        0.0025,
+        0.0025,
+        0.9924999999999999,
+        0.0025
+      ],
+      [
+        0.0025,
+        0.9924999999999999,
+        0.0025,
+        0.0025
+      ],
+      [
+        0.0025,
+        0.9924999999999999,
+        0.0025,
+        0.0025
+      ],
+      [
+        0.9924999999999999,
+        0.0025,
+        0.0025,
+        0.0025
+      ]
+    ],
+    "Q": [
+      [
+        2.260094954952782,
+        2.6776722181318777,
+        3.4548990213929076,
+        2.1790515040206193
+      ],
+      [
+        3.092600332444881,
+        4.427942913034459,
+        4.105949484084739,
+        2.10161108085594
+      ],
+      [
+        4.987864666995143,
+        5.087360484595343,
+        6.2401780903937265,
+        4.389250603594937
+      ],
+      [
+        2.736025166558514,
+        4.180630651831445,
+        4.9546112374482965,
+        3.5182087887229248
+      ],
+      [
+        4.1775535045362435,
+        7.295853662493285,
+        5.777339637297381,
+        3.622774481933704
+      ],
+      [
+        5.413670384142644,
+        7.200358790574718,
+        9.665880109002197,
+        5.783532067601687
+      ],
+      [
+        3.647594885776964,
+        6.907511120060189,
+        4.491122360840761,
+        4.196888091788462
+      ],
+      [
+        5.078527779018526,
+        9.268406543737402,
+        7.155079227276464,
+        5.059783141333876
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "state_scores": [
+      3.4548990213929076,
+      4.427942913034459,
+      6.2401780903937265,
+      4.9546112374482965,
+      7.295853662493285,
+      9.665880109002197,
+      6.907511120060189,
+      9.268406543737402,
+      0.0
+    ],
+    "transition_model": {
+      "0": {
+        "UP": [
+          {
+            "probability": 0.9,
+            "next_state": 0,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 1,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "RIGHT": [
+          {
+            "probability": 0.8,
+            "next_state": 1,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 0,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 3,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "DOWN": [
+          {
+            "probability": 0.8,
+            "next_state": 3,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 1,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 0,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "LEFT": [
+          {
+            "probability": 0.9,
+            "next_state": 0,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 3,
+            "reward": -1.0,
+            "done": false
+          }
+        ]
+      },
+      "1": {
+        "UP": [
+          {
+            "probability": 0.8,
+            "next_state": 1,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 0,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 2,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "RIGHT": [
+          {
+            "probability": 0.8,
+            "next_state": 2,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 1,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 4,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "DOWN": [
+          {
+            "probability": 0.8,
+            "next_state": 4,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 2,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 0,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "LEFT": [
+          {
+            "probability": 0.8,
+            "next_state": 0,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 4,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 1,
+            "reward": -1.0,
+            "done": false
+          }
+        ]
+      },
+      "2": {
+        "UP": [
+          {
+            "probability": 0.9,
+            "next_state": 2,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 1,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "RIGHT": [
+          {
+            "probability": 0.9,
+            "next_state": 2,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 5,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "DOWN": [
+          {
+            "probability": 0.8,
+            "next_state": 5,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 2,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 1,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "LEFT": [
+          {
+            "probability": 0.8,
+            "next_state": 1,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 5,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 2,
+            "reward": -1.0,
+            "done": false
+          }
+        ]
+      },
+      "3": {
+        "UP": [
+          {
+            "probability": 0.8,
+            "next_state": 0,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 3,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 4,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "RIGHT": [
+          {
+            "probability": 0.8,
+            "next_state": 4,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 0,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 6,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "DOWN": [
+          {
+            "probability": 0.8,
+            "next_state": 6,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 4,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 3,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "LEFT": [
+          {
+            "probability": 0.8,
+            "next_state": 3,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 6,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 0,
+            "reward": -1.0,
+            "done": false
+          }
+        ]
+      },
+      "4": {
+        "UP": [
+          {
+            "probability": 0.8,
+            "next_state": 1,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 3,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 5,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "RIGHT": [
+          {
+            "probability": 0.8,
+            "next_state": 5,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 1,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 7,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "DOWN": [
+          {
+            "probability": 0.8,
+            "next_state": 7,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 5,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 3,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "LEFT": [
+          {
+            "probability": 0.8,
+            "next_state": 3,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 7,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 1,
+            "reward": -1.0,
+            "done": false
+          }
+        ]
+      },
+      "5": {
+        "UP": [
+          {
+            "probability": 0.8,
+            "next_state": 2,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 4,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 5,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "RIGHT": [
+          {
+            "probability": 0.8,
+            "next_state": 5,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 2,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 8,
+            "reward": 10.0,
+            "done": true
+          }
+        ],
+        "DOWN": [
+          {
+            "probability": 0.8,
+            "next_state": 8,
+            "reward": 10.0,
+            "done": true
+          },
+          {
+            "probability": 0.1,
+            "next_state": 5,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 4,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "LEFT": [
+          {
+            "probability": 0.8,
+            "next_state": 4,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 8,
+            "reward": 10.0,
+            "done": true
+          },
+          {
+            "probability": 0.1,
+            "next_state": 2,
+            "reward": -1.0,
+            "done": false
+          }
+        ]
+      },
+      "6": {
+        "UP": [
+          {
+            "probability": 0.8,
+            "next_state": 3,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 6,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 7,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "RIGHT": [
+          {
+            "probability": 0.8,
+            "next_state": 7,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 3,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 6,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "DOWN": [
+          {
+            "probability": 0.9,
+            "next_state": 6,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 7,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "LEFT": [
+          {
+            "probability": 0.9,
+            "next_state": 6,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 3,
+            "reward": -1.0,
+            "done": false
+          }
+        ]
+      },
+      "7": {
+        "UP": [
+          {
+            "probability": 0.8,
+            "next_state": 4,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 6,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 8,
+            "reward": 10.0,
+            "done": true
+          }
+        ],
+        "RIGHT": [
+          {
+            "probability": 0.8,
+            "next_state": 8,
+            "reward": 10.0,
+            "done": true
+          },
+          {
+            "probability": 0.1,
+            "next_state": 4,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 7,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "DOWN": [
+          {
+            "probability": 0.8,
+            "next_state": 7,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 8,
+            "reward": 10.0,
+            "done": true
+          },
+          {
+            "probability": 0.1,
+            "next_state": 6,
+            "reward": -1.0,
+            "done": false
+          }
+        ],
+        "LEFT": [
+          {
+            "probability": 0.8,
+            "next_state": 6,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 7,
+            "reward": -1.0,
+            "done": false
+          },
+          {
+            "probability": 0.1,
+            "next_state": 4,
+            "reward": -1.0,
+            "done": false
+          }
+        ]
+      },
+      "8": {
+        "UP": [
+          {
+            "probability": 1.0,
+            "next_state": 8,
+            "reward": 0.0,
+            "done": true
+          }
+        ],
+        "RIGHT": [
+          {
+            "probability": 1.0,
+            "next_state": 8,
+            "reward": 0.0,
+            "done": true
+          }
+        ],
+        "DOWN": [
+          {
+            "probability": 1.0,
+            "next_state": 8,
+            "reward": 0.0,
+            "done": true
+          }
+        ],
+        "LEFT": [
+          {
+            "probability": 1.0,
+            "next_state": 8,
+            "reward": 0.0,
+            "done": true
+          }
+        ]
+      }
+    }
+  }
+}

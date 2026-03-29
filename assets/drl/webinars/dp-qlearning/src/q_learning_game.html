@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dynamic Programming Gridworld Game</title>
+  <title>Q-Learning Gridworld Game</title>
   <style>
     :root {
       --bg: #f3efe5;
@@ -378,9 +378,9 @@
 <body>
   <div class="shell">
     <section class="hero">
-      <h1>Dynamic Programming Gridworld</h1>
+      <h1>Q-Learning Gridworld</h1>
       <div class="nav">
-        <a id="model-link" href="dynamic_programming_model.html?state=0" class="secondary">Open Model Tables</a>
+        <a id="model-link" href="q_learning_model.html#state=0" class="secondary">Open Model Tables</a>
       </div>
     </section>
 
@@ -444,9 +444,9 @@
 
   <script>
     async function init() {
-      const response = await fetch("dynamic_programming_policies.json", { cache: "no-store" });
+      const response = await fetch("q_learning_policies.json", { cache: "no-store" });
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status} while loading dynamic_programming_policies.json`);
+        throw new Error(`HTTP ${response.status} while loading q_learning_policies.json`);
       }
       const policyData = await response.json();
     const config = {
@@ -479,7 +479,7 @@
     const modelLinkEl = document.getElementById("model-link");
 
     const finalPolicy = policyData.final.policy_matrix;
-    const stateValues = policyData.final.V;
+    const stateScores = policyData.final.state_scores;
     const qValues = policyData.final.Q;
     const transitionModel = policyData.final.transition_model;
 
@@ -521,8 +521,8 @@
 
     function renderBoard() {
       board.innerHTML = "";
-      const minV = Math.min(...stateValues);
-      const maxV = Math.max(...stateValues);
+      const minV = Math.min(...stateScores);
+      const maxV = Math.max(...stateScores);
       const scale = maxV - minV || 1;
 
       for (let stateId = 0; stateId < finalPolicy.length; stateId += 1) {
@@ -535,7 +535,7 @@
           cell.classList.add("goal");
         }
 
-        const normalized = (stateValues[stateId] - minV) / scale;
+        const normalized = (stateScores[stateId] - minV) / scale;
         cell.style.background = stateId === config.goalState
           ? ""
           : `linear-gradient(180deg, rgba(43, 108, 176, ${0.14 + normalized * 0.32}), rgba(255, 255, 255, 0.95))`;
@@ -558,11 +558,11 @@
           .join("");
 
         cell.innerHTML = `
-          <a class="cell-link" href="dynamic_programming_model.html?state=${stateId}">
+          <a class="cell-link" href="q_learning_model.html#state=${stateId}">
           <div class="cell-header">
             <span class="state-name">state ${stateId}</span>
             <div class="agent">🤖</div>
-            <span class="state-value">${stateValues[stateId].toFixed(2)}</span>
+            <span class="state-value">${stateScores[stateId].toFixed(2)}</span>
           </div>
           <div class="state-name">best: ${bestActions || "G"}</div>
           <div class="policy-lines">${lines}</div>
@@ -573,7 +573,7 @@
     }
 
     function renderSummary(lastEvent = null) {
-      modelLinkEl.href = `dynamic_programming_model.html?state=${state}`;
+      modelLinkEl.href = `q_learning_model.html#state=${state}`;
       currentStateEl.textContent = String(state);
       totalRewardEl.textContent = totalReward.toFixed(1);
       stepsEl.textContent = String(steps);
@@ -604,8 +604,8 @@
 
       stateDetailEl.innerHTML = `
         <div class="stat" style="margin-bottom:6px;">
-          <div class="stat-label">Value V*</div>
-          <div class="stat-value" style="color: var(--accent-deep);">${stateValues[state].toFixed(3)}</div>
+          <div class="stat-label">State Score max_a Q(s,a)</div>
+          <div class="stat-value" style="color: var(--accent-deep);">${stateScores[state].toFixed(3)}</div>
           ${state === config.goalState ? '<div style="margin-top:4px; font-size:0.72rem; font-weight:700; color:#355723;">GOAL</div>' : ''}
         </div>
         <div class="stat" style="margin-bottom:6px;">
@@ -617,7 +617,7 @@
           <div style="margin-top:4px; line-height:1.25; font-size:0.76rem;">${policyRow}</div>
         </div>
         <div class="stat">
-          <div class="stat-label">Q* Row</div>
+          <div class="stat-label">Learned Q Row</div>
           <div style="margin-top:4px; line-height:1.25; font-size:0.76rem;">${qRow}</div>
         </div>
       `;
@@ -712,7 +712,7 @@
 
     init().catch((error) => {
       console.error("Failed to load policy data", error);
-      document.body.innerHTML = `<pre style="padding:16px;font-family:monospace;">Failed to load dynamic_programming_policies.json\n${String(error)}</pre>`;
+      document.body.innerHTML = `<pre style="padding:16px;font-family:monospace;">Failed to load q_learning_policies.json\n${String(error)}</pre>`;
     });
   </script>
 </body>

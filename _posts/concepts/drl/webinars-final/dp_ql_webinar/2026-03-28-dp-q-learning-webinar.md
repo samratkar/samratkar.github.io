@@ -165,7 +165,48 @@ height="1000"
 style="border: 1px solid #ddd;">
 </iframe>
 
+### Key Points - 
+1. DP is a planning method that computes exact value functions from a known model.
+2. DP uses the Bellman equations to iteratively compute values.
+3. DP can compute both state values and action values, which are useful for different purposes.
+4. DP is not a learning method in the sense of learning from experience, but it provides
+the theoretical foundation for later learning methods that do learn from experience.
+5. In DP, the $P(s', r \mid s, a)$ is constant, and it does not change. that is known as the model. In Q-learning, we do not have access to this model, and we learn from samples instead.
+6. However, in DP we do learn and optimize on the $\pi (a \mid s)$, which is the policy. So, environment model is constant. But the action plicies change. However it is started with a static arbitrary policy which is then improved. That process is known as bootstrapping. 
+7. In Q-learning, we also learn and optimize on the policy, but we do it indirectly by learning $Q(s,a)$ values that guide the policy. 
+8. DP is : 
+- model-based
+- expectation-based
+- sweep over all states and actions
+- policy is udpated between interactions.
+
 ## Case Study 2: Q-Learning
+
+### Q Learning - what it does?
+
+1. Initialize Q = 0
+2. for each episode : 
+    - reset environment
+    - choose actios with epsilon-greedy policy from current Q
+    - call env.step(action)
+    - update Q using tempral difference, i.e difference between current Q and target Q
+
+    $$
+    Q(S_t,A_t) \leftarrow Q(S_t,A_t) + \alpha \left[R_{t+1} + \gamma \max_{a'} Q(S_{t+1},a') - Q(S_t,A_t)\right]
+    $$
+3. it is a model free in the learning rule.
+4. sample based
+5. online / incremental 
+6. directly learning Q, not first computing V.
+7. environment model ($P(s', r \mid s, a)$) is unknown and not used in the learning rule. But it does use other information such as the reward and the next state observed from the environment. It uses the following - 
+- env.reset()
+- env.step(action)
+- env.observation_space.n
+- env.action_space.n
+8. there is no policy evaluation step. It directly learns the optimal action values, and the policy is implicitly defined as the ϵ - greedy policy with respect to the learned Q values.
+9. DP is "evaluate current policy, then improve it.". Q learnign is "use current Q to act, then update Q from samples".
+10. Q learning will have several episodes of interaction with the environment, and it will learn from the experience of those interactions. DP does not require episodes of interaction because it has the full model.
+
 
 ### Setting
 
