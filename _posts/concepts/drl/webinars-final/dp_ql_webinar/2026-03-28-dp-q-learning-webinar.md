@@ -143,14 +143,7 @@ flowchart TB
 
 ### Source Code Dynamic Programming
 
-[Link to the source code - Dynamic Programming](/assets/drl/webinars/dp-qlearning/src/dynamic_programming_case_study.ipynb)
-
-<iframe
-src="/assets/drl/webinars/dp-qlearning/src/dynamic_programming_case_study.html"
-width="100%"
-height="1000"
-style="border: 1px solid #ddd;">
-</iframe>
+[Link to the source code - Dynamic Programming](https://github.com/samratkar/samratkar.github.io/blob/main/assets/drl/webinars/dp-qlearning/src/dynamic_programming_case_study.ipynb)
 
 ### The gridboard game 
 
@@ -158,12 +151,6 @@ style="border: 1px solid #ddd;">
     Open the game in the a new tab full screen mode
 </a> 
 
-<iframe
-src="/assets/drl/webinars/dp-qlearning/src/dynamic_programming_game.html"
-width="100%"
-height="1000"
-style="border: 1px solid #ddd;">
-</iframe>
 
 ### Key Points - 
 1. DP is a planning method that computes exact value functions from a known model.
@@ -337,7 +324,6 @@ So the final policy may match the dynamic programming solution, even though the 
 
 ---
 
-## Side-by-Side Comparison
 
 ### Core Difference
 
@@ -402,7 +388,7 @@ flowchart TD
 
 ---
 
-## Why Both Matter
+### Why Both Matter
 
 State value and action value answer two different questions.
 
@@ -465,7 +451,7 @@ Q-Learning:
 
 ---
 
-## Final Takeaway
+### Final Takeaway
 
 Both methods try to answer the same question:
 
@@ -479,110 +465,16 @@ But they solve it differently:
 So if the model is known, dynamic programming is the cleanest exact method.
 If the model is unknown, Q-learning is a practical model-free alternative.
 
----
+### Source Code Dynamic Programming
 
-## Key Insights in Sutton-Style Framing
+[Link to the source code - Q Learning](https://github.com/samratkar/samratkar.github.io/blob/main/assets/drl/webinars/dp-qlearning/src/q_learning_case_study.ipynb)
 
-The following ideas are closely aligned with the way Sutton and Barto motivate these methods.
+### The gridboard game 
 
-### Key insights behind Dynamic Programming
+<a href="/assets/drl/webinars/dp-qlearning/src/q_learning_game.html" target="_blank" rel="noopener noreferrer">
+    Open the game in the a new tab full screen mode
+</a> 
 
-1. **Dynamic programming assumes a complete model of the environment**
 
-DP requires knowledge of:
-- state transitions
-- rewards
 
-This is why DP is mainly a planning method rather than a pure learning method.
 
-2. **DP is built directly on the Bellman equations**
-
-The Bellman expectation and Bellman optimality equations provide recursive definitions of value.
-DP turns those recursive equations into iterative algorithms.
-
-3. **Policy evaluation and policy improvement are the central decomposition**
-
-A major insight is that control can be broken into two alternating steps:
-- evaluate the current policy
-- improve the policy using the current values
-
-This leads naturally to policy iteration.
-
-4. **Value iteration compresses evaluation and improvement together**
-
-Instead of fully evaluating a policy before improving it, value iteration performs partial evaluation and greedy improvement in the same update.
-
-5. **DP establishes the conceptual foundation for later RL methods**
-
-Even when a model is not available, the structure of DP remains important because later methods such as TD learning and Q-learning can be understood as approximations to DP-style Bellman backups.
-
-### Key insights behind Q-Learning
-
-1. **Q-learning learns action values directly from experience**
-
-Rather than learning a model first, Q-learning directly estimates:
-$$
-Q^*(s,a)
-$$
-
-This is a major shift from planning with a model to learning from interaction.
-
-2. **Q-learning is a sample-based version of Bellman optimality updates**
-
-Instead of averaging over all possible next outcomes, Q-learning updates from one sampled transition at a time.
-
-So it can be seen as replacing:
-- full expected backup
-
-with:
-- sampled backup
-
-3. **Q-learning is off-policy**
-
-This is one of the most important conceptual insights.
-
-The agent may behave using an exploratory policy, such as epsilon-greedy, but the update target still uses:
-$$
-\max_{a'} Q(s',a')
-$$
-
-So it learns about the greedy policy while behaving differently during learning.
-
-4. **The learned Q-values are enough for control**
-
-Once the Q-table is learned, there is no need to separately learn a model or a state-value function.
-The policy can be obtained directly by choosing:
-$$
-\arg\max_a Q(s,a)
-$$
-
-5. **Q-learning brings optimal control into the model-free setting**
-
-This is the core reason it is so influential.
-It keeps the optimality idea from dynamic programming, but removes the need for a known transition model.
-
-### Shared insight across both methods
-
-Both dynamic programming and Q-learning are driven by the same high-level idea:
-
-- good decisions today depend on reward today plus good decisions tomorrow
-
-In Sutton-style RL, this is the unifying role of Bellman recursion.
-
-So:
-- DP uses Bellman recursion with a known model
-- Q-learning uses Bellman recursion with sampled experience
-
-### Short summary
-
-```text
-Dynamic Programming:
-  planning with a known model
-  exact Bellman backups
-  policy evaluation + policy improvement
-
-Q-Learning:
-  learning without a model
-  sampled Bellman optimality backups
-  direct estimation of optimal action values
-```
