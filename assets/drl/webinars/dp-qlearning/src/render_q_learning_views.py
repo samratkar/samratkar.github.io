@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import re
 
 from render_dynamic_programming_game import HTML_TEMPLATE, MODEL_TEMPLATE
 
@@ -74,6 +75,7 @@ def build_game_template() -> str:
         ('\n            <div class="summary-card">\n              <h2>Transition Model</h2>\n              <div id="transition-detail"></div>\n            </div>', ""),
         ("const stateValues = policyData.final.V;", "const stateScores = policyData.final.state_scores;"),
         ("const qValues = policyData.final.Q;", "const qValues = policyData.final.Q;"),
+        ("const transitionModel = policyData.final.transition_model;\n", ""),
         ('const transitionDetailEl = document.getElementById("transition-detail");\n', ""),
         ("Math.min(...stateValues)", "Math.min(...stateScores)"),
         ("Math.max(...stateValues)", "Math.max(...stateScores)"),
@@ -83,11 +85,22 @@ def build_game_template() -> str:
         ("${stateValues[state].toFixed(3)}", "${stateScores[state].toFixed(3)}"),
         ('<div class="stat-label">Q* Row</div>', '<div class="stat-label">Learned Q Row</div>'),
         ('        const transitionRows = config.actionOrder\n          .map((actionName) => {\n            const outcomes = transitionModel[String(state)][actionName]\n              .map((outcome) =>\n                `p=${outcome.probability.toFixed(3)} → s${outcome.next_state}, r=${outcome.reward.toFixed(1)}, done=${outcome.done}`\n              )\n              .join("<br>");\n            return `\n            <div class="stat" style="margin-bottom:6px;">\n              <div class="stat-label">${actionName}</div>\n              <div style="margin-top:4px; line-height:1.25; font-size:0.76rem;">${outcomes}</div>\n            </div>\n          `;\n        })\n        .join("");\n', ""),
+        ('        const transitionRows = config.actionOrder\n          .map((actionName) => {{\n            const outcomes = transitionModel[String(state)][actionName]\n              .map((outcome) =>\n                `p=${{outcome.probability.toFixed(3)}} → s${{outcome.next_state}}, r=${{outcome.reward.toFixed(1)}}, done=${{outcome.done}}`\n              )\n              .join("<br>");\n            return `\n            <div class="stat" style="margin-bottom:6px;">\n              <div class="stat-label">${{actionName}}</div>\n              <div style="margin-top:4px; line-height:1.25; font-size:0.76rem;">${{outcomes}}</div>\n            </div>\n          `;\n        }})\n        .join("");\n', ""),
         ("      transitionDetailEl.innerHTML = transitionRows;\n", ""),
+        ('    function chooseEnvironmentOutcome(stateId, actionName) {\n      const outcomes = transitionModel[String(stateId)][actionName];\n      return outcomes[sampleIndex(outcomes.map((outcome) => outcome.probability))];\n    }\n', '    function moveState(stateId, actionName) {\n      if (stateId === config.goalState) {\n        return stateId;\n      }\n\n      const row = Math.floor(stateId / config.cols);\n      const col = stateId % config.cols;\n      let nextRow = row;\n      let nextCol = col;\n\n      if (actionName === "UP") {\n        nextRow = Math.max(0, row - 1);\n      } else if (actionName === "RIGHT") {\n        nextCol = Math.min(config.cols - 1, col + 1);\n      } else if (actionName === "DOWN") {\n        nextRow = Math.min(config.rows - 1, row + 1);\n      } else if (actionName === "LEFT") {\n        nextCol = Math.max(0, col - 1);\n      }\n\n      return nextRow * config.cols + nextCol;\n    }\n'),
+        ('    function chooseEnvironmentOutcome(stateId, actionName) {{\n      const outcomes = transitionModel[String(stateId)][actionName];\n      return outcomes[sampleIndex(outcomes.map((outcome) => outcome.probability))];\n    }}\n', '    function moveState(stateId, actionName) {{\n      if (stateId === config.goalState) {{\n        return stateId;\n      }}\n\n      const row = Math.floor(stateId / config.cols);\n      const col = stateId % config.cols;\n      let nextRow = row;\n      let nextCol = col;\n\n      if (actionName === "UP") {{\n        nextRow = Math.max(0, row - 1);\n      }} else if (actionName === "RIGHT") {{\n        nextCol = Math.min(config.cols - 1, col + 1);\n      }} else if (actionName === "DOWN") {{\n        nextRow = Math.min(config.rows - 1, row + 1);\n      }} else if (actionName === "LEFT") {{\n        nextCol = Math.max(0, col - 1);\n      }}\n\n      return nextRow * config.cols + nextCol;\n    }}\n'),
+        ('      const policyAction = choosePolicyAction(state);\n      const outcome = chooseEnvironmentOutcome(state, policyAction);\n      const nextState = outcome.next_state;\n      const reward = outcome.reward;\n      const reachedGoal = outcome.done;\n', '      const policyAction = choosePolicyAction(state);\n      const nextState = moveState(state, policyAction);\n      const reachedGoal = nextState === config.goalState;\n      const reward = reachedGoal ? 10 : -1;\n'),
         ("        `s${previousState} -> s${nextState}: policy chose ${policyAction}, sampled p=${outcome.probability.toFixed(3)}, reward ${reward.toFixed(1)}`\n", "        `s${previousState} -> s${nextState}: policy chose ${policyAction}, reward ${reward.toFixed(1)}`\n"),
     ]
     for old, new in replacements:
         template = template.replace(old, new)
+    template = re.sub(
+        r"\n\s*const transitionRows = config\.actionOrder.*?\.join\(\"\"\);\n",
+        "\n",
+        template,
+        flags=re.DOTALL,
+    )
+    template = template.replace("      transitionDetailEl.innerHTML = transitionRows;\n", "")
     return template
 
 

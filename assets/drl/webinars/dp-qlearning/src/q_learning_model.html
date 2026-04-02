@@ -239,6 +239,12 @@
       color: var(--muted);
     }
 
+    .transition-table th,
+    .transition-table td {
+      padding: 4px 6px;
+      font-size: 0.72rem;
+    }
+
     @media (max-width: 920px) {
       .layout {
         grid-template-columns: 1fr;
@@ -315,6 +321,7 @@
             <div id="q-table"></div>
           </div>
         </div>
+
       </main>
     </section>
   </div>
@@ -328,7 +335,7 @@
       const policyData = await response.json();
     const actionOrder = policyData.action_order;
     const finalData = policyData.final;
-    const policyMatrix = finalData.policy_matrix;
+        const policyMatrix = finalData.policy_matrix;
     const qMatrix = finalData.Q;
     const stateScores = finalData.state_scores;
     let selectedState = 0;
@@ -346,7 +353,7 @@
     const actionOrderEl = document.getElementById("action-order");
     const policyTableEl = document.getElementById("policy-table");
     const qTableEl = document.getElementById("q-table");
-
+    
     function bestIndices(row) {
       const maxValue = Math.max(...row);
       return row

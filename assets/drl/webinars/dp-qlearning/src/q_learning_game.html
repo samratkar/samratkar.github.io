@@ -431,6 +431,7 @@
               <h2>State Detail</h2>
               <div id="state-detail"></div>
             </div>
+
           </div>
         </div>
       </aside>
@@ -466,7 +467,7 @@
     const terminalEl = document.getElementById("terminal");
     const logEl = document.getElementById("log");
     const stateDetailEl = document.getElementById("state-detail");
-    const resetBtn = document.getElementById("reset");
+        const resetBtn = document.getElementById("reset");
     const stepBtn = document.getElementById("step");
     const autoBtn = document.getElementById("auto");
     const stopBtn = document.getElementById("stop");
@@ -475,8 +476,7 @@
     const finalPolicy = policyData.final.policy_matrix;
     const stateScores = policyData.final.state_scores;
     const qValues = policyData.final.Q;
-    const transitionModel = policyData.final.transition_model;
-
+    
     let state = config.startState;
     let totalReward = 0;
     let steps = 0;
@@ -499,9 +499,27 @@
       return config.actionOrder[sampleIndex(finalPolicy[stateId])];
     }
 
-    function chooseEnvironmentOutcome(stateId, actionName) {
-      const outcomes = transitionModel[String(stateId)][actionName];
-      return outcomes[sampleIndex(outcomes.map((outcome) => outcome.probability))];
+    function moveState(stateId, actionName) {
+      if (stateId === config.goalState) {
+        return stateId;
+      }
+
+      const row = Math.floor(stateId / config.cols);
+      const col = stateId % config.cols;
+      let nextRow = row;
+      let nextCol = col;
+
+      if (actionName === "UP") {
+        nextRow = Math.max(0, row - 1);
+      } else if (actionName === "RIGHT") {
+        nextCol = Math.min(config.cols - 1, col + 1);
+      } else if (actionName === "DOWN") {
+        nextRow = Math.min(config.rows - 1, row + 1);
+      } else if (actionName === "LEFT") {
+        nextCol = Math.max(0, col - 1);
+      }
+
+      return nextRow * config.cols + nextCol;
     }
 
     function bestActionsForState(stateId) {
@@ -628,10 +646,9 @@
       }
 
       const policyAction = choosePolicyAction(state);
-      const outcome = chooseEnvironmentOutcome(state, policyAction);
-      const nextState = outcome.next_state;
-      const reward = outcome.reward;
-      const reachedGoal = outcome.done;
+      const nextState = moveState(state, policyAction);
+      const reachedGoal = nextState === config.goalState;
+      const reward = reachedGoal ? 10 : -1;
 
       const previousState = state;
       state = nextState;
