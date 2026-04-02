@@ -431,11 +431,6 @@
               <h2>State Detail</h2>
               <div id="state-detail"></div>
             </div>
-
-            <div class="summary-card">
-              <h2>Transition Model</h2>
-              <div id="transition-detail"></div>
-            </div>
           </div>
         </div>
       </aside>
@@ -471,7 +466,6 @@
     const terminalEl = document.getElementById("terminal");
     const logEl = document.getElementById("log");
     const stateDetailEl = document.getElementById("state-detail");
-    const transitionDetailEl = document.getElementById("transition-detail");
     const resetBtn = document.getElementById("reset");
     const stepBtn = document.getElementById("step");
     const autoBtn = document.getElementById("auto");
@@ -586,21 +580,6 @@
       const policyRow = finalPolicy[state]
         .map((value, index) => `${config.actionOrder[index]}: ${value.toFixed(3)}`)
         .join("<br>");
-        const transitionRows = config.actionOrder
-          .map((actionName) => {
-            const outcomes = transitionModel[String(state)][actionName]
-              .map((outcome) =>
-                `p=${outcome.probability.toFixed(3)} → s${outcome.next_state}, r=${outcome.reward.toFixed(1)}, done=${outcome.done}`
-              )
-              .join("<br>");
-            return `
-            <div class="stat" style="margin-bottom:6px;">
-              <div class="stat-label">${actionName}</div>
-              <div style="margin-top:4px; line-height:1.25; font-size:0.76rem;">${outcomes}</div>
-            </div>
-          `;
-        })
-        .join("");
 
       stateDetailEl.innerHTML = `
         <div class="stat" style="margin-bottom:6px;">
@@ -621,7 +600,6 @@
           <div style="margin-top:4px; line-height:1.25; font-size:0.76rem;">${qRow}</div>
         </div>
       `;
-      transitionDetailEl.innerHTML = transitionRows;
 
       if (lastEvent) {
         const item = document.createElement("li");
@@ -663,7 +641,7 @@
 
       renderBoard();
       renderSummary(
-        `s${previousState} -> s${nextState}: policy chose ${policyAction}, sampled p=${outcome.probability.toFixed(3)}, reward ${reward.toFixed(1)}`
+        `s${previousState} -> s${nextState}: policy chose ${policyAction}, reward ${reward.toFixed(1)}`
       );
 
       if (terminal) {

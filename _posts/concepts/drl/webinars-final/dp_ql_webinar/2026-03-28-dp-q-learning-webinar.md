@@ -50,6 +50,50 @@ RIGHT = 1
 DOWN = 2
 LEFT = 3
 ```
+
+## Side-by-Side Mapping: What Each Notebook Builds and Uses
+
+Both notebooks work on the same tabular `3 x 3` grid world, so both finally show a policy matrix and a Q matrix. But they do not use the same information in the same way.
+
+| Item | Dynamic Programming notebook | Q-Learning notebook |
+|---|---|---|
+| Environment model `P(s', r \mid s, a)` | Required and used directly | Not required by the learning rule |
+| Policy matrix | Starts from a seed policy and is improved by Bellman backups | Extracted from learned `Q` using epsilon-greedy |
+| State-value table `V(s)` | Computed explicitly during policy evaluation | Not learned explicitly |
+| Action-value table `Q(s,a)` | Computed from `V` and the known model | Learned directly from sampled transitions |
+| Update source | Full expected backup over all next outcomes | One sampled transition at a time |
+| Typical loop | Evaluate policy -> compute `V` -> derive `Q` -> improve policy | Act -> observe `(s, a, r, s')` -> update `Q` |
+
+In the dynamic programming notebook, the main objects line up like this:
+
+```text
+known P[s][a] + current policy
+    -> policy_evaluation(...)
+    -> V^pi
+    -> compute_q_from_v(...)
+    -> Q^pi
+    -> policy_improvement(...)
+    -> better policy
+```
+
+In the Q-learning notebook, the flow is different:
+
+```text
+current Q
+    -> epsilon-greedy policy from Q
+    -> sampled interaction (s, a, r, s')
+    -> Q-learning TD update
+    -> improved Q
+    -> improved policy implied by Q
+```
+
+So the main conceptual difference is:
+
+- DP is model-based: it needs the full transition table and performs full Bellman expectation backups.
+- Q-learning is model-free: it does not need the transition table for learning and improves `Q` online from experience.
+- In DP, `V` is central and `Q` is derived from it.
+- In Q-learning, `Q` is central and the policy is derived from it.
+
 ## Case Study 1: Dynamic Programming
 
 ### What DP is solving
@@ -433,7 +477,6 @@ If the model is unknown, Q-learning is a practical model-free alternative.
 <a href="/assets/drl/webinars/dp-qlearning/src/q_learning_game.html" target="_blank" rel="noopener noreferrer">
     Open the game in the a new tab full screen mode
 </a> 
-
 
 
 

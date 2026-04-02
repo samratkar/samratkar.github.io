@@ -71,8 +71,10 @@ def build_game_template() -> str:
         ("dynamic_programming_model.html?state=0", "q_learning_model.html#state=0"),
         ('href="dynamic_programming_model.html?state=${stateId}"', 'href="q_learning_model.html#state=${stateId}"'),
         ("dynamic_programming_model.html?state=${state}", "q_learning_model.html#state=${state}"),
+        ('\n            <div class="summary-card">\n              <h2>Transition Model</h2>\n              <div id="transition-detail"></div>\n            </div>', ""),
         ("const stateValues = policyData.final.V;", "const stateScores = policyData.final.state_scores;"),
         ("const qValues = policyData.final.Q;", "const qValues = policyData.final.Q;"),
+        ('const transitionDetailEl = document.getElementById("transition-detail");\n', ""),
         ("Math.min(...stateValues)", "Math.min(...stateScores)"),
         ("Math.max(...stateValues)", "Math.max(...stateScores)"),
         ("(stateValues[stateId] - minV) / scale", "(stateScores[stateId] - minV) / scale"),
@@ -80,6 +82,9 @@ def build_game_template() -> str:
         ("Value V*", "State Score max_a Q(s,a)"),
         ("${stateValues[state].toFixed(3)}", "${stateScores[state].toFixed(3)}"),
         ('<div class="stat-label">Q* Row</div>', '<div class="stat-label">Learned Q Row</div>'),
+        ('        const transitionRows = config.actionOrder\n          .map((actionName) => {\n            const outcomes = transitionModel[String(state)][actionName]\n              .map((outcome) =>\n                `p=${outcome.probability.toFixed(3)} → s${outcome.next_state}, r=${outcome.reward.toFixed(1)}, done=${outcome.done}`\n              )\n              .join("<br>");\n            return `\n            <div class="stat" style="margin-bottom:6px;">\n              <div class="stat-label">${actionName}</div>\n              <div style="margin-top:4px; line-height:1.25; font-size:0.76rem;">${outcomes}</div>\n            </div>\n          `;\n        })\n        .join("");\n', ""),
+        ("      transitionDetailEl.innerHTML = transitionRows;\n", ""),
+        ("        `s${previousState} -> s${nextState}: policy chose ${policyAction}, sampled p=${outcome.probability.toFixed(3)}, reward ${reward.toFixed(1)}`\n", "        `s${previousState} -> s${nextState}: policy chose ${policyAction}, reward ${reward.toFixed(1)}`\n"),
     ]
     for old, new in replacements:
         template = template.replace(old, new)
@@ -115,15 +120,20 @@ def build_model_template() -> str:
         ('<div>Epsilon: <span id="epsilon"></span></div>', '<div>Episodes: <span id="num-episodes"></span></div>'),
         ('<div>Stable: <span id="stable"></span></div>', '<div>Alpha: <span id="alpha"></span></div>'),
         ('<div>Action Order: <span id="action-order"></span></div>', '<div>Gamma: <span id="gamma"></span></div><div>Epsilon Start: <span id="epsilon-start"></span></div><div>Epsilon Final: <span id="epsilon-final"></span></div><div>Action Order: <span id="action-order"></span></div>'),
+        ('\n        <div class="panel">\n          <div class="panel-head">\n            <h2>Transition Model For Current State</h2>\n            <p class="caption">Flat table view of the exported transition model <code>P[s][a]</code>.</p>\n          </div>\n          <div id="transition-table"></div>\n        </div>', ""),
         ("const vValues = finalData.V;", "const stateScores = finalData.state_scores;"),
+        ("const transitionModel = finalData.transition_model;\n", ""),
         ('const currentVEl = document.getElementById("current-v");', 'const currentScoreEl = document.getElementById("current-score");'),
         ('const epsilonEl = document.getElementById("epsilon");', 'const numEpisodesEl = document.getElementById("num-episodes");'),
         ('const stableEl = document.getElementById("stable");', 'const alphaEl = document.getElementById("alpha");'),
         ('const actionOrderEl = document.getElementById("action-order");', 'const gammaEl = document.getElementById("gamma");\n    const epsilonStartEl = document.getElementById("epsilon-start");\n    const epsilonFinalEl = document.getElementById("epsilon-final");\n    const actionOrderEl = document.getElementById("action-order");'),
+        ('const transitionTableEl = document.getElementById("transition-table");\n', ""),
+        ('\n    function renderTransitionTable() {\n      const rows = [];\n      for (const actionName of actionOrder) {\n        const outcomes = transitionModel[String(selectedState)][actionName];\n        for (const outcome of outcomes) {\n          rows.push(`\n            <tr>\n              <td>${selectedState}</td>\n              <td>${actionName}</td>\n              <td>${Number(outcome.probability).toFixed(3)}</td>\n              <td>${outcome.next_state}</td>\n              <td>${Number(outcome.reward).toFixed(1)}</td>\n              <td>${outcome.done}</td>\n            </tr>\n          `);\n        }\n      }\n\n      transitionTableEl.innerHTML = `\n        <table class="transition-table">\n          <thead>\n            <tr>\n              <th>State</th>\n              <th>Action</th>\n              <th>Probability</th>\n              <th>Next State</th>\n              <th>Reward</th>\n              <th>Done</th>\n            </tr>\n          </thead>\n          <tbody>${rows.join("")}</tbody>\n        </table>\n      `;\n    }\n', ""),
         ("currentVEl.textContent = Number(vValues[selectedState]).toFixed(3);", "currentScoreEl.textContent = Number(stateScores[selectedState]).toFixed(3);"),
         ("epsilonEl.textContent = String(policyData.epsilon);", "numEpisodesEl.textContent = String(policyData.num_episodes);"),
         ("stableEl.textContent = String(finalData.stable);", "alphaEl.textContent = String(policyData.alpha);"),
         ('actionOrderEl.textContent = actionOrder.join(", ");', 'gammaEl.textContent = String(policyData.gamma);\n      epsilonStartEl.textContent = String(policyData.epsilon_start);\n      epsilonFinalEl.textContent = String(policyData.epsilon_final);\n      actionOrderEl.textContent = actionOrder.join(", ");'),
+        ("      renderTransitionTable();\n", ""),
     ]
     for old, new in replacements:
         template = template.replace(old, new)

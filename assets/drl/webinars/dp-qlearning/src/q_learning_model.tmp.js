@@ -7,7 +7,6 @@
       const policyData = await response.json();
     const actionOrder = policyData.action_order;
     const finalData = policyData.final;
-    const transitionModel = finalData.transition_model;
     const policyMatrix = finalData.policy_matrix;
     const qMatrix = finalData.Q;
     const stateScores = finalData.state_scores;
@@ -26,7 +25,6 @@
     const actionOrderEl = document.getElementById("action-order");
     const policyTableEl = document.getElementById("policy-table");
     const qTableEl = document.getElementById("q-table");
-    const transitionTableEl = document.getElementById("transition-table");
 
     function bestIndices(row) {
       const maxValue = Math.max(...row);
@@ -78,41 +76,6 @@
       }
     }
 
-    function renderTransitionTable() {
-      const rows = [];
-      for (const actionName of actionOrder) {
-        const outcomes = transitionModel[String(selectedState)][actionName];
-        for (const outcome of outcomes) {
-          rows.push(`
-            <tr>
-              <td>${selectedState}</td>
-              <td>${actionName}</td>
-              <td>${Number(outcome.probability).toFixed(3)}</td>
-              <td>${outcome.next_state}</td>
-              <td>${Number(outcome.reward).toFixed(1)}</td>
-              <td>${outcome.done}</td>
-            </tr>
-          `);
-        }
-      }
-
-      transitionTableEl.innerHTML = `
-        <table class="transition-table">
-          <thead>
-            <tr>
-              <th>State</th>
-              <th>Action</th>
-              <th>Probability</th>
-              <th>Next State</th>
-              <th>Reward</th>
-              <th>Done</th>
-            </tr>
-          </thead>
-          <tbody>${rows.join("")}</tbody>
-        </table>
-      `;
-    }
-
     function render() {
       window.history.replaceState({}, "", `#state=${selectedState}`);
       renderPicker();
@@ -127,7 +90,6 @@
       actionOrderEl.textContent = actionOrder.join(", ");
       policyTableEl.innerHTML = buildMatrixTable("Policy", policyMatrix, 3);
       qTableEl.innerHTML = buildMatrixTable("Q", qMatrix, 3);
-      renderTransitionTable();
     }
 
     function initializeSelectedState() {

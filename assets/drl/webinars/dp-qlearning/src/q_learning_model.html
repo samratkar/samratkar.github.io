@@ -239,12 +239,6 @@
       color: var(--muted);
     }
 
-    .transition-table th,
-    .transition-table td {
-      padding: 4px 6px;
-      font-size: 0.72rem;
-    }
-
     @media (max-width: 920px) {
       .layout {
         grid-template-columns: 1fr;
@@ -321,14 +315,6 @@
             <div id="q-table"></div>
           </div>
         </div>
-
-        <div class="panel">
-          <div class="panel-head">
-            <h2>Transition Model For Current State</h2>
-            <p class="caption">Flat table view of the exported transition model <code>P[s][a]</code>.</p>
-          </div>
-          <div id="transition-table"></div>
-        </div>
       </main>
     </section>
   </div>
@@ -342,7 +328,6 @@
       const policyData = await response.json();
     const actionOrder = policyData.action_order;
     const finalData = policyData.final;
-    const transitionModel = finalData.transition_model;
     const policyMatrix = finalData.policy_matrix;
     const qMatrix = finalData.Q;
     const stateScores = finalData.state_scores;
@@ -361,7 +346,6 @@
     const actionOrderEl = document.getElementById("action-order");
     const policyTableEl = document.getElementById("policy-table");
     const qTableEl = document.getElementById("q-table");
-    const transitionTableEl = document.getElementById("transition-table");
 
     function bestIndices(row) {
       const maxValue = Math.max(...row);
@@ -413,41 +397,6 @@
       }
     }
 
-    function renderTransitionTable() {
-      const rows = [];
-      for (const actionName of actionOrder) {
-        const outcomes = transitionModel[String(selectedState)][actionName];
-        for (const outcome of outcomes) {
-          rows.push(`
-            <tr>
-              <td>${selectedState}</td>
-              <td>${actionName}</td>
-              <td>${Number(outcome.probability).toFixed(3)}</td>
-              <td>${outcome.next_state}</td>
-              <td>${Number(outcome.reward).toFixed(1)}</td>
-              <td>${outcome.done}</td>
-            </tr>
-          `);
-        }
-      }
-
-      transitionTableEl.innerHTML = `
-        <table class="transition-table">
-          <thead>
-            <tr>
-              <th>State</th>
-              <th>Action</th>
-              <th>Probability</th>
-              <th>Next State</th>
-              <th>Reward</th>
-              <th>Done</th>
-            </tr>
-          </thead>
-          <tbody>${rows.join("")}</tbody>
-        </table>
-      `;
-    }
-
     function render() {
       window.history.replaceState({}, "", `#state=${selectedState}`);
       renderPicker();
@@ -462,7 +411,6 @@
       actionOrderEl.textContent = actionOrder.join(", ");
       policyTableEl.innerHTML = buildMatrixTable("Policy", policyMatrix, 3);
       qTableEl.innerHTML = buildMatrixTable("Q", qMatrix, 3);
-      renderTransitionTable();
     }
 
     function initializeSelectedState() {
