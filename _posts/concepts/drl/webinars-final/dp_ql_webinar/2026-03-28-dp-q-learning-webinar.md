@@ -278,13 +278,13 @@ Q(S_t,A_t) \leftarrow Q(S_t,A_t) + \alpha \left[R_{t+1} + \gamma \max_{a'} Q(S_{
 
 ### Diagram
 
-```mermaid
+<div class="mermaid">
 flowchart LR
     A["Current state s"] --> B["Choose action a"]
     B --> C["Observe reward r and next state s'"]
     C --> D["Compute target: r + gamma max_a' Q(s',a')"]
     D --> E["Update Q(s,a)"]
-```
+</div>
 
 
 ### Example Learning Story
@@ -354,7 +354,7 @@ Interpretation:
 
 ### Diagram
 
-```mermaid
+<div class="mermaid">
 flowchart TD
     A["Dynamic Programming"]
     B["Known model"]
@@ -370,7 +370,7 @@ flowchart TD
 
     A --> B --> C --> D --> E
     F --> G --> H --> I --> J
-```
+</div>
 
 ### Comparison Table
 
