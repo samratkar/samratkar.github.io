@@ -1196,6 +1196,22 @@ MODEL_TEMPLATE = """<!DOCTYPE html>
 
 
 def convert_to_fetch_template(template: str, json_filename: str) -> str:
+    """Wrap an inline-data HTML template so it fetches JSON at runtime.
+
+    Precondition:
+    `template` contains the expected placeholder script structure used by the
+    case-study HTML templates, and `json_filename` names the exported policy
+    data file that should be fetched by the browser.
+
+    What happens:
+    1. Replace the inline `policyData` bootstrap with an async `fetch()` call.
+    2. Append common error handling that renders a readable failure message.
+    3. Preserve the existing template-specific initialization calls.
+
+    Postcondition:
+    Returns HTML that loads the policy JSON dynamically instead of embedding it
+    directly in the page source.
+    """
     script_start = f"""<script>
     async function init() {{
       const response = await fetch("{json_filename}", {{ cache: "no-store" }});
@@ -1219,6 +1235,22 @@ def convert_to_fetch_template(template: str, json_filename: str) -> str:
 
 
 def main() -> None:
+    """Generate the dynamic-programming game and model HTML files.
+
+    Precondition:
+    `dynamic_programming_policies.json` already exists in the same directory.
+
+    What happens:
+    1. Resolve the working paths for the JSON export and output HTML files.
+    2. Fail fast if the JSON export is missing.
+    3. Convert both base templates into fetch-based HTML documents.
+    4. Normalize escaped braces introduced by Python formatting.
+    5. Write the final game and model pages to disk.
+
+    Postcondition:
+    `dynamic_programming_game.html` and `dynamic_programming_model.html` are
+    regenerated from the latest exported policy data.
+    """
     workdir = Path(__file__).resolve().parent
     json_path = workdir / "dynamic_programming_policies.json"
     game_html_path = workdir / "dynamic_programming_game.html"

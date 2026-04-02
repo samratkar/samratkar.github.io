@@ -45,21 +45,23 @@ ACTION_NAMES = {
 
 @dataclass(frozen=True)
 class GridWorldConfig:
-    # Story:
-    # This is a pure data container. It does not execute the environment;
-    # it only stores the fixed parameters needed to construct one.
-    #
-    # Precondition:
-    # The values should describe a valid gridworld. In particular, start and
-    # goal state indices should be within the total number of cells.
-    #
-    # Postcondition:
-    # A read-only configuration object exists and can be safely shared.
-    #
-    # Immutable configuration bundle for the environment.
-    # This is the structural metadata a Gym-style env usually keeps:
-    # grid size, start/goal states, reward settings, and the probability of
-    # each possible movement outcome after an action is chosen.
+    """Immutable parameter bundle for the case-study grid world.
+
+    Story:
+    This dataclass describes the static MDP specification rather than the live
+    runtime environment. It holds the grid geometry, the start and goal states,
+    the reward scheme, and the stochastic movement probabilities used when the
+    agent chooses an action.
+
+    Precondition:
+    The field values should describe a valid grid world. In particular, the
+    start and goal states should refer to cells inside the `rows x cols` grid,
+    and the movement probabilities should form a sensible distribution.
+
+    Postcondition:
+    A frozen configuration object exists and can be safely shared across
+    environments, notebooks, and rendering scripts without accidental mutation.
+    """
     rows: int = 3
     cols: int = 3
     start_state: int = 0
@@ -92,20 +94,25 @@ class GridWorldCaseStudyEnv:
     rng: np.random.Generator
 
     def __init__(self, config: GridWorldConfig | None = None) -> None:
-        # Precondition:
-        # `config` is either:
-        # - a `GridWorldConfig` object supplied by the caller, or
-        # - `None`, meaning the default config should be used.
-        #
-        # What happens:
-        # 1. Choose the provided config, or create a default one.
-        # 2. Build Gym-like `observation_space` and `action_space` objects.
-        # 3. Precompute the full transition table `P`.
-        # 4. Create a random-number generator for stochastic sampling in `step()`.
-        # 5. Initialize the live state to the start state.
-        #
-        # Postcondition:
-        # The environment is ready to be used with `reset()` and `step()`.
+        """Initialize the environment and precompute its tabular dynamics.
+
+        Precondition:
+        `config` is either a caller-supplied `GridWorldConfig` or `None`, in
+        which case the default case-study configuration is used.
+
+        What happens:
+        1. Resolve the environment configuration.
+        2. Create lightweight Gym-like `observation_space` and `action_space`
+           objects exposing the number of states and actions.
+        3. Build the full transition table `P` for every `(state, action)` pair.
+        4. Create a random number generator used by `step()`.
+        5. Set the live state to the configured start state.
+
+        Postcondition:
+        The environment is ready for repeated `reset()` and `step()` calls.
+        `P[state][action]` stores a list of transition tuples in the form
+        `(probability, next_state, reward, done)`.
+        """
         self.config = config or GridWorldConfig()
         # Gym exposes an observation space object. For a discrete tabular MDP,
         # the only field needed here is `n`: the total number of valid states.
@@ -138,26 +145,24 @@ class GridWorldCaseStudyEnv:
     def _build_transition_model(
         self,
     ) -> Dict[int, Dict[int, List[Tuple[float, int, float, bool]]]]:
-        # Precondition:
-        # `self.config`, `self.observation_space`, and `self.action_space` have
-        # already been initialized.
-        #
-        # What happens:
-        # 1. Allocate an empty nested dictionary `transitions`.
-        # 2. Loop over every state `s`.
-        # 3. For each state, loop over every action `a`.
-        # 4. Call `_transition_distribution(s, a)` to compute all stochastic
-        #    outcomes for that state-action pair.
-        # 5. Store the full probability distribution at `transitions[s][a]`.
-        #
-        # Postcondition:
-        # Returns a complete tabular model of the MDP where every valid
-        # state-action pair has an entry.
-        # Nested dictionary structure:
-        # - outer key: current state id `s`
-        # - inner key: action id `a`
-        # - `transitions[s][a]` is the list of outcomes in the transition
-        #   probability distribution for that state-action pair
+        """Build the full tabular transition model for the environment.
+
+        Precondition:
+        `self.config`, `self.observation_space`, and `self.action_space` are
+        already initialized.
+
+        What happens:
+        1. Allocate an empty nested dictionary.
+        2. Iterate over every discrete state.
+        3. For each state, iterate over every discrete action.
+        4. Compute the complete stochastic outcome distribution for that pair.
+        5. Store the resulting list at `transitions[state][action]`.
+
+        Postcondition:
+        Returns a complete tabular model where the outer key is the current
+        state, the inner key is the action, and the value is the list of
+        environment outcomes for that state-action pair.
+        """
         transitions: Dict[int, Dict[int, List[Tuple[float, int, float, bool]]]] = {}
         for state in range(self.observation_space.n):
             transitions[state] = {}
@@ -170,24 +175,26 @@ class GridWorldCaseStudyEnv:
     def _transition_distribution(
         self, state: int, action: int
     ) -> List[Tuple[float, int, float, bool]]:
-        # Precondition:
-        # - `state` must be a valid discrete state index.
-        # - `action` must be one of {UP, RIGHT, DOWN, LEFT}.
-        #
-        # What happens:
-        # 1. If `state` is already the goal state, keep the agent there and mark
-        #    the transition as terminal.
-        # 2. Otherwise compute three candidate directions:
-        #    intended move, slip-left move, and slip-right move.
-        # 3. Use the probabilities from `GridWorldConfig` to assign probability
-        #    mass to those candidate movement directions.
-        # 4. Convert each candidate move into a next state.
-        # 5. If multiple outcomes land in the same next state, merge their
-        #    probabilities into one probability-mass entry.
-        # 6. Attach reward and terminal status to each merged outcome.
-        #
-        # Postcondition:
-        # Returns the full transition distribution for `(state, action)`.
+        """Compute the stochastic outcomes produced by one state-action pair.
+
+        Precondition:
+        `state` is a valid state index and `action` is one of the directional
+        action constants `{UP, RIGHT, DOWN, LEFT}`.
+
+        What happens:
+        1. If the agent is already at the goal, return a self-loop terminal
+           transition with probability 1.
+        2. Otherwise form the intended move plus the slip-left and slip-right
+           alternatives using the configured movement probabilities.
+        3. Apply `_move()` to each candidate direction.
+        4. Aggregate probabilities when different move branches land in the
+           same next state.
+        5. Attach the appropriate reward and terminal flag to each outcome.
+
+        Postcondition:
+        Returns the tabular transition distribution as a list of
+        `(probability, next_state, reward, done)` tuples.
+        """
         if state == self.config.goal_state:
             # Terminal states loop to themselves with probability 1.
             return [(1.0, state, 0.0, True)]
@@ -213,18 +220,21 @@ class GridWorldCaseStudyEnv:
         return outcomes
 
     def _move(self, state: int, action: int) -> int:
-        # Precondition:
-        # - `state` must be a valid discrete state index.
-        # - `action` must be one of the four directional actions.
-        #
-        # What happens:
-        # 1. Convert the flat state index into `(row, col)`.
-        # 2. Apply the chosen directional move.
-        # 3. Clamp movement to stay inside the grid boundaries.
-        # 4. Convert the resulting grid cell back into a flat state index.
-        #
-        # Postcondition:
-        # Returns the next discrete state reached by that single movement.
+        """Apply one directional move while clamping the result to the grid.
+
+        Precondition:
+        `state` is a valid discrete state index and `action` is one of the four
+        directional action constants.
+
+        What happens:
+        1. Convert the flat state id into `(row, col)` coordinates.
+        2. Apply the requested directional move.
+        3. Clamp the move so the agent cannot leave the grid.
+        4. Convert the resulting coordinates back into a flat state id.
+
+        Postcondition:
+        Returns the single next state induced by that movement direction.
+        """
         if state == self.config.goal_state:
             return state
 
@@ -248,48 +258,41 @@ class GridWorldCaseStudyEnv:
         return next_row * self.config.cols + next_col
 
     def reset(self) -> Tuple[int, dict]:
-        # Precondition:
-        # The environment object has been constructed.
-        #
-        # What happens:
-        # 1. Discard any previous episode progress.
-        # 2. Set the live state back to the configured start state.
-        #
-        # Postcondition:
-        # - `self.state == self.config.start_state`
-        # - returns `(start_state, {})`
-        # - the environment is ready for a fresh episode
-        # Gym-style reset returns the initial observation plus an info dict.
+        """Reset the live episode state to the configured start cell.
+
+        Precondition:
+        The environment has already been constructed.
+
+        What happens:
+        1. Discard any progress from the current episode.
+        2. Restore `self.state` to `self.config.start_state`.
+
+        Postcondition:
+        Returns the Gym-style pair `(start_state, {})` and leaves the
+        environment ready for a fresh episode rollout.
+        """
         self.state = self.config.start_state
         return self.state, {}
 
     def step(self, action: int) -> Tuple[int, float, bool, bool, dict]:
-        # Precondition:
-        # - `action` must be a valid discrete action id.
-        # - `self.state` must currently hold a valid state index.
-        # - The transition table `P` must already exist.
-        #
-        # What happens:
-        # 1. Use the current state and chosen action to look up `P[self.state][action]`.
-        # 2. Read the full list of possible transition outcomes.
-        # 3. Sample one outcome according to its probability.
-        # 4. Extract `next_state`, `reward`, and `done`.
-        # 5. Update the live environment state to `next_state`.
-        # 6. Return the Gym-like step result tuple.
-        #
-        # Postcondition:
-        # - `self.state` is updated to the returned `next_state`
-        # - caller receives `(next_state, reward, terminated, truncated, info)`
-        # - `truncated` is always `False` in this simple environment
-        # Execute one action in the environment.
-        # In RL terms this maps:
-        # current state s + chosen action a -> next state s', reward, terminal flag
-        # `P[self.state][action]` can contain multiple transition tuples, one
-        # for each support point in the stochastic transition distribution.
-        # Sample one of those outcomes from the tabular model `P`,
-        # update the live state, and return the standard Gym-like step tuple:
-        # (observation, reward, terminated, truncated, info)
-        # `info` is an optional dictionary for extra metadata; it is empty here.
+        """Advance the environment by sampling one outcome from `P[self.state][action]`.
+
+        Precondition:
+        `action` is a valid discrete action id, `self.state` contains a valid
+        current state, and the transition model `P` has already been built.
+
+        What happens:
+        1. Look up all transition outcomes for the current state and action.
+        2. Sample one outcome according to its stored probabilities.
+        3. Extract the sampled next state, reward, and terminal flag.
+        4. Update the live state to the sampled next state.
+        5. Return the Gym-like result tuple.
+
+        Postcondition:
+        Returns `(next_state, reward, terminated, truncated, info)` where
+        `truncated` is always `False` and `info` is an empty dictionary for
+        this simplified environment.
+        """
         outcomes = self.P[self.state][action]
         probabilities = [prob for prob, _, _, _ in outcomes]
         outcome_index = int(self.rng.choice(len(outcomes), p=probabilities))
@@ -299,6 +302,7 @@ class GridWorldCaseStudyEnv:
 
 
 def _format_action_grid(rows) -> str:
+    """Render a flat list of cell labels as a boxed 3x3 text grid."""
     lines = []
     cols = GridWorldConfig().cols
     separator = "+---+---+---+"
@@ -310,19 +314,21 @@ def _format_action_grid(rows) -> str:
 
 
 def format_policy(policy) -> str:
-    # Precondition:
-    # `policy` should be indexable by state and each row should support
-    # selecting the highest-probability action(s) for that state.
-    #
-    # What happens:
-    # 1. Map the best action in each state to an arrow symbol.
-    # 2. If multiple actions are tied for the largest probability, display all
-    #    tied arrows in the same cell so the visualization does not hide ties.
-    # 2. Replace the goal state's arrow with `G`.
-    # 3. Group the states row by row into a text grid.
-    #
-    # Postcondition:
-    # Returns a multi-line string that visually represents the policy.
+    """Format a policy matrix as a text grid of greedy-action arrows.
+
+    Precondition:
+    `policy` is indexable by state and each row contains action probabilities
+    for that state.
+
+    What happens:
+    1. Find the highest-probability action or actions in each state.
+    2. Map those greedy actions to arrow symbols.
+    3. Preserve ties by rendering every tied action in the same cell.
+    4. Mark the goal cell with `G`.
+
+    Postcondition:
+    Returns a multi-line string suitable for notebook output or debugging.
+    """
     arrows = {
         UP: "^",
         RIGHT: ">",
@@ -344,15 +350,21 @@ def format_policy(policy) -> str:
 
 
 def format_greedy_actions(Q) -> str:
-    # Precondition:
-    # `Q` should be a state-action value table with one row per state.
-    #
-    # What happens:
-    # 1. Find all actions tied for the maximal Q-value in each state.
-    # 2. Render every tied greedy action in the same grid cell.
-    #
-    # Postcondition:
-    # Returns a grid that exposes greedy-action ties directly from Q.
+    """Format the greedy action set implied by a Q-table as a text grid.
+
+    Precondition:
+    `Q` is a state-action value table with one row per state.
+
+    What happens:
+    1. Compute the maximal Q-value in each state.
+    2. Identify every action tied for that maximum.
+    3. Render all greedy actions in the cell so ties remain visible.
+    4. Mark the goal cell with `G`.
+
+    Postcondition:
+    Returns a multi-line string that exposes greedy-action ties directly from
+    the learned or computed Q-values.
+    """
     arrows = {
         UP: "^",
         RIGHT: ">",

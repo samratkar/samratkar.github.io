@@ -8,6 +8,23 @@ from render_dynamic_programming_game import HTML_TEMPLATE, MODEL_TEMPLATE
 
 
 def convert_to_fetch_template(template: str, json_filename: str) -> str:
+    """Wrap an inline-data HTML template so it fetches Q-learning JSON at runtime.
+
+    Precondition:
+    `template` follows the same placeholder conventions as the shared HTML
+    templates, and `json_filename` is the name of the exported Q-learning JSON
+    payload to load in the browser.
+
+    What happens:
+    1. Replace the inline `policyData` bootstrap with an async `fetch()` call.
+    2. Inject shared error handling for failed JSON loads.
+    3. Preserve the page-specific initialization logic already present in the
+       template.
+
+    Postcondition:
+    Returns HTML that loads the JSON artifact dynamically rather than embedding
+    it at generation time.
+    """
     script_start = f"""<script>
     async function init() {{
       const response = await fetch("{json_filename}", {{ cache: "no-store" }});
@@ -31,6 +48,22 @@ def convert_to_fetch_template(template: str, json_filename: str) -> str:
 
 
 def build_game_template() -> str:
+    """Specialize the shared game template for Q-learning terminology and links.
+
+    Precondition:
+    The imported `HTML_TEMPLATE` still contains the dynamic-programming labels
+    and snippets targeted by the replacement list in this function.
+
+    What happens:
+    1. Start from the shared dynamic-programming game template.
+    2. Replace titles, navigation targets, and displayed metric labels so the
+       page reflects the Q-learning export schema.
+    3. Swap value-function references for the Q-learning state-score fields.
+
+    Postcondition:
+    Returns an HTML template string ready to be wrapped with runtime JSON
+    loading for the Q-learning game view.
+    """
     template = HTML_TEMPLATE
     replacements = [
         ("Dynamic Programming Gridworld Game", "Q-Learning Gridworld Game"),
@@ -54,6 +87,22 @@ def build_game_template() -> str:
 
 
 def build_model_template() -> str:
+    """Specialize the shared model-table template for Q-learning exports.
+
+    Precondition:
+    The imported `MODEL_TEMPLATE` still contains the expected dynamic-
+    programming strings and DOM ids referenced by the replacement rules below.
+
+    What happens:
+    1. Start from the shared model-table template.
+    2. Replace navigation, labels, metadata fields, and URL-state handling so
+       they match the Q-learning view and its JSON structure.
+    3. Update the rendered metrics from value-function terminology to the
+       exported Q-learning scores and hyperparameters.
+
+    Postcondition:
+    Returns an HTML template string configured for the Q-learning model view.
+    """
     template = MODEL_TEMPLATE
     replacements = [
         ("Dynamic Programming Model Tables", "Q-Learning Model Tables"),
@@ -82,6 +131,22 @@ def build_model_template() -> str:
 
 
 def main() -> None:
+    """Generate the Q-learning game and model HTML files from the JSON export.
+
+    Precondition:
+    `q_learning_policies.json` already exists in the same directory.
+
+    What happens:
+    1. Resolve the local paths for the JSON artifact and output HTML files.
+    2. Fail early if the JSON export has not been generated yet.
+    3. Build the Q-learning-specific game and model templates.
+    4. Wrap both templates so they fetch the JSON payload at runtime.
+    5. Normalize escaped braces and write the final HTML files to disk.
+
+    Postcondition:
+    `q_learning_game.html` and `q_learning_model.html` are regenerated from the
+    latest Q-learning export.
+    """
     workdir = Path(__file__).resolve().parent
     json_path = workdir / "q_learning_policies.json"
     game_html_path = workdir / "q_learning_game.html"
