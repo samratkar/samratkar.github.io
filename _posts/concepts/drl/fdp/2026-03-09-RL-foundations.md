@@ -42,4 +42,4 @@ So: reward is a one-step signal, while value is the predicted total future rewar
 - terminal state - win, lose, draw. for tic tac toc
 - table is the **value function** - state to value. 
 - exploration and exploitation - interleave. - is heart of action selection. 
--  
+
