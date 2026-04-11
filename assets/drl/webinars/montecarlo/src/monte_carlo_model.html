@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monte Carlo Gridworld Model Tables</title>
+  <style>
+    :root {
+      --bg: #f0e8de;
+      --paper: rgba(255, 252, 247, 0.95);
+      --ink: #1f2933;
+      --muted: #60707e;
+      --accent: #1f7a72;
+      --accent-deep: #0f5b54;
+      --line: rgba(31, 122, 114, 0.14);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Aptos", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(31, 122, 114, 0.08), transparent 30%),
+        linear-gradient(180deg, #f8f2e8 0%, var(--bg) 100%);
+    }
+    .shell { max-width: 1320px; margin: 0 auto; padding: 16px; }
+    .hero, .panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 18px 34px rgba(31, 41, 51, 0.1);
+    }
+    .hero { margin-bottom: 14px; }
+    h1, h2 { margin: 0 0 10px; color: var(--accent-deep); }
+    .lede { color: var(--muted); line-height: 1.5; max-width: 900px; }
+    .nav { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .nav a {
+      display: inline-block;
+      padding: 9px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      background: #d9f1ed;
+      color: var(--accent-deep);
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.72);
+    }
+    .label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    th, td {
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      position: sticky;
+      top: 0;
+      background: rgba(255,252,247,0.98);
+      z-index: 1;
+    }
+    .table-wrap {
+      overflow: auto;
+      max-height: 520px;
+    }
+    .small {
+      color: var(--muted);
+      line-height: 1.45;
+      margin-top: 8px;
+    }
+    code {
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 0.85rem;
+    }
+    @media (max-width: 900px) {
+      .meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <h1>Monte Carlo Gridworld Tables</h1>
+      <div class="lede">
+        This view exposes the learned action-values, epsilon-soft policy probabilities, visit counts, and the tabular transition model used by the Monte Carlo case study. The data comes from <code>monte_carlo_policies.json</code>.
+      </div>
+      <div class="nav">
+        <a href="monte_carlo_game.html">Game View</a>
+        <a href="https://github.com/samratkar/samratkar.github.io/blob/main/assets/drl/webinars/montecarlo/src/monte_carlo_case_study.py" target="_blank" rel="noopener noreferrer">Source Code</a>
+      </div>
+      <div class="meta" id="meta"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Learned Q Table</h2>
+      <div class="small">Each row is a state, each column is an action, and <code>max Q</code> is the learned state score used by the game view.</div>
+      <div class="table-wrap"><table id="q-table"></table></div>
+    </section>
+
+    <section class="panel" style="margin-top:14px;">
+      <h2>Policy and Visit Counts</h2>
+      <div class="small">Policy probabilities come from the final epsilon-soft policy. Visit counts show how many first-visit returns contributed to each state-action estimate.</div>
+      <div class="table-wrap"><table id="policy-table"></table></div>
+    </section>
+
+    <section class="panel" style="margin-top:14px;">
+      <h2>Transition Model</h2>
+      <div class="small">This is the environment dynamics <code>P(s', r, done | s, a)</code> used by the stochastic gridworld.</div>
+      <div class="table-wrap"><table id="transition-table"></table></div>
+    </section>
+  </div>
+
+  <script>
+    async function init() {
+      const response = await fetch("monte_carlo_policies.json", { cache: "no-store" });
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status} while loading Monte Carlo data`);
+      }
+      const data = await response.json();
+      const actionOrder = data.action_order;
+
+      document.getElementById("meta").innerHTML = `
+        <div class="card"><div class="label">Algorithm</div><div>First-visit on-policy MC control</div></div>
+        <div class="card"><div class="label">Episodes</div><div>${data.num_episodes}</div></div>
+        <div class="card"><div class="label">Gamma</div><div>${Number(data.gamma).toFixed(2)}</div></div>
+        <div class="card"><div class="label">Epsilon</div><div>${Number(data.epsilon_start).toFixed(2)} -> ${Number(data.epsilon_final).toFixed(2)}</div></div>
+      `;
+
+      const qHeader = `<thead><tr><th>State</th>${actionOrder.map((name) => `<th>${name}</th>`).join("")}<th>max Q</th></tr></thead>`;
+      const qRows = data.final.Q.map((row, state) => `
+        <tr>
+          <td>s${state}</td>
+          ${row.map((value) => `<td>${Number(value).toFixed(3)}</td>`).join("")}
+          <td>${Number(data.final.state_scores[state]).toFixed(3)}</td>
+        </tr>
+      `).join("");
+      document.getElementById("q-table").innerHTML = `${qHeader}<tbody>${qRows}</tbody>`;
+
+      const policyHeader = `<thead><tr><th>State</th>${actionOrder.map((name) => `<th>${name} prob</th>`).join("")}${actionOrder.map((name) => `<th>${name} visits</th>`).join("")}</tr></thead>`;
+      const policyRows = data.final.policy_matrix.map((row, state) => `
+        <tr>
+          <td>s${state}</td>
+          ${row.map((value) => `<td>${Number(value).toFixed(3)}</td>`).join("")}
+          ${data.final.visit_counts[state].map((value) => `<td>${Number(value).toFixed(0)}</td>`).join("")}
+        </tr>
+      `).join("");
+      document.getElementById("policy-table").innerHTML = `${policyHeader}<tbody>${policyRows}</tbody>`;
+
+      const transitionHeader = "<thead><tr><th>State</th><th>Action</th><th>Probability</th><th>Next State</th><th>Reward</th><th>Done</th></tr></thead>";
+      const transitionRows = Object.entries(data.final.transition_model).flatMap(([state, actions]) => {
+        return actionOrder.flatMap((actionName) => {
+          return actions[actionName].map((outcome) => `
+            <tr>
+              <td>s${state}</td>
+              <td>${actionName}</td>
+              <td>${Number(outcome.probability).toFixed(3)}</td>
+              <td>s${outcome.next_state}</td>
+              <td>${Number(outcome.reward).toFixed(1)}</td>
+              <td>${String(outcome.done)}</td>
+            </tr>
+          `);
+        });
+      }).join("");
+      document.getElementById("transition-table").innerHTML = `${transitionHeader}<tbody>${transitionRows}</tbody>`;
+    }
+
+    init().catch((error) => {
+      document.body.innerHTML = `<pre style="padding:16px;font-family:monospace;">Failed to load Monte Carlo tables\n${String(error)}</pre>`;
+      console.error(error);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monte Carlo Gridworld Game</title>
+  <style>
+    :root {
+      --bg: #efe7db;
+      --paper: rgba(255, 250, 242, 0.94);
+      --ink: #1e2931;
+      --muted: #5d6b78;
+      --accent: #1f7a72;
+      --accent-soft: #d9f1ed;
+      --accent-deep: #0f5b54;
+      --goal: #9bcf6f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Aptos", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(31, 122, 114, 0.14), transparent 30%),
+        radial-gradient(circle at top right, rgba(230, 138, 91, 0.14), transparent 26%),
+        linear-gradient(180deg, #f8f2e8 0%, var(--bg) 100%);
+    }
+    .shell { max-width: 1440px; margin: 0 auto; min-height: 100vh; padding: 14px; }
+    .hero, .panel {
+      background: var(--paper);
+      border: 1px solid rgba(31, 122, 114, 0.14);
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(30, 41, 49, 0.12);
+      backdrop-filter: blur(10px);
+    }
+    .hero { padding: 20px 22px; display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; margin-bottom: 14px; }
+    h1 { margin: 0 0 8px; font-size: clamp(1.45rem, 2vw, 2.1rem); line-height: 1.05; color: var(--accent-deep); }
+    .sub { color: var(--muted); max-width: 720px; line-height: 1.45; }
+    .nav { display: flex; gap: 8px; flex-wrap: wrap; }
+    .nav a, button {
+      appearance: none; border: 0; border-radius: 999px; padding: 10px 15px;
+      background: linear-gradient(135deg, var(--accent-deep), var(--accent)); color: white;
+      text-decoration: none; cursor: pointer; font: inherit;
+      box-shadow: 0 10px 18px rgba(15, 91, 84, 0.18);
+    }
+    button.secondary, .nav a.secondary { background: var(--accent-soft); color: var(--accent-deep); box-shadow: none; }
+    .layout { display: grid; gap: 14px; grid-template-columns: minmax(360px, 560px) minmax(820px, 1fr); }
+    .panel { padding: 16px; }
+    .section-title { margin: 0 0 10px; font-size: 1rem; color: var(--accent-deep); }
+    .controls { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 12px; }
+    .stat { border: 1px solid rgba(31, 122, 114, 0.12); border-radius: 16px; padding: 10px 12px; background: rgba(255, 255, 255, 0.65); }
+    .stat-label { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 4px; }
+    .stat-value { font-size: 1.02rem; font-weight: 700; color: var(--accent-deep); }
+    .board { display: grid; grid-template-columns: repeat(3, minmax(90px, 1fr)); gap: 10px; }
+    .cell { min-height: 168px; border-radius: 20px; padding: 12px; background: rgba(255, 255, 255, 0.84); border: 1px solid rgba(30, 41, 49, 0.08); position: relative; overflow: hidden; }
+    .cell.goal { background: linear-gradient(180deg, rgba(155, 207, 111, 0.4), rgba(255, 255, 255, 0.92)); border-color: rgba(101, 145, 62, 0.32); }
+    .cell.active::after {
+      content: "MC"; position: absolute; top: 10px; right: 10px; font-size: 0.72rem; font-weight: 700;
+      color: #0b69ff; background: rgba(255, 255, 255, 0.9); padding: 4px 8px; border-radius: 999px;
+      box-shadow: 0 8px 16px rgba(11, 105, 255, 0.14);
+    }
+    .cell-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+    .state-name { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+    .state-score { font-size: 0.98rem; font-weight: 700; color: var(--accent-deep); }
+    .action-lines { display: grid; gap: 5px; font-size: 0.78rem; }
+    .action-line { display: grid; grid-template-columns: 44px 1fr 42px; gap: 6px; align-items: center; }
+    .bar { height: 8px; border-radius: 999px; background: rgba(31, 122, 114, 0.1); overflow: hidden; }
+    .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), #3fa89f); border-radius: 999px; }
+    .log, .episodes { border: 1px solid rgba(31, 122, 114, 0.12); border-radius: 18px; background: rgba(255, 255, 255, 0.72); padding: 12px; min-height: 140px; max-height: 240px; overflow: auto; line-height: 1.4; }
+    .curve { width: 100%; height: 220px; display: block; border: 1px solid rgba(31, 122, 114, 0.12); border-radius: 20px; background: rgba(255, 255, 255, 0.76); }
+    .small { color: var(--muted); font-size: 0.84rem; line-height: 1.45; }
+    @media (max-width: 1100px) { .layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <div>
+        <h1>Monte Carlo Gridworld</h1>
+        <div class="sub">First-visit on-policy Monte Carlo control on the same 3x3 gridworld. The board shows learned action-values and the current epsilon-soft policy after training from complete episodes.</div>
+      </div>
+      <div class="nav">
+        <a href="../dp-qlearning/src/q_learning_game.html" class="secondary">Q-Learning</a>
+      </div>
+    </section>
+    <div class="layout">
+      <section class="panel">
+        <div class="controls">
+          <button id="reset-btn" class="secondary">Reset Agent</button>
+          <button id="step-btn">Take Policy Step</button>
+          <button id="episode-btn">Play Full Episode</button>
+          <button id="preview-btn" class="secondary">Show Sample Episodes</button>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="stat-label">Algorithm</div><div class="stat-value" id="algorithm"></div></div>
+          <div class="stat"><div class="stat-label">Episodes</div><div class="stat-value" id="episodes"></div></div>
+          <div class="stat"><div class="stat-label">Gamma</div><div class="stat-value" id="gamma"></div></div>
+          <div class="stat"><div class="stat-label">Epsilon Final</div><div class="stat-value" id="epsilon-final"></div></div>
+        </div>
+        <div class="board" id="board"></div>
+      </section>
+      <section class="panel">
+        <h2 class="section-title">Training Summary</h2>
+        <canvas id="curve" class="curve" width="900" height="220"></canvas>
+        <p class="small">The chart plots the moving average episode return. Monte Carlo updates only after each full episode, so the learning signal arrives later than TD methods but is based on complete sampled returns.</p>
+        <div class="stats">
+          <div class="stat"><div class="stat-label">Agent State</div><div class="stat-value" id="agent-state"></div></div>
+          <div class="stat"><div class="stat-label">Episode Reward</div><div class="stat-value" id="episode-return"></div></div>
+        </div>
+        <h2 class="section-title">Simulation Log</h2>
+        <div class="log" id="log"></div>
+        <h2 class="section-title">Sample Episodes</h2>
+        <div class="episodes" id="episodes-preview"></div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    async function init() {
+      const response = await fetch("monte_carlo_policies.json", { cache: "no-store" });
+      if (!response.ok) throw new Error(`HTTP ${response.status} while loading Monte Carlo data`);
+      const data = await response.json();
+      const boardEl = document.getElementById("board");
+      const logEl = document.getElementById("log");
+      const previewEl = document.getElementById("episodes-preview");
+      const curveEl = document.getElementById("curve");
+      const ctx = curveEl.getContext("2d");
+      const config = data.environment;
+      const actionOrder = data.action_order;
+      const stateScores = data.final.state_scores;
+      const policyMatrix = data.final.policy_matrix;
+      const transitionModel = data.final.transition_model;
+      let agentState = config.start_state;
+      let currentReward = 0;
+      let logLines = [];
+
+      document.getElementById("algorithm").textContent = "First-visit MC";
+      document.getElementById("episodes").textContent = String(data.num_episodes);
+      document.getElementById("gamma").textContent = Number(data.gamma).toFixed(2);
+      document.getElementById("epsilon-final").textContent = Number(data.epsilon_final).toFixed(2);
+
+      function sampleIndex(probabilities) {
+        const target = Math.random();
+        let cumulative = 0;
+        for (let i = 0; i < probabilities.length; i += 1) {
+          cumulative += probabilities[i];
+          if (target <= cumulative) return i;
+        }
+        return probabilities.length - 1;
+      }
+
+      function chooseAction(state) {
+        return sampleIndex(policyMatrix[state]);
+      }
+
+      function drawBoard() {
+        boardEl.innerHTML = "";
+        const minScore = Math.min(...stateScores);
+        const maxScore = Math.max(...stateScores);
+        const scoreRange = Math.max(1e-9, maxScore - minScore);
+        for (let state = 0; state < stateScores.length; state += 1) {
+          const cell = document.createElement("div");
+          cell.className = "cell";
+          if (state === config.goal_state) cell.classList.add("goal");
+          if (state === agentState) cell.classList.add("active");
+          const normalized = (stateScores[state] - minScore) / scoreRange;
+          cell.style.boxShadow = `inset 0 0 0 999px rgba(31, 122, 114, ${0.06 + normalized * 0.18})`;
+          const actions = actionOrder.map((name, index) => {
+            const probability = Number(policyMatrix[state][index]);
+            const qValue = Number(data.final.Q[state][index]);
+            return `<div class="action-line"><div>${name}</div><div class="bar"><span style="width:${Math.max(4, probability * 100)}%"></span></div><div>${qValue.toFixed(2)}</div></div>`;
+          }).join("");
+          cell.innerHTML = `<div class="cell-top"><div class="state-name">State s${state}</div><div class="state-score">${stateScores[state].toFixed(2)}</div></div><div class="action-lines">${actions}</div>`;
+          boardEl.appendChild(cell);
+        }
+        document.getElementById("agent-state").textContent = `s${agentState}`;
+        document.getElementById("episode-return").textContent = currentReward.toFixed(1);
+      }
+
+      function pushLog(message) {
+        logLines = [message, ...logLines].slice(0, 14);
+        logEl.innerHTML = logLines.map((line) => `<div>${line}</div>`).join("");
+      }
+
+      function resetAgent() {
+        agentState = config.start_state;
+        currentReward = 0;
+        pushLog("Agent reset to start state.");
+        drawBoard();
+      }
+
+      function playStep() {
+        if (agentState === config.goal_state) {
+          pushLog("Agent is already at the goal. Reset to start a new rollout.");
+          return;
+        }
+        const actionIndex = chooseAction(agentState);
+        const actionName = actionOrder[actionIndex];
+        const outcomes = transitionModel[String(agentState)][actionName];
+        const outcome = outcomes[sampleIndex(outcomes.map((item) => item.probability))];
+        const previousState = agentState;
+        agentState = Number(outcome.next_state);
+        currentReward += Number(outcome.reward);
+        pushLog(`s${previousState} -> s${agentState}: ${actionName}, reward ${Number(outcome.reward).toFixed(1)}`);
+        drawBoard();
+      }
+
+      async function playEpisode() {
+        resetAgent();
+        for (let step = 0; step < data.max_steps_per_episode; step += 1) {
+          if (agentState === config.goal_state) break;
+          playStep();
+          await new Promise((resolve) => setTimeout(resolve, 320));
+        }
+      }
+
+      function renderPreviewEpisodes() {
+        previewEl.innerHTML = data.preview_episodes.map((episode, episodeIndex) => {
+          const steps = episode.map((item) => `s${item.state} -> ${item.action} -> r=${item.reward.toFixed(1)}`).join("<br>");
+          return `<div style="margin-bottom:12px;"><strong>Sample Episode ${episodeIndex + 1}</strong><br>${steps}</div>`;
+        }).join("");
+      }
+
+      function drawCurve() {
+        const values = data.training_curve.moving_average;
+        const width = curveEl.width;
+        const height = curveEl.height;
+        const padding = 24;
+        const minV = Math.min(...values);
+        const maxV = Math.max(...values);
+        const scaleY = (height - padding * 2) / Math.max(1e-6, maxV - minV);
+        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = "rgba(255,255,255,0.88)";
+        ctx.fillRect(0, 0, width, height);
+        ctx.strokeStyle = "rgba(31,122,114,0.18)";
+        ctx.lineWidth = 1;
+        for (let i = 0; i < 4; i += 1) {
+          const y = padding + ((height - padding * 2) / 3) * i;
+          ctx.beginPath();
+          ctx.moveTo(padding, y);
+          ctx.lineTo(width - padding, y);
+          ctx.stroke();
+        }
+        ctx.strokeStyle = "#1f7a72";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        values.forEach((value, index) => {
+          const x = padding + (index / Math.max(1, values.length - 1)) * (width - padding * 2);
+          const y = height - padding - (value - minV) * scaleY;
+          if (index === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+        ctx.fillStyle = "#5d6b78";
+        ctx.font = "12px Aptos, Segoe UI, sans-serif";
+        ctx.fillText(`min ${minV.toFixed(1)}`, 10, height - 8);
+        ctx.fillText(`max ${maxV.toFixed(1)}`, 10, 16);
+      }
+
+      document.getElementById("reset-btn").addEventListener("click", resetAgent);
+      document.getElementById("step-btn").addEventListener("click", playStep);
+      document.getElementById("episode-btn").addEventListener("click", playEpisode);
+      document.getElementById("preview-btn").addEventListener("click", renderPreviewEpisodes);
+
+      resetAgent();
+      renderPreviewEpisodes();
+      drawCurve();
+    }
+
+    init().catch((error) => {
+      document.body.innerHTML = `<pre style="padding:16px;font-family:monospace;">Failed to load Monte Carlo game\n${String(error)}</pre>`;
+      console.error(error);
+    });
+  </script>
+</body>
+</html>
