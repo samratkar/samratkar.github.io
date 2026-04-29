@@ -328,6 +328,11 @@ title: Home - All Articles
       padding: 0.5rem 1rem;
     }
   }
+  /* Fix for bullets and links in the article body */
+  .post-content ul, .content ul, article ul { list-style-type: disc !important; padding-left: 1.5rem !important; margin-bottom: 1rem !important; }
+  .post-content ol, .content ol, article ol { list-style-type: decimal !important; padding-left: 1.5rem !important; margin-bottom: 1rem !important; }
+  .post-content li, .content li, article li { margin-bottom: 0.5rem !important; }
+  .post-content a, .content a, article a { color: #7c3aed !important; text-decoration: underline !important; font-weight: 500; }
 </style>
 
 <div class="bg-gray-50 min-h-screen">
@@ -963,3 +968,4 @@ title: Home - All Articles
     forceCursorStyles();
   }, 1000);
 </script>
+
