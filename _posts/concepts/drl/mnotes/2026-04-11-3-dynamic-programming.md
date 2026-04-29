@@ -3,6 +3,7 @@ tags : [drl, rl]
 title: "Chapter 3: Dynamic Programming"
 category: "drl"
 subcategory: "dynamic-programming"
+layout : mermaid
 ---
 
 ### The Big Picture

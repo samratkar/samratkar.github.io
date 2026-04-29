@@ -3,6 +3,7 @@ tags : [drl, rl]
 title: "Chapter 4: Monte Carlo"
 category: "drl"
 subcategory: "monte-carlo"
+layout : mermaid
 ---
 
 ### The Big Picture
