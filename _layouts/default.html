@@ -221,9 +221,16 @@
         flex-direction: column;
       }
     }
+      /* Fix for bullets and links */
+    ul { list-style-type: disc !important; padding-left: 1.5rem !important; margin-bottom: 1rem !important; }
+    ol { list-style-type: decimal !important; padding-left: 1.5rem !important; margin-bottom: 1rem !important; }
+    li { margin-bottom: 0.5rem !important; }
+    a { color: #7c3aed !important; text-decoration: underline !important; }
+    a:hover { color: #6d28d9 !important; }
   </style>
 </head>
 <body>
   {{ content }}
 </body>
 </html>
+
