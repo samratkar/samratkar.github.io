@@ -5,232 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page.title | default: site.title }}</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  {% seo %}
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      color: #E6E6FA;
-    }
-    
-    /* Global stat-card embossed glass effect */
-    .stat-card {
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.85) 0%, rgba(243, 232, 255, 0.6) 100%) !important;
-      backdrop-filter: blur(12px) !important;
-      -webkit-backdrop-filter: blur(12px) !important;
-      border-radius: 12px !important;
-      padding: 0.75rem 1rem !important;
-      box-shadow: 
-        6px 6px 12px rgba(155, 135, 245, 0.12),
-        -3px -3px 8px rgba(255, 255, 255, 0.7),
-        inset 1px 1px 2px rgba(255, 255, 255, 0.8),
-        inset -1px -1px 2px rgba(155, 135, 245, 0.08) !important;
-      border: none !important;
-      transition: all 0.3s ease !important;
-    }
-    
-    .stat-card:hover {
-      transform: translateY(-4px) scale(1.02) !important;
-      box-shadow: 
-        8px 8px 16px rgba(155, 135, 245, 0.18),
-        -4px -4px 10px rgba(255, 255, 255, 0.8),
-        inset 1px 1px 2px rgba(255, 255, 255, 0.9),
-        inset -1px -1px 2px rgba(155, 135, 245, 0.1) !important;
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(243, 232, 255, 0.75) 100%) !important;
-    }
-    
-    .stat-card .flex {
-      display: flex !important;
-      flex-direction: row !important;
-      align-items: center !important;
-      gap: 0.75rem !important;
-    }
-    
-    .stat-icon {
-      width: 36px !important;
-      height: 36px !important;
-      min-width: 36px !important;
-      border-radius: 8px !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      flex-shrink: 0 !important;
-    }
-    
-    /* Global gradient header */
-    .gradient-bg {
-      background: linear-gradient(135deg, #9b87f5 0%, #c4b5fd 100%) !important;
-    }
-    
-    .full-width-header {
-      background: linear-gradient(135deg, #9b87f5 0%, #c4b5fd 100%) !important;
-    }
-    
-    /* Image size controls - use classes to control size */
-    img.small {
-      max-width: 200px;
-      width: auto;
-      height: auto;
-      display: block;
-      margin: 1.5rem auto;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    
-    img.small:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    }
-    
-    img.medium {
-      max-width: 400px;
-      width: auto;
-      height: auto;
-      display: block;
-      margin: 1.5rem auto;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    
-    img.medium:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    }
-    
-    img.original {
-      max-width: 100%;
-      width: auto;
-      height: auto;
-      display: block;
-      margin: 1.5rem auto;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    
-    img.original:hover {
-      transform: scale(1.02);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    }
-    
-    /* Side-by-side images */
-    .image-row {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      margin: 1.5rem 0;
-    }
-    
-    .image-row p {
-      flex: 1 1 200px;
-      margin: 0 !important;
-    }
-    
-    .image-row p img {
-      width: 100% !important;
-      max-width: 100% !important;
-      height: auto !important;
-      margin: 0 !important;
-    }
-    
-    .image-row > img {
-      flex: 1 1 200px;
-      max-width: 300px;
-      height: auto;
-      margin: 0 !important;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-    
-    /* Text beside image layout */
-    .text-image-row {
-      display: flex;
-      gap: 2rem;
-      align-items: flex-start;
-      margin: 2rem 0;
-      flex-wrap: nowrap;
-    }
-    
-    .text-column {
-      flex: 1 1 50%;
-      min-width: 250px;
-    }
-    
-    .text-column ol,
-    .text-column ul {
-      padding-left: 1.5rem;
-      margin: 1rem 0;
-    }
-    
-    .text-column ol {
-      list-style-type: decimal;
-    }
-    
-    .text-column ul {
-      list-style-type: disc;
-    }
-    
-    .text-column li {
-      margin-bottom: 0.5rem;
-    }
-    
-    .image-column {
-      flex: 1 1 50%;
-      min-width: 250px;
-    }
-    
-    .image-column img {
-      width: auto !important;
-      display: block !important;
-      margin: 0 auto !important;
-    }
-    
-    /* Responsive for text-image layout */
-    @media (max-width: 768px) {
-      .text-image-row {
-        flex-direction: column;
-        flex-wrap: wrap;
-      }
-    }
-    
-    /* Responsive images on smaller screens */
-    @media (max-width: 768px) {
-      img.small,
-      img.medium {
-        max-width: 100%;
-      }
-      
-      .image-row {
-        flex-direction: column;
-      }
-      
-      .image-row img {
-        max-width: 100%;
-      }
-      
-      .text-image-row {
-        flex-direction: column;
-      }
-    }
-      /* Fix for bullets and links */
-    ul { list-style-type: disc !important; padding-left: 1.5rem !important; margin-bottom: 1rem !important; }
-    ol { list-style-type: decimal !important; padding-left: 1.5rem !important; margin-bottom: 1rem !important; }
-    li { margin-bottom: 0.5rem !important; }
-    a { color: #7c3aed !important; text-decoration: underline !important; }
-    a:hover { color: #6d28d9 !important; }
+    body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; background-color: #f8fafc; color: #1e293b; }
+    .full-width-header { width: 100%; background: #0f172a !important; border-bottom: 4px solid #3b82f6; }
+    .nav-link { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 0.85rem; padding: 0.5rem 1rem; border-radius: 0.375rem; transition: all 0.2s ease; border: 1px solid transparent; }
+    .nav-link:hover { color: white; background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1); }
+    .markdown-content { line-height: 1.7; color: #334155; }
+    .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #0f172a; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1.25rem; letter-spacing: -0.025em; }
+    .markdown-content h2 { font-size: 1.75rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
+    .markdown-content p { margin-bottom: 1.5rem; }
+    .markdown-content ul { margin-bottom: 1.5rem; padding-left: 1.5rem; list-style-type: disc !important; }
+    .markdown-content ol { margin-bottom: 1.5rem; padding-left: 1.5rem; list-style-type: decimal !important; }
+    .markdown-content li { margin-bottom: 0.65rem; }
+    .markdown-content li::marker { color: #3b82f6; }
+    .markdown-content a { color: #2563eb; text-decoration: underline; text-underline-offset: 4px; font-weight: 500; }
+    .markdown-content a:hover { color: #1d4ed8; }
+    .markdown-content code { font-family: 'JetBrains Mono', monospace; background-color: #f1f5f9; color: #0f172a; padding: 0.2rem 0.4rem; border-radius: 0.375rem; font-size: 0.875em; }
+    .markdown-content pre { font-family: 'JetBrains Mono', monospace; background-color: #f6f8fa; color: #111827; padding: 1.5rem; border-radius: 0.75rem; overflow-x: auto; margin: 2rem 0; border: 1px solid #d0d7de; }
+    .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt { color: #d73a49; font-weight: bold; }
+    .highlight .s, .highlight .s1, .highlight .s2 { color: #032f62; }
+    .highlight .c, .highlight .c1 { color: #6a737d; font-style: italic; }
+    .highlight .nf { color: #6f42c1; font-weight: bold; }
   </style>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-  {{ content }}
+  <header class="full-width-header shadow-xl">
+    <div class="w-full max-w-[1600px] mx-auto px-8 py-6">
+      <div class="flex items-center justify-between flex-wrap gap-8">
+        <div class="flex-1">
+          <h1 class="text-2xl font-bold text-white tracking-tight">
+            <a href="/" class="hover:text-blue-400 transition-colors">SAMRAT KAR</a>
+          </h1>
+          <p class="mt-1 text-slate-400 text-xs font-medium uppercase tracking-widest">{{ site.description }}</p>
+        </div>
+        <nav class="flex gap-2">
+          <a href="/" class="nav-link">PORTFOLIO</a>
+          <a href="/about/" class="nav-link">ABOUT</a>
+          <a href="/books/" class="nav-link">BOOKS</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <main class="w-full max-w-[1600px] mx-auto px-8 py-10">
+    <article class="markdown-content bg-white p-10 rounded-xl shadow-sm border border-slate-200">
+      {{ content }}
+    </article>
+  </main>
+  <footer class="w-full max-w-[1600px] mx-auto px-8 py-12 text-center text-slate-400 text-xs font-medium border-t border-slate-100 uppercase tracking-widest">
+    &copy; {{ "now" | date: "%Y" }} {{ site.github_username }} &middot; EXPLORING & EXPERIMENTING
+  </footer>
 </body>
 </html>
-

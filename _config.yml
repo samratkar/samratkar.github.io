@@ -18,6 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 markdown: kramdown
+permalink: /:year/:month/:day/:title.html
 kramdown:
   math_engine: mathjax
   hard_wrap: true
@@ -33,7 +34,7 @@ github_username: samratkar
 linkedin_username: samratk
 wordpress_username: samratkar2012
 # Build settings
-theme: minima
+# theme: minima
 plugins:
   - jekyll-feed
 show_dir_listing: false
@@ -62,3 +63,4 @@ exclude:
   - apps/sleep-assistant/*.py
   - apps/sleep-assistant/*.md
   - apps/sleep-assistant/requirements.txt
+
