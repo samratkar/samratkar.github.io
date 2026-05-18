@@ -6,14 +6,16 @@
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    background: #000;
   }
 
   .mySlides {
     display: none;
     text-align: center;
+    background: #000;
   }
 
-  .mySlides img {
+  .mySlides img, .mySlides video {
     width: 100%;
     height: auto;
     max-height: 600px;
@@ -35,6 +37,7 @@
     border-radius: 0 3px 3px 0;
     user-select: none;
     background-color: rgba(0,0,0,0.3);
+    z-index: 10;
   }
 
   .next {
@@ -63,6 +66,7 @@
     padding: 8px 12px;
     position: absolute;
     top: 0;
+    z-index: 10;
   }
 
   .dot-container {
@@ -98,17 +102,24 @@
 </style>
 
 <div class="slideshow-container">
-  {% assign images = "allofus.jpeg,baba.jpeg,babadhaam.jpeg,babadhaam1.jpeg,bag-tag.jpeg,BiswajeetShukla.jpeg,cake.jpeg,cheers.jpeg,father-thomas.jpeg,fathers.jpeg,frJoselet.jpeg,frthomas1.jpeg,lastday.jpeg,lastday1.jpeg,lunch.jpeg,nightout.jpeg,poker.jpeg,pool.jpeg,poolhurray.jpeg,poolmandali.jpeg,rahulandgang.jpeg,rahulshiv.jpeg,ravi and i.jpeg,Ravi Singhania.jpeg,reunionphot.jpeg,ritesh.jpeg,room.jpeg,shishir-ashish-sam.jpeg,shiv and i.jpeg,shiv-neeraj-ashish-rahul-hemper-prem-nehal.jpeg,shiv-rahul-ravi-ujjwal.jpeg,swimming-goutam.jpeg,team.jpeg,though-the -mountains.jpeg,tired-back.jpeg,tiwari-ji-paduka.jpeg,waiting.jpeg,we.jpeg,WhatsApp Image 2026-03-22 at 6.49.07 PM.jpeg,WhatsApp Image 2026-05-09 at 1.24.04 PM.jpeg,WhatsApp Image 2026-05-16 at 5.23.26 PM.jpeg,WhatsApp Image 2026-05-16 at 5.24.45 PM.jpeg,WhatsApp Image 2026-05-16 at 5.37.23 PM.jpeg,WhatsApp Image 2026-05-16 at 5.37.28 PM-1.jpeg,WhatsApp Image 2026-05-16 at 5.37.28 PM.jpeg,WhatsApp Image 2026-05-16 at 6.00.15 PM-1.jpeg,WhatsApp Image 2026-05-16 at 6.00.15 PM.jpeg,withfather.jpeg" | split: "," %}
+  {% assign media_files = "allofus.jpeg,baba.jpeg,babadhaam.jpeg,babadhaam1.jpeg,bag-tag.jpeg,BiswajeetShukla.jpeg,cake.jpeg,cheers.jpeg,father-thomas.jpeg,fathers.jpeg,frJoselet.jpeg,frthomas1.jpeg,lastday.jpeg,lastday1.jpeg,lunch.jpeg,nightout.jpeg,poker.jpeg,pool.jpeg,poolhurray.jpeg,poolmandali.jpeg,rahulandgang.jpeg,rahulshiv.jpeg,ravi and i.jpeg,Ravi Singhania.jpeg,reunionphot.jpeg,ritesh.jpeg,room.jpeg,shishir-ashish-sam.jpeg,shiv and i.jpeg,shiv-neeraj-ashish-rahul-hemper-prem-nehal.jpeg,shiv-rahul-ravi-ujjwal.jpeg,swimming-goutam.jpeg,team.jpeg,though-the -mountains.jpeg,tired-back.jpeg,tiwari-ji-paduka.jpeg,waiting.jpeg,we.jpeg,WhatsApp Image 2026-03-22 at 6.49.07 PM.jpeg,WhatsApp Image 2026-05-09 at 1.24.04 PM.jpeg,WhatsApp Image 2026-05-16 at 5.23.26 PM.jpeg,WhatsApp Image 2026-05-16 at 5.24.45 PM.jpeg,WhatsApp Image 2026-05-16 at 5.37.23 PM.jpeg,WhatsApp Image 2026-05-16 at 5.37.28 PM-1.jpeg,WhatsApp Image 2026-05-16 at 5.37.28 PM.jpeg,WhatsApp Image 2026-05-16 at 6.00.15 PM-1.jpeg,WhatsApp Image 2026-05-16 at 6.00.15 PM.jpeg,withfather.jpeg,abhishek-song1.mp4,ashish-poem-becharapati.mp4,atishhbd.mp4,bunty-speech.mp4,fr-chittoo-speech-5-17-26.mp4,jairaj-song-dance.mp4,jairajsong-compressed.mp4,manishsong.mp4,poolrace.mp4,sing-the-praise-and-theg-glory-ofGod.mp4,swimmingpool1.mp4,takingblessingsoffather.mp4,though-the-mountains-may-fall.mp4" | split: "," %}
   
-  {% for img in images %}
+  {% for file in media_files %}
     <div class="mySlides fade">
-      <div class="numbertext">{{ forloop.index }} / {{ images.size }}</div>
-      <img src="/assets/mount-assisi/051526-mas95-reunion/{{ img | url_encode }}" style="width:100%">
+      <div class="numbertext">{{ forloop.index }} / {{ media_files.size }}</div>
+      {% if file contains '.mp4' %}
+        <video controls preload="metadata">
+          <source src="/assets/mount-assisi/051526-mas95-reunion/{{ file | url_encode }}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      {% else %}
+        <img src="/assets/mount-assisi/051526-mas95-reunion/{{ file | url_encode }}" style="width:100%">
+      {% endif %}
       <div class="text">
-        {% if img contains 'WhatsApp' %}
+        {% if file contains 'WhatsApp' %}
           Reunion Memory {{ forloop.index }}
         {% else %}
-          {{ img | replace: ".jpeg", "" | replace: "-", " " | replace: "_", " " | capitalize }}
+          {{ file | replace: ".jpeg", "" | replace: ".mp4", "" | replace: "-", " " | replace: "_", " " | capitalize }}
         {% endif %}
       </div>
     </div>
@@ -120,7 +131,7 @@
 <br>
 
 <div class="dot-container">
-  {% for img in images %}
+  {% for file in media_files %}
     <span class="dot" onclick="currentSlide({{ forloop.index }})"></span>
   {% endfor %}
 </div>
@@ -143,6 +154,11 @@ function showSlides(n) {
   let dots = document.getElementsByClassName("dot");
   if (n > slides.length) {slideIndex = 1}    
   if (n < 1) {slideIndex = slides.length}
+  
+  // Pause all videos
+  let videos = document.querySelectorAll('.mySlides video');
+  videos.forEach(v => v.pause());
+
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";  
   }
