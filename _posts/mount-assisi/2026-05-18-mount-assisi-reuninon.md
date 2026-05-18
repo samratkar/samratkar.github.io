@@ -32,6 +32,19 @@ Thanks for your love, care affection and above all the feeling that we belong to
   Your browser does not support the video tag.
 </video>
 
+### Gopal Dokania
+
+Dear Legends,
+
+Most of you would be reaching back home today or tomorrow. We know it takes a lot of effort to make an event like this possible, and as the organizing committee, we tried our very best to give everyone an experience that will remain a cherished memory for a lifetime.
+
+The reunion brought back countless moments of nostalgia, laughter, friendship, and togetherness that flowed through the entire batch and touched all of us deeply. Thank you all for gracing the occasion with your legendary presence and making the reunion truly special.
+
+On behalf of the organizing team — Gopal, Rajeev, Ravi, Ambarish, Ujjawal, Jairaj, and everyone involved — a heartfelt thank you to each one of you.
+
+Till we meet again…
+Once a Montazzian, always a Montazzian.
+
 ### Saurabh Singh
 
 This is to each and every one of you. 
@@ -107,6 +120,12 @@ Endless laughter, nostalgia, and good vibes all around. It felt so good to reliv
 
 Already looking forward to the next one!
 
+### Atish Anand
+
+Big BIG shout out to all the orginisers for making this nearly impossible event possible. It was an awesome get together ❤️. Will cherish for a long long time 🥰🤗. NCR legends have safely landed in Delhi and are on the way back to get respective destination 
+
+
+
 ### Kumar Gourav 
 
 Tiwari baba ka Jindgi ...har kadm ek nai jung hai
@@ -128,6 +147,14 @@ On behalf of Organising committee I pay my heartfelt gratitude to all legends wh
 ### Shishir Dubey 
 
 And finally the last bird to fly from the nest. 😊.  With all the memories i gathered in 2 days, it would have been utter stupidity to miss this get together. Once again congrats to event hosts for this splendid show.  🙏🙏🙏. Let's meets soon again
+
+### Gautam Kumar 
+
+Hi, friends very good time, stress free tonic was meeting u all and especially thanks to all organizer u have arranged  best
+
+### Niraj Kumar Choudhary
+
+⛳️⛳️💐💐💐Good going Gopal and DR Vinayak! We were impressed by the way you all came out and involved yourself in making the 🍉Gala meet🍉 happen. Keep it ⛳️⛳️up  and😍 our aspirations are now much higher😍 with hopes pinned upon for another nostalgic meet in near the future. ☀️☀️Also wonderful participation from the sweet sixteen participants of 95 batch☀️☀️ who all have bloomed in both professional and personal journey without losing the spark of a child🍝🍝 which infact is the essence of our existence and the driving force that made us steer through all odds always. I myself though jam packed in office affairs, finally made it to the meet after booking-and cancelling at least 7 tickets in 3 days.  Thank you all! Best of you to everyone! Take care ! God bless all of us♥️♥️
 
 
 
