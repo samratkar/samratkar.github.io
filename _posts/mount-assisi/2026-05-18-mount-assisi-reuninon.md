@@ -15,8 +15,9 @@ In the labyrinth of complexity of life which all of us have in some way or other
 
 Till we meet again. And anyone who is coming to delhi with family or work trip please give me a ring - you have a home in delhi.
 
-#### On the - prayer song - Thouh the mountains may fall 
+#### On the - prayer song - Though the mountains may fall 
 
+{% include mount-assisi/though-the-mountains-may-fall.md %}
 
 ##### Samrat 
 
