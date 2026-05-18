@@ -347,7 +347,6 @@ title: Home - All Articles
         <nav class="nav-menu">
           <a href="/" class="nav-link" style="color: white !important;">🏠 Home</a>
           <a href="/about/" class="nav-link" style="color: white !important;">👤 About</a>
-          <a href="/books/" class="nav-link" style="color: white !important;">📚 Books</a>
         </nav>
       </div>
     </div>

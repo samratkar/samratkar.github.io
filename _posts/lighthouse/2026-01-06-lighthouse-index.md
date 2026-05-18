@@ -211,7 +211,6 @@ tag: [lighthouse]
         <nav class="nav-menu">
           <a href="/" class="nav-link">🏠 Home</a>
           <a href="/about/" class="nav-link">👤 About</a>
-          <a href="/books/" class="nav-link">📚 Books</a>
         </nav>
       </div>
     </div>

@@ -32,6 +32,14 @@ Thanks for your love, care affection and above all the feeling that we belong to
   Your browser does not support the video tag.
 </video>
 
+### Father Joselet TOR
+
+<video width="640" height="360" controls>
+  <source src="/assets/mount-assisi/051526-mas95-reunion/father-joselet-speech.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+
 ### Gopal Dokania
 
 Dear Legends,
@@ -60,9 +68,11 @@ Gopu and Lochan. God bless you guys. You have given us back a piece of ourselves
 
 ### Jairaj Handsdah 
 
-Yes dear.. we never even once practiced the song. Even then we could sing without any hiccups...
+<video width="640" height="360" controls>
+  <source src="/assets/mount-assisi/051526-mas95-reunion/jairajsong-compressed.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
-Abhishek, Samrat, Ritesh.. It was really amazing
 
 ### Nalin Jha 
 
