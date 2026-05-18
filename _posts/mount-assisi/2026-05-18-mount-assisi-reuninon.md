@@ -166,6 +166,33 @@ Hi, friends very good time, stress free tonic was meeting u all and especially t
 
 ⛳️⛳️💐💐💐Good going Gopal and DR Vinayak! We were impressed by the way you all came out and involved yourself in making the 🍉Gala meet🍉 happen. Keep it ⛳️⛳️up  and😍 our aspirations are now much higher😍 with hopes pinned upon for another nostalgic meet in near the future. ☀️☀️Also wonderful participation from the sweet sixteen participants of 95 batch☀️☀️ who all have bloomed in both professional and personal journey without losing the spark of a child🍝🍝 which infact is the essence of our existence and the driving force that made us steer through all odds always. I myself though jam packed in office affairs, finally made it to the meet after booking-and cancelling at least 7 tickets in 3 days.  Thank you all! Best of you to everyone! Take care ! God bless all of us♥️♥️
 
+### Ujjwal 
+
+My experiences and feelings on Reunion-2026 🥳💐🍻🎂
+
+Last 3 days were such those days, which we all wanted to happen.
+Meeting each other even after long 30 years didn't feel as if we were 30 years apart. It seemed like, ki just beetey kal ki hi baat ho. It did not take even seconds to reconnect once we met with each other.
+Moments spent with Father Chittu/Jose, School song by Group, Anchoring by Amiya, Superb speech by Nalin, Songs by Jairaj/Ranjan/Amiya/Kr Abhishek/Ritesh, Poetry by Atish/Samrat, Karaoke by some of you, and many other performances felt as if we were really in school time.
+So much of talking, laughing, story-sharing over restaurant table was like diffusing several time-capsules which had such memorable flavors.
+Prasun Bhai's and Nalin's Casanova evergreen stories were so hilarious.
+And now the most memorable for me (and all for sure) was Rahul Baba's SS Gyan and Pravachans...ALL TIME HIT !!
+He made us recall our historians like Gandhiji, Nehruji, and Sarojni Naidu 😜
+We many are now disciples of SS, Biswajit leading from front 😆
+Great energy, masti and memories by all of you.
+Moments with Singhania, Saurabh, Subhabrata, Sanjeev, Ashish, Nehal, Gourav, Manish, Avinash, Niraj.
+Great efforts for travelling the farthest by Singhania and Biswajit.
+Glad that Dr Vikas and Gautam also joined and had time well spent with us.
+For me..., it felt like, All brothers of a family were far apart, and now we met, moving forward with stronger bond ever.
+
+Finally, great thanks to Organising team.
+Gopal, Rajeev, Kedia, Ambarish, Jairaj, and two-cents by me.
+Have seen the energy and relentless efforts put by everyone. Kudos to All. 👍🏻
+Continuous driving energy by Gopal, Rajeev, Ambarish.
+Special thanks to Ravi Kedia for hampers of Gulab Chhap Sattu (secret of my health 😜 )
+
+Love you all, and miss who couldn't attend this time. ❤️
+Let's do this again.
+Hail SS !! 😀
 
 ### Moments in Frames
 
