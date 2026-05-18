@@ -7,20 +7,25 @@
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     background: #000;
+    min-height: 450px; /* Prevent collapse */
   }
 
   .mySlides {
     display: none;
     text-align: center;
     background: #000;
+    min-height: 450px;
   }
 
   .mySlides img, .mySlides video {
     width: 100%;
     height: auto;
     max-height: 600px;
+    min-height: 300px;
     object-fit: contain;
     background: #000;
+    display: block;
+    margin: 0 auto;
   }
 
   .prev, .next {
@@ -32,12 +37,12 @@
     margin-top: -22px;
     color: white;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 24px;
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
     background-color: rgba(0,0,0,0.3);
-    z-index: 10;
+    z-index: 100;
   }
 
   .next {
@@ -51,13 +56,14 @@
 
   .text {
     color: #f2f2f2;
-    font-size: 15px;
-    padding: 8px 12px;
+    font-size: 14px;
+    padding: 10px 15px;
     position: absolute;
-    bottom: 8px;
+    bottom: 0;
     width: 100%;
     text-align: center;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.6);
+    box-sizing: border-box;
   }
 
   .numbertext {
@@ -66,20 +72,24 @@
     padding: 8px 12px;
     position: absolute;
     top: 0;
-    z-index: 10;
+    z-index: 100;
+    background: rgba(0,0,0,0.4);
+    border-bottom-right-radius: 5px;
   }
 
   .dot-container {
     text-align: center;
     padding: 20px;
     background: #f9f9f9;
+    max-height: 100px;
+    overflow-y: auto;
   }
 
   .dot {
     cursor: pointer;
-    height: 12px;
-    width: 12px;
-    margin: 0 4px;
+    height: 10px;
+    width: 10px;
+    margin: 3px 3px;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
@@ -92,34 +102,35 @@
 
   .fade {
     animation-name: fade;
-    animation-duration: 1.5s;
+    animation-duration: 0.5s;
   }
 
   @keyframes fade {
-    from {opacity: .4} 
+    from {opacity: .7} 
     to {opacity: 1}
   }
 </style>
 
 <div class="slideshow-container">
-  {% assign media_files = "allofus.jpeg,baba.jpeg,babadhaam.jpeg,babadhaam1.jpeg,bag-tag.jpeg,BiswajeetShukla.jpeg,cake.jpeg,cheers.jpeg,father-thomas.jpeg,fathers.jpeg,frJoselet.jpeg,frthomas1.jpeg,lastday.jpeg,lastday1.jpeg,lunch.jpeg,nightout.jpeg,poker.jpeg,pool.jpeg,poolhurray.jpeg,poolmandali.jpeg,rahulandgang.jpeg,rahulshiv.jpeg,ravi and i.jpeg,Ravi Singhania.jpeg,reunionphot.jpeg,ritesh.jpeg,room.jpeg,shishir-ashish-sam.jpeg,shiv and i.jpeg,shiv-neeraj-ashish-rahul-hemper-prem-nehal.jpeg,shiv-rahul-ravi-ujjwal.jpeg,swimming-goutam.jpeg,team.jpeg,though-the -mountains.jpeg,tired-back.jpeg,tiwari-ji-paduka.jpeg,waiting.jpeg,we.jpeg,WhatsApp Image 2026-03-22 at 6.49.07 PM.jpeg,WhatsApp Image 2026-05-09 at 1.24.04 PM.jpeg,WhatsApp Image 2026-05-16 at 5.23.26 PM.jpeg,WhatsApp Image 2026-05-16 at 5.24.45 PM.jpeg,WhatsApp Image 2026-05-16 at 5.37.23 PM.jpeg,WhatsApp Image 2026-05-16 at 5.37.28 PM-1.jpeg,WhatsApp Image 2026-05-16 at 5.37.28 PM.jpeg,WhatsApp Image 2026-05-16 at 6.00.15 PM-1.jpeg,WhatsApp Image 2026-05-16 at 6.00.15 PM.jpeg,withfather.jpeg,abhishek-song1.mp4,ashish-poem-becharapati.mp4,atishhbd.mp4,bunty-speech.mp4,fr-chittoo-speech-5-17-26.mp4,jairaj-song-dance.mp4,jairajsong-compressed.mp4,manishsong.mp4,poolrace.mp4,sing-the-praise-and-theg-glory-ofGod.mp4,swimmingpool1.mp4,takingblessingsoffather.mp4,though-the-mountains-may-fall.mp4" | split: "," %}
+  {% assign media_files = "abhishek-song1.mp4,Abhishek-song2.mp4,abhishek-song3.mp4,allofus.jpeg,atish-poem-becharapati.mp4,atishhbd.mp4,baba.jpeg,babadhaam.jpeg,babadhaam1.jpeg,bag-tag.jpeg,BiswajeetShukla.jpeg,bunty-speech.mp4,cake.jpeg,cheers.jpeg,did-u-hear-us.JPG,father-joselet-speech.mp4,father-thomas.jpeg,fathers.jpeg,fr-chittoo-speech-5-17-26.mp4,frJoselet.jpeg,frthomas1.jpeg,IMG_9401.JPG,IMG_9403.JPG,IMG_9404.JPG,IMG_9407.JPG,IMG_9411.JPG,jairaj-song-dance.mp4,jairajsong-compressed.mp4,lastday.jpeg,lastday1.jpeg,lunch.jpeg,manishsong.mp4,nightout.jpeg,poker.jpeg,pool.jpeg,poolhurray.jpeg,poolmandali.jpeg,poolrace.mp4,rahulandgang.jpeg,rahulshiv.jpeg,ravi and i.jpeg,Ravi Singhania.jpeg,reunionphot.jpeg,ritesh.jpeg,RiteshSong.mp4,room.jpeg,shishir-ashish-sam.jpeg,shiv and i.jpeg,shiv-neeraj-ashish-rahul-hemper-prem-nehal.jpeg,shiv-rahul-ravi-ujjwal.jpeg,sing-the-praise-and-theg-glory-ofGod.mp4,swimming-goutam.jpeg,swimmingpool1.mp4,takingblessingsoffather.mp4,team.jpeg,though-the -mountains.jpeg,though-the-mountains-may-fall.mp4,tired-back.jpeg,tiwari-ji-paduka.jpeg,waiting.jpeg,we.jpeg,WhatsApp Image 2026-03-22 at 6.49.07 PM.jpeg,WhatsApp Image 2026-05-09 at 1.24.04 PM.jpeg,WhatsApp Image 2026-05-16 at 5.23.26 PM.jpeg,WhatsApp Image 2026-05-16 at 5.24.45 PM.jpeg,WhatsApp Image 2026-05-16 at 5.37.23 PM.jpeg,WhatsApp Image 2026-05-16 at 5.37.28 PM-1.jpeg,WhatsApp Image 2026-05-16 at 5.37.28 PM.jpeg,WhatsApp Image 2026-05-16 at 6.00.15 PM-1.jpeg,WhatsApp Image 2026-05-16 at 6.00.15 PM.jpeg,withfather.jpeg" | split: "," %}
   
   {% for file in media_files %}
+    {% assign ext = file | split: "." | last | downcase %}
     <div class="mySlides fade">
       <div class="numbertext">{{ forloop.index }} / {{ media_files.size }}</div>
-      {% if file contains '.mp4' %}
+      {% if ext == 'mp4' %}
         <video controls preload="metadata">
           <source src="/assets/mount-assisi/051526-mas95-reunion/{{ file | url_encode }}" type="video/mp4">
           Your browser does not support the video tag.
         </video>
       {% else %}
-        <img src="/assets/mount-assisi/051526-mas95-reunion/{{ file | url_encode }}" style="width:100%">
+        <img src="/assets/mount-assisi/051526-mas95-reunion/{{ file | url_encode }}" alt="{{ file }}">
       {% endif %}
       <div class="text">
         {% if file contains 'WhatsApp' %}
           Reunion Memory {{ forloop.index }}
         {% else %}
-          {{ file | replace: ".jpeg", "" | replace: ".mp4", "" | replace: "-", " " | replace: "_", " " | capitalize }}
+          {{ file | split: "." | first | replace: "-", " " | replace: "_", " " | capitalize }}
         {% endif %}
       </div>
     </div>
@@ -166,6 +177,8 @@ function showSlides(n) {
     dots[i].className = dots[i].className.replace(" active", "");
   }
   slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
+  if (dots.length > 0) {
+    dots[slideIndex-1].className += " active";
+  }
 }
 </script>
