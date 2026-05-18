@@ -6,6 +6,14 @@ title : "Mount Assisi Reunion 15-17 May 2026 - Deoghar"
 ---
 
 # Echoes straight from heart 
+In the journey of life, without ever asking, we are endowed with precious gifts that we never deserved. In the business of the daily mundane grind of life, somewhere, somehow unknowingly we just forget those life-time blessings that had been showered on us without asking ever. 
+And then, due to the spark of inspiration kindled by few brave and super-creative souls, we get a chance to enter into a rendezvous with those long-lost blessings - only to find that they were deeply embedded in our soul, waiting for the right moment to be rediscovered. 
+Those memories, somehow extend their invisible embrace, concretely and tangibly, to our flesh and bones, to our heart and souls, to our very being - and jolt us with a deep sense of belonging, of connectedness, of love, of joy, of contentment, of relief, and of gratitude. 
+This re-union of our brothers from the Mount of Assisi was that life enriching, soul nourishing and redeeming experience for all of us. 
+There are some things that cannot be thanked. There are some things that cannot be expressed in words. There are something that are invisible but essential. They are so big and so gallant that they cannot be contained in the limited comprehension of human mind, caged in the narrow constructs of language. Our Friendship is one such blessings, one such gift, one such treasure! 
+
+![](/assets/mount-assisi/051526-mas95-reunion/reunionphot.jpeg)
+
 
 {% include mount-assisi/though-the-mountains-may-fall.md %}
 
@@ -13,16 +21,11 @@ title : "Mount Assisi Reunion 15-17 May 2026 - Deoghar"
 ### Father Thomas Chittoo TOR
 
 Dear and Loving My Mountazians of 1995
-
 Good Morning and good tidings to each of you. I admire that spark of a thought - of gathering together after 31 long years. 
-
 For many of us the old innocent, ambitious, curious , anxious and the truant faces in the corridors of Mounyt Assisi School have been transformed in to mature, decisive, willing  and responsible officers today. 
 I thank the Good Lord for the gift of each of you /us. We have travelled a long way through anxieties, hectic movements, studies, preparations to reach as fulfilling  and joyous human beings with a family, beloved children and good jobs . Congratulations to you.
-
 Thank you for the wonderful evening together on the 16th May,2026. A day of great memories of reunion, love, affection , freedom and worth meeting. 
-
 May you cherish each moments and THANKS SPECIALLY TO THE ORGANIZERS ; Rajeev Lochan Binayak, Jairaj and Ravi Kedia and others. 
-
 Thanks for your love, care affection and above all the feeling that we belong to each other in freedom 
 
 <video width="640" height="360" controls>
@@ -159,3 +162,4 @@ A special thanks to the entire team who worked tirelessly behind the scenes to e
 ### Moments in Frames
 
 {% include mount-assisi/reunion-slideshow.html %}
+
