@@ -7,8 +7,6 @@ title : "Mount Assisi Reunion 15-17 May 2026 - Deoghar"
 
 # Echoes straight from heart 
 
-### Though the mountains may fall 
-
 {% include mount-assisi/though-the-mountains-may-fall.md %}
 
 
