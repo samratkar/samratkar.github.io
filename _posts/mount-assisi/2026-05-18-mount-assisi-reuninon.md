@@ -157,7 +157,6 @@ Hi, friends very good time, stress free tonic was meeting u all and especially t
 ⛳️⛳️💐💐💐Good going Gopal and DR Vinayak! We were impressed by the way you all came out and involved yourself in making the 🍉Gala meet🍉 happen. Keep it ⛳️⛳️up  and😍 our aspirations are now much higher😍 with hopes pinned upon for another nostalgic meet in near the future. ☀️☀️Also wonderful participation from the sweet sixteen participants of 95 batch☀️☀️ who all have bloomed in both professional and personal journey without losing the spark of a child🍝🍝 which infact is the essence of our existence and the driving force that made us steer through all odds always. I myself though jam packed in office affairs, finally made it to the meet after booking-and cancelling at least 7 tickets in 3 days.  Thank you all! Best of you to everyone! Take care ! God bless all of us♥️♥️
 
 
+### Moments in Frames
 
-
-
-
+{% include mount-assisi/reunion-slideshow.html %}
