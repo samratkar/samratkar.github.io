@@ -7,7 +7,7 @@
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     background: #000;
-    min-height: 450px; /* Prevent collapse */
+    min-height: 450px;
   }
 
   .mySlides {
@@ -112,7 +112,7 @@
 </style>
 
 <div class="slideshow-container">
-  {% assign media_files = "abhishek-song1.mp4,Abhishek-song2.mp4,abhishek-song3.mp4,allofus.jpeg,atish-poem-becharapati.mp4,atishhbd.mp4,baba.jpeg,babadhaam.jpeg,babadhaam1.jpeg,bag-tag.jpeg,BiswajeetShukla.jpeg,bunty-speech.mp4,cake.jpeg,cheers.jpeg,did-u-hear-us.JPG,father-joselet-speech.mp4,father-thomas.jpeg,fathers.jpeg,fr-chittoo-speech-5-17-26.mp4,frJoselet.jpeg,frthomas1.jpeg,IMG_9401.JPG,IMG_9403.JPG,IMG_9404.JPG,IMG_9407.JPG,IMG_9411.JPG,jairaj-song-dance.mp4,jairajsong-compressed.mp4,lastday.jpeg,lastday1.jpeg,lunch.jpeg,manishsong.mp4,nightout.jpeg,poker.jpeg,pool.jpeg,poolhurray.jpeg,poolmandali.jpeg,poolrace.mp4,rahulandgang.jpeg,rahulshiv.jpeg,ravi and i.jpeg,Ravi Singhania.jpeg,reunionphot.jpeg,ritesh.jpeg,RiteshSong.mp4,room.jpeg,shishir-ashish-sam.jpeg,shiv and i.jpeg,shiv-neeraj-ashish-rahul-hemper-prem-nehal.jpeg,shiv-rahul-ravi-ujjwal.jpeg,sing-the-praise-and-theg-glory-ofGod.mp4,swimming-goutam.jpeg,swimmingpool1.mp4,takingblessingsoffather.mp4,team.jpeg,though-the -mountains.jpeg,though-the-mountains-may-fall.mp4,tired-back.jpeg,tiwari-ji-paduka.jpeg,waiting.jpeg,we.jpeg,WhatsApp Image 2026-03-22 at 6.49.07 PM.jpeg,WhatsApp Image 2026-05-09 at 1.24.04 PM.jpeg,WhatsApp Image 2026-05-16 at 5.23.26 PM.jpeg,WhatsApp Image 2026-05-16 at 5.24.45 PM.jpeg,WhatsApp Image 2026-05-16 at 5.37.23 PM.jpeg,WhatsApp Image 2026-05-16 at 5.37.28 PM-1.jpeg,WhatsApp Image 2026-05-16 at 5.37.28 PM.jpeg,WhatsApp Image 2026-05-16 at 6.00.15 PM-1.jpeg,WhatsApp Image 2026-05-16 at 6.00.15 PM.jpeg,withfather.jpeg" | split: "," %}
+  {% assign media_files = "abhishek-song1.mp4,abhishek-song2.mp4,abhishek-song3.mp4,allofus.jpeg,atish-poem-becharapati.mp4,atishhbd.mp4,baba.jpeg,babadhaam.jpeg,babadhaam1.jpeg,bag-tag.jpeg,biswajeet-shukla.jpeg,bunty-speech.mp4,cake.jpeg,cheers.jpeg,did-u-hear-us.jpg,father-joselet-speech.mp4,father-thomas.jpeg,fathers.jpeg,fr-chittoo-speech-5-17-26.mp4,frJoselet.jpeg,frthomas1.jpeg,img_9401.jpg,img_9403.jpg,img_9404.jpg,img_9407.jpg,img_9411.jpg,jairaj-song-dance.mp4,jairajsong-compressed.mp4,lastday.jpeg,lastday1.jpeg,lunch.jpeg,manishsong.mp4,nightout.jpeg,poker.jpeg,pool.jpeg,poolhurray.jpeg,poolmandali.jpeg,poolrace.mp4,rahulandgang.jpeg,rahulshiv.jpeg,ravi-and-i.jpeg,ravi-singhania.jpeg,reunionphot.jpeg,ritesh.jpeg,riteshsong.mp4,room.jpeg,shishir-ashish-sam.jpeg,shiv-and-i.jpeg,shiv-neeraj-ashish-rahul-hemper-prem-nehal.jpeg,shiv-rahul-ravi-ujjwal.jpeg,sing-the-praise-and-theg-glory-ofGod.mp4,swimming-goutam.jpeg,swimmingpool1.mp4,takingblessingsoffather.mp4,team.jpeg,though-the-mountains-may-fall.mp4,though-the-mountains-photo.jpeg,tired-back.jpeg,tiwari-ji-paduka.jpeg,waiting.jpeg,we.jpeg,whatsapp-memory-1.jpeg,whatsapp-memory-2.jpeg,whatsapp-memory-3.jpeg,whatsapp-memory-4.jpeg,whatsapp-memory-5.jpeg,whatsapp-memory-6.jpeg,whatsapp-memory-7.jpeg,whatsapp-memory-8.jpeg,whatsapp-memory-9.jpeg,withfather.jpeg" | split: "," %}
   
   {% for file in media_files %}
     {% assign ext = file | split: "." | last | downcase %}
@@ -120,14 +120,14 @@
       <div class="numbertext">{{ forloop.index }} / {{ media_files.size }}</div>
       {% if ext == 'mp4' %}
         <video controls preload="metadata">
-          <source src="/assets/mount-assisi/051526-mas95-reunion/{{ file | url_encode }}" type="video/mp4">
+          <source src="/assets/mount-assisi/051526-mas95-reunion/{{ file }}" type="video/mp4">
           Your browser does not support the video tag.
         </video>
       {% else %}
-        <img src="/assets/mount-assisi/051526-mas95-reunion/{{ file | url_encode }}" alt="{{ file }}">
+        <img src="/assets/mount-assisi/051526-mas95-reunion/{{ file }}" alt="{{ file }}">
       {% endif %}
       <div class="text">
-        {% if file contains 'WhatsApp' %}
+        {% if file contains 'whatsapp' %}
           Reunion Memory {{ forloop.index }}
         {% else %}
           {{ file | split: "." | first | replace: "-", " " | replace: "_", " " | capitalize }}
