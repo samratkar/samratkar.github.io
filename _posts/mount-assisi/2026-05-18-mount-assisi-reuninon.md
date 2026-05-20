@@ -49,6 +49,102 @@ On behalf of the organizing team — Gopal, Rajeev, Ravi, Ambarish, Ujjawal, Jai
 Till we meet again…
 Once a Montazzian, always a Montazzian.
 
+Guys, 3 days have passed, but the nostalgia still refuses to leave. Honestly, it’s becoming difficult to get over those two magical days. The worst part is that I keep weighing my present friendships against this lot… and all of you know exactly how that feels.
+After reading Smarat bhai’s beautiful verse about the reunion, I thought I should also share the story of how this meet actually came together.
+Some of you may remember that before Covid, we had completed 25 years of passing out. Back then I had suggested that we all meet in GOA to celebrate our Silver Jubilee, but unfortunately that plan never materialised. Then Covid happened, and we all started meeting online — and honestly, those online meets were amazing in their own way.
+Then came the turning point.
+One day, at the end of January this year, Dr. Rajeev called me and said:
+“Let’s do the meet. I know you have been trying for years. This time I am with you, and we can make it happen.”
+That one phone call changed everything.
+On 1st February, Rajeev put a message in the group with options of Bhagalpur and Deoghar. Eventually, Deoghar was finalised — mainly because of airport proximity and… daru convenience 😄
+Initially, around 13–14 people responded with preferred dates sometime around the first week of April. Then, like all good Indian group plans, things slowly went into cold storage.
+In the second week of March, when I was coming to Bhagalpur, I called Rajeev and said:
+“Let’s meet once physically and give this one final push.”
+And on 14th March, 13 Montazzians met in Bhagalpur. That meeting became the foundation of this reunion.
+The dates 15th–17th May were finalised, and one masterstroke idea was introduced:
+₹5000 registration fee.
+Not because we needed commitment financially…
+but because:
+“Banda paisa dekar phaas jayega.” 😄
+Pure Bihari management strategy.
+The message went out the same day along with the QR code.
+But as expected, nobody wanted to become the first bakra to register.
+Then Rajeev, Ravi, Ambarish and I discussed and decided:
+“Forget waiting. Let’s start ourselves.”
+So on 21st March, Ambarish and I transferred the amount to Rajeev.
+Then came the domino effect:
+Samrat.
+Jairaj.
+Ravi.
+Gautam.
+And slowly the registrations started increasing.
+At the same time, a core group of 6 was formed:
+Rajeev, Ravi, Ambarish, Jairaj, Ujjawal and myself.
+By 1st April, we had 17 registrations and the preparations officially started.
+T-shirt sizes.
+Mementos.
+Shawls.
+Luggage tags.
+Branding.
+Slideshows.
+Games.
+Banners.
+Photo booth.
+Everything.
+The Bhagalpur group later visited Deoghar to finalise the venue based on Jairaj’s suggestion. I was continuously connected through video call during the visit, and finally the resort was locked.
+After that, every couple of days the six of us would talk and divide responsibilities.
+Rajeev handled the toughest task —
+talking to legends and collecting money 😄
+Ambarish handled all the mementos, shawls, luggage tags and gifts for the Fathers. The luggage tag idea actually came at the last minute, but somehow we managed to get it printed in time.
+When I started planning the games, my original idea was to give customised Montazzian mugs only to the winners — maybe 25 mugs in total.
+But suddenly a terrifying thought crossed my mind:
+“The rest of the legends will abuse me properly if they don’t get one.” 😄
+So the plan changed immediately.
+We ordered 50 mugs instead — courtesy Ravi bhai — along with chocolates for the games.
+One thing we consciously tried to maintain was consistent branding across everything:
+Banner.
+Photo booth.
+Mugs.
+Luggage tags.
+T-shirts.
+Group photo frames.
+Even the messages in the WhatsApp group.
+For this branding consistency, the entire credit is mine 😄
+At the same time, I was also preparing the slideshow presentations of all legends. Honestly, my family deserves special thanks for tolerating me spending endless hours on the laptop doing all this.
+And speaking of credit —
+the complete food menu planning was done by my wife, so I cannot take credit for that.
+The famous “Mutton Atta” idea came from Nalin, and thankfully I managed to get the hotel to execute it perfectly.
+Then slowly we approached the D-Day.
+I reached Deoghar on 13th May itself just to ensure every arrangement matched what we had planned.
+And finally…
+15th May arrived.
+After that, madness took over the entire resort 😄
+Today, when I look back, I feel this reunion happened because of collective effort, trust, madness, nostalgia and the Montazzian spirit.
+Many of us had doubts whether this would ever happen.
+But this team made it happen.
+And I know every single one of you has appreciated and acknowledged the effort.
+This reunion was not organised by one person.
+It was built by emotions, friendships and teamwork.
+Thank you, people.
+Thank you, Montazzians.
+Love you all ❤️
+
+### Subhabrata Sinha
+
+When i showed the pics to my family, my wife was super impressed and asked who the organizers were? Unfortunately coudnt find any 1 single image of them in a single frame. That shows how much effort they put in behind the scene. Even when we were enjoying Rahul babas gyan waiting for the train/flight which were getting delayed, the volunteers were busy in a room sorting the last formalities. Thank you to all of them. I think the memories will stay on for ever. We all participated wholeheartedly and for me perhaps, I laughed heartily, the kind, which i do not remember from anything earlier. Thank you all for making this trip an amazing experience, an experienceto cherish and relive!
+
+### Ravi Singhania
+Am late to this. My thoughts:
+
+This was an ABSOLUTE must attend reunion for me. Would have missed so much if I hadn’t join.  HUGE thanks to all of you who showed up - physically and 200% mentally.  We laughed so much, and still it didn’t feel enough. The whole day went past today without any laugh- a feeling of vacuum. Kitna Sukh mila tum sab ke saath. Singapore main ek movie hai - “Ah Boys to Men”. These 48 hours we converted from Men to Boys. Itni gaaliyan ne dene aur na sunne ki aadat rahi. Chichora panti ka super maja aaya.  We landed up individually but we spent those 48 hours as a collective group of 44 - no mini groups, no boundaries (literal, verbal, physical) 🤣.  Some bonds got revived, some became stronger and some got created. It was surreal. 
+We missed playing a game of cricket or football (sorry Nehal), but baaki to bharpur masti ki. 
+Salute to all of you!!
+To those who have been working behind the scenes (you know who)- take a Bow 🙇 🙏. Amazing efficiency, super organized, everyone was cared as if we were super guest. The branding was consistent and everywhere - awesome creativity and thought process. What a dedication to get all of us together and take us back in time. 
+To the multi talented ones - singers, dancers, emcee, speakers - amazing performance.  I wish I had even 5% of talent like you. 
+These memories will last the lifetime. 
+Like most of you, will love to relive these moments as often as we can. And till we do, let’s stay connected, keep meeting whenever possible in little groups, keep the spark going. 
+Sab Sukhi raho!! 🤗
+
 ### Saurabh Singh
 This is to each and every one of you. 
 I came to Deoghar with very low expectations and a bit of skepticism. 30 years is a long time - long enough to forget names and faces. But for the first time I was happy to be proven wrong. Some of you i remembered the moment I saw you. Some.of you needed a 2nd look. And some of you, I almost met for the first time - and not once did  it feel like we were strangers. Thats the bond we have and the magic of having a shared childhood. 
