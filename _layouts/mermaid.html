@@ -482,9 +482,50 @@
         node.parentNode.replaceChild(span, node);
       });
     }
+
+    // Style words starting with # as tags in lavender
+    function styleHashtags() {
+      const root = document.querySelector('.article-content') || document.querySelector('.markdown-content') || document.body;
+      const walker = document.createTreeWalker(
+        root,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode: function(node) {
+            const parent = node.parentNode;
+            if (parent) {
+              const tag = parent.tagName.toLowerCase();
+              if (tag === 'code' || tag === 'pre' || tag === 'script' || tag === 'style' || tag === 'a') {
+                return NodeFilter.FILTER_REJECT;
+              }
+            }
+            return NodeFilter.FILTER_ACCEPT;
+          }
+        },
+        false
+      );
+      
+      const textNodes = [];
+      while (walker.nextNode()) {
+        if (walker.currentNode.nodeValue.match(/#[a-zA-Z_][a-zA-Z0-9_-]*/)) {
+          textNodes.push(walker.currentNode);
+        }
+      }
+      
+      textNodes.forEach(node => {
+        const text = node.nodeValue;
+        const span = document.createElement('span');
+        span.innerHTML = text.replace(/#([a-zA-Z_][a-zA-Z0-9_-]*)/g, function(match, tagName) {
+          return `<a href="/?tag=${encodeURIComponent(tagName)}" class="hashtag" style="color: #8b5cf6 !important; font-weight: 600; text-decoration: none; border-bottom: 1px dashed #c4b5fd; padding: 0 2px;">#${tagName}</a>`;
+        });
+        node.parentNode.replaceChild(span, node);
+      });
+    }
     
     // Run on page load
-    document.addEventListener('DOMContentLoaded', styleAtMentions);
+    document.addEventListener('DOMContentLoaded', function() {
+      styleAtMentions();
+      styleHashtags();
+    });
   </script>
 </body>
 </html>

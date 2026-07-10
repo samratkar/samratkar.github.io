@@ -361,7 +361,54 @@ tag: [lighthouse]
                 </thead>
                 <tbody id="articlesTable" class="divide-y divide-gray-200">
                   {% for post in lighthouse_posts %}
-                  {% assign tag_string = post.tags | join: "|" %}
+                  {% comment %} Extract hashtags from post content {% endcomment %}
+                  {% assign post_content_tags = "" | split: "" %}
+                  {% assign parts = post.content | split: '#' %}
+                  {% assign valid_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" %}
+                  {% for part in parts %}
+                    {% if forloop.first %}{% continue %}{% endif %}
+                    {% assign first_char = part | slice: 0, 1 %}
+                    {% if valid_chars contains first_char %}
+                      {% assign tag_word = part | newline_to_br | replace: '<br />', ' ' | replace: '<br>', ' ' | split: ' ' | first %}
+                      {% assign tag_word = tag_word | split: '.' | first | split: ',' | first | split: '!' | first | split: '?' | first | split: ';' | first | split: ':' | first | split: '(' | first | split: ')' | first | split: '[' | first | split: ']' | first | split: '{' | first | split: '}' | first | split: '"' | first | split: "'" | first | split: '`' | first | split: '/' | first | split: '\' | first | split: '<' | first | split: '>' | first | strip | downcase %}
+                      {% if tag_word != "" %}
+                        {% unless post_content_tags contains tag_word %}
+                          {% assign post_content_tags = post_content_tags | push: tag_word %}
+                        {% endunless %}
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                  {% comment %} Merge front-matter tags and inline hashtags {% endcomment %}
+                  {% assign merged_tags = "" | split: "" %}
+                  {% if post.tags %}
+                    {% for tag in post.tags %}
+                      {% assign t_clean = tag | strip | downcase %}
+                      {% unless merged_tags contains t_clean %}
+                        {% assign merged_tags = merged_tags | push: t_clean %}
+                      {% endunless %}
+                    {% endfor %}
+                  {% endif %}
+                  {% if post.tag %}
+                    {% if post.tag.first %}
+                      {% for tag in post.tag %}
+                        {% assign t_clean = tag | strip | downcase %}
+                        {% unless merged_tags contains t_clean %}
+                          {% assign merged_tags = merged_tags | push: t_clean %}
+                        {% endunless %}
+                      {% endfor %}
+                    {% else %}
+                      {% assign t_clean = post.tag | strip | downcase %}
+                      {% unless merged_tags contains t_clean %}
+                        {% assign merged_tags = merged_tags | push: t_clean %}
+                      {% endunless %}
+                    {% endif %}
+                  {% endif %}
+                  {% for tag in post_content_tags %}
+                    {% unless merged_tags contains tag %}
+                      {% assign merged_tags = merged_tags | push: tag %}
+                    {% endunless %}
+                  {% endfor %}
+                  {% assign tag_string = merged_tags | join: "|" %}
                   {% assign subtopic_string = "" %}
                   {% if post.subtopics %}
                     {% assign subtopic_string = post.subtopics | join: "|" %}
@@ -390,7 +437,7 @@ tag: [lighthouse]
                     </td>
                     <td class="px-4 py-3">
                       <div class="flex flex-wrap gap-1">
-                        {% for tag in post.tags %}
+                        {% for tag in merged_tags %}
                           <span class="inline-block px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700">{{ tag }}</span>
                         {% endfor %}
                       </div>

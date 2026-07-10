@@ -362,7 +362,7 @@ title: Home - All Articles
     <!-- Collect from both 'tags' and 'tag' fields -->
     {% if post.tags %}
       {% for tag in post.tags %}
-        {% assign tag_str = tag | strip %}
+        {% assign tag_str = tag | strip | downcase %}
         {% unless all_tags contains tag_str %}
           {% assign all_tags = all_tags | push: tag_str %}
         {% endunless %}
@@ -372,19 +372,35 @@ title: Home - All Articles
       {% if post.tag.first %}
         <!-- If post.tag is an array, iterate through it -->
         {% for tag in post.tag %}
-          {% assign tag_str = tag | strip %}
+          {% assign tag_str = tag | strip | downcase %}
           {% unless all_tags contains tag_str %}
             {% assign all_tags = all_tags | push: tag_str %}
           {% endunless %}
         {% endfor %}
       {% else %}
         <!-- If post.tag is a single string -->
-        {% assign tag_value = post.tag | strip %}
+        {% assign tag_value = post.tag | strip | downcase %}
         {% unless all_tags contains tag_value %}
           {% assign all_tags = all_tags | push: tag_value %}
         {% endunless %}
       {% endif %}
     {% endif %}
+    {% comment %} Extract tags starting with # from post.content {% endcomment %}
+    {% assign parts = post.content | split: '#' %}
+    {% assign valid_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" %}
+    {% for part in parts %}
+      {% if forloop.first %}{% continue %}{% endif %}
+      {% assign first_char = part | slice: 0, 1 %}
+      {% if valid_chars contains first_char %}
+        {% assign tag_word = part | newline_to_br | replace: '<br />', ' ' | replace: '<br>', ' ' | split: ' ' | first %}
+        {% assign tag_word = tag_word | split: '.' | first | split: ',' | first | split: '!' | first | split: '?' | first | split: ';' | first | split: ':' | first | split: '(' | first | split: ')' | first | split: '[' | first | split: ']' | first | split: '{' | first | split: '}' | first | split: '"' | first | split: "'" | first | split: '`' | first | split: '/' | first | split: '\' | first | split: '<' | first | split: '>' | first | strip | downcase %}
+        {% if tag_word != "" %}
+          {% unless all_tags contains tag_word %}
+            {% assign all_tags = all_tags | push: tag_word %}
+          {% endunless %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
     <!-- Collect categories -->
     {% if post.categories %}
       {% for category in post.categories %}
@@ -576,8 +592,55 @@ title: Home - All Articles
               </thead>
               <tbody id="articlesTable" class="divide-y divide-gray-200">
                 {% for post in sorted_posts %}
+                  {% comment %} Extract hashtags from post content {% endcomment %}
+                  {% assign post_content_tags = "" | split: "" %}
+                  {% assign parts = post.content | split: '#' %}
+                  {% assign valid_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" %}
+                  {% for part in parts %}
+                    {% if forloop.first %}{% continue %}{% endif %}
+                    {% assign first_char = part | slice: 0, 1 %}
+                    {% if valid_chars contains first_char %}
+                      {% assign tag_word = part | newline_to_br | replace: '<br />', ' ' | replace: '<br>', ' ' | split: ' ' | first %}
+                      {% assign tag_word = tag_word | split: '.' | first | split: ',' | first | split: '!' | first | split: '?' | first | split: ';' | first | split: ':' | first | split: '(' | first | split: ')' | first | split: '[' | first | split: ']' | first | split: '{' | first | split: '}' | first | split: '"' | first | split: "'" | first | split: '`' | first | split: '/' | first | split: '\' | first | split: '<' | first | split: '>' | first | strip | downcase %}
+                      {% if tag_word != "" %}
+                        {% unless post_content_tags contains tag_word %}
+                          {% assign post_content_tags = post_content_tags | push: tag_word %}
+                        {% endunless %}
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                  {% comment %} Merge front-matter tags and inline hashtags {% endcomment %}
+                  {% assign merged_tags = "" | split: "" %}
+                  {% if post.tags %}
+                    {% for tag in post.tags %}
+                      {% assign t_clean = tag | strip | downcase %}
+                      {% unless merged_tags contains t_clean %}
+                        {% assign merged_tags = merged_tags | push: t_clean %}
+                      {% endunless %}
+                    {% endfor %}
+                  {% endif %}
+                  {% if post.tag %}
+                    {% if post.tag.first %}
+                      {% for tag in post.tag %}
+                        {% assign t_clean = tag | strip | downcase %}
+                        {% unless merged_tags contains t_clean %}
+                          {% assign merged_tags = merged_tags | push: t_clean %}
+                        {% endunless %}
+                      {% endfor %}
+                    {% else %}
+                      {% assign t_clean = post.tag | strip | downcase %}
+                      {% unless merged_tags contains t_clean %}
+                        {% assign merged_tags = merged_tags | push: t_clean %}
+                      {% endunless %}
+                    {% endif %}
+                  {% endif %}
+                  {% for tag in post_content_tags %}
+                    {% unless merged_tags contains tag %}
+                      {% assign merged_tags = merged_tags | push: tag %}
+                    {% endunless %}
+                  {% endfor %}
                   <tr class="article-row" 
-                      data-tags="{% if post.tags %}{% for tag in post.tags %}{{ tag }}{% unless forloop.last %}|{% endunless %}{% endfor %}{% endif %}{% if post.tag %}{% if post.tag.first %}{% for tag in post.tag %}{{ tag }}{% unless forloop.last %}|{% endunless %}{% endfor %}{% else %}{{ post.tag }}{% endif %}{% endif %}"
+                      data-tags="{% for tag in merged_tags %}{{ tag }}{% unless forloop.last %}|{% endunless %}{% endfor %}"
                       data-categories="{% for category in post.categories %}{{ category }}{% unless forloop.last %}|{% endunless %}{% endfor %}"
                       data-subcategories="{% if post.subcategory %}{{ post.subcategory }}{% endif %}{% if post.subcategories %}{% for subcategory in post.subcategories %}{{ subcategory }}{% unless forloop.last %}|{% endunless %}{% endfor %}{% endif %}">
                     <td class="px-4 py-3 text-xs text-gray-600 font-medium">{{ forloop.index }}</td>
@@ -603,35 +666,11 @@ title: Home - All Articles
                     </td>
                     <td class="px-4 py-3">
                       <div class="flex flex-wrap gap-1">
-                        {% assign displayed_tags = "" | split: "" %}
-                        {% if post.tags %}
-                          {% for tag in post.tags %}
-                            {% unless displayed_tags contains tag %}
-                              <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-purple-100 text-purple-700 hover:bg-purple-200 transition">
-                                {{ tag }}
-                              </span>
-                              {% assign displayed_tags = displayed_tags | push: tag %}
-                            {% endunless %}
-                          {% endfor %}
-                        {% endif %}
-                        {% if post.tag %}
-                          {% if post.tag.first %}
-                            {% for tag in post.tag %}
-                              {% unless displayed_tags contains tag %}
-                                <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-purple-100 text-purple-700 hover:bg-purple-200 transition">
-                                  {{ tag }}
-                                </span>
-                                {% assign displayed_tags = displayed_tags | push: tag %}
-                              {% endunless %}
-                            {% endfor %}
-                          {% else %}
-                            {% unless displayed_tags contains post.tag %}
-                              <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-purple-100 text-purple-700 hover:bg-purple-200 transition">
-                                {{ post.tag }}
-                              </span>
-                            {% endunless %}
-                          {% endif %}
-                        {% endif %}
+                        {% for tag in merged_tags %}
+                          <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-purple-100 text-purple-700 hover:bg-purple-200 transition">
+                            {{ tag }}
+                          </span>
+                        {% endfor %}
                       </div>
                     </td>
                     <td class="px-4 py-3">
@@ -946,26 +985,73 @@ title: Home - All Articles
     });
   }
   
+  // Filter by tag string directly (e.g. for URL query parameters)
+  function filterByTagString(tag) {
+    console.log('Filtering by tag string:', tag);
+    activeFilter = { type: 'tag', value: tag };
+    const rows = document.querySelectorAll('.article-row');
+    let matchCount = 0;
+    rows.forEach(row => {
+      const tags = row.dataset.tags ? row.dataset.tags.split('|').map(t => t.toLowerCase().trim()) : [];
+      if (tags.includes(tag.toLowerCase().trim())) {
+        row.classList.remove('hidden-row');
+        row.style.display = '';
+        matchCount++;
+      } else {
+        row.classList.add('hidden-row');
+        row.style.display = 'none';
+      }
+    });
+    console.log('Matched tag rows:', matchCount);
+    updateFilteredCount();
+  }
+
+  // Check for tag query parameter on load
+  function checkUrlParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tagParam = urlParams.get('tag');
+    if (tagParam) {
+      console.log('Found tag query param:', tagParam);
+      const tagElements = document.querySelectorAll('.tag-item');
+      let matchedElement = null;
+      tagElements.forEach(el => {
+        if (el.dataset.tag.toLowerCase().trim() === tagParam.toLowerCase().trim()) {
+          matchedElement = el;
+        }
+      });
+      if (matchedElement) {
+        filterByTag(matchedElement.dataset.tag, matchedElement);
+      } else {
+        filterByTagString(tagParam);
+      }
+    }
+  }
+  
   // Try multiple times to ensure event listeners are attached
   document.addEventListener('DOMContentLoaded', function() {
     setupEventListeners();
     forceCursorStyles();
+    checkUrlParams();
   });
   window.addEventListener('load', function() {
     setupEventListeners();
     forceCursorStyles();
+    checkUrlParams();
   });
   setTimeout(function() {
     setupEventListeners();
     forceCursorStyles();
+    checkUrlParams();
   }, 100);
   setTimeout(function() {
     setupEventListeners();
     forceCursorStyles();
+    checkUrlParams();
   }, 500);
   setTimeout(function() {
     setupEventListeners();
     forceCursorStyles();
+    checkUrlParams();
   }, 1000);
 </script>
 
