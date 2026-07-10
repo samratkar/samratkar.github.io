@@ -37,6 +37,7 @@ wordpress_username: samratkar2012
 # theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
 show_dir_listing: false
 
 
