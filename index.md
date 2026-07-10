@@ -588,12 +588,13 @@ title: Home - All Articles
                     </td>
                     <td class="px-4 py-3">
                       <div class="text-xs text-gray-600 line-clamp-2">
+                        {% assign excerpt_text = post.excerpt | strip_html | strip %}
                         {% if post.summary %}
                           {{ post.summary }}
-                        {% elsif post.excerpt %}
-                          {{ post.excerpt | strip_html | truncatewords: 20 }}
+                        {% elsif excerpt_text != "" %}
+                          {{ excerpt_text | truncatewords: 20 }}
                         {% else %}
-                          <span class="text-gray-400 italic">No summary available</span>
+                          {{ post.content | strip_html | truncatewords: 20 }}
                         {% endif %}
                       </div>
                     </td>

@@ -3,6 +3,7 @@ layout: mermaid
 title: Lighthouse - Wisdom & Reflection
 category: lighthouse
 tag: [lighthouse]
+summary: "A collection of 26 lighthouse wisdoms, reflections, and insights on life, love, learning, ego, work, and discipline."
 ---
 
 ![](/assets/lighthouse/lighthouse-comp.png)

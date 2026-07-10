@@ -378,10 +378,11 @@ tag: [lighthouse]
                     </td>
                     <td class="px-4 py-3">
                       <div class="text-sm text-gray-600 line-clamp-2">
+                        {% assign excerpt_text = post.excerpt | strip_html | strip %}
                         {% if post.summary %}
                           {{ post.summary }}
-                        {% elsif post.excerpt %}
-                          {{ post.excerpt | strip_html | truncatewords: 30 }}
+                        {% elsif excerpt_text != "" %}
+                          {{ excerpt_text | truncatewords: 30 }}
                         {% else %}
                           {{ post.content | strip_html | truncatewords: 30 }}
                         {% endif %}
