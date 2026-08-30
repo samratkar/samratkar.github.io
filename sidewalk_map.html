@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_6d51f08e96d78b22687e6fbc7933d303 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_6d51f08e96d78b22687e6fbc7933d303" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_6d51f08e96d78b22687e6fbc7933d303 = L.map(
+                "map_6d51f08e96d78b22687e6fbc7933d303",
+                {
+                    center: [40.758, -73.9855],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 19,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_6bbd27c251bedaa1ee5b31ec7327ebbe = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_6bbd27c251bedaa1ee5b31ec7327ebbe.addTo(map_6d51f08e96d78b22687e6fbc7933d303);
+        
+    
+            var polygon_ddbe48116b8e26448944da41cc0b8b64 = L.polygon(
+                [[40.7574271, -73.986141], [40.7574271, -73.9861545], [40.7574189, -73.9861652], [40.7574128, -73.9861652], [40.7574108, -73.9861679], [40.7573864, -73.9861679], [40.7573844, -73.9861706], [40.7573783, -73.9861706], [40.7573763, -73.9861759], [40.7573641, -73.9861759], [40.7573641, -73.9861652], [40.7573702, -73.9861652], [40.7573742, -73.9861545], [40.7573803, -73.9861464], [40.7573885, -73.986141], [40.7573905, -73.9861357], [40.7573986, -73.9861357], [40.7574027, -73.9861437], [40.7574271, -73.986141]],
+                {"bubblingMouseEvents": true, "color": "#0074D9", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7FDBFF", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_6d51f08e96d78b22687e6fbc7933d303);
+        
+    
+        var popup_efb928bd869226c09da68ff9a04c469e = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_e594002e92ec8aefaa45d3f924e4bde2 = $(`<div id="html_e594002e92ec8aefaa45d3f924e4bde2" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 12px; width: 180px;">                 <h4 style="margin: 0 0 5px 0; color: #0074D9;">Pavement #1</h4>                 <b>Centroid Lat:</b> 40.757397<br/>                 <b>Centroid Lon:</b> -73.986156<br/>                 <b>Area:</b> 13.54 m²<br/>                 <b>Perimeter:</b> 18.87 m<br/>                 <b>Vertices:</b> 18             </div>             </div>`)[0];
+                popup_efb928bd869226c09da68ff9a04c469e.setContent(html_e594002e92ec8aefaa45d3f924e4bde2);
+            
+        
+
+        polygon_ddbe48116b8e26448944da41cc0b8b64.bindPopup(popup_efb928bd869226c09da68ff9a04c469e)
+        ;
+
+        
+    
+    
+            polygon_ddbe48116b8e26448944da41cc0b8b64.bindTooltip(
+                `<div>
+                     Pavement #1: (40.75740, -73.98616)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_8b0784156953630d9f3e437ea5f0a422 = L.circleMarker(
+                [40.7573967, -73.9861559],
+                {"bubblingMouseEvents": true, "color": "#001f3f", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0074D9", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_6d51f08e96d78b22687e6fbc7933d303);
+        
+    
+            circle_marker_8b0784156953630d9f3e437ea5f0a422.bindTooltip(
+                `<div>
+                     Centroid #1: 40.757397, -73.986156
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var polygon_fa369d45a58ab546b84a9bd234f4e3f2 = L.polygon(
+                [[40.7576302, -73.98561], [40.7576323, -73.9856287], [40.7575591, -73.9857199], [40.7574332, -73.9858031], [40.7574494, -73.9858916], [40.7574271, -73.985964], [40.7573966, -73.9859721], [40.7573742, -73.9859372], [40.7573681, -73.9859935], [40.7573519, -73.9859989], [40.7573519, -73.985905], [40.757423, -73.9858648], [40.7574108, -73.9858353], [40.7573519, -73.9858299], [40.7573519, -73.9857441], [40.7574555, -73.9856609], [40.7574311, -73.9856314], [40.7574839, -73.9855885], [40.7575083, -73.9856073], [40.7575693, -73.9855831], [40.7575896, -73.985618], [40.7576302, -73.98561]],
+                {"bubblingMouseEvents": true, "color": "#0074D9", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7FDBFF", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_6d51f08e96d78b22687e6fbc7933d303);
+        
+    
+        var popup_00043212e74b13cbeabdd91ae379ea43 = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_2120fffb9dc4f58b54b9857129619365 = $(`<div id="html_2120fffb9dc4f58b54b9857129619365" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 12px; width: 180px;">                 <h4 style="margin: 0 0 5px 0; color: #0074D9;">Pavement #2</h4>                 <b>Centroid Lat:</b> 40.757463<br/>                 <b>Centroid Lon:</b> -73.985746<br/>                 <b>Area:</b> 390.33 m²<br/>                 <b>Perimeter:</b> 147.96 m<br/>                 <b>Vertices:</b> 21             </div>             </div>`)[0];
+                popup_00043212e74b13cbeabdd91ae379ea43.setContent(html_2120fffb9dc4f58b54b9857129619365);
+            
+        
+
+        polygon_fa369d45a58ab546b84a9bd234f4e3f2.bindPopup(popup_00043212e74b13cbeabdd91ae379ea43)
+        ;
+
+        
+    
+    
+            polygon_fa369d45a58ab546b84a9bd234f4e3f2.bindTooltip(
+                `<div>
+                     Pavement #2: (40.75746, -73.98575)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_763fa1e3f19eeeb76a0865767ce8c973 = L.circleMarker(
+                [40.7574633, -73.9857459],
+                {"bubblingMouseEvents": true, "color": "#001f3f", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0074D9", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_6d51f08e96d78b22687e6fbc7933d303);
+        
+    
+            circle_marker_763fa1e3f19eeeb76a0865767ce8c973.bindTooltip(
+                `<div>
+                     Centroid #2: 40.757463, -73.985746
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var polygon_d8942e89960462c4ba1ec0321993c01e = L.polygon(
+                [[40.7579776, -73.9855912], [40.7579655, -73.9855912], [40.7579634, -73.9855751], [40.7579492, -73.9855724], [40.7579472, -73.9855376], [40.757933, -73.9855295], [40.757935, -73.985508], [40.7579472, -73.9855], [40.7579451, -73.9854759], [40.7579573, -73.9854759], [40.7579594, -73.9854678], [40.7579675, -73.9854678], [40.7579776, -73.9854812], [40.7579776, -73.9855134], [40.7579675, -73.9855429], [40.7579695, -73.9855751], [40.7579776, -73.9855805], [40.7579776, -73.9855912]],
+                {"bubblingMouseEvents": true, "color": "#0074D9", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7FDBFF", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_6d51f08e96d78b22687e6fbc7933d303);
+        
+    
+        var popup_a0375ee0744f9ac5ccb4340c59667b9e = L.popup({"maxWidth": 250});
+
+        
+            
+                var html_72e936455128f2a28c35c20d5ddc4355 = $(`<div id="html_72e936455128f2a28c35c20d5ddc4355" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 12px; width: 180px;">                 <h4 style="margin: 0 0 5px 0; color: #0074D9;">Pavement #3</h4>                 <b>Centroid Lat:</b> 40.757959<br/>                 <b>Centroid Lon:</b> -73.985522<br/>                 <b>Area:</b> 30.25 m²<br/>                 <b>Perimeter:</b> 30.28 m<br/>                 <b>Vertices:</b> 17             </div>             </div>`)[0];
+                popup_a0375ee0744f9ac5ccb4340c59667b9e.setContent(html_72e936455128f2a28c35c20d5ddc4355);
+            
+        
+
+        polygon_d8942e89960462c4ba1ec0321993c01e.bindPopup(popup_a0375ee0744f9ac5ccb4340c59667b9e)
+        ;
+
+        
+    
+    
+            polygon_d8942e89960462c4ba1ec0321993c01e.bindTooltip(
+                `<div>
+                     Pavement #3: (40.75796, -73.98552)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_36249166b3aed7e1b40ba41b85eea31c = L.circleMarker(
+                [40.7579589, -73.9855223],
+                {"bubblingMouseEvents": true, "color": "#001f3f", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0074D9", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(map_6d51f08e96d78b22687e6fbc7933d303);
+        
+    
+            circle_marker_36249166b3aed7e1b40ba41b85eea31c.bindTooltip(
+                `<div>
+                     Centroid #3: 40.757959, -73.985522
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_e699513b69e4b6927021f0bde3e3f841 = L.marker(
+                [40.758, -73.9855],
+                {}
+            ).addTo(map_6d51f08e96d78b22687e6fbc7933d303);
+        
+    
+            var icon_e82b3abf457eca7ea82b72ae60cdf8e2 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_e699513b69e4b6927021f0bde3e3f841.setIcon(icon_e82b3abf457eca7ea82b72ae60cdf8e2);
+        
+    
+            marker_e699513b69e4b6927021f0bde3e3f841.bindTooltip(
+                `<div>
+                     Center Query Location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
+</html>

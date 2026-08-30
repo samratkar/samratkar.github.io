@@ -8,3 +8,16 @@ python-dotenv==1.0.0
 llama-index==0.10.27
 llama-index-llms-openai==0.1.15
 llama-index-embeddings-openai==0.1.7
+
+# Remote Sensing & CV Pipeline
+requests
+pillow
+numpy
+opencv-python
+shapely
+geopandas
+folium
+h3
+torch
+torchvision
+transformers
