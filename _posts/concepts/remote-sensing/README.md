@@ -9,9 +9,10 @@ Outputs include **GeoJSON** vector polygons, **H3 Hexagon GeoJSON**, **CSV**, **
 ## Table of Contents
 
 1. [High-Level Architecture & System Overview](#high-level-architecture--system-overview)
-2. [Data & Control Flow Chart](#data--control-flow-chart)
-3. [End-to-End Sequence Diagram](#end-to-end-sequence-diagram)
-4. [Detailed Component & Algorithm Design](#detailed-component--algorithm-design)
+2. [Input & Output Artifacts Matrix](#input--output-artifacts-matrix)
+3. [Data & Control Flow Chart](#data--control-flow-chart)
+4. [End-to-End Sequence Diagram](#end-to-end-sequence-diagram)
+5. [Detailed Component & Algorithm Design](#detailed-component--algorithm-design)
    - [Component 1: Initialization & Transformer Model Loading](#component-1-initialization--transformer-model-loading)
    - [Component 2: Image Ingestion & Web Mercator Georeferencing](#component-2-image-ingestion--web-mercator-georeferencing)
    - [Component 3: Semantic Segmentation & Logit Interpolation](#component-3-semantic-segmentation--logit-interpolation)
@@ -19,9 +20,9 @@ Outputs include **GeoJSON** vector polygons, **H3 Hexagon GeoJSON**, **CSV**, **
    - [Component 5: Affine Coordinate Transformation & Geodesic Calculation](#component-5-affine-coordinate-transformation--geodesic-calculation)
    - [Component 6: Uber H3 Discrete Global Hexagonal Grid Indexing](#component-6-uber-h3-discrete-global-hexagonal-grid-indexing)
    - [Component 7: Multi-Format Vector & Map Exporters](#component-7-multi-format-vector--map-exporters)
-5. [Data Lifecycle & Transformation State Matrix](#data-lifecycle--transformation-state-matrix)
-6. [Input Specifications](#input-specifications)
-7. [Output Formats & Data Schemas](#output-formats--data-schemas)
+6. [Data Lifecycle & Transformation State Matrix](#data-lifecycle--transformation-state-matrix)
+7. [Input Specifications](#input-specifications)
+8. [Output Formats & Data Schemas](#output-formats--data-schemas)
    - [1. Formatted Terminal Console Report](#1-formatted-terminal-console-report)
    - [2. Vector Polygons GeoJSON (`detected_sidewalks.geojson`)](#2-vector-polygons-geojson-detected_sidewalksgeojson)
    - [3. H3 Hexagons GeoJSON (`detected_hexagons.geojson`)](#3-h3-hexagons-geojson-detected_hexagonsgeojson)
@@ -29,7 +30,7 @@ Outputs include **GeoJSON** vector polygons, **H3 Hexagon GeoJSON**, **CSV**, **
    - [5. Structured JSON Report (`detected_pavements.json`)](#5-structured-json-report-detected_pavementsjson)
    - [6. Interactive Multi-Layer Folium Map (`sidewalk_map.html`)](#6-interactive-multi-layer-folium-map-sidewalk_maphtml)
    - [7. Visual Debug Overlays (`pavement_overlay.png`)](#7-visual-debug-overlays-pavement_overlaypng)
-8. [Usage Instructions & CLI Reference](#usage-instructions--cli-reference)
+9. [Usage Instructions & CLI Reference](#usage-instructions--cli-reference)
 
 ---
 
@@ -69,6 +70,40 @@ The system bridges **Deep Computer Vision (Transformers)** and **Geographic Info
 (detected_side-    (detected_     (detected_      (detected_      (sidewalk_map.
  walks.geojson)  hexagons.geojson) pavements.csv) pavements.json)      html)
 ```
+
+---
+
+## Input & Output Artifacts Matrix
+
+The following tables detail all input requirements and generated output artifacts across the computer vision, geotagging, and spatial indexing pipeline.
+
+### Input Artifacts & Parameters
+
+| Input Artifact / Parameter | Format / Type | Source / Location | Requirement | Detailed Role & Description |
+| :--- | :--- | :--- | :--- | :--- |
+| **`.env`** | Key-Value File (`.env`) | Workspace root / config | Optional *(Required for Live API)* | Stores `GOOGLE_MAPS_API_KEY` for authenticating HTTPS queries against the Google Maps Static API. |
+| **`aerial_tile.png` / Custom Image** | Raster Image (`.png`, `.jpg`) | Local disk via `--image-path` | Optional | High-resolution aerial or satellite orthoimage. When supplied, bypasses Google Maps API calls for offline processing. |
+| **SegFormer Pretrained Checkpoint** | PyTorch Weights + Config | Hugging Face Model Hub | Required *(Auto-downloaded)* | Deep Vision Transformer weights (`nvidia/segformer-b0-finetuned-cityscapes-1024-1024` or `ade-512-512`) and semantic `id2label` mapping table. |
+| **`requirements.txt`** | Dependency Manifest | Workspace repository | Setup | Python library dependencies (`torch`, `transformers`, `h3`, `shapely`, `geopandas`, `folium`, `opencv-python`, `pillow`, `requests`, `python-dotenv`). |
+| **Target Coordinates (`--lat`, `--lon`)** | Float (`degrees`) | CLI Argument | Required | Target geodetic center latitude and longitude in WGS84 decimal degrees (e.g. `40.7580, -73.9855` for Times Square, NYC). |
+| **Mercator Zoom (`--zoom`)** | Integer (`0 - 21`) | CLI Argument (Default: `19`) | Configurable | Web Mercator zoom level determining Ground Sampling Distance (GSD $\approx 0.298\text{ m/px}$ at zoom 19). |
+| **Target Classes (`--target-classes`)**| String List | CLI Argument | Configurable | Target semantic category keywords (`sidewalk`, `pavement`, `footpath`, `road`, `street`, `path`) dynamically matched against the neural network ontology. |
+| **H3 Grid Resolution (`--h3-res`)** | Integer (`0 - 15`) | CLI Argument (Default: `13`) | Configurable | Uber H3 Discrete Global Grid resolution (Res 13 yields $\sim 3.5\text{ m}$ average hexagon edge length). |
+| **Area Noise Filter (`--min-area-px`)** | Integer (`pixels`) | CLI Argument (Default: `60`) | Configurable | Minimum connected pixel area threshold to suppress small false-positive prediction artifacts. |
+
+---
+
+### Output Artifacts & Data Products
+
+| Output Artifact | Format / Extension | Destination / Consumer | Detailed Role & Description |
+| :--- | :--- | :--- | :--- |
+| **`detected_sidewalks.geojson`** | **Vector GeoJSON** (`.geojson`) | GIS Tools (QGIS, ArcGIS, Mapbox, PostGIS) | Standard **RFC 7946 GeoJSON FeatureCollection** in `EPSG:4326` (WGS84). Contains simplified vector polygon geometries of all detected sidewalks and pavements with attributes: `id`, `centroid_lat`, `centroid_lon`, `h3_centroid`, `h3_hex_count`, `area_sq_m`, `perimeter_m`, `num_vertices`, and bounding box `bbox`. |
+| **`detected_hexagons.geojson`** | **Hexagonal GeoJSON** (`.geojson`) | Spatial Analytics (Kepler.gl, H3 viewers) | Dedicated GeoJSON layer where every covering Uber H3 hexagon cell is represented as an individual 6-point geodetic polygon tagged with `h3_index`, `resolution`, and parent `pavement_id`. |
+| **`detected_pavements.csv`** | **Tabular CSV** (`.csv`) | Pandas, Excel, SQL, BI Dashboards | Flat tabular summary containing pavement IDs, centroid coordinates, H3 centroid index, H3 cell counts, semi-colon-separated H3 lists, surface areas ($m^2$), perimeters ($m$), bounding coordinates, and stringified coordinate arrays. |
+| **`detected_pavements.json`** | **Hierarchical JSON** (`.json`) | Web APIs, microservices, frontends | Complete structured JSON report containing total feature metrics, nested centroid objects, H3 spatial index trees with 6-point boundary coordinate arrays, and polygon vertex lists. |
+| **`sidewalk_map.html`** | **Interactive Web Map** (`.html`) | Modern Web Browsers | Standalone interactive Leaflet.js map with toggleable layer groups: (1) **Detected Sidewalks / Pavements Layer** (Cyan translucent overlay), (2) **H3 Hexagonal Grid Layer** (Amber/gold hexagonal tiles with cell ID tooltips), and (3) **Centroid Markers Layer** (Clickable markers with full metadata popups). |
+| **`pavement_overlay.png`** | **Annotated Raster Image** (`.png`) | Computer Vision QA, reports, debug | High-resolution satellite tile blended with a 40% translucent cyan mask ($[0, 220, 255]$) and blue ($[0, 100, 255]$) contour boundaries highlighting all detected pavement surfaces. |
+| **`aerial_tile.png`** | **Raw Satellite Tile** (`.png`) | Local disk cache, offline re-runs | Caches the raw RGB satellite orthoimage fetched from the Google Maps Static API for auditability, visual comparison, and subsequent offline pipeline executions. |
 
 ---
 
