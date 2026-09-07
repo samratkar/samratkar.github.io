@@ -12,7 +12,8 @@ import numpy as np
 from PIL import Image
 import cv2
 import torch
-from shapely.geometry import Polygon, mapping
+from shapely.geometry import Polygon, Point, mapping
+from shapely.validation import make_valid
 import geopandas as gpd
 import folium
 
@@ -453,25 +454,47 @@ class SidewalkGeotagger:
                 street_clean = cv2.morphologyEx(roads_mask, cv2.MORPH_CLOSE, k_clean)
                 street_clean = cv2.morphologyEx(street_clean, cv2.MORPH_OPEN, k_clean)
 
+                # Dynamic road width and vehicular corridor estimation:
+                dist_road = cv2.distanceTransform(roads_mask, cv2.DIST_L2, 5)
+                k_dilate = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (21, 21))
+                r_local = cv2.dilate(dist_road, k_dilate)
+                local_road_width = 2.0 * r_local
+
+                # Sidewalk buffer cannot exceed 22% of street corridor width, reserving the center for vehicular traffic:
+                dynamic_sidewalk_limit = np.minimum(float(sidewalk_px), np.maximum(2.0, 0.22 * local_road_width))
+
                 # Distance transform from building line into the street corridor:
                 dist_from_building = cv2.distanceTransform(street_clean, cv2.DIST_L2, 5)
 
-                # Ground-level sidewalk is the outer ribbon of the street corridor within sidewalk_px of buildings
-                sidewalk_ribbon = ((street_clean > 0) & (dist_from_building <= sidewalk_px)).astype(np.uint8) * 255
+                # Ground-level sidewalk is the outer ribbon of the street corridor within dynamic_sidewalk_limit of buildings:
+                sidewalk_ribbon = ((street_clean > 0) & (dist_from_building <= dynamic_sidewalk_limit)).astype(np.uint8) * 255
 
                 # STRICT CONSTRAINT: Zero overlap with buildings / skyscrapers!
                 sidewalk_mask = cv2.bitwise_and(sidewalk_ribbon, cv2.bitwise_not(buildings_mask))
-                logger.info(f"Extracted ground-level sidewalk ribbon ({sidewalk_px}px width, {sidewalk_width_m}m) strictly outside building footprints (0% building overlap).")
+                logger.info(f"Extracted ground-level sidewalk ribbon ({sidewalk_px}px max width, {sidewalk_width_m}m) strictly outside building footprints (0% building overlap).")
             else:
                 sidewalk_mask = np.zeros_like(pred_mask, dtype=np.uint8)
 
-        # Sever cross-road intersection junctions and crosswalks if exclude_crossings is True:
-        if exclude_crossings and np.sum(sidewalk_mask > 0) > 0:
-            # Ensure vehicular roadway core is completely carved out:
+        # Compute adaptive vehicular roadway core (guaranteeing narrow cross-streets are also carved out):
+        if np.sum(roads_mask > 0) > 0:
             dist_road = cv2.distanceTransform(roads_mask, cv2.DIST_L2, 5)
-            road_core = (dist_road > sidewalk_px).astype(np.uint8) * 255
-            sidewalk_mask = cv2.bitwise_and(sidewalk_mask, cv2.bitwise_not(road_core))
-            logger.info("Carved out central vehicular roadway corridors and cross-street intersections.")
+            k_dilate = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (21, 21))
+            r_local = cv2.dilate(dist_road, k_dilate)
+            local_road_width = 2.0 * r_local
+            dynamic_sidewalk_limit = np.minimum(float(sidewalk_px), np.maximum(2.0, 0.22 * local_road_width))
+            road_core = ((roads_mask > 0) & (dist_road > dynamic_sidewalk_limit)).astype(np.uint8) * 255
+            self.last_road_core = road_core
+
+            # Sever cross-road intersection junctions and crosswalks if exclude_crossings is True:
+            if exclude_crossings and np.sum(sidewalk_mask > 0) > 0:
+                k_cross = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+                road_core_sever = cv2.dilate(road_core, k_cross)
+                sidewalk_mask = cv2.bitwise_and(sidewalk_mask, cv2.bitwise_not(road_core_sever))
+                logger.info("Carved out central vehicular roadway corridors and cross-street intersections.")
+            elif exclude_roadway and np.sum(sidewalk_mask > 0) > 0:
+                sidewalk_mask = cv2.bitwise_and(sidewalk_mask, cv2.bitwise_not(road_core))
+        else:
+            self.last_road_core = np.zeros_like(pred_mask, dtype=np.uint8)
 
         # Morphological post-processing to clean up noise and close small gaps
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
@@ -515,7 +538,8 @@ class SidewalkGeotagger:
         binary_mask: np.ndarray,
         bounds: Dict[str, float],
         min_area_px: int = 60,
-        h3_res: int = 13
+        h3_res: int = 13,
+        road_core: Optional[np.ndarray] = None
     ) -> List[Dict[str, Any]]:
         """
         Extracts contours from the binary segmentation mask and translates
@@ -526,9 +550,7 @@ class SidewalkGeotagger:
         contours, _ = cv2.findContours(binary_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
         north, south = bounds["north"], bounds["south"]
-        west, east = bounds["east"], bounds["west"]
-        if west > east:
-            west, east = bounds["west"], bounds["east"]
+        west, east = bounds["west"], bounds["east"]
 
         # Approximate meters per degree at mean latitude
         mean_lat = (north + south) / 2.0
@@ -574,8 +596,12 @@ class SidewalkGeotagger:
                 coords_lat_lon.append(coords_lat_lon[0])
 
             poly = Polygon(coords_lon_lat)
-            if not poly.is_valid or poly.area == 0:
+            if not poly.is_valid:
+                poly = make_valid(poly)
+            if poly.is_empty or poly.area == 0:
                 continue
+            if poly.geom_type == "MultiPolygon":
+                poly = max(poly.geoms, key=lambda p: p.area)
 
             # Compute centroid lat/lon
             centroid_lon, centroid_lat = poly.centroid.x, poly.centroid.y
@@ -590,36 +616,84 @@ class SidewalkGeotagger:
             h3_hexagons = []
             if h3 is not None:
                 try:
-                    h3_centroid = h3.latlng_to_cell(centroid_lat, centroid_lon, h3_res)
-                    
-                    # Collect hexagon cells from polygon vertices and internal raster sampling
-                    sampled_cell_ids = set()
-                    if h3_centroid:
-                        sampled_cell_ids.add(h3_centroid)
-                    for lat_pt, lon_pt in coords_lat_lon:
-                        sampled_cell_ids.add(h3.latlng_to_cell(lat_pt, lon_pt, h3_res))
+                    c_cell = h3.latlng_to_cell(centroid_lat, centroid_lon, h3_res)
+                    if poly.contains(Point(centroid_lon, centroid_lat)):
+                        h3_centroid = c_cell
 
-                    # Sample interior points within bounding box
+                    # Dense internal grid sampling within contour bounding box:
                     x_box, y_box, w_box, h_box = cv2.boundingRect(contour)
-                    step_x = max(1, w_box // 12)
-                    step_y = max(1, h_box // 12)
+                    # Sampling step ~ 1.5 meters in pixels
+                    step_x = max(1, int(round(1.5 / m_per_px_x)))
+                    step_y = max(1, int(round(1.5 / m_per_px_y)))
+
+                    candidate_cell_ids = set()
+                    if h3_centroid:
+                        candidate_cell_ids.add(h3_centroid)
+
                     for py_s in range(y_box, y_box + h_box, step_y):
                         for px_s in range(x_box, x_box + w_box, step_x):
-                            if cv2.pointPolygonTest(contour, (float(px_s), float(py_s)), False) >= 0:
+                            if binary_mask[py_s, px_s] > 0 and cv2.pointPolygonTest(contour, (float(px_s), float(py_s)), False) >= 0:
                                 g_lon = west + (px_s / width) * (east - west)
                                 g_lat = north - (py_s / height) * (north - south)
-                                sampled_cell_ids.add(h3.latlng_to_cell(g_lat, g_lon, h3_res))
+                                candidate_cell_ids.add(h3.latlng_to_cell(g_lat, g_lon, h3_res))
 
-                    for cell_id in sorted(list(sampled_cell_ids)):
+                    # Create single contour mask in pixels to perform robust spatial verification:
+                    c_mask = np.zeros((height, width), dtype=np.uint8)
+                    cv2.drawContours(c_mask, [contour], -1, 255, -1)
+
+                    # Retrieve cached vehicular road core to prevent roadway intrusion:
+                    active_road_core = road_core if road_core is not None else getattr(self, "last_road_core", None)
+
+                    # STRICT CONTAINMENT & ROAD INTRUSION FILTERING:
+                    max_road_ratio = 0.25
+                    min_inter_ratio = 0.05 if h3_res <= 13 else 0.10
+
+                    for cell_id in sorted(list(candidate_cell_ids)):
+                        c_lat, c_lon = h3.cell_to_latlng(cell_id)
+                        c_px = int(round((c_lon - west) / (east - west) * width))
+                        c_py = int(round((north - c_lat) / (north - south) * height))
+
                         boundary_pts = h3.cell_to_boundary(cell_id) # list of (lat, lon)
+                        poly_pts = [
+                            (int(round((b_lon - west) / (east - west) * width)),
+                             int(round((north - b_lat) / (north - south) * height)))
+                            for b_lat, b_lon in boundary_pts
+                        ]
+                        hex_m = np.zeros((height, width), dtype=np.uint8)
+                        cv2.fillPoly(hex_m, [np.array(poly_pts, np.int32)], 255)
+                        tot_hex_px = np.sum(hex_m > 0)
+                        if tot_hex_px == 0:
+                            continue
+
+                        # 1. Vehicular road core intrusion check (strictly discard cells intruding into driving lanes):
+                        if active_road_core is not None:
+                            core_hex_px = np.sum((hex_m > 0) & (active_road_core > 0))
+                            if (core_hex_px / tot_hex_px) > max_road_ratio:
+                                continue
+
+                        # 2. Polygon area intersection with sidewalk mask:
+                        inter_px = np.sum((hex_m > 0) & (c_mask > 0))
+                        inter_ratio = inter_px / tot_hex_px
+                        if inter_ratio < min_inter_ratio:
+                            continue
+
+                        # 3. Containment rule:
+                        # Either the centroid pixel falls inside the sidewalk contour mask, OR
+                        # the hexagon has substantial sidewalk overlap with zero/minimal roadway core overlap.
+                        centroid_in_mask = (0 <= c_px < width and 0 <= c_py < height and c_mask[c_py, c_px] > 0)
+                        if not centroid_in_mask:
+                            core_ratio = (core_hex_px / tot_hex_px) if active_road_core is not None else 0.0
+                            if not (inter_ratio >= (0.10 if h3_res <= 13 else 0.15) and core_ratio <= 0.08):
+                                continue
+
                         h3_hexagons.append({
                             "h3_index": cell_id,
                             "resolution": h3_res,
-                            "centroid": [round(b[0], 7) for b in [h3.cell_to_latlng(cell_id)]][0] if hasattr(h3, "cell_to_latlng") else None,
+                            "centroid": [round(c_lat, 7), round(c_lon, 7)],
                             "boundary": [(round(b_lat, 7), round(b_lon, 7)) for b_lat, b_lon in boundary_pts]
                         })
                 except Exception as ex:
-                    logger.debug(f"H3 indexing warning: {ex}")
+                    logger.warning(f"H3 indexing warning: {ex}")
 
             feature = {
                 "id": feature_id,
@@ -1017,7 +1091,7 @@ def main():
     parser.add_argument("--include-crossings", action="store_true", help="Include cross-road crossings/intersections connecting opposite sides of the street (default: False)")
     parser.add_argument("--sidewalk-width-m", type=float, default=2.5, help="Width of pedestrian sidewalk corridor in meters along curbs/buildings (default: 2.5m)")
     parser.add_argument("--min-area-px", type=int, default=60, help="Minimum contour area in pixels (default: 60)")
-    parser.add_argument("--h3-res", type=int, default=13, help="H3 Hexagon resolution (default: 13, ~3.5m edge)")
+    parser.add_argument("--h3-res", type=int, default=14, help="H3 Hexagon resolution (default: 14, ~1.34m edge / ~2.6m diameter, optimal for sidewalk corridors)")
     parser.add_argument("--verbose-coords", action="store_true", help="Print all individual vertex lat/lon coordinates in console")
     parser.add_argument("--verbose-hex", action="store_true", help="Print all H3 Hexagon IDs and 6-point boundary coordinates")
     parser.add_argument("--geojson-out", type=str, default="detected_sidewalks.geojson", help="Output GeoJSON path")
