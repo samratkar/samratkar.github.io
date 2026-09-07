@@ -1,0 +1,20 @@
+# Environments & Secrets
+.env
+.env.*
+.venv/
+env/
+venv/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+
+# Generated Run Outputs
+detected_*.geojson
+detected_*.csv
+detected_*.json
+*.html
+aerial_tile.png
+pavement_overlay.png
+streetview_snaps/
+streetview_images/

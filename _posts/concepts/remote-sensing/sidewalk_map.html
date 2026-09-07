@@ -3,14 +3,6 @@
 <head>
     
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    
-        <script>
-            L_NO_TOUCH = false;
-            L_DISABLE_3D = false;
-        </script>
-    
-    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
-    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -25,7 +17,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_49b2fa507c146a08d9a6ef8b2e9a8744 {
+                #map_c8bce3f7437564ff3f98228cd995c1f7 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -34,25 +26,51 @@
                 }
                 .leaflet-container { font-size: 1rem; }
             </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
         
 </head>
 <body>
     
     
-            <div class="folium-map" id="map_49b2fa507c146a08d9a6ef8b2e9a8744" ></div>
+            <div class="folium-map" id="map_c8bce3f7437564ff3f98228cd995c1f7" ></div>
         
 </body>
 <script>
     
     
-            var map_49b2fa507c146a08d9a6ef8b2e9a8744 = L.map(
-                "map_49b2fa507c146a08d9a6ef8b2e9a8744",
+            var map_c8bce3f7437564ff3f98228cd995c1f7 = L.map(
+                "map_c8bce3f7437564ff3f98228cd995c1f7",
                 {
                     center: [40.758, -73.9855],
                     crs: L.CRS.EPSG3857,
-                    zoom: 19,
-                    zoomControl: true,
-                    preferCanvas: false,
+                    ...{
+  "zoom": 19,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
                 }
             );
 
@@ -60,841 +78,2312 @@
 
         
     
-            var tile_layer_ff58b4ca741c7292a292ee351c926df8 = L.tileLayer(
+            var tile_layer_cdf7214fe6595cc300de2df6b47c7553 = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
             );
         
     
-            tile_layer_ff58b4ca741c7292a292ee351c926df8.addTo(map_49b2fa507c146a08d9a6ef8b2e9a8744);
+            tile_layer_cdf7214fe6595cc300de2df6b47c7553.addTo(map_c8bce3f7437564ff3f98228cd995c1f7);
         
     
-            var feature_group_33a6cd2b1240e32db642e946919c2575 = L.featureGroup(
-                {}
+            var feature_group_212969ac6c46f9016a7b25dd3c03fd05 = L.featureGroup(
+                {
+}
             );
         
     
-            var polygon_01caa1cdac0c640d9f05bd31705a78f1 = L.polygon(
-                [[40.7574271, -73.986141], [40.7574271, -73.9861545], [40.7574189, -73.9861652], [40.7574128, -73.9861652], [40.7574108, -73.9861679], [40.7573864, -73.9861679], [40.7573844, -73.9861706], [40.7573783, -73.9861706], [40.7573763, -73.9861759], [40.7573641, -73.9861759], [40.7573641, -73.9861652], [40.7573702, -73.9861652], [40.7573742, -73.9861545], [40.7573803, -73.9861464], [40.7573885, -73.986141], [40.7573905, -73.9861357], [40.7573986, -73.9861357], [40.7574027, -73.9861437], [40.7574271, -73.986141]],
+            var polygon_3e4b342b1ea5c21d4dd0b75367bb48fd = L.polygon(
+                [[40.7573661, -73.9855161], [40.75736, -73.9855161], [40.757358, -73.9855134], [40.757358, -73.9855107], [40.7573559, -73.985508], [40.7573519, -73.985508], [40.7573519, -73.985492], [40.7573559, -73.985492], [40.757358, -73.9854893], [40.75736, -73.9854893], [40.757362, -73.9854866], [40.7573661, -73.9854866], [40.7573681, -73.9854893], [40.7573681, -73.9855107], [40.7573661, -73.9855134], [40.7573661, -73.9855161]],
                 {"bubblingMouseEvents": true, "color": "#0074D9", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7FDBFF", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
-            ).addTo(feature_group_33a6cd2b1240e32db642e946919c2575);
+            ).addTo(feature_group_212969ac6c46f9016a7b25dd3c03fd05);
         
     
-        var popup_e45f91b89c38299c1d94a24a9bc662e1 = L.popup({"maxWidth": 260});
+        var popup_227ce4e25d66ac05cbb5054a541c04fb = L.popup({
+  "maxWidth": 260,
+});
 
         
             
-                var html_92feae3c975769e0b57540d6a7b3df82 = $(`<div id="html_92feae3c975769e0b57540d6a7b3df82" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 12px; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #0074D9;">Pavement #1</h4>                 <b>Centroid Lat:</b> 40.757397<br/>                 <b>Centroid Lon:</b> -73.986156<br/>                 <b>H3 Index:</b> <code>8d2a10725b6d73f</code><br/>                 <b>Hexagons:</b> 2 cells<br/>                 <b>Area:</b> 13.54 sq m<br/>                 <b>Perimeter:</b> 18.87 m<br/>                 <b>Vertices:</b> 18             </div>             </div>`)[0];
-                popup_e45f91b89c38299c1d94a24a9bc662e1.setContent(html_92feae3c975769e0b57540d6a7b3df82);
+                var html_9dd6d4cb7235f2e4b9951996e94ddc27 = $(`<div id="html_9dd6d4cb7235f2e4b9951996e94ddc27" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 12px; width: 230px;">                 <h4 style="margin: 0 0 5px 0; color: #0074D9;">Pavement #1</h4>                 <b>Centroid Lat:</b> 40.757361<br/>                 <b>Centroid Lon:</b> -73.985501<br/>                 <b>H3 Index:</b> <code>8d2a100d679e77f</code><br/>                 <b>Hexagons:</b> 1 cells<br/>                 <b>Area:</b> 3.58 sq m<br/>                 <b>Perimeter:</b> 7.8 m<br/>                 <b>Vertices:</b> 15<br/>                 <hr style="margin: 6px 0; border: 0; border-top: 1px solid #e0e0e0;"/>                 <b>Street View:</b> <span style="color: #AAAAAA; font-weight: bold;">Not Checked / Unavailable</span><br/>                 <b>SV Imagery Date:</b> N/A<br/>                 <b>SV Sidewalk %:</b> N/A<br/>                 <div style="margin-top: 6px;">                     <a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=40.7573609,-73.985501" target="_blank" style="color: #0074D9; text-decoration: underline; font-weight: bold;">View in Google Street View &rarr;</a>                 </div>             </div>             </div>`)[0];
+                popup_227ce4e25d66ac05cbb5054a541c04fb.setContent(html_9dd6d4cb7235f2e4b9951996e94ddc27);
             
         
 
-        polygon_01caa1cdac0c640d9f05bd31705a78f1.bindPopup(popup_e45f91b89c38299c1d94a24a9bc662e1)
+        polygon_3e4b342b1ea5c21d4dd0b75367bb48fd.bindPopup(popup_227ce4e25d66ac05cbb5054a541c04fb)
         ;
 
         
     
     
-            polygon_01caa1cdac0c640d9f05bd31705a78f1.bindTooltip(
+            polygon_3e4b342b1ea5c21d4dd0b75367bb48fd.bindTooltip(
                 `<div>
-                     Pavement #1: (40.75740, -73.98616)
+                     Pavement #1: (40.75736, -73.98550)
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_a3ce9bb00efe870766447c580f25514f = L.polygon(
-                [[40.7576302, -73.98561], [40.7576323, -73.9856287], [40.7575591, -73.9857199], [40.7574332, -73.9858031], [40.7574494, -73.9858916], [40.7574271, -73.985964], [40.7573966, -73.9859721], [40.7573742, -73.9859372], [40.7573681, -73.9859935], [40.7573519, -73.9859989], [40.7573519, -73.985905], [40.757423, -73.9858648], [40.7574108, -73.9858353], [40.7573519, -73.9858299], [40.7573519, -73.9857441], [40.7574555, -73.9856609], [40.7574311, -73.9856314], [40.7574839, -73.9855885], [40.7575083, -73.9856073], [40.7575693, -73.9855831], [40.7575896, -73.985618], [40.7576302, -73.98561]],
+            var polygon_9a8d51455945fb06dfebc320bd676b27 = L.polygon(
+                [[40.7576302, -73.9856985], [40.7575855, -73.9856636], [40.7575835, -73.9855617], [40.7573519, -73.9856073], [40.7575286, -73.9855322], [40.7576465, -73.9855724], [40.7578131, -73.9854061], [40.7578131, -73.9853257], [40.757744, -73.9852532], [40.7577277, -73.9851218], [40.7575774, -73.9848294], [40.7575327, -73.9846444], [40.7578395, -73.9853552], [40.7578029, -73.9854785], [40.757679, -73.9855483], [40.7576302, -73.9856985]],
                 {"bubblingMouseEvents": true, "color": "#0074D9", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7FDBFF", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
-            ).addTo(feature_group_33a6cd2b1240e32db642e946919c2575);
+            ).addTo(feature_group_212969ac6c46f9016a7b25dd3c03fd05);
         
     
-        var popup_40912824d015139c40eb084673d217e6 = L.popup({"maxWidth": 260});
+        var popup_9d76e444f83e3ca3ab5915599cf0c7aa = L.popup({
+  "maxWidth": 260,
+});
 
         
             
-                var html_83c47ce1824edda8ae306e1d3559645e = $(`<div id="html_83c47ce1824edda8ae306e1d3559645e" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 12px; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #0074D9;">Pavement #2</h4>                 <b>Centroid Lat:</b> 40.757463<br/>                 <b>Centroid Lon:</b> -73.985746<br/>                 <b>H3 Index:</b> <code>8d2a10725b6db3f</code><br/>                 <b>Hexagons:</b> 17 cells<br/>                 <b>Area:</b> 390.33 sq m<br/>                 <b>Perimeter:</b> 147.96 m<br/>                 <b>Vertices:</b> 21             </div>             </div>`)[0];
-                popup_40912824d015139c40eb084673d217e6.setContent(html_83c47ce1824edda8ae306e1d3559645e);
+                var html_36cb9554b44a45c73d44b35855c4dfab = $(`<div id="html_36cb9554b44a45c73d44b35855c4dfab" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 12px; width: 230px;">                 <h4 style="margin: 0 0 5px 0; color: #0074D9;">Pavement #2</h4>                 <b>Centroid Lat:</b> 40.757660<br/>                 <b>Centroid Lon:</b> -73.985313<br/>                 <b>H3 Index:</b> <code>8d2a100d679e9bf</code><br/>                 <b>Hexagons:</b> 23 cells<br/>                 <b>Area:</b> 376.05 sq m<br/>                 <b>Perimeter:</b> 315.91 m<br/>                 <b>Vertices:</b> 15<br/>                 <hr style="margin: 6px 0; border: 0; border-top: 1px solid #e0e0e0;"/>                 <b>Street View:</b> <span style="color: #AAAAAA; font-weight: bold;">Not Checked / Unavailable</span><br/>                 <b>SV Imagery Date:</b> N/A<br/>                 <b>SV Sidewalk %:</b> N/A<br/>                 <div style="margin-top: 6px;">                     <a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=40.7576598,-73.9853134" target="_blank" style="color: #0074D9; text-decoration: underline; font-weight: bold;">View in Google Street View &rarr;</a>                 </div>             </div>             </div>`)[0];
+                popup_9d76e444f83e3ca3ab5915599cf0c7aa.setContent(html_36cb9554b44a45c73d44b35855c4dfab);
             
         
 
-        polygon_a3ce9bb00efe870766447c580f25514f.bindPopup(popup_40912824d015139c40eb084673d217e6)
+        polygon_9a8d51455945fb06dfebc320bd676b27.bindPopup(popup_9d76e444f83e3ca3ab5915599cf0c7aa)
         ;
 
         
     
     
-            polygon_a3ce9bb00efe870766447c580f25514f.bindTooltip(
+            polygon_9a8d51455945fb06dfebc320bd676b27.bindTooltip(
                 `<div>
-                     Pavement #2: (40.75746, -73.98575)
+                     Pavement #2: (40.75766, -73.98531)
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_08923a6d3d0939efc6f1496dd9c92bdd = L.polygon(
-                [[40.7579776, -73.9855912], [40.7579655, -73.9855912], [40.7579634, -73.9855751], [40.7579492, -73.9855724], [40.7579472, -73.9855376], [40.757933, -73.9855295], [40.757935, -73.985508], [40.7579472, -73.9855], [40.7579451, -73.9854759], [40.7579573, -73.9854759], [40.7579594, -73.9854678], [40.7579675, -73.9854678], [40.7579776, -73.9854812], [40.7579776, -73.9855134], [40.7579675, -73.9855429], [40.7579695, -73.9855751], [40.7579776, -73.9855805], [40.7579776, -73.9855912]],
+            var polygon_4590faef48e7679dac081c5cde507c9d = L.polygon(
+                [[40.7586501, -73.9848348], [40.7585181, -73.984875], [40.7584815, -73.9850387], [40.7583799, -73.9851567], [40.7580731, -73.9853847], [40.7579533, -73.9854008], [40.7578517, -73.9852157], [40.7576627, -73.9846444], [40.7579533, -73.9853739], [40.758063, -73.9853605], [40.7583698, -73.9851325], [40.7585628, -73.9847946], [40.7586501, -73.9848348]],
                 {"bubblingMouseEvents": true, "color": "#0074D9", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7FDBFF", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
-            ).addTo(feature_group_33a6cd2b1240e32db642e946919c2575);
+            ).addTo(feature_group_212969ac6c46f9016a7b25dd3c03fd05);
         
     
-        var popup_d47e9515e0d7857b103c4c71588c7c63 = L.popup({"maxWidth": 260});
+        var popup_2c3b671b1cdfcecb426fb8f1741ed1b0 = L.popup({
+  "maxWidth": 260,
+});
 
         
             
-                var html_6db3a6910b801701153860e8be8e1b63 = $(`<div id="html_6db3a6910b801701153860e8be8e1b63" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 12px; width: 220px;">                 <h4 style="margin: 0 0 5px 0; color: #0074D9;">Pavement #3</h4>                 <b>Centroid Lat:</b> 40.757959<br/>                 <b>Centroid Lon:</b> -73.985522<br/>                 <b>H3 Index:</b> <code>8d2a100d679383f</code><br/>                 <b>Hexagons:</b> 3 cells<br/>                 <b>Area:</b> 30.25 sq m<br/>                 <b>Perimeter:</b> 30.28 m<br/>                 <b>Vertices:</b> 17             </div>             </div>`)[0];
-                popup_d47e9515e0d7857b103c4c71588c7c63.setContent(html_6db3a6910b801701153860e8be8e1b63);
+                var html_c9928d96726b1251f8e36eba5a69aaf7 = $(`<div id="html_c9928d96726b1251f8e36eba5a69aaf7" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 12px; width: 230px;">                 <h4 style="margin: 0 0 5px 0; color: #0074D9;">Pavement #3</h4>                 <b>Centroid Lat:</b> 40.758151<br/>                 <b>Centroid Lon:</b> -73.985114<br/>                 <b>H3 Index:</b> <code>8d2a100d67956bf</code><br/>                 <b>Hexagons:</b> 21 cells<br/>                 <b>Area:</b> 401.96 sq m<br/>                 <b>Perimeter:</b> 375.44 m<br/>                 <b>Vertices:</b> 12<br/>                 <hr style="margin: 6px 0; border: 0; border-top: 1px solid #e0e0e0;"/>                 <b>Street View:</b> <span style="color: #AAAAAA; font-weight: bold;">Not Checked / Unavailable</span><br/>                 <b>SV Imagery Date:</b> N/A<br/>                 <b>SV Sidewalk %:</b> N/A<br/>                 <div style="margin-top: 6px;">                     <a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=40.7581515,-73.9851136" target="_blank" style="color: #0074D9; text-decoration: underline; font-weight: bold;">View in Google Street View &rarr;</a>                 </div>             </div>             </div>`)[0];
+                popup_2c3b671b1cdfcecb426fb8f1741ed1b0.setContent(html_c9928d96726b1251f8e36eba5a69aaf7);
             
         
 
-        polygon_08923a6d3d0939efc6f1496dd9c92bdd.bindPopup(popup_d47e9515e0d7857b103c4c71588c7c63)
+        polygon_4590faef48e7679dac081c5cde507c9d.bindPopup(popup_2c3b671b1cdfcecb426fb8f1741ed1b0)
         ;
 
         
     
     
-            polygon_08923a6d3d0939efc6f1496dd9c92bdd.bindTooltip(
+            polygon_4590faef48e7679dac081c5cde507c9d.bindTooltip(
                 `<div>
-                     Pavement #3: (40.75796, -73.98552)
+                     Pavement #3: (40.75815, -73.98511)
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            feature_group_33a6cd2b1240e32db642e946919c2575.addTo(map_49b2fa507c146a08d9a6ef8b2e9a8744);
+            var polygon_c14f8de6332a6a9e110b1fd3a3fbf568 = L.polygon(
+                [[40.7586501, -73.9854893], [40.7581585, -73.9856609], [40.7581178, -73.9858138], [40.7579655, -73.9857897], [40.7578212, -73.9858594], [40.7575469, -73.986074], [40.7575185, -73.9861464], [40.7573519, -73.9861464], [40.7575104, -73.9861196], [40.7576424, -73.9859506], [40.7579492, -73.9857682], [40.7580996, -73.985795], [40.7581625, -73.9856287], [40.7586501, -73.9854893]],
+                {"bubblingMouseEvents": true, "color": "#0074D9", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7FDBFF", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_212969ac6c46f9016a7b25dd3c03fd05);
         
     
-            var feature_group_99d4cd247a0c379465bff57a3f32e97d = L.featureGroup(
-                {}
+        var popup_a5a23a20a45e97efb8545de532dc3002 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_ba1e7103ce8e0e33c681da307e3fce5e = $(`<div id="html_ba1e7103ce8e0e33c681da307e3fce5e" style="width: 100.0%; height: 100.0%;">             <div style="font-family: sans-serif; font-size: 12px; width: 230px;">                 <h4 style="margin: 0 0 5px 0; color: #0074D9;">Pavement #4</h4>                 <b>Centroid Lat:</b> 40.757942<br/>                 <b>Centroid Lon:</b> -73.985818<br/>                 <b>H3 Index:</b> <code>8d2a100d6793cff</code><br/>                 <b>Hexagons:</b> 16 cells<br/>                 <b>Area:</b> 383.67 sq m<br/>                 <b>Perimeter:</b> 362.23 m<br/>                 <b>Vertices:</b> 13<br/>                 <hr style="margin: 6px 0; border: 0; border-top: 1px solid #e0e0e0;"/>                 <b>Street View:</b> <span style="color: #AAAAAA; font-weight: bold;">Not Checked / Unavailable</span><br/>                 <b>SV Imagery Date:</b> N/A<br/>                 <b>SV Sidewalk %:</b> N/A<br/>                 <div style="margin-top: 6px;">                     <a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=40.7579418,-73.9858178" target="_blank" style="color: #0074D9; text-decoration: underline; font-weight: bold;">View in Google Street View &rarr;</a>                 </div>             </div>             </div>`)[0];
+                popup_a5a23a20a45e97efb8545de532dc3002.setContent(html_ba1e7103ce8e0e33c681da307e3fce5e);
+            
+        
+
+        polygon_c14f8de6332a6a9e110b1fd3a3fbf568.bindPopup(popup_a5a23a20a45e97efb8545de532dc3002)
+        ;
+
+        
+    
+    
+            polygon_c14f8de6332a6a9e110b1fd3a3fbf568.bindTooltip(
+                `<div>
+                     Pavement #4: (40.75794, -73.98582)
+                 </div>`,
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_ed6ee3e1dff933b79ba7c68eedf7367b = L.polygon(
-                [[40.7573935, -73.9861953], [40.7573743, -73.9862383], [40.7573384, -73.9862369], [40.7573216, -73.9861925], [40.7573407, -73.9861496], [40.7573767, -73.986151]],
+            feature_group_212969ac6c46f9016a7b25dd3c03fd05.addTo(map_c8bce3f7437564ff3f98228cd995c1f7);
+        
+    
+            var feature_group_d31cfcc7deedb26f7aa217939524e456 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var polygon_3a52aa12d89c949b7ad3a33edd451bd9 = L.polygon(
+                [[40.7574123, -73.9854971], [40.7573932, -73.9855401], [40.7573573, -73.9855387], [40.7573405, -73.9854943], [40.7573596, -73.9854514], [40.7573955, -73.9854528]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_10ec7f85022059319411e712dd97525b = L.popup({"maxWidth": 220});
+        var popup_d83efda2171d08a759dcb94943629d1f = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_9b68e70bf1b3ffcf916a27e7743c7c07 = $(`<div id="html_9b68e70bf1b3ffcf916a27e7743c7c07" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a10725b6d63f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #1                 </div>                 </div>`)[0];
-                popup_10ec7f85022059319411e712dd97525b.setContent(html_9b68e70bf1b3ffcf916a27e7743c7c07);
+                var html_158d5197b680fc65acc073e8aaf23c49 = $(`<div id="html_158d5197b680fc65acc073e8aaf23c49" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679e77f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #1                 </div>                 </div>`)[0];
+                popup_d83efda2171d08a759dcb94943629d1f.setContent(html_158d5197b680fc65acc073e8aaf23c49);
             
         
 
-        polygon_ed6ee3e1dff933b79ba7c68eedf7367b.bindPopup(popup_10ec7f85022059319411e712dd97525b)
+        polygon_3a52aa12d89c949b7ad3a33edd451bd9.bindPopup(popup_d83efda2171d08a759dcb94943629d1f)
         ;
 
         
     
     
-            polygon_ed6ee3e1dff933b79ba7c68eedf7367b.bindTooltip(
+            polygon_3a52aa12d89c949b7ad3a33edd451bd9.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a10725b6d63f
+                     H3 Hex: 8d2a100d679e77f
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_f520d9813c17a3b47e1cc00350745c79 = L.polygon(
-                [[40.7574485, -73.9861538], [40.7574294, -73.9861968], [40.7573935, -73.9861953], [40.7573767, -73.986151], [40.7573958, -73.9861081], [40.7574318, -73.9861095]],
+            var polygon_d63fadf388b71955f1bdc3df373537a1 = L.polygon(
+                [[40.7577476, -73.9850734], [40.7577284, -73.9851163], [40.7576925, -73.9851149], [40.7576757, -73.9850706], [40.7576948, -73.9850277], [40.7577308, -73.9850291]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_968ea49b0639aef6391ff54d8ed29f0e = L.popup({"maxWidth": 220});
+        var popup_562881a2096827d3d3bddaf839f89475 = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_2bfe48dfeb862057e1e4100b9c691b31 = $(`<div id="html_2bfe48dfeb862057e1e4100b9c691b31" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a10725b6d73f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #1                 </div>                 </div>`)[0];
-                popup_968ea49b0639aef6391ff54d8ed29f0e.setContent(html_2bfe48dfeb862057e1e4100b9c691b31);
+                var html_e198630296229af1c2b97bd4825eae00 = $(`<div id="html_e198630296229af1c2b97bd4825eae00" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679123f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_562881a2096827d3d3bddaf839f89475.setContent(html_e198630296229af1c2b97bd4825eae00);
             
         
 
-        polygon_f520d9813c17a3b47e1cc00350745c79.bindPopup(popup_968ea49b0639aef6391ff54d8ed29f0e)
+        polygon_d63fadf388b71955f1bdc3df373537a1.bindPopup(popup_562881a2096827d3d3bddaf839f89475)
         ;
 
         
     
     
-            polygon_f520d9813c17a3b47e1cc00350745c79.bindTooltip(
+            polygon_d63fadf388b71955f1bdc3df373537a1.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a10725b6d73f
+                     H3 Hex: 8d2a100d679123f
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_d754f75a672c46cd7f65f97c12e2be93 = L.polygon(
+            var polygon_4b2c2ed1a2033344bd554c10c0b5a33e = L.polygon(
+                [[40.7576948, -73.9850277], [40.7576757, -73.9850706], [40.7576397, -73.9850692], [40.757623, -73.9850248], [40.7576421, -73.9849819], [40.757678, -73.9849833]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_c4dcf473e74c8ece1b396c8f96b576f7 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_96c97b24f771b8dd4f91d2cfbd80e400 = $(`<div id="html_96c97b24f771b8dd4f91d2cfbd80e400" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679127f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_c4dcf473e74c8ece1b396c8f96b576f7.setContent(html_96c97b24f771b8dd4f91d2cfbd80e400);
+            
+        
+
+        polygon_4b2c2ed1a2033344bd554c10c0b5a33e.bindPopup(popup_c4dcf473e74c8ece1b396c8f96b576f7)
+        ;
+
+        
+    
+    
+            polygon_4b2c2ed1a2033344bd554c10c0b5a33e.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d679127f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_27c00130cc73151f8c85990bde522c69 = L.polygon(
+                [[40.7577452, -73.9851607], [40.757726, -73.9852036], [40.7576901, -73.9852022], [40.7576733, -73.9851579], [40.7576925, -73.9851149], [40.7577284, -73.9851163]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_8158fc48687e1f46b71e89d802107d89 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_be12cbf427e490668701dd793f2b75d1 = $(`<div id="html_be12cbf427e490668701dd793f2b75d1" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d67912bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_8158fc48687e1f46b71e89d802107d89.setContent(html_be12cbf427e490668701dd793f2b75d1);
+            
+        
+
+        polygon_27c00130cc73151f8c85990bde522c69.bindPopup(popup_8158fc48687e1f46b71e89d802107d89)
+        ;
+
+        
+    
+    
+            polygon_27c00130cc73151f8c85990bde522c69.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d67912bf
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_2599445a91798bc8242464845dd12e01 = L.polygon(
+                [[40.7577956, -73.9852937], [40.7577764, -73.9853367], [40.7577405, -73.9853352], [40.7577237, -73.9852909], [40.7577428, -73.985248], [40.7577788, -73.9852494]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_a86327703c13edb7fecd0e4c596333e2 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_9a0e2766e00ce9dbd270f6108490e056 = $(`<div id="html_9a0e2766e00ce9dbd270f6108490e056" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679163f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_a86327703c13edb7fecd0e4c596333e2.setContent(html_9a0e2766e00ce9dbd270f6108490e056);
+            
+        
+
+        polygon_2599445a91798bc8242464845dd12e01.bindPopup(popup_a86327703c13edb7fecd0e4c596333e2)
+        ;
+
+        
+    
+    
+            polygon_2599445a91798bc8242464845dd12e01.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d679163f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_d75a42116b4baf49e4a12141f6674388 = L.polygon(
+                [[40.7578506, -73.9852522], [40.7578315, -73.9852951], [40.7577956, -73.9852937], [40.7577788, -73.9852494], [40.7577979, -73.9852064], [40.7578339, -73.9852078]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_d0f88b94dd7df46aa9b244b25306bd22 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_10b012b4638cbad5d6e6bf52001209a6 = $(`<div id="html_10b012b4638cbad5d6e6bf52001209a6" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679173f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_d0f88b94dd7df46aa9b244b25306bd22.setContent(html_10b012b4638cbad5d6e6bf52001209a6);
+            
+        
+
+        polygon_d75a42116b4baf49e4a12141f6674388.bindPopup(popup_d0f88b94dd7df46aa9b244b25306bd22)
+        ;
+
+        
+    
+    
+            polygon_d75a42116b4baf49e4a12141f6674388.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d679173f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_3bc4b54f2ca6c1797844add54e81e4de = L.polygon(
+                [[40.7577979, -73.9852064], [40.7577788, -73.9852494], [40.7577428, -73.985248], [40.757726, -73.9852036], [40.7577452, -73.9851607], [40.7577811, -73.9851621]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_590c7f5ef6a519466ef84034d68e36d6 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_335eb668a9a42858c24e85d8aca67af4 = $(`<div id="html_335eb668a9a42858c24e85d8aca67af4" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679177f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_590c7f5ef6a519466ef84034d68e36d6.setContent(html_335eb668a9a42858c24e85d8aca67af4);
+            
+        
+
+        polygon_3bc4b54f2ca6c1797844add54e81e4de.bindPopup(popup_590c7f5ef6a519466ef84034d68e36d6)
+        ;
+
+        
+    
+    
+            polygon_3bc4b54f2ca6c1797844add54e81e4de.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d679177f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_6804b5d7cd3d4896d2cf0fb46e793cfb = L.polygon(
+                [[40.7578483, -73.9853395], [40.7578291, -73.9853824], [40.7577932, -73.985381], [40.7577764, -73.9853367], [40.7577956, -73.9852937], [40.7578315, -73.9852951]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_d575def7104b192503443cce30527a1c = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_403b489d1bceca8cf7fa2d3c8694a86b = $(`<div id="html_403b489d1bceca8cf7fa2d3c8694a86b" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d67917bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_d575def7104b192503443cce30527a1c.setContent(html_403b489d1bceca8cf7fa2d3c8694a86b);
+            
+        
+
+        polygon_6804b5d7cd3d4896d2cf0fb46e793cfb.bindPopup(popup_d575def7104b192503443cce30527a1c)
+        ;
+
+        
+    
+    
+            polygon_6804b5d7cd3d4896d2cf0fb46e793cfb.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d67917bf
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_af5dafe552a58e213c691466544ecee9 = L.polygon(
                 [[40.7576783, -73.9856386], [40.7576592, -73.9856815], [40.7576232, -73.9856801], [40.7576064, -73.9856358], [40.7576256, -73.9855929], [40.7576615, -73.9855943]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_a7d582fc026a7aad3560edddbf46f5ae = L.popup({"maxWidth": 220});
+        var popup_ad38a7bf5708cc47741aad6b05394fc1 = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_0d8e35ae2852ee62bc79563ee1971202 = $(`<div id="html_0d8e35ae2852ee62bc79563ee1971202" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679327f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
-                popup_a7d582fc026a7aad3560edddbf46f5ae.setContent(html_0d8e35ae2852ee62bc79563ee1971202);
+                var html_4e13d99823e8c5142aeca7ac8ed853ff = $(`<div id="html_4e13d99823e8c5142aeca7ac8ed853ff" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679327f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_ad38a7bf5708cc47741aad6b05394fc1.setContent(html_4e13d99823e8c5142aeca7ac8ed853ff);
             
         
 
-        polygon_d754f75a672c46cd7f65f97c12e2be93.bindPopup(popup_a7d582fc026a7aad3560edddbf46f5ae)
+        polygon_af5dafe552a58e213c691466544ecee9.bindPopup(popup_ad38a7bf5708cc47741aad6b05394fc1)
         ;
 
         
     
     
-            polygon_d754f75a672c46cd7f65f97c12e2be93.bindTooltip(
+            polygon_af5dafe552a58e213c691466544ecee9.bindTooltip(
                 `<div>
                      H3 Hex: 8d2a100d679327f
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_905cb14dd9867a2edab9cefd82e991bc = L.polygon(
-                [[40.7575705, -73.9856344], [40.7575514, -73.9856773], [40.7575154, -73.9856759], [40.7574986, -73.9856316], [40.7575178, -73.9855886], [40.7575537, -73.98559]],
+            var polygon_1b855e4c7932cf51d1206199dd9f6895 = L.polygon(
+                [[40.757676, -73.9857259], [40.7576568, -73.9857688], [40.7576209, -73.9857674], [40.7576041, -73.9857231], [40.7576232, -73.9856801], [40.7576592, -73.9856815]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_be0f30da589965ceee0b1615289973c4 = L.popup({"maxWidth": 220});
+        var popup_c5725ad78bd6192e0767803ed30fc0d9 = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_89d712d148a84ca1a50b8ababa3d2181 = $(`<div id="html_89d712d148a84ca1a50b8ababa3d2181" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679e43f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
-                popup_be0f30da589965ceee0b1615289973c4.setContent(html_89d712d148a84ca1a50b8ababa3d2181);
+                var html_32f3c21138e1dbb8c78f7870872e2b15 = $(`<div id="html_32f3c21138e1dbb8c78f7870872e2b15" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d67932ff</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_c5725ad78bd6192e0767803ed30fc0d9.setContent(html_32f3c21138e1dbb8c78f7870872e2b15);
             
         
 
-        polygon_905cb14dd9867a2edab9cefd82e991bc.bindPopup(popup_be0f30da589965ceee0b1615289973c4)
+        polygon_1b855e4c7932cf51d1206199dd9f6895.bindPopup(popup_c5725ad78bd6192e0767803ed30fc0d9)
         ;
 
         
     
     
-            polygon_905cb14dd9867a2edab9cefd82e991bc.bindTooltip(
+            polygon_1b855e4c7932cf51d1206199dd9f6895.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a100d679e43f
+                     H3 Hex: 8d2a100d67932ff
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_ef55736e3eea89ab0dc612ab5a836501 = L.polygon(
-                [[40.7575178, -73.9855886], [40.7574986, -73.9856316], [40.7574627, -73.9856302], [40.7574459, -73.9855858], [40.7574651, -73.9855429], [40.757501, -73.9855443]],
+            var polygon_21758666c89024392afaf7040f4a0ed6 = L.polygon(
+                [[40.7578436, -73.985514], [40.7578244, -73.985557], [40.7577885, -73.9855556], [40.7577717, -73.9855112], [40.7577908, -73.9854683], [40.7578268, -73.9854697]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_6e7752f6bf31e0f3ecc4ac2adf82e983 = L.popup({"maxWidth": 220});
+        var popup_5e74698b7c51cd38a38fa115785444ac = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_bd92447182b1b26db972e63f2231abd3 = $(`<div id="html_bd92447182b1b26db972e63f2231abd3" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679e47f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
-                popup_6e7752f6bf31e0f3ecc4ac2adf82e983.setContent(html_bd92447182b1b26db972e63f2231abd3);
+                var html_d1d2a6b6a349c12d1ff2a4c1db5c16bb = $(`<div id="html_d1d2a6b6a349c12d1ff2a4c1db5c16bb" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d6793a3f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_5e74698b7c51cd38a38fa115785444ac.setContent(html_d1d2a6b6a349c12d1ff2a4c1db5c16bb);
             
         
 
-        polygon_ef55736e3eea89ab0dc612ab5a836501.bindPopup(popup_6e7752f6bf31e0f3ecc4ac2adf82e983)
+        polygon_21758666c89024392afaf7040f4a0ed6.bindPopup(popup_5e74698b7c51cd38a38fa115785444ac)
         ;
 
         
     
     
-            polygon_ef55736e3eea89ab0dc612ab5a836501.bindTooltip(
+            polygon_21758666c89024392afaf7040f4a0ed6.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a100d679e47f
+                     H3 Hex: 8d2a100d6793a3f
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_8be4482c115da362340270620e9c4a5f = L.polygon(
-                [[40.7575681, -73.9857217], [40.757549, -73.9857646], [40.7575131, -73.9857632], [40.7574963, -73.9857188], [40.7575154, -73.9856759], [40.7575514, -73.9856773]],
+            var polygon_17c0d7406f1b8f69f7a672e6af58c240 = L.polygon(
+                [[40.7578459, -73.9854267], [40.7578268, -73.9854697], [40.7577908, -73.9854683], [40.7577741, -73.9854239], [40.7577932, -73.985381], [40.7578291, -73.9853824]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_37598a611cf5e713ea8432bc080d3d36 = L.popup({"maxWidth": 220});
+        var popup_16a5ea5e51b078d00fc291e440e60612 = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_09628ad0499109df15b84f89a58c9e82 = $(`<div id="html_09628ad0499109df15b84f89a58c9e82" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679e4bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
-                popup_37598a611cf5e713ea8432bc080d3d36.setContent(html_09628ad0499109df15b84f89a58c9e82);
+                var html_5d4f183e12f4b9efb123c8925057ea68 = $(`<div id="html_5d4f183e12f4b9efb123c8925057ea68" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d6793b7f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_16a5ea5e51b078d00fc291e440e60612.setContent(html_5d4f183e12f4b9efb123c8925057ea68);
             
         
 
-        polygon_8be4482c115da362340270620e9c4a5f.bindPopup(popup_37598a611cf5e713ea8432bc080d3d36)
+        polygon_17c0d7406f1b8f69f7a672e6af58c240.bindPopup(popup_16a5ea5e51b078d00fc291e440e60612)
         ;
 
         
     
     
-            polygon_8be4482c115da362340270620e9c4a5f.bindTooltip(
+            polygon_17c0d7406f1b8f69f7a672e6af58c240.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a100d679e4bf
+                     H3 Hex: 8d2a100d6793b7f
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_58fcb17b1e75f2e93cda00346a8c939a = L.polygon(
-                [[40.7575154, -73.9856759], [40.7574963, -73.9857188], [40.7574603, -73.9857174], [40.7574436, -73.9856731], [40.7574627, -73.9856302], [40.7574986, -73.9856316]],
+            var polygon_0bc5081cfc4f554664ac5c9f74f440a2 = L.polygon(
+                [[40.7575941, -73.9847616], [40.7575749, -73.9848045], [40.757539, -73.9848031], [40.7575222, -73.9847588], [40.7575414, -73.9847159], [40.7575773, -73.9847173]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_844eb58d00ccac7ca63625d1b31ec65f = L.popup({"maxWidth": 220});
+        var popup_ad981452d69b89a884524736dac48bf8 = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_351dc3dc708d43fd62c01ae4ed3dd362 = $(`<div id="html_351dc3dc708d43fd62c01ae4ed3dd362" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679e4ff</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
-                popup_844eb58d00ccac7ca63625d1b31ec65f.setContent(html_351dc3dc708d43fd62c01ae4ed3dd362);
+                var html_c3f61df5f9412ed0e81e41d4f75e5a2f = $(`<div id="html_c3f61df5f9412ed0e81e41d4f75e5a2f" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679c13f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_ad981452d69b89a884524736dac48bf8.setContent(html_c3f61df5f9412ed0e81e41d4f75e5a2f);
             
         
 
-        polygon_58fcb17b1e75f2e93cda00346a8c939a.bindPopup(popup_844eb58d00ccac7ca63625d1b31ec65f)
+        polygon_0bc5081cfc4f554664ac5c9f74f440a2.bindPopup(popup_ad981452d69b89a884524736dac48bf8)
         ;
 
         
     
     
-            polygon_58fcb17b1e75f2e93cda00346a8c939a.bindTooltip(
+            polygon_0bc5081cfc4f554664ac5c9f74f440a2.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a100d679e4ff
+                     H3 Hex: 8d2a100d679c13f
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_864929efa9b17d3e9b0711f861838e6e = L.polygon(
+            var polygon_3ec313d0562c40576c48564c3788a987 = L.polygon(
+                [[40.7575917, -73.9848489], [40.7575726, -73.9848918], [40.7575367, -73.9848904], [40.7575199, -73.9848461], [40.757539, -73.9848031], [40.7575749, -73.9848045]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_c4cd1699fdf0e695b28c928a0abfbcdf = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_4b7a2fc3cd9829d128ce0211fcbf6d8e = $(`<div id="html_4b7a2fc3cd9829d128ce0211fcbf6d8e" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679c1bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_c4cd1699fdf0e695b28c928a0abfbcdf.setContent(html_4b7a2fc3cd9829d128ce0211fcbf6d8e);
+            
+        
+
+        polygon_3ec313d0562c40576c48564c3788a987.bindPopup(popup_c4cd1699fdf0e695b28c928a0abfbcdf)
+        ;
+
+        
+    
+    
+            polygon_3ec313d0562c40576c48564c3788a987.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d679c1bf
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_4a4b1ee020f7edf221095edae19b7387 = L.polygon(
+                [[40.7575965, -73.9846743], [40.7575773, -73.9847173], [40.7575414, -73.9847159], [40.7575246, -73.9846715], [40.7575437, -73.9846286], [40.7575797, -73.98463]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_d0e35ef39d88c40753b2b9d36207e9ff = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_20cc34ecb035fe89f4f4188da38f109b = $(`<div id="html_20cc34ecb035fe89f4f4188da38f109b" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679c8ff</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_d0e35ef39d88c40753b2b9d36207e9ff.setContent(html_20cc34ecb035fe89f4f4188da38f109b);
+            
+        
+
+        polygon_4a4b1ee020f7edf221095edae19b7387.bindPopup(popup_d0e35ef39d88c40753b2b9d36207e9ff)
+        ;
+
+        
+    
+    
+            polygon_4a4b1ee020f7edf221095edae19b7387.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d679c8ff
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_179242124edb4124b32bf5695611e7f1 = L.polygon(
+                [[40.7575437, -73.9846286], [40.7575246, -73.9846715], [40.7574886, -73.9846701], [40.7574719, -73.9846258], [40.757491, -73.9845828], [40.7575269, -73.9845842]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_ac322478c48f1e8d1b0c8e78e91218a3 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_cf9862272242491bd15e52c1cb5069fe = $(`<div id="html_cf9862272242491bd15e52c1cb5069fe" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679cbbf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_ac322478c48f1e8d1b0c8e78e91218a3.setContent(html_cf9862272242491bd15e52c1cb5069fe);
+            
+        
+
+        polygon_179242124edb4124b32bf5695611e7f1.bindPopup(popup_ac322478c48f1e8d1b0c8e78e91218a3)
+        ;
+
+        
+    
+    
+            polygon_179242124edb4124b32bf5695611e7f1.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d679cbbf
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_e6f20e7912011b9ca9ef8f4732910e07 = L.polygon(
+                [[40.7576468, -73.9848074], [40.7576277, -73.9848503], [40.7575917, -73.9848489], [40.7575749, -73.9848045], [40.7575941, -73.9847616], [40.75763, -73.984763]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_794e1b4f68526d6750f88c37d366b558 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_57e837f29bb2ee171bb52ced56f8aacd = $(`<div id="html_57e837f29bb2ee171bb52ced56f8aacd" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679cc7f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_794e1b4f68526d6750f88c37d366b558.setContent(html_57e837f29bb2ee171bb52ced56f8aacd);
+            
+        
+
+        polygon_e6f20e7912011b9ca9ef8f4732910e07.bindPopup(popup_794e1b4f68526d6750f88c37d366b558)
+        ;
+
+        
+    
+    
+            polygon_e6f20e7912011b9ca9ef8f4732910e07.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d679cc7f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_d74510b8694334c1567a56c42e1c31ba = L.polygon(
                 [[40.7576256, -73.9855929], [40.7576064, -73.9856358], [40.7575705, -73.9856344], [40.7575537, -73.98559], [40.7575729, -73.9855471], [40.7576088, -73.9855485]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_abdfde47bfe8585594a70dcb4db34cad = L.popup({"maxWidth": 220});
+        var popup_440fa80e204639bfa022f022355859d7 = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_c44d5abeedbf533e29a814ea2df44578 = $(`<div id="html_c44d5abeedbf533e29a814ea2df44578" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679e53f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
-                popup_abdfde47bfe8585594a70dcb4db34cad.setContent(html_c44d5abeedbf533e29a814ea2df44578);
+                var html_55774997075a7bea33a328dbeb7d79d2 = $(`<div id="html_55774997075a7bea33a328dbeb7d79d2" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679e53f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_440fa80e204639bfa022f022355859d7.setContent(html_55774997075a7bea33a328dbeb7d79d2);
             
         
 
-        polygon_864929efa9b17d3e9b0711f861838e6e.bindPopup(popup_abdfde47bfe8585594a70dcb4db34cad)
+        polygon_d74510b8694334c1567a56c42e1c31ba.bindPopup(popup_440fa80e204639bfa022f022355859d7)
         ;
 
         
     
     
-            polygon_864929efa9b17d3e9b0711f861838e6e.bindTooltip(
+            polygon_d74510b8694334c1567a56c42e1c31ba.bindTooltip(
                 `<div>
                      H3 Hex: 8d2a100d679e53f
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_c981963fd080ff3a05b461e57ff1b4ea = L.polygon(
-                [[40.7576232, -73.9856801], [40.7576041, -73.9857231], [40.7575681, -73.9857217], [40.7575514, -73.9856773], [40.7575705, -73.9856344], [40.7576064, -73.9856358]],
+            var polygon_7df8d0e06b2f586fa25b64d86d4dcfc7 = L.polygon(
+                [[40.7575729, -73.9855471], [40.7575537, -73.98559], [40.7575178, -73.9855886], [40.757501, -73.9855443], [40.7575201, -73.9855014], [40.7575561, -73.9855028]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_3276b57a99ac3551f1a1a40094e01084 = L.popup({"maxWidth": 220});
+        var popup_5a850671facb7e57e86f2a5e93a1e04e = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_91888b176d364d759b64244b88f8e75a = $(`<div id="html_91888b176d364d759b64244b88f8e75a" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679e5bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
-                popup_3276b57a99ac3551f1a1a40094e01084.setContent(html_91888b176d364d759b64244b88f8e75a);
+                var html_05bf70795adb94c6d801bd0cfcf3ce58 = $(`<div id="html_05bf70795adb94c6d801bd0cfcf3ce58" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679e57f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_5a850671facb7e57e86f2a5e93a1e04e.setContent(html_05bf70795adb94c6d801bd0cfcf3ce58);
             
         
 
-        polygon_c981963fd080ff3a05b461e57ff1b4ea.bindPopup(popup_3276b57a99ac3551f1a1a40094e01084)
+        polygon_7df8d0e06b2f586fa25b64d86d4dcfc7.bindPopup(popup_5a850671facb7e57e86f2a5e93a1e04e)
         ;
 
         
     
     
-            polygon_c981963fd080ff3a05b461e57ff1b4ea.bindTooltip(
+            polygon_7df8d0e06b2f586fa25b64d86d4dcfc7.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d679e57f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_d38b1d0ccd905e74ea514bf80dad8633 = L.polygon(
+                [[40.7576232, -73.9856801], [40.7576041, -73.9857231], [40.7575681, -73.9857217], [40.7575514, -73.9856773], [40.7575705, -73.9856344], [40.7576064, -73.9856358]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_091187a0d10a0f2dd005eaf1b1596cdd = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_b0201fb09d68bcb9283a2926d5c67960 = $(`<div id="html_b0201fb09d68bcb9283a2926d5c67960" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679e5bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_091187a0d10a0f2dd005eaf1b1596cdd.setContent(html_b0201fb09d68bcb9283a2926d5c67960);
+            
+        
+
+        polygon_d38b1d0ccd905e74ea514bf80dad8633.bindPopup(popup_091187a0d10a0f2dd005eaf1b1596cdd)
+        ;
+
+        
+    
+    
+            polygon_d38b1d0ccd905e74ea514bf80dad8633.bindTooltip(
                 `<div>
                      H3 Hex: 8d2a100d679e5bf
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_34f4da2653bec4be5f6490944a6989ae = L.polygon(
-                [[40.7574627, -73.9856302], [40.7574436, -73.9856731], [40.7574076, -73.9856717], [40.7573908, -73.9856273], [40.75741, -73.9855844], [40.7574459, -73.9855858]],
+            var polygon_d56d68772f3e65c92b7ec827e754161f = L.polygon(
+                [[40.75741, -73.9855844], [40.7573908, -73.9856273], [40.7573549, -73.9856259], [40.7573381, -73.9855816], [40.7573573, -73.9855387], [40.7573932, -73.9855401]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_be14667b1fcd383a2953a961f241cfdb = L.popup({"maxWidth": 220});
+        var popup_62ea020e74aa47f2827185e7024a74ce = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_d0f81c2088b7307da6de398c464eb394 = $(`<div id="html_d0f81c2088b7307da6de398c464eb394" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679e7bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
-                popup_be14667b1fcd383a2953a961f241cfdb.setContent(html_d0f81c2088b7307da6de398c464eb394);
+                var html_f8baf1babb5e5af37e9b5e37fe36ce6c = $(`<div id="html_f8baf1babb5e5af37e9b5e37fe36ce6c" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679e63f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_62ea020e74aa47f2827185e7024a74ce.setContent(html_f8baf1babb5e5af37e9b5e37fe36ce6c);
             
         
 
-        polygon_34f4da2653bec4be5f6490944a6989ae.bindPopup(popup_be14667b1fcd383a2953a961f241cfdb)
+        polygon_d56d68772f3e65c92b7ec827e754161f.bindPopup(popup_62ea020e74aa47f2827185e7024a74ce)
         ;
 
         
     
     
-            polygon_34f4da2653bec4be5f6490944a6989ae.bindTooltip(
+            polygon_d56d68772f3e65c92b7ec827e754161f.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a100d679e7bf
+                     H3 Hex: 8d2a100d679e63f
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_17e0813dc5d774a9356b2099b55013c6 = L.polygon(
-                [[40.7574533, -73.9859793], [40.7574341, -73.9860222], [40.7573982, -73.9860208], [40.7573814, -73.9859764], [40.7574005, -73.9859335], [40.7574365, -73.9859349]],
+            var polygon_738caf4fc42db19dd2a267a107d001a3 = L.polygon(
+                [[40.7576878, -73.9852895], [40.7576686, -73.9853324], [40.7576327, -73.985331], [40.7576159, -73.9852867], [40.757635, -73.9852437], [40.757671, -73.9852452]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_934b3d3d5ccc6ea0199ca678f8eb799d = L.popup({"maxWidth": 220});
+        var popup_ead595f766687f176b7a9b27d3baf33f = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_374b52eaf62f39dd255abf0450433e40 = $(`<div id="html_374b52eaf62f39dd255abf0450433e40" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a10725b6d07f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
-                popup_934b3d3d5ccc6ea0199ca678f8eb799d.setContent(html_374b52eaf62f39dd255abf0450433e40);
+                var html_8b386db1770d9fb16ec1192ff6078f58 = $(`<div id="html_8b386db1770d9fb16ec1192ff6078f58" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679e9bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_ead595f766687f176b7a9b27d3baf33f.setContent(html_8b386db1770d9fb16ec1192ff6078f58);
             
         
 
-        polygon_17e0813dc5d774a9356b2099b55013c6.bindPopup(popup_934b3d3d5ccc6ea0199ca678f8eb799d)
+        polygon_738caf4fc42db19dd2a267a107d001a3.bindPopup(popup_ead595f766687f176b7a9b27d3baf33f)
         ;
 
         
     
     
-            polygon_17e0813dc5d774a9356b2099b55013c6.bindTooltip(
+            polygon_738caf4fc42db19dd2a267a107d001a3.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a10725b6d07f
+                     H3 Hex: 8d2a100d679e9bf
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_6d806230acd5e99d3fa610e90bd05856 = L.polygon(
-                [[40.7574005, -73.9859335], [40.7573814, -73.9859764], [40.7573455, -73.985975], [40.7573287, -73.9859307], [40.7573478, -73.9858878], [40.7573838, -73.9858892]],
+            var polygon_60e5d0a2f1abcc7e1e27650b536ffb65 = L.polygon(
+                [[40.7576807, -73.9855513], [40.7576615, -73.9855943], [40.7576256, -73.9855929], [40.7576088, -73.9855485], [40.757628, -73.9855056], [40.7576639, -73.985507]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_5706dbc795fae21bff4308d674ced667 = L.popup({"maxWidth": 220});
+        var popup_bdaf1e1f3add2ba82a766808a0678afa = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_390cf19dd851ee8b738730ed1df17a0b = $(`<div id="html_390cf19dd851ee8b738730ed1df17a0b" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a10725b6d33f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
-                popup_5706dbc795fae21bff4308d674ced667.setContent(html_390cf19dd851ee8b738730ed1df17a0b);
+                var html_c149287c591a8f4cc19d8c75b54c2387 = $(`<div id="html_c149287c591a8f4cc19d8c75b54c2387" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679ecbf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_bdaf1e1f3add2ba82a766808a0678afa.setContent(html_c149287c591a8f4cc19d8c75b54c2387);
             
         
 
-        polygon_6d806230acd5e99d3fa610e90bd05856.bindPopup(popup_5706dbc795fae21bff4308d674ced667)
+        polygon_60e5d0a2f1abcc7e1e27650b536ffb65.bindPopup(popup_bdaf1e1f3add2ba82a766808a0678afa)
         ;
 
         
     
     
-            polygon_6d806230acd5e99d3fa610e90bd05856.bindTooltip(
+            polygon_60e5d0a2f1abcc7e1e27650b536ffb65.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a10725b6d33f
+                     H3 Hex: 8d2a100d679ecbf
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_be3d913683404acdb46b01b3c026c3a0 = L.polygon(
-                [[40.7573982, -73.9860208], [40.757379, -73.9860637], [40.7573431, -73.9860623], [40.7573263, -73.986018], [40.7573455, -73.985975], [40.7573814, -73.9859764]],
+            var polygon_aae4714e37b99db30ee5618cac678910 = L.polygon(
+                [[40.7577358, -73.9855098], [40.7577166, -73.9855527], [40.7576807, -73.9855513], [40.7576639, -73.985507], [40.757683, -73.9854641], [40.757719, -73.9854655]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_94721c33b2e990b049c4921f0cb5d3c2 = L.popup({"maxWidth": 220});
+        var popup_864e577db8f71e4c522d1cf768c641f3 = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_122c6a41cf7810949e033e221416c0b1 = $(`<div id="html_122c6a41cf7810949e033e221416c0b1" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a10725b6d3bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
-                popup_94721c33b2e990b049c4921f0cb5d3c2.setContent(html_122c6a41cf7810949e033e221416c0b1);
+                var html_c838a02dafa2b3d1db4066a61deba659 = $(`<div id="html_c838a02dafa2b3d1db4066a61deba659" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679edbf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
+                popup_864e577db8f71e4c522d1cf768c641f3.setContent(html_c838a02dafa2b3d1db4066a61deba659);
             
         
 
-        polygon_be3d913683404acdb46b01b3c026c3a0.bindPopup(popup_94721c33b2e990b049c4921f0cb5d3c2)
+        polygon_aae4714e37b99db30ee5618cac678910.bindPopup(popup_864e577db8f71e4c522d1cf768c641f3)
         ;
 
         
     
     
-            polygon_be3d913683404acdb46b01b3c026c3a0.bindTooltip(
+            polygon_aae4714e37b99db30ee5618cac678910.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a10725b6d3bf
+                     H3 Hex: 8d2a100d679edbf
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_975d7a81c1b7c35244689fa2553b4b3c = L.polygon(
-                [[40.757458, -73.9858047], [40.7574388, -73.9858476], [40.7574029, -73.9858462], [40.7573861, -73.9858019], [40.7574053, -73.985759], [40.7574412, -73.9857604]],
+            var polygon_422e64ee3fff4bd46981b5fa244d90dc = L.polygon(
+                [[40.7581166, -73.9853937], [40.7580975, -73.9854366], [40.7580615, -73.9854352], [40.7580448, -73.9853909], [40.7580639, -73.9853479], [40.7580998, -73.9853493]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_2fe925826994f7889f4b5fb4c55ffafc = L.popup({"maxWidth": 220});
+        var popup_0749f2361161a1d1d8e4838b35ba777f = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_897a2435603e633f9851757794311551 = $(`<div id="html_897a2435603e633f9851757794311551" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a10725b6da3f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
-                popup_2fe925826994f7889f4b5fb4c55ffafc.setContent(html_897a2435603e633f9851757794311551);
+                var html_9f79518202ab952c90a42b750bea7cce = $(`<div id="html_9f79518202ab952c90a42b750bea7cce" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679023f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_0749f2361161a1d1d8e4838b35ba777f.setContent(html_9f79518202ab952c90a42b750bea7cce);
             
         
 
-        polygon_975d7a81c1b7c35244689fa2553b4b3c.bindPopup(popup_2fe925826994f7889f4b5fb4c55ffafc)
+        polygon_422e64ee3fff4bd46981b5fa244d90dc.bindPopup(popup_0749f2361161a1d1d8e4838b35ba777f)
         ;
 
         
     
     
-            polygon_975d7a81c1b7c35244689fa2553b4b3c.bindTooltip(
+            polygon_422e64ee3fff4bd46981b5fa244d90dc.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a10725b6da3f
+                     H3 Hex: 8d2a100d679023f
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_3c3e3bdc150998f637d978d6f376ac37 = L.polygon(
-                [[40.7574053, -73.985759], [40.7573861, -73.9858019], [40.7573502, -73.9858005], [40.7573334, -73.9857561], [40.7573525, -73.9857132], [40.7573885, -73.9857146]],
+            var polygon_fbd892446f3bad9e525b5f868de3685c = L.polygon(
+                [[40.758392, -73.985186], [40.7583729, -73.985229], [40.758337, -73.9852276], [40.7583202, -73.9851832], [40.7583393, -73.9851403], [40.7583753, -73.9851417]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_fb8e16775f7ed79d345479ae09e352c6 = L.popup({"maxWidth": 220});
+        var popup_f613261bfd0b7390b86d133300192799 = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_0078095c4f033d8c1a03fce4beeeacc2 = $(`<div id="html_0078095c4f033d8c1a03fce4beeeacc2" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a10725b6da7f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
-                popup_fb8e16775f7ed79d345479ae09e352c6.setContent(html_0078095c4f033d8c1a03fce4beeeacc2);
+                var html_8c6de8f061558274e13fc3f79e54440a = $(`<div id="html_8c6de8f061558274e13fc3f79e54440a" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679097f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_f613261bfd0b7390b86d133300192799.setContent(html_8c6de8f061558274e13fc3f79e54440a);
             
         
 
-        polygon_3c3e3bdc150998f637d978d6f376ac37.bindPopup(popup_fb8e16775f7ed79d345479ae09e352c6)
+        polygon_fbd892446f3bad9e525b5f868de3685c.bindPopup(popup_f613261bfd0b7390b86d133300192799)
         ;
 
         
     
     
-            polygon_3c3e3bdc150998f637d978d6f376ac37.bindTooltip(
+            polygon_fbd892446f3bad9e525b5f868de3685c.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a10725b6da7f
+                     H3 Hex: 8d2a100d679097f
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_613c8b0c7d15b6e0e824cd069a5f822c = L.polygon(
-                [[40.7574556, -73.985892], [40.7574365, -73.9859349], [40.7574005, -73.9859335], [40.7573838, -73.9858892], [40.7574029, -73.9858462], [40.7574388, -73.9858476]],
+            var polygon_c876268688c9fbcdc8250c83e6ac8862 = L.polygon(
+                [[40.7581741, -73.9852649], [40.7581549, -73.9853078], [40.758119, -73.9853064], [40.7581022, -73.985262], [40.7581213, -73.9852191], [40.7581573, -73.9852205]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_3e7d3559c7c950e4028d578744ba2682 = L.popup({"maxWidth": 220});
+        var popup_97289c056f1f51e36e1ede86d839cf73 = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_1e33f03d41432cd919976ed4f7f480d7 = $(`<div id="html_1e33f03d41432cd919976ed4f7f480d7" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a10725b6dabf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
-                popup_3e7d3559c7c950e4028d578744ba2682.setContent(html_1e33f03d41432cd919976ed4f7f480d7);
+                var html_23935b4b8110bc0f78f664193a501148 = $(`<div id="html_23935b4b8110bc0f78f664193a501148" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d6790aff</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_97289c056f1f51e36e1ede86d839cf73.setContent(html_23935b4b8110bc0f78f664193a501148);
             
         
 
-        polygon_613c8b0c7d15b6e0e824cd069a5f822c.bindPopup(popup_3e7d3559c7c950e4028d578744ba2682)
+        polygon_c876268688c9fbcdc8250c83e6ac8862.bindPopup(popup_97289c056f1f51e36e1ede86d839cf73)
         ;
 
         
     
     
-            polygon_613c8b0c7d15b6e0e824cd069a5f822c.bindTooltip(
+            polygon_c876268688c9fbcdc8250c83e6ac8862.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a10725b6dabf
+                     H3 Hex: 8d2a100d6790aff
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_0f63ff62734abd11cd9020f3cbbce6cf = L.polygon(
-                [[40.7574029, -73.9858462], [40.7573838, -73.9858892], [40.7573478, -73.9858878], [40.757331, -73.9858434], [40.7573502, -73.9858005], [40.7573861, -73.9858019]],
+            var polygon_1f2a33fc8ae759136c2677fe5c748b6f = L.polygon(
+                [[40.7582842, -73.9851818], [40.7582651, -73.9852247], [40.7582292, -73.9852233], [40.7582124, -73.985179], [40.7582315, -73.9851361], [40.7582674, -73.9851375]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_d8ba60bb0ea2ffc3da18e83520659919 = L.popup({"maxWidth": 220});
+        var popup_fa30a4bdf87e7c735d494e2fa0955eab = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_18c2ea97a0cbe1a73c2604c975e495ce = $(`<div id="html_18c2ea97a0cbe1a73c2604c975e495ce" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a10725b6daff</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
-                popup_d8ba60bb0ea2ffc3da18e83520659919.setContent(html_18c2ea97a0cbe1a73c2604c975e495ce);
+                var html_1c2f69f7a2d2d4278cfea2f582efd640 = $(`<div id="html_1c2f69f7a2d2d4278cfea2f582efd640" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d6790b3f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_fa30a4bdf87e7c735d494e2fa0955eab.setContent(html_1c2f69f7a2d2d4278cfea2f582efd640);
             
         
 
-        polygon_0f63ff62734abd11cd9020f3cbbce6cf.bindPopup(popup_d8ba60bb0ea2ffc3da18e83520659919)
+        polygon_1f2a33fc8ae759136c2677fe5c748b6f.bindPopup(popup_fa30a4bdf87e7c735d494e2fa0955eab)
         ;
 
         
     
     
-            polygon_0f63ff62734abd11cd9020f3cbbce6cf.bindTooltip(
+            polygon_1f2a33fc8ae759136c2677fe5c748b6f.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a10725b6daff
+                     H3 Hex: 8d2a100d6790b3f
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_de4fc01789091ad59f1a34f209ec6946 = L.polygon(
-                [[40.7575131, -73.9857632], [40.7574939, -73.9858061], [40.757458, -73.9858047], [40.7574412, -73.9857604], [40.7574603, -73.9857174], [40.7574963, -73.9857188]],
+            var polygon_1091ab2a215baf44292704fc31212344 = L.polygon(
+                [[40.7578554, -73.9850776], [40.7578362, -73.9851206], [40.7578003, -73.9851192], [40.7577835, -73.9850748], [40.7578026, -73.9850319], [40.7578386, -73.9850333]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_5f3ce4f95360cdc9a062d1260c0906bf = L.popup({"maxWidth": 220});
+        var popup_3b80b469ba9c0f542590fbd9bbca3696 = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_4e8d70e3841f99f0d8f6856bfe780b1a = $(`<div id="html_4e8d70e3841f99f0d8f6856bfe780b1a" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a10725b6db3f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
-                popup_5f3ce4f95360cdc9a062d1260c0906bf.setContent(html_4e8d70e3841f99f0d8f6856bfe780b1a);
+                var html_e9380c52c8327781b7fb88dffccdd6e2 = $(`<div id="html_e9380c52c8327781b7fb88dffccdd6e2" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679107f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_3b80b469ba9c0f542590fbd9bbca3696.setContent(html_e9380c52c8327781b7fb88dffccdd6e2);
             
         
 
-        polygon_de4fc01789091ad59f1a34f209ec6946.bindPopup(popup_5f3ce4f95360cdc9a062d1260c0906bf)
+        polygon_1091ab2a215baf44292704fc31212344.bindPopup(popup_3b80b469ba9c0f542590fbd9bbca3696)
         ;
 
         
     
     
-            polygon_de4fc01789091ad59f1a34f209ec6946.bindTooltip(
+            polygon_1091ab2a215baf44292704fc31212344.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a10725b6db3f
+                     H3 Hex: 8d2a100d679107f
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_46987b89f4e3b6a8ed55562290b168ce = L.polygon(
-                [[40.7574603, -73.9857174], [40.7574412, -73.9857604], [40.7574053, -73.985759], [40.7573885, -73.9857146], [40.7574076, -73.9856717], [40.7574436, -73.9856731]],
+            var polygon_ed10005613cbcbe582f617fd523d9dbd = L.polygon(
+                [[40.7579057, -73.9852107], [40.7578866, -73.9852536], [40.7578506, -73.9852522], [40.7578339, -73.9852078], [40.757853, -73.9851649], [40.7578889, -73.9851663]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_5c59d30783cd9af502f966093eb61a33 = L.popup({"maxWidth": 220});
+        var popup_b0d9d1094c51081cfd53e17f44973412 = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_5fdfa36860b7021ff2c91761acedea56 = $(`<div id="html_5fdfa36860b7021ff2c91761acedea56" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a10725b6db7f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #2                 </div>                 </div>`)[0];
-                popup_5c59d30783cd9af502f966093eb61a33.setContent(html_5fdfa36860b7021ff2c91761acedea56);
+                var html_cd67e25034b31be9032f446f319ab543 = $(`<div id="html_cd67e25034b31be9032f446f319ab543" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d67910bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_b0d9d1094c51081cfd53e17f44973412.setContent(html_cd67e25034b31be9032f446f319ab543);
             
         
 
-        polygon_46987b89f4e3b6a8ed55562290b168ce.bindPopup(popup_5c59d30783cd9af502f966093eb61a33)
+        polygon_ed10005613cbcbe582f617fd523d9dbd.bindPopup(popup_b0d9d1094c51081cfd53e17f44973412)
         ;
 
         
     
     
-            polygon_46987b89f4e3b6a8ed55562290b168ce.bindTooltip(
+            polygon_ed10005613cbcbe582f617fd523d9dbd.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a10725b6db7f
+                     H3 Hex: 8d2a100d67910bf
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_65fd205cfd935c1bcae508dde83976e7 = L.polygon(
-                [[40.7580041, -73.985564], [40.757985, -73.9856069], [40.757949, -73.9856055], [40.7579322, -73.9855612], [40.7579514, -73.9855183], [40.7579873, -73.9855197]],
+            var polygon_3de7a5d1d5a899c18edd288ec6d463b8 = L.polygon(
+                [[40.757853, -73.9851649], [40.7578339, -73.9852078], [40.7577979, -73.9852064], [40.7577811, -73.9851621], [40.7578003, -73.9851192], [40.7578362, -73.9851206]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_ff171af6584181b3e290d3a7285b474d = L.popup({"maxWidth": 220});
+        var popup_48a0f01894b8a258628f3ef5920e4921 = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_deb23c5a0f7360e16f7d2021340800f3 = $(`<div id="html_deb23c5a0f7360e16f7d2021340800f3" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679383f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
-                popup_ff171af6584181b3e290d3a7285b474d.setContent(html_deb23c5a0f7360e16f7d2021340800f3);
+                var html_61da1983237d78f0689ea8543772d4e6 = $(`<div id="html_61da1983237d78f0689ea8543772d4e6" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d67910ff</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_48a0f01894b8a258628f3ef5920e4921.setContent(html_61da1983237d78f0689ea8543772d4e6);
             
         
 
-        polygon_65fd205cfd935c1bcae508dde83976e7.bindPopup(popup_ff171af6584181b3e290d3a7285b474d)
+        polygon_3de7a5d1d5a899c18edd288ec6d463b8.bindPopup(popup_48a0f01894b8a258628f3ef5920e4921)
         ;
 
         
     
     
-            polygon_65fd205cfd935c1bcae508dde83976e7.bindTooltip(
+            polygon_3de7a5d1d5a899c18edd288ec6d463b8.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a100d679383f
+                     H3 Hex: 8d2a100d67910ff
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_ddf6c012f46623c5d59c90912cb920d1 = L.polygon(
-                [[40.7579514, -73.9855183], [40.7579322, -73.9855612], [40.7578963, -73.9855598], [40.7578795, -73.9855154], [40.7578987, -73.9854725], [40.7579346, -73.9854739]],
+            var polygon_8c0c1139071e15823de39ca049df59e5 = L.polygon(
+                [[40.7579561, -73.9853437], [40.7579369, -73.9853866], [40.757901, -73.9853852], [40.7578842, -73.9853409], [40.7579034, -73.9852979], [40.7579393, -73.9852994]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_8275d475ca84b42688059c2c7b245dfe = L.popup({"maxWidth": 220});
+        var popup_5b03056e80d43eb5862cf478dd05ac69 = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_a47ecd6139e1d90f3c5cacc90f5f27cc = $(`<div id="html_a47ecd6139e1d90f3c5cacc90f5f27cc" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679387f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
-                popup_8275d475ca84b42688059c2c7b245dfe.setContent(html_a47ecd6139e1d90f3c5cacc90f5f27cc);
+                var html_027df409290d06e3634ff9c260934be5 = $(`<div id="html_027df409290d06e3634ff9c260934be5" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679143f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_5b03056e80d43eb5862cf478dd05ac69.setContent(html_027df409290d06e3634ff9c260934be5);
             
         
 
-        polygon_ddf6c012f46623c5d59c90912cb920d1.bindPopup(popup_8275d475ca84b42688059c2c7b245dfe)
+        polygon_8c0c1139071e15823de39ca049df59e5.bindPopup(popup_5b03056e80d43eb5862cf478dd05ac69)
         ;
 
         
     
     
-            polygon_ddf6c012f46623c5d59c90912cb920d1.bindTooltip(
+            polygon_8c0c1139071e15823de39ca049df59e5.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a100d679387f
+                     H3 Hex: 8d2a100d679143f
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var polygon_7a23518b2cc621743055ad7dcb99fa2c = L.polygon(
-                [[40.7580065, -73.9854767], [40.7579873, -73.9855197], [40.7579514, -73.9855183], [40.7579346, -73.9854739], [40.7579537, -73.985431], [40.7579897, -73.9854324]],
+            var polygon_c86b32a262c233e6651b4bad39f8c177 = L.polygon(
+                [[40.7580088, -73.9853894], [40.7579897, -73.9854324], [40.7579537, -73.985431], [40.7579369, -73.9853866], [40.7579561, -73.9853437], [40.757992, -73.9853451]],
                 {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
-            ).addTo(feature_group_99d4cd247a0c379465bff57a3f32e97d);
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-        var popup_a1ade1e917cadbd4e37bbf72ae12bc8d = L.popup({"maxWidth": 220});
+        var popup_ecd4d3a177d5d84d57fa14df521dbc7d = L.popup({
+  "maxWidth": 220,
+});
 
         
             
-                var html_36d012f8727283137f21351e4bedf140 = $(`<div id="html_36d012f8727283137f21351e4bedf140" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679397f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
-                popup_a1ade1e917cadbd4e37bbf72ae12bc8d.setContent(html_36d012f8727283137f21351e4bedf140);
+                var html_d45fcc742b13fcc9d2d1f22da77b88a4 = $(`<div id="html_d45fcc742b13fcc9d2d1f22da77b88a4" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d67915bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_ecd4d3a177d5d84d57fa14df521dbc7d.setContent(html_d45fcc742b13fcc9d2d1f22da77b88a4);
             
         
 
-        polygon_7a23518b2cc621743055ad7dcb99fa2c.bindPopup(popup_a1ade1e917cadbd4e37bbf72ae12bc8d)
+        polygon_c86b32a262c233e6651b4bad39f8c177.bindPopup(popup_ecd4d3a177d5d84d57fa14df521dbc7d)
         ;
 
         
     
     
-            polygon_7a23518b2cc621743055ad7dcb99fa2c.bindTooltip(
+            polygon_c86b32a262c233e6651b4bad39f8c177.bindTooltip(
                 `<div>
-                     H3 Hex: 8d2a100d679397f
+                     H3 Hex: 8d2a100d67915bf
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            feature_group_99d4cd247a0c379465bff57a3f32e97d.addTo(map_49b2fa507c146a08d9a6ef8b2e9a8744);
+            var polygon_8144ffd5b12b25a45aa071d95dd7bab6 = L.polygon(
+                [[40.7584495, -73.9850572], [40.7584303, -73.9851002], [40.7583944, -73.9850988], [40.7583776, -73.9850544], [40.7583968, -73.9850115], [40.7584327, -73.9850129]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
         
     
-            var feature_group_486e573771f98f3512b8d083d78f9cc2 = L.featureGroup(
-                {}
+        var popup_b1d97893db641d141c575731e4ad9961 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_333c7075128c3aa90e81bc7404e0142a = $(`<div id="html_333c7075128c3aa90e81bc7404e0142a" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679427f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_b1d97893db641d141c575731e4ad9961.setContent(html_333c7075128c3aa90e81bc7404e0142a);
+            
+        
+
+        polygon_8144ffd5b12b25a45aa071d95dd7bab6.bindPopup(popup_b1d97893db641d141c575731e4ad9961)
+        ;
+
+        
+    
+    
+            polygon_8144ffd5b12b25a45aa071d95dd7bab6.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d679427f
+                 </div>`,
+                {
+  "sticky": true,
+}
             );
         
     
-            var circle_marker_c913e20e2bfa303d3e50623bd8b238c7 = L.circleMarker(
-                [40.7573967, -73.9861559],
+            var polygon_6bf8b64d0c64561bc355e9032a30298c = L.polygon(
+                [[40.7585046, -73.9850157], [40.7584854, -73.9850586], [40.7584495, -73.9850572], [40.7584327, -73.9850129], [40.7584518, -73.9849699], [40.7584878, -73.9849714]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_2d555336c16fdb9300ffd99be047a84c = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_1a90a41ba92fdff148a3062427ee0881 = $(`<div id="html_1a90a41ba92fdff148a3062427ee0881" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679437f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_2d555336c16fdb9300ffd99be047a84c.setContent(html_1a90a41ba92fdff148a3062427ee0881);
+            
+        
+
+        polygon_6bf8b64d0c64561bc355e9032a30298c.bindPopup(popup_2d555336c16fdb9300ffd99be047a84c)
+        ;
+
+        
+    
+    
+            polygon_6bf8b64d0c64561bc355e9032a30298c.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d679437f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_3bbcb898513142be56c8e1e4dd32b78d = L.polygon(
+                [[40.758562, -73.9848869], [40.7585429, -73.9849298], [40.7585069, -73.9849284], [40.7584901, -73.9848841], [40.7585093, -73.9848411], [40.7585452, -73.9848425]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_2319593a1a0150a2e46a25200429da5e = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_d05d6ae31456f50cc9a23d5ad51a7f74 = $(`<div id="html_d05d6ae31456f50cc9a23d5ad51a7f74" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d6794a7f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_2319593a1a0150a2e46a25200429da5e.setContent(html_d05d6ae31456f50cc9a23d5ad51a7f74);
+            
+        
+
+        polygon_3bbcb898513142be56c8e1e4dd32b78d.bindPopup(popup_2319593a1a0150a2e46a25200429da5e)
+        ;
+
+        
+    
+    
+            polygon_3bbcb898513142be56c8e1e4dd32b78d.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d6794a7f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_9397d8875b6398578a237bc6322d5c2c = L.polygon(
+                [[40.7586171, -73.9848454], [40.7585979, -73.9848883], [40.758562, -73.9848869], [40.7585452, -73.9848425], [40.7585644, -73.9847996], [40.7586003, -73.984801]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_8fca0c9a45eee98be01f79b2113d78ec = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_e0dad42d2462ad385210be3980b04f7e = $(`<div id="html_e0dad42d2462ad385210be3980b04f7e" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d6794b7f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_8fca0c9a45eee98be01f79b2113d78ec.setContent(html_e0dad42d2462ad385210be3980b04f7e);
+            
+        
+
+        polygon_9397d8875b6398578a237bc6322d5c2c.bindPopup(popup_8fca0c9a45eee98be01f79b2113d78ec)
+        ;
+
+        
+    
+    
+            polygon_9397d8875b6398578a237bc6322d5c2c.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d6794b7f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_f2f7a71ab63420e9393c0abe076e68c0 = L.polygon(
+                [[40.7583393, -73.9851403], [40.7583202, -73.9851832], [40.7582842, -73.9851818], [40.7582674, -73.9851375], [40.7582866, -73.9850945], [40.7583225, -73.9850959]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_900fa84bbb7bc234219a1239429a9571 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_fedf073ad299b6af681cd80f564b56de = $(`<div id="html_fedf073ad299b6af681cd80f564b56de" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d67954bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_900fa84bbb7bc234219a1239429a9571.setContent(html_fedf073ad299b6af681cd80f564b56de);
+            
+        
+
+        polygon_f2f7a71ab63420e9393c0abe076e68c0.bindPopup(popup_900fa84bbb7bc234219a1239429a9571)
+        ;
+
+        
+    
+    
+            polygon_f2f7a71ab63420e9393c0abe076e68c0.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d67954bf
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_dde4e0b8a65b33946ec8ad57c60cadc9 = L.polygon(
+                [[40.7583944, -73.9850988], [40.7583753, -73.9851417], [40.7583393, -73.9851403], [40.7583225, -73.9850959], [40.7583417, -73.985053], [40.7583776, -73.9850544]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_f1b860956387c67fb53474c999071012 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_192b526090a553a13ff704439f535c85 = $(`<div id="html_192b526090a553a13ff704439f535c85" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d67955bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_f1b860956387c67fb53474c999071012.setContent(html_192b526090a553a13ff704439f535c85);
+            
+        
+
+        polygon_dde4e0b8a65b33946ec8ad57c60cadc9.bindPopup(popup_f1b860956387c67fb53474c999071012)
+        ;
+
+        
+    
+    
+            polygon_dde4e0b8a65b33946ec8ad57c60cadc9.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d67955bf
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_9a1a80dcfdaf70e9ae4a91933dbfc85e = L.polygon(
+                [[40.7581788, -73.9850903], [40.7581596, -73.9851332], [40.7581237, -73.9851318], [40.7581069, -73.9850875], [40.7581261, -73.9850446], [40.758162, -73.985046]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_2bb873bfca873da2079228ba78c777dc = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_33fb75f1a6c83dac4b7821311cc1cfc4 = $(`<div id="html_33fb75f1a6c83dac4b7821311cc1cfc4" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d67956bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_2bb873bfca873da2079228ba78c777dc.setContent(html_33fb75f1a6c83dac4b7821311cc1cfc4);
+            
+        
+
+        polygon_9a1a80dcfdaf70e9ae4a91933dbfc85e.bindPopup(popup_2bb873bfca873da2079228ba78c777dc)
+        ;
+
+        
+    
+    
+            polygon_9a1a80dcfdaf70e9ae4a91933dbfc85e.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d67956bf
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_fed2854f9193149739526193ce560b98 = L.polygon(
+                [[40.7585069, -73.9849284], [40.7584878, -73.9849714], [40.7584518, -73.9849699], [40.7584351, -73.9849256], [40.7584542, -73.9848827], [40.7584901, -73.9848841]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_4d1473706105342f7b6026c8a96aab22 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_ed445843ce71a9c4e8096206b140f853 = $(`<div id="html_ed445843ce71a9c4e8096206b140f853" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d6795dbf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_4d1473706105342f7b6026c8a96aab22.setContent(html_ed445843ce71a9c4e8096206b140f853);
+            
+        
+
+        polygon_fed2854f9193149739526193ce560b98.bindPopup(popup_4d1473706105342f7b6026c8a96aab22)
+        ;
+
+        
+    
+    
+            polygon_fed2854f9193149739526193ce560b98.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d6795dbf
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_89567fd93ad694e7b3be3f4d644a4ef3 = L.polygon(
+                [[40.7577043, -73.9846785], [40.7576851, -73.9847215], [40.7576492, -73.9847201], [40.7576324, -73.9846757], [40.7576515, -73.9846328], [40.7576875, -73.9846342]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_6a314fe1b457d65bb57072103811ce94 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_abd063510b692a8c58acf5c2862e7680 = $(`<div id="html_abd063510b692a8c58acf5c2862e7680" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679c9bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_6a314fe1b457d65bb57072103811ce94.setContent(html_abd063510b692a8c58acf5c2862e7680);
+            
+        
+
+        polygon_89567fd93ad694e7b3be3f4d644a4ef3.bindPopup(popup_6a314fe1b457d65bb57072103811ce94)
+        ;
+
+        
+    
+    
+            polygon_89567fd93ad694e7b3be3f4d644a4ef3.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d679c9bf
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_1dc7c8ebad4ba91c0c85b41c6b29c5af = L.polygon(
+                [[40.7577019, -73.9847658], [40.7576828, -73.9848088], [40.7576468, -73.9848074], [40.75763, -73.984763], [40.7576492, -73.9847201], [40.7576851, -73.9847215]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_c2422f71b9123ce72533d8eb2eedfa9c = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_c64f2e5b413b4efae1e32080b06b0c17 = $(`<div id="html_c64f2e5b413b4efae1e32080b06b0c17" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679cd7f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_c2422f71b9123ce72533d8eb2eedfa9c.setContent(html_c64f2e5b413b4efae1e32080b06b0c17);
+            
+        
+
+        polygon_1dc7c8ebad4ba91c0c85b41c6b29c5af.bindPopup(popup_c2422f71b9123ce72533d8eb2eedfa9c)
+        ;
+
+        
+    
+    
+            polygon_1dc7c8ebad4ba91c0c85b41c6b29c5af.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d679cd7f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_4d39ed546e3b317d5c6105eb09ed6aa4 = L.polygon(
+                [[40.7586722, -73.9848038], [40.758653, -73.9848468], [40.7586171, -73.9848454], [40.7586003, -73.984801], [40.7586195, -73.9847581], [40.7586554, -73.9847595]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_372b4f5100cda6271ebd5f42a429c84f = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_00148616cf59adb2c333c6b4dbc8956c = $(`<div id="html_00148616cf59adb2c333c6b4dbc8956c" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d67b34ff</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_372b4f5100cda6271ebd5f42a429c84f.setContent(html_00148616cf59adb2c333c6b4dbc8956c);
+            
+        
+
+        polygon_4d39ed546e3b317d5c6105eb09ed6aa4.bindPopup(popup_372b4f5100cda6271ebd5f42a429c84f)
+        ;
+
+        
+    
+    
+            polygon_4d39ed546e3b317d5c6105eb09ed6aa4.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d67b34ff
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_96425f1f492a62ad07d2f812f263797f = L.polygon(
+                [[40.7586195, -73.9847581], [40.7586003, -73.984801], [40.7585644, -73.9847996], [40.7585476, -73.9847553], [40.7585667, -73.9847123], [40.7586027, -73.9847137]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_c060cdd2da6f7d7e6e69c34dcd74c55a = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_0d3e9c734a0fba767fee7cb2c0e96b5e = $(`<div id="html_0d3e9c734a0fba767fee7cb2c0e96b5e" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d67b37bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #3                 </div>                 </div>`)[0];
+                popup_c060cdd2da6f7d7e6e69c34dcd74c55a.setContent(html_0d3e9c734a0fba767fee7cb2c0e96b5e);
+            
+        
+
+        polygon_96425f1f492a62ad07d2f812f263797f.bindPopup(popup_c060cdd2da6f7d7e6e69c34dcd74c55a)
+        ;
+
+        
+    
+    
+            polygon_96425f1f492a62ad07d2f812f263797f.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d67b37bf
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_2b1b38aff7c312f621435a1da9d6c87d = L.polygon(
+                [[40.7583803, -73.9856224], [40.7583611, -73.9856654], [40.7583252, -73.985664], [40.7583084, -73.9856196], [40.7583275, -73.9855767], [40.7583635, -73.9855781]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_cf82deb83c7a918d1f7b95d3466378c2 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_5a3ccb85e614108eac2a15e547ecbc4d = $(`<div id="html_5a3ccb85e614108eac2a15e547ecbc4d" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679053f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #4                 </div>                 </div>`)[0];
+                popup_cf82deb83c7a918d1f7b95d3466378c2.setContent(html_5a3ccb85e614108eac2a15e547ecbc4d);
+            
+        
+
+        polygon_2b1b38aff7c312f621435a1da9d6c87d.bindPopup(popup_cf82deb83c7a918d1f7b95d3466378c2)
+        ;
+
+        
+    
+    
+            polygon_2b1b38aff7c312f621435a1da9d6c87d.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d679053f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_6ed70d3b20acb0dea5a471afeea50363 = L.polygon(
+                [[40.7581623, -73.9857013], [40.7581431, -73.9857442], [40.7581072, -73.9857428], [40.7580904, -73.9856984], [40.7581095, -73.9856555], [40.7581455, -73.9856569]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_68104a0a5005a7a9e85c1fdbda1de8ce = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_ab832d32d15bd98210c037281930a55b = $(`<div id="html_ab832d32d15bd98210c037281930a55b" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d67906bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #4                 </div>                 </div>`)[0];
+                popup_68104a0a5005a7a9e85c1fdbda1de8ce.setContent(html_ab832d32d15bd98210c037281930a55b);
+            
+        
+
+        polygon_6ed70d3b20acb0dea5a471afeea50363.bindPopup(popup_68104a0a5005a7a9e85c1fdbda1de8ce)
+        ;
+
+        
+    
+    
+            polygon_6ed70d3b20acb0dea5a471afeea50363.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d67906bf
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_ca24f09ad19f732a7277ba535854b664 = L.polygon(
+                [[40.7582174, -73.9856597], [40.7581982, -73.9857027], [40.7581623, -73.9857013], [40.7581455, -73.9856569], [40.7581646, -73.985614], [40.7582006, -73.9856154]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_ccd96e81d4930df9a5c05d946e8fcd0d = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_99387ae1d82e1db7afaba73b0805343a = $(`<div id="html_99387ae1d82e1db7afaba73b0805343a" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d67907bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #4                 </div>                 </div>`)[0];
+                popup_ccd96e81d4930df9a5c05d946e8fcd0d.setContent(html_99387ae1d82e1db7afaba73b0805343a);
+            
+        
+
+        polygon_ca24f09ad19f732a7277ba535854b664.bindPopup(popup_ccd96e81d4930df9a5c05d946e8fcd0d)
+        ;
+
+        
+    
+    
+            polygon_ca24f09ad19f732a7277ba535854b664.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d67907bf
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_907a609b5b13eaeb68cccec8c28dfed6 = L.polygon(
+                [[40.7584904, -73.9855394], [40.7584713, -73.9855823], [40.7584353, -73.9855809], [40.7584185, -73.9855366], [40.7584377, -73.9854936], [40.7584736, -73.985495]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_a72efebec25594060092621edf10fe49 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_34bd4aae94263b77c08b8813faf5a05a = $(`<div id="html_34bd4aae94263b77c08b8813faf5a05a" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d6790dbf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #4                 </div>                 </div>`)[0];
+                popup_a72efebec25594060092621edf10fe49.setContent(html_34bd4aae94263b77c08b8813faf5a05a);
+            
+        
+
+        polygon_907a609b5b13eaeb68cccec8c28dfed6.bindPopup(popup_a72efebec25594060092621edf10fe49)
+        ;
+
+        
+    
+    
+            polygon_907a609b5b13eaeb68cccec8c28dfed6.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d6790dbf
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_6c592c10c8cb327beef1ffe53d07c4bb = L.polygon(
+                [[40.7581599, -73.9857885], [40.7581408, -73.9858315], [40.7581048, -73.9858301], [40.758088, -73.9857857], [40.7581072, -73.9857428], [40.7581431, -73.9857442]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_76cd39c750d95d91cfe51ef7cf2147fd = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_dcb48a10f9f1255e25fb899c9605d3ac = $(`<div id="html_dcb48a10f9f1255e25fb899c9605d3ac" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d6792a7f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #4                 </div>                 </div>`)[0];
+                popup_76cd39c750d95d91cfe51ef7cf2147fd.setContent(html_dcb48a10f9f1255e25fb899c9605d3ac);
+            
+        
+
+        polygon_6c592c10c8cb327beef1ffe53d07c4bb.bindPopup(popup_76cd39c750d95d91cfe51ef7cf2147fd)
+        ;
+
+        
+    
+    
+            polygon_6c592c10c8cb327beef1ffe53d07c4bb.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d6792a7f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_47280460bbc06b146abff5df35b022f0 = L.polygon(
+                [[40.7579419, -73.9858674], [40.7579228, -73.9859103], [40.7578869, -73.9859089], [40.7578701, -73.9858645], [40.7578892, -73.9858216], [40.7579252, -73.985823]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_f2fe705dacdfeb8f23434a82fb0c220c = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_c08a94d939b9db3f41491812853a3f4c = $(`<div id="html_c08a94d939b9db3f41491812853a3f4c" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679357f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #4                 </div>                 </div>`)[0];
+                popup_f2fe705dacdfeb8f23434a82fb0c220c.setContent(html_c08a94d939b9db3f41491812853a3f4c);
+            
+        
+
+        polygon_47280460bbc06b146abff5df35b022f0.bindPopup(popup_f2fe705dacdfeb8f23434a82fb0c220c)
+        ;
+
+        
+    
+    
+            polygon_47280460bbc06b146abff5df35b022f0.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d679357f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_c002bbf0951c7d77616b16e5e0a73c7c = L.polygon(
+                [[40.757724, -73.9859462], [40.7577048, -73.9859891], [40.7576689, -73.9859877], [40.7576521, -73.9859434], [40.7576712, -73.9859004], [40.7577072, -73.9859018]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_7ad4efe01d9959821c75d889d4f6460b = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_e125a18be5ab15c431ec914ebd6100e7 = $(`<div id="html_e125a18be5ab15c431ec914ebd6100e7" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d67936ff</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #4                 </div>                 </div>`)[0];
+                popup_7ad4efe01d9959821c75d889d4f6460b.setContent(html_e125a18be5ab15c431ec914ebd6100e7);
+            
+        
+
+        polygon_c002bbf0951c7d77616b16e5e0a73c7c.bindPopup(popup_7ad4efe01d9959821c75d889d4f6460b)
+        ;
+
+        
+    
+    
+            polygon_c002bbf0951c7d77616b16e5e0a73c7c.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d67936ff
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_79f2972fc1a359c6563ed246e56f6213 = L.polygon(
+                [[40.7578341, -73.9858631], [40.757815, -73.9859061], [40.757779, -73.9859047], [40.7577623, -73.9858603], [40.7577814, -73.9858174], [40.7578173, -73.9858188]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_8ba883f8e464c7e1a50e79ac88340f87 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_1f21594c2a7675b9c97e1045300b5c76 = $(`<div id="html_1f21594c2a7675b9c97e1045300b5c76" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d679373f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #4                 </div>                 </div>`)[0];
+                popup_8ba883f8e464c7e1a50e79ac88340f87.setContent(html_1f21594c2a7675b9c97e1045300b5c76);
+            
+        
+
+        polygon_79f2972fc1a359c6563ed246e56f6213.bindPopup(popup_8ba883f8e464c7e1a50e79ac88340f87)
+        ;
+
+        
+    
+    
+            polygon_79f2972fc1a359c6563ed246e56f6213.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d679373f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_408fd82ea6bbd3cfa810ca96a8f73533 = L.polygon(
+                [[40.7579994, -73.9857386], [40.7579802, -73.9857815], [40.7579443, -73.9857801], [40.7579275, -73.9857357], [40.7579467, -73.9856928], [40.7579826, -73.9856942]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_18e639f5aa04b817f695c049294a191f = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_f981fabe42e4b9426e71d618c1eb68ed = $(`<div id="html_f981fabe42e4b9426e71d618c1eb68ed" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d6793c7f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #4                 </div>                 </div>`)[0];
+                popup_18e639f5aa04b817f695c049294a191f.setContent(html_f981fabe42e4b9426e71d618c1eb68ed);
+            
+        
+
+        polygon_408fd82ea6bbd3cfa810ca96a8f73533.bindPopup(popup_18e639f5aa04b817f695c049294a191f)
+        ;
+
+        
+    
+    
+            polygon_408fd82ea6bbd3cfa810ca96a8f73533.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d6793c7f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_c650bc4c944c8cb243143570fd718797 = L.polygon(
+                [[40.757997, -73.9858258], [40.7579779, -73.9858688], [40.7579419, -73.9858674], [40.7579252, -73.985823], [40.7579443, -73.9857801], [40.7579802, -73.9857815]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_7904c9e6118bf8756b4b63eeb55c4837 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_10407c74dc9a3f3a70bf01ee5629fb87 = $(`<div id="html_10407c74dc9a3f3a70bf01ee5629fb87" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d6793cff</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #4                 </div>                 </div>`)[0];
+                popup_7904c9e6118bf8756b4b63eeb55c4837.setContent(html_10407c74dc9a3f3a70bf01ee5629fb87);
+            
+        
+
+        polygon_c650bc4c944c8cb243143570fd718797.bindPopup(popup_7904c9e6118bf8756b4b63eeb55c4837)
+        ;
+
+        
+    
+    
+            polygon_c650bc4c944c8cb243143570fd718797.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d6793cff
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_09e8be7afe185223bd62ff38eebe5f70 = L.polygon(
+                [[40.7587084, -73.9854605], [40.7586892, -73.9855035], [40.7586533, -73.9855021], [40.7586365, -73.9854577], [40.7586557, -73.9854148], [40.7586916, -73.9854162]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_32e6426d6e05d5bf44537a91bd3cb5ee = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_92fc054f1d09e22e1fb1a053a2666bc5 = $(`<div id="html_92fc054f1d09e22e1fb1a053a2666bc5" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a100d67944bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #4                 </div>                 </div>`)[0];
+                popup_32e6426d6e05d5bf44537a91bd3cb5ee.setContent(html_92fc054f1d09e22e1fb1a053a2666bc5);
+            
+        
+
+        polygon_09e8be7afe185223bd62ff38eebe5f70.bindPopup(popup_32e6426d6e05d5bf44537a91bd3cb5ee)
+        ;
+
+        
+    
+    
+            polygon_09e8be7afe185223bd62ff38eebe5f70.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a100d67944bf
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_66dd32ef0f8ae446d1ec3f3b665aaff6 = L.polygon(
+                [[40.7575587, -73.9860708], [40.7575396, -73.9861137], [40.7575036, -73.9861123], [40.7574868, -73.986068], [40.757506, -73.986025], [40.7575419, -73.9860264]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_339fb23e27a955ffe754483f8a49c9d8 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_e86a511fa201be329901ec5b173670aa = $(`<div id="html_e86a511fa201be329901ec5b173670aa" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a10725b6d1bf</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #4                 </div>                 </div>`)[0];
+                popup_339fb23e27a955ffe754483f8a49c9d8.setContent(html_e86a511fa201be329901ec5b173670aa);
+            
+        
+
+        polygon_66dd32ef0f8ae446d1ec3f3b665aaff6.bindPopup(popup_339fb23e27a955ffe754483f8a49c9d8)
+        ;
+
+        
+    
+    
+            polygon_66dd32ef0f8ae446d1ec3f3b665aaff6.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a10725b6d1bf
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_bbaae0642d575fedcbe8acbb193e4803 = L.polygon(
+                [[40.7575564, -73.986158], [40.7575372, -73.986201], [40.7575013, -73.9861996], [40.7574845, -73.9861552], [40.7575036, -73.9861123], [40.7575396, -73.9861137]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_cdb0d8526884ce931531cafa5b9527c6 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_398e9e36853b2c84cf3827a3442f2b5f = $(`<div id="html_398e9e36853b2c84cf3827a3442f2b5f" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a10725b6d57f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #4                 </div>                 </div>`)[0];
+                popup_cdb0d8526884ce931531cafa5b9527c6.setContent(html_398e9e36853b2c84cf3827a3442f2b5f);
+            
+        
+
+        polygon_bbaae0642d575fedcbe8acbb193e4803.bindPopup(popup_cdb0d8526884ce931531cafa5b9527c6)
+        ;
+
+        
+    
+    
+            polygon_bbaae0642d575fedcbe8acbb193e4803.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a10725b6d57f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_01bb572e74b82b9b1276ed803f10902f = L.polygon(
+                [[40.7573958, -73.9861081], [40.7573767, -73.986151], [40.7573407, -73.9861496], [40.757324, -73.9861053], [40.7573431, -73.9860623], [40.757379, -73.9860637]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_9017cae9ca10fffc6b5ffb6225974c1a = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_98d9749030390e71df2bcd9cdf6e2a44 = $(`<div id="html_98d9749030390e71df2bcd9cdf6e2a44" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a10725b6d77f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #4                 </div>                 </div>`)[0];
+                popup_9017cae9ca10fffc6b5ffb6225974c1a.setContent(html_98d9749030390e71df2bcd9cdf6e2a44);
+            
+        
+
+        polygon_01bb572e74b82b9b1276ed803f10902f.bindPopup(popup_9017cae9ca10fffc6b5ffb6225974c1a)
+        ;
+
+        
+    
+    
+            polygon_01bb572e74b82b9b1276ed803f10902f.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a10725b6d77f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_712f349578a1a91401d2b38f534797e4 = L.polygon(
+                [[40.7576138, -73.9860292], [40.7575946, -73.9860722], [40.7575587, -73.9860708], [40.7575419, -73.9860264], [40.7575611, -73.9859835], [40.757597, -73.9859849]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_326759b0d876c2f272b2709ca178aebf = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_22eb330fa554995a95de3353ba0b28fc = $(`<div id="html_22eb330fa554995a95de3353ba0b28fc" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a10725b6dc7f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #4                 </div>                 </div>`)[0];
+                popup_326759b0d876c2f272b2709ca178aebf.setContent(html_22eb330fa554995a95de3353ba0b28fc);
+            
+        
+
+        polygon_712f349578a1a91401d2b38f534797e4.bindPopup(popup_326759b0d876c2f272b2709ca178aebf)
+        ;
+
+        
+    
+    
+            polygon_712f349578a1a91401d2b38f534797e4.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a10725b6dc7f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_2dd85fb76f254580de229d950f283ebd = L.polygon(
+                [[40.7576689, -73.9859877], [40.7576497, -73.9860307], [40.7576138, -73.9860292], [40.757597, -73.9859849], [40.7576162, -73.985942], [40.7576521, -73.9859434]],
+                {"bubblingMouseEvents": true, "color": "#FF851B", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFDC00", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_d31cfcc7deedb26f7aa217939524e456);
+        
+    
+        var popup_a6d17683f4d95dd2d264455cf270c067 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_d9e9a3993c0e2dfbc39d135e034f4796 = $(`<div id="html_d9e9a3993c0e2dfbc39d135e034f4796" style="width: 100.0%; height: 100.0%;">                 <div style="font-family: sans-serif; font-size: 11px; width: 190px;">                     <h5 style="margin: 0 0 4px 0; color: #FF851B;">H3 Hexagon</h5>                     <b>H3 Cell ID:</b> <code>8d2a10725b6dd7f</code><br/>                     <b>Resolution:</b> 13<br/>                     <b>Pavement ID:</b> #4                 </div>                 </div>`)[0];
+                popup_a6d17683f4d95dd2d264455cf270c067.setContent(html_d9e9a3993c0e2dfbc39d135e034f4796);
+            
+        
+
+        polygon_2dd85fb76f254580de229d950f283ebd.bindPopup(popup_a6d17683f4d95dd2d264455cf270c067)
+        ;
+
+        
+    
+    
+            polygon_2dd85fb76f254580de229d950f283ebd.bindTooltip(
+                `<div>
+                     H3 Hex: 8d2a10725b6dd7f
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_d31cfcc7deedb26f7aa217939524e456.addTo(map_c8bce3f7437564ff3f98228cd995c1f7);
+        
+    
+            var feature_group_205fca16d2c5c0b76afdcb3f000fd482 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_abe99104fe0f9e21ea76eb8cce23a0be = L.circleMarker(
+                [40.7573609, -73.985501],
                 {"bubblingMouseEvents": true, "color": "#001f3f", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0074D9", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
-            ).addTo(feature_group_486e573771f98f3512b8d083d78f9cc2);
+            ).addTo(feature_group_205fca16d2c5c0b76afdcb3f000fd482);
         
     
-            circle_marker_c913e20e2bfa303d3e50623bd8b238c7.bindTooltip(
+            circle_marker_abe99104fe0f9e21ea76eb8cce23a0be.bindTooltip(
                 `<div>
-                     Centroid #1: 40.757397, -73.986156
+                     Centroid #1: 40.757361, -73.985501
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var circle_marker_de96f11f8b0de97494293af0d6510c9f = L.circleMarker(
-                [40.7574633, -73.9857459],
+            var circle_marker_d592d3a694f046f93e39e644d6ac1e62 = L.circleMarker(
+                [40.7576598, -73.9853134],
                 {"bubblingMouseEvents": true, "color": "#001f3f", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0074D9", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
-            ).addTo(feature_group_486e573771f98f3512b8d083d78f9cc2);
+            ).addTo(feature_group_205fca16d2c5c0b76afdcb3f000fd482);
         
     
-            circle_marker_de96f11f8b0de97494293af0d6510c9f.bindTooltip(
+            circle_marker_d592d3a694f046f93e39e644d6ac1e62.bindTooltip(
                 `<div>
-                     Centroid #2: 40.757463, -73.985746
+                     Centroid #2: 40.757660, -73.985313
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var circle_marker_93b9c5bf4dd15c8d3d24b6fd89e2aeaf = L.circleMarker(
-                [40.7579589, -73.9855223],
+            var circle_marker_6a3e773aaccedda9e9fa293ae5b27e43 = L.circleMarker(
+                [40.7581515, -73.9851136],
                 {"bubblingMouseEvents": true, "color": "#001f3f", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0074D9", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
-            ).addTo(feature_group_486e573771f98f3512b8d083d78f9cc2);
+            ).addTo(feature_group_205fca16d2c5c0b76afdcb3f000fd482);
         
     
-            circle_marker_93b9c5bf4dd15c8d3d24b6fd89e2aeaf.bindTooltip(
+            circle_marker_6a3e773aaccedda9e9fa293ae5b27e43.bindTooltip(
                 `<div>
-                     Centroid #3: 40.757959, -73.985522
+                     Centroid #3: 40.758151, -73.985114
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            var marker_8b5cebf5b77c55b4cabbf275275fc171 = L.marker(
+            var circle_marker_879bf1f75a968323f2f1f876197ab51d = L.circleMarker(
+                [40.7579418, -73.9858178],
+                {"bubblingMouseEvents": true, "color": "#001f3f", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0074D9", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 3}
+            ).addTo(feature_group_205fca16d2c5c0b76afdcb3f000fd482);
+        
+    
+            circle_marker_879bf1f75a968323f2f1f876197ab51d.bindTooltip(
+                `<div>
+                     Centroid #4: 40.757942, -73.985818
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_840f7b021ae6676b2326b8c421b21696 = L.marker(
                 [40.758, -73.9855],
-                {}
-            ).addTo(feature_group_486e573771f98f3512b8d083d78f9cc2);
+                {
+}
+            ).addTo(feature_group_205fca16d2c5c0b76afdcb3f000fd482);
         
     
-            var icon_d4491bfb9d3f45598a67a1887349c587 = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            var icon_f312e61b362dcbb5f781358c15aa5afd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
             );
-            marker_8b5cebf5b77c55b4cabbf275275fc171.setIcon(icon_d4491bfb9d3f45598a67a1887349c587);
         
     
-            marker_8b5cebf5b77c55b4cabbf275275fc171.bindTooltip(
+            marker_840f7b021ae6676b2326b8c421b21696.bindTooltip(
                 `<div>
                      Center Query Location
                  </div>`,
-                {"sticky": true}
+                {
+  "sticky": true,
+}
             );
         
     
-            feature_group_486e573771f98f3512b8d083d78f9cc2.addTo(map_49b2fa507c146a08d9a6ef8b2e9a8744);
+                marker_840f7b021ae6676b2326b8c421b21696.setIcon(icon_f312e61b362dcbb5f781358c15aa5afd);
+            
+    
+            feature_group_205fca16d2c5c0b76afdcb3f000fd482.addTo(map_c8bce3f7437564ff3f98228cd995c1f7);
         
     
-            var layer_control_7372866021222e45b8eced84f67872ac_layers = {
+            var layer_control_edfd492c867dc97f78ad471c1bf227f2_layers = {
                 base_layers : {
-                    "openstreetmap" : tile_layer_ff58b4ca741c7292a292ee351c926df8,
+                    "openstreetmap" : tile_layer_cdf7214fe6595cc300de2df6b47c7553,
                 },
                 overlays :  {
-                    "Detected Sidewalks / Pavements" : feature_group_33a6cd2b1240e32db642e946919c2575,
-                    "H3 Hexagonal Grid (Amber)" : feature_group_99d4cd247a0c379465bff57a3f32e97d,
-                    "Centroid Markers" : feature_group_486e573771f98f3512b8d083d78f9cc2,
+                    "Detected Sidewalks / Pavements" : feature_group_212969ac6c46f9016a7b25dd3c03fd05,
+                    "H3 Hexagonal Grid (Amber)" : feature_group_d31cfcc7deedb26f7aa217939524e456,
+                    "Centroid Markers" : feature_group_205fca16d2c5c0b76afdcb3f000fd482,
                 },
             };
-            let layer_control_7372866021222e45b8eced84f67872ac = L.control.layers(
-                layer_control_7372866021222e45b8eced84f67872ac_layers.base_layers,
-                layer_control_7372866021222e45b8eced84f67872ac_layers.overlays,
-                {"autoZIndex": true, "collapsed": false, "position": "topright"}
-            ).addTo(map_49b2fa507c146a08d9a6ef8b2e9a8744);
+            let layer_control_edfd492c867dc97f78ad471c1bf227f2 = L.control.layers(
+                layer_control_edfd492c867dc97f78ad471c1bf227f2_layers.base_layers,
+                layer_control_edfd492c867dc97f78ad471c1bf227f2_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_c8bce3f7437564ff3f98228cd995c1f7);
 
         
 </script>

@@ -1,0 +1,16 @@
+# Core Networking & Utilities
+requests>=2.28.0
+python-dotenv>=1.0.0
+
+# Numerical, Computer Vision & Deep Learning
+numpy>=1.24.0,<2.0.0
+Pillow>=9.5.0
+opencv-python>=4.7.0,<=4.10.0.84
+torch>=2.0.0
+transformers==4.51.3
+
+# Geospatial Analysis & Spatial Indexing
+shapely>=2.0.0
+geopandas>=0.13.0
+folium>=0.14.0
+h3>=3.7.0

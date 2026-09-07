@@ -41,16 +41,22 @@ except ImportError:
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("SidewalkGeotagger")
 
+MODEL_PRESETS = {
+    "loveda": "wu-pr-gw/segformer-b2-finetuned-with-LoveDA",
+    "cityscapes": "nvidia/segformer-b0-finetuned-cityscapes-1024-1024",
+    "ade20k": "nvidia/segformer-b0-finetuned-ade-512-512",
+}
+
 
 class SidewalkGeotagger:
-    def __init__(self, google_api_key: Optional[str] = None, model_name: str = "nvidia/segformer-b0-finetuned-cityscapes-1024-1024"):
+    def __init__(self, google_api_key: Optional[str] = None, model_name: str = "wu-pr-gw/segformer-b2-finetuned-with-LoveDA"):
         """
         Initializes the Sidewalk Geotagger with Google Maps API access 
         and a pretrained semantic segmentation model.
         """
         self.api_key = google_api_key or os.getenv("GOOGLE_MAPS_API_KEY")
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.model_name = model_name
+        self.model_name = MODEL_PRESETS.get(model_name.lower(), model_name)
         self.processor = None
         self.model = None
 
@@ -95,6 +101,212 @@ class SidewalkGeotagger:
         bounds = self.get_mercator_bounds(lat, lon, zoom, size, size)
         return img, bounds
 
+    def check_streetview_availability(self, lat: float, lon: float) -> Dict[str, Any]:
+        """
+        Queries Google Street View Metadata API to check if panorama coverage exists
+        near the target location without consuming Street View Static image quota.
+        """
+        if not self.api_key:
+            return {"available": False, "reason": "No API key provided"}
+
+        url = "https://maps.googleapis.com/maps/api/streetview/metadata"
+        params = {
+            "location": f"{lat},{lon}",
+            "key": self.api_key
+        }
+        try:
+            resp = requests.get(url, params=params, timeout=10)
+            if resp.status_code == 200:
+                data = resp.json()
+                if data.get("status") == "OK":
+                    loc = data.get("location", {})
+                    return {
+                        "available": True,
+                        "pano_id": data.get("pano_id"),
+                        "date": data.get("date", "N/A"),
+                        "camera_lat": loc.get("lat", lat),
+                        "camera_lon": loc.get("lng", lon),
+                        "copyright": data.get("copyright", "")
+                    }
+                return {"available": False, "status": data.get("status")}
+            return {"available": False, "status": resp.status_code}
+        except Exception as e:
+            logger.debug(f"Street View metadata check error: {e}")
+            return {"available": False, "error": str(e)}
+
+    @staticmethod
+    def calculate_bearing(from_lat: float, from_lon: float, to_lat: float, to_lon: float) -> float:
+        """
+        Calculates compass bearing (heading 0-360 degrees) from camera position towards target centroid.
+        """
+        lat1 = math.radians(from_lat)
+        lat2 = math.radians(to_lat)
+        diff_lon = math.radians(to_lon - from_lon)
+
+        x = math.sin(diff_lon) * math.cos(lat2)
+        y = math.cos(lat1) * math.sin(lat2) - math.sin(lat1) * math.cos(lat2) * math.cos(diff_lon)
+        initial_bearing = math.atan2(x, y)
+        compass_bearing = (math.degrees(initial_bearing) + 360) % 360
+        return round(compass_bearing, 1)
+
+    def fetch_streetview_image(
+        self,
+        lat: float,
+        lon: float,
+        heading: Optional[float] = None,
+        pitch: int = -10,
+        fov: int = 90,
+        size: str = "600x400"
+    ) -> Optional[Image.Image]:
+        """
+        Fetches ground-level perspective imagery from Google Street View Static API.
+        """
+        if not self.api_key:
+            return None
+
+        url = "https://maps.googleapis.com/maps/api/streetview"
+        params = {
+            "location": f"{lat},{lon}",
+            "size": size,
+            "fov": fov,
+            "pitch": pitch,
+            "key": self.api_key
+        }
+        if heading is not None:
+            params["heading"] = heading
+
+        try:
+            resp = requests.get(url, params=params, stream=True, timeout=15)
+            if resp.status_code == 200 and "image" in resp.headers.get("Content-Type", ""):
+                return Image.open(resp.raw).convert("RGB")
+            logger.warning(f"Street View image fetch returned status {resp.status_code}")
+            return None
+        except Exception as e:
+            logger.warning(f"Failed to fetch Street View image: {e}")
+            return None
+
+    def verify_streetview_sidewalk(
+        self,
+        sv_image: Image.Image,
+        target_keywords: Optional[List[str]] = None,
+        min_coverage_pct: float = 1.5
+    ) -> Dict[str, Any]:
+        """
+        Performs semantic segmentation on the ground-level Street View image
+        to verify sidewalk / pavement presence from ground level.
+        """
+        if sv_image is None or self.model is None or self.processor is None:
+            return {"verified": False, "sidewalk_coverage_pct": 0.0, "detected_classes": []}
+
+        if target_keywords is None:
+            target_keywords = ["sidewalk", "pavement", "footpath", "footway"]
+
+        inputs = self.processor(images=sv_image, return_tensors="pt").to(self.device)
+        with torch.no_grad():
+            outputs = self.model(**inputs)
+            logits = outputs.logits
+            upsampled_logits = torch.nn.functional.interpolate(
+                logits,
+                size=sv_image.size[::-1],
+                mode="bilinear",
+                align_corners=False
+            )
+            pred_mask = upsampled_logits.argmax(dim=1)[0].cpu().numpy()
+
+        id2label = getattr(self.model.config, "id2label", {})
+        target_ids = [
+            cid for cid, label in id2label.items()
+            if any(kw in label.lower() for kw in target_keywords)
+        ]
+
+        total_pixels = pred_mask.size
+        sidewalk_pixels = int(np.isin(pred_mask, target_ids).sum()) if target_ids else 0
+        coverage_pct = round((sidewalk_pixels / total_pixels) * 100, 2)
+
+        unique_classes, counts = np.unique(pred_mask, return_counts=True)
+        detected_classes = [
+            {"label": id2label.get(cid, str(cid)), "pct": round((cnt / total_pixels) * 100, 1)}
+            for cid, count in zip(unique_classes, counts)
+            if (count / total_pixels) >= 0.01
+        ]
+
+        verified = bool(coverage_pct >= min_coverage_pct)
+        return {
+            "verified": verified,
+            "sidewalk_coverage_pct": coverage_pct,
+            "detected_classes": detected_classes
+        }
+
+    def verify_features_with_streetview(
+        self,
+        features: List[Dict[str, Any]],
+        save_images: bool = False,
+        output_dir: str = "streetview_images"
+    ) -> List[Dict[str, Any]]:
+        """
+        Enriches detected polygon features by querying Google Street View metadata and
+        ground-level imagery at each pavement centroid to visually verify sidewalk presence.
+        """
+        if not features:
+            return features
+
+        if save_images:
+            os.makedirs(output_dir, exist_ok=True)
+
+        logger.info(f"Starting Street View ground verification on {len(features)} detected feature(s)...")
+
+        for f in features:
+            cent_lat = f["centroid_lat"]
+            cent_lon = f["centroid_lon"]
+
+            # 1. Metadata check (quota efficient)
+            sv_meta = self.check_streetview_availability(cent_lat, cent_lon)
+            if not sv_meta.get("available"):
+                f["streetview_available"] = False
+                f["streetview_verified"] = False
+                f["streetview_coverage_pct"] = 0.0
+                f["streetview_pano_id"] = None
+                f["streetview_date"] = None
+                f["streetview_image_path"] = None
+                continue
+
+            f["streetview_available"] = True
+            f["streetview_pano_id"] = sv_meta.get("pano_id")
+            f["streetview_date"] = sv_meta.get("date")
+
+            # 2. Heading from camera position towards pavement centroid
+            cam_lat = sv_meta.get("camera_lat", cent_lat)
+            cam_lon = sv_meta.get("camera_lon", cent_lon)
+            heading = self.calculate_bearing(cam_lat, cam_lon, cent_lat, cent_lon)
+
+            # 3. Fetch Street View image
+            sv_img = self.fetch_streetview_image(cam_lat, cam_lon, heading=heading, pitch=-10)
+            if sv_img is None:
+                f["streetview_verified"] = False
+                f["streetview_coverage_pct"] = 0.0
+                f["streetview_image_path"] = None
+                continue
+
+            # 4. Save image if requested
+            if save_images:
+                img_path = os.path.join(output_dir, f"pavement_{f['id']}_streetview.jpg")
+                sv_img.save(img_path)
+                f["streetview_image_path"] = img_path
+
+            # 5. Semantic segmentation verification
+            verif_res = self.verify_streetview_sidewalk(sv_img)
+            f["streetview_verified"] = verif_res["verified"]
+            f["streetview_coverage_pct"] = verif_res["sidewalk_coverage_pct"]
+            f["streetview_classes"] = verif_res["detected_classes"]
+
+            logger.info(
+                f"Pavement #{f['id']}: Street View pano {f['streetview_pano_id']} ({f['streetview_date']}) "
+                f"-> Verified: {f['streetview_verified']} (Sidewalk coverage: {f['streetview_coverage_pct']}%)"
+            )
+
+        return features
+
+
     def load_local_image(self, image_path: str, lat: float, lon: float, zoom: int = 19) -> Tuple[Image.Image, Dict[str, float]]:
         """
         Loads a local aerial image and computes its geographic bounding box based on center coordinates and zoom.
@@ -138,16 +350,25 @@ class SidewalkGeotagger:
 
         return {"north": north, "south": south, "east": east, "west": west}
 
-    def detect_sidewalk_mask(self, image: Image.Image, target_keywords: Optional[List[str]] = None) -> np.ndarray:
+    def detect_sidewalk_mask(
+        self,
+        image: Image.Image,
+        target_keywords: Optional[List[str]] = None,
+        bounds: Optional[Dict[str, float]] = None,
+        sidewalk_width_m: float = 2.5,
+        exclude_roadway: bool = True,
+        exclude_crossings: bool = True
+    ) -> np.ndarray:
         """
         Runs semantic segmentation to detect sidewalk / pavement pixels.
-        Dynamically finds target class IDs from the model's id2label configuration.
+        Strictly isolates pedestrian sidewalks along curbs and building lines
+        by carving out the central vehicular roadway and severing cross-road intersections.
         """
         if self.model is None or self.processor is None:
             raise RuntimeError("Segmentation model is not loaded.")
 
         if target_keywords is None:
-            target_keywords = ["sidewalk", "pavement", "footpath", "footway", "road", "street", "path"]
+            target_keywords = ["sidewalk", "pavement", "footpath", "footway", "walkway"]
 
         inputs = self.processor(images=image, return_tensors="pt").to(self.device)
         with torch.no_grad():
@@ -163,37 +384,99 @@ class SidewalkGeotagger:
             )
             pred_mask = upsampled_logits.argmax(dim=1)[0].cpu().numpy()
 
-        # Identify relevant target class IDs
         id2label = getattr(self.model.config, "id2label", {})
-        target_ids = [
+
+        # 1. Identify direct pedestrian sidewalk class IDs
+        sidewalk_ids = [
             cid for cid, label in id2label.items()
-            if any(kw in label.lower() for kw in target_keywords)
+            if any(kw in label.lower() for kw in target_keywords) and not any(r in label.lower() for r in ["crosswalk", "road", "street", "highway", "driveway"])
         ]
 
-        # Fallback if no specific labels matched
-        if not target_ids:
-            target_ids = [0, 1]
-            logger.info(f"Using default target class IDs: {target_ids}")
+        # 2. Identify vehicular roadway class IDs
+        road_ids = [
+            cid for cid, label in id2label.items()
+            if any(r in label.lower() for r in ["road", "street", "highway", "lane"])
+        ]
+
+        # 3. Identify building / block structure class IDs
+        building_ids = [
+            cid for cid, label in id2label.items()
+            if any(b in label.lower() for b in ["building", "house", "edifice", "structure"])
+        ]
+
+        # 4. Identify background / open pedestrian space class IDs (e.g. in LoveDA class 1 is 'Background')
+        bg_ped_ids = [
+            cid for cid, label in id2label.items()
+            if any(p in label.lower() for p in ["background", "pedestrian", "plaza", "floor"])
+        ]
+
+        matching_labels = [f"{cid}: {id2label[cid]}" for cid in sidewalk_ids]
+        logger.info(f"Target sidewalk class IDs: {matching_labels}")
+        if road_ids:
+            logger.info(f"Identified vehicular roadway class IDs: {[f'{cid}: {id2label[cid]}' for cid in road_ids]}")
+        if building_ids:
+            logger.info(f"Identified building class IDs: {[f'{cid}: {id2label[cid]}' for cid in building_ids]}")
+
+        # Compute ground sampling distance (meters/pixel) to accurately size the sidewalk buffer:
+        width, height = image.size
+        if bounds is not None:
+            north, south = bounds["north"], bounds["south"]
+            west, east = bounds["west"], bounds["east"]
+            mean_lat = (north + south) / 2.0
+            lat_m_per_deg = 111132.954 - 559.822 * math.cos(2 * math.radians(mean_lat)) + 1.175 * math.cos(4 * math.radians(mean_lat))
+            lon_m_per_deg = 111412.84 * math.cos(math.radians(mean_lat)) - 93.5 * math.cos(3 * math.radians(mean_lat))
+            m_per_px = (abs(east - west) * lon_m_per_deg / width + abs(north - south) * lat_m_per_deg / height) / 2.0
+            sidewalk_px = max(3, int(round(sidewalk_width_m / m_per_px)))
         else:
-            matching_labels = [f"{cid}: {id2label[cid]}" for cid in target_ids]
-            logger.info(f"Identified matching target classes: {matching_labels}")
+            sidewalk_px = 11
 
-        # Log breakdown of detected top classes
-        unique_classes, counts = np.unique(pred_mask, return_counts=True)
-        total_pixels = pred_mask.size
-        detected_summary = [
-            f"'{id2label.get(cid, str(cid))}': {round(count / total_pixels * 100, 1)}%"
-            for cid, count in zip(unique_classes, counts)
-        ]
-        logger.info(f"Class coverage breakdown: {', '.join(detected_summary)}")
+        # Direct sidewalk pixels from model
+        direct_sidewalk = np.isin(pred_mask, sidewalk_ids).astype(np.uint8) * 255 if sidewalk_ids else np.zeros_like(pred_mask, dtype=np.uint8)
+        roads_mask = np.isin(pred_mask, road_ids).astype(np.uint8) * 255 if road_ids else np.zeros_like(pred_mask, dtype=np.uint8)
+        
+        # In overhead remote sensing, all land outside the ground-level street corridor consists of buildings/skyscrapers:
+        buildings_mask = (pred_mask != road_ids[0]).astype(np.uint8) * 255 if road_ids else (np.isin(pred_mask, building_ids).astype(np.uint8) * 255 if building_ids else np.zeros_like(pred_mask, dtype=np.uint8))
 
-        # Generate binary mask matching any of the target class IDs
-        binary_mask = np.isin(pred_mask, target_ids).astype(np.uint8) * 255
+        if np.sum(direct_sidewalk > 0) > 0:
+            # Model has explicit direct sidewalk detection (e.g. Cityscapes/ADE20k)
+            sidewalk_mask = direct_sidewalk
+            if exclude_roadway and np.sum(roads_mask > 0) > 0:
+                sidewalk_mask = cv2.bitwise_and(sidewalk_mask, cv2.bitwise_not(roads_mask))
+            # Guarantee zero overlap with buildings
+            sidewalk_mask = cv2.bitwise_and(sidewalk_mask, cv2.bitwise_not(buildings_mask))
+        else:
+            # Remote sensing / aerial model (e.g. LoveDA):
+            # Ground-level transportation corridor right-of-way is roads_mask.
+            # Sidewalks are the ground-level perimeter ribbons inside the street corridor, directly abutting building facades:
+            if np.sum(roads_mask > 0) > 0:
+                k_clean = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
+                street_clean = cv2.morphologyEx(roads_mask, cv2.MORPH_CLOSE, k_clean)
+                street_clean = cv2.morphologyEx(street_clean, cv2.MORPH_OPEN, k_clean)
 
-        # Morphological post-processing to smooth contours and close small gaps
-        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-        cleaned_mask = cv2.morphologyEx(binary_mask, cv2.MORPH_CLOSE, kernel)
-        cleaned_mask = cv2.morphologyEx(cleaned_mask, cv2.MORPH_OPEN, kernel)
+                # Distance transform from building line into the street corridor:
+                dist_from_building = cv2.distanceTransform(street_clean, cv2.DIST_L2, 5)
+
+                # Ground-level sidewalk is the outer ribbon of the street corridor within sidewalk_px of buildings
+                sidewalk_ribbon = ((street_clean > 0) & (dist_from_building <= sidewalk_px)).astype(np.uint8) * 255
+
+                # STRICT CONSTRAINT: Zero overlap with buildings / skyscrapers!
+                sidewalk_mask = cv2.bitwise_and(sidewalk_ribbon, cv2.bitwise_not(buildings_mask))
+                logger.info(f"Extracted ground-level sidewalk ribbon ({sidewalk_px}px width, {sidewalk_width_m}m) strictly outside building footprints (0% building overlap).")
+            else:
+                sidewalk_mask = np.zeros_like(pred_mask, dtype=np.uint8)
+
+        # Sever cross-road intersection junctions and crosswalks if exclude_crossings is True:
+        if exclude_crossings and np.sum(sidewalk_mask > 0) > 0:
+            # Ensure vehicular roadway core is completely carved out:
+            dist_road = cv2.distanceTransform(roads_mask, cv2.DIST_L2, 5)
+            road_core = (dist_road > sidewalk_px).astype(np.uint8) * 255
+            sidewalk_mask = cv2.bitwise_and(sidewalk_mask, cv2.bitwise_not(road_core))
+            logger.info("Carved out central vehicular roadway corridors and cross-street intersections.")
+
+        # Morphological post-processing to clean up noise and close small gaps
+        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
+        cleaned_mask = cv2.morphologyEx(sidewalk_mask, cv2.MORPH_OPEN, kernel)
+        cleaned_mask = cv2.morphologyEx(cleaned_mask, cv2.MORPH_CLOSE, kernel)
 
         return cleaned_mask
 
@@ -351,7 +634,13 @@ class SidewalkGeotagger:
                 "bbox": [round(min_lat, 7), round(min_lon, 7), round(max_lat, 7), round(max_lon, 7)],
                 "num_vertices": len(coords_lat_lon) - 1,
                 "coordinates_lat_lon": coords_lat_lon,
-                "geometry": poly
+                "geometry": poly,
+                "streetview_available": False,
+                "streetview_verified": None,
+                "streetview_coverage_pct": 0.0,
+                "streetview_pano_id": None,
+                "streetview_date": None,
+                "streetview_image_path": None
             }
             geotagged_features.append(feature)
             feature_id += 1
@@ -372,21 +661,41 @@ class SidewalkGeotagger:
 
         total_area = sum(f["area_sq_m"] for f in features)
         total_hexes = sum(f.get("h3_count", 0) for f in features)
-        print("\n" + "=" * 115)
-        print(f" GEOTAGGED PAVEMENTS & H3 HEXAGONS SUMMARY ({len(features)} detected | Total Area: {total_area:.1f} sq m | Total Hexagons: {total_hexes})")
-        print("=" * 115)
-        header = f"{'ID':<4} | {'Centroid (Lat, Lon)':<25} | {'H3 Centroid (Res 13)':<20} | {'Hex Count':<9} | {'Area (sq m)':<11} | {'Perimeter (m)':<13} | {'Vertices'}"
-        print(header)
-        print("-" * 115)
+        has_sv = any(f.get("streetview_verified") is not None for f in features)
+        if has_sv:
+            print("\n" + "=" * 138)
+            print(f" GEOTAGGED PAVEMENTS & H3 HEXAGONS SUMMARY ({len(features)} detected | Total Area: {total_area:.1f} sq m | Total Hexagons: {total_hexes})")
+            print("=" * 138)
+            header = f"{'ID':<4} | {'Centroid (Lat, Lon)':<25} | {'H3 Centroid (Res 13)':<20} | {'Hex Count':<9} | {'Area (sq m)':<11} | {'SV Verified':<12} | {'SV Sidewalk %':<14} | {'Vertices'}"
+            print(header)
+            print("-" * 138)
 
-        for f in features:
-            centroid_str = f"{f['centroid_lat']:.6f}, {f['centroid_lon']:.6f}"
-            h3_cent = f.get("h3_centroid") or "N/A"
-            hex_cnt = f.get("h3_count", 0)
-            row = f"{f['id']:<4} | {centroid_str:<25} | {h3_cent:<20} | {hex_cnt:<9} | {f['area_sq_m']:<11.1f} | {f['perimeter_m']:<13.1f} | {f['num_vertices']}"
-            print(row)
+            for f in features:
+                centroid_str = f"{f['centroid_lat']:.6f}, {f['centroid_lon']:.6f}"
+                h3_cent = f.get("h3_centroid") or "N/A"
+                hex_cnt = f.get("h3_count", 0)
+                sv_ver = "YES" if f.get("streetview_verified") else ("NO" if f.get("streetview_verified") is False else "N/A")
+                sv_cov = f"{f.get('streetview_coverage_pct', 0.0):.1f}%" if f.get("streetview_available") else "N/A"
+                row = f"{f['id']:<4} | {centroid_str:<25} | {h3_cent:<20} | {hex_cnt:<9} | {f['area_sq_m']:<11.1f} | {sv_ver:<12} | {sv_cov:<14} | {f['num_vertices']}"
+                print(row)
 
-        print("=" * 115)
+            print("=" * 138)
+        else:
+            print("\n" + "=" * 115)
+            print(f" GEOTAGGED PAVEMENTS & H3 HEXAGONS SUMMARY ({len(features)} detected | Total Area: {total_area:.1f} sq m | Total Hexagons: {total_hexes})")
+            print("=" * 115)
+            header = f"{'ID':<4} | {'Centroid (Lat, Lon)':<25} | {'H3 Centroid (Res 13)':<20} | {'Hex Count':<9} | {'Area (sq m)':<11} | {'Perimeter (m)':<13} | {'Vertices'}"
+            print(header)
+            print("-" * 115)
+
+            for f in features:
+                centroid_str = f"{f['centroid_lat']:.6f}, {f['centroid_lon']:.6f}"
+                h3_cent = f.get("h3_centroid") or "N/A"
+                hex_cnt = f.get("h3_count", 0)
+                row = f"{f['id']:<4} | {centroid_str:<25} | {h3_cent:<20} | {hex_cnt:<9} | {f['area_sq_m']:<11.1f} | {f['perimeter_m']:<13.1f} | {f['num_vertices']}"
+                print(row)
+
+            print("=" * 115)
 
         if verbose_coords:
             print("\nDETAILED PAVEMENT LAT/LON VERTEX PATHS:")
@@ -425,6 +734,12 @@ class SidewalkGeotagger:
                     "area_sq_m": f["area_sq_m"],
                     "perimeter_m": f["perimeter_m"],
                     "num_vertices": f["num_vertices"],
+                    "streetview_available": f.get("streetview_available", False),
+                    "streetview_verified": f.get("streetview_verified"),
+                    "streetview_coverage_pct": f.get("streetview_coverage_pct", 0.0),
+                    "streetview_pano_id": f.get("streetview_pano_id"),
+                    "streetview_date": f.get("streetview_date"),
+                    "streetview_url": f"https://www.google.com/maps/@?api=1&map_action=pano&viewpoint={f['centroid_lat']},{f['centroid_lon']}",
                     "bbox": str(f["bbox"]),
                     "geometry": f["geometry"]
                 }
@@ -487,6 +802,11 @@ class SidewalkGeotagger:
                 "h3_hex_ids",
                 "area_sq_m",
                 "perimeter_m",
+                "streetview_available",
+                "streetview_verified",
+                "streetview_coverage_pct",
+                "streetview_pano_id",
+                "streetview_date",
                 "min_lat",
                 "min_lon",
                 "max_lat",
@@ -506,6 +826,11 @@ class SidewalkGeotagger:
                     ";".join(hex_ids),
                     feat["area_sq_m"],
                     feat["perimeter_m"],
+                    feat.get("streetview_available", False),
+                    feat.get("streetview_verified"),
+                    feat.get("streetview_coverage_pct", 0.0),
+                    feat.get("streetview_pano_id") or "",
+                    feat.get("streetview_date") or "",
                     feat["bbox"][0],
                     feat["bbox"][1],
                     feat["bbox"][2],
@@ -539,6 +864,15 @@ class SidewalkGeotagger:
                 },
                 "area_sq_m": feat["area_sq_m"],
                 "perimeter_m": feat["perimeter_m"],
+                "streetview_verification": {
+                    "available": feat.get("streetview_available", False),
+                    "verified": feat.get("streetview_verified"),
+                    "coverage_pct": feat.get("streetview_coverage_pct", 0.0),
+                    "pano_id": feat.get("streetview_pano_id"),
+                    "date": feat.get("streetview_date"),
+                    "image_path": feat.get("streetview_image_path"),
+                    "url": f"https://www.google.com/maps/@?api=1&map_action=pano&viewpoint={feat['centroid_lat']},{feat['centroid_lon']}"
+                },
                 "bbox": {
                     "min_lat": feat["bbox"][0],
                     "min_lon": feat["bbox"][1],
@@ -580,8 +914,13 @@ class SidewalkGeotagger:
             h3_cent = f.get("h3_centroid") or "N/A"
             hex_cnt = f.get("h3_count", 0)
 
+            sv_status = "Verified" if f.get("streetview_verified") else ("Available" if f.get("streetview_available") else "Not Checked / Unavailable")
+            sv_color = "#2ECC40" if f.get("streetview_verified") else ("#FF851B" if f.get("streetview_available") else "#AAAAAA")
+            sv_cov = f"{f.get('streetview_coverage_pct', 0.0):.1f}%" if f.get("streetview_available") else "N/A"
+            sv_date = f.get("streetview_date") or "N/A"
+
             popup_html = f"""
-            <div style="font-family: sans-serif; font-size: 12px; width: 220px;">
+            <div style="font-family: sans-serif; font-size: 12px; width: 230px;">
                 <h4 style="margin: 0 0 5px 0; color: #0074D9;">Pavement #{f['id']}</h4>
                 <b>Centroid Lat:</b> {f['centroid_lat']:.6f}<br/>
                 <b>Centroid Lon:</b> {f['centroid_lon']:.6f}<br/>
@@ -589,7 +928,14 @@ class SidewalkGeotagger:
                 <b>Hexagons:</b> {hex_cnt} cells<br/>
                 <b>Area:</b> {f['area_sq_m']} sq m<br/>
                 <b>Perimeter:</b> {f['perimeter_m']} m<br/>
-                <b>Vertices:</b> {f['num_vertices']}
+                <b>Vertices:</b> {f['num_vertices']}<br/>
+                <hr style="margin: 6px 0; border: 0; border-top: 1px solid #e0e0e0;"/>
+                <b>Street View:</b> <span style="color: {sv_color}; font-weight: bold;">{sv_status}</span><br/>
+                <b>SV Imagery Date:</b> {sv_date}<br/>
+                <b>SV Sidewalk %:</b> {sv_cov}<br/>
+                <div style="margin-top: 6px;">
+                    <a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint={f['centroid_lat']},{f['centroid_lon']}" target="_blank" style="color: #0074D9; text-decoration: underline; font-weight: bold;">View in Google Street View &rarr;</a>
+                </div>
             </div>
             """
             folium.Polygon(
@@ -661,8 +1007,15 @@ def main():
     parser.add_argument("--size", type=int, default=640, help="Tile size in pixels (default: 640)")
     parser.add_argument("--image-path", type=str, default=None, help="Path to local aerial image (skips API call if provided)")
     parser.add_argument("--api-key", type=str, default=None, help="Google Maps API Key (or set GOOGLE_MAPS_API_KEY env)")
-    parser.add_argument("--model", type=str, default="nvidia/segformer-b0-finetuned-cityscapes-1024-1024", help="HuggingFace SegFormer model (default: cityscapes-1024-1024)")
-    parser.add_argument("--target-classes", nargs="+", default=["sidewalk", "pavement", "footpath", "footway", "road", "street", "path"], help="Classes to detect")
+    parser.add_argument("--model", type=str, default="wu-pr-gw/segformer-b2-finetuned-with-LoveDA", help="HuggingFace SegFormer model (default: wu-pr-gw/segformer-b2-finetuned-with-LoveDA)")
+    parser.add_argument("--model-preset", type=str, choices=list(MODEL_PRESETS.keys()), default="loveda", help="Preset model architecture ('loveda', 'cityscapes', 'ade20k', default: loveda)")
+    parser.add_argument("--verify-streetview", action="store_true", help="Enable Google Street View ground-level verification of detected sidewalk centroids")
+    parser.add_argument("--save-streetview", action="store_true", help="Save downloaded Street View snapshots to disk")
+    parser.add_argument("--streetview-dir", type=str, default="streetview_snaps", help="Directory to save Street View snapshots (default: streetview_snaps)")
+    parser.add_argument("--target-classes", nargs="+", default=["sidewalk", "pavement", "footpath", "footway", "walkway"], help="Target pedestrian classes to detect (default: sidewalk, pavement, footpath, footway, walkway)")
+    parser.add_argument("--include-roadways", action="store_true", help="Include full vehicular roadways along with sidewalks (default: False)")
+    parser.add_argument("--include-crossings", action="store_true", help="Include cross-road crossings/intersections connecting opposite sides of the street (default: False)")
+    parser.add_argument("--sidewalk-width-m", type=float, default=2.5, help="Width of pedestrian sidewalk corridor in meters along curbs/buildings (default: 2.5m)")
     parser.add_argument("--min-area-px", type=int, default=60, help="Minimum contour area in pixels (default: 60)")
     parser.add_argument("--h3-res", type=int, default=13, help="H3 Hexagon resolution (default: 13, ~3.5m edge)")
     parser.add_argument("--verbose-coords", action="store_true", help="Print all individual vertex lat/lon coordinates in console")
@@ -675,7 +1028,13 @@ def main():
 
     args = parser.parse_args()
 
-    geotagger = SidewalkGeotagger(google_api_key=args.api_key, model_name=args.model)
+    selected_model = args.model
+    if args.model_preset:
+        selected_model = MODEL_PRESETS[args.model_preset]
+    elif args.model.lower() in MODEL_PRESETS:
+        selected_model = MODEL_PRESETS[args.model.lower()]
+
+    geotagger = SidewalkGeotagger(google_api_key=args.api_key, model_name=selected_model)
 
     try:
         # 1. Fetch satellite / skyview tile or load local image
@@ -688,8 +1047,15 @@ def main():
                 lat=args.lat, lon=args.lon, zoom=args.zoom, size=args.size
             )
 
-        # 2. Detect sidewalk / pavement mask
-        mask = geotagger.detect_sidewalk_mask(image, target_keywords=args.target_classes)
+        # 2. Detect sidewalk / pavement mask (strictly excluding vehicular roadways, crossroads, and intersections)
+        mask = geotagger.detect_sidewalk_mask(
+            image,
+            target_keywords=args.target_classes,
+            bounds=bounds,
+            sidewalk_width_m=args.sidewalk_width_m,
+            exclude_roadway=(not args.include_roadways),
+            exclude_crossings=(not args.include_crossings)
+        )
 
         # 3. Save visual debugging images (raw tile + overlay)
         geotagger.save_debug_visualizations(image, mask)
@@ -699,12 +1065,18 @@ def main():
             mask, bounds, min_area_px=args.min_area_px, h3_res=args.h3_res
         )
 
-        # 5. Output geotagged lat/lon report with H3 hexagons to console
+        # 5. Optional Google Street View ground-level verification
+        if args.verify_streetview:
+            features = geotagger.verify_features_with_streetview(
+                features, save_images=args.save_streetview, output_dir=args.streetview_dir
+            )
+
+        # 6. Output geotagged lat/lon report with H3 hexagons to console
         geotagger.print_geotagged_summary(
             features, verbose_coords=args.verbose_coords, verbose_hex=args.verbose_hex
         )
 
-        # 6. Export results in multiple formats
+        # 7. Export results in multiple formats
         if args.geojson_out:
             geotagger.export_geojson(features, output_path=args.geojson_out)
         if args.hex_geojson_out:
