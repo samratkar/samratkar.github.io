@@ -1,0 +1,62 @@
+schema: '2.0'
+stages:
+  generate:
+    cmd: python src/generate_data.py
+    deps:
+    - path: src/generate_data.py
+      hash: md5
+      md5: 617aee95c93d41269dbcb4ca783f01ca
+      size: 4927
+    outs:
+    - path: data/pos_raw.hash
+      hash: md5
+      md5: 18850da408888c4bbb2caff63e5a0ab4
+      size: 12
+    - path: data/pos_raw.parquet
+      hash: md5
+      md5: 37411add9747f39bfcce8d53e9472185
+      size: 643084
+    - path: data/product_master.parquet
+      hash: md5
+      md5: 0a252a28261600716ac5fa1fad618391
+      size: 2317
+    - path: data/store_master.parquet
+      hash: md5
+      md5: 870039509dce43b8ba9ff22120e7771b
+      size: 2387
+  clean:
+    cmd: python src/clean_pos.py
+    deps:
+    - path: data/pos_raw.parquet
+      hash: md5
+      md5: 37411add9747f39bfcce8d53e9472185
+      size: 643084
+    - path: src/clean_pos.py
+      hash: md5
+      md5: 752f466d623469f67fd809b8954c92c9
+      size: 2729
+    outs:
+    - path: data/clean_report.json
+      hash: md5
+      md5: b1b988bf966ceb8f1761d7df1146c667
+      size: 141
+    - path: data/pos_clean.parquet
+      hash: md5
+      md5: 65c61010c0e168f172b4e24ea7196d6f
+      size: 636412
+  validate:
+    cmd: python src/validate_data.py
+    deps:
+    - path: data/pos_clean.parquet
+      hash: md5
+      md5: 65c61010c0e168f172b4e24ea7196d6f
+      size: 636412
+    - path: src/validate_data.py
+      hash: md5
+      md5: 34885b043b80b4cd02619c002ceb42e1
+      size: 5440
+    outs:
+    - path: data/contract_report.json
+      hash: md5
+      md5: 40bd1b573759a31b5b24be5e17278246
+      size: 679

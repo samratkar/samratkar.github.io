@@ -5,3 +5,22 @@ _site
 .env
 .env.*
 *.env
+
+# Python / Virtual environments
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.tmp
+*.temp
+.ipynb_checkpoints/
+
+# DVC and MLOps local caches / databases
+.dvc/cache/
+.dvc/tmp/
+*.db
+*.sqlite
+*.sqlite3
+.prefect/
+

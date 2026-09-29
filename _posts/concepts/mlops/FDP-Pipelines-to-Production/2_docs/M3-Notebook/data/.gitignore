@@ -1,0 +1,7 @@
+/pos_raw.parquet
+/pos_raw.hash
+/store_master.parquet
+/product_master.parquet
+/pos_clean.parquet
+/clean_report.json
+/contract_report.json

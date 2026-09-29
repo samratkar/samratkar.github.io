@@ -1,0 +1,21 @@
+# Lab 4 -> Lab 5: the serving container plus a monitor sidecar that watches it.
+services:
+  reorder-api:
+    build: .
+    image: freshmart-reorder:1.0.0        # the immutable artifact Lab 5 promotes
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_ALIAS=production            # injected, not baked: Lab 5 flips this
+
+  monitor:
+    image: freshmart-reorder:1.0.0        # same image, different command
+    depends_on:
+      reorder-api:
+        condition: service_healthy        # start only once the API is READY
+    volumes:
+      - ./data:/app/data:ro               # batches are data, not image content
+    command: >
+      python -c "from src.monitor import decide;
+      r = decide('data/train.parquet', 'data/current_batch.parquet');
+      print('[monitor]', r['action'], '-', r['reason'])"

@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Everything generated is rebuilt from a fixed seed - never committed
+data/
+artifacts/
+mlruns/
+mlartifacts/
+feature_repo/data/
+feature_repo/*.db
+m2/freshmart_m2/
+gx/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,131 @@
+schema: '2.0'
+stages:
+  generate:
+    cmd: python src/generate_data.py
+    deps:
+    - path: src/generate_data.py
+      hash: md5
+      md5: 224a829bc2793a72ee4e7e607c5126d9
+      size: 4813
+    outs:
+    - path: data/pos_raw.hash
+      hash: md5
+      md5: 18850da408888c4bbb2caff63e5a0ab4
+      size: 12
+    - path: data/pos_raw.parquet
+      hash: md5
+      md5: 37411add9747f39bfcce8d53e9472185
+      size: 643084
+    - path: data/product_master.parquet
+      hash: md5
+      md5: 0a252a28261600716ac5fa1fad618391
+      size: 2317
+    - path: data/store_master.parquet
+      hash: md5
+      md5: 870039509dce43b8ba9ff22120e7771b
+      size: 2387
+  clean:
+    cmd: python src/clean_pos.py
+    deps:
+    - path: data/pos_raw.parquet
+      hash: md5
+      md5: 37411add9747f39bfcce8d53e9472185
+      size: 643084
+    - path: src/clean_pos.py
+      hash: md5
+      md5: 261b44d523b55d6f8e78ec5541581916
+      size: 2657
+    outs:
+    - path: data/clean_report.json
+      hash: md5
+      md5: b1b988bf966ceb8f1761d7df1146c667
+      size: 141
+    - path: data/pos_clean.parquet
+      hash: md5
+      md5: 65c61010c0e168f172b4e24ea7196d6f
+      size: 636412
+  validate:
+    cmd: python src/validate_data.py
+    deps:
+    - path: data/pos_clean.parquet
+      hash: md5
+      md5: 65c61010c0e168f172b4e24ea7196d6f
+      size: 636412
+    - path: src/validate_data.py
+      hash: md5
+      md5: 5758522cf784dd09ce6b7e236a02006c
+      size: 5324
+    outs:
+    - path: data/contract_report.json
+      hash: md5
+      md5: 40bd1b573759a31b5b24be5e17278246
+      size: 679
+  ops:
+    cmd: python src/fetch_ops.py --asof 2026-08-15
+    deps:
+    - path: data/product_master.parquet
+      hash: md5
+      md5: 0a252a28261600716ac5fa1fad618391
+      size: 2317
+    - path: src/fetch_ops.py
+      hash: md5
+      md5: c12b2a593099f31ce78d35ec62ae9a83
+      size: 1882
+    outs:
+    - path: data/product_ops.parquet
+      hash: md5
+      md5: 4a63644c68c966222c087a442cc9efd7
+      size: 3521
+  engineer:
+    cmd: python src/engineer_features.py
+    deps:
+    - path: data/pos_clean.parquet
+      hash: md5
+      md5: 65c61010c0e168f172b4e24ea7196d6f
+      size: 636412
+    - path: data/product_master.parquet
+      hash: md5
+      md5: 0a252a28261600716ac5fa1fad618391
+      size: 2317
+    - path: data/product_ops.parquet
+      hash: md5
+      md5: 4a63644c68c966222c087a442cc9efd7
+      size: 3521
+    - path: data/store_master.parquet
+      hash: md5
+      md5: 870039509dce43b8ba9ff22120e7771b
+      size: 2387
+    - path: src/engineer_features.py
+      hash: md5
+      md5: bb0586152bc8ad213b5dd088f7aa192d
+      size: 5595
+    outs:
+    - path: feature_repo/data/reorder_features.parquet
+      hash: md5
+      md5: f1d47c46e33ec3f209c2791504837c8c
+      size: 573490
+  feast:
+    cmd: feast -c feature_repo apply && feast -c feature_repo 
+      materialize-incremental 2026-12-31T00:00:00
+    deps:
+    - path: feature_repo/data/reorder_features.parquet
+      hash: md5
+      md5: f1d47c46e33ec3f209c2791504837c8c
+      size: 573490
+    - path: feature_repo/feature_store.yaml
+      hash: md5
+      md5: 547f8eac3f9b377a73611459290ef595
+      size: 148
+    - path: feature_repo/repo.py
+      hash: md5
+      md5: 8de04503958a154c0702df00eafba80c
+      size: 1714
+    outs:
+    - path: feature_repo/online_store.db
+      hash: md5
+      md5: 055cedf2d1150f9e5978ed4caaec5769
+      size: 4751360
+    - path: feature_repo/registry.db
+      hash: md5
+      md5: 94c2e939073884a1fbbfe8198667b832
+      size: 2564

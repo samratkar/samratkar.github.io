@@ -1,0 +1,23 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Temporary and log files
+*.tmp
+*.temp
+*.log
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# MLOps tools temp / cache files (Feast, DVC, Great Expectations, Prefect)
+.dvc/cache/
+.dvc/tmp/
+great_expectations/uncommitted/
+.prefect/

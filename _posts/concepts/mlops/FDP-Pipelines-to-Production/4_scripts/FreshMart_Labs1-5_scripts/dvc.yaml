@@ -1,0 +1,57 @@
+# Lab 1 - the data pipeline as a DVC stage DAG.
+# `dvc repro` runs only the stages whose inputs changed; dvc.lock records the
+# exact hashes of every input and output, giving reproducible data versioning.
+# Note the shape: the POS log is ingested and cleaned once (it is immutable), the
+# operational feed is pulled separately (it changes daily), and only `engineer`
+# depends on both.
+stages:
+  generate:
+    cmd: python src/generate_data.py
+    deps:
+      - src/generate_data.py
+    outs:
+      - data/pos_raw.parquet
+      - data/pos_raw.hash
+      - data/store_master.parquet
+      - data/product_master.parquet
+  clean:
+    cmd: python src/clean_pos.py
+    deps:
+      - src/clean_pos.py
+      - data/pos_raw.parquet
+    outs:
+      - data/pos_clean.parquet
+      - data/clean_report.json
+  validate:
+    cmd: python src/validate_data.py
+    deps:
+      - src/validate_data.py
+      - data/pos_clean.parquet
+    outs:
+      - data/contract_report.json
+  ops:
+    cmd: python src/fetch_ops.py --asof 2026-08-15
+    deps:
+      - src/fetch_ops.py
+      - data/product_master.parquet
+    outs:
+      - data/product_ops.parquet
+  engineer:
+    cmd: python src/engineer_features.py
+    deps:
+      - src/engineer_features.py
+      - data/pos_clean.parquet
+      - data/store_master.parquet
+      - data/product_master.parquet
+      - data/product_ops.parquet
+    outs:
+      - feature_repo/data/reorder_features.parquet
+  feast:
+    cmd: feast -c feature_repo apply && feast -c feature_repo materialize-incremental 2026-12-31T00:00:00
+    deps:
+      - feature_repo/repo.py
+      - feature_repo/feature_store.yaml
+      - feature_repo/data/reorder_features.parquet
+    outs:
+      - feature_repo/registry.db
+      - feature_repo/online_store.db

@@ -1,0 +1,27 @@
+stages:
+  generate:
+    cmd: python src/generate_data.py
+    deps:
+      - src/generate_data.py
+    outs:
+      - data/pos_raw.parquet
+      - data/pos_raw.hash
+      - data/store_master.parquet
+      - data/product_master.parquet
+
+  clean:
+    cmd: python src/clean_pos.py
+    deps:
+      - src/clean_pos.py
+      - data/pos_raw.parquet
+    outs:
+      - data/pos_clean.parquet
+      - data/clean_report.json
+
+  validate:
+    cmd: python src/validate_data.py
+    deps:
+      - src/validate_data.py
+      - data/pos_clean.parquet
+    outs:
+      - data/contract_report.json

@@ -1,0 +1,14 @@
+# Pinned to the versions Labs 1-4 were verified against. Pinning is not
+# bureaucracy here: the model is a pickle, and a scikit-learn minor bump can
+# change how it unpickles. The image is the reproducibility boundary.
+fastapi==0.141.1
+uvicorn==0.52.4
+pydantic==2.13.5
+mlflow==3.16.0
+scikit-learn==1.8.0
+xgboost==3.4.1
+feast==0.66.0
+pandas==3.0.2
+pyarrow==25.0.1
+scipy==1.17.1
+requests==2.33.1
