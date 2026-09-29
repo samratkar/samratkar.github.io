@@ -1,0 +1,101 @@
+product_id,category,lead_time_days
+P0001,Beverages,2
+P0002,Dairy,7
+P0003,Beverages,2
+P0004,Beverages,6
+P0005,Snacks,7
+P0006,Staples,3
+P0007,Personal Care,4
+P0008,Beverages,7
+P0009,Beverages,5
+P0010,Beverages,6
+P0011,Snacks,7
+P0012,Snacks,7
+P0013,Dairy,1
+P0014,Beverages,7
+P0015,Beverages,4
+P0016,Dairy,5
+P0017,Dairy,7
+P0018,Staples,1
+P0019,Beverages,1
+P0020,Personal Care,4
+P0021,Personal Care,1
+P0022,Personal Care,6
+P0023,Personal Care,2
+P0024,Personal Care,5
+P0025,Dairy,2
+P0026,Snacks,4
+P0027,Staples,5
+P0028,Beverages,5
+P0029,Personal Care,1
+P0030,Staples,3
+P0031,Beverages,2
+P0032,Beverages,3
+P0033,Beverages,4
+P0034,Dairy,2
+P0035,Personal Care,6
+P0036,Snacks,4
+P0037,Snacks,1
+P0038,Staples,2
+P0039,Snacks,2
+P0040,Personal Care,1
+P0041,Snacks,6
+P0042,Staples,2
+P0043,Dairy,6
+P0044,Staples,7
+P0045,Personal Care,2
+P0046,Personal Care,7
+P0047,Staples,4
+P0048,Staples,3
+P0049,Dairy,3
+P0050,Dairy,4
+P0051,Personal Care,2
+P0052,Dairy,1
+P0053,Dairy,4
+P0054,Dairy,3
+P0055,Personal Care,4
+P0056,Snacks,1
+P0057,Personal Care,2
+P0058,Staples,1
+P0059,Dairy,2
+P0060,Snacks,3
+P0061,Snacks,5
+P0062,Snacks,3
+P0063,Personal Care,3
+P0064,Personal Care,4
+P0065,Snacks,1
+P0066,Dairy,1
+P0067,Staples,3
+P0068,Snacks,7
+P0069,Personal Care,7
+P0070,Snacks,4
+P0071,Snacks,1
+P0072,Snacks,4
+P0073,Staples,5
+P0074,Personal Care,1
+P0075,Beverages,7
+P0076,Dairy,6
+P0077,Dairy,6
+P0078,Personal Care,2
+P0079,Snacks,4
+P0080,Dairy,4
+P0081,Staples,3
+P0082,Beverages,5
+P0083,Snacks,4
+P0084,Snacks,6
+P0085,Staples,3
+P0086,Beverages,6
+P0087,Personal Care,1
+P0088,Staples,1
+P0089,Beverages,6
+P0090,Dairy,5
+P0091,Dairy,1
+P0092,Snacks,3
+P0093,Dairy,1
+P0094,Beverages,6
+P0095,Personal Care,5
+P0096,Staples,7
+P0097,Dairy,6
+P0098,Staples,1
+P0099,Beverages,3
+P0100,Staples,2

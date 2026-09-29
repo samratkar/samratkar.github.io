@@ -21,3 +21,11 @@ h3
 torch
 torchvision
 transformers
+
+# MLOps Data Discovery Notebook
+pandas
+matplotlib
+seaborn
+plotly
+altair
+ydata-profiling
