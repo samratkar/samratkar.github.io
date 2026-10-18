@@ -23,4 +23,7 @@ __pycache__/
 *.sqlite
 *.sqlite3
 .prefect/
+
+# Node / JS dependencies
+node_modules/
 

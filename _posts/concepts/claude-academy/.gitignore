@@ -1,0 +1,22 @@
+# Environment & Secrets
+.env
+.env.*
+*.env
+
+# Python Virtual Environments & Cache
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+
+# Node / JS dependencies
+node_modules/
+package-lock.json
+.npm/
+
+# Temporary & OS files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
