@@ -30,9 +30,24 @@ class GetWeather(BaseModel):
         # In a real app, this would call a real weather API
         return f"Weather in {self.city}: 95°F, sunny with clear skies."
 
+class GetForecast(BaseModel):
+    """Get the multi-day weather forecast for a city."""
+    city: str = Field(description="The city name to get forecast for, e.g. 'Austin'")
+    days: int = Field(default=3, description="Number of days to forecast (1 to 7)", ge=1, le=7)
+
+    def execute(self) -> str:
+        # In a real app, this would call a forecast API
+        return (
+            f"Forecast for {self.city} ({self.days} days):\n"
+            f"- Tomorrow: 90°F, partly cloudy\n"
+            f"- Day 2: 82°F, scattered showers and thunderstorms\n"
+            f"- Day 3: 78°F, light rain clearing by evening"
+        )
+
 # 3. Tool Registry mapping tool name -> Pydantic model
 TOOL_REGISTRY = {
-    "get_weather": GetWeather
+    "get_weather": GetWeather,
+    "get_forecast": GetForecast,
 }
 
 # 4. Auto-generate Claude tool schemas directly from Pydantic
@@ -61,7 +76,7 @@ def run_tool(name: str, tool_input: dict) -> str:
 
 def main():
     messages = [
-        {"role": "user", "content": "What should I wear in Austin today?"}
+        {"role": "user", "content": "What should I wear in Austin today, and will I need an umbrella over the next few days?"}
     ]
 
     print("--- Starting Agent Loop ---\n")
